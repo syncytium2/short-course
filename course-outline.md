@@ -77,7 +77,7 @@ Not a course. A demonstration with a warning attached.
 | 5 min | Frame | "I'm going to show you it being wrong first." Signals you're not selling. |
 | 15 min | **Live failure** | Something plausible and wrong — silently dropped rows, a bad join, a figure regenerated from stale data. Let it sit wrong on screen. Don't rescue it quickly. |
 | 10 min | The two dangerous error types | Did more than asked; confidently reported success. Skip the rest of the taxonomy. |
-| 15 min | **Live win — the murderboard prompt** | 482 words, any chat box, no install. Paste it, paste a draft, watch eleven adversarial roles run. It's peer review, the one process everyone in the room already believes in. See the four-step arc below. |
+| 15 min | **Live win — the murderboard prompt** | 433 words, any chat box, no install. Paste it, paste a draft, watch eleven adversarial roles run. It's peer review, the one process everyone in the room already believes in. See the four-step arc below. |
 | 10 min | Verification moves + blast radius | The takeaway. Four moves, no code reading. |
 | 5 min | Start over more often than feels right | Compressed §0b. It knows only what's in front of it, and a long session quietly drifts. **Include the admission** — I know this and still get it wrong. Skeptics will otherwise have one bad hour and conclude the tool is bad. |
 | 10 min | What to do this week | One disposable folder. One small task. One rule: one thing at a time. |
@@ -410,7 +410,7 @@ An anti-slop document review process out of a calcium-imaging project: eleven ad
 
 ## The session A arc — this replaces the generic live-win demo
 
-1. **Hand them `PROMPT.md`.** 482 words, any chat box, no install, no account, no agent. Paste it, then paste a draft. Free, and immediately worth their afternoon.
+1. **Hand them `PROMPT.md`.** 433 words, any chat box, no install, no account, no agent. Paste it, then paste a draft. Free, and immediately worth their afternoon.
 2. **Show a run**, including the honest shape of a null result: a role with nothing to check says so and states what it checked.
 3. **Ask: how would you know if it only ran seven?** You wouldn't. That happened.
 4. **That's the gate, and that's §5.** The argument lands without anyone learning what a hook is.
