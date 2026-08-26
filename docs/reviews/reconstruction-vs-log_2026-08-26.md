@@ -156,7 +156,13 @@ present at once, in the document that scores the session's errors.
    [`OPEN-FINDINGS.md`](../../OPEN-FINDINGS.md).
 3. **This repo's own README was wrong** about how the errors happened, on the strength of node 1.
    Corrected.
-4. **Still unresolved:** whether the wrong numbers came from wrong commands, misread output, or
-   correct output written up from memory. The collapsed tool calls cannot answer it. If the raw
-   session is exportable with tool output intact, that is the one artifact that would close it —
-   and it is the highest-value thing still recoverable.
+4. **Still unresolved, and now unresolved *by choice*.** Whether the wrong numbers came from
+   wrong commands, misread output, or correct output written up from memory cannot be answered
+   from a log with collapsed tool calls. A full session export **does exist** — and is
+   deliberately not imported, because it is a whole-account export spanning many unrelated
+   projects, some touching private repositories, and this repo may go public. See
+   [`../chain/EXCLUDED.md`](../chain/EXCLUDED.md) for the rule, what a scoped extract would
+   settle, and how to import one safely.
+
+   The distinction matters: *could not obtain* and *chose not to include* are different facts,
+   and this record must not render them alike.

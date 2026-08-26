@@ -30,6 +30,12 @@ idea  →  outline  →  AI interaction  →  review  →  what survived
 smoothed over, because a chain presented as complete when it isn't would be the same defect
 the course is about.
 
+**One node is missing on purpose.** A full session export exists and is deliberately not
+imported — it spans many unrelated projects, and this repo may go public. What that costs, and
+how to import a scoped extract safely, is in
+[`docs/chain/EXCLUDED.md`](docs/chain/EXCLUDED.md). *Could not obtain* and *chose not to
+include* are different facts and this chain does not render them alike.
+
 ---
 
 ## The rule this repo runs on
