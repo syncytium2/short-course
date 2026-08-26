@@ -421,7 +421,7 @@ An anti-slop document review process out of a calcium-imaging project: eleven ad
 
 ## The risk — do not skip this
 
-Eleven roles, three gates, three-round convergence caps, two-thousand-word commit messages. A dubious faculty member watching the full apparatus concludes *I don't have time for this*, and **they are right about their own week.**
+Eleven roles, three gates, three-round convergence caps, and the occasional commit message that runs to thousands of words. A dubious faculty member watching the full apparatus concludes *I don't have time for this*, and **they are right about their own week.**
 
 - Lead with the two-minute path. Let the apparatus be visible as where this goes, never as the price of entry.
 - Best single artifact for that room: the convergence table, blocking+major running 65 → 11 → 5 and shipping labelled UNCONVERGED at the cap.
@@ -431,7 +431,7 @@ Eleven roles, three gates, three-round convergence caps, two-thousand-word commi
 ## Loose ends
 
 - Ask whether the defect-first commit convention is written down anywhere or just habit. If it's habit, it's §5 waiting to happen.
-- The two-thousand-word commit messages are extraordinary and almost certainly not reproducible by a student. Worth saying so rather than implying the standard.
+- The longest commit messages are extraordinary and not reproducible by a student — but they are outliers, not the standard, and the draft implied otherwise. One of the ninety-one runs to 3,393 words; the median body is 185 and thirty-six are under 100. Say the real distribution: the discipline is that the title names the defect, not that the message is long.
 
 ---
 
