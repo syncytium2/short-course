@@ -272,7 +272,7 @@ The last two are the dangerous ones. Everything else announces itself.
 
 *What I asserted:* the agent drifts toward describing the change — "update export script" — when what you need later is the reason.
 
-*What the murderboard log actually shows:* seventy-nine commits, and nearly every title names the **defect**. "Every gate shipped a --selftest and nothing ever ran them." "A public doc said the gate could never fire on a private upstream. It can." "The origin rule caught the defect it was written for, and missed the next one."
+*What the murderboard log actually shows:* ninety-one commits (counted 2026-08-26; the number moves, so state the date), and nearly every title names the **defect**. "Every gate shipped a --selftest and nothing ever ran them." "A public doc said the gate could never fire on a private upstream. It can." "The origin rule caught the defect it was written for, and missed the next one."
 
 *So the real lesson:* the default is change-shaped, the useful form is defect-shaped, and **the difference is a stated convention, not a property of the tool.** Title the commit with the problem and the log becomes a friction log (§4) that you get for free. Don't, and you get an accurate record of edits that answers no question you'll actually have.
 
