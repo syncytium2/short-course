@@ -67,6 +67,28 @@ an absence of evidence.
 
 ---
 
+## Recovered — content the record lost, not defects
+
+Found by comparing the reconstruction against the real log
+([`docs/reviews/reconstruction-vs-log_2026-08-26.md`](docs/reviews/reconstruction-vs-log_2026-08-26.md)).
+Both verified absent from `course-outline.md`. Neither is a fix; both are material the session
+produced and the write-up dropped.
+
+**R1 · The §5 concession, honestly labelled.** From the log: *"Instructions still get a step,
+honestly labelled. Step 4 adds the rule to CLAUDE.md, with 'the steps above make the rule
+enforceable; this one states it.'"* Draft 3 concedes something weaker — instructions as
+tie-breakers on ambiguous choices. The stronger version comes from someone who built the gates and
+still wrote the sentence, and it models the honest labelling that is the whole discipline.
+
+**R2 · The most honest slide in either session.** The murderboard came out of the same
+calcium-imaging project as §9's bloat. Rigorous gates for the documents; the data architecture
+still unfixed. One half got cured because the failures were legible and repeated; the other got
+sliced around because the workaround was cheap. **Same person, same project, same year.** Draft 3
+carries both halves and never puts them together — which is the point, and the best available
+answer to "why should I believe any of this."
+
+---
+
 ## Residual ⚠ carried from the run
 
 1. **Round-1 only.** No verify pass, no convergence table. Not a clean run.
