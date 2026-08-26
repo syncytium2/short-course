@@ -247,7 +247,7 @@ The last two are the dangerous ones. Everything else announces itself.
 - A mechanism is a wrapper script, a check that runs, a command that only accepts one shape of input. Mechanisms don't get skipped.
 - **The question to ask every time something goes wrong twice:** can I turn this request into a mechanism?
 - Concede the real value: instructions work as tie-breakers on genuinely ambiguous choices. They fail as guarantees. Know which one you need.
-- **A third form worth stealing — the distinction as an *editing* rule.** murderboard's own CLAUDE.md, 64 lines, states where new material goes: a new *rule* goes in the process document; a new *step that would otherwise be skipped* goes in the skill that runs automatically. So the request/mechanism split isn't only a diagnosis after failure — it's a filing decision made every time something is added.
+- **A third form worth stealing — the distinction as an *editing* rule.** murderboard's own CLAUDE.md, 82 lines as of 2026-08-26, states where new material goes: a new *rule* goes in the process document; a new *step that would otherwise be skipped* goes in the skill that runs automatically. So the request/mechanism split isn't only a diagnosis after failure — it's a filing decision made every time something is added.
 
 > **Prior art — this section is our most exposed.** The advisory-vs-deterministic argument is thoroughly worked over in Market B, including a published heuristic that's essentially our blast radius ("annoyance → CLAUDE.md, incident → hook") and a published prompt for converting a CLAUDE.md into hooks automatically, which is our §7 move.
 >
