@@ -36,8 +36,20 @@
 > scorecard below counts four errors and concludes *"all four of my errors were the same kind:
 > a plausible claim, stated confidently, that nobody had checked against a source. Which is
 > role 1."* It then makes four more of exactly that kind, in the act of counting them, and
-> does not see them — because the count was written from the same context that produced the
-> errors, without opening the repository it was describing.
+> does not see them.
+>
+> **The diagnosis in that sentence is itself wrong**, and node 1a — a later paste of the real
+> log — is what shows it. The repository *was* cloned and read; four commands ran in the turn
+> that produced three of the wrong numbers, and the fourth followed an explicit undertaking to
+> stop working from the website's description and open the file. The errors were not unchecked.
+> They survived their own check.
+>
+> **⚠ Superseded.** Where this file and
+> [`01a-real-log-partial.md`](01a-real-log-partial.md) disagree, node 1a wins. This file also
+> contains a fabricated obstacle ("site blocked automated access" — the log shows two successful
+> fetches), drops an entire substantive turn, and erases one admission. Full comparison:
+> [`../reviews/reconstruction-vs-log_2026-08-26.md`](../reviews/reconstruction-vs-log_2026-08-26.md).
+> It is kept because it is the only account of turns 1–11.
 >
 > *A process cannot observe its own misses.*
 

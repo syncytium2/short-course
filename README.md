@@ -19,13 +19,14 @@ idea  →  outline  →  AI interaction  →  review  →  what survived
 | Node | Artifact | What it is | Integrity |
 |---|---|---|---|
 | 0 | [`docs/chain/00-the-eight-points.md`](docs/chain/00-the-eight-points.md) | The original idea. Eight points, written before any AI was involved. | **Copy of a copy.** No primary source survives |
-| 1 | [`docs/chain/01-session-record.md`](docs/chain/01-session-record.md) | The session that turned eight points into an outline | **Reconstruction, not a transcript.** Banner-flagged. Contains four refuted claims |
+| 1 | [`docs/chain/01-session-record.md`](docs/chain/01-session-record.md) | The session that turned eight points into an outline | **Reconstruction, not a transcript.** Superseded by node 1a where they disagree |
+| 1a | [`docs/chain/01a-real-log-partial.md`](docs/chain/01a-real-log-partial.md) | The actual chat log, pasted from the web UI | **Partial** — covers only the last six turns. Tool calls collapsed, so it shows *that* a command ran, never what it returned |
 | 2 | *(missing)* | Drafts 1 and 2 | **Gone.** Only descriptions of how they changed survive, inside node 1 |
 | 3 | [`course-outline.md`](course-outline.md) | Draft 3 — the outline as it stood when first reviewed | Intact. Commit 3 is the exact reviewed bytes (`ad695d94`) |
 | 4 | [`docs/reviews/course-outline_murderboard_2026-08-26.md`](docs/reviews/course-outline_murderboard_2026-08-26.md) | An 11-role adversarial review: 34 findings, 5 blocking | Intact. Round 1 only — **not** a converged run |
 | 5 | *in progress* | What survives, and what was cut for being wrong | See [`OPEN-FINDINGS.md`](OPEN-FINDINGS.md) |
 
-**Two of the six nodes are damaged and one is missing.** That is recorded here rather than
+**Two of the seven nodes are damaged and one is missing.** That is recorded here rather than
 smoothed over, because a chain presented as complete when it isn't would be the same defect
 the course is about.
 
@@ -67,8 +68,14 @@ to check. Making it produced an unusually clean demonstration, in four layers:
 3. The **outline** (node 3) carried all of them forward, and separately wrote a competitive
    analysis in which no claim could have failed, three screens from a section arguing that
    suspicion without a method is just anxiety.
-4. The **review** (node 4) caught them by opening the repository the claims were about, which
-   is the only step any of the earlier layers had skipped.
+4. The **review** (node 4) caught them by recomputing every number against the repository.
+
+**Layer 2 was wrong about layer 1, and a later paste of the real log proved it.** The scorecard
+called the errors unchecked. They were not: the log shows a clone, four commands, and — for the
+482 — an explicit *"I was referring to it from the website's description rather than the file.
+Let me actually check"* immediately before the wrong number. The check ran and the wrong number
+came out anyway, which is a worse defect than not checking and a different one. See
+[`docs/reviews/reconstruction-vs-log_2026-08-26.md`](docs/reviews/reconstruction-vs-log_2026-08-26.md).
 
 None of this was staged. It is recorded because a worked example that actually happened is
 worth more than one that was designed, and because the alternative — quietly fixing the
