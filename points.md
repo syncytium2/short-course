@@ -187,6 +187,28 @@ pressing problems. The barriers are:
   which is the one that actually spans machines. Branches and worktrees only separate work inside
   one machine. Three machines share a repo through a remote or they do not share it at all.
 
+  *The mechanism already exists, in `interface2`, and it is not `HANDOFF.md`.* It is five
+  written channels, each with one job and a stated wrong-channel case — pipeline TODOs
+  (`docs/todo/`), guardrail feedback (`docs/sapper_feedback/`), a cross-machine session board
+  (`docs/SESSIONS.md`, for claiming a shared path or messaging a specific session), project
+  handoffs (`docs/handoffs/`, 29 files), and decision records (`decisions/`). See B7 for how
+  one of them is built. What makes them a mechanism rather than a habit is that each item is
+  **a committed file, addressed to a session**, so it survives the session that wrote it and
+  arrives on every machine that pulls.
+
+  *Which settles what a handoff actually is.* Not a document you write at the end if you
+  remember. A message has to be persisted or it is gone — `interface2` enforces exactly this
+  with `require_commit_before_message.sh`, a gate that **refuses a cross-session message while
+  the working tree is dirty**, on the reasoning that a session may tell another session
+  something only once that something exists in git. It exists because an estate lost a finding
+  four sessions had established, and noticed only because somebody thought to ask whether the
+  messages had been committed.
+
+  *So the 2026-08-27 failure above was the predictable one.* `HANDOFF.md` is maintained by
+  hand, in one file, by whichever session remembers — which is rule 1 of B7 violated (one file,
+  many sessions) and rule 3 violated (a handoff is expensive to write, so it doesn't get
+  written). The habit failed the same way every hand-maintained board in that repo failed.
+
   *Tension to resolve, not tonight.* §6 currently fixes the git scope at three commands — commit,
   diff, log — and says explicitly: no branches, no remotes, no merge. C3's answer needs the parts
   that were cut.
