@@ -84,3 +84,13 @@ pressing problems. The barriers are:
   next time it won't do it that way, it'll do it this way.
 
   This is a trap.
+
+- **C3. Ending a session safely, and picking the work back up.** Compaction. Context filling up.
+  When do you stop a session on purpose rather than when it falls apart — and how does the next
+  session continue the same work?
+
+  Hardest case, and the real one: five sessions live in the same repo, on three machines, at once.
+
+  *Evidence, 2026-08-26.* Tonight this repo held finished work from another session that had sat
+  uncommitted for eleven hours, while a third session edited three of the same files. `HANDOFF.md`
+  exists because of this and is maintained by hand.
