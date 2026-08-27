@@ -95,6 +95,44 @@ pressing problems. The barriers are:
 
 - **B3.** Identify annoyances and hindrances — repeated mistakes (heredoc!), files for review lost in some folder you have no clue where it's at (~/docs vs ~/dropbox/darkroom).
 - **B4.** Do not trust standard features built to prevent these issues. CLAUDE.md or equivalent is not reliable or enforceable. Use all the bad words you want and the second sentence is still skipped. Build your own tools (using AI) and keep them in a repo.
+
+  *Worked example — a declaration mistaken for wiring (`bugarach`, verified against the repo
+  2026-08-27).* Commit `9582329`, 2026-08-17, titled *"The README stopped at the port plan, and
+  the project kept going"*: `README.md | 445 +++---`, `pyproject.toml | 1 +`, `.github`
+  untouched. That one line declared an optional dependency, `dl = ["torch>=2.0"]` — added so the
+  README's install instructions would be accurate, **not** because anything was being wired to
+  use it.
+
+  *What it left behind.* Three things came to depend on a human remembering to type
+  `pip install -e ".[dl]"`: the structural tests in `test_learn_nets.py` (nine functions, one of
+  them parametrised, all removed at once by a module-level `pytest.importorskip`), the bakeoff
+  reproduction test in `test_lab_server.py` — the one guarding the published numbers — and the
+  README line saying the extra exists at all. Nothing connects them. CI installs `.[ui]` and has
+  never installed `[dl]`.
+
+  *Why this is B4 and not merely a gap.* `[project.optional-dependencies]` is a standard feature
+  that looks like dependency management. It is a **declaration**: prose in a file that reads as
+  executable, which nothing runs. Same error as expecting `CLAUDE.md` to be enforced — the
+  format implies a mechanism that does not exist, and the implication does all the work.
+
+  *The part worth teaching, and it was only found by looking.* The repo already has an alarm for
+  torch's absence — `test_the_tube_trainer_says_so_plainly_when_torch_is_absent`, ungated,
+  running in CI, docstring: *"torch is the optional `dl` extra, and its absence is an ANSWER."*
+  Thirty lines below it, the test guarding the published numbers skips in silence. **The alarm
+  was built for the capability and never for the coverage.** The announcement mechanism is in
+  the same CI file, spent on a different optional dependency:
+  `pip install pyspike || echo "pyspike unavailable — cross-check test will skip"`.
+
+  *How it got in — this is precisely what §3's first check is for.* One line inside a 445-line
+  README rewrite. Nobody auditing a documentation change is reading dependency wiring, which is
+  why the check is *read the diff for scope, not correctness*. The check exists for this, and
+  this happened anyway.
+
+  *And the obvious fix is still a habit.* "Make CI type `[dl]`" fixes today. Nothing would then
+  assert that the guarded test **ran**, so a later dependency shuffle returns you to exactly
+  here, green. B7's rule 4 — validate the envelope — is the whole difference between typing the
+  flag and mechanising it.
+
 - **B5.** Repo, repo, repo. What's a repo and why.
 - **B6.** Spec, validate, re-spec.
 - **B7.** Note all repeated issues and use coding agents to build long-lasting cures for each.
