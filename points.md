@@ -107,3 +107,14 @@ pressing problems. The barriers are:
   question — the outline holds candid competitor notes and a personal admission, so the repo has
   none and is local only. C3 makes a remote an **operational** requirement. Those are the same
   decision, and the repo currently records only one half of it.
+
+- **C4. The force multiplier does not apply overnight.** It takes time to learn how this can make
+  you, or your employees, 100x faster.
+
+  *The evidence is already in B1.* That progression — sculpting prompts, then having Claude write
+  the prompts, then Claude Code in VSCode, then running the orchestration — is the learning curve
+  this point is about. Four stages, not a switch.
+
+  *Unchecked, and labelled rather than taught:* 100x. Nobody has measured it. Same treatment as
+  §10's price (see `OPEN-FINDINGS.md`, N1) — argue the shape of the curve, not the multiple, until
+  someone has a number they can source.
