@@ -95,8 +95,15 @@ pressing problems. The barriers are:
   uncommitted for eleven hours, while a third session edited three of the same files. `HANDOFF.md`
   exists because of this and is maintained by hand.
 
-  *Candidate mechanisms:* branches, worktrees, collision avoidance.
+  *Candidate mechanisms:* branches, worktrees, collision avoidance — and **push / pull / fetch**,
+  which is the one that actually spans machines. Branches and worktrees only separate work inside
+  one machine. Three machines share a repo through a remote or they do not share it at all.
 
   *Tension to resolve, not tonight.* §6 currently fixes the git scope at three commands — commit,
   diff, log — and says explicitly: no branches, no remotes, no merge. C3's answer needs the parts
   that were cut.
+
+  *And it collides with an open decision.* The README treats "add a remote" as a **publication**
+  question — the outline holds candid competitor notes and a personal admission, so the repo has
+  none and is local only. C3 makes a remote an **operational** requirement. Those are the same
+  decision, and the repo currently records only one half of it.
