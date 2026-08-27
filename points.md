@@ -175,3 +175,10 @@ the course has to cover, and they are asked at the door rather than discovered i
   *Risk — do not stage it.* Chat may not fabricate on the day. If it doesn't, say so: that is a
   result too, and a course about checking claims cannot rig its own opening. Run it beforehand,
   keep the transcript, and be willing to show a live null.
+
+- **Glossary.** guard, hook, git, repo, shell, bash, dig, etc.
+
+  *Tension with C1, worth settling.* C1 says you don't need to learn computer science and keep a
+  dictionary. A glossary is a dictionary. The way both are true: this is not a reference to study,
+  it is a decoder for the small closed set of words that actually appear in the return channel and
+  change what you would do next. Short, and only the load-bearing ones.
