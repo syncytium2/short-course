@@ -368,3 +368,42 @@ the course has to cover, and they are asked at the door rather than discovered i
   *The point is that it is expensive.* You cannot go touch everything. So the working
   question is never "verify more", it is **what makes a claim worth touching** — which is
   what dating a claim, and saying how you knew, is for.
+
+  ---
+
+  *Institution-specific product names are not terms.* Turbo and Great Lakes are what one
+  university calls its instances of two generic things. The generic term is what travels to
+  a reader somewhere else; the brand name is what the person beside them will actually say.
+  Both belong in the entry, generic first — and a course that used the brand name alone would
+  be doing to its readers what C1 says the agent does to you.
+
+  **research storage** *(U-M: **Turbo**)* — a large network filesystem the institution
+  provides, **mounted** rather than copied: one set of bytes living elsewhere, which many
+  machines and the compute cluster all read in place.
+
+  *Mounted vs synced is the distinction that matters,* and it is the entire reason a storage
+  tier rule exists. Mounted means everyone sees the same bytes and the cluster reads them
+  directly — but reads cross the network and are slow; 20 GB over SMB took about five minutes
+  on the Mac. Synced means a copy per machine: fast local reads, a quota, and **invisible to
+  the cluster**.
+
+  *What changes if you hear it.* Ask which of the two your data is on before asking why a job
+  is slow, or why the other machine cannot see the file.
+
+  **synced storage** *(Dropbox, Box, OneDrive, Drive)* — the consumer kind: a copy on every
+  machine, kept in step by a background client. Backed up and shareable, quota-limited, and a
+  machine not running the client is simply out of date. Holds results under about a gigabyte,
+  and the figure-review folder.
+
+  **HPC — high-performance computing** *(U-M: **Great Lakes**)* — a shared pool of many
+  machines you **submit jobs to** rather than run things on. No desktop: you write a script,
+  put it in a queue, and it runs headless on whichever machine frees up.
+
+  *The appeal is not speed.* It is that an eight-hour run stops depending on your workstation
+  staying awake and IT not rebooting it for a patch.
+
+  *Three words that arrive with it.* The **batch scheduler** is the queue deciding whose job
+  runs when (**Slurm**, nearly everywhere). An **allocation** is permission and budget to run,
+  and is separate from having a login — you can log in and still not be able to submit. A
+  **web portal** is a browser terminal and file manager that lets you skip SSH entirely (**Open
+  OnDemand**, which is not a U-M product).
