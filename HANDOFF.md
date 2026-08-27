@@ -18,7 +18,8 @@ is for murderboard development only; see [Boundary](#boundary) below.
 | The session, real (partial) | [`docs/chain/01a-real-log-partial.md`](docs/chain/01a-real-log-partial.md) |
 | The session, real and complete | [`docs/chain/01b-real-log-complete.md`](docs/chain/01b-real-log-complete.md) — **with tool output.** Supersedes 1 and 1a |
 | What is deliberately not here | [`docs/chain/EXCLUDED.md`](docs/chain/EXCLUDED.md) |
-| The working point list | [`points.md`](points.md) — A/B/C/D, the author's own words, unmerged |
+| The working point list | [`points.md`](points.md) — A/B/C/D/E, the author's own words, unmerged |
+| Access, cost, routes, rates | [`points.md`](points.md) **§F** — sourced and dated 2026-08-27, expected to go stale |
 | The circulatable outline | [`course-outline-external.md`](course-outline-external.md) — 434 words, four barriers |
 | Why the repo exists | [`README.md`](README.md) |
 
@@ -65,16 +66,21 @@ Write to the Oxford, UW eScience and Southampton organisers. Ask what their sess
 what failed. One email each and the positioning section stops being guesswork. Cheapest check
 available and the only one that settles it.
 
-### 5 · This week — price one run (N1, added after the review)
+### 5 · Price one run (N1) — half done, 2026-08-27
 
 §10 was added to the outline: tokenmaxxing versus workflow, and the fact that the course's own
-worked example is the most expensive thing in it. The section states that a full murderboard run is
-probably too costly for a university allotment — **and nobody has checked either number.** Two cheap
-facts close it: what a U-M account gets per period, and what one full run on a document this size
-actually consumes. Run one and read the usage.
+worked example is the most expensive thing in it. It claimed a full murderboard run is probably too
+costly for a university allotment. **Two numbers were needed; one has been obtained and it dissolved
+the question.**
 
-Until then §10 teaches the principle and labels the price as unchecked. Do not put a figure on a
-slide first; a course about verifying claims cannot open its cost section with an estimate.
+There is no allotment on the faculty path — U-M bills Claude Code at published list rates against a
+departmental Shortcode, uncapped, and the author has no Shortcode. The capped case exists only for
+students under a classroom grant. Routes, rates, dates and sources are in `points.md` **F**; the
+consequence for the course argument is in D2.
+
+**Still outstanding: one measured run.** The arithmetic says single-digit dollars, which would make
+§10's "probably too expensive" false rather than merely unchecked. Postponement removes the deadline
+and not the finding — the run costs a few dollars and settles a section.
 
 ---
 

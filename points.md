@@ -288,8 +288,14 @@ the course has to cover, and they are asked at the door rather than discovered i
 - **D1 pre-empts §6.** If a GitHub account is step 0, a remote exists from the first hour, and
   §6's "commit, diff, log — no remotes" is already contradicted at the door. D5 and D6 are what
   decide whether that matters, and C3 is what it costs when it does.
-- **D2 is where §10 lands.** The plan is the allotment. What a run costs stops being an abstract
-  argument the moment someone has to pick one.
+- **D2 is where §10 lands, and it forks.** The consumer path — a personal Claude or ChatGPT plan —
+  makes the plan the allotment: a ceiling you hit, which is the case §10 assumes throughout. The
+  institutional path inverts it. U-M bills Claude Code at list per-token rates against a
+  departmental **Shortcode**, uncapped: nothing stops, nothing warns, and the number surfaces when
+  somebody else reads the monthly statement. **The uncapped case is the dangerous one and §10 does
+  not cover it.** Put in the course's own terms — a ceiling is a crude mechanism but it is a
+  mechanism; a Shortcode is a request that the spender be sensible, and B4 is about what happens to
+  requests. Sourced routes and numbers in **F**.
 - **D4 is mis-scoped as written.** "Data management (Dropbox)" names a product where the decision
   is a **storage tier rule** — which class of storage holds what — and it has to be made before
   the first data file exists, not when a disk fills up. See **research storage** and **synced
@@ -397,6 +403,33 @@ asked at the door.
   result too, and a course about checking claims cannot rig its own opening. Run it beforehand,
   keep the transcript, and be willing to show a live null.
 
+- **Part 2. Commission a model of the thing the course already teaches.** A feedback loop: set
+  point, sensor, error, effector, gain, time constants. Glucose–insulin, thermoregulation,
+  baroreflex, osmolality–ADH — whichever the room is already on.
+
+  *Why this and not a file-manipulation demo.* Every failure demo in this material asks the learner
+  to check code they cannot read, which is the exact anxiety C1 says the course exists to remove —
+  so the opening demo currently spends its first minutes confirming it. A physiological model
+  inverts the roles. The machine returns something that runs and plots, with the sign wrong on the
+  feedback term, or a gain that oscillates where the real loop is critically damped, or a model
+  that reaches set point because the set point was written into the output rather than arrived at
+  by the loop. **The student catches it on physiology, not on code.** They know a baroreflex does
+  not hunt with a forty-second period. They are the expert and the machine is the novice — the one
+  arrangement in the whole course where exercising suspicion costs the learner nothing.
+
+  *It also closes an open question.* The outline asked for a failure demo involving data rather
+  than files and did not have one. This is one, it is theirs, and it can be produced honestly in an
+  evening: run it until it goes plausibly wrong and keep the transcript.
+
+  *Same rule as Part 1 — do not stage it.* If the model comes back correct, that is a result and it
+  gets said out loud.
+
+  *Pair the room, and not as a fallback.* One drives, one is the designated checker, they swap
+  halfway. A course whose thesis is that the machine is confidently wrong and the skill is noticing
+  is better taught with a skeptic sitting beside the driver than with everyone alone on a screen.
+  It also absorbs the access gap for anyone the credit offers exclude (**F**), without singling
+  that person out.
+
 - **Glossary.** guard, hook, git, repo, shell, bash, dig, etc.
 
   *Tension with C1, worth settling.* C1 says you don't need to learn computer science and keep a
@@ -488,3 +521,79 @@ asked at the door.
   and is separate from having a login — you can log in and still not be able to submit. A
   **web portal** is a browser terminal and file manager that lets you skip SSH entirely (**Open
   OnDemand**, which is not a U-M product).
+
+---
+
+## F. Access and cost — what a learner needs before any of A–E runs
+
+**Researched 2026-08-26/27, at one institution, from pages that will move.** This is the specimen
+the glossary's **stale** entry describes: correct on the day, decaying silently, with nobody at
+fault. It is filed in its own section rather than woven through A–E so that it can rot without
+taking the course material with it. When this is next needed, go touch the systems — do not edit
+around the dates.
+
+*Filed in `points.md` because losing it was the larger risk. Extract it the moment there is a
+better home; nothing in A–E depends on it except by cross-reference.*
+
+D2 says "Claude or Codex plan" in four words. For a course taught at one institution, those four
+words are a week of other people's lead time and the reason a session fails at minute five.
+
+### What U-M provides (checked 2026-08-27)
+
+| Service | Who | Cost | An agent? |
+|---|---|---|---|
+| [U-M GPT](https://genai.umich.edu/) | all students, faculty, staff | free | **No — a chat box** |
+| [GPT Toolkit](https://its.umich.edu/computing/ai/gpt-toolkit-in-depth) | faculty and staff, **Shortcode required** | list per-token rates, billed monthly | API gateway |
+| [Claude Code via Toolkit](https://its.umich.edu/computing/ai/claude-code-gpt-toolkit) | **faculty and staff only** — students excluded, sharing prohibited | as above | Yes |
+| [Codex for the Classroom](https://its.umich.edu/computing/ai/codex-classroom) | students in a provisioned Canvas course | grant, else your Shortcode | Yes — Codex CLI only |
+
+**The most useful fact here is not logistical.** The institution gives every student a chat box for
+free and puts the agent behind an employment check and a billing code. The chat-versus-agent
+distinction Part 1 exists to demonstrate is one the university itself already enforces — that is
+better evidence than a demo, it is free, and it cannot be accused of being staged.
+
+[Published rates](https://its.umich.edu/computing/ai/pricing) match Anthropic list pricing:
+`claude-opus-5` **$5.00 / $25.00** per 1M tokens (prompt/completion), `claude-sonnet-5`
+$2.00 / $10.00, `claude-haiku-4-5` $1.00 / $5.00.
+
+### Routes, and their lead times
+
+- **[$100 Codex student credits](https://developers.openai.com/community/students)** — claimed by
+  the student, SheerID verification against a university address, works on a **free** ChatGPT
+  account, 2,500 credits, expires 12 months. Minutes, self-serve, nothing required from the
+  instructor. **US and Canada only** — an international cohort is partly excluded, which is why
+  pairing sits in E as pedagogy rather than here as a contingency.
+- **Codex for the Classroom grant** — applied for 2026-08-26, no response as of 08-27. "A limited
+  number of grants … for faculty and students in eligible courses." Provisioning appears to be
+  available *without* the grant against a Shortcode — the course-description step on the form is
+  marked grant-applicants-only — but **this was inferred from the page, not confirmed by
+  provisioning it.** ⚠ *A stipend of $50/user/month appears in secondary coverage; the ITS page
+  itself states no amount.*
+- **Shortcode** — the author does not have one, which blocks the Toolkit, Claude Code, and
+  classroom provisioning in one stroke. For most faculty this is an unasked question rather than an
+  ineligibility. Precedent worth citing when asking: the pricing page offers Maizey with "a no cost
+  faculty tier … without requiring a Shortcode," so ITS already runs no-shortcode instructional
+  tiers. ⚠ *Whether the pending grant is itself waiting on a Shortcode is unknown and worth asking
+  in the same message.*
+- **Sponsored keys for employed students** — the FAQ indicates faculty may sponsor keys for
+  *employed* students and that keys "should not be generated for non-employed students," which
+  would cover GSRAs and GSIs but not a taught cohort. ⚠ *Single source, read once, not confirmed on
+  a second page. It is the most decision-relevant line found and the least verified.*
+- **[Claude Campus / Builder Clubs](https://claude.com/programs/campus)** — **applications closed**
+  as of 2026-08-26: "The Spring 2026 Claude Campus program is in session and applications have
+  closed."
+- **[Anthropic AI for Science](https://support.claude.com/en/articles/11199177-anthropic-s-ai-for-science-program)**
+  — up to **$20,000** in API credits over six months, applications reviewed the **first Monday of
+  each month**, prioritising biology and life sciences. API-only, and framed as research rather
+  than teaching; whether it can underwrite a course is a question, not an assumption.
+
+### What it costs, in the one case that was ever concrete
+
+Six students, one 90-minute session. ITS sizes its classroom stipend per user *per month* for a
+term, so a single session is a fraction of it — **order of $5–15 a student, $30–90 for the room.**
+At that size the cost question answers itself and the decision becomes pedagogical, which is the
+opposite of the conclusion the material reached before anyone looked.
+
+**That is an estimate and not a measurement** — `OPEN-FINDINGS.md` **N1** still wants one measured
+run. It is recorded here because the estimate already changed a decision, and an estimate that
+changes a decision belongs somewhere the decision can be revisited.

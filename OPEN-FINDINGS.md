@@ -105,16 +105,27 @@ because there wasn't one.
 plausible claim, stated confidently, that has not been checked against a source — the defect this
 entire repository exists to document, produced this time inside the section that names it.
 
-Two facts settle it and neither is expensive:
+Two facts settle it. **One has since been looked up and the other has not** (2026-08-27, sources
+in `points.md` **F**):
 
-- **What a U-M account is allotted**, per period. One email, or one settings page.
-- **What one full run consumes** on a document the size of `course-outline.md`. One run, then read
-  the usage back.
+- ~~**What a U-M account is allotted**, per period.~~ **Answered, and the question was wrong.**
+  There is no allotment on the faculty path — U-M bills Claude Code at published list rates
+  (`claude-opus-5` $5.00 / $25.00 per 1M tokens) against a departmental Shortcode, uncapped. The
+  capped case exists only for students under a classroom grant. "What is the allotment" presumed a
+  ceiling that is not there, and the absence of one is the more interesting finding.
+- **What one full run consumes** on a document the size of `course-outline.md`. **Still open.** One
+  run, then read the usage back.
 
-**Decision needed:** get both numbers before either session teaches a figure, and until then keep
-§10 arguing the principle — uniform spending is the failure, in both directions — rather than the
-price. If the run turns out to fit, §10 survives unchanged; only the worked-example subsection
-changes, and it changes to something better, which is a run that was measured instead of assumed.
+**And the estimate points the other way from the claim.** At ~10k tokens for the document, eleven
+roles at roughly 12k in / 2k out each is about $1.20 a round, so a three-round run lands in single
+digits of dollars. If that holds, **"probably too expensive" is false** — which does not weaken §10,
+it relocates it. The expensive thing was never the elaborate review; it is the long careless
+session, which is what §10 already names as the largest lever.
+
+**Decision needed, revised:** do the one measured run before anything teaches a figure. Until then
+§10 argues the principle — uniform spending is the failure, in both directions — and its
+worked-example subsection is now known to be *probably wrong* rather than merely unchecked, which is
+a stronger reason to fix it and a worse one to leave standing.
 
 **Second-order, worth stating now:** cost pressure is the most likely reason anyone will ever cut a
 review short. A run trimmed from eleven roles to three is fine. A trimmed run reported as a full one
