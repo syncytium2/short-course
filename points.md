@@ -162,5 +162,16 @@ the course has to cover, and they are asked at the door rather than discovered i
   filesystem. That is §0a — chat is not an agent — demonstrated rather than explained, and it
   starts from the one tool everyone in the room has already used.
 
-  *Open:* which prompt. The whole thing rests on picking one where the three genuinely diverge,
-  and where the third one visibly *does* something.
+  *Prompt: probably a lit search.*
+
+  Search returns links and paywalls. Chat returns a fluent synthesis — and this is the one failure
+  every academic in the room has already heard of, or been burned by. The agent can actually
+  fetch: `fetch_paper.py` in the murderboard repo is an open-access lit-fetch tool, so the DOI
+  either resolves or it does not, in front of them.
+
+  So the middle tool fails in the exact way the audience already fears, and the third shows its
+  work. That is §0a and §1 in one demo, on the task they do every week.
+
+  *Risk — do not stage it.* Chat may not fabricate on the day. If it doesn't, say so: that is a
+  result too, and a course about checking claims cannot rig its own opening. Run it beforehand,
+  keep the transcript, and be willing to show a live null.
