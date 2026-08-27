@@ -2,6 +2,8 @@
 
 *Draft 3 — 2026-08-26. Changes since draft 2: thesis rewritten (it was breaking its own positioning rule); §9 reframed from "sprawl is cheap" to inheritance; murderboard added as worked example, which corrected §6, extended §7 and §8, and replaced session A's demo. Mapping to the original eight points at the bottom.*
 
+*Edited after the review, same day: four numeric defects corrected — each in its own commit, titled after the defect. §10 added (what a run costs), which puts a second axis on §5, gives §0b a reason that isn't willpower, and prices the course's own worked example — a price nobody has looked up yet, and which is labelled rather than guessed.*
+
 > **Before sharing:** the positioning section names competitors candidly and the §0b teaching note is a personal admission. Both are useful and both were written as internal notes. Decide who gets the whole file.
 
 ---
@@ -165,6 +167,7 @@ Two halves, same lesson.
 - **The tell:** it re-makes a mistake you already fixed together, or drops a rule you'd settled. That's not it getting careless. That's the room being full.
 - **The move:** start a fresh session and re-establish. This is cheap and people resist it hard, because it feels like losing everything you built up. You aren't — see §6, that's what the repo is for.
 - **A long session is not an accomplishment.** Sunk cost is the enemy here. The habit these students bring from ChatGPT — one chat, forever, for a whole project — is precisely wrong.
+- **It is also the expensive habit.** The room is re-sent every turn, so a long session costs more than a short one by more than its length. The same mechanism produces both the drift and the bill (§10) — which matters because the bill is the half that can be counted.
 - Point it at the file rather than describing the file. What's actually in front of it beats what you said about it.
 - **This is why §5 is true.** Instructions live in the same filling room and compete with your actual work for the space. More words in CLAUDE.md is not more compliance.
 - **And why §6 matters.** The room empties when the session ends. The repo is the only part that survives.
@@ -296,6 +299,8 @@ A log you never checked will mislead you at exactly the moment you go looking. T
 
 Pick deliberately. Most people land on one by accident and never notice the gap it leaves.
 
+**A third thing to pick deliberately: what the cure costs per run.** A cure that is a command runs free forever. A cure that asks a model to look is metered every time it fires, and fires on every run whether or not there was anything to find (§10).
+
 **Three kinds of cure — students assume every problem is tool-shaped:**
 1. **A tool.** Script, wrapper, hook. The satisfying case, and the rarest.
 2. **A habit change on your end.** The heredoc fix might just be: never paste multi-line content through the shell. No tool required.
@@ -386,6 +391,64 @@ That's the hook for scientists specifically. Provenance is already their value s
 
 *Session placement: not tomorrow. Session two or three — it needs accumulated slices to be felt. But the backward-chain exercise is the best version of this material, and the paper habit from the standing rule is what makes it possible, so that part gets taught tomorrow.*
 
+## §10. What a run costs
+
+**Claim:** there are two ways to get a hard thing right — spend more model on it, or build the path so that less model is needed. The first is instant, requires no diagnosis, and works often enough to become the only move anyone makes. The second is the conversion §5 already asked for, arriving now for a second reason.
+
+**The two moves, named:**
+
+- **Tokenmaxxing.** Every failure gets answered with *more*: more context, more roles, more rounds, a longer session, a bigger model, one more re-run. It is the only strategy that requires no thought about the problem, which is exactly why it becomes the default.
+- **Workflow.** Decide the steps once, then let the deterministic parts be deterministic. The model does the part that needs judgement; a command does the part that needs doing.
+
+*Internal word only. "Tokenmaxxing" belongs in the same bin as "vibe coding" — do not say it in front of the room. Say "throwing more model at it."*
+
+**Why this is a section and not a budgeting note.** Three things already in the course say it:
+
+1. **It is §5 on a second axis.** §5's argument for mechanisms is that a mechanism doesn't get skipped. The other half is that a mechanism doesn't get billed. `grep -c` is exact and free forever; asking a model to count is approximate and metered every time, for as long as you keep asking. Every corrected number in this repo was obtained the first way — the model's job was deciding what to count, not counting it.
+2. **It is §9's mechanism, arriving from the other direction.** §9: when working around a problem gets cheap, the pressure to fix the problem disappears. Re-running is the cheapest workaround there is. A vague spec re-run five times costs five runs and teaches nothing; the re-spec (§3) that would have ended it costs one. At zero marginal cost nobody notices that trade. On a fixed allotment they notice by week three — and **the noticing is the useful part.** A budget is the only thing in this course that makes an invisible cost visible without anyone building a mechanism for it.
+3. **The cost is invisible and gradual**, which is §0b's shape exactly. Nothing on screen says what that turn just cost. There is no tell, until the allotment is gone — which is the worst available moment to start wondering where it went.
+
+### The arithmetic nobody does
+
+Every turn re-sends the room (§0b). The room only grows. So turn 40 does not cost what turn 4 cost, and a session's total grows faster than its length. **The long session is expensive for the same reason it is unreliable, by the same mechanism.**
+
+**This gives §0b's advice a second reason that doesn't run on willpower.** *Start over more often than feels right* was a discipline problem while the only cost was drift, and the teaching note concedes that discipline loses that trade and is right to. With a meter attached it stops being discipline and becomes arithmetic — and arithmetic is a mechanism (§5).
+
+*Caching cuts part of this when turns come quickly, and how much depends on the plan and on the gap between turns. Stated as a direction, not a number, because nobody here has measured it. Do not put a percentage on a slide.*
+
+### Where it actually goes, in rough order
+
+Actionable without ever reading a bill:
+
+- **Long sessions.** Above. The largest lever, and the only one that buys reliability at the same time.
+- **Re-reading.** A file pasted or read into the room is paid for again on every subsequent turn, not once. Ask for the part you need rather than the file you have.
+- **Fan-out.** N reviewers on one document costs roughly N times one reviewer, and convergence rounds multiply it again. Eleven roles over three rounds is not eleven units of work.
+- **Work a command does exactly.** Counting, finding, listing, renaming, checking a format. This is the one that deserves a rule.
+
+**The rule: if the answer is exactly computable, compute it.** Use the model to decide what to check and to write the check. Use the check to get the answer. Judgement is the expensive ingredient — spend it on judgement.
+
+### The limit — this is not thrift
+
+Some runs deserve the whole budget. **Blast radius again (§1):** the pass over the archive earns everything you have; the throwaway earns the cheap path. Spending heavily on the thing that matters is the correct use of a finite allotment, not a violation of it.
+
+So the failure mode is not expense. It is **uniform** spending — one reflex applied to everything, in place of deciding what this particular run is worth. That fails in both directions: eleven roles on a memo, and one careless pass on the figure that goes in the paper.
+
+### Our own worked example is on the wrong side of this
+
+The murderboard is where §4 → §5 → §7 lands, and it is the most expensive artifact in the course. That is not a reason to drop it. It is a reason to say the number out loud.
+
+**The number is not in this document, because nobody has looked it up.** Two facts are needed and neither one is here:
+
+- what a U-M account is actually allotted, per period;
+- what one full run consumes on a document the size of this one.
+
+Both are cheap to get. The second is one run and a glance at the usage; the first is one email or one settings page. **Until then, "the murderboard is probably too expensive for the allotment" is a plausible claim, stated confidently, that nobody has checked** — the exact species §1 is about, produced by the author of §1 while writing §10. It is labelled here rather than taught. See `OPEN-FINDINGS.md` (N1).
+
+**What survives either answer.** Session A's demo was already the two-minute path: `PROMPT.md`, any chat box, one draft, one pass, no gates and no convergence rounds. It was chosen because the full apparatus reads as *I don't have time for this*. The cost argument arrives from an unrelated direction and lands on the identical recommendation, which is the best evidence available that both are right.
+
+**And if the number does come back bad**, the roles are separable — run the three that fit the document instead of all eleven. **Then say which three ran.** A partial run reported as a full one is precisely the defect the roster gate exists to catch: silence and absence must not look alike. Cost pressure is the most likely reason anyone will ever cut a run short, so the gate and the budget turn out to be one conversation.
+
+*Session placement: one slide in B, one sentence in A. B is the audience whose stated question is "how fast can I go," so they hit the ceiling first and hardest. **Do not add minutes to B until M4 is resolved** — that session is already booked to exactly 90 with an unbudgeted block, and bolting a cost slide onto a schedule that doesn't balance would be its own small joke.*
 ---
 
 # WORKED EXAMPLE — the murderboard
@@ -427,6 +490,7 @@ Eleven roles, three gates, three-round convergence caps, and the occasional comm
 - Best single artifact for that room: the convergence table, blocking+major running 65 → 11 → 5 and shipping labelled UNCONVERGED at the cap.
 - Worst: the vendoring instructions.
 - Have the "checking AI with AI" answer loaded before someone says it: a floor under expert review, never a substitute. Someone who knows the field catches half asleep what this misses at full effort.
+- **The time objection has a sibling that is harder to wave off.** *I don't have time for this* is a feeling; *this will not fit in my allotment* is arithmetic, and on a shared university plan someone in the room will do it faster than you will. §10 is the answer, and the honest form of that answer is that the number has not been looked up yet — so do not estimate it from the front of a room.
 
 ## Loose ends
 
@@ -461,4 +525,5 @@ Eleven roles, three gates, three-round convergence caps, and the occasional comm
 | — | §0b context is a filling room (new) |
 | — | §8 trusting tools you can't read (new) |
 | — | §9 what you inherit — bloat, slices, provenance (new) |
+| — | §10 what a run costs — tokenmaxxing vs. workflow (new) |
 | — | Worked example: murderboard (new) |

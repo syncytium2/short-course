@@ -7,6 +7,10 @@ The four numeric defects (B3) are **fixed** — see the commits named after them
 are blocking and need a decision only the author can make. A document with unresolved blocking
 findings is not done.
 
+**One item (N1) was raised after the run and is not a review finding.** It is filed in its own
+section below, labelled, rather than mixed into the panel's output — the count above is what
+eleven roles found, and it should stay that.
+
 ---
 
 ## B1 · The sandbox is a convention presented as a boundary
@@ -86,6 +90,36 @@ still unfixed. One half got cured because the failures were legible and repeated
 sliced around because the workaround was cheap. **Same person, same project, same year.** Draft 3
 carries both halves and never puts them together — which is the point, and the best available
 answer to "why should I believe any of this."
+
+---
+
+## Raised after the run — not a review finding
+
+**Provenance: the author, 2026-08-26, writing §10.** Recorded here because it blocks in the same
+way the others do, not because the panel found it. The eleven roles never saw a cost section
+because there wasn't one.
+
+### N1 · §10 prices the worked example with a number nobody has looked up
+
+§10 says the murderboard is *probably* too expensive to run on a university allotment. That is a
+plausible claim, stated confidently, that has not been checked against a source — the defect this
+entire repository exists to document, produced this time inside the section that names it.
+
+Two facts settle it and neither is expensive:
+
+- **What a U-M account is allotted**, per period. One email, or one settings page.
+- **What one full run consumes** on a document the size of `course-outline.md`. One run, then read
+  the usage back.
+
+**Decision needed:** get both numbers before either session teaches a figure, and until then keep
+§10 arguing the principle — uniform spending is the failure, in both directions — rather than the
+price. If the run turns out to fit, §10 survives unchanged; only the worked-example subsection
+changes, and it changes to something better, which is a run that was measured instead of assumed.
+
+**Second-order, worth stating now:** cost pressure is the most likely reason anyone will ever cut a
+review short. A run trimmed from eleven roles to three is fine. A trimmed run reported as a full one
+is exactly what the roster gate exists to catch. Whatever the numbers say, that sentence belongs in
+the session.
 
 ---
 

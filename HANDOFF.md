@@ -56,6 +56,17 @@ Write to the Oxford, UW eScience and Southampton organisers. Ask what their sess
 what failed. One email each and the positioning section stops being guesswork. Cheapest check
 available and the only one that settles it.
 
+### 5 · This week — price one run (N1, added after the review)
+
+§10 was added to the outline: tokenmaxxing versus workflow, and the fact that the course's own
+worked example is the most expensive thing in it. The section states that a full murderboard run is
+probably too costly for a university allotment — **and nobody has checked either number.** Two cheap
+facts close it: what a U-M account gets per period, and what one full run on a document this size
+actually consumes. Run one and read the usage.
+
+Until then §10 teaches the principle and labels the price as unchecked. Do not put a figure on a
+slide first; a course about verifying claims cannot open its cost section with an estimate.
+
 ---
 
 ## Two things the record lost — put them back
