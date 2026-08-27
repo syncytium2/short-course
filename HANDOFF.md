@@ -9,7 +9,7 @@ is for murderboard development only; see [Boundary](#boundary) below.
 
 | You want | It is at |
 |---|---|
-| The outline | [`course-outline.md`](course-outline.md) — draft 3, four numeric defects fixed |
+| The outline | [`course-outline.md`](course-outline.md) — draft 3, four numeric defects fixed. **Frozen 2026-08-27** as chain node 3; stale against `points.md`, do not edit it to catch up |
 | What still blocks it | [`OPEN-FINDINGS.md`](OPEN-FINDINGS.md) |
 | The 11-role review | [`docs/reviews/course-outline_murderboard_2026-08-26.md`](docs/reviews/course-outline_murderboard_2026-08-26.md) |
 | How the reconstruction failed | [`docs/reviews/reconstruction-vs-log_2026-08-26.md`](docs/reviews/reconstruction-vs-log_2026-08-26.md) |
@@ -21,21 +21,26 @@ is for murderboard development only; see [Boundary](#boundary) below.
 | The working point list | [`points.md`](points.md) — A/B/C/D/E, the author's own words, unmerged |
 | Access, cost, routes, rates | [`points.md`](points.md) **§F** — sourced and dated 2026-08-27, expected to go stale |
 | The circulatable outline | [`course-outline-external.md`](course-outline-external.md) — 434 words, four barriers |
+| **What a learner is handed** | [`docs/handouts/`](docs/handouts/) — `search-to-shipped.html`, one-page runbook + a second sheet on decision records |
 | Why the repo exists | [`README.md`](README.md) |
 
-Local only. No remote — **and that is now a live problem, not a deferred one.** See *Overnight*
-below: the README treats adding a remote as a publication decision, while D1/C3 make it an
-operational requirement. `git log` is the record — every commit is titled by the defect it fixes.
+**Remote: `syncytium2/short-course`, private, added 2026-08-27.** The paragraph here used to say
+"local only, no remote — and that is now a live problem." It was true when written and stopped being
+true the same day. The collision it described is half-resolved: the *operational* half (D1/C3 — backup
+and cross-machine access) is settled by a private remote; the *publication* half is deliberately still
+open, because nothing in `course-outline.md`'s positioning section or its personal teaching note was
+written for an audience. `git log` is the record — every commit is titled by the defect it fixes.
 
 ---
 
 ## Priority order
 
-**Timing warning, 2026-08-27.** This list was written on 2026-08-26 and says "tomorrow morning."
-That is **now today**. Whether the sessions ran, and whether the pre-work email went out, is not
-recorded anywhere in this repo — so the first thing the next session should do is ask, rather than
-assume the list below is still ahead of the work. **B1 was never resolved.** If Session B has not
-happened, item 2 is the only one with a safety consequence.
+**Overtaken, 2026-08-27: the course is postponed for redesign.** It was never officially offered,
+so no session is cancelled and nobody is told. The question this warning asked — did the sessions run,
+did the pre-work email go out — is **moot**: they are not running. Items 1–3 below lose their
+deadline and keep their content. **Item 4 gets more urgent, not less** — it waits on other people
+replying, which is exactly what a redesign should start with. See the Status section of
+[`README.md`](README.md).
 
 ### 1 · The pre-work email — was it sent?
 Highest-leverage item available before the morning, per the outline itself: install, verify it
@@ -47,9 +52,13 @@ Currently: *"everyone makes a scratch directory now."* A directory constrains no
 do with `cd`, `~`, or an absolute path. You are telling students they are contained when they are
 not, in the session you identified as the one where damage happens.
 
-Minimum acceptable fix, if no real mechanism fits in 90 minutes: **say plainly that the directory
-is a habit, not a wall.** Better: `chmod -R a-w` on a copy of real data, or Claude Code's own
-permission settings. Do not let "sandbox" mean "folder."
+**A resolution is now proposed and awaiting a yes or no** — see `OPEN-FINDINGS.md` B1, 2026-08-27.
+Short version: all four original candidates are walls *around* the agent, which is why none fitted in
+ninety minutes; a wall must be right about every route out and `cd`, `~` and an absolute path are
+three. Invert it — do not put the irreplaceable thing where the agent is. Copy in, point at the copy;
+a deny list for the catastrophic verbs; `chmod -R a-w` only if work must happen near the original.
+Then keep the directory, stop calling it a sandbox, and defeat it live, because a scratch directory is
+a declaration and that is the course's own B4.
 
 ### 3 · Before Session A — decide what to say about the gap (B2, blocking)
 "Nobody is teaching a non-programmer to do agentic work on their own machine and their own files"
@@ -195,6 +204,56 @@ undecided.
 recorded nowhere; B1 never resolved; the provisional section in `course-outline-external.md` (C2,
 B4, B7) needs a home; the remote decision (D1/C3 versus §6 and the README); and the two unchecked
 numbers, §10's price (N1) and C4's "100x".
+
+---
+
+## Session close, 2026-08-27 · evening
+
+**The course is postponed for redesign.** Never officially offered, so nothing is cancelled.
+Recorded in `README.md` Status with the reasoning, including the sentence that matters most:
+postponement removed the **deadline**, not the findings. B1, B2, B4, B5 are unresolved and still
+true. The guard being set is the quiet slide from *postponed* to *no longer blocking*.
+
+**A private remote exists.** `syncytium2/short-course`. Backup and cross-machine access settled;
+publication still open and deliberately so.
+
+**Landed today, second session:**
+
+- **§D is ordered** — seven phases, from the two long-lead items that need someone else's approval
+  through to a second machine. The constraint that produces the order is stated: each layer is only
+  verifiable once the one below it exists.
+- **Glossary gained the terms the material had been using without defining** — *research storage*,
+  *synced storage*, *HPC*, with the U-M brand names as aliases. `Turbo` had appeared five times as a
+  load-bearing term with no definition anywhere.
+- **B4 gained its first worked example**: `bugarach`'s `dl` extra, a declaration mistaken for wiring,
+  verified against the repo rather than taken from the report that raised it.
+- **B1 has a proposed resolution** awaiting a yes or no.
+- **`README.md`'s chain table was wrong about its own repo** — node 5 was blank while seventeen
+  commits of work sat in `points.md`, which the table never mentioned. Node 5 now names it; node 3 is
+  marked frozen and do-not-edit.
+- **First handout**: `docs/handouts/search-to-shipped.html`.
+
+**Three push failures observed today, by three different actors.** The N1 work was committed and not
+pushed, so it existed on one machine only until someone checked. The session-start briefing handed to
+one session was a commit behind. And a definition worked out in conversation was reported twice as
+"not in the repo" and still sat unwritten until the author asked where it had gone. Same shape each
+time, and it is the shape B2's third incident names: an action and its report are two different
+events.
+
+**This section was appended by hand, which is still the defect.** `5da72f8` diagnosed this file
+against B7's own rules and nothing has changed about that. Replacing it with the channel mechanism
+remains the open task; writing it more carefully is not the fix.
+
+**Open, in the order they cost something:**
+
+1. **Three emails** — Oxford, UW eScience, Southampton. The only item waiting on other people, and a
+   redesign should not decide what it is without them.
+2. **`docs/reviews/reconstruction-vs-log_2026-08-26.md` is falsified in its lead finding** by node 1b
+   and still stands unmarked. Top item for two days now. How to correct it in place is undecided.
+3. **B1** — yes or no on the proposal.
+4. **One measured murderboard run** (N1), a few dollars, settles §10.
+5. The provisional section in `course-outline-external.md` (C2, B4, B7) still needs a home; the
+   publication decision; and C4's unchecked "100x".
 
 ---
 
