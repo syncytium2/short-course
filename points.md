@@ -118,3 +118,27 @@ pressing problems. The barriers are:
   *Unchecked, and labelled rather than taught:* 100x. Nobody has measured it. Same treatment as
   §10's price (see `OPEN-FINDINGS.md`, N1) — argue the shape of the curve, not the multiple, until
   someone has a number they can source.
+
+---
+
+## D. Step 0 — before any of the above
+
+Set up and decisions that precede the first task.
+
+- **D1.** GitHub account.
+- **D2.** Claude or Codex plan.
+- **D3.** VSCode.
+- **D4.** Data management (Dropbox).
+- **D5.** Multi-platform? More than one workstation?
+- **D6.** Solo or team?
+
+*D5 and D6 are questions, not items.* They are branch points — the answers change what the rest of
+the course has to cover, and they are asked at the door rather than discovered in week three.
+
+*Two things this settles that were open above.*
+
+- **D1 pre-empts §6.** If a GitHub account is step 0, a remote exists from the first hour, and
+  §6's "commit, diff, log — no remotes" is already contradicted at the door. D5 and D6 are what
+  decide whether that matters, and C3 is what it costs when it does.
+- **D2 is where §10 lands.** The plan is the allotment. What a run costs stops being an abstract
+  argument the moment someone has to pick one.
