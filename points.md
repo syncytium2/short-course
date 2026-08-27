@@ -51,6 +51,48 @@ pressing problems. The barriers are:
   *Still unrecovered:* which dataset it actually used. The experience is vivid; the diagnostic
   detail is gone.
 
+  *Second incident — the stale official page, 2026-08-27.* Drafting §D's resource list, the
+  U-M ITS "Getting Started with Great Lakes" page was cited for the account and allocation
+  steps. That page says the cluster's MFA is **Duo**. `interface2`'s `greatlakes/ACCESS.md`
+  says the opposite — *"MFA is Okta, not Duo… anything older saying Duo is stale"* — and was
+  validated end-to-end on 2026-07-30 against four live jobs.
+
+  *How it was caught.* Not by a check. Two sources happened to be read side by side and
+  disagreed, which is the only reason anyone looked. Resolved by first-hand knowledge: U-M
+  migrated to Okta a few months ago and I have not opened Duo in at least three months. The
+  local note is right; the institutional page is stale.
+
+  *Why this one is different from every other specimen in this repo.* The others all run one
+  direction — a confident assertion, corrected by a source (482 words, 79 commits, "nobody is
+  teaching this"). Here the **institutional source was wrong and the local note was right.**
+  So *check it against a source* is not the rule, because the source is a claim too. The
+  discriminator is which claim has hands on it, and how recently.
+
+  *The cost, had it held:* a link in front of a room sending people to enrol in the wrong MFA
+  — from the official page, in a course about verifying claims.
+
+  *Recorded while intact.* Unlike the calcium-imaging incident above, the diagnostic detail
+  survives, because it was written down the day it happened.
+
+  *Third incident — the tool that reported success it never achieved.* `tools/file_todo.sh`
+  in `interface2` closes a todo by rewriting `status: open` to `status: done`. It used
+  `sed -i`, which is GNU syntax: on macOS `-i` **requires** an argument, so the expression
+  was consumed as a backup suffix, the edit never happened — **and the script printed
+  `resolved` anyway.** The item stayed open on every machine while the tool said it had
+  closed it.
+
+  *Why this is the best specimen we have.* It is error type five — *reported success it never
+  achieved* — committed by the tool whose entire job was to keep work visible. The other four
+  error types announce themselves. This one produces a confirmation. And unlike the
+  calcium-imaging incident, the whole diagnosis survives, because the fix was written as a
+  comment beside the code: *"AND CHECK IT ACTUALLY HAPPENED. The bug above was invisible
+  precisely because nothing confirmed the write — the same 'can the alarm ring?' failure this
+  repo keeps paying for."*
+
+  *The general rule it yields.* An action and its report are two different events. Anything
+  that reports success must re-read the world and confirm, or it is only reporting that it
+  reached the end of its own instructions.
+
 - **B3.** Identify annoyances and hindrances — repeated mistakes (heredoc!), files for review lost in some folder you have no clue where it's at (~/docs vs ~/dropbox/darkroom).
 - **B4.** Do not trust standard features built to prevent these issues. CLAUDE.md or equivalent is not reliable or enforceable. Use all the bad words you want and the second sentence is still skipped. Build your own tools (using AI) and keep them in a repo.
 - **B5.** Repo, repo, repo. What's a repo and why.
