@@ -26,6 +26,50 @@ increasing cost — a copy of the data with the original `chmod -R a-w`; a dedic
 container; Claude Code's own permission settings. **If none is practical, say plainly that the
 directory is a habit and not a wall.** Do not let "sandbox" mean "folder."
 
+### Proposed resolution, 2026-08-27 — **author's call, not yet taken**
+
+*Recorded as a proposal, not a decision. B1 is a design choice and the finding says it is the
+author's to make; this is the option on the table with its reasoning, so the decision is a yes
+or a no rather than a fresh start.*
+
+**The four candidates are all walls around the agent, which is why none of them fits in ten
+minutes.** Invert it: *don't build a wall around the agent — don't put the irreplaceable thing
+where the agent is.* Containment by absence, not by permission. It is free, cross-platform,
+needs no install, and it survives the agent being cleverer than the wall, which every permission
+scheme has to bet against.
+
+Three layers, in this order:
+
+1. **The original is never in the room.** Copy the subset you need into the working directory and
+   point the agent at the copy. Total loss then costs a re-copy. This is the layer that actually
+   holds and it costs one sentence to teach.
+2. **A `deny` list for the catastrophic verbs.** Four minutes, no install, and a real gate — the
+   harness refuses the call rather than asking the model nicely. `interface2`'s is the worked
+   example: `rm -rf`, `sudo`, `push --force`, `reset --hard`, plus named files that must never be
+   edited.
+3. **`chmod -R a-w` on the original**, if work must happen near it. One command, a real permission
+   bit. Two caveats said out loud: sync clients fight it, and on institutional research storage it
+   may not be yours to chmod.
+
+**Containers and a dedicated OS user: named, priced, deferred.** Real containment, wrong session.
+Naming them is what makes the deferral honest rather than an omission.
+
+**Keep the directory; stop calling it a sandbox; then defeat it live.** One `cd ~`, or one
+absolute path, and the agent is outside it while doing exactly what was asked. A scratch
+directory is a **declaration** — the same class as `dl = ["torch>=2.0"]` and `CLAUDE.md`, per
+`points.md` B4. Spending that vocabulary here turns B1 from a liability into the course's
+cleanest live demonstration of its own thesis, with the audience's own safety as the stake, in
+the first ten minutes. It also honours §0a's own instruction — *"never demonstrate this power
+without demonstrating containment in the same breath"* — which the current implementation does
+not, because what it demonstrates is containment theatre.
+
+**And it changes the answer to the pushback in `course-outline.md` Open questions** (*"Do I hold
+the line on sandbox-only for session one? Leaning yes. Someone will push back"*). Hold it, but
+not because the directory protects them — a grad student will disprove that by Tuesday. Because:
+*here is what would actually contain this, here is what it costs to set up, we do not have that
+today, so today you work on a copy.* That concedes their point before they make it, which is a
+much harder thing to argue with.
+
 ## B2 · "Nobody is teaching a non-programmer…" is false
 
 Refuted by one search:
