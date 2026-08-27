@@ -22,13 +22,20 @@ idea  →  outline  →  AI interaction  →  review  →  what survived
 | 1 | [`docs/chain/01-session-record.md`](docs/chain/01-session-record.md) | The session that turned eight points into an outline | **Reconstruction, not a transcript.** Superseded by node 1a where they disagree |
 | 1a | [`docs/chain/01a-real-log-partial.md`](docs/chain/01a-real-log-partial.md) | The actual chat log, pasted from the web UI | **Partial** — covers only the last six turns. Tool calls collapsed, so it shows *that* a command ran, never what it returned |
 | 2 | *(missing)* | Drafts 1 and 2 | **Gone.** Only descriptions of how they changed survive, inside node 1 |
-| 3 | [`course-outline.md`](course-outline.md) | Draft 3 — the outline as it stood when first reviewed | Intact. Commit 3 is the exact reviewed bytes (`ad695d94`) |
+| 3 | [`course-outline.md`](course-outline.md) | Draft 3 — the outline as it stood when first reviewed | Intact. Commit 3 is the exact reviewed bytes (`ad695d94`). **Frozen 2026-08-27** — superseded by node 5 and now stale against it. Do not edit it to catch up |
 | 4 | [`docs/reviews/course-outline_murderboard_2026-08-26.md`](docs/reviews/course-outline_murderboard_2026-08-26.md) | An 11-role adversarial review: 34 findings, 5 blocking | Intact. Round 1 only — **not** a converged run |
-| 5 | *in progress* | What survives, and what was cut for being wrong | See [`OPEN-FINDINGS.md`](OPEN-FINDINGS.md) |
+| 5 | [`points.md`](points.md) + [`OPEN-FINDINGS.md`](OPEN-FINDINGS.md) | What survives, and what was cut for being wrong. `points.md` is the live working document; `OPEN-FINDINGS.md` is what the review left unresolved | **Live, not a snapshot** — the only node still moving. 17 commits, 11 of them 2026-08-27 |
 
 **Two of the seven nodes are damaged and one is missing.** That is recorded here rather than
 smoothed over, because a chain presented as complete when it isn't would be the same defect
 the course is about.
+
+**Node 5 went backwards on purpose.** It is not a fourth draft. `points.md` opens *"Working
+list. Nothing here is elaborated or ordered yet,"* and its first commit — 2026-08-26 22:45 — is
+named *"The outline was elaborated faster than it was agreed, so tonight went back to the
+list."* The live end of the chain is a step back from a polished document to an unordered one,
+because that is what the review made necessary. It is the opposite of the direction a project's
+own README usually shows, which is why it is stated rather than left to be inferred from dates.
 
 **One node is missing on purpose.** A full session export exists and is deliberately not
 imported — it spans many unrelated projects, and this repo may go public. What that costs, and
