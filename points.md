@@ -290,6 +290,87 @@ the course has to cover, and they are asked at the door rather than discovered i
   decide whether that matters, and C3 is what it costs when it does.
 - **D2 is where §10 lands.** The plan is the allotment. What a run costs stops being an abstract
   argument the moment someone has to pick one.
+- **D4 is mis-scoped as written.** "Data management (Dropbox)" names a product where the decision
+  is a **storage tier rule** — which class of storage holds what — and it has to be made before
+  the first data file exists, not when a disk fills up. See **research storage** and **synced
+  storage** in the glossary.
+
+### The order, and why it is this one
+
+*Each layer can only be verified once the one below it exists.* You cannot test a path helper
+before there is a filesystem to point it at, or a handoff before there are two machines. One
+thing runs the other way: the items that take longest are the ones involving people who are not
+you, so they start first and finish last.
+
+**Phase 0 — conditional. Skip unless you need research storage and/or HPC.**
+
+Most people need neither. A laptop, synced storage and one repo covers the majority of research
+computing, and knowing which side of that line you are on *is* the D4 decision.
+
+1. **Research storage volume** — usually sponsored by a lab or PI, not requested individually.
+   *(U-M: [Turbo](https://its.umich.edu/advanced-research-computing/storage/turbo); 10 TB comes
+   free with the [Research Computing Package](https://its.umich.edu/advanced-research-computing/research-computing-package).)*
+2. **Cluster account *and* an allocation** — two separate things, and only the second lets you
+   submit. *(U-M: [Great Lakes](https://its.umich.edu/advanced-research-computing/high-performance-computing/great-lakes),
+   [getting started](https://its.umich.edu/advanced-research-computing/high-performance-computing/great-lakes/getting-started)
+   — whose MFA line is stale, see B2.)*
+
+Days to weeks, because someone else has to approve. Everything below proceeds while they pend.
+
+**Phase 1 — identity, before any code exists.**
+
+3. **GitHub account, SSH key, `gh auth login`** (D1).
+4. **Agent plan** (D2) — also where the cost question stops being abstract.
+5. **Institutional basics** — login, VPN client, synced-storage client.
+
+**Phase 2 — machine baseline.**
+
+6. Package manager, then `git`, `gh`, `node`, `ripgrep`, `jq`.
+7. **VS Code and the agent extension** (D3).
+8. Language runtimes — only the ones you need. Most people need one.
+
+**Phase 3 — storage decisions, before the first data file.**
+
+9. Create the data root and the figure-review folder; mount research storage if Phase 0 applies.
+10. **Write the path helper before any script hardcodes a path.** This is cheap now and
+    archaeology later — `interface2` carries a stale path island it describes in its own words as
+    rooted somewhere nothing else uses, flagged for cleanup and not fixed.
+11. **Write the tier rule down.** Three sentences. It prevents both failures: multi-GB outputs
+    strangling a sync client, and small shareable results stranded where the other machine cannot
+    see them.
+
+**Phase 4 — the first repo.**
+
+12. `git init` **and add the remote in the same sitting** (D1 again — see C3 for the cost of not).
+13. `.gitignore` excluding data by extension. `.gitattributes` pinning `eol=lf` on shell and
+    batch scripts — a CR in a shebang is a `bad interpreter` failure on a Linux cluster, and it
+    is a genuinely awful thing to debug from a Windows checkout.
+14. The project instructions file, and the agent's permission settings: allow, ask, deny.
+15. **A commit-message hook stamping agent authorship.** Cheap now, impossible retroactively —
+    `interface2` has to say "assume agent authorship unless a commit says otherwise" for
+    everything before the day it added one.
+
+**Phase 5 — the guard layer, built *only* from friction.**
+
+16. Nothing here is set up in advance, and that is the point (B7). Every guard worth having
+    exists because something specific went wrong first. Building them up front is §4's asymptote
+    with extra steps — and the evidence is in the same repo: a session-start briefing grew until
+    it killed sessions outright, and the fix was architectural, not tuning.
+
+**Phase 6 — second machine, then HPC.**
+
+17. **The second machine is where D5 stops being a question.** It is also where C3 turns from
+    theory into an operational requirement: three machines share a repo through a remote or they
+    do not share it at all.
+18. HPC, once the allocation lands. Portal before SSH; VPN before the browser.
+19. Publishing, if any — and note that a login flow like `wrangler login` is once per machine and
+    cannot be scripted.
+
+*What is not required.* MATLAB only if you inherit MATLAB code. Research storage and HPC only at
+TB scale or multi-hour runs. A deploy platform only to publish. The list looks long because it is
+the three-machine answer; **a solo researcher on one laptop drops Phase 0, Phase 6, and most of
+Phase 3, which is a much shorter course.** That is what D5 and D6 decide, and it is why they are
+asked at the door.
 
 ---
 
