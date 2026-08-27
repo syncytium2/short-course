@@ -94,3 +94,9 @@ pressing problems. The barriers are:
   *Evidence, 2026-08-26.* Tonight this repo held finished work from another session that had sat
   uncommitted for eleven hours, while a third session edited three of the same files. `HANDOFF.md`
   exists because of this and is maintained by hand.
+
+  *Candidate mechanisms:* branches, worktrees, collision avoidance.
+
+  *Tension to resolve, not tonight.* §6 currently fixes the git scope at three commands — commit,
+  diff, log — and says explicitly: no branches, no remotes, no merge. C3's answer needs the parts
+  that were cut.
