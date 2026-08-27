@@ -95,6 +95,14 @@ pressing problems. The barriers are:
   uncommitted for eleven hours, while a third session edited three of the same files. `HANDOFF.md`
   exists because of this and is maintained by hand.
 
+  *The habit I developed:* do not end a session until you have delivered a handoff to the session
+  taking over.
+
+  *Second instance, 2026-08-27 morning.* The session was not ended and no handoff was delivered.
+  The habit was stated the next morning, by the person who has it, in the sentence reporting that
+  it had not been followed. It is a habit and not a mechanism — §7's second kind — so §5 applies
+  to it in full.
+
   *Candidate mechanisms:* branches, worktrees, collision avoidance — and **push / pull / fetch**,
   which is the one that actually spans machines. Branches and worktrees only separate work inside
   one machine. Three machines share a repo through a remote or they do not share it at all.

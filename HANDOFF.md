@@ -1,6 +1,6 @@
 # Handoff — course work moves here
 
-**2026-08-26.** Everything about the short course now lives in this repo. The murderboard repo
+**2026-08-26, updated 2026-08-27.** Everything about the short course now lives in this repo. The murderboard repo
 is for murderboard development only; see [Boundary](#boundary) below.
 
 ---
@@ -16,18 +16,27 @@ is for murderboard development only; see [Boundary](#boundary) below.
 | The origin (8 points) | [`docs/chain/00-the-eight-points.md`](docs/chain/00-the-eight-points.md) |
 | The session, reconstructed | [`docs/chain/01-session-record.md`](docs/chain/01-session-record.md) — superseded where it conflicts with 1a |
 | The session, real (partial) | [`docs/chain/01a-real-log-partial.md`](docs/chain/01a-real-log-partial.md) |
+| The session, real and complete | [`docs/chain/01b-real-log-complete.md`](docs/chain/01b-real-log-complete.md) — **with tool output.** Supersedes 1 and 1a |
+| What is deliberately not here | [`docs/chain/EXCLUDED.md`](docs/chain/EXCLUDED.md) |
+| The working point list | [`points.md`](points.md) — A/B/C/D, the author's own words, unmerged |
+| The circulatable outline | [`course-outline-external.md`](course-outline-external.md) — 434 words, four barriers |
 | Why the repo exists | [`README.md`](README.md) |
 
-Local only. No remote. `git log` is the record — every commit is titled by the defect it fixes.
+Local only. No remote — **and that is now a live problem, not a deferred one.** See *Overnight*
+below: the README treats adding a remote as a publication decision, while D1/C3 make it an
+operational requirement. `git log` is the record — every commit is titled by the defect it fixes.
 
 ---
 
-## Tomorrow morning, in priority order
+## Priority order
 
-The outline says both sessions are **tomorrow morning** and the pre-work email goes **tonight**.
-That ordering is what makes the list below urgent rather than tidy.
+**Timing warning, 2026-08-27.** This list was written on 2026-08-26 and says "tomorrow morning."
+That is **now today**. Whether the sessions ran, and whether the pre-work email went out, is not
+recorded anywhere in this repo — so the first thing the next session should do is ask, rather than
+assume the list below is still ahead of the work. **B1 was never resolved.** If Session B has not
+happened, item 2 is the only one with a safety consequence.
 
-### 1 · Tonight — the pre-work email
+### 1 · The pre-work email — was it sent?
 Highest-leverage item available before the morning, per the outline itself: install, verify it
 runs, make a scratch folder. Setup friction at minute five is what kills these sessions, and it
 lands hardest on the faculty.
@@ -96,15 +105,55 @@ manufactured one, and it needs to run on data that looks like theirs — though 
 §2 still earns a section; whether §8 is the closer or gets split; whether to name the tool.
 
 **One of those is already answered and the outline doesn't know it.** The open question asks for
-"3–4 real failures from my own logs." This repo is now four of them, documented, with commits:
-a course about checking said 482 words when the file says 433; a commit count that was never 79;
-a line count that was true for one day; and a claim that one commit in ninety-one represents the
-standard. Plus this repo's own two — a commit that did more than it said, and a README that
-asserted the errors were unchecked when the log shows the tools ran.
+"3–4 real failures from my own logs." This repo is now several, documented, with commits — but the
+description of them that stood here until 2026-08-27 was wrong, and node 1b is what corrected it.
 
-They are not failures on data, which is what Session B needs. For Session A they are better than
-data failures, because the audience is being asked to trust the person at the front, and these are
-his.
+They were filed as four instances of one defect: a plausible claim nobody checked. **Every one was
+checked**, and they are four different defects. `wc -w` returned 482 and was reported faithfully —
+it measured the whole file when the claim was about the pasteable block, which is 433. `git log |
+wc -l` returned 79, true that day, written as a standing fact. `wc -l CLAUDE.md` returned 64, same
+shape. And "two-thousand-word commit messages" came from a command labelled `MSG LENGTH DIST` that
+returned **1726** — non-empty body lines across all commits, not words per message. Right number,
+wrong quantity, invited by a label its own author wrote.
+
+That is a better taxonomy than the one it replaced, and it is the course's own §1 material.
+
+**Session B's data failure now exists.** It did not when this file was written. See
+[`points.md`](points.md) B2: three levels of data, two on Turbo, variant extractions in Dropbox, an
+analysis that used something other than what was assumed, a pipeline that ran clean, figures that
+looked right, caught on paper walking into the meeting. Recorded with its cost — including that it
+made the author's use of AI look unprofessional, which is the faculty's stated question answered
+from the front of the room. Still unrecovered: which dataset it actually used.
+
+---
+
+## Overnight, 2026-08-26 → 27
+
+**Node 1b landed.** The full session from the account export, **with tool output**, plus the
+lossless source JSON. It supersedes node 1 and node 1a, both kept. Scoped per `EXCLUDED.md`: one
+conversation of 183, all 61 tool calls enumerated and read, nothing else copied.
+
+**A review in this repo is falsified and still stands unmarked.**
+`docs/reviews/reconstruction-vs-log_2026-08-26.md` leads with "A fabricated obstacle," holding that
+node 1 invented *"site blocked automated access."* Message 25 of node 1b is a `web_fetch` returning
+`is_error=true`, `ROBOTS_DISALLOWED`, *"Site disallows automated access."* Node 1's sentence was
+accurate. That review inferred success from node 1a — a source whose own stated limit is that it
+shows *that* a tool ran and never what it returned. **How to correct it in place is not decided.**
+This is the top item for whoever picks the repo up.
+
+**The framing was reopened.** "How do you know it worked" was demoted: it is validation, one of
+four barriers, promoted to the whole thesis. `points.md` now holds four lists in the author's own
+words — A the four barriers, B the original eight with new notes, C four new points, D step 0.
+`course-outline-external.md` was rewritten around them, 1,175 words down to 434.
+
+**Unresolved from that rewrite:** C2, B4 and B7 sit in a section marked *provisional* and need a
+home.
+
+**Two decisions collided.** D1 puts a GitHub account at step 0 and C3 needs push/pull to work
+across machines, while §6 fixes git at commit/diff/log and rules out remotes, and the README defers
+remotes as a publication question. One decision, recorded in two places, neither aware of the other.
+
+**Unchecked numbers now carry labels, not slides:** §10's price (N1) and C4's "100x."
 
 ---
 
