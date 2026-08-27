@@ -91,14 +91,29 @@ numbers — would have destroyed the only evidence the course had.
 
 ## Status
 
-Draft. The outline carries **five blocking findings**, four of which need a human decision
-before anything is taught from it — see [`OPEN-FINDINGS.md`](OPEN-FINDINGS.md). Two sessions
-are scheduled against this material; the schedules in `course-outline.md` are not yet
-corrected for M4 (Session B is booked to 90/90 minutes with an unbudgeted block).
+**Postponed for redesign, 2026-08-27** (author's decision). The course was never officially
+offered, so no session is being cancelled and nobody is being told anything. The previously
+scheduled sessions are off, and with them the M4 schedule problem — Session B was booked to
+exactly 90 minutes with an unbudgeted block, which stops mattering until a redesign decides
+what the sessions are.
 
-**Not published.** `course-outline.md` contains a positioning section that names competitors
-candidly and a teaching note that is a personal admission. Both are load-bearing for the
-author and neither was written for an audience. Decide before adding a remote.
+**Postponement removed the deadline, not the findings.** The four blocking findings in
+[`OPEN-FINDINGS.md`](OPEN-FINDINGS.md) are unresolved and still true; nothing about them was
+answered by not teaching. Three of the four (B2, B4, B5) rewrite one section, and the cheapest
+route through them — emailing the Oxford, UW eScience and Southampton organisers — depends on
+other people replying, so it gets *more* urgent with a redesign starting, not less.
+
+**Which file is live.** `points.md` is the working document and is where the redesign proceeds
+from; `course-outline.md` is draft 3, frozen as node 3 of the chain — the exact bytes the
+murderboard reviewed. Do not edit node 3 to bring it up to date; that is what the redesign
+output is for. As of this note `course-outline.md` is **stale** with respect to `points.md`
+and carries none of the 2026-08-27 material.
+
+**Not published as a course.** `course-outline.md` contains a positioning section that names
+competitors candidly and a teaching note that is a personal admission. Both are load-bearing
+for the author and neither was written for an audience. The repository now has a **private**
+remote (`syncytium2/short-course`, 2026-08-27) for backup and cross-machine access — that
+settled the operational half of the question and deliberately left the publication half open.
 
 ## Related
 
