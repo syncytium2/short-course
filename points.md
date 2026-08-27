@@ -98,6 +98,44 @@ pressing problems. The barriers are:
 - **B5.** Repo, repo, repo. What's a repo and why.
 - **B6.** Spec, validate, re-spec.
 - **B7.** Note all repeated issues and use coding agents to build long-lasting cures for each.
+
+  *Worked example — the TODO channel (`interface2`).* Not a list. A channel: one markdown
+  file per item in `docs/todo/`, filed by `tools/file_todo.sh` against one of eighteen
+  pipeline stages, rendering into the goals doc and the pipeline map with a forwarded-count
+  badge on the stage it belongs to. 27 items, 22 open. Frontmatter is `stage / status /
+  filed / from`, where `from` names a **session**, never a machine — two of the workstations
+  share a username *and* a worktree path, so a machine id is right on one box and wrong on
+  the other, and cannot name a session at all.
+
+  *The design decisions are the teachable part, and each was bought with a failure.*
+
+  1. **One file per item, because of concurrency, not tidiness.** The obvious design is
+     "every session edits one YAML." That fails the moment two sessions do it at once —
+     one file, adjacent lines, guaranteed conflict — and this repo routinely has several
+     sessions live across two machines.
+  2. **Git is the transport.** An uncommitted todo reaches nobody; an unpushed resolution
+     leaves the item open everywhere else. The README says this three times because it is
+     the failure that actually recurs.
+  3. **Resolving must be as cheap as filing.** *"Every dead board in this repo died the same
+     way: open items accumulated until the list stopped being read."*
+  4. **Validate the envelope, not the contents.** The build **fails** on an unknown stage or
+     missing frontmatter, because a mistyped stage would render nowhere and nobody would be
+     told — *"a silent drop is worse than a rejected file."* But *"a two-character todo is a
+     valid todo"*; meaning is not checked, deliberately.
+  5. **Instructions travel with the item.** Every filed file carries its own resolve footer,
+     so nobody has to find the README.
+  6. **`done` is never deleted, and you do not resolve what you did not verify yourself.**
+
+  *Rules 3 and 4 are the ones that decide whether a cure survives a busy month.* Everything
+  else is craft. A cure that is expensive to close silts up and stops being read; a cure that
+  fails silently is worse than no cure, because it also supplies confidence.
+
+  *And the channel has siblings, which is the actual insight.* There are five, with a routing
+  table naming which is which: pipeline TODOs, guardrail feedback, a cross-machine session
+  board, project handoffs, and decision records. The value is not any one of them. It is that
+  each has one job and a stated wrong-channel case, so an item cannot be filed *somewhere*
+  and be nowhere.
+
 - **B8.** DO NOT DO MORE THAN ONE THING AT A TIME IN THE BEGINNING.
 
   *Note.* The temptation is to fill the time between replies with another project. Some people are
