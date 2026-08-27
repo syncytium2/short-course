@@ -284,3 +284,49 @@ the course has to cover, and they are asked at the door rather than discovered i
   dictionary. A glossary is a dictionary. The way both are true: this is not a reference to study,
   it is a decoder for the small closed set of words that actually appear in the return channel and
   change what you would do next. Short, and only the load-bearing ones.
+
+  ### Entries
+
+  **stale** — *was true when written, is not true now, and says nothing about the difference.*
+
+  Not wrong — wrong implies it was never right, and invites you to look for who erred. Stale
+  claims were correct on the day someone wrote them and decayed afterwards, silently, with
+  nobody at fault. That is why the usual defences miss: there is no error to catch, no author
+  to distrust, and the document looks exactly as confident as it did when it was accurate.
+
+  *Applies to everything, not to institutions.* The instinct is to hear this as a complaint
+  about IT, admin, or vendor docs — everyone already believes those rot, and the belief
+  changes no behaviour. It is a property of writing things down. The clearest specimen in
+  this material is not an institutional page but `interface2/CLAUDE.md`, read at the start
+  of every session, wrong about which performance levers mattered for weeks, sending work at
+  dead ends that had already been measured and ruled out (B2).
+
+  *Why it matters more now.* A stale claim used to die on contact with the world: you try
+  the thing, it isn't there, you lose ninety seconds. An agent never contacts the world — it
+  reads the claim and copies it forward into a plan, a script, a commit message, a handoff,
+  and then into the next document, which is now stale too and no longer remembers where the
+  claim came from. What used to self-correct now reproduces.
+
+  *So C2 is a special case of this.* Telling the agent to remember something manufactures a
+  document: true at the moment of writing, ageing from that moment, undated, with no record
+  of how you knew.
+
+  *What changes if you hear the word.* Stop reading, go touch the system. Two documents that
+  disagree can only disagree — nothing about holding them side by side tells you which one
+  aged (see **gripping hand**).
+
+  **fresh / freshness** — the opposite property, and the only one a machine can check. Not
+  *is this true* but *is this copy the same as the thing it was copied from.* The distinction
+  matters because freshness is cheap and automatable and truth is neither; a freshness gate
+  buys you "this has not drifted from upstream", never "this is correct."
+
+  **gripping hand** — the decisive third consideration, from Niven and Pournelle's *The Mote
+  in God's Eye*, where the aliens have a third arm and use it for the argument that ends the
+  argument. Here: on the one hand the official page said Duo, on the other hand the local
+  note said Okta — on the gripping hand, nobody had opened Duo in three months. Both of the
+  first two are documents. The third is contact with the thing itself, and it is the only
+  one that cannot be stale.
+
+  *The point is that it is expensive.* You cannot go touch everything. So the working
+  question is never "verify more", it is **what makes a claim worth touching** — which is
+  what dating a claim, and saying how you knew, is for.
