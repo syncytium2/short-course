@@ -157,6 +157,41 @@ remotes as a publication question. One decision, recorded in two places, neither
 
 ---
 
+## Session close, 2026-08-27
+
+**points.md is now the live document.** Two sessions worked it today. Added since the morning
+update:
+
+- **E, running order.** Part 1 is a bake-off — Google search, ChatGPT, Claude Code, one prompt —
+  with a lit search as the prompt, because chat fabricates citations in the way this audience
+  already fears and `fetch_paper.py` lets the agent show its work. Flagged: do not stage it; if
+  chat comes back clean on the day, say so.
+- **Glossary**, now with entries rather than a word list: *stale*, *fresh/freshness*, *gripping
+  hand*.
+- **B2** gained two more specimens, both with the diagnosis intact because both were written down
+  the day they happened — the stale official page, and a tool that printed "resolved" after a
+  silent no-op.
+- **B7** gained its first worked cure that survived: interface2's TODO channel, six design rules.
+- **C3** was answered. interface2 already has the mechanism — five written channels, each item a
+  committed file addressed to a session, with `require_commit_before_message.sh` as the gate.
+
+**This file is the thing that failed.** Commit `5da72f8` diagnoses HANDOFF.md against B7's own
+rules: one file, many sessions, maintained by hand by whoever remembers, expensive to write and so
+not written. It died the way every hand-maintained board dies, and this section was appended by
+hand, which is the same defect continuing. **Replacing it with the channel mechanism is the open
+task**, not writing it more carefully.
+
+**Still the top item, untouched for a day.** `docs/reviews/reconstruction-vs-log_2026-08-26.md` is
+falsified in its lead finding by node 1b and still stands unmarked. How to correct it in place is
+undecided.
+
+**Also still open:** whether the sessions ran today and whether the pre-work email went out —
+recorded nowhere; B1 never resolved; the provisional section in `course-outline-external.md` (C2,
+B4, B7) needs a home; the remote decision (D1/C3 versus §6 and the README); and the two unchecked
+numbers, §10's price (N1) and C4's "100x".
+
+---
+
 ## Boundary
 
 **The murderboard repo is for murderboard development only.** Course material, session plans,
