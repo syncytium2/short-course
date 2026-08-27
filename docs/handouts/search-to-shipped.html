@@ -1,0 +1,829 @@
+<title>Search to Shipped</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+  :root {
+    --ground:  #FAFBFC;
+    --surface: #FFFFFF;
+    --sunk:    #F2F5F8;
+    --ink:     #171C23;
+    --muted:   #5C6875;
+    --faint:   #8B96A3;
+    --rule:    #E1E6EB;
+    --accent:  #15577D;
+    --accent-soft: #E7F0F6;
+    --caution: #8A5D0F;
+    --caution-soft: #FAF2E2;
+
+    --sans: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:  #0D1218;
+      --surface: #141A22;
+      --sunk:    #1A222B;
+      --ink:     #E3E8EE;
+      --muted:   #93A0AE;
+      --faint:   #6D7987;
+      --rule:    #232C36;
+      --accent:  #69B0DD;
+      --accent-soft: #16283A;
+      --caution: #D2A64E;
+      --caution-soft: #2A2213;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground:  #0D1218;
+    --surface: #141A22;
+    --sunk:    #1A222B;
+    --ink:     #E3E8EE;
+    --muted:   #93A0AE;
+    --faint:   #6D7987;
+    --rule:    #232C36;
+    --accent:  #69B0DD;
+    --accent-soft: #16283A;
+    --caution: #D2A64E;
+    --caution-soft: #2A2213;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.55;
+    margin: 0;
+    padding: 40px 24px 96px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page { max-width: 860px; margin: 0 auto; }
+
+  /* ---- masthead ---- */
+  .mast { border-bottom: 2px solid var(--ink); padding-bottom: 18px; margin-bottom: 8px; }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 10px;
+  }
+  h1 {
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    margin: 0 0 10px;
+    text-wrap: balance;
+  }
+  .standfirst { color: var(--muted); margin: 0; max-width: 62ch; }
+
+  /* ---- the escalation ---- */
+  .escalation { display: grid; gap: 0; margin: 26px 0 30px; }
+  .esc-row {
+    display: grid;
+    grid-template-columns: 108px 1fr;
+    gap: 18px;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: baseline;
+  }
+  .esc-row:first-child { border-top: 1px solid var(--rule); }
+  .esc-k {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .esc-row.now .esc-k { color: var(--accent); font-weight: 500; }
+  .esc-v { margin: 0; }
+  .esc-row.now .esc-v { font-weight: 500; }
+
+  .method {
+    background: var(--accent-soft);
+    border-left: 2px solid var(--accent);
+    padding: 13px 16px;
+    margin: 0 0 38px;
+    font-size: 14px;
+    color: var(--ink);
+  }
+  .method b { font-weight: 600; }
+
+  /* ---- phases ---- */
+  .phase { margin: 0 0 34px; }
+  .phase-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 7px;
+    margin-bottom: 4px;
+  }
+  h2 { font-size: 17px; font-weight: 600; margin: 0; letter-spacing: -0.01em; }
+  .phase-time {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    margin-left: auto;
+    white-space: nowrap;
+  }
+
+  /* ---- steps ---- */
+  ol.steps { list-style: none; margin: 0; padding: 0; }
+  ol.steps > li {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 0 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .n {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+    padding-top: 1px;
+    font-variant-numeric: tabular-nums;
+  }
+  .body > :first-child { margin-top: 0; }
+  .body > :last-child { margin-bottom: 0; }
+  .do { margin: 0 0 4px; font-weight: 500; }
+  .why { margin: 0 0 8px; color: var(--muted); font-size: 14px; }
+
+  .done {
+    font-size: 13.5px;
+    color: var(--muted);
+    margin: 8px 0 0;
+    padding-left: 15px;
+    position: relative;
+  }
+  .done::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+  .done b { color: var(--ink); font-weight: 500; }
+
+  pre {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    line-height: 1.65;
+    background: var(--sunk);
+    border: 1px solid var(--rule);
+    padding: 10px 13px;
+    margin: 8px 0;
+    overflow-x: auto;
+    white-space: pre;
+  }
+  code { font-family: var(--mono); font-size: 0.92em; }
+  p code, li code, .done code { background: var(--sunk); padding: 1px 5px; border: 1px solid var(--rule); }
+
+  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* ---- plain lists ---- */
+  ul.plain { margin: 0; padding: 0; list-style: none; }
+  ul.plain > li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3px;
+  }
+  ul.plain > li:last-child { border-bottom: none; }
+  ul.plain .lead { font-weight: 500; }
+  ul.plain .sub { color: var(--muted); font-size: 14px; }
+
+  /* ---- loop marker ---- */
+  .loop {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 9px 13px;
+    margin-top: 14px;
+    letter-spacing: 0.02em;
+  }
+
+  /* ---- caution block ---- */
+  .traps { border-top: 1px solid var(--ink); padding-top: 4px; }
+  .traps ul.plain > li { border-bottom: 1px solid var(--rule); }
+  .trap-k {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--caution);
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  /* ---- barriers ---- */
+  .barriers { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); margin-top: 4px; }
+  .barrier { background: var(--surface); padding: 14px 15px; }
+  .barrier h3 { font-size: 13px; margin: 0 0 5px; font-weight: 600; }
+  .barrier p { margin: 0; font-size: 13.5px; color: var(--muted); }
+
+  /* ---- spokes ---- */
+  .spokes ul.plain > li { display: flex; gap: 12px; align-items: baseline; justify-content: space-between; flex-wrap: wrap; }
+  .status {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--faint);
+    border: 1px solid var(--rule);
+    padding: 2px 7px;
+    white-space: nowrap;
+  }
+
+  footer {
+    margin-top: 46px;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+    color: var(--faint);
+    font-size: 13px;
+  }
+  footer p { margin: 0 0 6px; }
+
+  /* ---- second sheet ---- */
+  .sheet { margin-top: 66px; }
+  .sheet-rule {
+    border: 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 3px double var(--ink);
+    height: 4px;
+    margin: 0 0 40px;
+  }
+  .sheet .mast { border-bottom-width: 2px; }
+
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 0 34px; margin-top: 4px; }
+  .split h3 {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    margin: 0 0 4px;
+    font-weight: 500;
+    color: var(--accent);
+  }
+  .split .col.no h3 { color: var(--caution); }
+  .split ul.plain > li { padding: 8px 0; }
+
+  @media (max-width: 620px) {
+    body { padding: 28px 18px 72px; }
+    .split { grid-template-columns: 1fr; gap: 0; }
+    .split .col.no { margin-top: 18px; }
+    .esc-row { grid-template-columns: 84px 1fr; gap: 12px; }
+    ol.steps > li { grid-template-columns: 30px 1fr; gap: 0 10px; }
+    .phase-time { margin-left: 0; width: 100%; }
+    .phase-head { flex-wrap: wrap; }
+  }
+</style>
+
+<div class="page">
+
+  <header class="mast">
+    <p class="eyebrow">Runbook · one page</p>
+    <h1>Search to Shipped</h1>
+    <p class="standfirst">Zero to a deployed web app, for a researcher who has never written software. Every step, in order, with the condition that tells you it worked.</p>
+  </header>
+
+  <div class="escalation">
+    <div class="esc-row">
+      <span class="esc-k">Search</span>
+      <p class="esc-v">Returns links. You do the work.</p>
+    </div>
+    <div class="esc-row">
+      <span class="esc-k">Chat</span>
+      <p class="esc-v">Returns text. You decide what to do with it.</p>
+    </div>
+    <div class="esc-row now">
+      <span class="esc-k">Agent</span>
+      <p class="esc-v">Changes files on your disk. That is the leap, and it is the only one that matters.</p>
+    </div>
+  </div>
+
+  <p class="method"><b>Why every step has a “done when”.</b> An action and its report are two different events. A tool that says it worked is telling you it reached the end of its own instructions — not that anything happened. Check the world, not the summary. That habit is the entire skill; the steps are just where you practise it.</p>
+
+  <section class="phase">
+    <div class="phase-head">
+      <h2>Phase 0 · Decide</h2>
+      <span class="phase-time">5 min</span>
+    </div>
+    <ol class="steps">
+      <li>
+        <span class="n">0.1</span>
+        <div class="body">
+          <p class="do">Answer two questions before anything else.</p>
+          <p class="why">One machine or several? Working alone or with others? Both answers change what you have to set up — and they are cheap now, expensive in week three.</p>
+          <p class="done">Several machines or any collaborators means <b>a remote is mandatory, not optional</b>. Skip ahead knowing that.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">0.2</span>
+        <div class="body">
+          <p class="do">Decide where data lives, before the first file exists.</p>
+          <p class="why">Synced storage (Dropbox, Box, OneDrive) keeps a copy on every machine — fast, quota-limited. Network research storage is mounted, not copied — one set of bytes everyone reads across the network. Pick which holds what.</p>
+          <p class="done">You can say, in one sentence, <b>what goes where and why</b>. Write it down; you will forget.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">0.3</span>
+        <div class="body">
+          <p class="do">Skip institutional storage and computing clusters unless you need them.</p>
+          <p class="why">You need them at terabyte scale, or for runs that would pin a laptop for hours. Both take days-to-weeks because someone else has to approve them — so if you do need them, request them today and carry on with the rest.</p>
+          <p class="done">Either the request is filed, or you have <b>decided out loud that you do not need one</b>.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="phase">
+    <div class="phase-head">
+      <h2>Phase 1 · Set up</h2>
+      <span class="phase-time">about an hour, once</span>
+    </div>
+    <ol class="steps">
+      <li>
+        <span class="n">1</span>
+        <div class="body">
+          <p class="do">Make a <a href="https://github.com/">GitHub</a> account, then install and authenticate the <a href="https://cli.github.com/">GitHub CLI</a>.</p>
+<pre>gh auth login</pre>
+          <p class="done"><code>gh auth status</code> prints <b>your username</b>.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">2</span>
+        <div class="body">
+          <p class="do">Install <a href="https://code.visualstudio.com/">VS Code</a>, <a href="https://git-scm.com/">git</a>, and <a href="https://nodejs.org/en">Node</a>.</p>
+          <p class="done"><code>git --version</code> and <code>node --version</code> <b>both answer</b> in a terminal.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">3</span>
+        <div class="body">
+          <p class="do">Get a coding-agent plan and install the extension.</p>
+          <p class="why">Check what your institution already provides before paying — many give staff API access against a billing code, and some give students a free chat tool that is <em>not</em> an agent. The difference is the whole point.</p>
+          <p class="done">The agent opens <b>inside VS Code</b> and answers a question about a file in your folder.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">4</span>
+        <div class="body">
+          <p class="do">Create the repository and add the remote in the same sitting.</p>
+<pre>mkdir myproject &amp;&amp; cd myproject &amp;&amp; git init
+gh repo create myproject --private --source=. --remote=origin
+git commit --allow-empty -m "start"
+git push -u origin main</pre>
+          <p class="why">Adding the remote later is the single most common way a week of work ends up on one dead laptop.</p>
+          <p class="done">The repository is <b>visible on github.com</b> in a browser, not just in your terminal.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">5</span>
+        <div class="body">
+          <p class="do">Write a deny list before the first real task.</p>
+          <p class="why">A scratch folder is not a wall — the agent can leave it with an absolute path while doing exactly what you asked. A deny list is different in kind: the tool refuses the command instead of asking the model nicely. Start with <code>rm -rf</code>, <code>sudo</code>, <code>git push --force</code>, <code>git reset --hard</code>. See <a href="https://code.claude.com/docs/en/settings">settings</a>.</p>
+          <p class="done">You ask it to run a denied command and it <b>refuses</b>. Test this. An untested guard is a guess.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">6</span>
+        <div class="body">
+          <p class="do">Copy the data you need into the project. Never point the agent at the original.</p>
+          <p class="why">Containment by absence beats containment by permission. Every wall has to be right about every route out; an original that was never in the room cannot be damaged by any of them.</p>
+          <p class="done">Deleting your whole project folder would cost you <b>a re-copy and nothing else</b>.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="phase">
+    <div class="phase-head">
+      <h2>Phase 2 · Know three things</h2>
+      <span class="phase-time">2 min, read once</span>
+    </div>
+    <ul class="plain">
+      <li>
+        <span class="lead">It will be confidently wrong, fluently, at any moment.</span>
+        <span class="sub">Not occasionally and not with a warning. Everything can look right and be completely wrong. The skill is not avoiding this — it is catching it.</span>
+      </li>
+      <li>
+        <span class="lead">Context is a filling room, not a memory.</span>
+        <span class="sub">It knows what has been put in front of it this session. A file it never opened may as well not exist — and rather than say so, it will fill the gap with something plausible. Point it at the file instead of describing the file.</span>
+      </li>
+      <li>
+        <span class="lead">A long session is not an accomplishment.</span>
+        <span class="sub">The room fills, old instructions lose weight, and it starts contradicting a rule you set an hour ago. The tell is a mistake you already fixed together coming back. Start a fresh session; that is what the repo is for.</span>
+      </li>
+    </ul>
+  </section>
+
+  <section class="phase">
+    <div class="phase-head">
+      <h2>Phase 3 · Build</h2>
+      <span class="phase-time">one afternoon</span>
+    </div>
+    <ol class="steps">
+      <li>
+        <span class="n">7</span>
+        <div class="body">
+          <p class="do">Say the whole thing in one sentence.</p>
+          <p class="why">“A web page that shows my recordings one at a time and lets me mark the bad ones.” If you cannot say it in a sentence, you are not ready to ask for it.</p>
+          <p class="done">Someone outside your field <b>understands what it does</b>.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">8</span>
+        <div class="body">
+          <p class="do">Break it into parts. Break each part into elements.</p>
+          <p class="why">This decomposition is the actual skill. Not prompt wording — there is no secret phrasing, and sculpting one is a stage people pass through and leave behind.</p>
+          <p class="done">You have a list where <b>every item is one afternoon or less</b>.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">9</span>
+        <div class="body">
+          <p class="do">Do one element. Never two.</p>
+          <p class="why">The temptation is to start a second thing while it works. Resist it until you have done this twenty times. You need the focus for spec, structure, and spotting the failure.</p>
+          <p class="done">You can name, in one line, <b>the single change that just happened</b>.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">10</span>
+        <div class="body">
+          <p class="do">Check it four ways. None of them needs you to read code.</p>
+          <p class="why">Read the diff for <em>scope</em>, not correctness — what did it touch that you did not ask about? Run it and look. List the files that now exist. Open the artifact yourself.</p>
+          <p class="done">You have <b>seen the thing work</b>, not read a message saying it does.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">11</span>
+        <div class="body">
+          <p class="do">Commit, then push.</p>
+<pre>git add -A
+git commit -m "what changed and why"
+git push</pre>
+          <p class="why">Committing is not pushing. An unpushed commit exists on exactly one machine and reaches nobody, including you tomorrow on a different one.</p>
+          <p class="done">The change is <b>visible on github.com</b>.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">12</span>
+        <div class="body">
+          <p class="do">Re-spec, and expect to.</p>
+          <p class="why">Seeing it built is what tells you what you actually wanted. Revising the spec is the normal case, not a failure — it is the loop working.</p>
+          <p class="done">The next element is <b>described more precisely than the last one was</b>.</p>
+        </div>
+      </li>
+    </ol>
+    <p class="loop">↻ Repeat 9 → 12 until it does what the sentence in step 7 said.</p>
+  </section>
+
+  <section class="phase">
+    <div class="phase-head">
+      <h2>Phase 4 · Write down why</h2>
+      <span class="phase-time">10 min, per real decision</span>
+    </div>
+    <ol class="steps">
+      <li>
+        <span class="n">13</span>
+        <div class="body">
+          <p class="do">Every time you choose between two real options, record the decision before you forget the reasoning.</p>
+          <p class="why">One small file per choice, in the repo, numbered and dated. This is the single highest-value habit on the page and it is the one everybody skips, because at the moment you make a decision the reasoning feels unforgettable. It is not. In six weeks you will find a strange-looking choice in your own project and have no idea whether it was careful or careless.</p>
+<pre>decisions/0003-one-file-per-recording.md
+
+Date: 2026-08-27   Status: accepted
+
+What we chose:    one file per recording, not one big table.
+What we rejected: a single combined file — simpler to load, but
+                  every re-export rewrites all of it.
+Why:              re-exports happen weekly; whole-file rewrites
+                  cost an hour and risk the lot.
+Revisit if:       recordings drop below ~20, or exports stop.</pre>
+          <p class="done">Someone who was not there — <b>including a fresh agent session tomorrow</b> — can read it and not reopen the argument.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">14</span>
+        <div class="body">
+          <p class="do">Never edit one. When a decision reverses, write a new record saying it supersedes the old.</p>
+          <p class="why">The old record stays, wrong, on purpose. A series you can quietly rewrite is not a record of anything — you would only ever see the decisions that happened to survive, which tells you nothing about whether any of them could have failed.</p>
+          <p class="done">Your <code>decisions/</code> folder contains at least one record that is <b>no longer true and says so</b>.</p>
+        </div>
+      </li>
+    </ol>
+    <p class="method" style="margin: 16px 0 0;"><b>Why this beats telling the agent to remember.</b> An agent starts every session with no memory of last week’s debate, so an unrecorded decision gets relitigated — at best wasting a session, at worst quietly reversed while you are not looking. And a decision record cannot go stale the way documentation does: it describes a choice made on a date, not a state of the world, so it stays true even after the decision is overturned. Point the agent at the folder.</p>
+  </section>
+
+  <section class="phase">
+    <div class="phase-head">
+      <h2>Phase 5 · Ship</h2>
+      <span class="phase-time">20 min</span>
+    </div>
+    <ol class="steps">
+      <li>
+        <span class="n">15</span>
+        <div class="body">
+          <p class="do">Put it on the internet.</p>
+          <p class="why">A static site — one built from your files with no server of its own — is enough for most research tools and is free to host. <a href="https://pages.github.com/">GitHub Pages</a> is the shortest path from a repo you already have. <a href="https://www.cloudflare.com/products/pages/">Cloudflare Pages</a> and <a href="https://vercel.com/">Vercel</a> add a custom domain easily. Ask the agent to set up <a href="https://vite.dev/">Vite</a> if you need a build step.</p>
+          <p class="done">The URL <b>loads on your phone</b>, off your wifi.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">16</span>
+        <div class="body">
+          <p class="do">Send it to one person who was not involved.</p>
+          <p class="why">You cannot see your own assumptions. They will hit the broken thing in ninety seconds.</p>
+          <p class="done">They <b>used it without you narrating</b>.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="phase traps">
+    <div class="phase-head">
+      <h2>Phase 6 · What will bite you</h2>
+      <span class="phase-time">ongoing</span>
+    </div>
+    <ul class="plain">
+      <li>
+        <span class="trap-k">Jargon</span>
+        <span class="lead">Its reply is your only evidence of how it understood you.</span>
+        <span class="sub">It comes back in words you do not know. Ask for plain language, then actually read the answer — skipping it and assuming the work is right because the explanation sounded right is how a small mistake grows past the point where anything can contain it.</span>
+      </li>
+      <li>
+        <span class="trap-k">Silence</span>
+        <span class="lead">Five ways it goes wrong; two of them do not announce themselves.</span>
+        <span class="sub">Wrong output, right output in the wrong place, and silently doing nothing all show up eventually. Doing more than you asked, and reporting a success it never achieved, do not. Those two are why step 10 exists.</span>
+      </li>
+      <li>
+        <span class="trap-k">Requests</span>
+        <span class="lead">A request is not a rule.</span>
+        <span class="sub">Instruction files are advisory, and the second sentence still gets skipped no matter how you word it. Worse, config files often look executable and are not — a declared setting that nothing reads is a note wearing a mechanism’s clothes. Ask what enforces it. If nothing does, it is a habit.</span>
+      </li>
+      <li>
+        <span class="trap-k">Staleness</span>
+        <span class="lead">Documentation was true when written and says nothing about the difference.</span>
+        <span class="sub">Including official pages, including yours, including what you told the agent to remember last month. When two documents disagree, they can only disagree — stop reading and go touch the actual system. That third check is the only one that cannot be out of date.</span>
+      </li>
+      <li>
+        <span class="trap-k">Memory</span>
+        <span class="lead">“Remember this” is a trap.</span>
+        <span class="sub">Telling it to remember a hard-won correction manufactures a document that starts ageing immediately, undated, that nobody re-reads. What lasts is a check something runs, or a dated decision record (phase 4) — which cannot go stale, because it never claimed to describe the present.</span>
+      </li>
+      <li>
+        <span class="trap-k">Asymptote</span>
+        <span class="lead">Two ways to never finish.</span>
+        <span class="sub">The guarding becomes the work — a beautiful setup script will not analyse your data. And the work itself is never perfect; the app can always be better. Both are legitimate, which is exactly what makes them hard to stop.</span>
+      </li>
+    </ul>
+  </section>
+
+  <section class="phase">
+    <div class="phase-head">
+      <h2>Phase 7 · Habits that hold</h2>
+      <span class="phase-time">from day one</span>
+    </div>
+    <ul class="plain">
+      <li>
+        <span class="lead">Keep a friction log in the repo.</span>
+        <span class="sub">One line, today, about something that just annoyed you. Repetition is the signal — the third time is when you build the cure.</span>
+      </li>
+      <li>
+        <span class="lead">Cures come in three kinds, and only one is a tool.</span>
+        <span class="sub">A tool, a change of habit, or a check you accept forever. Not every fix is tool-shaped, and a cure that is expensive to use silently stops being used.</span>
+      </li>
+      <li>
+        <span class="lead">Stop a session on purpose, before it degrades.</span>
+        <span class="sub">Not when it falls apart. You choose the moment.</span>
+      </li>
+      <li>
+        <span class="lead">Never end without a handoff — committed.</span>
+        <span class="sub">What you did, what is next, what is unfinished. A note that only exists in a session that has closed never existed at all.</span>
+      </li>
+    </ul>
+  </section>
+
+  <section class="phase">
+    <div class="phase-head">
+      <h2>What this is actually about</h2>
+    </div>
+    <div class="barriers">
+      <div class="barrier">
+        <h3>Communication</h3>
+        <p>You speak plainly and it understands. It answers in jargon, and that answer is your only evidence.</p>
+      </div>
+      <div class="barrier">
+        <h3>Idiosyncrasies</h3>
+        <p>Your setup has quirks — which machine, which path, where the data is. It inherits them silently and nothing crashes.</p>
+      </div>
+      <div class="barrier">
+        <h3>Validation</h3>
+        <p>Everything can look right and be totally wrong. Spec, validate, re-spec.</p>
+      </div>
+      <div class="barrier">
+        <h3>The asymptote</h3>
+        <p>Guarding is absorbing and the work is never perfect. Knowing when to stop is a skill of its own.</p>
+      </div>
+    </div>
+    <p class="why" style="margin-top:14px;">Coding is no longer the barrier. These four are — and none of them is solved by writing a better prompt.</p>
+  </section>
+
+  <section class="phase spokes">
+    <div class="phase-head">
+      <h2>Deeper, one page each</h2>
+    </div>
+    <ul class="plain">
+      <li><span class="lead">The repo, for people who have never used one</span> <span class="status">not written</span></li>
+      <li><span class="lead">Deny lists and what actually contains an agent</span> <span class="status">not written</span></li>
+      <li><span class="lead">Reading a diff when you cannot read code</span> <span class="status">not written</span></li>
+      <li><span class="lead">Where data lives: mounted, synced, and why it matters</span> <span class="status">not written</span></li>
+      <li><span class="lead">The friction log, and turning one into a cure</span> <span class="status">not written</span></li>
+      <li><span class="lead">Decision records: numbering, superseding, and what does not belong in one</span> <span class="status">below ↓</span></li>
+      <li><span class="lead">Meanwhile — <a href="https://github.com/git-guides">GitHub’s git guides</a> and <a href="https://git-scm.com/book/en/v2">Pro Git</a>, free</span> <span class="status">external</span></li>
+    </ul>
+  </section>
+
+  <div class="sheet">
+    <hr class="sheet-rule">
+
+    <header class="mast">
+      <p class="eyebrow">Sheet two · expands phase 4</p>
+      <h1>Decision Records</h1>
+      <p class="standfirst">One small file per choice, kept in the repo forever. The cheapest thing you will ever do, and the one you will most regret skipping.</p>
+    </header>
+
+    <section class="phase">
+      <div class="phase-head">
+        <h2>When to write one</h2>
+        <span class="phase-time">the whole difficulty</span>
+      </div>
+      <div class="split">
+        <div class="col yes">
+          <h3>Write one</h3>
+          <ul class="plain">
+            <li>
+              <span class="lead">You chose between two real options.</span>
+              <span class="sub">Both were defensible. That is what makes it a decision rather than a step.</span>
+            </li>
+            <li>
+              <span class="lead">You decided <em>not</em> to do something.</span>
+              <span class="sub">The most valuable records, because nothing in the repo shows the road not taken. Six months on, the absence looks like an oversight.</span>
+            </li>
+            <li>
+              <span class="lead">You reversed an earlier choice.</span>
+              <span class="sub">New record, pointing at the old one. Never a quiet edit.</span>
+            </li>
+            <li>
+              <span class="lead">You settled an argument you do not want again.</span>
+              <span class="sub">Some records exist only to say: this was reconciled, do not relitigate.</span>
+            </li>
+          </ul>
+        </div>
+        <div class="col no">
+          <h3>Do not</h3>
+          <ul class="plain">
+            <li>
+              <span class="lead">What you did today.</span>
+              <span class="sub">That is a handoff or a friction log entry.</span>
+            </li>
+            <li>
+              <span class="lead">How the system works.</span>
+              <span class="sub">That is documentation. It describes the present and will go stale; a record describes a moment and cannot.</span>
+            </li>
+            <li>
+              <span class="lead">Something you still have to do.</span>
+              <span class="sub">That is a task. Records are closed by construction.</span>
+            </li>
+            <li>
+              <span class="lead">Anything with no rejected alternative.</span>
+              <span class="sub">If nothing was turned down, no decision was made — you are writing a note and filing it in the wrong place.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="phase">
+      <div class="phase-head">
+        <h2>The file</h2>
+        <span class="phase-time">ten lines is plenty</span>
+      </div>
+<pre>decisions/0007-drop-frames-before-alignment.md
+
+# 0007 · Drop bad frames before alignment, not after
+
+Date:   2026-08-27
+Status: accepted        (proposed | accepted | superseded by NNNN)
+
+## Decision
+Discard frames failing the quality check before the alignment step.
+
+## Rejected
+Align everything, then discard. Simpler code, one pass — but a bad
+frame drags the alignment for its neighbours, so discarding after
+leaves damage behind that nothing downstream can see.
+
+## Why it went this way
+Tested both on 20260811_375. Post-alignment discard left a 3 px
+drift in the surrounding 40 frames. Pre-alignment did not.
+
+## Revisit if
+The quality check gets strict enough to drop &gt;10% of frames, or
+alignment stops being sensitive to neighbours.</pre>
+      <p class="why" style="margin-top: 10px;">Every section earns its place. <b>Rejected</b> is what makes it a record and not a note. <b>Revisit if</b> is what stops it becoming dogma — it names, in advance, the evidence that would overturn it.</p>
+    </section>
+
+    <section class="phase">
+      <div class="phase-head">
+        <h2>Six rules</h2>
+        <span class="phase-time">all of them cheap</span>
+      </div>
+      <ol class="steps">
+        <li>
+          <span class="n">1</span>
+          <div class="body">
+            <p class="do">Append-only. Never edit a landed record.</p>
+            <p class="why">When a decision reverses, write a new record that says what it supersedes, and add <code>Status: superseded by 0011</code> to the old one — that status line is the only edit ever permitted. Memory you can silently rewrite is not memory: you would only ever see the decisions that happened to survive.</p>
+          </div>
+        </li>
+        <li>
+          <span class="n">2</span>
+          <div class="body">
+            <p class="do">Date every record, and never backdate one.</p>
+            <p class="why">The date is what makes the record immune to going stale. It does not claim the decision is still right — only that it was made, then, for these reasons.</p>
+          </div>
+        </li>
+        <li>
+          <span class="n">3</span>
+          <div class="body">
+            <p class="do">Write the rejected option in as much detail as the chosen one.</p>
+            <p class="why">A record that only argues for what you did cannot fail, and a check that cannot fail is not a check. The rejected option is also what a future reader is actually reaching for, because it is the thing they are about to propose.</p>
+          </div>
+        </li>
+        <li>
+          <span class="n">4</span>
+          <div class="body">
+            <p class="do">Cite records by full filename, never by bare number.</p>
+            <p class="why">Numbers collide as soon as more than one line of work is running. Filenames do not, and a citation that reads <code>0005-coordination-export-contract.md</code> tells the reader what it is without opening it.</p>
+          </div>
+        </li>
+        <li>
+          <span class="n">5</span>
+          <div class="body">
+            <p class="do">Allocate the number when you commit, and never fill a gap.</p>
+            <p class="why">Not when you start writing. Two parallel sessions each take “the next number after the highest I can see”, and what each can see is its own branch — the sequence then has one integer meaning two unrelated things. Refusing to backfill keeps numbering monotonic in time, so the sequence doubles as a chronology.</p>
+            <p class="done">Solo on one machine, this costs nothing and you will never notice it. <b>The first day it matters, it will already have been free for a year.</b></p>
+          </div>
+        </li>
+        <li>
+          <span class="n">6</span>
+          <div class="body">
+            <p class="do">Graduate the important ones into something that fires.</p>
+            <p class="why">A hazard is not handled when it is written down; it is handled when something refuses without anyone remembering why. Turn the record into a check — a test, a guard, a name that makes the wrong thing impossible to express — and cite the record from the failure message, so whoever trips it gets the reasoning and not just a refusal.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="phase">
+      <div class="phase-head">
+        <h2>What it buys you</h2>
+      </div>
+      <ul class="plain">
+        <li>
+          <span class="lead">The agent has no memory of last week’s debate.</span>
+          <span class="sub">Every session starts cold. An unrecorded decision gets relitigated — a wasted session at best, quietly reversed at worst, while you are looking somewhere else. This folder is what you point it at.</span>
+        </li>
+        <li>
+          <span class="lead">Future you finds a strange choice and cannot tell if it was careful.</span>
+          <span class="sub">This is the common case and it is worse than it sounds, because the honest response to an unexplained choice is to leave it alone — so a careless decision and a hard-won one become equally permanent.</span>
+        </li>
+        <li>
+          <span class="lead">Someone asks why, and you have an answer instead of a memory.</span>
+          <span class="sub">A reviewer, a collaborator, a committee, or a reader of the paper. The record was written when you still knew, which is the only time anyone ever does.</span>
+        </li>
+      </ul>
+    </section>
+
+    <p class="method">
+      <b>Start now, badly.</b> Make <code>decisions/</code> and write one record today about a choice you already made — from memory, marked as reconstructed. Four sections, ten lines. A thin series that exists beats a rigorous one you were going to start when the project got serious, and the project will not announce when that happens.
+    </p>
+  </div>
+
+  <footer>
+    <p>Links checked 27 August 2026. Everything on this page will go stale; the page cannot tell you when. Go touch the system.</p>
+  </footer>
+
+</div>
