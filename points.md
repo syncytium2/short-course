@@ -150,3 +150,17 @@ the course has to cover, and they are asked at the door rather than discovered i
   decide whether that matters, and C3 is what it costs when it does.
 - **D2 is where §10 lands.** The plan is the allotment. What a run costs stops being an abstract
   argument the moment someone has to pick one.
+
+---
+
+## E. Running order
+
+- **Part 1. Bake-off.** Google search, ChatGPT, Claude Code. Same prompt.
+
+  *What it does:* shows the escalation instead of asserting it. Search returns links and you do
+  the work. Chat returns text and you decide what to do with it. The agent acts on your
+  filesystem. That is §0a — chat is not an agent — demonstrated rather than explained, and it
+  starts from the one tool everyone in the room has already used.
+
+  *Open:* which prompt. The whole thing rests on picking one where the three genuinely diverge,
+  and where the third one visibly *does* something.
