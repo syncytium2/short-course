@@ -93,6 +93,36 @@ pressing problems. The barriers are:
   that reports success must re-read the world and confirm, or it is only reporting that it
   reached the end of its own instructions.
 
+  *Fourth incident — the measured table that was wrong about the cause (`bugarach`, 2026-08-28).*
+  A published bake-off would not reproduce. A session measured it properly: four thread counts,
+  the per-fold detection counts for each, mean F1 for each, laid out in a table. Ten threads
+  reproduced exactly; one, two and four did not. Conclusion: the reference is thread-bound. The
+  threads were pinned, the reproduction test was switched back on, and the commit stated the
+  reference *"runs everywhere again."*
+
+  *How it was caught.* CI, on a machine nobody had used to form the belief, **fourteen minutes
+  later**: fold 0, 69 detections against 72. The reference is generated on macOS arm64; the
+  runners are Linux x86_64, and different CPU kernels reduce and fuse differently. The reference
+  was **platform**-bound. Threads were one variable inside that, not the cause.
+
+  *Why this one is worth a slot the other three do not fill.* B2's five error types are all
+  about a **claim**: wrong output, right output in the wrong place, nothing done, too much done,
+  success reported that never happened. This is none of them. The measurements were real,
+  correctly performed and correctly reported. **What was wrong was the inference: one variable
+  was varied, it moved, and it was read as the whole cause.** Nothing in the five checks catches
+  that, because the output *was* right.
+
+  *And the second half is the part that scales.* The finding was written down with its evidence
+  attached, and the next session inherited it and did not re-ask what else was uncontrolled —
+  in its own words, *"I repeated that error by believing it."* **A wrong cause travels further
+  than an unsupported claim, because it arrives with a table.** The check that caught it was not
+  a better analysis; it was a second machine.
+
+  *Provenance note.* That quoted sentence is from a commit message written by the session that
+  made the error, and no transcript exists. Flagged rather than laundered — see
+  [`docs/cases/2026-08-28-the-skip-was-the-whole-story.md`](docs/cases/2026-08-28-the-skip-was-the-whole-story.md),
+  Point 4 and its verification appendix.
+
 - **B3.** Identify annoyances and hindrances — repeated mistakes (heredoc!), files for review lost in some folder you have no clue where it's at (~/docs vs ~/dropbox/darkroom).
 - **B4.** Do not trust standard features built to prevent these issues. CLAUDE.md or equivalent is not reliable or enforceable. Use all the bad words you want and the second sentence is still skipped. Build your own tools (using AI) and keep them in a repo.
 
@@ -107,8 +137,8 @@ pressing problems. The barriers are:
   `pip install -e ".[dl]"`: the structural tests in `test_learn_nets.py` (nine functions, one of
   them parametrised, all removed at once by a module-level `pytest.importorskip`), the bakeoff
   reproduction test in `test_lab_server.py` — the one guarding the published numbers — and the
-  README line saying the extra exists at all. Nothing connects them. CI installs `.[ui]` and has
-  never installed `[dl]`.
+  README line saying the extra exists at all. Nothing connects them. For ten days CI installed
+  `.[ui]` and never `[dl]` — **closed 2026-08-27 21:59, see below.**
 
   *Why this is B4 and not merely a gap.* `[project.optional-dependencies]` is a standard feature
   that looks like dependency management. It is a **declaration**: prose in a file that reads as
@@ -128,10 +158,42 @@ pressing problems. The barriers are:
   why the check is *read the diff for scope, not correctness*. The check exists for this, and
   this happened anyway.
 
-  *And the obvious fix is still a habit.* "Make CI type `[dl]`" fixes today. Nothing would then
-  assert that the guarded test **ran**, so a later dependency shuffle returns you to exactly
-  here, green. B7's rule 4 — validate the envelope — is the whole difference between typing the
-  flag and mechanising it.
+  *A prediction was made here, and it was wrong in the useful direction.* This paragraph
+  previously read: *"the obvious fix is still a habit. 'Make CI type `[dl]`' fixes today.
+  Nothing would then assert that the guarded test **ran**."* The fix landed at 21:59 the same
+  evening and did not stop at typing the flag. `tests/test_torch_available.py` asserts the
+  **envelope**: that the workflow still contains the install, that CI still sets
+  `BUGARACH_REQUIRE_TORCH=1`, that the wheel comes from the CPU index, that torch can actually
+  run a convolution rather than merely import — and that `test_learn_*.py` still exists at all,
+  *"if these were renamed, the torch guard above is now guarding nothing."* Something now
+  asserts that the guarded tests are there to run. B7's rule 4 — validate the envelope — is the
+  whole difference between typing the flag and mechanising it, and both versions are now on the
+  record.
+
+  *The skip was not removed. It was made conditional.* Absent the flag the tests still skip,
+  which is correct on a laptop with no torch. With the flag CI sets, the same skip becomes a
+  **failure**. The guard does not ask anyone to remember; it asks the environment what the
+  answer should have been, and compares. Cheapest instance of rule 4 in the estate.
+
+  *The reason to bother is not tidiness, and it arrived inside one CI run.* Switching the alarm
+  on also switched on the test guarding the published numbers, which failed immediately: the
+  bake-off reproduced only on the ten-thread Mac that generated it, because `train.py` pinned a
+  seed and nothing else, so torch read its thread count off the hardware and the reduction order
+  went with it. **Ten days of that skip were also ten days of not knowing that.** The full arc —
+  including the first repair being wrong about the cause, and a fairness assertion that passed
+  because it compared seeds instead of recordings — is in
+  [`docs/cases/2026-08-28-the-skip-was-the-whole-story.md`](docs/cases/2026-08-28-the-skip-was-the-whole-story.md).
+
+  *Second instance, and it says something B4 currently does not (`bugarach`, `ac57581`,
+  2026-08-28).* Tony asked for pending page changes to be queued rather than published one at a
+  time. It was written down. It lost — because three separate machines in that repo tell a
+  session to publish and none of them waits to be asked: the staleness report's copy-paste
+  command, a daily workflow summary, and the `site:` line in every session briefing. **A hold
+  living only in a document is not ignored, it is outvoted — and the session that gives in is
+  *right* by every signal available to it.** That is a sharper claim than "the second sentence
+  is skipped" and a harder one to argue with, because it does not require anyone to have been
+  careless. The repair was to move the hold to where those three signals are computed, so all
+  three print the hold and its release condition instead of the publish command.
 
 - **B5.** Repo, repo, repo. What's a repo and why.
 - **B6.** Spec, validate, re-spec.
@@ -173,6 +235,56 @@ pressing problems. The barriers are:
   board, project handoffs, and decision records. The value is not any one of them. It is that
   each has one job and a stated wrong-channel case, so an item cannot be filed *somewhere*
   and be nowhere.
+
+  ---
+
+  *Three more rules, each bought by a cure that failed. 2026-08-27/28, from elsewhere in the
+  estate.*
+
+  **7 · A cure's failure mode is a design choice, and loud-and-cheap beats strong.** From
+  `turnstile` — the tool extracted from this repo on 2026-08-28 to answer whether session hooks
+  are too complicated for a beginner to use safely. Its decision tree's load-bearing rung is
+  the third, not the fourth: *"a test and a hook enforce the same rule, a broken test costs a
+  red line and a broken hook costs the session, so prefer the mechanism whose failure is loud
+  and cheap."* **When two mechanisms enforce the same rule, choose by what happens when the
+  mechanism itself breaks, not by how strong it is when it works.** This is the counterweight
+  to B4 — B4 says prose is not enforcement, and this says the answer is not therefore *the
+  heaviest available gate.*
+
+  *And the measurement behind it is the part a beginner can be shown.* Across one estate,
+  `SessionStart` hooks ran 39, 34, 27, 17, 11, 9 and 7 KB. One grew until sessions stopped
+  opening against a **60-second ceiling the editor hardcodes** — and raising the hook's own
+  timeout changed nothing, because the hook was never what enforced it. The off switch lives at
+  `~/.turnstile-off`, in `HOME` and not in the repo, *"because a switch inside the repo is
+  unreachable when the broken thing is what opens the repo."*
+
+  **8 · A cure can fail by accusing the compliant.** `bugarach`, `61dcd08`, 2026-08-27. A
+  commit gate read a session's identifier by dropping everything up to the last slash on a
+  heading line — correct for hosts, which contain slashes, and wrong for task text, which also
+  does. **Seven of the 199 blocks on the live board parsed as the wrong worktree**, and not one
+  was a typo: `wip-modularity-port` read as `Louvain`, `forks-next` as `forks.md`. Every one
+  was a session that had claimed *exactly as instructed*, and every one would have been refused
+  at its first commit — with a paragraph explaining that it should have claimed before
+  starting. **The failure mode was not a missed check. It was a false accusation**, and a cure
+  that refuses correct behaviour is routed around within a week, which returns you to no cure
+  at all with the extra cost of having built one. Rule 3 — *resolving must be as cheap as
+  filing* — has a sibling: **being right must be as cheap as being wrong.**
+
+  **9 · A gate should answer, not only refuse** — carried in full by
+  [`docs/cases/2026-08-27-computed-instead-of-asking.md`](docs/cases/2026-08-27-computed-instead-of-asking.md),
+  incident B, point B4. A session that is *lost* rather than defiant is left lost by a gate
+  that says only no, and it goes and churns somewhere else.
+
+  *And the selftest is the weakest component in every cure here.* The gate in rule 8 had one:
+  ten cases, two of them adversarial, every one driving the same parser — **and not one fixture
+  heading had a slash anywhere except in the host.** It passed. It had always passed. It proved
+  the parser correct on the only inputs it was ever shown, which were the inputs its author
+  could imagine, which is the same set as the ones he got right. That is *a check that cannot
+  fail*, arrived at honestly, and it is the same defect as
+  [`docs/cases/2026-08-28-the-tests-were-defending-the-bug.md`](docs/cases/2026-08-28-the-tests-were-defending-the-bug.md)
+  and as the positioning section in `OPEN-FINDINGS.md` **B5**. **Three instances now, in three
+  unrelated artifacts, which makes it a pattern rather than an anecdote and probably a point of
+  its own rather than a footnote to B7.**
 
 - **B8.** DO NOT DO MORE THAN ONE THING AT A TIME IN THE BEGINNING.
 
