@@ -93,6 +93,35 @@ pressing problems. The barriers are:
   that reports success must re-read the world and confirm, or it is only reporting that it
   reached the end of its own instructions.
 
+  *Fourth incident — the measured table that was wrong about the cause (`bugarach`, 2026-08-28).*
+  A published bake-off would not reproduce. A session measured it properly: four thread counts,
+  the per-fold detection counts for each, mean F1 for each, laid out in a table. Ten threads
+  reproduced exactly; one, two and four did not. Conclusion: the reference is thread-bound. The
+  threads were pinned, the reproduction test was switched back on, and the commit stated the
+  reference *"runs everywhere again."*
+
+  *How it was caught.* CI, on a machine nobody had used to form the belief, **fourteen minutes
+  later**: fold 0, 69 detections against 72. The reference is generated on macOS arm64; the
+  runners are Linux x86_64, and different CPU kernels reduce and fuse differently. The reference
+  was **platform**-bound. Threads were one variable inside that, not the cause.
+
+  *Why this one is worth a slot the other three do not fill.* B2's five error types are all
+  about a **claim**: wrong output, right output in the wrong place, nothing done, too much done,
+  success reported that never happened. This is none of them. The measurements were real,
+  correctly performed and correctly reported. **What was wrong was the inference: one variable
+  was varied, it moved, and it was read as the whole cause.** Nothing in the five checks catches
+  that, because the output *was* right.
+
+  *And the second half is the part that scales.* The finding was written down with its evidence
+  attached, and the next session inherited it and did not re-ask what else was uncontrolled —
+  in its own words, *"I repeated that error by believing it."* **A wrong cause travels further
+  than an unsupported claim, because it arrives with a table.** The check that caught it was not
+  a better analysis; it was a second machine.
+
+  *Provenance note.* That quoted sentence is from a commit message written by the session that
+  made the error, and no transcript exists. Flagged rather than laundered — see
+  [`docs/cases/2026-08-28-the-skip-was-the-whole-story.md`](docs/cases/2026-08-28-the-skip-was-the-whole-story.md),
+  Point 4 and its verification appendix.
 
 - **B3.** Identify annoyances and hindrances — repeated mistakes (heredoc!), files for review lost in some folder you have no clue where it's at (~/docs vs ~/dropbox/darkroom).
 - **B4.** Do not trust standard features built to prevent these issues. CLAUDE.md or equivalent is not reliable or enforceable. Use all the bad words you want and the second sentence is still skipped. Build your own tools (using AI) and keep them in a repo.
