@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-# vendored from syncytium2/turnstile @ 9786953 — do NOT edit here; update upstream and re-copy.
+# vendored from syncytium2/turnstile @ 04628a3 — do NOT edit here; update upstream and re-copy.
 # turnstile-run — run a session hook so that it can never cost you the session.
 #
 #   Register hooks through this, never directly:

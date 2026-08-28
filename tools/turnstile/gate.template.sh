@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-# vendored from syncytium2/turnstile @ 9786953 — do NOT edit here; update upstream and re-copy.
+# vendored from syncytium2/turnstile @ 04628a3 — do NOT edit here; update upstream and re-copy.
 # __NAME__.sh — refuse one specific thing, and say what to do instead.
 #
 # turnstile: advisory

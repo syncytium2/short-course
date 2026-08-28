@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-# vendored from syncytium2/turnstile @ 9786953 — do NOT edit here; update upstream and re-copy.
+# vendored from syncytium2/turnstile @ 04628a3 — do NOT edit here; update upstream and re-copy.
 # turnstile — decide whether a thing should be a hook, and find out whether yours work.
 #
 #   turnstile decide          the decision tree, printed

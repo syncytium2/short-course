@@ -1,8 +1,15 @@
-<!-- vendored from syncytium2/turnstile @ 9786953 — do NOT edit here; update upstream and re-copy. -->
+<!-- vendored from syncytium2/turnstile @ 04628a3 — do NOT edit here; update upstream and re-copy. -->
 
 # turnstile — vendored copy
 
 **Upstream is [`syncytium2/turnstile`](https://github.com/syncytium2/turnstile).** Edit there, then re-copy. Nothing yet checks this copy's freshness automatically; `murderboard_freshness.sh --label turnstile --slug syncytium2/turnstile` would, and is not wired here because this repo does not vendor the murderboard family.
+
+**Relative links below are rewritten to upstream URLs.** Upstream links to its own
+`docs/` by relative path; those paths do not exist in this repo, so vendoring them
+verbatim produces broken pointers — which is what `tools/check_pointers.sh` caught on
+2026-08-28, the first time a re-vendor pulled a README that linked to a sibling file.
+Re-do this rewrite on every re-vendor.
+
 
 **A session hook cannot cost you the session.** That is the only promise, and everything
 here exists to keep it.
@@ -65,6 +72,13 @@ directly**:
 
 ## The five guarantees
 
+> ⚠ **Under review, and four of these five are contested.** An eleven-role murderboard run
+> on 2026-08-28 reproduced a failure of guarantees 1, 2, 3 and 5 against the shipped code —
+> see [`docs/reviews/README_2026-08-28.md`](https://github.com/syncytium2/turnstile/blob/main/docs/reviews/README_2026-08-28.md). No fix has
+> been chosen: the two remedies are different projects and the run stopped at synthesis and
+> handed the decision back. Read them as **claims about intent** until that decision is
+> taken, not as a description of what the code does today.
+
 Each exists because the unwrapped version failed somewhere real.
 
 1. **A hook you did not declare a gate cannot block you.** Hooks are advisory by default;
@@ -118,6 +132,14 @@ completely broken, which is why that harness exists.
 
 Every guarantee above has an assertion in `turnstile-run --selftest`, and four mutations in
 `mutation_check.sh` break the wrapper on purpose and require it to notice.
+
+> ⚠ **That sentence is literally true and materially false, and this repo's own review is
+> what says so.** For guarantees 2 and 3 the assertions cannot distinguish a working wrapper
+> from a broken one — `3a`/`3b` `touch` the breadcrumb by hand and never exercise the drop,
+> and `2a` passes for the wrong reason because an off-by-one `elapsed` clause covers for an
+> absent kill. The four wrapper mutations target the reporting branches, not the crumb-drop
+> or watchdog lines. Both were demonstrated by mutation in
+> [`docs/reviews/README_2026-08-28.md`](https://github.com/syncytium2/turnstile/blob/main/docs/reviews/README_2026-08-28.md).
 
 **It has already caught itself twice.** `turnstile check` reported that `turnstile-run` had
 no `--selftest`, before it was committed. And the first version read declarations from the
