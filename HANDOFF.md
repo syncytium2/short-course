@@ -22,6 +22,7 @@ is for murderboard development only; see [Boundary](#boundary) below.
 | Access, cost, routes, rates | [`points.md`](points.md) **§F** — sourced and dated 2026-08-27, expected to go stale |
 | The circulatable outline | [`course-outline-external.md`](course-outline-external.md) — 434 words, four barriers |
 | **What a learner is handed** | [`docs/handouts/`](docs/handouts/) — `search-to-shipped.html`, one-page runbook + a second sheet on decision records |
+| **Who else is working here** | [`docs/SESSIONS.md`](docs/SESSIONS.md) — claim before you write, `tools/claim.sh --list` |
 | **What has actually been delivered** | `<darkroom>/short-course/` — the runbook as a standalone page, plus a folder README. Claimed and written 2026-08-27; the repo copy is publisher source and does not open from Finder |
 | Why the repo exists | [`README.md`](README.md) |
 
@@ -325,6 +326,43 @@ treat it as a conflict to reason about.
 refspec it was given, not on the work you did. `git push origin master` from a branch is a
 successful no-op. `git status -sb` names the branch and the tracking gap in one line and would
 have caught it — the day's own rule, applied to the tool doing the reporting.
+
+---
+
+## The board exists now — 2026-08-28
+
+Both collisions of 2026-08-27 are mechanised against. **Open a claim before you write
+anything another session could also write.**
+
+```sh
+tools/claim.sh "what you are about to do"
+tools/claim.sh --list
+tools/claim.sh --release
+git add docs/SESSIONS.md && git commit && git push
+```
+
+**Addressed by session, not by branch** (`Mac/a49d017b`), because this repo is one
+checkout shared by several sessions — so a branch names the checkout and not you. That is
+the single way it departs from `bugarach`'s and `interface2`'s boards, and it is the thing
+that broke. `tools/session_identity.sh` is the one place that resolves it.
+
+**`.claude/hooks/push-goes-where-you-are.sh`** is a `PreToolUse(Bash)` gate with two
+interlocks: a push whose refspec is not your branch is refused, and the first commit or
+push after the branch moved under you is refused once, with both branch names. It answers
+rather than only refusing — every refusal prints the command that would have been right.
+Escape hatch `SC_PUSH_OK=1`. `--selftest` on all three files; the hook's twelve cases
+include that it still blocks with no python on `PATH`.
+
+**Three defects were found by running the tests rather than reading the code**, and each
+is recorded where it happened: the hook's selftest first printed PASS having run the
+*identity* script's tests (sourcing passes `$1` through); the refspec parser read
+`master"}}` from the JSON and refused a correct push, while its selftest passed because
+every case it checked was one where blocking was right; and `--list` reported the format
+template inside a fenced code block as a live claim held by `<machine>/<session>`.
+
+**Still open, and now claimable:** merging the two case files
+(`computed-instead-of-asking` and `nothing-declared-which-folder`) into one that keeps
+both halves.
 
 ---
 
