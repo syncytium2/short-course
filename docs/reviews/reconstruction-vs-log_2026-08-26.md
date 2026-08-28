@@ -15,6 +15,42 @@ command and the prose the number broke. That question is open.
 
 ---
 
+## ⚠ Corrected 2026-08-28 — discrepancy 1 is withdrawn
+
+**Discrepancy 1 below ("A fabricated obstacle") is false, and node 1's sentence was accurate.**
+Node 1b ([`01b-real-log-complete.md`](../chain/01b-real-log-complete.md)) is the same session
+**with tool output**, and it settles the question this document could not see:
+
+| | |
+|---|---|
+| message **25**, 17:09:45 | `web_fetch` → `https://murderboard.tonydefazio.com` → **`ERROR`** · `[ROBOTS_DISALLOWED] Site disallows automated access.` |
+| message **29**, 17:11:37 | `web_fetch` → `http://murderboard.tonydefazio.com/` → **success**, 30,373 chars |
+
+A site did disallow automated access, on the first attempt, at the URL Tony had just named. The
+retry two minutes later differed by scheme — `http`, not `https` — and went through.
+
+So the correction runs both ways and neither half should be dropped:
+
+- **This document is wrong** that "the log shows no blocked site," and wrong again in the count —
+  there were not "two successful fetches," there was one refusal and one success.
+- **Node 1 is accurate but incomplete.** *"Site blocked automated access"* describes what
+  happened; it omits that the second attempt worked, which is why the turn built on the page
+  exists at all. Incomplete is not fabricated, and this document charged fabrication.
+
+**How it got here is the part worth keeping.** This document inferred a *return* from node 1a —
+and the paragraph immediately above states that node 1a cannot show returns, only that a tool
+ran. The lead finding was produced by the exact inference its own scope banner forbids, three
+paragraphs after writing the banner. Nothing was careless and no reviewer was absent; the limit
+was stated, agreed, and then walked past inside the same document.
+
+**Discrepancy 1 is withdrawn, not deleted**, and the surviving half — that node 1 dropped the
+GitHub-search failure into the same sentence — is restated at its site below. The rest of this
+document is unaffected: discrepancies 2, 3 and 4 rest on absences from node 1, which node 1b
+confirms, and "The finding that matters" is strengthened by node 1b rather than weakened, since
+node 1b shows the tool output the scorecard's diagnosis was wrong about.
+
+---
+
 ## The finding that matters
 
 **Node 1's scorecard mis-diagnoses its own errors, and the log is what shows it.**
@@ -48,18 +84,29 @@ repository was opened. Corrected in the commit that lands this file.
 
 ## Discrepancies, most serious first
 
-### 1 · A fabricated obstacle — "Site blocked automated access"
+### 1 · ~~A fabricated obstacle — "Site blocked automated access"~~ — **WITHDRAWN 2026-08-28**
 
-Node 1, line 199: *"Site blocked automated access; GitHub search didn't surface it; you sent
-`syncytium2/murderboard` and I cloned and read it."*
+> **This finding is false.** See [the correction above](#-corrected-2026-08-28--discrepancy-1-is-withdrawn).
+> Node 1b message 25 is a `web_fetch` of `https://murderboard.tonydefazio.com` returning
+> `ERROR` / `[ROBOTS_DISALLOWED] Site disallows automated access.` The obstacle was real. Struck
+> through rather than deleted, because a review that quietly loses its own lead finding is not a
+> record of anything.
 
-The log shows no blocked site. It shows **two successful fetches** of murderboard.tonydefazio.com
-and an entire substantive turn built on what they returned. The half that is true is the GitHub
+~~Node 1, line 199: *"Site blocked automated access; GitHub search didn't surface it; you sent
+`syncytium2/murderboard` and I cloned and read it."*~~
+
+~~The log shows no blocked site. It shows **two successful fetches** of murderboard.tonydefazio.com
+and an entire substantive turn built on what they returned.~~ The half that is true is the GitHub
 *search* failing — *"the DeFazio namespace on GitHub is crowded and nothing matching murderboard
 came up."*
 
-A search that stopped too early became, in the retelling, an external system denying access. The
-reconstruction supplied an excuse the log does not support.
+~~A search that stopped too early became, in the retelling, an external system denying access. The
+reconstruction supplied an excuse the log does not support.~~
+
+**What survives.** Node 1 compresses three separate events — a refused `https` fetch, a GitHub
+search that found nothing, and a successful `http` retry — into one clause that names two of them
+and drops the third. That is compression damage of the same kind as discrepancies 2 and 3, and it
+is a much smaller charge than the one this section originally made.
 
 ### 2 · An entire turn is missing, and it was the best one
 
@@ -126,12 +173,17 @@ Not everything drifted, and the compression is mostly honest:
 
 ## The pattern in the drift
 
-Four of the five discrepancies remove something. Three of the removals make the assistant look
-better than the log does:
+**⚠ Revised 2026-08-28.** The first row of this table was the withdrawn discrepancy 1, and with
+it goes the only *addition* in the drift. What remains is removal only — which weakens the
+"bias" reading, not the "compression damage" one.
+
+~~Four of the five discrepancies remove something. Three of the removals make the assistant look
+better than the log does:~~ **Every surviving discrepancy removes something, and two of the
+removals make the assistant look better than the log does:**
 
 | Change | Effect |
 |---|---|
-| "Site blocked automated access" added | a search that stopped early becomes an external denial |
+| ~~"Site blocked automated access" added~~ | ~~a search that stopped early becomes an external denial~~ — **withdrawn; the denial was real** |
 | "I was referring to it from the website's description rather than the file" dropped | an admission of recommending an unopened file disappears |
 | Errors diagnosed as unchecked | *didn't look* is a lesser fault than *looked and got it wrong* |
 
@@ -156,7 +208,14 @@ present at once, in the document that scores the session's errors.
    [`OPEN-FINDINGS.md`](../../OPEN-FINDINGS.md).
 3. **This repo's own README was wrong** about how the errors happened, on the strength of node 1.
    Corrected.
-4. **Still unresolved, and now unresolved *by choice*.** Whether the wrong numbers came from
+4. **⚠ Superseded 2026-08-28 — this was resolved, by the route this item describes.** The scoped
+   extract was taken and is [`../chain/01b-real-log-complete.md`](../chain/01b-real-log-complete.md):
+   one conversation of 183, all 61 tool calls enumerated and read, **with their output**. It
+   supersedes node 1 and node 1a, and it is what withdrew discrepancy 1 above. The paragraph
+   below is kept as written because the reasoning it records is the reason the extract was
+   scoped rather than the whole export imported — but it no longer describes an open question.
+
+   ~~Still unresolved, and now unresolved *by choice*.~~ Whether the wrong numbers came from
    wrong commands, misread output, or correct output written up from memory cannot be answered
    from a log with collapsed tool calls. A full session export **does exist** — and is
    deliberately not imported, because it is a whole-account export spanning many unrelated
