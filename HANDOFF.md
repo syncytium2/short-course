@@ -288,6 +288,46 @@ VS Code explorer; the path it references is outside his workspace. Reported by h
 
 ---
 
+## Two collisions on the night of 2026-08-27 — read before working here
+
+**Four sessions worked this repo tonight and two of them collided. Nothing was lost, and
+neither collision was anyone being careless.** `short-course` has no session board, which is
+the mechanism `bugarach` and `interface2` both have and this repo does not — see C3.
+
+**1 · Two case files for one incident.** `docs/cases/2026-08-27-computed-instead-of-asking.md`
+(22:52, murderboard-reviewed, via PR #1) and
+`docs/cases/2026-08-27-nothing-declared-which-folder.md` (22:56) both describe the session that
+re-derived data from a store. They are complementary — the first is the better account of the
+**failure** (an agent can always compute something so it does; acknowledging an instruction is
+not following it; what a wrong derived number costs), the second is the **repair** (the guard
+whose channel could not see it, why the gate answers instead of refusing, that it fails closed
+and was tested for it) and it verified the source commit, finding that the commit understated
+its own problem and that `README.md:153` is still unrepaired. **Merging them is a decision, not
+a chore** — one file should survive and it should keep both halves.
+
+**2 · A commit landed on the wrong branch, and the push that should have caught it reported
+success.** At 23:11 a session branched `case-every-number-was-right` from master *in this
+checkout*. At 23:13 another session committed the Amphetamine addition on top of it, believing
+it was on master, and ran `git push origin master` — which **succeeded and did nothing**,
+because it pushed an unchanged `master` ref while `HEAD` was on the branch. The report said
+pushed; nothing moved.
+
+Resolved without disturbing the live session: the commit was pushed to the branch it was
+actually on, then cherry-picked onto `master` (`2f54fb6`) through a **temporary worktree**, so
+the shared working tree was never switched. **`master` is correct and complete.**
+
+⚠ **The Amphetamine commit therefore exists twice** — as `162c738` on
+`case-every-number-was-right` and as `2f54fb6` on `master`. Identical patch, so a later merge
+should resolve cleanly, but whoever merges that branch should expect to see it and should not
+treat it as a conflict to reason about.
+
+**The general form, and it is the one this repo keeps re-learning:** `git push` reports on the
+refspec it was given, not on the work you did. `git push origin master` from a branch is a
+successful no-op. `git status -sb` names the branch and the tracking gap in one line and would
+have caught it — the day's own rule, applied to the tool doing the reporting.
+
+---
+
 ## Boundary
 
 **The murderboard repo is for murderboard development only.** Course material, session plans,
