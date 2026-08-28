@@ -93,6 +93,7 @@ pressing problems. The barriers are:
   that reports success must re-read the world and confirm, or it is only reporting that it
   reached the end of its own instructions.
 
+
 - **B3.** Identify annoyances and hindrances — repeated mistakes (heredoc!), files for review lost in some folder you have no clue where it's at (~/docs vs ~/dropbox/darkroom).
 - **B4.** Do not trust standard features built to prevent these issues. CLAUDE.md or equivalent is not reliable or enforceable. Use all the bad words you want and the second sentence is still skipped. Build your own tools (using AI) and keep them in a repo.
 
@@ -107,8 +108,8 @@ pressing problems. The barriers are:
   `pip install -e ".[dl]"`: the structural tests in `test_learn_nets.py` (nine functions, one of
   them parametrised, all removed at once by a module-level `pytest.importorskip`), the bakeoff
   reproduction test in `test_lab_server.py` — the one guarding the published numbers — and the
-  README line saying the extra exists at all. Nothing connects them. CI installs `.[ui]` and has
-  never installed `[dl]`.
+  README line saying the extra exists at all. Nothing connects them. For ten days CI installed
+  `.[ui]` and never `[dl]` — **closed 2026-08-27 21:59, see below.**
 
   *Why this is B4 and not merely a gap.* `[project.optional-dependencies]` is a standard feature
   that looks like dependency management. It is a **declaration**: prose in a file that reads as
@@ -128,10 +129,42 @@ pressing problems. The barriers are:
   why the check is *read the diff for scope, not correctness*. The check exists for this, and
   this happened anyway.
 
-  *And the obvious fix is still a habit.* "Make CI type `[dl]`" fixes today. Nothing would then
-  assert that the guarded test **ran**, so a later dependency shuffle returns you to exactly
-  here, green. B7's rule 4 — validate the envelope — is the whole difference between typing the
-  flag and mechanising it.
+  *A prediction was made here, and it was wrong in the useful direction.* This paragraph
+  previously read: *"the obvious fix is still a habit. 'Make CI type `[dl]`' fixes today.
+  Nothing would then assert that the guarded test **ran**."* The fix landed at 21:59 the same
+  evening and did not stop at typing the flag. `tests/test_torch_available.py` asserts the
+  **envelope**: that the workflow still contains the install, that CI still sets
+  `BUGARACH_REQUIRE_TORCH=1`, that the wheel comes from the CPU index, that torch can actually
+  run a convolution rather than merely import — and that `test_learn_*.py` still exists at all,
+  *"if these were renamed, the torch guard above is now guarding nothing."* Something now
+  asserts that the guarded tests are there to run. B7's rule 4 — validate the envelope — is the
+  whole difference between typing the flag and mechanising it, and both versions are now on the
+  record.
+
+  *The skip was not removed. It was made conditional.* Absent the flag the tests still skip,
+  which is correct on a laptop with no torch. With the flag CI sets, the same skip becomes a
+  **failure**. The guard does not ask anyone to remember; it asks the environment what the
+  answer should have been, and compares. Cheapest instance of rule 4 in the estate.
+
+  *The reason to bother is not tidiness, and it arrived inside one CI run.* Switching the alarm
+  on also switched on the test guarding the published numbers, which failed immediately: the
+  bake-off reproduced only on the ten-thread Mac that generated it, because `train.py` pinned a
+  seed and nothing else, so torch read its thread count off the hardware and the reduction order
+  went with it. **Ten days of that skip were also ten days of not knowing that.** The full arc —
+  including the first repair being wrong about the cause, and a fairness assertion that passed
+  because it compared seeds instead of recordings — is in
+  [`docs/cases/2026-08-28-the-skip-was-the-whole-story.md`](docs/cases/2026-08-28-the-skip-was-the-whole-story.md).
+
+  *Second instance, and it says something B4 currently does not (`bugarach`, `ac57581`,
+  2026-08-28).* Tony asked for pending page changes to be queued rather than published one at a
+  time. It was written down. It lost — because three separate machines in that repo tell a
+  session to publish and none of them waits to be asked: the staleness report's copy-paste
+  command, a daily workflow summary, and the `site:` line in every session briefing. **A hold
+  living only in a document is not ignored, it is outvoted — and the session that gives in is
+  *right* by every signal available to it.** That is a sharper claim than "the second sentence
+  is skipped" and a harder one to argue with, because it does not require anyone to have been
+  careless. The repair was to move the hold to where those three signals are computed, so all
+  three print the hold and its release condition instead of the publish command.
 
 - **B5.** Repo, repo, repo. What's a repo and why.
 - **B6.** Spec, validate, re-spec.
