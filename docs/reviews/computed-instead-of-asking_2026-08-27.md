@@ -60,6 +60,35 @@ data in about a second. The case's central claim — that the trap was survivabl
 it, it was stated by the user, and no artifact in the account demonstrates it. It is flagged
 in the file's own verification appendix rather than smoothed over.
 
+## Round 3 — the review was right and the document was still wrong
+
+After the run closed, the user supplied the canonical data path. It falsified a claim
+**no role could have caught**, because every role had verified the document against the
+sources the document named, and the missing fact was held by a person.
+
+The draft said all its withdrawn numbers "were derived from sources the project does not
+designate." Two of them were not: the corpus the agent read is a **designated** folder —
+the accessor's `pensub` alias resolves to exactly it — and its values match the project's
+own (slow width median 2.00 s, max 5.5 s; fast 0.90 s; 84 recordings). The real defect is
+narrower: **the agent recomputed a quantity already present in a column of the open
+file**, the slow stream's `width_sec` being `peak_sec − time_sec` on 150,703 of 150,715
+rows.
+
+**The error ran in the pessimistic direction, which is why nothing caught it.** A
+self-critical document overstating its own damage reads as rigour, and every reviewer —
+including the adversarial one — was pushing the file *toward* harsher self-assessment, not
+away from it. Role 4 attacked the flattering claims and had no reason to attack this one.
+
+Two further facts arrived with it, both now in the file: the canonical accessor **did not
+exist in the session's worktree**, and the commit adding it landed on the project's main
+line *during the incident*, titled *"A session could not find the data, so it went to the
+store — and prose was the only thing stopping it."*
+
+**What this says about the process:** an 11-role review verifies a document against the
+sources it cites. It cannot supply a source the document never knew existed. The check
+that found this was a person reading the output and saying "that is not where the data
+is" — which is the review step no roster contains and no roster can.
+
 ## How it generalises
 
 The finding worth keeping is not about agents. **A document written by an interested party
@@ -78,9 +107,9 @@ harder than on a document nobody has a stake in.
 - upstream:  syncytium2/murderboard @ 0.1.0 (version tag; commit sha not exposed by the installed copy)
 - copy:      **installed** @ 0.1.0 — `~/.claude/plugins/cache/murderboard/murderboard/0.1.0/`
 - freshness: **current** (`murderboard_freshness.sh --refresh --verbose --plugin`: *"current (installed 0.1.0, upstream 0.1.0)"*)
-- artifact:  `docs/cases/2026-08-27-computed-instead-of-asking.md` (`65ab9234` -> `2eb36595`; the round-2 dead link was resolved by creating this file, so the artifact hash is unchanged from round 1 and that is the expected result, not a skipped rebuild)
+- artifact:  `docs/cases/2026-08-27-computed-instead-of-asking.md` (`65ab9234` -> `2eb36595` -> `93ad883f`)
 - roles:     **11 of 11 run**
-- rounds:    2 blind verify rounds to clean
+- rounds:    3 blind verify rounds to clean — round 3 triggered by new evidence after the review closed (below), not by a defect the review missed
 
 > ⚠ **Single-pass, not parallel arms.** This session is configured not to spawn subagents,
 > so one reviewer walked all eleven checklists in turn. The process file permits this
@@ -99,7 +128,7 @@ harder than on a document nobody has a stake in.
 
 | # | role | findings | note |
 |---|---|---|---|
-| 1 | Claim & data verifier | **1 fixed** | "hundredfold gap" overstated a 17–102× range; corrected. Recomputed the rest: `dataset.resolve()` search order verbatim from source, the 14:26/16:20 timestamps, the four earlier defects, the ~15 tool calls. The withdrawn measurements (0.59 / 0.30 / 2.00 s, 566, ~30) are labelled withdrawn **in the file**, not quietly dropped — they are the incident |
+| 1 | Claim & data verifier | **2 fixed** (1 in round 3) | "hundredfold gap" overstated a 17–102× range; corrected. Recomputed the rest: `dataset.resolve()` search order verbatim from source, the 14:26/16:20 timestamps, the four earlier defects, the ~15 tool calls. **Round 3:** the blanket claim that every withdrawn number came from an undesignated source was false — this lab's figures came from a designated folder and are correct. The numbers now carry per-item standing rather than one verdict. **This role could not have caught it** without the path the user held |
 | 2 | Citation & reference validator | 0 | 4 relative links, all resolve. **No external literature and no attribution claim** — the case deliberately names no lab, method or paper, so the un-collapsible-role rule does not bind. That is itself the finding: nothing to trace forward or backward |
 | 3 | Consistency auditor | **2 fixed** | the folder README's index had no row for this case; and the sibling case links back to its folder README where this one did not. Both added. Numbers appear once each and agree with the run record |
 | 4 | Adversarial reviewer | **1 fixed** | the thesis sentence rested on self-report about the author's own care (above). Also pressed the "another session found it in a second" claim — it survives as the file's one acknowledged unverifiable, correctly located in the appendix rather than the body |

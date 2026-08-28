@@ -203,6 +203,13 @@ agent's behaviour, because every reader has shipped one.
 **But the correct response to an ambiguous path is to stop, not to route around it.** The
 comparison session had a third option available at every moment and did not take it.
 
+**The trap is now closed, and how it was closed is the point.** The project added a
+canonical accessor — one call that returns the current folder, so no consumer has to know
+which directory is real. It did not land as a clearer README. **Prose describing where the
+data lives had already failed twice; a function returning the path cannot be misread.**
+That is the same lesson the source project keeps relearning in other forms: where a rule
+can be made to fire by itself, writing it down more carefully is not the fix.
+
 ## Point 5 — what a wrong derived number costs is not the number
 
 The two invalid tables cost about fifteen tool calls. That is the cheap part. The
@@ -214,10 +221,30 @@ expensive parts:
 - **Contamination of the good work.** The session had produced a genuinely useful
   argument — that the detector's threshold is a fine dial at ~566 cells and a
   three-position switch at ~30, which retro-predicted a documented retune in the project's
-  own history. It rests on the same re-derived inputs, so **it had to be withdrawn along
-  with the errors.** A single unaddressed source poisoned every conclusion downstream of
-  it, including the correct ones.
+  own history. Because its inputs were derived rather than read, it had to be **withdrawn
+  along with the errors** the moment the method was challenged — not because it was shown
+  wrong, but because nothing separated it from the parts that were.
 - **A deadline day.**
+
+**A correction, added after the user supplied the canonical data path.** The paragraph
+above originally said a single unaddressed source had poisoned every downstream
+conclusion. **That was too strong, and getting it wrong in the pessimistic direction is
+still getting it wrong.** The corpus the agent read turned out to be a *designated*
+folder — the accessor's own `pensub` alias resolves to exactly it — and its numbers match
+the project's: slow width median 2.00 s, max 5.5 s, fast 0.90 s, 84 recordings. So the
+export-side figures were right, from the right data.
+
+The real defect is narrower and less flattering to the excuse: **the quantity the agent
+computed was already sitting in a column of the file it had open.** For the slow stream
+`width_sec` *is* `peak_sec − time_sec` — the project has verified the identity on 150,703
+of 150,715 rows — and the agent recomputed it anyway, having never checked whether the
+answer was already there. Only the other lab's figures were genuinely off-contract,
+derived from raw rasters.
+
+**This correction is itself the case's argument running once more.** The first account
+overstated the damage because that was the shape the story already had. Two of the three
+errors this file records were found by someone else checking a number the author was
+confident about.
 
 ## Point 6 — the thing that worked
 
@@ -259,9 +286,23 @@ reasoning-error costume.
 - The merged PR whose premise the session was reacting to, its diff, and the review
   record that passed it.
 - The board claims the session wrote, in both board files.
-- Every number quoted: 0.59 s, 0.30 s, 2.00 s, 566, ~30, and the threshold-resolution
-  figures. **Reproducible, and all of them withdrawn** — they were derived from sources
-  the project does not designate, which is the incident, not a footnote to it.
+- Every number quoted, but **they do not all have the same standing**, and the first
+  version of this file wrongly gave them all the worst one:
+  - **This lab's figures — 2.00 s, 0.90 s, ~30 ROIs, 84 recordings — are correct and come
+    from a designated folder.** Confirmed against the project's own values after the fact.
+    The defect was recomputing them when `width_sec` already held the answer, not reading
+    the wrong corpus.
+  - **The other lab's figures — 0.59 s, 566 — were derived from raw rasters**, off the
+    input contract. These are the genuinely undesignated ones.
+  - **0.30 s** is this lab's *rise interval*, correctly computed but the wrong quantity for
+    the comparison it was put in — a valid number in an invalid table.
+  - **The threshold-resolution figures** rest on the row above them and stand or fall with
+    it. Withdrawn, not disproved.
+- **The canonical accessor `dataset.current()` did not exist in the session's worktree** —
+  the commit adding it is not an ancestor of the branch point. It landed on the project's
+  main line *while this incident was in progress*, under the title *"A session could not
+  find the data, so it went to the store — and prose was the only thing stopping it."*
+  Another session was mechanizing the fix for this failure on the same day it happened.
 
 **Not settled, and load-bearing:**
 
