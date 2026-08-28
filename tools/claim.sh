@@ -36,7 +36,11 @@ REPO=$(cd "$HERE/.." 2>/dev/null && pwd) || REPO="."
 cd "$REPO" || exit 1
 . "tools/session_identity.sh"
 
-BOARD="docs/SESSIONS.md"
+# SC_BOARD is a TEST SEAM, not a feature: the selftest below points it at a scratch
+# copy so it can actually claim and release without touching the real board. A
+# selftest that cannot exercise the write path can only inspect its own source, and
+# that is what the first version of it did.
+BOARD="${SC_BOARD:-docs/SESSIONS.md}"
 ADDR=$(sc_session_address)
 BR=$(sc_branch)
 TODAY=$(date +%F)
@@ -110,18 +114,39 @@ if [ "${1:-}" = "--release" ]; then
 fi
 
 if [ "${1:-}" = "--selftest" ]; then
+    # BEHAVIOURAL. The first version of this selftest grepped this file for the strings
+    # "FAILED to release" and "sed -i" and called that "release verifies its own write".
+    # It passed with --release completely disabled (mutation-tested 2026-08-28: the awk
+    # output was never moved back over the board, and this said PASS). A check that reads
+    # the source instead of running it has no power in the direction it was built for.
     fail=0
-    [ -f "$BOARD" ] && printf '  ok   board exists\n' || { printf '  FAIL no board\n'; fail=1; }
-    case "$ADDR" in */*) printf '  ok   address resolves: %s\n' "$ADDR" ;;
-        *) printf '  FAIL address has no shape\n'; fail=1 ;; esac
-    grep -q '^### ' "$BOARD" && printf '  ok   board has at least one block\n' \
-        || printf '  ok   board is empty (fine, nothing claimed)\n'
-    # the release path must never claim success it did not achieve
-    if grep -q 'FAILED to release' "$0"; then printf '  ok   release verifies its own write\n'
-    else printf '  FAIL release does not verify\n'; fail=1; fi
-    if grep -q 'sed -i' "$0" && ! grep -q 'NOT `sed -i`' "$0"; then
-        printf '  FAIL uses sed -i\n'; fail=1
-    else printf '  ok   does not use sed -i\n'; fi
+    ck() { if [ "$2" = "$3" ]; then printf '  ok   %s\n' "$1"
+           else printf '  FAIL %s (want "%s" got "%s")\n' "$1" "$2" "$3"; fail=1; fi; }
+
+    TD=$(mktemp -d) || exit 1
+    export SC_BOARD="$TD/board.md"
+    printf '# scratch board\n\nprelude line that must survive\n' > "$SC_BOARD"
+    BEFORE=$(wc -l < "$SC_BOARD")
+
+    sh "$0" "selftest task" >/dev/null 2>&1
+    ck "claiming appends a block"       1 "$(grep -c '^### .* — selftest task' "$SC_BOARD")"
+    ck "the new block is ACTIVE"        1 "$(grep -c '^- \*\*Status:\*\* ACTIVE' "$SC_BOARD")"
+    ck "--list reports it"              1 "$(sh "$0" --list | grep -c 'selftest task')"
+
+    sh "$0" --release >/dev/null 2>&1
+    ck "releasing marks it DONE"        1 "$(grep -c "^- \*\*Status:\*\* DONE $(date +%F)" "$SC_BOARD")"
+    ck "no ACTIVE block survives"       0 "$(grep -c '^- \*\*Status:\*\* ACTIVE' "$SC_BOARD")"
+    ck "--list is empty again"          1 "$(sh "$0" --list | grep -c 'no active claims')"
+    ck "the board was not truncated"    1 "$(grep -c 'prelude line that must survive' "$SC_BOARD")"
+    AFTER=$(wc -l < "$SC_BOARD")
+    if [ "$AFTER" -gt "$BEFORE" ]; then printf '  ok   the board grew, nothing was lost\n'
+    else printf '  FAIL board shrank: %s -> %s\n' "$BEFORE" "$AFTER"; fail=1; fi
+
+    # releasing something that is not there must NOT report success
+    sh "$0" --release definitely-not-on-this-board >/dev/null 2>&1
+    ck "releasing a missing block fails loudly" 2 "$?"
+
+    rm -rf "$TD"; unset SC_BOARD
     [ $fail -eq 0 ] && { echo PASS; exit 0; } || { echo FAIL; exit 1; }
 fi
 

@@ -128,9 +128,20 @@ if [ "${1:-}" = "--selftest" ]; then
     if [ "$v" = "no-session-id" ]; then printf '  ok   (1) no session id -> placeholder, not empty\n'
     else printf '  FAIL no-session-id fallback gave "%s"\n' "$v"; fail=1; fi
 
-    # a subshell call must NOT set the caller's globals -- the documented trap
-    ( sc_resolve >/dev/null ) ; if [ -z "${SC_RESOLVED_PROBE:-}" ]; then
-        printf '  ok   (0) documented: $(sc_resolve) in a subshell sets nothing\n'; fi
+    # ASSERT THE VALUE, not the shape. The first version checked only that the address
+    # contained a slash and no spaces -- which the literal string "XXX/XXX" satisfies,
+    # and a mutation on 2026-08-28 proved it: the address was replaced with XXX/XXX and
+    # this selftest still said PASS. A shape assertion cannot fail in the direction the
+    # function exists for.
+    want="$(hostname -s)/$(printf '%s' "${CLAUDE_CODE_SESSION_ID:-}" | cut -c1-8)"
+    got="$(sc_session_address)"
+    if [ "$got" = "$want" ]; then printf '  ok   (0) address IS machine/session: %s\n' "$got"
+    else printf '  FAIL address is "%s", independently derived is "%s"\n' "$got" "$want"; fail=1; fi
+
+    # and it must track the real branch, not a constant
+    wb=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+    if [ "$(sc_branch)" = "$wb" ]; then printf '  ok   (0) branch IS the checkout branch: %s\n' "$wb"
+    else printf '  FAIL branch says "%s", git says "%s"\n' "$(sc_branch)" "$wb"; fail=1; fi
 
     [ $fail -eq 0 ] && { echo "PASS"; exit 0; } || { echo "FAIL"; exit 1; }
 fi

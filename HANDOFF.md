@@ -416,6 +416,53 @@ because a role charter is theirs to change.
 
 ---
 
+## The board tooling failed its own case, 2026-08-28
+
+`docs/cases/2026-08-28-the-tests-were-defending-the-bug.md` landed at 07:16. **It was
+applied to this repo's own tooling within the hour, and two of the three tools built the
+night before failed it.**
+
+Mutation-tested by breaking each tool and asking whether its `--selftest` noticed:
+
+| broken on purpose | old selftest said |
+|---|---|
+| `claim.sh --release` never writes the board back | **PASS** |
+| `session_identity.sh` returns the literal `XXX/XXX` as the address | **PASS** |
+| the push gate fails open on a bad refspec | FAIL ✓ |
+
+`claim.sh` was checking that its own source **contained the string** `FAILED to release`,
+and printing `ok release verifies its own write`. `session_identity.sh` asserted the
+address had a slash and no spaces — which `XXX/XXX` satisfies. Both are the case's Point 2:
+a check with full power aimed at the wrong outcome. Both were written the same night this
+repo filed three case reports about checks that cannot fire.
+
+**Fixed:** both selftests are now behavioural. `claim.sh` claims and releases against a
+scratch board through a new `SC_BOARD` seam and asserts the block appears, goes DONE,
+leaves no ACTIVE, and that **the board was not truncated**. `session_identity.sh` asserts
+the address *equals* an independently derived `machine/session`, and the branch equals what
+git says.
+
+**The cure, which is the part that lasts: [`tools/mutation_check.sh`](tools/mutation_check.sh).**
+Six mutations, each verified to have changed the file before its selftest is trusted. Run
+it after touching any of these tools.
+
+```sh
+tools/mutation_check.sh        # caught 6  missed 0  errors 0  → PASS
+```
+
+**It refuses to lie in its own way too.** Its first draft reported `MISSED` when a mutation
+failed to apply — which reads as "that test is weak" when nothing had been tested at all.
+An unapplied mutation is now an `ERROR` and never a pass. All three outcomes were
+demonstrated before commit: `caught`, `MISSED` (via a comment-only edit no selftest could
+notice), and `ERROR`.
+
+**What this adds to B4.** The imported case proposes that B4's *build your own tools* needs
+a correction — a homemade gate is not more trustworthy for being homemade, it is less
+reviewed. This repo supplied a second, independent instance of that within an hour of
+reading it, without meaning to. Two instances, two sessions, two repos, one day.
+
+---
+
 ## Boundary
 
 **The murderboard repo is for murderboard development only.** Course material, session plans,
