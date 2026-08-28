@@ -22,6 +22,7 @@ is for murderboard development only; see [Boundary](#boundary) below.
 | Access, cost, routes, rates | [`points.md`](points.md) **§F** — sourced and dated 2026-08-27, expected to go stale |
 | The circulatable outline | [`course-outline-external.md`](course-outline-external.md) — 434 words, four barriers |
 | **What a learner is handed** | [`docs/handouts/`](docs/handouts/) — `search-to-shipped.html`, one-page runbook + a second sheet on decision records |
+| **Hook safety / the decision tree** | [`tools/turnstile/`](tools/turnstile/) — vendored from [`syncytium2/turnstile`](https://github.com/syncytium2/turnstile); `turnstile decide`, `turnstile check` |
 | **Who else is working here** | [`docs/SESSIONS.md`](docs/SESSIONS.md) — claim before you write, `tools/claim.sh --list` |
 | **What has actually been delivered** | `<darkroom>/short-course/` — the runbook as a standalone page, plus a folder README. Claimed and written 2026-08-27; the repo copy is publisher source and does not open from Finder |
 | Why the repo exists | [`README.md`](README.md) |
@@ -491,6 +492,37 @@ legitimate, productive, and absorbing, and a beautifully curated case library wi
 teach anyone anything until it is placed in a session. The next question for this material
 is not *what else went wrong* — it is **which three of these does a beginner actually
 need**, and what happens to the rest.
+
+---
+
+## turnstile has its own repo — 2026-08-28
+
+**[`syncytium2/turnstile`](https://github.com/syncytium2/turnstile), private.** Apache-2.0,
+matching its sibling `murderboard`. Cloned to `~/Developer/turnstile`; **that is now the
+source of truth** and `tools/turnstile/` here is a vendored copy, stamped on line 2 in the
+estate's existing format.
+
+**Freshness is not mechanised here.** `murderboard_freshness.sh --label turnstile --slug
+syncytium2/turnstile` would do it — the gate is already generic over any vendoring
+relationship — and it is not wired because this repo does not vendor the murderboard
+family. Until it is, **this copy can silently fall behind upstream**, which is the exact
+class the `stale` glossary entry describes. Stated rather than left to be discovered.
+
+**Three defects were caught during extraction**, all by running it rather than reading it,
+all recorded at their sites:
+
+- `check` reported that `turnstile-run` shipped **without a `--selftest`** — the tool that
+  demands one from every hook.
+- Declarations were read from the first 40 lines. This estate writes 40-plus-line incident
+  headers, so the first real gate it wrapped had its declaration at line 44 and was
+  **silently downgraded to advisory**: a fail-open produced by the safety wrapper.
+- `SELF_DIR` was hardcoded to the vendored path, so the tool **was broken in its own
+  repository**. A tool that only works inside the consumer is not vendorable; it is a copy.
+
+**Publication is open, as it was for this repo.** It is private by default because its
+README quotes this estate's own hook failures by size and repo. Flipping it is one command
+(`gh repo edit syncytium2/turnstile --visibility public`) and it is a decision, not an
+oversight.
 
 ---
 

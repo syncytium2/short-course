@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
+# vendored from syncytium2/turnstile @ 9786953 — do NOT edit here; update upstream and re-copy.
 # turnstile-run — run a session hook so that it can never cost you the session.
 #
 #   Register hooks through this, never directly:
@@ -68,11 +69,13 @@ exit 2'
     slug=$(printf '%s' "$PWD/$H" | tr -c 'A-Za-z0-9' '-' | cut -c1-90)
     mkdir -p "$HOME/.turnstile"; touch "$HOME/.turnstile/running-$slug"
     ck "3a a killed previous run latches safe mode"                       0 "$(go)"
+    grep -q "SAFE MODE" "$TD/err" && printf '  ok   3a2 ...and says which guarantee skipped it\n' || { printf '  FAIL 3a2 silent\n'; f=1; }
     rm -f "$HOME/.turnstile/running-$slug"
     ck "3b ...and clearing it restores the gate"                          2 "$(go)"
 
     touch "$HOME/.turnstile-off"
     ck "4a the kill switch overrides even a gate"                         0 "$(go)"
+    grep -q "OFF" "$TD/err" && printf '  ok   4a2 ...and says nothing was checked\n' || { printf '  FAIL 4a2 silent\n'; f=1; }
     rm -f "$HOME/.turnstile-off"
 
     rm -f "$H";              ck "5a a registered hook that is gone cannot block" 0 "$(go)"

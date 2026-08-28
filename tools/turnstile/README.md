@@ -1,4 +1,8 @@
-# turnstile
+<!-- vendored from syncytium2/turnstile @ 9786953 — do NOT edit here; update upstream and re-copy. -->
+
+# turnstile — vendored copy
+
+**Upstream is [`syncytium2/turnstile`](https://github.com/syncytium2/turnstile).** Edit there, then re-copy. Nothing yet checks this copy's freshness automatically; `murderboard_freshness.sh --label turnstile --slug syncytium2/turnstile` would, and is not wired here because this repo does not vendor the murderboard family.
 
 **A session hook cannot cost you the session.** That is the only promise, and everything
 here exists to keep it.
@@ -30,7 +34,20 @@ has no rules enforcing it.
 
 ## Install
 
-Vendor the folder, then register hooks **through the wrapper, never directly**:
+**Vendor it.** Copy this repo's four scripts into the consumer at `tools/turnstile/`, or
+add it as a submodule. There is nothing to build and no dependency to install; the wrapper
+is POSIX `sh` on purpose, because it runs on the critical path and a sibling hook in this
+estate shipped to seven repositories exiting 0 for every call when `python` was missing
+from a hook's login `PATH`.
+
+```sh
+mkdir -p tools/turnstile
+cp turnstile turnstile-run gate.template.sh mutation_check.sh tools/turnstile/
+```
+
+The scripts work at a repo root or vendored under `tools/turnstile/` — every path is
+derived from `$0`, never assumed. Then register hooks **through the wrapper, never
+directly**:
 
 ```json
 { "hooks": { "PreToolUse": [ { "matcher": "Bash", "hooks": [
@@ -39,11 +56,11 @@ Vendor the folder, then register hooks **through the wrapper, never directly**:
 ```
 
 ```sh
-tools/turnstile/turnstile decide          # should this even be a hook?
-tools/turnstile/turnstile new my-gate     # scaffold a survivable one
-tools/turnstile/turnstile check           # what is installed, and what is wrong with it
-tools/turnstile/turnstile test            # every hook's selftest
-tools/turnstile/turnstile off             # ← when it all goes wrong
+./turnstile decide          # should this even be a hook?
+./turnstile new my-gate     # scaffold a survivable one
+./turnstile check           # what is installed, and what is wrong with it
+./turnstile test            # every hook's selftest
+./turnstile off             # ← when it all goes wrong
 ```
 
 ## The five guarantees
@@ -92,7 +109,7 @@ wrong thing impossible to express — beats every gate.
 finds registered-but-missing hooks, duplicate registrations, unwrapped hooks, hooks with no
 selftest, and anything on the blocking startup path.
 
-**Watch a selftest go red.** `turnstile test` runs them; `tools/mutation_check.sh` breaks
+**Watch a selftest go red.** `turnstile test` runs them; `mutation_check.sh` breaks
 each tool on purpose and requires its selftest to fail. A selftest you have never seen fail
 is a claim you have never checked — and both of this repo's first two tools passed while
 completely broken, which is why that harness exists.
@@ -100,7 +117,7 @@ completely broken, which is why that harness exists.
 ## Self-application
 
 Every guarantee above has an assertion in `turnstile-run --selftest`, and four mutations in
-`tools/mutation_check.sh` break the wrapper on purpose and require it to notice.
+`mutation_check.sh` break the wrapper on purpose and require it to notice.
 
 **It has already caught itself twice.** `turnstile check` reported that `turnstile-run` had
 no `--selftest`, before it was committed. And the first version read declarations from the
@@ -108,3 +125,15 @@ first 40 lines only — this estate writes 40-plus-line incident headers, so the
 gate it wrapped had its declaration at line 44 and was **silently downgraded to advisory**.
 A fail-open produced by the safety wrapper. Both are recorded in the files where they
 happened, not only here.
+
+## Provenance
+
+Extracted 2026-08-28 from `syncytium2/short-course`, where it was written in response to a
+straightforward question: *are session hooks simply too complicated for a beginner to use
+safely?* The measurement said the fear was correctly aimed and at the wrong noun — not
+hooks, but `SessionStart` hooks — and this is what came out of answering it.
+
+Licensed Apache-2.0, matching its sibling `syncytium2/murderboard`.
+
+**Authorship.** The ideas, decisions and review are Tony DeFazio's; the code is Claude's
+(Anthropic's Claude Code). Agent commits carry a `Co-Authored-By: Claude` trailer.

@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
+# vendored from syncytium2/turnstile @ 9786953 — do NOT edit here; update upstream and re-copy.
 # turnstile — decide whether a thing should be a hook, and find out whether yours work.
 #
 #   turnstile decide          the decision tree, printed
@@ -16,11 +17,23 @@
 # critical path may depend on an interpreter that might not be there.**
 
 set -u
-# Check the repo you are STANDING IN if it has hooks, else the repo this copy is
-# vendored into. A vendored tool that always inspects its own home would report on the
-# wrong repo and be confidently right about nothing.
-[ -f ".claude/settings.json" ] || cd "$(dirname "$0")/../.." 2>/dev/null || true
-SELF_DIR="tools/turnstile"
+# NEVER cd. `check` inspects the repo you are standing in, full stop.
+#
+# The first version hardcoded SELF_DIR="tools/turnstile" and was therefore broken in its
+# own repository -- a tool that only works inside the consumer is not a vendorable tool,
+# it is a copy. The second computed it after a `cd` that walked ABOVE the repo when no
+# .claude/settings.json was present, so it then could not find its own siblings. Both are
+# the same mistake: resolving a path relative to an assumption about where you are.
+#
+# SELF is absolute so file access always works. SELF_REL is what gets PRINTED, because a
+# settings.json carrying an absolute path is machine-specific and breaks the moment anyone
+# else clones the repo.
+SELF_DIR=$(cd "$(dirname "$0")" && pwd)
+case "$SELF_DIR" in
+    "$PWD"/*) SELF_REL=".${SELF_DIR#$PWD}" ;;
+    "$PWD")   SELF_REL="." ;;
+    *)        SELF_REL="$SELF_DIR" ;;
+esac
 STATE="${HOME}/.turnstile"
 KILL_SWITCH="${HOME}/.turnstile-off"
 
@@ -109,7 +122,7 @@ new )
     echo "  It is ADVISORY until you add '# turnstile: gate' — it can print and cannot block."
     echo "  Register it wrapped, never directly:"
     echo
-    echo "      \"command\": \"sh $SELF_DIR/turnstile-run $out\""
+    echo "      \"command\": \"sh $SELF_REL/turnstile-run $out\""
     echo
     echo "  Then: sh $out --selftest     and watch it go red before you trust it."
     exit 0 ;;
