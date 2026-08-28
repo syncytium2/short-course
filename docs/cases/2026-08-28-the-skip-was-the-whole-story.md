@@ -23,7 +23,8 @@
 > **One finding here is new and belongs to no commit.** Point 6a — the repair reached two of
 > its three call sites, and the third asserts in its own docstring a comparability it no longer
 > has — was turned up by running the appendix greps rather than trusting the retelling. It is
-> filed to `bugarach` as a finding, not fixed from here.
+> filed to `bugarach` as a finding, not fixed from here — **[PR #369](https://github.com/syncytium2/bugarach/pull/369),
+> merged 2026-08-28 at `6ce1b19`.**
 >
 > **This case closes a worked example already in [`points.md`](../../points.md) B4** — B4
 > was written on 2026-08-27 describing this defect *unfixed*, and predicted which fix would
@@ -274,9 +275,26 @@ and the file that inherits the guarantee by reference was not one of them.**
 
 That is the same defect as Point 6 one level up: a stated guarantee and the mechanism that
 would deliver it, no longer in correspondence. It survived a repair whose entire subject was
-that correspondence, which is why it is here rather than in a footnote. **It is filed to
-`bugarach` as a finding from this review, not fixed here** — this repository imports
-specimens, it does not edit the estate.
+that correspondence, which is why it is here rather than in a footnote.
+
+**Filed to `bugarach`, not fixed from here** — this repository imports specimens, it does
+not edit the estate. `docs/todo/2026-08-28-the-ablation-still-picks-thresholds-on-its-fitting-data.md`,
+[PR #369](https://github.com/syncytium2/bugarach/pull/369), merged 2026-08-28 at `6ce1b19`.
+
+*Two things the filing turned up that belong in this case.* **The report's conclusion is
+not affected** — `coordination_report` compares a one-scale bank against the four-scale
+bank and both arms leak identically, so the leak is common-mode across the comparison the
+page actually makes and *"one scale scores the same as four"* survives. A hurried fix would
+have withdrawn a finding that holds, which is its own lesson: **when you find a leak, ask
+what it is common to before you retract anything.**
+
+And the write-up could not be committed the way it was asked for. `bugarach`'s
+`guard_branch` refuses a commit on `main` — *"CI runs AFTER a push to `main`, so it can
+report a breakage but cannot prevent one"* — and offers `ALLOW_MAIN_COMMIT=1`. The gate was
+right and the escape hatch was not used. **A gate you built and then route around is a gate
+you have already decided is wrong**, and this course's whole B4 argument is that the
+mechanism has to be the one that holds when the person is in a hurry, including when that
+person is you.
 
 ## Point 7 — the numbers moved, and the pages that publish them did not, on purpose
 
