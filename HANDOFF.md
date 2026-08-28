@@ -366,6 +366,56 @@ both halves.
 
 ---
 
+## Session close, 2026-08-28 early hours
+
+**The two case files are merged**, into `docs/cases/2026-08-27-computed-instead-of-asking.md`.
+That filename survived because `docs/reviews/computed-instead-of-asking_2026-08-27.md`
+points at it.
+
+**They were NOT the same incident, and finding that out changed the job.** They read alike
+and were assumed to be duplicates. Checked before merging: **zero shared evidence.** One
+cites `<data>/bugarach/README.md` and `dataset.py`; the other `current_export.toml`,
+`export_folder_spec.md` and commit `4297033`, and never mentions the other's fix at all.
+Two distinct incidents, same repo, hours apart, same shape.
+
+So they are merged as **two incidents, explicitly two** — fusing them would have
+manufactured one event from two, which is precisely what
+`2026-08-27-the-claim-that-gained-a-source.md` is about. And two is the better teaching
+material: one instance invites "that agent was careless"; two independent ones in twelve
+hours, **one of them against a contract that was correct and present the whole time**,
+rules that out. The cause is structural — when the thing an agent needs has no address it
+can resolve, it computes something rather than stopping, and a written rule does not fix
+an address.
+
+⚠ **The 11-role murderboard covers incident A only.** The merged file says so at the top,
+in bold, because a review badge on a document that has grown past what the review saw
+reads as a receipt for the whole thing — observation 2 in the memo below, committed by the
+merge itself.
+
+**Murderboard feedback written up for that team**, on a branch in their repo rather than
+here, per the Boundary rule: `syncytium2/murderboard`, branch
+`feedback-four-observations-2026-08-28`, commit `d4066da`. Four observations, three of them
+defects that passed *between* correctly-executed roles: an attribution to a named person is
+checked by no role; a partial flag reads as a receipt; reviewer correlation is invisible to
+the roster gate; and a run record outlives the document it reviewed. On a branch, not main,
+because a role charter is theirs to change.
+
+**Open, in the order they cost something:**
+
+1. **Three emails** — Oxford, UW eScience, Southampton. Still the only item waiting on other
+   people, and a redesign should not decide what it is without them.
+2. **`docs/reviews/reconstruction-vs-log_2026-08-26.md` is falsified in its lead finding** by
+   node 1b and still stands unmarked. Third day. How to correct it in place is undecided.
+3. **B1** — yes or no on the sandbox proposal in `OPEN-FINDINGS.md`.
+4. **One measured murderboard run** (N1), a few dollars, settles §10.
+5. **`<darkroom>/course-outline.md` is Draft 2 and loose at the darkroom top level** — two
+   drafts stale, in the folder Tony actually opens. Recommended for deletion; his file, so
+   left alone.
+6. **`README.md:153` in bugarach** still abbreviates the export folder — one of the four
+   disagreeing sources that commit `4297033` fixed, and the one it missed.
+
+---
+
 ## Boundary
 
 **The murderboard repo is for murderboard development only.** Course material, session plans,
