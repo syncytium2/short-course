@@ -526,6 +526,63 @@ oversight.
 
 ---
 
+## Session close — 2026-08-28, midday
+
+**Everything is committed and pushed.** `short-course` master, both case branches,
+`syncytium2/turnstile`, and the murderboard feedback branch are all 0/0. Board has no open
+claims. All six selftests PASS, 11 mutations caught with 0 missed, every markdown pointer
+resolves, `turnstile check` reports no findings here.
+
+### What exists now that did not yesterday
+
+| | |
+|---|---|
+| a cross-session board | `docs/SESSIONS.md` + `tools/claim.sh`, addressed by session because this repo shares one checkout |
+| a push interlock | `.claude/hooks/push-goes-where-you-are.sh`, declared and wrapped |
+| a mutation harness | `tools/mutation_check.sh` — six tools, each must go red when broken |
+| a pointer checker | `tools/check_pointers.sh` |
+| hook safety, vendorable | [`syncytium2/turnstile`](https://github.com/syncytium2/turnstile), vendored to `tools/turnstile/` |
+| feedback to the murderboard team | `syncytium2/murderboard` branch `feedback-four-observations-2026-08-28` |
+
+### The thing to carry forward, if only one thing is
+
+**Nine defects were caught in eighteen hours, and every one was caught by running something
+rather than reading it.** Three green selftests were defending broken tools. A safety
+wrapper silently downgraded the first real gate it was given. A pointer checker reported 38
+breakages of which one was real. A push retry loop hid a rejection behind `2>/dev/null` and
+made it look like a network blip.
+
+None of that was carelessness and none of it was caught by care. It was caught by
+mutation, by running the tool against a real repo, and by the ahead/behind count not
+reading zero. **That is the course's thesis, demonstrated on the course's own tooling,
+faster than the course can absorb it.**
+
+### Open, in the order they cost something
+
+1. **Three emails** — Oxford, UW eScience, Southampton. Untouched for two days. The only
+   item waiting on other people, and a redesign should not decide what it is without them.
+2. **`docs/reviews/reconstruction-vs-log_2026-08-26.md` is falsified in its lead finding**
+   by node 1b and still stands unmarked. Fourth day.
+3. **B1** — yes or no on the sandbox proposal in `OPEN-FINDINGS.md`.
+4. **Placement, which is now the binding constraint.** Six cases exist, two parked as too
+   expensive to explain, three on unmerged branches. Nothing decides how many a 90-minute
+   session carries or which barrier each serves. Supply is solved; this is not.
+5. **One measured murderboard run** (N1), a few dollars, settles §10.
+6. **Two decisions left deliberately open:** publication, for this repo and for
+   `turnstile`; and whether `turnstile`'s vendored copy gets a freshness gate, which it
+   currently does not — so it can fall behind silently.
+7. **`<darkroom>/course-outline.md` is Draft 2**, loose at the darkroom top level, two
+   drafts stale, in the folder actually opened. Recommended for deletion; his file.
+8. **`README.md:153` in bugarach** still abbreviates the export folder — the one source
+   commit `4297033` missed.
+
+### Not mine, noticed in passing
+
+`fireflies` has one untracked file (`R_commits_for_diary.txt`). Two case branches here are
+unmerged. Neither was touched.
+
+---
+
 ## Boundary
 
 **The murderboard repo is for murderboard development only.** Course material, session plans,
