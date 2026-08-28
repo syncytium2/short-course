@@ -24,7 +24,19 @@
 # been tested. Every mutation here is VERIFIED TO HAVE CHANGED THE FILE before the selftest
 # is trusted, and a mutation that does not apply is an ERROR, never a result.
 #
-# Exit 0 = every mutation was caught. Exit 1 = at least one was missed or could not apply.
+# AND IT LIED ANYWAY, IN THE ONE PLACE LEFT. Until 2026-08-28 this script checked only that
+# a mutated selftest said FAIL. It never checked that the UNMUTATED one said PASS -- so a
+# selftest that was already red scored `caught` on every mutation aimed at it, having proved
+# nothing at all. That was not hypothetical: run in a detached worktree, where
+# `session_identity.sh --selftest` was red before anything was touched, this script printed
+# `caught 11  missed 0  errors 0  PASS` with two of its eleven rows vacuous.
+#
+# `caught` now means the selftest went from PASS to FAIL. A red baseline is an ERROR, with
+# the same reasoning as an unapplied mutation: nothing was demonstrated, and a result that
+# demonstrates nothing must not read like a pass.
+#
+# Exit 0 = every mutation was caught. Exit 1 = at least one was missed, could not apply, or
+# was aimed at a selftest that was not green to begin with.
 
 set -u
 cd "$(dirname "$0")/.." || exit 1
@@ -58,6 +70,18 @@ printf '%s\n' "$MUTATIONS" | while IFS='@' read -r FILE _ FROM _ TO _ LABEL; do
     printf '  %-52s ' "$LABEL"
 
     if [ ! -f "$FILE" ]; then printf 'ERROR no such file: %s\n' "$FILE"; echo E >> "$BAK/err"; continue; fi
+
+    # BASELINE FIRST. "The mutated selftest said FAIL" is only evidence if the unmutated one
+    # said PASS. Computed once per file and cached, because these run several mutations each.
+    KEY=$(printf '%s' "$FILE" | tr -c 'A-Za-z0-9' '_')
+    if [ ! -f "$BAK/base.$KEY" ]; then
+        sh "$FILE" --selftest 2>/dev/null | tail -1 > "$BAK/base.$KEY"
+    fi
+    BASE=$(cat "$BAK/base.$KEY" 2>/dev/null)
+    if [ "$BASE" != PASS ]; then
+        printf 'ERROR baseline selftest is not green (said "%s") — a red test proves nothing when it goes red\n' "$BASE"
+        echo E >> "$BAK/err"; continue
+    fi
 
     cp "$FILE" "$BAK/orig" || { printf 'ERROR cannot back up\n'; echo E >> "$BAK/err"; continue; }
 

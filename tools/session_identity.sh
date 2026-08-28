@@ -138,10 +138,41 @@ if [ "${1:-}" = "--selftest" ]; then
     if [ "$got" = "$want" ]; then printf '  ok   (0) address IS machine/session: %s\n' "$got"
     else printf '  FAIL address is "%s", independently derived is "%s"\n' "$got" "$want"; fail=1; fi
 
-    # and it must track the real branch, not a constant
-    wb=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+    # and it must track the real branch, not a constant.
+    #
+    # DERIVED BY A DIFFERENT COMMAND ON PURPOSE. This assertion used to compare sc_branch
+    # against raw `git rev-parse --abbrev-ref HEAD`, which returns the literal "HEAD" on a
+    # detached checkout while sc_resolve deliberately normalises that to "detached" (see
+    # above). So the test failed wherever the tool was RIGHT -- and the state it failed in
+    # is `git worktree add --detach`, which is the pattern HANDOFF.md recommends for working
+    # master without switching the shared checkout. Found 2026-08-28 by running the selftest
+    # in exactly that worktree.
+    #
+    # A test that goes red on correct behaviour is worse than one that never fires: the
+    # obvious repair is to delete the normalisation, and then the tool is broken to satisfy
+    # its test. That is `2026-08-28-the-tests-were-defending-the-bug.md`, inverted, in the
+    # tools that repo's own case is about.
+    #
+    # `git symbolic-ref --short -q HEAD` is empty on a detached HEAD, so "detached" is
+    # reached here without copying the tool's string swap. Mirroring the implementation
+    # would make this assert that the code says what it says.
+    wb=$(git symbolic-ref --short -q HEAD 2>/dev/null)
+    if [ -z "$wb" ]; then
+        if git rev-parse --git-dir >/dev/null 2>&1; then wb="detached"; else wb="no-branch"; fi
+    fi
     if [ "$(sc_branch)" = "$wb" ]; then printf '  ok   (0) branch IS the checkout branch: %s\n' "$wb"
-    else printf '  FAIL branch says "%s", git says "%s"\n' "$(sc_branch)" "$wb"; fail=1; fi
+    else printf '  FAIL branch says "%s", independently derived is "%s"\n' "$(sc_branch)" "$wb"; fail=1; fi
+
+    # And the normalisation itself, which had no test at all. A `git` that reports "HEAD"
+    # must come back as "detached", not as the literal "HEAD".
+    shim=$(mktemp -d) || shim=""
+    if [ -n "$shim" ]; then
+        printf '#!/bin/sh\nprintf "HEAD\\n"\n' > "$shim/git"; chmod +x "$shim/git"
+        v=$(PATH="$shim:$PATH" SC_RESOLVED= sh -c '. ./tools/session_identity.sh; sc_branch' 2>/dev/null)
+        rm -rf "$shim"
+        if [ "$v" = "detached" ]; then printf '  ok   (0) a git reporting "HEAD" normalises to "detached"\n'
+        else printf '  FAIL detached HEAD normalised to "%s", want "detached"\n' "$v"; fail=1; fi
+    fi
 
     [ $fail -eq 0 ] && { echo "PASS"; exit 0; } || { echo "FAIL"; exit 1; }
 fi
