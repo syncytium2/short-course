@@ -1,5 +1,23 @@
 <!-- Case study, imported 2026-08-27. Internal use — links point at real commits and files. -->
 
+> ## 📌 Not beginner material — standalone, by decision
+>
+> **Decided 2026-08-27 (Tony): keep this standalone. Do not fold it into `points.md` B2.**
+>
+> **Why:** roughly thirty minutes of scaffolding stands between a beginner and the
+> payload — what a murderboard is, what eleven roles means, what a per-fold ratio is,
+> what a citation flag does. That is a prerequisite cost, not a defect in the case.
+>
+> **Rejected:** merging its three findings into B2 alongside the other specimens. They
+> are the sharpest instances the estate has, and that is exactly the problem: they are
+> sharp *about a process a beginner does not yet have.*
+>
+> **Do not relitigate on merit.** The three points hold and were not in question. The
+> question was audience fit.
+>
+> **Revisit if:** the redesign gains an advanced session, or a slot appears for a worked
+> review failure. See [`README.md`](README.md) in this folder.
+
 > ## ⚠ Provenance: this is an account written by the party being evaluated
 >
 > The agent in this story wrote this file. That is the same weakness
