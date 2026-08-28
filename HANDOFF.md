@@ -604,6 +604,131 @@ unmerged. Neither was touched.
 
 ---
 
+## Session close — 2026-08-28, afternoon
+
+**Ran the tooling instead of reading it, and it found four things.** This session opened as
+an evaluation of the repo. Every finding below came from executing something — nothing came
+from reading a diff or a document.
+
+**The checkout moved under this session mid-task, and the board is why nothing was lost.**
+It was on `case-tests-defending-the-bug` at the start; another session merged the case
+branches and switched it to `master` while this one was still reading. The failure mode is
+now familiar and the response is the boring one: claim before writing. A claim was opened
+before the first edit and released at the end.
+
+### 1 · The turnstile murderboard run existed on one laptop only
+
+`~/Developer/turnstile/docs/reviews/README_2026-08-28.md` — 253 lines, 13 blocking findings
+— was **untracked and unpushed**, finished at 12:10 and never committed. Its central result:
+**four of turnstile's five guarantees do not hold as written**, each reproduced by running
+the wrapper. Guarantee 5, *"it says when it did nothing,"* fails because every skip line goes
+to stderr on exit 0, which reaches the debug log and never the transcript. Its own sentence:
+*"Wrapping the seven-repository incident in turnstile would have made it more silent, not
+less."*
+
+This repo's only gate is wrapped in that harness. Committed and pushed as `04628a3`
+upstream, with the guarantees **marked and not rewritten** — the run stopped at synthesis
+under the escalation rule and handed back a choice between two different projects, and that
+choice is the author's. The fourth push failure in eight days, and the most expensive one
+had the file been lost.
+
+### 2 · The mutation harness had never checked that a test was green
+
+`mutation_check.sh` verified that a *mutated* selftest said FAIL. It never verified that the
+*unmutated* one said PASS — so any mutation aimed at an already-red selftest scored `caught`
+having proved nothing. Not hypothetical: in a detached worktree it printed **`caught 11
+missed 0 errors 0 PASS`** with two of eleven rows vacuous. The harness written to catch
+checks that cannot fail contained two.
+
+`caught` now requires PASS → FAIL; a red baseline is an `ERROR`. Demonstrated by reproducing
+that same run with the guard in place: `caught 9 missed 0 errors 2 FAIL`.
+
+### 3 · A test that went red on correct behaviour
+
+`session_identity.sh` normalises git's literal `HEAD` to `detached` on purpose; its selftest
+compared against raw `git rev-parse --abbrev-ref HEAD` and so **failed in any detached
+checkout** — which is `git worktree add --detach`, the pattern this file recommends for
+working `master` without switching the shared checkout. The tool was right and the test was
+wrong, and the obvious repair is to delete the normalisation, breaking the tool to satisfy
+its test. That is `2026-08-28-the-tests-were-defending-the-bug.md`, inverted, in this repo's
+own tooling. Now derived from `git symbolic-ref` — a different command, not a copy of the
+implementation — and the normalisation has a test for the first time.
+
+### 4 · `reconstruction-vs-log` is corrected, and the four-day item is closed
+
+Settled against the primary source, both ways. Node 1b message 25: `web_fetch` of
+`https://murderboard.tonydefazio.com` → `[ROBOTS_DISALLOWED] Site disallows automated
+access.` Message 29, two minutes later: `http://` — different scheme — → success, 30,373
+chars.
+
+So **discrepancy 1 is withdrawn**: the obstacle was real, and the review was wrong twice,
+since there were not "two successful fetches" but one refusal and one success. **Node 1 was
+accurate but incomplete** — it names the denial and drops the retry. Incomplete is not
+fabricated, and the review charged fabrication.
+
+**The mechanism is the part worth keeping.** The review inferred a tool *return* from node
+1a, three paragraphs after writing the banner saying node 1a shows only *that* a tool ran and
+never what it returned. The lead finding is the exact inference its own scope limit forbids.
+Struck through, not deleted, with the two consequences that follow also marked: the drift
+table's only *addition* row was this finding, so surviving drift is removal-only; and
+consequence 4's "unresolved by choice" is superseded, because the scoped extract it
+recommends is node 1b.
+
+### Also done, and small
+
+- **The vendored `turnstile` went stale the same afternoon** — HANDOFF named that risk
+  yesterday and it landed within a day. Re-vendored at `04628a3`. Still no freshness gate.
+- **A re-vendor shipped two broken pointers**, caught by `check_pointers.sh`: upstream links
+  to its own `docs/` by relative path, which resolves nowhere here. Rewritten to upstream
+  URLs; the vendored header now says to redo that every time.
+- **The delivered handout had inverted closing tags.**
+  `<darkroom>/short-course/search-to-shipped.html` closed `</html>` before `</body>`. The
+  repo copy is fine — it has no wrapper by design — so the defect existed only in the one
+  file a person actually opens, which is the copy nobody re-reads. Fixed in place.
+
+### Verified now, on `master`
+
+Six selftests PASS · 11 mutations caught, 0 missed, 0 errors · every pointer resolves ·
+`turnstile check` no findings · working tree clean · `master` and both case branches 0/0
+with origin · no open claims.
+
+### Open, in the order they cost something
+
+1. **Three emails** — Oxford, UW eScience, Southampton. **Third day untouched.** Still the
+   only item waiting on other people.
+2. **Placement. Now unblocked and now the binding constraint.** The case branches merged
+   today, so `master` may finally link to all seven cases — the reason placement could not
+   be written down is gone. Nothing yet decides how many a 90-minute session carries or
+   which barrier each serves. Supply was solved two days ago; this was not, and is now the
+   only thing between a case library and a session.
+3. **B1** — yes or no on the sandbox proposal in `OPEN-FINDINGS.md`.
+4. **turnstile's four contested guarantees** — marked, not fixed. Two remedies, two
+   different projects: fix `turnstile-run`, or narrow the README to what ships. The author's
+   call, and this repo's only gate runs inside the answer.
+5. **One measured murderboard run** (N1), a few dollars, settles §10.
+6. **Three decisions left deliberately open:** publication, for this repo and for
+   `turnstile`; and the freshness gate for `tools/turnstile/`, which fell behind within a
+   day of the risk being written down and will do it again.
+7. **`<darkroom>/course-outline.md` is Draft 2**, loose at the darkroom top level, in the
+   folder actually opened. Recommended for deletion; his file.
+8. **`README.md:153` in bugarach** still abbreviates the export folder.
+
+### Noticed, not touched
+
+`origin/case-computed-instead-of-asking` is **fully merged and stale** — `master` carries
+`ffc661c`'s content, verified by grepping the corrected figures, and the branch now only
+*removes* things relative to `master`. Deletable, and left alone because deleting someone
+else's branch is not a chore.
+
+Three of the four `DONE` blocks on `docs/SESSIONS.md` still carry the unfilled
+`<files or folders you will change>` template text in **Writes** and **Notes**. Harmless
+today; a board whose blocks are template placeholders is not a record of anything, which is
+that file's own argument.
+
+**This section was appended by hand, which is still the defect** `5da72f8` diagnosed.
+
+---
+
 ## Boundary
 
 **The murderboard repo is for murderboard development only.** Course material, session plans,
