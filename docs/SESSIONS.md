@@ -120,8 +120,17 @@ find out about each other. That is what a board is for, and it is why C3 in
 - **Status:** DONE 2026-08-28
 - **Opened:** 2026-08-28
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `points.md`, `OPEN-FINDINGS.md`, `HANDOFF.md`, `docs/cases/` — **all committed
+  and pushed already**; this block is retrospective, opened after the fact.
+- **Notes:** **`HANDOFF.md` moved under session `8a3a77d5`, which claims it.** That claim
+  landed at 14:44:03 and this session committed `HANDOFF.md` at 14:44:34 — the edits were
+  written before the claim existed and committed after it. Nothing was lost and no section
+  overlaps: this session corrected the *case-branch* statements the merge falsified (the
+  "waiting to merge" table, the unresolvable path in the board-tooling section, and the
+  five-cases count). `8a3a77d5`'s stated subject is discrepancy 1 against node 1b,
+  `mutation_check.sh` and `session_identity.sh`. **Re-read `HANDOFF.md` before editing it —
+  it is 60 lines longer than when you claimed it.** A claim is a message, not a lock, and
+  this is the message going the other way.
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -132,8 +141,17 @@ find out about each other. That is what a board is for, and it is why C3 in
 - **Status:** DONE 2026-08-28
 - **Opened:** 2026-08-28
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `points.md`, `OPEN-FINDINGS.md`, `HANDOFF.md`, `docs/cases/` — **all committed
+  and pushed already**; this block is retrospective, opened after the fact.
+- **Notes:** **`HANDOFF.md` moved under session `8a3a77d5`, which claims it.** That claim
+  landed at 14:44:03 and this session committed `HANDOFF.md` at 14:44:34 — the edits were
+  written before the claim existed and committed after it. Nothing was lost and no section
+  overlaps: this session corrected the *case-branch* statements the merge falsified (the
+  "waiting to merge" table, the unresolvable path in the board-tooling section, and the
+  five-cases count). `8a3a77d5`'s stated subject is discrepancy 1 against node 1b,
+  `mutation_check.sh` and `session_identity.sh`. **Re-read `HANDOFF.md` before editing it —
+  it is 60 lines longer than when you claimed it.** A claim is a message, not a lock, and
+  this is the message going the other way.
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -144,8 +162,17 @@ find out about each other. That is what a board is for, and it is why C3 in
 - **Status:** DONE 2026-08-28
 - **Opened:** 2026-08-28
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `points.md`, `OPEN-FINDINGS.md`, `HANDOFF.md`, `docs/cases/` — **all committed
+  and pushed already**; this block is retrospective, opened after the fact.
+- **Notes:** **`HANDOFF.md` moved under session `8a3a77d5`, which claims it.** That claim
+  landed at 14:44:03 and this session committed `HANDOFF.md` at 14:44:34 — the edits were
+  written before the claim existed and committed after it. Nothing was lost and no section
+  overlaps: this session corrected the *case-branch* statements the merge falsified (the
+  "waiting to merge" table, the unresolvable path in the board-tooling section, and the
+  five-cases count). `8a3a77d5`'s stated subject is discrepancy 1 against node 1b,
+  `mutation_check.sh` and `session_identity.sh`. **Re-read `HANDOFF.md` before editing it —
+  it is 60 lines longer than when you claimed it.** A claim is a message, not a lock, and
+  this is the message going the other way.
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -161,6 +188,27 @@ find out about each other. That is what a board is for, and it is why C3 in
 - **Notes:** Another session merged the case branches into `master` while this one was reading,
   and this checkout was switched to `master` underneath it mid-task. No work was lost because
   nothing had been written yet. Do not edit these three files until this block says DONE.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
+
+### Tonys-MacBook-Pro/a52b2bae — merge the case branches into master; correct HANDOFF.md statements the merge falsified
+- **Status:** DONE 2026-08-28
+- **Opened:** 2026-08-28
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** `points.md`, `OPEN-FINDINGS.md`, `HANDOFF.md`, `docs/cases/` — **all committed
+  and pushed already**; this block is retrospective, opened after the fact.
+- **Notes:** **`HANDOFF.md` moved under session `8a3a77d5`, which claims it.** That claim
+  landed at 14:44:03 and this session committed `HANDOFF.md` at 14:44:34 — the edits were
+  written before the claim existed and committed after it. Nothing was lost and no section
+  overlaps: this session corrected the *case-branch* statements the merge falsified (the
+  "waiting to merge" table, the unresolvable path in the board-tooling section, and the
+  five-cases count). `8a3a77d5`'s stated subject is discrepancy 1 against node 1b,
+  `mutation_check.sh` and `session_identity.sh`. **Re-read `HANDOFF.md` before editing it —
+  it is 60 lines longer than when you claimed it.** A claim is a message, not a lock, and
+  this is the message going the other way.
 
 <!-- RELEASE THIS
      tools/claim.sh --release
