@@ -7,7 +7,7 @@ was made.
 | File | What it is | Live at |
 |---|---|---|
 | [`search-to-shipped.html`](search-to-shipped.html) | One-page runbook, zero to a deployed web app, plus a second sheet on decision records | [artifact](https://claude.ai/code/artifact/38ccc999-1621-4a11-9936-e0a885d7a5ac) (private) |
-| [`four-barriers.html`](four-barriers.html) | The walkthrough site. Four barriers, each with its worked incidents, plus step 0 and the record of how the material was made. Reading-depth control: brief / full / sources | [artifact](https://claude.ai/code/artifact/e72e2b76-5cff-4e46-a26f-985fa5c3d47e) (private) |
+| [`four-barriers.html`](four-barriers.html) | The walkthrough site. Four challenges, each with its worked incidents, plus step 0 and the record of how the material was made. Reading-depth control: brief / full / sources | [artifact](https://claude.ai/code/artifact/e72e2b76-5cff-4e46-a26f-985fa5c3d47e) (private) |
 
 **These are artifact sources, not standalone pages.** Publishing wraps the file in
 `<!doctype html><head>…</head><body>`, so the committed file deliberately has no doctype
