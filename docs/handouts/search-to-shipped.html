@@ -372,13 +372,22 @@
       <li>
         <span class="n">3</span>
         <div class="body">
+          <p class="do">Stop the machine sleeping through your own work.</p>
+          <p class="why">An agent session or an analysis run that outlasts your attention dies when the display sleeps or the lid closes — and it dies without a result, hours in. On a Mac, <a href="https://apps.apple.com/us/app/amphetamine/id937984704?mt=12">Amphetamine</a> is free on the App Store and handles triggers and a closed lid; <code>caffeinate -dimsu</code> is already installed and needs nothing. Windows has PowerToys Awake, Linux <code>systemd-inhibit</code>.</p>
+          <p class="why"><b>This is phase 0's cheap alternative and it belongs before the request.</b> Phase 0 says ask for a cluster when a run would pin a workstation for hours. Plenty of those people do not need a cluster — they need the lid to stop killing the job. One costs a minute; the other takes weeks and someone else's approval.</p>
+          <p class="done">A run <b>survives the screen going dark and the lid closing</b>. Test it on something short before you trust it with something long.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">4</span>
+        <div class="body">
           <p class="do">Get a coding-agent plan and install the extension.</p>
           <p class="why">Check what your institution already provides before paying — many give staff API access against a billing code, and some give students a free chat tool that is <em>not</em> an agent. The difference is the whole point.</p>
           <p class="done">The agent opens <b>inside VS Code</b> and answers a question about a file in your folder.</p>
         </div>
       </li>
       <li>
-        <span class="n">4</span>
+        <span class="n">5</span>
         <div class="body">
           <p class="do">Create the repository and add the remote in the same sitting.</p>
 <pre>mkdir myproject &amp;&amp; cd myproject &amp;&amp; git init
@@ -390,7 +399,7 @@ git push -u origin main</pre>
         </div>
       </li>
       <li>
-        <span class="n">5</span>
+        <span class="n">6</span>
         <div class="body">
           <p class="do">Write a deny list before the first real task.</p>
           <p class="why">A scratch folder is not a wall — the agent can leave it with an absolute path while doing exactly what you asked. A deny list is different in kind: the tool refuses the command instead of asking the model nicely. Start with <code>rm -rf</code>, <code>sudo</code>, <code>git push --force</code>, <code>git reset --hard</code>. See <a href="https://code.claude.com/docs/en/settings">settings</a>.</p>
@@ -398,7 +407,7 @@ git push -u origin main</pre>
         </div>
       </li>
       <li>
-        <span class="n">6</span>
+        <span class="n">7</span>
         <div class="body">
           <p class="do">Copy the data you need into the project. Never point the agent at the original.</p>
           <p class="why">Containment by absence beats containment by permission. Every wall has to be right about every route out; an original that was never in the room cannot be damaged by any of them.</p>
@@ -436,7 +445,7 @@ git push -u origin main</pre>
     </div>
     <ol class="steps">
       <li>
-        <span class="n">7</span>
+        <span class="n">8</span>
         <div class="body">
           <p class="do">Say the whole thing in one sentence.</p>
           <p class="why">“A web page that shows my recordings one at a time and lets me mark the bad ones.” If you cannot say it in a sentence, you are not ready to ask for it.</p>
@@ -444,7 +453,7 @@ git push -u origin main</pre>
         </div>
       </li>
       <li>
-        <span class="n">8</span>
+        <span class="n">9</span>
         <div class="body">
           <p class="do">Break it into parts. Break each part into elements.</p>
           <p class="why">This decomposition is the actual skill. Not prompt wording — there is no secret phrasing, and sculpting one is a stage people pass through and leave behind.</p>
@@ -452,7 +461,7 @@ git push -u origin main</pre>
         </div>
       </li>
       <li>
-        <span class="n">9</span>
+        <span class="n">10</span>
         <div class="body">
           <p class="do">Do one element. Never two.</p>
           <p class="why">The temptation is to start a second thing while it works. Resist it until you have done this twenty times. You need the focus for spec, structure, and spotting the failure.</p>
@@ -460,7 +469,7 @@ git push -u origin main</pre>
         </div>
       </li>
       <li>
-        <span class="n">10</span>
+        <span class="n">11</span>
         <div class="body">
           <p class="do">Check it four ways. None of them needs you to read code.</p>
           <p class="why">Read the diff for <em>scope</em>, not correctness — what did it touch that you did not ask about? Run it and look. List the files that now exist. Open the artifact yourself.</p>
@@ -468,7 +477,7 @@ git push -u origin main</pre>
         </div>
       </li>
       <li>
-        <span class="n">11</span>
+        <span class="n">12</span>
         <div class="body">
           <p class="do">Commit, then push.</p>
 <pre>git add -A
@@ -479,7 +488,7 @@ git push</pre>
         </div>
       </li>
       <li>
-        <span class="n">12</span>
+        <span class="n">13</span>
         <div class="body">
           <p class="do">Re-spec, and expect to.</p>
           <p class="why">Seeing it built is what tells you what you actually wanted. Revising the spec is the normal case, not a failure — it is the loop working.</p>
@@ -497,7 +506,7 @@ git push</pre>
     </div>
     <ol class="steps">
       <li>
-        <span class="n">13</span>
+        <span class="n">14</span>
         <div class="body">
           <p class="do">Every time you choose between two real options, record the decision before you forget the reasoning.</p>
           <p class="why">One small file per choice, in the repo, numbered and dated. This is the single highest-value habit on the page and it is the one everybody skips, because at the moment you make a decision the reasoning feels unforgettable. It is not. In six weeks you will find a strange-looking choice in your own project and have no idea whether it was careful or careless.</p>
@@ -515,7 +524,7 @@ Revisit if:       recordings drop below ~20, or exports stop.</pre>
         </div>
       </li>
       <li>
-        <span class="n">14</span>
+        <span class="n">15</span>
         <div class="body">
           <p class="do">Never edit one. When a decision reverses, write a new record saying it supersedes the old.</p>
           <p class="why">The old record stays, wrong, on purpose. A series you can quietly rewrite is not a record of anything — you would only ever see the decisions that happened to survive, which tells you nothing about whether any of them could have failed.</p>
@@ -533,7 +542,7 @@ Revisit if:       recordings drop below ~20, or exports stop.</pre>
     </div>
     <ol class="steps">
       <li>
-        <span class="n">15</span>
+        <span class="n">16</span>
         <div class="body">
           <p class="do">Put it on the internet.</p>
           <p class="why">A static site — one built from your files with no server of its own — is enough for most research tools and is free to host. <a href="https://pages.github.com/">GitHub Pages</a> is the shortest path from a repo you already have. <a href="https://www.cloudflare.com/products/pages/">Cloudflare Pages</a> and <a href="https://vercel.com/">Vercel</a> add a custom domain easily. Ask the agent to set up <a href="https://vite.dev/">Vite</a> if you need a build step.</p>
@@ -541,7 +550,7 @@ Revisit if:       recordings drop below ~20, or exports stop.</pre>
         </div>
       </li>
       <li>
-        <span class="n">16</span>
+        <span class="n">17</span>
         <div class="body">
           <p class="do">Send it to one person who was not involved.</p>
           <p class="why">You cannot see your own assumptions. They will hit the broken thing in ninety seconds.</p>

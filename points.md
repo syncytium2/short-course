@@ -334,42 +334,54 @@ Days to weeks, because someone else has to approve. Everything below proceeds wh
 6. Package manager, then `git`, `gh`, `node`, `ripgrep`, `jq`.
 7. **VS Code and the agent extension** (D3).
 8. Language runtimes — only the ones you need. Most people need one.
+9. **Stop the machine sleeping through your own work.** An agent session or an analysis run
+   that outlasts your attention dies when the display sleeps or the lid closes, and it dies
+   without a result. On a Mac, [Amphetamine](https://apps.apple.com/us/app/amphetamine/id937984704?mt=12)
+   — free, App Store, triggers and closed-lid operation; `caffeinate -dimsu` is built in and
+   needs no install. Windows has PowerToys Awake; Linux, `systemd-inhibit`.
+
+   *This is Phase 0's cheap alternative, and it belongs before the request, not after.* Phase 0
+   says ask for a cluster when a run would pin a workstation for hours. A good share of those
+   people do not need a cluster — they need the machine to stay awake. `interface2` names both
+   failure modes for its own ~8 h unattended re-detection: *"keep the workstation awake for
+   8 h"* and *"IT force-reboots for a patch."* One of those costs a minute to fix. Try it
+   before filing a requisition that takes weeks.
 
 **Phase 3 — storage decisions, before the first data file.**
 
-9. Create the data root and the figure-review folder; mount research storage if Phase 0 applies.
-10. **Write the path helper before any script hardcodes a path.** This is cheap now and
+10. Create the data root and the figure-review folder; mount research storage if Phase 0 applies.
+11. **Write the path helper before any script hardcodes a path.** This is cheap now and
     archaeology later — `interface2` carries a stale path island it describes in its own words as
     rooted somewhere nothing else uses, flagged for cleanup and not fixed.
-11. **Write the tier rule down.** Three sentences. It prevents both failures: multi-GB outputs
+12. **Write the tier rule down.** Three sentences. It prevents both failures: multi-GB outputs
     strangling a sync client, and small shareable results stranded where the other machine cannot
     see them.
 
 **Phase 4 — the first repo.**
 
-12. `git init` **and add the remote in the same sitting** (D1 again — see C3 for the cost of not).
-13. `.gitignore` excluding data by extension. `.gitattributes` pinning `eol=lf` on shell and
+13. `git init` **and add the remote in the same sitting** (D1 again — see C3 for the cost of not).
+14. `.gitignore` excluding data by extension. `.gitattributes` pinning `eol=lf` on shell and
     batch scripts — a CR in a shebang is a `bad interpreter` failure on a Linux cluster, and it
     is a genuinely awful thing to debug from a Windows checkout.
-14. The project instructions file, and the agent's permission settings: allow, ask, deny.
-15. **A commit-message hook stamping agent authorship.** Cheap now, impossible retroactively —
+15. The project instructions file, and the agent's permission settings: allow, ask, deny.
+16. **A commit-message hook stamping agent authorship.** Cheap now, impossible retroactively —
     `interface2` has to say "assume agent authorship unless a commit says otherwise" for
     everything before the day it added one.
 
 **Phase 5 — the guard layer, built *only* from friction.**
 
-16. Nothing here is set up in advance, and that is the point (B7). Every guard worth having
+17. Nothing here is set up in advance, and that is the point (B7). Every guard worth having
     exists because something specific went wrong first. Building them up front is §4's asymptote
     with extra steps — and the evidence is in the same repo: a session-start briefing grew until
     it killed sessions outright, and the fix was architectural, not tuning.
 
 **Phase 6 — second machine, then HPC.**
 
-17. **The second machine is where D5 stops being a question.** It is also where C3 turns from
+18. **The second machine is where D5 stops being a question.** It is also where C3 turns from
     theory into an operational requirement: three machines share a repo through a remote or they
     do not share it at all.
-18. HPC, once the allocation lands. Portal before SSH; VPN before the browser.
-19. Publishing, if any — and note that a login flow like `wrangler login` is once per machine and
+19. HPC, once the allocation lands. Portal before SSH; VPN before the browser.
+20. Publishing, if any — and note that a login flow like `wrangler login` is once per machine and
     cannot be scripted.
 
 *What is not required.* MATLAB only if you inherit MATLAB code. Research storage and HPC only at
