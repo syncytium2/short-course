@@ -418,7 +418,10 @@ because a role charter is theirs to change.
 
 ## The board tooling failed its own case, 2026-08-28
 
-`docs/cases/2026-08-28-the-tests-were-defending-the-bug.md` landed at 07:16. **It was
+`2026-08-28-the-tests-were-defending-the-bug.md` landed at 07:16 — **on branch
+`case-tests-defending-the-bug`, not on `master`**, so the path above does not resolve here
+yet. That is stated rather than linked, because a pointer on `master` naming a file only a
+branch has is the defect `interface2`'s review queue already carries thirteen of. **It**
 applied to this repo's own tooling within the hour, and two of the three tools built the
 night before failed it.**
 
@@ -460,6 +463,34 @@ notice), and `ERROR`.
 a correction — a homemade gate is not more trustworthy for being homemade, it is less
 reviewed. This repo supplied a second, independent instance of that within an hour of
 reading it, without meaning to. Two instances, two sessions, two repos, one day.
+
+---
+
+## Case branches waiting to merge — 2026-08-28
+
+Cases are arriving faster than they land. Both of these are pushed and neither is on
+`master`:
+
+| branch | case | landed |
+|---|---|---|
+| `case-tests-defending-the-bug` | the safety tool that shipped with the flaw it was built to catch, **and** the agent proposing a `CLAUDE.md` rule hours after documenting that `CLAUDE.md` does not work | 07:16, 09:04 |
+| `case-every-number-was-right` | every number right, every gate green, the page wrong | 23:11 |
+
+**Until they merge, nothing on `master` may link to them** — a pointer naming a file only a
+branch has is a broken pointer, and this handoff already made that mistake once today
+(corrected above).
+
+**The constraint has flipped and it is worth noticing before the redesign starts.** For a
+week the problem was finding real specimens. It no longer is: the estate produced five in
+about eighteen hours, all verified, all with primary sources. **Supply is solved. Placement
+is not** — two of five are already parked as too expensive to explain, and nothing yet
+decides how many a 90-minute session can carry or which barrier each one serves.
+
+That is §4's asymptote wearing its most attractive costume. Collecting incidents is
+legitimate, productive, and absorbing, and a beautifully curated case library will not
+teach anyone anything until it is placed in a session. The next question for this material
+is not *what else went wrong* — it is **which three of these does a beginner actually
+need**, and what happens to the rest.
 
 ---
 
