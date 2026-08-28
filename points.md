@@ -236,6 +236,56 @@ pressing problems. The barriers are:
   each has one job and a stated wrong-channel case, so an item cannot be filed *somewhere*
   and be nowhere.
 
+  ---
+
+  *Three more rules, each bought by a cure that failed. 2026-08-27/28, from elsewhere in the
+  estate.*
+
+  **7 · A cure's failure mode is a design choice, and loud-and-cheap beats strong.** From
+  `turnstile` — the tool extracted from this repo on 2026-08-28 to answer whether session hooks
+  are too complicated for a beginner to use safely. Its decision tree's load-bearing rung is
+  the third, not the fourth: *"a test and a hook enforce the same rule, a broken test costs a
+  red line and a broken hook costs the session, so prefer the mechanism whose failure is loud
+  and cheap."* **When two mechanisms enforce the same rule, choose by what happens when the
+  mechanism itself breaks, not by how strong it is when it works.** This is the counterweight
+  to B4 — B4 says prose is not enforcement, and this says the answer is not therefore *the
+  heaviest available gate.*
+
+  *And the measurement behind it is the part a beginner can be shown.* Across one estate,
+  `SessionStart` hooks ran 39, 34, 27, 17, 11, 9 and 7 KB. One grew until sessions stopped
+  opening against a **60-second ceiling the editor hardcodes** — and raising the hook's own
+  timeout changed nothing, because the hook was never what enforced it. The off switch lives at
+  `~/.turnstile-off`, in `HOME` and not in the repo, *"because a switch inside the repo is
+  unreachable when the broken thing is what opens the repo."*
+
+  **8 · A cure can fail by accusing the compliant.** `bugarach`, `61dcd08`, 2026-08-27. A
+  commit gate read a session's identifier by dropping everything up to the last slash on a
+  heading line — correct for hosts, which contain slashes, and wrong for task text, which also
+  does. **Seven of the 199 blocks on the live board parsed as the wrong worktree**, and not one
+  was a typo: `wip-modularity-port` read as `Louvain`, `forks-next` as `forks.md`. Every one
+  was a session that had claimed *exactly as instructed*, and every one would have been refused
+  at its first commit — with a paragraph explaining that it should have claimed before
+  starting. **The failure mode was not a missed check. It was a false accusation**, and a cure
+  that refuses correct behaviour is routed around within a week, which returns you to no cure
+  at all with the extra cost of having built one. Rule 3 — *resolving must be as cheap as
+  filing* — has a sibling: **being right must be as cheap as being wrong.**
+
+  **9 · A gate should answer, not only refuse** — carried in full by
+  [`docs/cases/2026-08-27-nothing-declared-which-folder.md`](docs/cases/2026-08-27-nothing-declared-which-folder.md),
+  Point 4. A session that is *lost* rather than defiant is left lost by a gate that says only
+  no, and it goes and churns somewhere else.
+
+  *And the selftest is the weakest component in every cure here.* The gate in rule 8 had one:
+  ten cases, two of them adversarial, every one driving the same parser — **and not one fixture
+  heading had a slash anywhere except in the host.** It passed. It had always passed. It proved
+  the parser correct on the only inputs it was ever shown, which were the inputs its author
+  could imagine, which is the same set as the ones he got right. That is *a check that cannot
+  fail*, arrived at honestly, and it is the same defect as
+  [`docs/cases/2026-08-28-the-tests-were-defending-the-bug.md`](docs/cases/2026-08-28-the-tests-were-defending-the-bug.md)
+  and as the positioning section in `OPEN-FINDINGS.md` **B5**. **Three instances now, in three
+  unrelated artifacts, which makes it a pattern rather than an anecdote and probably a point of
+  its own rather than a footnote to B7.**
+
 - **B8.** DO NOT DO MORE THAN ONE THING AT A TIME IN THE BEGINNING.
 
   *Note.* The temptation is to fill the time between replies with another project. Some people are
