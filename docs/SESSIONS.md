@@ -151,3 +151,18 @@ find out about each other. That is what a board is for, and it is why C3 in
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Tonys-MacBook-Pro/8a3a77d5 — mark reconstruction-vs-log discrepancy 1 against node 1b; give mutation_check a baseline-green assertion; fix session_identity's branch assertion
+- **Status:** ACTIVE
+- **Opened:** 2026-08-28
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** `docs/reviews/reconstruction-vs-log_2026-08-26.md`, `tools/mutation_check.sh`,
+  `tools/session_identity.sh`, `HANDOFF.md`
+- **Notes:** Another session merged the case branches into `master` while this one was reading,
+  and this checkout was switched to `master` underneath it mid-task. No work was lost because
+  nothing had been written yet. Do not edit these three files until this block says DONE.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
