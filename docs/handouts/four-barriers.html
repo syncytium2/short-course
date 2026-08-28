@@ -1,0 +1,1001 @@
+<title>Four Barriers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+
+<style>
+  /* ---------------------------------------------------------------
+     Palette inherited from search-to-shipped.html so the runbook and
+     this page read as one system. Light is the base; dark redefines
+     tokens only.
+     --------------------------------------------------------------- */
+  :root {
+    --ground:  #FAFBFC;
+    --surface: #FFFFFF;
+    --sunk:    #F2F5F8;
+    --ink:     #171C23;
+    --muted:   #5C6875;
+    --faint:   #8B96A3;
+    --rule:    #E1E6EB;
+    --rule-firm:#C9D2DB;
+    --accent:  #15577D;
+    --accent-soft: #E7F0F6;
+    --caution: #8A5D0F;
+    --caution-soft: #FAF2E2;
+    --shadow: 0 1px 2px rgba(23,28,35,.05), 0 8px 24px -16px rgba(23,28,35,.28);
+
+    --sans: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:  #0D1218;
+      --surface: #141A22;
+      --sunk:    #1A222B;
+      --ink:     #E3E8EE;
+      --muted:   #93A0AE;
+      --faint:   #6D7987;
+      --rule:    #232C36;
+      --rule-firm:#313D4A;
+      --accent:  #69B0DD;
+      --accent-soft: #16283A;
+      --caution: #D2A64E;
+      --caution-soft: #2A2213;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.7);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground:  #0D1218;
+    --surface: #141A22;
+    --sunk:    #1A222B;
+    --ink:     #E3E8EE;
+    --muted:   #93A0AE;
+    --faint:   #6D7987;
+    --rule:    #232C36;
+    --rule-firm:#313D4A;
+    --accent:  #69B0DD;
+    --accent-soft: #16283A;
+    --caution: #D2A64E;
+    --caution-soft: #2A2213;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.7);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 15.5px;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+
+  /* ---------------- shell ---------------- */
+
+  .shell { max-width: 1180px; margin: 0 auto; padding: 0 24px 120px; }
+
+  .mast {
+    border-bottom: 2px solid var(--ink);
+    padding: 34px 0 18px;
+    display: flex; flex-wrap: wrap; gap: 20px;
+    align-items: flex-end; justify-content: space-between;
+  }
+  .mast-id { max-width: 62ch; }
+  .eyebrow {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .13em;
+    text-transform: uppercase; color: var(--muted); margin: 0 0 8px;
+  }
+  h1 {
+    font-size: clamp(24px, 3.4vw, 31px); font-weight: 600; letter-spacing: -.02em;
+    margin: 0; text-wrap: balance;
+  }
+  .standfirst { color: var(--muted); margin: 8px 0 0; max-width: 60ch; }
+
+  /* ---------------- depth control ---------------- */
+
+  .depth { display: flex; flex-direction: column; gap: 6px; }
+  .depth-label {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--faint);
+  }
+  .seg { display: flex; border: 1px solid var(--rule-firm); border-radius: 6px; overflow: hidden; }
+  .seg button {
+    font-family: var(--mono); font-size: 11.5px; letter-spacing: .05em;
+    padding: 7px 13px; border: 0; border-right: 1px solid var(--rule-firm);
+    background: var(--surface); color: var(--muted); cursor: pointer;
+    transition: background .12s ease, color .12s ease;
+  }
+  .seg button:last-child { border-right: 0; }
+  .seg button:hover { background: var(--sunk); color: var(--ink); }
+  .seg button[aria-pressed="true"] { background: var(--accent); color: var(--ground); }
+
+  /* ---------------- layout ---------------- */
+
+  .cols { display: grid; grid-template-columns: 232px minmax(0,1fr); gap: 44px; margin-top: 30px; }
+
+  .rail { position: sticky; top: 20px; align-self: start; max-height: calc(100vh - 40px); overflow-y: auto; }
+  .rail-group { margin-bottom: 20px; }
+  .rail-head {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--faint); margin: 0 0 8px;
+  }
+  .rail a {
+    display: flex; gap: 10px; align-items: baseline;
+    padding: 6px 9px; border-radius: 5px; text-decoration: none;
+    color: var(--muted); font-size: 14px; line-height: 1.35;
+    border-left: 2px solid transparent;
+  }
+  .rail a:hover { background: var(--sunk); color: var(--ink); }
+  .rail a[aria-current="page"] {
+    background: var(--accent-soft); color: var(--ink); font-weight: 500;
+    border-left-color: var(--accent);
+  }
+  .rail .k { font-family: var(--mono); font-size: 11px; color: var(--faint); flex: none; width: 1.4em; }
+  .rail a[aria-current="page"] .k { color: var(--accent); }
+
+  .pane { min-width: 0; }
+  .view { display: none; }
+  .view.on { display: block; animation: rise .2s ease both; }
+  @keyframes rise { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .view.on { animation: none; }
+    * { transition: none !important; }
+  }
+
+  /* ---------------- typography inside a view ---------------- */
+
+  .view h2 {
+    font-size: clamp(21px, 2.6vw, 25px); font-weight: 600; letter-spacing: -.015em;
+    margin: 0; text-wrap: balance;
+  }
+  .view-head { border-bottom: 1px solid var(--rule); padding-bottom: 16px; margin-bottom: 26px; }
+  .view-head .eyebrow { margin-bottom: 6px; }
+  .lede { font-size: 17.5px; line-height: 1.5; margin: 12px 0 0; max-width: 60ch; text-wrap: pretty; }
+  .lede b { font-weight: 600; }
+
+  .view h3 {
+    font-size: 16px; font-weight: 600; margin: 34px 0 10px; letter-spacing: -.005em;
+  }
+  .view p { max-width: 68ch; margin: 0 0 14px; }
+  .view ul, .view ol { max-width: 68ch; margin: 0 0 16px; padding-left: 22px; }
+  .view li { margin-bottom: 7px; }
+  .view li::marker { color: var(--faint); }
+
+  code, .path {
+    font-family: var(--mono); font-size: .875em;
+    background: var(--sunk); padding: 1px 5px; border-radius: 3px;
+    border: 1px solid var(--rule);
+  }
+
+  .quote {
+    border-left: 2px solid var(--rule-firm); padding: 2px 0 2px 16px;
+    color: var(--muted); font-style: italic; margin: 0 0 16px; max-width: 62ch;
+  }
+
+  /* ---------------- component cards on the overview ---------------- */
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(258px, 1fr)); gap: 14px; margin: 0 0 12px; }
+  .card {
+    display: block; text-decoration: none; color: inherit;
+    background: var(--surface); border: 1px solid var(--rule); border-radius: 8px;
+    padding: 17px 18px 18px; box-shadow: var(--shadow);
+    transition: border-color .14s ease, transform .14s ease;
+  }
+  .card:hover { border-color: var(--accent); transform: translateY(-1px); }
+  .card .k {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 7px;
+  }
+  .card h4 { font-size: 16.5px; font-weight: 600; margin: 0 0 6px; letter-spacing: -.01em; }
+  .card p { font-size: 14px; color: var(--muted); margin: 0; max-width: none; }
+
+  /* ---------------- the escalation strip ---------------- */
+
+  .esc { border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; margin: 0 0 26px; background: var(--surface); }
+  .esc-row { display: grid; grid-template-columns: 108px 1fr; gap: 16px; padding: 12px 16px; border-bottom: 1px solid var(--rule); align-items: baseline; }
+  .esc-row:last-child { border-bottom: 0; }
+  .esc-row.now { background: var(--accent-soft); }
+  .esc-k { font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+  .esc-row.now .esc-k { color: var(--accent); }
+  .esc-v { margin: 0; font-size: 14.5px; max-width: none; }
+
+  /* ---------------- depth layers ---------------- */
+
+  details.more {
+    border-top: 1px solid var(--rule); margin: 0 0 4px; max-width: 74ch;
+  }
+  details.more > summary {
+    list-style: none; cursor: pointer; padding: 11px 0;
+    display: flex; align-items: baseline; gap: 10px;
+    font-size: 14.5px; color: var(--accent); font-weight: 500;
+  }
+  details.more > summary::-webkit-details-marker { display: none; }
+  details.more > summary::before {
+    content: "+"; font-family: var(--mono); font-size: 13px;
+    color: var(--faint); width: 1em; flex: none;
+  }
+  details.more[open] > summary::before { content: "\2212"; }
+  details.more > summary:hover { color: var(--ink); }
+  details.more > summary .cost {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .06em;
+    color: var(--faint); text-transform: uppercase; margin-left: auto; font-weight: 400;
+  }
+  details.more .inner { padding: 2px 0 18px 1.6em; }
+  details.more .inner > :last-child { margin-bottom: 0; }
+
+  /* ---------------- evidence ---------------- */
+
+  .spec {
+    background: var(--surface); border: 1px solid var(--rule); border-left: 3px solid var(--accent);
+    border-radius: 0 7px 7px 0; padding: 15px 17px; margin: 0 0 13px; max-width: 74ch;
+  }
+  .spec-top { display: flex; flex-wrap: wrap; gap: 10px; align-items: baseline; margin-bottom: 7px; }
+  .spec-top h4 { font-size: 15.5px; font-weight: 600; margin: 0; letter-spacing: -.005em; }
+  .tag {
+    font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase;
+    padding: 2px 7px; border-radius: 3px; background: var(--accent-soft); color: var(--accent);
+    white-space: nowrap;
+  }
+  .tag.warn { background: var(--caution-soft); color: var(--caution); }
+  .spec p { font-size: 14.5px; margin: 0 0 10px; max-width: none; }
+  .spec p:last-child { margin-bottom: 0; }
+
+  .caught {
+    font-family: var(--mono); font-size: 12px; color: var(--caution);
+    background: var(--caution-soft); border-radius: 4px; padding: 8px 11px;
+    margin: 10px 0 0; display: block; max-width: none;
+  }
+
+  /* ---------------- provenance (depth 3) ---------------- */
+
+  .prov {
+    display: none;
+    font-family: var(--mono); font-size: 11.5px; line-height: 1.65;
+    color: var(--faint); border-top: 1px dashed var(--rule);
+    padding-top: 9px; margin-top: 12px; max-width: none;
+    overflow-x: auto;
+  }
+  body[data-depth="all"] .prov { display: block; }
+  .prov b { color: var(--muted); font-weight: 500; }
+
+  /* ---------------- tables ---------------- */
+
+  .tw { overflow-x: auto; margin: 0 0 18px; max-width: 74ch; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; }
+  th, td { text-align: left; padding: 9px 13px 9px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--muted); font-weight: 500; border-bottom-color: var(--rule-firm);
+  }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+  /* ---------------- phases (the one real sequence) ---------------- */
+
+  .phase { border-left: 2px solid var(--rule-firm); padding: 0 0 4px 20px; margin: 0 0 22px; position: relative; }
+  .phase-k {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--accent); margin: 0 0 3px;
+  }
+  .phase h4 { font-size: 15.5px; font-weight: 600; margin: 0 0 8px; }
+  .phase ol { padding-left: 20px; margin-bottom: 0; }
+  .phase.opt { border-left-style: dashed; }
+
+  /* ---------------- footer ---------------- */
+
+  .foot {
+    margin-top: 52px; padding-top: 20px; border-top: 1px solid var(--rule);
+    font-size: 13px; color: var(--faint); max-width: 74ch;
+  }
+  .foot p { max-width: none; margin: 0 0 9px; font-size: 13px; }
+
+  /* ---------------- narrow ---------------- */
+
+  @media (max-width: 860px) {
+    .cols { grid-template-columns: 1fr; gap: 22px; }
+    .rail {
+      position: static; max-height: none; overflow-x: auto; overflow-y: visible;
+      border-bottom: 1px solid var(--rule); padding-bottom: 12px;
+    }
+    .rail-group { display: inline-block; vertical-align: top; margin-right: 26px; margin-bottom: 10px; }
+    .mast { padding-top: 24px; }
+  }
+</style>
+
+<div class="shell">
+
+  <header class="mast">
+    <div class="mast-id">
+      <p class="eyebrow">Working with coding agents &middot; for researchers</p>
+      <h1>Coding is no longer the barrier</h1>
+      <p class="standfirst">Four barriers remain. Each one below, with the incidents that produced it &mdash; every one real, dated, and checked against a source.</p>
+    </div>
+    <div class="depth">
+      <span class="depth-label" id="depth-label">Reading depth</span>
+      <div class="seg" role="group" aria-labelledby="depth-label">
+        <button type="button" data-depth="brief" aria-pressed="true">Brief</button>
+        <button type="button" data-depth="full" aria-pressed="false">Full</button>
+        <button type="button" data-depth="all" aria-pressed="false">Sources</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="cols">
+
+    <nav class="rail" aria-label="Components">
+      <div class="rail-group">
+        <p class="rail-head">Start</p>
+        <a href="#overview" data-view="overview"><span class="k">&mdash;</span><span>Overview</span></a>
+      </div>
+      <div class="rail-group">
+        <p class="rail-head">The four barriers</p>
+        <a href="#communication" data-view="communication"><span class="k">1</span><span>Communication</span></a>
+        <a href="#idiosyncrasies" data-view="idiosyncrasies"><span class="k">2</span><span>Idiosyncrasies</span></a>
+        <a href="#validation" data-view="validation"><span class="k">3</span><span>Validation</span></a>
+        <a href="#asymptote" data-view="asymptote"><span class="k">4</span><span>The forever asymptote</span></a>
+      </div>
+      <div class="rail-group">
+        <p class="rail-head">What to do about it</p>
+        <a href="#fixes" data-view="fixes"><span class="k">&rsaquo;</span><span>Fixes that hold</span></a>
+        <a href="#rule" data-view="rule"><span class="k">&rsaquo;</span><span>The standing rule</span></a>
+        <a href="#repo" data-view="repo"><span class="k">&rsaquo;</span><span>The repo</span></a>
+        <a href="#step0" data-view="step0"><span class="k">&rsaquo;</span><span>Step 0</span></a>
+      </div>
+      <div class="rail-group">
+        <p class="rail-head">Evidence</p>
+        <a href="#record" data-view="record"><span class="k">&rsaquo;</span><span>How this was made</span></a>
+        <a href="#method" data-view="method"><span class="k">&rsaquo;</span><span>About this page</span></a>
+      </div>
+    </nav>
+
+    <main class="pane">
+
+      <!-- ============ OVERVIEW ============ -->
+      <section class="view on" id="view-overview" aria-labelledby="h-overview">
+        <div class="view-head">
+          <p class="eyebrow">Overview</p>
+          <h2 id="h-overview">You don&rsquo;t need code. You don&rsquo;t need prompt engineering.</h2>
+          <p class="lede">There is no secret phrasing. The skill is decomposition: state the big picture, break it into parts, break each part into elements, review as you go.</p>
+        </div>
+
+        <h3>The escalation, which is the only leap that matters</h3>
+        <div class="esc">
+          <div class="esc-row"><span class="esc-k">Search</span><p class="esc-v">Returns links. You do the work.</p></div>
+          <div class="esc-row"><span class="esc-k">Chat</span><p class="esc-v">Returns text. You decide what to do with it.</p></div>
+          <div class="esc-row now"><span class="esc-k">Agent</span><p class="esc-v">Changes files on your disk. That is the leap, and it is the only one that matters.</p></div>
+        </div>
+
+        <h3>The four barriers</h3>
+        <div class="grid">
+          <a class="card" href="#communication" data-view="communication">
+            <span class="k">Barrier 1</span>
+            <h4>Communication</h4>
+            <p>It runs both ways. The agent&rsquo;s answer is your only evidence of how it read you &mdash; and it comes back in jargon.</p>
+          </a>
+          <a class="card" href="#idiosyncrasies" data-view="idiosyncrasies">
+            <span class="k">Barrier 2</span>
+            <h4>Idiosyncrasies</h4>
+            <p>Every setup has quirks. The agent inherits them without asking, and nothing crashes.</p>
+          </a>
+          <a class="card" href="#validation" data-view="validation">
+            <span class="k">Barrier 3</span>
+            <h4>Validation</h4>
+            <p>Everything can look right and be totally wrong. Five errors worth naming; four checks that need no code.</p>
+          </a>
+          <a class="card" href="#asymptote" data-view="asymptote">
+            <span class="k">Barrier 4</span>
+            <h4>The forever asymptote</h4>
+            <p>Two ways to never finish. Both pursuits are legitimate, which is what makes them hard to stop.</p>
+          </a>
+        </div>
+
+        <h3>How to read this</h3>
+        <p><b>Use the depth control, top right.</b> <b>Brief</b> is the headline of every section &mdash; about two minutes for the whole page. <b>Full</b> opens the worked incidents underneath each one. <b>Sources</b> adds the provenance line for every claim: where it came from, whether anyone checked it, and what is still unverified.</p>
+        <p>That control exists because these incidents have very different explanation costs. One is a paragraph of setup; another needs twenty minutes before it makes sense. In a fixed-length talk that forces you to drop the expensive ones. Here it just changes which depth you are reading at.</p>
+
+        <div class="prov"><b>Source.</b> Thesis, escalation and the four barriers: <span class="path">course-outline-external.md</span> (434 words, written to be circulated) and <span class="path">points.md</span> &sect;A. Escalation strip is carried over verbatim from the companion runbook, <span class="path">docs/handouts/search-to-shipped.html</span>.</div>
+      </section>
+
+      <!-- ============ COMMUNICATION ============ -->
+      <section class="view" id="view-communication" aria-labelledby="h-communication">
+        <div class="view-head">
+          <p class="eyebrow">Barrier 1</p>
+          <h2 id="h-communication">Communication</h2>
+          <p class="lede">You speak plainly, and the agent understands you. It answers in jargon &mdash; CI, CLI, dig, heredoc. <b>That answer is your only evidence of how it read you.</b></p>
+        </div>
+
+        <p>Ask for plain language and you get paragraphs. They take too long to read. You skip them. You assume the work is right because the explanation sounded right.</p>
+        <p>Unquestioned, the agent marches on, and the mistake outgrows the constraints meant to contain it.</p>
+        <p><b>You do not need computer science. You need to interrogate.</b></p>
+
+        <details class="more">
+          <summary>Why asking for plain language is not the fix <span class="cost">2 min</span></summary>
+          <div class="inner">
+            <p>The agent is an expert and it will explain anything in simple terms if you ask. The trap is what you get back: jargon-free detail, at length, that takes too long to digest &mdash; so you skip it, and you assume that is the right way because the agent expressed it fluently.</p>
+            <p>The failure is not that the explanation was bad. It is that fluency is not evidence, and a long correct-sounding paragraph is the most efficient way ever devised to stop someone checking.</p>
+            <p>What works instead is narrow and specific: ask it what it changed, not what it did. Ask which file. Ask what would be different if it had gone wrong. Those have short answers, and a short answer can be checked.</p>
+            <div class="prov"><b>Source.</b> <span class="path">points.md</span> C1, the author&rsquo;s own words, unelaborated. <b>Status:</b> first-hand account, not independently verified.</div>
+          </div>
+        </details>
+
+        <details class="more">
+          <summary>The learning curve is four stages, not a switch <span class="cost">2 min</span></summary>
+          <div class="inner">
+            <p>The progression that actually happened, over months:</p>
+            <ol>
+              <li>Sculpting prompts by hand, trying to cover all the bases.</li>
+              <li>Learning the model is good at prompting &mdash; so asking it to generate the prompt, then a lot of cut and paste.</li>
+              <li>Agent inside the editor: terminal access and the model in one window.</li>
+              <li>Enough experience and confidence to handle the orchestration directly.</li>
+            </ol>
+            <p>The working method now: express the big picture, then break it down. An app to teach calcium-signal deconvolution becomes a tab for convolution, which is far easier to explain, and then a tab for deconvolution. Break each tab into key elements, review progress iteratively, and play with the result by hand.</p>
+            <p class="quote">&ldquo;It takes time to learn how this can make you 100&times; faster.&rdquo; &mdash; and that multiple is unmeasured. Argue the shape of the curve, not the number, until somebody has one they can source.</p>
+            <div class="prov"><b>Source.</b> <span class="path">points.md</span> B1 and C4. <b>Unverified:</b> the 100&times; figure is explicitly carried as a label rather than taught as a fact. Nobody has measured it.</div>
+          </div>
+        </details>
+
+        <div class="prov"><b>Barrier source.</b> <span class="path">points.md</span> A1, elaborated at C1; headline text from <span class="path">course-outline-external.md</span> &sect;1.</div>
+      </section>
+
+      <!-- ============ IDIOSYNCRASIES ============ -->
+      <section class="view" id="view-idiosyncrasies" aria-labelledby="h-idio">
+        <div class="view-head">
+          <p class="eyebrow">Barrier 2</p>
+          <h2 id="h-idio">Idiosyncrasies</h2>
+          <p class="lede">Every setup has quirks. Where the data lives. Which machine. Which path. <b>The agent inherits them without asking, and nothing crashes.</b></p>
+        </div>
+
+        <p>Some quirks repeat: heredocs, files lost between one folder and another, a review file that is in <span class="path">~/docs</span> on one machine and somewhere under a sync folder on the next. <b>Repetition is the signal.</b> A thing that has gone wrong twice will go wrong a third time, and that is the one worth building against.</p>
+
+        <div class="spec">
+          <div class="spec-top">
+            <h4>The agent could not find the data, so it computed its own</h4>
+            <span class="tag">Two incidents</span>
+            <span class="tag">12 hours apart</span>
+          </div>
+          <p>Twice in one day, in the same project, an agent could not resolve where the real data lived &mdash; and instead of stopping to ask, it derived its own numbers and reported them in a table. The first time it reversed the finding.</p>
+          <p><b>The second one is the disturbing one.</b> A written contract saying which folder to use was correct, current, and sitting in the repository the whole time. It still happened, because nothing <i>declared</i> which folder was the live one in a form the agent could resolve.</p>
+          <p class="caught">Caught by: a human supplying the canonical path after the review had already closed.</p>
+        </div>
+
+        <details class="more">
+          <summary>Why this is structural and not carelessness <span class="cost">5 min</span></summary>
+          <div class="inner">
+            <p>Asking costs one message and feels like failure. Computing something is always available and always produces an answer. So when the thing an agent needs has no address it can resolve, it computes.</p>
+            <p><b>The failure tracked whether the source had a resolvable address &mdash; not how careful the agent was.</b> That is why two independent sessions, with no shared evidence between them, produced the same shape twelve hours apart. One instance invites &ldquo;that agent was careless.&rdquo; Two, one of them against a correct and present contract, rules it out.</p>
+            <p>The narrower and worse version of the defect, found later: the agent recomputed a quantity that was already sitting in a column of the file it had open, on 150,703 of 150,715 rows.</p>
+            <p><b>The repair was a function, not a better README.</b> Prose describing where data lives had already failed twice. What closed it was a canonical accessor &mdash; one call that returns the current path, so there is nothing left to infer.</p>
+            <div class="prov"><b>Source.</b> Case file <span class="path">docs/cases/2026-08-27-computed-instead-of-asking.md</span>, two incidents merged from two independent accounts. Eleven-role adversarial review covers <b>incident A only</b>; incident B is a self-report with artifacts. <b>Correction applied:</b> an earlier draft claimed all withdrawn numbers came from undesignated sources; two did not, and the case was narrowed accordingly.</div>
+          </div>
+        </details>
+
+        <details class="more">
+          <summary>The same shape, in the tool that was supposed to prevent it <span class="cost">5 min</span></summary>
+          <div class="inner">
+            <p>In one session elsewhere in the same estate, <b>six written-down rules were broken and no mechanized rule was.</b> A 700-line instruction file, read in full at startup, diagnosed the problem in its own text and could do nothing about itself.</p>
+            <p>The central artifact is a commit whose message asserts the opposite of its own diff, followed by the correction. And in the same session, an agent routed <i>around</i> a gate by using a different tool, producing exactly the corruption the gate existed to prevent.</p>
+            <p>This is the bridge from barrier 2 to <a href="#fixes" data-view="fixes">Fixes that hold</a>: an idiosyncrasy you have written a rule about is still an idiosyncrasy.</p>
+            <div class="prov"><b>Source.</b> Case file <span class="path">docs/cases/2026-08-28-six-prose-rules-zero-mechanized-rules.md</span>. <b>Not reviewed</b> &mdash; one session&rsquo;s self-report, filed for the commit pair, which is checkable.</div>
+          </div>
+        </details>
+
+        <div class="prov"><b>Barrier source.</b> <span class="path">points.md</span> A2 and B3; headline from <span class="path">course-outline-external.md</span> &sect;2.</div>
+      </section>
+
+      <!-- ============ VALIDATION ============ -->
+      <section class="view" id="view-validation" aria-labelledby="h-val">
+        <div class="view-head">
+          <p class="eyebrow">Barrier 3</p>
+          <h2 id="h-val">Validation</h2>
+          <p class="lede"><b>Everything can look right and be totally wrong.</b> This is the barrier the rest of the material was eventually reorganised around.</p>
+        </div>
+
+        <div class="spec">
+          <div class="spec-top">
+            <h4>Printed figures. Wrong dataset. Noticed at the door.</h4>
+            <span class="tag warn">First-hand</span>
+          </div>
+          <p>The project has three levels of data: two on institutional research storage, and a couple of variant extractions small enough to live on disk. I asked for an analysis and assumed it would use the extraction we had been working on in another session. The pipeline is well established. Minutes later I had the figures I wanted &mdash; except it looked like there were too many data points.</p>
+          <p class="caught">Caught by: deadline, printed, walking into the meeting, in the door, looking at the figure. &ldquo;This doesn&rsquo;t look right, I need to re-run the analysis.&rdquo;</p>
+          <p style="margin-top:12px"><b>The cost.</b> Disappointment, frustration, embarrassment &mdash; and it made my use of AI look unprofessional, which is the question the room actually has.</p>
+          <p><b>Still unrecovered:</b> which dataset it actually used. The experience is vivid; the diagnostic detail is gone, because it was not written down the day it happened.</p>
+        </div>
+
+        <h3>Five errors worth naming</h3>
+        <div class="tw">
+          <table>
+            <thead><tr><th>Error</th><th>Does it announce itself?</th></tr></thead>
+            <tbody>
+              <tr><td>Wrong output</td><td>Yes</td></tr>
+              <tr><td>Right output, wrong place</td><td>Yes</td></tr>
+              <tr><td>Silently did nothing</td><td>Yes</td></tr>
+              <tr><td><b>Did more than asked</b></td><td><b>No</b></td></tr>
+              <tr><td><b>Reported success it never achieved</b></td><td><b>No &mdash; it produces a confirmation</b></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>The last two are the dangerous ones. The rest announce themselves.</p>
+
+        <h3>Four checks that need no code</h3>
+        <ul>
+          <li><b>Read the diff for scope, not correctness.</b> You are not checking whether the code is right. You are checking whether it touched things you did not ask it to touch.</li>
+          <li><b>Run it and look.</b></li>
+          <li><b>List the files that now exist.</b></li>
+          <li><b>Open the artifact yourself.</b></li>
+        </ul>
+        <p><b>Spec, validate, re-spec.</b> Re-spec is the normal case, not the failure case.</p>
+
+        <details class="more">
+          <summary>Error type five, committed by the tool whose job was to prevent it <span class="cost">5 min</span></summary>
+          <div class="inner">
+            <p>A small script closed a to-do item by rewriting <span class="path">status: open</span> to <span class="path">status: done</span>. It used <span class="path">sed -i</span>, which is GNU syntax. On macOS, <span class="path">-i</span> <i>requires</i> an argument &mdash; so the expression was consumed as a backup filename, the edit never happened, <b>and the script printed <span class="path">resolved</span> anyway.</b></p>
+            <p>The item stayed open on every machine while the tool reported it closed.</p>
+            <p>This is the best specimen in the whole collection, because it is error type five committed by the tool whose entire job was keeping work visible. The other four types announce themselves. This one issues a receipt.</p>
+            <p class="quote">The general rule it yields: <b>an action and its report are two different events.</b> Anything that reports success must re-read the world and confirm &mdash; otherwise it is only reporting that it reached the end of its own instructions.</p>
+            <div class="prov"><b>Source.</b> <span class="path">points.md</span> B2, third incident. Diagnosis survives intact because the fix was written as a comment beside the code the day it happened.</div>
+          </div>
+        </details>
+
+        <details class="more">
+          <summary>When the institutional source is the wrong one <span class="cost">3 min</span></summary>
+          <div class="inner">
+            <p>Drafting a resource list, the official university page was cited for the cluster account steps. That page says the cluster&rsquo;s multi-factor auth is Duo. A local note in another repo says the opposite &mdash; the university migrated to Okta, and anything still saying Duo is stale &mdash; and that note had been validated end-to-end against four live jobs a month earlier.</p>
+            <p class="caught">Caught by: nothing. Two sources happened to be read side by side and disagreed, which is the only reason anyone looked.</p>
+            <p style="margin-top:12px"><b>Why this specimen is different from every other one here.</b> All the others run one direction: a confident assertion, corrected by a source. Here <b>the institutional source was wrong and the local note was right.</b></p>
+            <p>So &ldquo;check it against a source&rdquo; is not the rule, because <b>the source is a claim too.</b> The discriminator is which claim has hands on it, and how recently.</p>
+            <p><b>The cost, had it held:</b> a link in front of a room sending people to enrol in the wrong authentication system &mdash; from the official page, in a session about verifying claims.</p>
+            <div class="prov"><b>Source.</b> <span class="path">points.md</span> B2, second incident, recorded the day it happened.</div>
+          </div>
+        </details>
+
+        <details class="more">
+          <summary>A sixth error type: the measurement was right and the cause was wrong <span class="cost">10 min</span></summary>
+          <div class="inner">
+            <p>A published benchmark would not reproduce. A session measured it properly: four thread counts, per-fold detection counts for each, mean F1 for each, laid out in a table. Ten threads reproduced exactly; one, two and four did not. Conclusion: the reference is thread-bound. The threads were pinned, the reproduction test was switched back on, and the commit said the reference runs everywhere again.</p>
+            <p class="caught">Caught by: continuous integration, on a machine nobody had used to form the belief, fourteen minutes later. Fold 0, 69 detections against 72.</p>
+            <p style="margin-top:12px">The reference was generated on one architecture; the test runners use another, and different CPU kernels reduce and fuse floating-point differently. <b>The reference was platform-bound. Threads were one variable inside that, not the cause.</b></p>
+            <p><b>Why this earns a slot the five error types do not fill.</b> All five are about a <i>claim</i>. This is none of them. The measurements were real, correctly performed and correctly reported. What was wrong was the <b>inference</b>: one variable was varied, it moved, and it was read as the whole cause. No check in the list above catches that, because the output <i>was</i> right.</p>
+            <p><b>And the second half is the part that scales.</b> The finding was written down with its evidence attached, and the next session inherited it and never re-asked what else was uncontrolled &mdash; in its own words, <i>&ldquo;I repeated that error by believing it.&rdquo;</i> <b>A wrong cause travels further than an unsupported claim, because it arrives with a table.</b></p>
+            <p>The check that caught it was not a better analysis. It was a second machine.</p>
+            <div class="prov"><b>Source.</b> <span class="path">points.md</span> B2 fourth incident; full arc in <span class="path">docs/cases/2026-08-28-the-skip-was-the-whole-story.md</span>. <b>Provenance flag:</b> the quoted sentence comes from a commit message written by the session that made the error, and no transcript exists. Flagged rather than laundered.</div>
+          </div>
+        </details>
+
+        <details class="more">
+          <summary>Every number right, every gate green, and the page was wrong <span class="cost">15 min</span></summary>
+          <div class="inner">
+            <p>63 of 63 numbers verified correct. Every automated gate green. A kernel reimplementation agreeing with the reference to 8&times;10<sup>-9</sup>. Then an eleven-role adversarial review returned <b>31 blocking findings, none of them arithmetic.</b></p>
+            <p><b>The anti-drift machinery worked perfectly and prevented nothing that mattered</b> &mdash; because it was all pointed at whether the numbers on the page were the numbers from the analysis, and the actual defect was that it was a page about the wrong thing.</p>
+            <p>The human found what the reviewers structurally could not. Eleven roles all check a document against the sources it names; none of them can ask whether the document should exist.</p>
+            <div class="prov"><b>Source.</b> Case file <span class="path">docs/cases/2026-08-27-every-number-was-right.md</span>. Written by the party being evaluated &mdash; the same weakness the reconstruction node in this repo carries a banner for. Two of its own unverified rows were later re-run; <b>one did not reproduce.</b></div>
+          </div>
+        </details>
+
+        <div class="prov"><b>Barrier source.</b> <span class="path">points.md</span> A3, B2, B6; headline and the two lists from <span class="path">course-outline-external.md</span> &sect;3.</div>
+      </section>
+
+      <!-- ============ ASYMPTOTE ============ -->
+      <section class="view" id="view-asymptote" aria-labelledby="h-asym">
+        <div class="view-head">
+          <p class="eyebrow">Barrier 4</p>
+          <h2 id="h-asym">The forever asymptote</h2>
+          <p class="lede">Two ways to never finish. <b>Both pursuits are legitimate. That is what makes them hard to stop.</b></p>
+        </div>
+
+        <h3>The guarding becomes the work</h3>
+        <p>Catching failures is a necessary end. It is also an absorbing one. A slick session-startup script will not analyze your data.</p>
+
+        <h3>The work itself is never perfect</h3>
+        <p>The web app can be better. The detection algorithm can be improved. The simulated data can be more realistic. The model might do better with another layer.</p>
+
+        <details class="more">
+          <summary>The most attractive costume this wears <span class="cost">3 min</span></summary>
+          <div class="inner">
+            <p>Collecting incidents is legitimate, productive and absorbing. A beautifully curated library of failure cases will not teach anyone anything until it is placed somewhere a person will read it.</p>
+            <p>This page is the fix for that in its own material: for about a week the hard problem was finding real specimens, and then it stopped being. Seven arrived in roughly two days, all verified, all with primary sources &mdash; and two of them were immediately parked as too expensive to explain in a fixed-length session.</p>
+            <p><b>Supply was solved. Placement was not.</b> That is the asymptote wearing the costume of productive work, and the reason the depth control at the top of this page exists at all.</p>
+            <div class="prov"><b>Source.</b> <span class="path">points.md</span> A4 and B7; the placement observation is from this project&rsquo;s own handoff ledger, 2026-08-28.</div>
+          </div>
+        </details>
+
+        <details class="more">
+          <summary>A guard that grew until it killed the thing it guarded <span class="cost">5 min</span></summary>
+          <div class="inner">
+            <p>Across one estate, startup hooks &mdash; scripts that run automatically when a session opens &mdash; had grown to 39, 34, 27, 17, 11, 9 and 7 kilobytes. One grew until sessions stopped opening at all, against a 60-second ceiling the editor hardcodes. Raising the hook&rsquo;s own timeout changed nothing, because the hook was never what enforced it.</p>
+            <p>The fix was architectural, not tuning. And the off switch for the whole mechanism lives in the home directory rather than in the repository &mdash; <i>because a switch inside the repo is unreachable when the broken thing is what opens the repo.</i></p>
+            <p><b>The rule this yields is the counterweight to everything in <a href="#fixes" data-view="fixes">Fixes that hold</a>:</b> a guard layer should be built only from friction that has actually happened. Building it up front is this barrier with extra steps.</p>
+            <div class="prov"><b>Source.</b> <span class="path">points.md</span> B7 rule 7, and &sect;D phase 5. Measured across one estate on 2026-08-28.</div>
+          </div>
+        </details>
+
+        <div class="prov"><b>Barrier source.</b> <span class="path">points.md</span> A4 and B8; headline from <span class="path">course-outline-external.md</span> &sect;4.</div>
+      </section>
+
+      <!-- ============ FIXES ============ -->
+      <section class="view" id="view-fixes" aria-labelledby="h-fixes">
+        <div class="view-head">
+          <p class="eyebrow">What to do about it</p>
+          <h2 id="h-fixes">Fixes that hold</h2>
+          <p class="lede">You find the mistake. You back up. You discover the better way. Then you tell the agent to remember it. <b>This is a trap.</b></p>
+        </div>
+
+        <p><b>A request is not a rule.</b> A project instructions file is not enforceable. Use all the bad words you want; the second sentence is still skipped.</p>
+        <p>Cures come in three kinds: <b>a tool, a change of habit, or a check you accept forever.</b> Not every fix is tool-shaped. Keep the cures in a repo.</p>
+
+        <h3>Four tiers of enforcement</h3>
+        <div class="tw">
+          <table>
+            <thead><tr><th>Tier</th><th>What it is</th><th>What it costs to ignore</th></tr></thead>
+            <tbody>
+              <tr><td><b>Prose</b></td><td>A rule written in an instructions file</td><td>Nothing. It is skipped silently.</td></tr>
+              <tr><td><b>Checklist</b></td><td>A step someone must remember</td><td>Nothing, when they are busy.</td></tr>
+              <tr><td><b>Test</b></td><td>Something that fails loudly</td><td>A red line. Cheap and visible.</td></tr>
+              <tr><td><b>Structure</b></td><td>The wrong thing is not reachable</td><td>It cannot be ignored.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>The mantra that beat every proposed fix in the incident that produced this table: <b>never change the data at source.</b> That is a structural answer, not a rule about behaviour.</p>
+
+        <details class="more">
+          <summary>A hold in a document is not ignored &mdash; it is outvoted <span class="cost">5 min</span></summary>
+          <div class="inner">
+            <p>A request was made to queue page changes rather than publish them one at a time. It was written down. It lost.</p>
+            <p><b>Because three separate machines in that project tell a session to publish, and none of them waits to be asked:</b> a copy-paste command in the staleness report, a daily workflow summary, and a line in every session briefing.</p>
+            <p>That is a sharper claim than &ldquo;the second sentence is skipped,&rdquo; and a much harder one to argue with, because <b>it does not require anyone to have been careless.</b> The session that gives in is <i>right</i> by every signal available to it.</p>
+            <p><b>The repair was to move the hold to where those three signals are computed</b> &mdash; so all three print the hold and its release condition instead of the publish command.</p>
+            <div class="prov"><b>Source.</b> <span class="path">points.md</span> B4, second instance, verified against the repository rather than taken from the report that raised it.</div>
+          </div>
+        </details>
+
+        <details class="more">
+          <summary>A declaration mistaken for wiring <span class="cost">10 min</span></summary>
+          <div class="inner">
+            <p>A 445-line documentation rewrite included one line in the project config declaring an optional dependency &mdash; added so the install instructions would be accurate, <b>not because anything was being wired to use it.</b></p>
+            <p>Three things then quietly depended on a human remembering to type an extra flag: nine structural tests, the test guarding the project&rsquo;s <i>published numbers</i>, and the documentation line saying the option existed at all. Nothing connected them. <b>For ten days the automated build never installed it, and the test guarding the published numbers skipped in silence.</b></p>
+            <p><b>Why this is the same error as expecting an instructions file to be enforced.</b> The config format <i>looks</i> like dependency management. It is a declaration: prose in a file that reads as executable, which nothing runs. The format implies a mechanism that does not exist, and the implication does all the work.</p>
+            <p><b>The part that was only found by looking.</b> The project already had an alarm for that library being absent &mdash; ungated, running in the build, with a docstring saying its absence is an <i>answer</i>. Thirty lines below it, the test guarding the published numbers skipped without a word. <b>The alarm was built for the capability and never for the coverage.</b></p>
+            <p><b>And the fix went further than the obvious one.</b> The obvious fix is &ldquo;make the build type the flag,&rdquo; which fixes today and asserts nothing about tomorrow. What actually landed asserts the <i>envelope</i>: that the workflow still contains the install, that the environment variable is still set, that the library can really run a computation rather than merely import, and that the guarded test files still exist at all &mdash; because if they were renamed, the guard would be guarding nothing.</p>
+            <p><b>The skip was not removed. It was made conditional.</b> Without the flag the tests still skip, which is correct on a laptop. With the flag, the same skip becomes a failure. The guard does not ask anyone to remember; it asks the environment what the answer should have been, and compares.</p>
+            <p class="caught">Ten days of that skip were also ten days of not knowing the benchmark only reproduced on one machine.</p>
+            <div class="prov"><b>Source.</b> <span class="path">points.md</span> B4, verified against the repository 2026-08-27. Full arc in <span class="path">docs/cases/2026-08-28-the-skip-was-the-whole-story.md</span>. <b>Note:</b> this entry previously carried a prediction that the fix would stop at the flag. It was wrong, in the useful direction, and both versions are kept on the record.</div>
+          </div>
+        </details>
+
+        <h3>Nine rules for a cure that survives a busy month</h3>
+        <p>Each of these was bought with a cure that failed.</p>
+        <ol>
+          <li><b>One file per item, because of concurrency, not tidiness.</b> The obvious design is one shared list everyone edits. That fails the moment two people edit it at once.</li>
+          <li><b>Version control is the transport.</b> An uncommitted note reaches nobody; an unpushed resolution leaves the item open everywhere else.</li>
+          <li><b>Resolving must be as cheap as filing.</b> Every dead list died the same way: open items accumulated until the list stopped being read.</li>
+          <li><b>Validate the envelope, not the contents.</b> Reject an item filed against a category that does not exist, because it would render nowhere and nobody would be told &mdash; but do not check whether the text is any good. A two-word note is a valid note.</li>
+          <li><b>Instructions travel with the item</b>, so nobody has to go and find the manual.</li>
+          <li><b>Done is never deleted, and you do not close what you did not verify yourself.</b></li>
+          <li><b>A cure&rsquo;s failure mode is a design choice, and loud-and-cheap beats strong.</b> A test and a gate can enforce the same rule. A broken test costs you a red line; a broken gate costs you the session. Prefer the mechanism whose failure is loud and cheap.</li>
+          <li><b>A cure can fail by accusing the compliant.</b> One gate misparsed seven of 199 entries on a live board. Not one was a typo &mdash; every one was somebody who had complied exactly as instructed, and every one would have been refused with a lecture. A cure that refuses correct behaviour is routed around within a week, which returns you to no cure at all, plus the cost of having built one. <b>Being right must be as cheap as being wrong.</b></li>
+          <li><b>A gate should answer, not only refuse.</b> Someone who is lost rather than defiant is left lost by a gate that says only no, and they go and churn somewhere else. Every refusal should print the command that would have been right.</li>
+        </ol>
+        <p><b>Rules 3 and 4 are the ones that decide whether a cure survives.</b> Everything else is craft. A cure that is expensive to close silts up; a cure that fails silently is worse than no cure, because it also supplies confidence.</p>
+
+        <details class="more">
+          <summary>The weakest component in every cure here is its own test <span class="cost">10 min</span></summary>
+          <div class="inner">
+            <p>The gate in rule 8 had a test suite: ten cases, two of them deliberately adversarial, every one driving the same parser. <b>Not one test input had a slash anywhere except in the place the parser expected it.</b> It passed. It had always passed. It proved the parser correct on the only inputs it was ever shown &mdash; which were the inputs its author could imagine, which is the same set as the ones he got right.</p>
+            <p>That is <b>a check that cannot fail</b>, arrived at honestly.</p>
+            <p><b>And it is not one incident.</b> A safety tool built specifically to catch checks that cannot fail shipped as one: two of its tests had been green since the day it was written and were describing a file-deleting bug as correct behaviour. Fixing the bug made the tests go <b>red</b> &mdash; and a careful maintainer, trusting the tests, would have restored the bug to make them green again.</p>
+            <p><b>Three instances now, in three unrelated artifacts.</b> That makes it a pattern rather than an anecdote.</p>
+            <p><b>The correction it forces.</b> &ldquo;Build your own tools&rdquo; needs a caveat: a homemade gate is not more trustworthy for being homemade. It is <i>less</i> reviewed. Your own tools inherit the same distrust as everything else.</p>
+            <p><b>The cure that lasts is mutation.</b> Break each tool on purpose and require its own test to notice. Anything that still passes was never testing what you thought.</p>
+            <div class="prov"><b>Source.</b> <span class="path">points.md</span> B7 rules 8 and 9; case file <span class="path">docs/cases/2026-08-28-the-tests-were-defending-the-bug.md</span>. Written by the party being evaluated. Rollout was paused before anything shipped. <b>Follow-on, 2026-08-28:</b> the mutation harness itself was then found to score catches without ever checking that a test was green to begin with &mdash; two of its eleven rows proved nothing. Same defect, one level up.</div>
+          </div>
+        </details>
+
+        <div class="prov"><b>Section source.</b> <span class="path">points.md</span> B4 and B7; <span class="path">course-outline-external.md</span> &ldquo;Fixes that hold&rdquo;. The four-tier table is from <span class="path">docs/cases/2026-08-28-the-weakest-fix-is-the-most-available.md</span>.</div>
+      </section>
+
+      <!-- ============ STANDING RULE ============ -->
+      <section class="view" id="view-rule" aria-labelledby="h-rule">
+        <div class="view-head">
+          <p class="eyebrow">What to do about it</p>
+          <h2 id="h-rule">The standing rule</h2>
+          <p class="lede"><b>Do one thing at a time.</b> One change. Verify. Commit. Next.</p>
+        </div>
+        <p>Do not fill the wait with a second project. Some people are good at that. In the beginning you need the focus &mdash; spec, data structure, problem, solution.</p>
+        <p>The temptation is real and it is specifically a beginner&rsquo;s trap, because the waiting is genuinely dead time and starting a second thread feels like efficiency. It is the fastest route to two half-finished pieces of work and no idea which change caused which result.</p>
+        <div class="prov"><b>Source.</b> <span class="path">points.md</span> B8, stated in the author&rsquo;s own words and in capitals.</div>
+      </section>
+
+      <!-- ============ REPO ============ -->
+      <section class="view" id="view-repo" aria-labelledby="h-repo">
+        <div class="view-head">
+          <p class="eyebrow">What to do about it</p>
+          <h2 id="h-repo">The repo</h2>
+          <p class="lede"><b>Not undo.</b> A record of what happened and why.</p>
+        </div>
+        <p>Three commands to start: <span class="path">commit</span>, <span class="path">diff</span>, <span class="path">log</span>.</p>
+        <p>The reason to keep one is not that you will roll back &mdash; you almost never will. It is that six weeks later you will need to know <i>why</i> something is the way it is, and the only artifact that can tell you is a message written by the person who knew at the time.</p>
+
+        <details class="more">
+          <summary>Which means the messages have to be worth reading <span class="cost">3 min</span></summary>
+          <div class="inner">
+            <p>The default message is change-shaped: <i>&ldquo;update analysis script.&rdquo;</i> The useful form is defect-shaped: it names what was wrong, not what was typed.</p>
+            <p>This project&rsquo;s own history is written that way as a deliberate experiment, so the log doubles as the friction log the material tells you to keep. Every commit is titled after the defect it fixed. A sample, verbatim:</p>
+            <p class="quote">&ldquo;A safety tool shipped with the flaw it was built to catch, and two green tests were defending it&rdquo;<br>&ldquo;The handoff said no remote existed on the day one was created, and still called it a live problem&rdquo;<br>&ldquo;Every number was right, every gate was green, and the page was wrong&rdquo;</p>
+            <p>The difference between the two forms is a stated convention and nothing else. Nothing enforces it, which by <a href="#fixes" data-view="fixes">Fixes that hold</a> means it is a habit rather than a mechanism &mdash; and it is labelled as one.</p>
+            <div class="prov"><b>Source.</b> <span class="path">points.md</span> B5; commit titles quoted from this project&rsquo;s own history.</div>
+          </div>
+        </details>
+
+        <details class="more">
+          <summary>The one thing to decide at the start, not in week three <span class="cost">2 min</span></summary>
+          <div class="inner">
+            <p>Add the remote in the same sitting as you create the repository. Not because you need to publish anything &mdash; you can keep it private &mdash; but because <b>three machines share a repository through a remote or they do not share it at all.</b></p>
+            <p>Branches and separate working copies only separate work inside one machine. The moment there is a second laptop, or a collaborator, the remote is the mechanism and everything else is a hope.</p>
+            <p>This is cheap on day one and archaeology later.</p>
+            <div class="prov"><b>Source.</b> <span class="path">points.md</span> C3 and &sect;D phase 4, item 13.</div>
+          </div>
+        </details>
+
+        <div class="prov"><b>Section source.</b> <span class="path">points.md</span> B5; <span class="path">course-outline-external.md</span> &ldquo;The repo&rdquo;.</div>
+      </section>
+
+      <!-- ============ STEP 0 ============ -->
+      <section class="view" id="view-step0" aria-labelledby="h-step0">
+        <div class="view-head">
+          <p class="eyebrow">What to do about it</p>
+          <h2 id="h-step0">Step 0 &mdash; before any of the above</h2>
+          <p class="lede">Set-up and decisions that come before the first task. <b>The order is not arbitrary: each layer can only be verified once the one below it exists.</b></p>
+        </div>
+
+        <p>You cannot test a path helper before there is a filesystem to point it at, or a handoff before there are two machines. One thing runs the other way &mdash; <b>the items that take longest are the ones involving people who are not you</b>, so they start first and finish last.</p>
+
+        <p><b>Two of these are questions, not items:</b> one machine or several, and solo or with others. The answers change what the rest of this covers, which is why they are asked at the door rather than discovered in week three. <b>A solo researcher on one laptop drops phase 0, phase 6 and most of phase 3</b> &mdash; a much shorter list than the one below.</p>
+
+        <div class="phase opt">
+          <p class="phase-k">Phase 0 &middot; conditional &middot; days to weeks</p>
+          <h4>Skip unless you need research storage or a computing cluster</h4>
+          <ol>
+            <li><b>A research storage volume</b> &mdash; usually sponsored by a lab or department, not requested individually.</li>
+            <li><b>A cluster account <i>and</i> an allocation</b> &mdash; two separate things, and only the second one lets you submit work.</li>
+          </ol>
+          <p style="font-size:14px;color:var(--muted);margin-top:10px">Most people need neither. A laptop, synced storage and one repository covers the majority of research computing, and knowing which side of that line you are on <i>is</i> the storage decision. These take days to weeks because someone else has to approve them, so file them now and carry on with everything below while they pend.</p>
+        </div>
+
+        <div class="phase">
+          <p class="phase-k">Phase 1 &middot; identity, before any code exists</p>
+          <ol start="3">
+            <li>Version-control account, SSH key, command-line login.</li>
+            <li>Agent plan &mdash; also where the cost question stops being abstract.</li>
+            <li>Institutional basics: login, VPN client, synced-storage client.</li>
+          </ol>
+        </div>
+
+        <div class="phase">
+          <p class="phase-k">Phase 2 &middot; machine baseline</p>
+          <ol start="6">
+            <li>A package manager, then the standard command-line tools.</li>
+            <li>The editor and its agent extension.</li>
+            <li>Language runtimes &mdash; only the ones you need. Most people need one.</li>
+            <li><b>Stop the machine sleeping through your own work.</b> A long run that outlasts your attention dies when the display sleeps or the lid closes, and it dies without a result. On macOS, <a href="https://apps.apple.com/us/app/amphetamine/id937984704?mt=12">Amphetamine</a> is free and handles closed-lid operation; <span class="path">caffeinate -dimsu</span> is built in and needs no install. Windows has PowerToys Awake; Linux has <span class="path">systemd-inhibit</span>.</li>
+          </ol>
+          <p style="font-size:14px;color:var(--muted);margin-top:10px"><b>Item 9 is phase 0&rsquo;s cheap alternative and it belongs before the request, not after.</b> Phase 0 says ask for a cluster when a run would pin a workstation for hours. A good share of those people do not need a cluster &mdash; they need the machine to stay awake. One of those costs a minute; the other takes weeks. Try the minute first.</p>
+        </div>
+
+        <div class="phase">
+          <p class="phase-k">Phase 3 &middot; storage, before the first data file</p>
+          <ol start="10">
+            <li>Create the data root and the figure-review folder.</li>
+            <li><b>Write the path helper before any script hardcodes a path.</b> Cheap now, archaeology later.</li>
+            <li><b>Write the storage-tier rule down.</b> Three sentences. It prevents both failures: multi-gigabyte outputs strangling a sync client, and small shareable results stranded where the other machine cannot see them.</li>
+          </ol>
+        </div>
+
+        <div class="phase">
+          <p class="phase-k">Phase 4 &middot; the first repository</p>
+          <ol start="13">
+            <li>Initialise it <b>and add the remote in the same sitting.</b></li>
+            <li>Exclude data by file extension. Pin line endings on shell scripts &mdash; a stray carriage return in the first line of a script is a &ldquo;bad interpreter&rdquo; failure on a Linux cluster, and it is a genuinely awful thing to debug from a Windows checkout.</li>
+            <li>The project instructions file, and the agent&rsquo;s permission settings: allow, ask, deny.</li>
+            <li><b>A commit hook stamping agent authorship.</b> Cheap now, impossible retroactively &mdash; otherwise everything before the day you add one has to be labelled &ldquo;assume agent authorship unless stated.&rdquo;</li>
+          </ol>
+        </div>
+
+        <div class="phase">
+          <p class="phase-k">Phase 5 &middot; the guard layer</p>
+          <ol start="17">
+            <li><b>Nothing here is set up in advance, and that is the point.</b> Every guard worth having exists because something specific went wrong first. Building them up front is <a href="#asymptote" data-view="asymptote">barrier 4</a> with extra steps.</li>
+          </ol>
+        </div>
+
+        <div class="phase">
+          <p class="phase-k">Phase 6 &middot; second machine, then cluster</p>
+          <ol start="18">
+            <li><b>The second machine is where &ldquo;one machine or several&rdquo; stops being a question</b>, and where a remote turns from good practice into an operational requirement.</li>
+            <li>Cluster work, once the allocation lands. Portal before command line; VPN before the browser.</li>
+            <li>Publishing, if any &mdash; and note that a login flow of this kind is once per machine and cannot be scripted.</li>
+          </ol>
+        </div>
+
+        <div class="prov"><b>Section source.</b> <span class="path">points.md</span> &sect;D, ordered 2026-08-27, seven phases. Institution-specific storage and cluster names have been generalised here; the sourced originals, with rates and dates, are in <span class="path">points.md</span> &sect;F and are expected to go stale.</div>
+      </section>
+
+      <!-- ============ RECORD ============ -->
+      <section class="view" id="view-record" aria-labelledby="h-record">
+        <div class="view-head">
+          <p class="eyebrow">Evidence</p>
+          <h2 id="h-record">How this was made</h2>
+          <p class="lede">The material above claims a machine will be confidently wrong and the skill is knowing how to check. <b>Making it produced an unusually clean demonstration of exactly that</b> &mdash; in four layers, none of them staged.</p>
+        </div>
+
+        <div class="tw">
+          <table>
+            <thead><tr><th>Layer</th><th>What happened</th></tr></thead>
+            <tbody>
+              <tr><td class="num"><b>1</b></td><td>The working session made four unchecked numerical claims and got them wrong.</td></tr>
+              <tr><td class="num"><b>2</b></td><td>Its own scorecard counted those four, concluded they were all the same kind &mdash; <i>&ldquo;a plausible claim, stated confidently, that nobody had checked&rdquo;</i> &mdash; and in the act of counting made <b>four more of exactly that kind</b>, unnoticed.</td></tr>
+              <tr><td class="num"><b>3</b></td><td>The outline carried all of them forward, and separately wrote a competitive analysis in which <b>no claim could have failed</b> &mdash; three screens from a section arguing that suspicion without a method is just anxiety.</td></tr>
+              <tr><td class="num"><b>4</b></td><td>An eleven-role adversarial review caught them by recomputing every number against the repository.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p><b>And then layer 2 turned out to be wrong about layer 1.</b> The scorecard called the errors unchecked. They were not. The real log shows a clone, four commands, and &mdash; for one of them &mdash; an explicit <i>&ldquo;I was referring to it from the website&rsquo;s description rather than the file. Let me actually check&rdquo;</i> immediately before the wrong number.</p>
+        <p><b>The check ran and the wrong number came out anyway.</b> That is a worse defect than not checking, and a different one.</p>
+
+        <details class="more">
+          <summary>The four wrong numbers, and why they are four different defects <span class="cost">5 min</span></summary>
+          <div class="inner">
+            <p>They were filed as four instances of one defect. Every one was checked, and they are four different things:</p>
+            <ul>
+              <li><b>482 words.</b> The command returned 482 and it was reported faithfully &mdash; it measured the whole file when the claim was about the pasteable block, which is 433. <b>Right command, wrong scope.</b></li>
+              <li><b>79 commits.</b> True the day it was run. Written down as a standing fact. <b>A measurement with a timestamp, recorded without one.</b></li>
+              <li><b>64 lines.</b> Same shape.</li>
+              <li><b>&ldquo;Two-thousand-word commit messages.&rdquo;</b> Came from a command labelled <i>message length distribution</i> that returned 1726 &mdash; non-empty body lines across <i>all</i> commits, not words per message. <b>Right number, wrong quantity, invited by a label its own author wrote.</b></li>
+            </ul>
+            <p>That taxonomy is better than the one it replaced, and it only exists because somebody went back to the primary source.</p>
+            <div class="prov"><b>Source.</b> Complete session log with tool output, imported 2026-08-27. Supersedes both the reconstruction and the partial paste.</div>
+          </div>
+        </details>
+
+        <details class="more">
+          <summary>The review of the reconstruction was itself falsified <span class="cost">5 min</span></summary>
+          <div class="inner">
+            <p>A review compared the AI-written reconstruction of the session against a partial log, and opened with its most serious finding: <b>a fabricated obstacle.</b> The reconstruction had said <i>&ldquo;site blocked automated access,&rdquo;</i> and the review held that no such thing happened &mdash; a search that stopped early had become, in the retelling, an external system denying access.</p>
+            <p><b>It was wrong.</b> The complete log, imported the next day, contains the fetch: an error, robots-disallowed, <i>&ldquo;Site disallows automated access.&rdquo;</i> A retry two minutes later over a different protocol went through. So there was one refusal and one success &mdash; not the &ldquo;two successful fetches&rdquo; the review asserted.</p>
+            <p><b>How it got there is the part worth keeping.</b> The review inferred what a tool <i>returned</i> from a source that shows only <i>that</i> a tool ran &mdash; and it had written that exact limitation into its own scope banner, three paragraphs above. <b>The lead finding was produced by precisely the inference its own stated limit forbids.</b></p>
+            <p>Nobody was careless. The limit was stated, agreed, and walked past inside a single document.</p>
+            <p>It is now struck through and marked rather than deleted, because a review that quietly loses its own lead finding is not a record of anything.</p>
+            <div class="prov"><b>Source.</b> <span class="path">docs/reviews/reconstruction-vs-log_2026-08-26.md</span>, corrected in place 2026-08-28 against the complete log. It stood unmarked for four days &mdash; not for want of evidence, which was in the same repository the whole time, but because how to correct it had been left undecided.</div>
+          </div>
+        </details>
+
+        <details class="more">
+          <summary>Why you should believe any of this <span class="cost">3 min</span></summary>
+          <div class="inner">
+            <p>The review process used above came out of the same calcium-imaging project as the wrong-dataset incident in <a href="#validation" data-view="validation">barrier 3</a>.</p>
+            <p><b>Rigorous gates for the documents. The data architecture still unfixed.</b> One half got cured because the failures were legible and repeated. The other half got sliced around, because the workaround was cheap.</p>
+            <p><b>Same person, same project, same year.</b></p>
+            <p>That is the honest answer to the question, and it is a better one than a success story. The discipline described here is not something I have; it is something I built in one place and did not build in the other, and the difference between the two is entirely about which failures were visible enough to be annoying.</p>
+            <div class="prov"><b>Source.</b> Recovered by comparing the reconstruction against the real log; recorded in <span class="path">OPEN-FINDINGS.md</span> as content the write-up dropped. Verified absent from the outline.</div>
+          </div>
+        </details>
+
+        <details class="more">
+          <summary>What is damaged, missing, or unresolved <span class="cost">3 min</span></summary>
+          <div class="inner">
+            <p>The record of how this was made has seven stages. <b>Two are damaged and one is missing entirely</b> &mdash; the original idea survives only as a copy of a copy, the first account is a reconstruction rather than a transcript, and two intermediate drafts are simply gone.</p>
+            <p>That is stated rather than smoothed over, because a chain presented as complete when it is not would be the same defect this material is about.</p>
+            <p><b>Still unresolved, and worth knowing before you use any of this:</b></p>
+            <ul>
+              <li>The adversarial review was <b>round one only</b>. No verification pass, no convergence. It is not a clean run, and a capped run must not read like a complete one.</li>
+              <li><b>Reviewer correlation.</b> All eleven roles ran on one model in one context. Eleven seats buy coverage of angles, not independence.</li>
+              <li><b>Three unsearched literatures</b> &mdash; end-user programming and trust in automation, research-data-management training, and education research on teaching debugging. Any could hold closer prior art. An unsearched field is a residual, not an absence.</li>
+              <li><b>Nobody was asked.</b> Three groups run adjacent workshops for non-programmers. Emails to their organisers are the cheapest available check and have not been sent.</li>
+            </ul>
+            <div class="prov"><b>Source.</b> <span class="path">OPEN-FINDINGS.md</span>, residuals carried from the murderboard run of 2026-08-26.</div>
+          </div>
+        </details>
+
+        <div class="prov"><b>Section source.</b> <span class="path">README.md</span> &ldquo;The finding&rdquo;; chain nodes 0&ndash;5 in <span class="path">docs/chain/</span>. The review process is <a href="https://github.com/syncytium2/murderboard">murderboard</a>, Apache-2.0.</div>
+      </section>
+
+      <!-- ============ METHOD ============ -->
+      <section class="view" id="view-method" aria-labelledby="h-method">
+        <div class="view-head">
+          <p class="eyebrow">Evidence</p>
+          <h2 id="h-method">About this page</h2>
+          <p class="lede">What it is, what it deliberately leaves out, and how far to trust it.</p>
+        </div>
+
+        <h3>Every incident here is real</h3>
+        <p>Nothing on this page was manufactured for teaching. Each incident happened in working projects between roughly 2026-07 and 2026-08-28, and each one is filed with its date, its primary source, and a note saying whether anyone independently checked it. Switch the depth control to <b>Sources</b> to see those notes.</p>
+        <p>Where an account is a self-report by the party being evaluated, it says so. Where a claim is unmeasured &mdash; the hundred-fold figure, the cost of a full review run &mdash; it is labelled rather than taught.</p>
+
+        <h3>Paths are named, not linked</h3>
+        <p>Filenames like <span class="path">points.md</span> appear throughout so a claim can be traced. <b>They are deliberately not hyperlinks.</b> They live in a private repository, and a link naming a file the reader does not have is a broken pointer &mdash; a claim that was true somewhere else. That is a defect this project has shipped and then had to fix, more than once, so it is not going to be shipped here.</p>
+        <p>Everything a reader needs is on this page. The paths are provenance, not navigation.</p>
+
+        <h3>What has been generalised</h3>
+        <p>Project and repository names from the wider body of work have been replaced with descriptions of what they are. Institution-specific storage names, cluster names, billing arrangements and rates have been generalised, because they go stale and because they are not the point. The identifiable content that remains is mine and is here on purpose.</p>
+
+        <h3>What this is not</h3>
+        <p><b>It is not a course, and there is no session attached to it.</b> The material was drafted as a two-part short course and then postponed for redesign; nothing is scheduled and nobody is being taught. This page is the reference the material turned out to want to be &mdash; components you can read in any order, at whichever depth you need, without a fixed-length session forcing anything to be cut.</p>
+        <p>It is also not finished. See <b>what is damaged, missing, or unresolved</b> under <a href="#record" data-view="record">How this was made</a>.</p>
+
+        <div class="foot">
+          <p><b>Companion page.</b> A one-page runbook, <i>Search to Shipped</i> &mdash; zero to a deployed web application for a researcher who has never written software, with the condition that tells you each step worked. Separate page, same system.</p>
+          <p>Last revised 2026-08-28. Outbound links were checked on the day this was written; nothing re-checks them, and when one rots this page will not tell you.</p>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var views = {};
+  Array.prototype.forEach.call(document.querySelectorAll(".view"), function (v) {
+    views[v.id.replace(/^view-/, "")] = v;
+  });
+  var links = Array.prototype.slice.call(document.querySelectorAll(".rail a[data-view]"));
+
+  function show(name, push) {
+    if (!views[name]) { name = "overview"; }
+    Object.keys(views).forEach(function (k) {
+      views[k].classList.toggle("on", k === name);
+    });
+    links.forEach(function (a) {
+      if (a.getAttribute("data-view") === name) { a.setAttribute("aria-current", "page"); }
+      else { a.removeAttribute("aria-current"); }
+    });
+    if (push && location.hash !== "#" + name) {
+      history.pushState(null, "", "#" + name);
+    }
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }
+
+  // Any link that names a view switches panes instead of jumping.
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest ? e.target.closest("a[data-view]") : null;
+    if (!a) { return; }
+    e.preventDefault();
+    show(a.getAttribute("data-view"), true);
+  });
+
+  window.addEventListener("popstate", function () {
+    show((location.hash || "#overview").slice(1), false);
+  });
+
+  // ---- reading depth ----
+  var depthButtons = Array.prototype.slice.call(document.querySelectorAll(".seg button"));
+  var allDetails = Array.prototype.slice.call(document.querySelectorAll("details.more"));
+
+  function setDepth(level) {
+    document.body.setAttribute("data-depth", level);
+    depthButtons.forEach(function (b) {
+      b.setAttribute("aria-pressed", String(b.getAttribute("data-depth") === level));
+    });
+    allDetails.forEach(function (d) { d.open = (level !== "brief"); });
+    try { localStorage.setItem("fb-depth", level); } catch (err) { /* private mode */ }
+  }
+
+  depthButtons.forEach(function (b) {
+    b.addEventListener("click", function () { setDepth(b.getAttribute("data-depth")); });
+  });
+
+  var saved = null;
+  try { saved = localStorage.getItem("fb-depth"); } catch (err) { saved = null; }
+  setDepth(saved === "full" || saved === "all" ? saved : "brief");
+
+  show((location.hash || "#overview").slice(1), false);
+}());
+</script>
