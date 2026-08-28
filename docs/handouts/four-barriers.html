@@ -200,12 +200,22 @@
   /* ---------------- the escalation strip ---------------- */
 
   .esc { border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; margin: 0 0 26px; background: var(--surface); }
-  .esc-row { display: grid; grid-template-columns: 108px 1fr; gap: 16px; padding: 12px 16px; border-bottom: 1px solid var(--rule); align-items: baseline; }
+  .esc-row { display: grid; grid-template-columns: 152px minmax(0,1fr); gap: 20px; padding: 15px 17px; border-bottom: 1px solid var(--rule); }
   .esc-row:last-child { border-bottom: 0; }
   .esc-row.now { background: var(--accent-soft); }
-  .esc-k { font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
-  .esc-row.now .esc-k { color: var(--accent); }
-  .esc-v { margin: 0; font-size: 14.5px; max-width: none; }
+  .esc-k { display: flex; flex-direction: column; gap: 5px; }
+  .esc-name {
+    font-family: var(--mono); font-size: 12.5px; font-weight: 600; letter-spacing: .04em;
+    text-transform: uppercase; color: var(--ink); line-height: 1.3;
+  }
+  .esc-row.now .esc-name { color: var(--accent); }
+  .esc-eg { font-family: var(--mono); font-size: 10.5px; line-height: 1.55; color: var(--faint); }
+  /* These beat `.view p` (0,1,1) on class count — without the doubled class the
+     view-level paragraph rule silently reinstates a bottom margin here. */
+  .esc .esc-v { margin: 0 0 7px; font-size: 14.5px; max-width: 58ch; }
+  .esc .esc-you { margin: 0; font-size: 13.5px; color: var(--muted); max-width: 58ch; }
+  .esc-row.now .esc-you { color: var(--ink); }
+  @media (max-width: 620px) { .esc-row { grid-template-columns: 1fr; gap: 9px; } }
 
   /* ---------------- depth layers ---------------- */
 
@@ -367,10 +377,42 @@
 
         <h3>The escalation, which is the only leap that matters</h3>
         <div class="esc">
-          <div class="esc-row"><span class="esc-k">Search</span><p class="esc-v">Returns links. You do the work.</p></div>
-          <div class="esc-row"><span class="esc-k">Chat</span><p class="esc-v">Returns text. You decide what to do with it.</p></div>
-          <div class="esc-row now"><span class="esc-k">Agent</span><p class="esc-v">Changes files on your disk. That is the leap, and it is the only one that matters.</p></div>
+
+          <div class="esc-row">
+            <div class="esc-k">
+              <span class="esc-name">Web search</span>
+              <span class="esc-eg">Google<br>PubMed<br>your library catalogue</span>
+            </div>
+            <div class="esc-b">
+              <p class="esc-v">Returns a list of links &mdash; and, increasingly, a short AI-written blurb sitting above them.</p>
+              <p class="esc-you">You open the results, read them, and judge them. Everything after that is work you do yourself, and nothing happens on your computer that you did not do.</p>
+            </div>
+          </div>
+
+          <div class="esc-row">
+            <div class="esc-k">
+              <span class="esc-name">AI chatbot</span>
+              <span class="esc-eg">ChatGPT<br>Claude<br>Gemini<br>Copilot chat</span>
+            </div>
+            <div class="esc-b">
+              <p class="esc-v">Returns text in a browser window. It will draft, summarise, explain, and write code that looks finished.</p>
+              <p class="esc-you">But the code arrives as something to <i>read</i>. Copying it out, putting it in the right place, running it, and finding out whether it actually worked are all still yours. <b>Nothing leaves the window.</b></p>
+            </div>
+          </div>
+
+          <div class="esc-row now">
+            <div class="esc-k">
+              <span class="esc-name">AI coding agent</span>
+              <span class="esc-eg">Claude Code<br>Codex<br>Copilot agent mode</span>
+            </div>
+            <div class="esc-b">
+              <p class="esc-v"><b>Runs commands on your computer and changes files on your disk.</b> It opens your data, writes a script, executes it, reads the error it got back, and tries again &mdash; without stopping to ask you each time.</p>
+              <p class="esc-you"><b>That is the leap, and it is the only one that matters.</b> It is also the entire reason the four barriers below exist: the first two tools hand you something to check at your leisure, and this one has already acted by the time you look.</p>
+            </div>
+          </div>
+
         </div>
+        <p>If you have only ever used the middle one, the third is not a better version of it. It is a different kind of thing, with a different failure mode, and that difference is what the rest of this page is about.</p>
 
         <h3>The four barriers</h3>
         <div class="grid">
@@ -400,7 +442,7 @@
         <p><b>Use the depth control, top right.</b> <b>Brief</b> is the headline of every section &mdash; about two minutes for the whole page. <b>Full</b> opens the worked incidents underneath each one. <b>Sources</b> adds the provenance line for every claim: where it came from, whether anyone checked it, and what is still unverified.</p>
         <p>That control exists because these incidents have very different explanation costs. One is a paragraph of setup; another needs twenty minutes before it makes sense. In a fixed-length talk that forces you to drop the expensive ones. Here it just changes which depth you are reading at.</p>
 
-        <div class="prov"><b>Source.</b> Thesis, escalation and the four barriers: <span class="path">course-outline-external.md</span> (434 words, written to be circulated) and <span class="path">points.md</span> &sect;A. Escalation strip is carried over verbatim from the companion runbook, <span class="path">docs/handouts/search-to-shipped.html</span>.</div>
+        <div class="prov"><b>Source.</b> Thesis, escalation and the four barriers: <span class="path">course-outline-external.md</span> (434 words, written to be circulated) and <span class="path">points.md</span> &sect;A. Escalation strip originates in the companion runbook, <span class="path">docs/handouts/search-to-shipped.html</span>, and was <b>expanded here on 2026-08-28</b> &mdash; each tier now carries its named examples, because &ldquo;search / chat / agent&rdquo; alone is too terse to land on a reader who suspects this is a waste of time. The runbook still carries the short form.</div>
       </section>
 
       <!-- ============ COMMUNICATION ============ -->
