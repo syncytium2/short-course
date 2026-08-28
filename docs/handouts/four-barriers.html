@@ -279,6 +279,10 @@
   /* ---------------- tables ---------------- */
 
   .tw { overflow-x: auto; margin: 0 0 18px; max-width: 74ch; }
+  .tw.wide { max-width: none; }
+  .tw.wide td, .tw.wide th { padding-right: 20px; }
+  .tw.wide td:first-child { min-width: 15em; }
+  td .tag { display: inline-block; margin-left: 7px; vertical-align: 1px; }
   table { border-collapse: collapse; width: 100%; font-size: 14px; }
   th, td { text-align: left; padding: 9px 13px 9px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
   th {
@@ -552,28 +556,58 @@
           <p><b>Still unrecovered:</b> which dataset it actually used. The experience is vivid; the diagnostic detail is gone, because it was not written down the day it happened.</p>
         </div>
 
-        <h3>Five errors worth naming</h3>
-        <div class="tw">
+        <h3>The errors worth naming, and what catches each</h3>
+        <p>Three of these announce themselves. The ones marked <span class="tag warn">silent</span> do not &mdash; and the last two of those hand you a confirmation while they do it, which is why they need a machine rather than a habit.</p>
+        <div class="tw wide">
           <table>
-            <thead><tr><th>Error</th><th>Does it announce itself?</th></tr></thead>
+            <thead><tr><th>The error</th><th>Catch it yourself</th><th>Make something catch it</th></tr></thead>
             <tbody>
-              <tr><td>Wrong output</td><td>Yes</td></tr>
-              <tr><td>Right output, wrong place</td><td>Yes</td></tr>
-              <tr><td>Silently did nothing</td><td>Yes</td></tr>
-              <tr><td><b>Did more than asked</b></td><td><b>No</b></td></tr>
-              <tr><td><b>Reported success it never achieved</b></td><td><b>No &mdash; it produces a confirmation</b></td></tr>
+              <tr>
+                <td>Wrong output</td>
+                <td>Run it and look.</td>
+                <td>One small input where you already know the right answer, checked every time.</td>
+              </tr>
+              <tr>
+                <td>Right output, wrong place</td>
+                <td>List the files that now exist.</td>
+                <td>Have the script confirm its output is where it was supposed to go before it reports done.</td>
+              </tr>
+              <tr>
+                <td>Silently did nothing</td>
+                <td>Open the artifact yourself. Check the timestamp.</td>
+                <td>Re-read the file after writing it and compare. Anything that skips this is reporting that it finished, not that it worked.</td>
+              </tr>
+              <tr>
+                <td><b>Did more than asked</b> <span class="tag warn">silent</span></td>
+                <td>Read the diff for scope, not correctness.</td>
+                <td>Version control. An unexpected file in the diff is visible; without it, nothing makes it visible.</td>
+              </tr>
+              <tr>
+                <td><b>Reported success it never achieved</b> <span class="tag warn">silent</span></td>
+                <td>Check the world, not the summary.</td>
+                <td>Break the check on purpose and see whether it notices. If it still passes, it was never testing anything.</td>
+              </tr>
+              <tr>
+                <td><b>Right measurement, wrong cause</b> <span class="tag warn">silent</span></td>
+                <td><i>Nothing on this list catches it.</i></td>
+                <td>A second machine. The incident below was caught by an automated run on different hardware, fourteen minutes later.</td>
+              </tr>
             </tbody>
           </table>
         </div>
-        <p>The last two are the dangerous ones. The rest announce themselves.</p>
 
-        <h3>Four checks that need no code</h3>
+        <h3>The four checks that need no code</h3>
+        <p>The middle column, on its own, and worth memorising in this order &mdash; it is the whole of validation for someone who has never written software.</p>
         <ul>
           <li><b>Read the diff for scope, not correctness.</b> You are not checking whether the code is right. You are checking whether it touched things you did not ask it to touch.</li>
           <li><b>Run it and look.</b></li>
           <li><b>List the files that now exist.</b></li>
           <li><b>Open the artifact yourself.</b></li>
         </ul>
+
+        <h3>Why the right-hand column matters more than it looks</h3>
+        <p>Every check in the middle column is a <b>habit</b> &mdash; it works exactly as long as you keep doing it, and the week you are busy is the week it lapses. Every check in the right-hand column is a <b>mechanism</b>: it runs whether or not anyone remembers, and it is the difference this page argues for throughout (see <a href="#fixes" data-view="fixes">Fixes that hold</a>).</p>
+        <p><b>But an automatic check is only worth what it can detect.</b> Three of the incidents on this page are green checks that were guarding nothing &mdash; a test suite that had never seen an input that could fail it, a test that skipped in silence for ten days, and two tests that had been describing a bug as correct behaviour since the day they were written. The last row of the table is the cure for all three: <b>break it on purpose and see whether it notices.</b></p>
         <p><b>Spec, validate, re-spec.</b> Re-spec is the normal case, not the failure case.</p>
 
         <details class="more">
