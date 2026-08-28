@@ -22,6 +22,7 @@ is for murderboard development only; see [Boundary](#boundary) below.
 | Access, cost, routes, rates | [`points.md`](points.md) **§F** — sourced and dated 2026-08-27, expected to go stale |
 | The circulatable outline | [`course-outline-external.md`](course-outline-external.md) — 434 words, four barriers |
 | **What a learner is handed** | [`docs/handouts/`](docs/handouts/) — `search-to-shipped.html`, one-page runbook + a second sheet on decision records |
+| **What has actually been delivered** | `<darkroom>/short-course/` — the runbook as a standalone page, plus a folder README. Claimed and written 2026-08-27; the repo copy is publisher source and does not open from Finder |
 | Why the repo exists | [`README.md`](README.md) |
 
 **Remote: `syncytium2/short-course`, private, added 2026-08-27.** The paragraph here used to say
@@ -254,6 +255,36 @@ remains the open task; writing it more carefully is not the fix.
 4. **One measured murderboard run** (N1), a few dollars, settles §10.
 5. The provisional section in `course-outline-external.md` (C2, B4, B7) still needs a home; the
    publication decision; and C4's unchecked "100x".
+
+---
+
+## Delivery — the darkroom, 2026-08-27
+
+**A report is output, and "in the repo" is not delivered.** This repo had been treating
+`docs/` as delivery for a document written for a beginner to read. It is not: a repo path
+reaches only the machine holding the checkout, and Tony cannot open it from the editor.
+The rest of the estate already knew this and has been burned by it twice — the 2026-08-18
+assembly report and the 2026-08-27 murderboard record.
+
+`<darkroom>/short-course/` now exists, in the **placed by hand** category alongside
+`haruspex/`, `bugarach/`, `no_peak/` and `downLow/` — a separate repo emitting into the
+shared darkroom, nothing branch-routes there. One row appended to the darkroom index so it
+is findable. Only material written *for a person to read* goes there; the outline, the
+chain, the reviews and the findings stay in git, where review and history need them.
+
+**Two copies of the runbook, on purpose.** `docs/handouts/search-to-shipped.html` is
+publisher source and has no `<!doctype>`, because publishing wraps it. The darkroom copy is
+the standalone wrapper, so it opens from Finder. The repo is authority if they disagree.
+
+**⛔ Found while doing this, and left for Tony.** `<darkroom>/course-outline.md` is loose at
+the darkroom top level, outside the per-project structure, and is **Draft 2 dated
+2026-08-25** — two drafts stale, since Draft 3 is itself now frozen and superseded by
+`points.md`. Not moved or deleted: it is his and he may have it open. Recommended for
+deletion, and the folder README says so where he will see it.
+
+**Do not use `SendUserFile` for this user.** It reports delivery and nothing appears in his
+VS Code explorer; the path it references is outside his workspace. Reported by him
+2026-08-27, after a sibling session hit it.
 
 ---
 
