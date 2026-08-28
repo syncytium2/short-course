@@ -275,13 +275,25 @@ Run against the repository on 2026-08-27.
 | The retraction predates the page by 11 days | frontmatter `filed: 2026-08-16` in the todo; page written 2026-08-27 | verified |
 | I had read that file in-session | the page quotes a different paragraph of the same todo | verified by inspection |
 | The ancestor review's "0 findings" for the citation role | quoted in the citation role's own return, from `docs/reviews/` in the same repo | **quoted from a role return, source file not re-opened by me** |
-| The ordering reverses when trap firings count | the adversarial role recomputed F1 from per-fold `n_hit / n_detected` in the results JSON | **role's measurement, not re-run by me** |
+| The ordering reverses when trap firings count | **re-run.** I implemented it as `tools/probe_inclusive_f1.py`, and a later verification agent recomputed it by hand from raw per-fold counts for all nine detectors | verified, reproduced independently |
+| The rate-invariance experiment | **re-run, and it did not reproduce.** The role reported 7 → 1,228 frames; my own run of the same experiment gave 22 → 538, and after a bug fix 14 → 486. Same direction, same order of magnitude, different numbers — because it is one training run each time. See the note below | **verified as a direction, not as a magnitude** |
 | "roughly 120 findings" was said before the count was known | it is in the session transcript; no export exists | **unverifiable from artifacts** |
 | The darkroom rule was quoted in the record and then broken | the record cites the rule; the file was committed to `docs/reviews/` only, and the darkroom copy exists solely in the later commit `93518db` | verified |
 | The eleven role returns | **not committed anywhere.** Subagent returns in one session | **gone** |
 
-**A note on what this appendix cannot do.** Five rows above are measurements I am reporting
-from a role's return rather than reproducing. I could re-run them and did not, and that is a
-real weakness in a self-written case: the party being evaluated is quoting its own reviewers
-as evidence that the review was thorough. A second session should re-run the five before this
-case is taught, and the appendix says so rather than presenting them as settled.
+**A note on what this appendix cannot do.** Several rows above are measurements reported
+from a role's return rather than reproduced. That is a real weakness in a self-written case:
+the party being evaluated is quoting its own reviewers as evidence that the review was
+thorough. Two rows have since been re-run and are marked; the rest have not, and a second
+session should close them before this case is taught.
+
+**What re-running two of them taught, which is the more useful half.** One reproduced
+exactly and one did not. The rate-invariance experiment came back 7 → 1,228 from the role
+and 22 → 538 from me, on the same code and the same question — because the model is trained
+fresh each time and the project has never measured seed variance. Neither pair is wrong;
+both are one draw from a distribution nobody has characterised. **A reviewer's measurement
+is evidence, not a value**, and a case study that quoted the role's numbers as fact would
+have shipped a figure no rerun can hit. (A bug found during that rerun moved the numbers
+again, to 14 → 486 — the tool had left a contaminating high-rate window in recordings it
+described as empty. Both facts point the same way: the direction was robust across three
+runs and two implementations; the magnitude was never stable at all.)
