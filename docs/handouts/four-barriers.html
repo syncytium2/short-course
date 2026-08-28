@@ -109,7 +109,7 @@
   .seg { display: flex; border: 1px solid var(--rule-firm); border-radius: 6px; overflow: hidden; }
   .seg button {
     font-family: var(--mono); font-size: 11.5px; letter-spacing: .05em;
-    padding: 7px 13px; border: 0; border-right: 1px solid var(--rule-firm);
+    padding: 7px 11px; border: 0; border-right: 1px solid var(--rule-firm);
     background: var(--surface); color: var(--muted); cursor: pointer;
     transition: background .12s ease, color .12s ease;
   }
@@ -356,9 +356,9 @@
     <div class="depth">
       <span class="depth-label" id="depth-label">Reading depth</span>
       <div class="seg" role="group" aria-labelledby="depth-label">
-        <button type="button" data-depth="brief" aria-pressed="true">Brief</button>
-        <button type="button" data-depth="full" aria-pressed="false">Full</button>
-        <button type="button" data-depth="all" aria-pressed="false">Sources</button>
+        <button type="button" data-depth="brief" aria-pressed="true">Headlines</button>
+        <button type="button" data-depth="full" aria-pressed="false">+ incidents</button>
+        <button type="button" data-depth="all" aria-pressed="false">+ sources</button>
       </div>
     </div>
   </header>
@@ -466,7 +466,7 @@
         </div>
 
         <h3>How to read this</h3>
-        <p><b>Use the depth control, top right.</b> <b>Brief</b> is the headline of every section &mdash; about two minutes for the whole page. <b>Full</b> opens the worked incidents underneath each one. <b>Sources</b> adds the provenance line for every claim: where it came from, whether anyone checked it, and what is still unverified.</p>
+        <p><b>Use the depth control, top right.</b> <b>Headlines</b> is the top of every section &mdash; about two minutes for the whole page. <b>+ incidents</b> opens the nineteen worked failures underneath them. <b>+ sources</b> adds a provenance line to every claim: where it came from, whether anyone independently checked it, and what is still unverified.</p>
         <p>That control exists because these incidents have very different explanation costs. One is a paragraph of setup; another needs twenty minutes before it makes sense. In a fixed-length talk that forces you to drop the expensive ones. Here it just changes which depth you are reading at.</p>
 
         <div class="prov"><b>Source.</b> The axis anecdote is first-hand, related by the colleague involved and recorded here without her name &mdash; on this page the named failures are the author&rsquo;s own. Thesis, escalation and the four challenges: <span class="path">course-outline-external.md</span> (434 words, written to be circulated) and <span class="path">points.md</span> &sect;A. The three panels are the <b>Expanding Brain</b> meme template (panels 1, 2 and 4), embedded as data URIs because the page may not load remote images. Escalation strip originates in the companion runbook, <span class="path">docs/handouts/search-to-shipped.html</span>, and was <b>expanded here on 2026-08-28</b> &mdash; each tier now carries its named examples, because &ldquo;search / chat / agent&rdquo; alone is too terse to land on a reader who suspects this is a waste of time. The runbook still carries the short form.</div>
@@ -1015,7 +1015,7 @@
         </div>
 
         <h3>Every incident here is real</h3>
-        <p>Nothing on this page was manufactured for teaching. Each incident happened in working projects between roughly 2026-07 and 2026-08-28, and each one is filed with its date, its primary source, and a note saying whether anyone independently checked it. Switch the depth control to <b>Sources</b> to see those notes.</p>
+        <p>Nothing on this page was manufactured for teaching. Each incident happened in working projects between roughly 2026-07 and 2026-08-28, and each one is filed with its date, its primary source, and a note saying whether anyone independently checked it. Switch the depth control to <b>+ sources</b> to see those notes.</p>
         <p>Where an account is a self-report by the party being evaluated, it says so. Where a claim is unmeasured &mdash; the hundred-fold figure, the cost of a full review run &mdash; it is labelled rather than taught.</p>
 
         <h3>Paths are named, not linked</h3>
