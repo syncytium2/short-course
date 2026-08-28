@@ -54,6 +54,7 @@ tools/turnstile/turnstile-run@@if [ -e "$KILL_SWITCH" ]; then@@if false; then@@k
 tools/turnstile/turnstile-run@@if [ "$rc" -ge 128 ] || [ "$elapsed" -ge "$BUDGET" ]; then@@if false; then@@budget not enforced
 tools/turnstile/turnstile@@[ -f "$SELF_DIR/gate.template.sh" ]@@[ -f "/dev/null" ]@@template check defanged
 tools/check_pointers.sh@@[ -e "$cand" ] || printf@@[ -e "$cand" ] && printf@@pointer check inverts its test
+tools/build_site.sh@@ "</body>\n"@@ "\n"@@standalone loses its closing body tag
 TABLE
 )
 
