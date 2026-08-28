@@ -1,0 +1,31 @@
+{
+  // Cloudflare Workers config — assets-only, the same shape tonydefazio.com uses:
+  // no server script, Cloudflare serves ./site directly.
+  //
+  // ./site/index.html is a GENERATED FILE. It is built from
+  // docs/handouts/four-barriers.html by tools/build_site.sh, which is the only
+  // source anyone edits. `tools/build_site.sh --check` fails if the two have
+  // drifted, so a stale deploy is caught rather than discovered.
+  //
+  //   tools/build_site.sh docs/handouts/four-barriers.html site/index.html lookedright.tonydefazio.com
+  //   npx wrangler deploy
+  "name": "lookedright",
+  "compatibility_date": "2026-07-01",
+  "workers_dev": true,
+  "preview_urls": true,
+
+  // The subdomain, declared rather than clicked. On deploy Cloudflare creates the
+  // DNS record and the Worker binding itself.
+  //
+  // CHECKED 2026-08-28 before the first deploy: `dig lookedright.tonydefazio.com`
+  // was empty, so this creates the record rather than replacing one. A
+  // custom_domain route TAKES A HOSTNAME OVER — if that dig ever answers before
+  // you deploy, find out what is answering first.
+  "routes": [
+    { "pattern": "lookedright.tonydefazio.com", "custom_domain": true }
+  ],
+
+  "assets": {
+    "directory": "./site"
+  }
+}

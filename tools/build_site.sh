@@ -76,6 +76,22 @@ print("  wrote %s  (%d bytes, title %r, canonical https://%s/)" % (out, len(page
 PY
 }
 
+# --check <source> <built> <hostname> — is the built page still what the source
+# would produce? A generated file that silently falls behind its source is the
+# same class as a vendored copy with no freshness gate, which this estate has
+# shipped twice. Run it before deploying.
+if [ "${1:-}" = "--check" ]; then
+    [ $# -eq 4 ] || { echo "usage: tools/build_site.sh --check <source> <built> <hostname>" >&2; exit 1; }
+    [ -f "$3" ] || { echo "  STALE $3 does not exist — never built" >&2; exit 1; }
+    TMP=$(mktemp -d); trap 'rm -rf "$TMP"' EXIT INT TERM
+    wrap "$2" "$TMP/rebuilt.html" "$4" >/dev/null || exit 1
+    if cmp -s "$TMP/rebuilt.html" "$3"; then
+        printf '  %s is current with %s\n' "$3" "$2"; exit 0
+    fi
+    printf '  STALE %s does not match a rebuild from %s — run the build before deploying\n' "$3" "$2" >&2
+    exit 1
+fi
+
 if [ "${1:-}" = "--selftest" ]; then
     fail=0
     T=$(mktemp -d); trap 'rm -rf "$T"' EXIT INT TERM
@@ -121,6 +137,16 @@ if [ "${1:-}" = "--selftest" ]; then
     if wrap "$T/nostyle.html" "$T/n.html" "example.com" >/dev/null 2>&1; then
         printf '  FAIL a source with no </style> was accepted\n'; fail=1
     else printf '  ok   refuses a source with no head/body boundary\n'; fi
+
+    # --check must call a drifted build stale, and a current one current.
+    if sh "$0" --check "$T/src.html" "$T/out.html" "example.com" >/dev/null 2>&1; then
+        printf '  ok   --check passes a build that is current\n'
+    else printf '  FAIL --check called a current build stale\n'; fail=1; fi
+
+    printf '<p>drifted</p>\n' >> "$T/src.html"
+    if sh "$0" --check "$T/src.html" "$T/out.html" "example.com" >/dev/null 2>&1; then
+        printf '  FAIL --check passed a build whose source had changed\n'; fail=1
+    else printf '  ok   --check catches a source that moved on\n'; fi
 
     [ $fail -eq 0 ] && { echo "PASS"; exit 0; } || { echo "FAIL"; exit 1; }
 fi
