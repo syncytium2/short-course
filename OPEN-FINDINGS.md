@@ -192,3 +192,28 @@ the session.
 6. **Reviewer correlation.** All eleven roles ran on one model in one context. Eleven seats buy
    coverage of angles, not independence. Nothing here distinguishes a document with nothing left
    to find from one whose reviewer looked in the same wrong place throughout.
+
+   **Update, 2026-08-28 — a remedy is proposed upstream, with evidence, and it is not a twelfth
+   role.** `murderboard@d4066da` files four observations from a consumer of
+   `doc_review_process.md`, on a branch rather than main *"because this is for the team to
+   evaluate and adopting a charter change unilaterally would be the same defect as any other
+   unreviewed edit to a shared contract."* The one that bears on this residual: **at least one
+   role per run must execute against the artifact rather than the text.** Eleven roles reading
+   one document in one context are eleven documents. The evidence offered is a measurement, not
+   an argument — recomputing a report from its source JSON *confirmed* the report **and** found
+   that it had understated its own problem and left one claimed fix open. Neither is visible
+   from the text at any number of seats.
+
+   **Two of the other three land on material this repo already holds.** *An attribution to a
+   named person is checked by no role* — role 1 asks whether a claim is true, role 2 whether
+   citations resolve, and a personal attribution is neither, so two correct outputs composed
+   into a green run. That is
+   [`docs/cases/2026-08-27-the-claim-that-gained-a-source.md`](docs/cases/2026-08-27-the-claim-that-gained-a-source.md)
+   arriving upstream as a proposed charter change, which is the first time a case in this folder
+   has changed something outside it. *A partial flag reads as a receipt* is the same case's
+   second finding, with the proposed fix that a flag must name **which component** is unverified,
+   *"since flagging one silently certifies the rest."*
+
+   **Nothing here is adopted.** It is on a branch, awaiting the team, and residual 6 stays open
+   until a run actually executes against an artifact. Recorded because "no remedy exists" and
+   "a remedy is proposed and unmerged" are different facts.
