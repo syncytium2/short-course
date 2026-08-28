@@ -41,6 +41,13 @@
 # ESCAPE HATCH: SC_PUSH_OK=1 anywhere in the command.
 #
 # Exit 0 = allow, exit 2 = block (the PreToolUse contract).
+#
+# turnstile: gate
+# turnstile: budget 5
+#
+# Declared a gate deliberately: it has a selftest that has been watched to go red,
+# it is on PreToolUse and not the startup path, and it carries an escape hatch.
+# Without the `gate` line turnstile-run would let its exit 2 through as advice.
 
 set -u
 

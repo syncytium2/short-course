@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "sh .claude/hooks/push-goes-where-you-are.sh",
+            "command": "sh tools/turnstile/turnstile-run .claude/hooks/push-goes-where-you-are.sh",
             "timeout": 10
           }
         ]
