@@ -419,10 +419,13 @@ because a role charter is theirs to change.
 
 ## The board tooling failed its own case, 2026-08-28
 
-`2026-08-28-the-tests-were-defending-the-bug.md` landed at 07:16 — **on branch
-`case-tests-defending-the-bug`, not on `master`**, so the path above does not resolve here
-yet. That is stated rather than linked, because a pointer on `master` naming a file only a
-branch has is the defect `interface2`'s review queue already carries thirteen of. **It**
+`2026-08-28-the-tests-were-defending-the-bug.md` landed at 07:16 on branch
+`case-tests-defending-the-bug` and **is now on `master`** — merged 2026-08-28, so
+[`docs/cases/2026-08-28-the-tests-were-defending-the-bug.md`](docs/cases/2026-08-28-the-tests-were-defending-the-bug.md)
+resolves. This paragraph previously said it did not, and said the path was *stated rather
+than linked* for that reason. Kept and corrected rather than deleted, because the reason it
+was stated rather than linked is the point: a pointer on `master` naming a file only a
+branch has is the defect `interface2`'s review queue already carries thirteen of. **It
 applied to this repo's own tooling within the hour, and two of the three tools built the
 night before failed it.**
 
@@ -467,25 +470,43 @@ reading it, without meaning to. Two instances, two sessions, two repos, one day.
 
 ---
 
-## Case branches waiting to merge — 2026-08-28
+## Case branches — merged 2026-08-28
 
-Cases are arriving faster than they land. Both of these are pushed and neither is on
-`master`:
+**Both have landed on `master`.** This section previously read *"Case branches waiting to
+merge"* and listed them as pushed and unmerged; the constraint it described — *"until they
+merge, nothing on `master` may link to them"* — is lifted.
 
-| branch | case | landed |
-|---|---|---|
-| `case-tests-defending-the-bug` | the safety tool that shipped with the flaw it was built to catch, **and** the agent proposing a `CLAUDE.md` rule hours after documenting that `CLAUDE.md` does not work | 07:16, 09:04 |
-| `case-every-number-was-right` | every number right, every gate green, the page wrong | 23:11 |
+| branch | case | landed | merged |
+|---|---|---|---|
+| `case-tests-defending-the-bug` | the safety tool that shipped with the flaw it was built to catch, **and** the agent proposing a `CLAUDE.md` rule hours after documenting that `CLAUDE.md` does not work | 07:16, 09:04 | `b4655e1` |
+| `case-every-number-was-right` | every number right, every gate green, the page wrong | 23:11 | contained in the above |
 
-**Until they merge, nothing on `master` may link to them** — a pointer naming a file only a
-branch has is a broken pointer, and this handoff already made that mistake once today
-(corrected above).
+Two branch-only rows in `docs/cases/README.md` were dropped in the merge rather than
+carried: `master` had already folded `nothing-declared-which-folder.md` into
+`computed-instead-of-asking.md` as **incident B** (`5bfea1a`) and deleted the standalone
+file, and three pointers into it were retargeted. `tools/check_pointers.sh` passes.
+
+**`origin/case-computed-instead-of-asking` is not merged and should not be.** Its two
+commits are superseded — `master`'s copy of that case is 166 lines richer, having gained
+incident B since. It is left on the remote so the claim is cheap to check.
+
+**The seventh case landed with the merge.**
+[`docs/cases/2026-08-28-the-skip-was-the-whole-story.md`](docs/cases/2026-08-28-the-skip-was-the-whole-story.md)
+— a declared-and-never-installed dependency, eleven checks standing down behind the number
+`1` for ten days, and the published numbers reproducing only on the machine that made them.
+It **closes** `points.md` B4's worked example, whose prediction about the fix was wrong in
+the useful direction.
 
 **The constraint has flipped and it is worth noticing before the redesign starts.** For a
 week the problem was finding real specimens. It no longer is: the estate produced five in
-about eighteen hours, all verified, all with primary sources. **Supply is solved. Placement
-is not** — two of five are already parked as too expensive to explain, and nothing yet
-decides how many a 90-minute session can carry or which barrier each one serves.
+about eighteen hours, all verified, all with primary sources — **seven in the folder as of
+the 2026-08-28 merge**, the sixth from `interface2` and the seventh from four `bugarach`
+commits. **Supply is solved. Placement is not** — two are parked as too expensive to
+explain, three more are marked *proposed, not decided*, and nothing yet decides how many a
+90-minute session can carry or which barrier each one serves.
+
+**Two days, two cases added, zero placement decisions taken.** That is the measurement, and
+it is the argument of the paragraph below rather than an aside to it.
 
 That is §4's asymptote wearing its most attractive costume. Collecting incidents is
 legitimate, productive, and absorbing, and a beautifully curated case library will not
