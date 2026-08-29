@@ -348,15 +348,28 @@
   rather than estimated &mdash; a document put through an eleven-agent adversarial review, where
   each agent reads independently so that none of them can be talked round by the others.</p>
 
+  <p><b>You can go and look at the task before you judge the price.</b> The review is
+  <a href="https://github.com/syncytium2/murderboard">syncytium2/murderboard</a>, Apache&#8209;2.0 &mdash;
+  the eleven roles, what each one is told to do, and the prompt that runs them are all in that
+  repository. It matters that this is checkable, because <b>&ldquo;$26 for a review&rdquo; means nothing
+  until you know how much reviewing that buys.</b> Eleven independent readers going through a
+  document line by line is a different purchase from one model skimming it, and the price is only
+  defensible next to the work.</p>
+
   <div class="tw">
     <table>
       <caption>Five complete eleven-agent runs across three projects, summed per run from the
       tool&rsquo;s own token log on 29 August 2026. Dollar figures computed from those token
       counts at published list rates, with cache reads charged at a tenth of the input rate.
       <b>Computed, not read off an invoice</b> &mdash; and the runs were not all on the same
-      model, so the range is a band rather than a price.</caption>
+      model, so the range is a band rather than a price. <b>The two money columns are the same
+      tokens priced at two different models</b>, not two subscription plans: a larger model at
+      <b>$5 in / $25 out</b> per million tokens and a mid-sized one at <b>$2 in / $10 out</b>, both
+      read from the vendor&rsquo;s page on 29 August 2026, with cached reading charged at a tenth of
+      the input rate. <b>&ldquo;Tier&rdquo; here means the model, not the plan</b> &mdash; the plans in the
+      table above are a different thing that unfortunately shares the word.</caption>
       <thead>
-        <tr><th>Run</th><th>Billable tokens</th><th>Top tier</th><th>Mid tier</th></tr>
+        <tr><th>Run</th><th>Billable tokens</th><th>At Opus&#8209;5 rates</th><th>At Sonnet&#8209;5 rates</th></tr>
       </thead>
       <tbody>
         <tr><td>14 Aug</td><td class="num">3,141,042</td><td class="num">$40</td><td class="num">$16</td></tr>
@@ -384,7 +397,8 @@
     author, so it agrees with itself. Independence is the product, and independence is the line
     item.</p>
     <p><b>It can also run away.</b> The process allows the review to repeat until it converges, so
-    the ceiling for one document is four rounds &mdash; call it $64&ndash;160 at the top tier. One
+    the ceiling for one document is four rounds &mdash; call it $64&ndash;160 at the larger model&rsquo;s
+    rates. One
     recorded run went <b>fourteen</b> rounds before a person stopped it. Nothing was broken. Nobody
     was watching.</p>
   </div>
@@ -400,10 +414,41 @@
 
   <h3>What one teaching session costs</h3>
 
-  <p>The one case anybody has costed here: six students, one ninety-minute session. Sizing it from an institutional per-user monthly stipend gives an order of <b>$5&ndash;15 a student</b>, so <b>$30&ndash;90 for the room</b>. At that size the cost question answers itself and the decision becomes a pedagogical one.</p>
+  <p>The one case anybody here has costed: <b>six students, one ninety-minute session.</b> It is worth
+  doing twice, because the two ways of sizing it disagree &mdash; and the disagreement is the whole
+  argument of this page in miniature.</p>
+
+  <p><b>Priced as a plan.</b> The university sizes its classroom allocation per user <i>per month</i>,
+  for a term. One session is a fraction of a month, which puts it at an order of <b>$5&ndash;15 a
+  student &mdash; $30&ndash;90 for the room.</b></p>
+
+  <p><b>Priced as a meter.</b> Ninety minutes is not ninety minutes of billing. It is a handful of
+  short requests each, separated by talking, watching and typing. At the per-task rates established
+  above &mdash; a few cents for a small task, single dollars for a serious one &mdash; six students
+  doing beginner-sized things for an hour and a half plausibly consume <b>a few dollars in total for
+  the whole room</b>, not per student.</p>
+
+  <p><b>The gap between those two answers is not an error.</b> One is what the institution sets
+  aside; the other is what actually gets used. A plan is a ceiling you have bought whether or not you
+  reach it, and a meter is a bill for what you did. <b>Budget with the first number and expect the
+  second</b> &mdash; and if you are choosing between them for a class, the ceiling is the one that
+  cannot surprise you in front of six students.</p>
+
+  <p>Either way the conclusion is the same and it is the point of this section: <b>at this size the
+  cost question answers itself, and the decision becomes a pedagogical one</b> &mdash; which is the
+  opposite of the conclusion this material reached before anyone actually looked.</p>
 
   <div class="flag">
-    <p><b>That is an estimate and not a measurement.</b> It is recorded here anyway, because the estimate already changed a decision &mdash; and an estimate that changes a decision belongs somewhere the decision can be revisited. One measured run is still owed.</p>
+    <p><b>Both numbers are estimates, and the first one rests on a figure this project has not
+    confirmed.</b> The per-user monthly allocation is reported as <b>$50</b> in secondary coverage;
+    <b>the university&rsquo;s own pricing page states no amount.</b> Nobody here has provisioned a
+    classroom and read an invoice. The second number is an extrapolation from tasks of a different
+    shape &mdash; the measured runs above are one long adversarial review, not six beginners taking
+    turns.</p>
+    <p>They are recorded anyway, because the estimate <b>already changed a decision</b>, and an
+    estimate that changes a decision belongs somewhere the decision can be revisited. <b>One measured
+    session is still owed</b> &mdash; and the way to settle it is the usage screen after the first
+    real class, not a better guess.</p>
   </div>
 
   <h2>What actually drives the number</h2>
@@ -493,7 +538,7 @@
   <footer>
     <p>Companion to <i>Cold Start</i>, and the fourth sheet alongside <i>Search to Shipped</i> and <i>It Looked Right</i>.</p>
     <p><b>Filed as its own page on purpose.</b> Cost material decays faster than anything else in this course and is tied to one institution and one moment, so it is kept where it can rot without taking the teaching material with it. When it next matters, go and touch the systems rather than editing around the dates.</p>
-    <p>The five-run worked example is derived from a token log in <a href="https://github.com/syncytium2/murderboard">syncytium2/murderboard</a>, summed per run on 29 August 2026; the dollar figures are computed from those counts at list rates and are not invoices. <b>That log is not yet published</b> &mdash; a handoff asking for it has gone to that project, and until it lands the table is checkable only by someone with the file. Prices and plan shapes read from the vendors&rsquo; own pages on 29 August 2026. The heavy-use figures are from Anthropic&rsquo;s cost documentation, the same day. The institutional and student-credit facts were checked at one university on 27 August 2026 and are generalized here. The teaching-session figure is an estimate and is labeled as one. Every outbound link was checked on 29 August 2026 and <b>nothing re-checks them</b>.</p>
+    <p>The five-run worked example is derived from a token log in <a href="https://github.com/syncytium2/murderboard">syncytium2/murderboard</a>, summed per run on 29 August 2026; the dollar figures are computed from those counts at list rates and are not invoices. <b>That log is not yet published</b> &mdash; a handoff asking for it has gone to that project, and until it lands the table is checkable only by someone with the file. Prices and plan shapes read from the vendors&rsquo; own pages on 29 August 2026. The heavy-use figures are from Anthropic&rsquo;s cost documentation, the same day. The institutional and student-credit facts were checked at one university on 27 August 2026 and are generalized here. The teaching-session figures are estimates and are labeled as such; the per-user monthly allocation they lean on is <b>$50 from secondary coverage, and the university&rsquo;s own page states no amount</b>. The two money columns in the five-run table are the same tokens priced at two different <b>models</b> &mdash; $5/$25 and $2/$10 per million, cached reading at a tenth of input &mdash; and not two subscription plans. Every outbound link was checked on 29 August 2026 and <b>nothing re-checks them</b>.</p>
   </footer>
 
 </div>
