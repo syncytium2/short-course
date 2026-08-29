@@ -299,7 +299,7 @@ find out about each other. That is what a board is for, and it is why C3 in
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Mac/9b26b5c4 — rewrite What It Costs: define Top/Mid tier, link the murderboard, rewrite the teaching-session block; then murderboard the page
-- **Status:** ACTIVE
+- **Status:** DONE 2026-08-29
 - **Opened:** 2026-08-29
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
 - **Writes:** `docs/handouts/what-it-costs.html` — **this file only.** Not `cold-start.html`,
