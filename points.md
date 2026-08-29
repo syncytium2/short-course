@@ -154,6 +154,29 @@ obtainable by asking rather than by reasoning.
   [`docs/cases/2026-08-28-the-skip-was-the-whole-story.md`](docs/cases/2026-08-28-the-skip-was-the-whole-story.md),
   Point 4 and its verification appendix.
 
+  *Fifth incident — two green checks and an obscene document, related 2026-08-29.* A
+  complaint came in about a job; jobs carry numbers. The person answering it meant to write
+  *"the below job number"* and typed *"the blow job number"*.
+
+  *Why it is the best on-ramp specimen in this collection.* **Spell check passed it — "blow"
+  is a word. Grammar check passed it — the sentence parses.** Two automated checks ran, both
+  were green, and the document was wrong in the most visible way available. A spell checker
+  verifies that a word EXISTS; it has no way to ask whether it is the right one. That is *"a
+  check that cannot fail is not a check, and the danger is that it PASSES"* in a tool every
+  reader already owns, with **zero prerequisites** — no repo, no CI, no code. Every other
+  specimen in B2 needs a paragraph of setup; this one needs none.
+
+  *The general form it yields.* A check's power is bounded by the question it can ask. Both
+  tools were working correctly and neither had a semantic question in it, so no amount of
+  running them harder would have helped. **Ask what a green result rules out, not whether it
+  is green.**
+
+  *Provenance.* Second-hand, related by a colleague on reading the page; undated as to when it
+  happened, no artifact. Kept anyway because the mechanism is inspectable without one — any
+  reader can confirm for themselves that a spell checker cannot ask this question. Published on
+  the page in the plain wording, which is the author's call: sanitising it removes the reason it
+  is memorable.
+
 - **B3.** Identify annoyances and hindrances — repeated mistakes (heredoc!), files for review lost in some folder you have no clue where it's at (~/docs vs ~/dropbox/darkroom).
 - **B4.** Do not trust standard features built to prevent these issues. CLAUDE.md or equivalent is not reliable or enforceable. *(Refined by B7's second worked cure: prose fails when it is a RULE. A DEFINITION the session reads before it reasons — a glossary — is the one document that holds, because it replaces a prior instead of competing with one.)* Use all the bad words you want and the second sentence is still skipped. Build your own tools (using AI) and keep them in a repo.
 

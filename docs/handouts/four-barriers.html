@@ -711,6 +711,18 @@
           <li><b>Open the artifact yourself.</b></li>
         </ul>
 
+        <div class="spec">
+          <div class="spec-top">
+            <h4>Two checks ran. Both passed. The document was wrong in the most visible way available.</h4>
+            <span class="tag warn">silent</span>
+          </div>
+          <p>A complaint came in about a job. Jobs have numbers. The person answering it meant to write <i>&ldquo;the below job number&rdquo;</i> and typed <i>&ldquo;the blow job number&rdquo;</i> instead.</p>
+          <p><b>Spell check passed it: &ldquo;blow&rdquo; is a word. Grammar check passed it: the sentence parses.</b> Both tools did exactly what they are built to do, and neither of them was built to ask whether this is the word you meant.</p>
+          <p class="caught">Caught by: the recipient.</p>
+          <p style="margin-top:12px"><b>A spell checker verifies that a word exists. It has no way to ask whether it is the right one.</b> That is the whole of the caveat below, in a tool everybody already owns &mdash; and it is why a green check is evidence about the check, not about the work.</p>
+          <div class="prov"><b>Source.</b> Related by a colleague, 2026-08-29, on reading this page. <b>Second-hand, undated as to when it happened, no artifact.</b> Kept because the mechanism is inspectable without one: any reader can confirm that a spell checker has no way to ask this question.</div>
+        </div>
+
         <h3>Why the right-hand column matters more than it looks</h3>
         <p>Every check in the middle column is a <b>habit</b> &mdash; it works exactly as long as you keep doing it, and the week you are busy is the week it lapses. Every check in the right-hand column is a <b>mechanism</b>: it runs whether or not anyone remembers, and it is the difference this page argues for throughout (see <a href="#fixes" data-view="fixes">Fixes that hold</a>).</p>
         <p><b>But an automatic check is only worth what it can detect.</b> Four of the incidents on this page are green checks that were guarding nothing &mdash; a test suite that had never seen an input that could fail it, a test that skipped in silence for ten days, and two tests that had been describing a bug as correct behaviour since the day they were written. The last row of the table is the cure for all three: <b>break it on purpose and see whether it notices.</b></p>
