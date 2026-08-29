@@ -233,7 +233,7 @@ find out about each other. That is what a board is for, and it is why C3 in
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Mac/6414cc91 — recover the outline drafts by replaying 01b's tool calls; file them as node 1c
-- **Status:** ACTIVE
+- **Status:** DONE 2026-08-29
 - **Opened:** 2026-08-29
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
 - **Writes:** `docs/chain/01c-recovered-drafts/` (new folder, 6 files) and one amended
