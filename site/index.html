@@ -1020,6 +1020,28 @@
           </div>
         </details>
 
+        <details class="more">
+          <summary>The concept it kept getting wrong, and why a document fixed it <span class="cost">10 min</span></summary>
+          <div class="inner">
+            <p>A web app for teaching calcium imaging rests on one premise: <b>spikes go in, a kernel shapes them, a calcium trace comes out.</b> All three of its screens assume it.</p>
+            <p><b>AP-independent calcium is calcium with no spike behind it.</b> It is real physiology, it is common, and it breaks the premise the whole tool is built on. Every session &mdash; being new, every time &mdash; reasoned from the premise and got it wrong. Correcting it cost a correction each time and taught nothing, because the next session had never seen the correction.</p>
+            <p><b>The cure was not a better explanation. It was two documents the session reads before it reasons about anything.</b> A <i>glossary</i>, where each term maps to exactly one definition. A <i>foundations</i> document, saying how the concepts connect and &mdash; the load-bearing part &mdash; <b>what you must not infer</b>. Every fact lives in exactly one of the two; neither restates the other.</p>
+
+            <p><b>This is the exception to &ldquo;a request is not a rule&rdquo;, and the distinction is worth having.</b> A project instructions file is an <i>instruction to behave</i> &mdash; it competes with everything the model already believes, and it loses, which is what the rest of this section is about. A glossary is not an instruction. It is <b>the fact the session reasons from</b>. A rule asks the model to override a prior; a definition replaces the prior. That is why one holds and the other does not.</p>
+
+            <p><b>It bans words, and says why.</b> One term was retired outright for colliding with a second axis and causing a conflation; another may never be used loosely, because loose use had already drifted it to the wrong unit. A word that has caused an error twice is not clarified, it is withdrawn.</p>
+
+            <p class="caught">Caught by: nothing. It was noticed as a recurring correction &mdash; the same explanation given to a new session, repeatedly &mdash; which is the only signal this class of defect emits.</p>
+
+            <p style="margin-top:14px"><b>What it cost before it existed, measured on one population:</b> the distance between two structures is <b>8.10 px edge-to-edge and 15.84 px centre-to-centre</b> &mdash; nearly 2&times;, and neither number is wrong. A slide deck built on the centroid figure claimed the structures sat <i>&ldquo;2&ndash;3 cell widths&rdquo;</i> apart, by dividing a centroid distance by a diameter. Those are different quantities. <b>The claim was retracted.</b> Edge-to-edge gives 1.11 cell widths &mdash; adjacent, not remote. Same data, opposite scientific story, and <b>the failure was the unstated convention, not the centroid.</b></p>
+
+            <p><b>And the first version of the cure was too strong.</b> It said distances are edge-to-edge, <i>never</i> centroid &mdash; a ban. Two days later the author replaced it with a rule that states the convention and picks the one that fits the question, because centre-to-centre is the correct measure when structures overlap and edge-to-edge saturates at zero. A cure that forbids the right answer gets routed around, which is rule 8 of this section arriving in the author&rsquo;s own repository.</p>
+
+            <p><b>It is mechanised, not remembered.</b> The pair is vendored into each consuming project, gated for freshness so a stale copy is caught rather than discovered, and read by a session-start hook. Nobody has to remember to open the glossary.</p>
+            <div class="prov"><b>Source.</b> <span class="path">syncytium2/foundations</span>, private, seeded 2026-07-22 from two existing repositories. Its founding decision record states the friction in its own words: <i>&ldquo;sessions repeatedly get project-central concepts wrong because each session is stateless and reasons from priors unless grounded in a document it reliably reads.&rdquo;</i> Figures and quoted rules are verbatim from that repository&rsquo;s glossary. <b>Written by the party being evaluated</b>; the retraction it describes is recorded there, not independently reviewed here.<div class="seq"><b>The sequence, from that repo&rsquo;s log:</b><ol class="sq"><li><span class="sq-d">22 Jul 14:19</span><span class="sq-h">9ee36a6</span><span class="sq-s">Seed canonical foundations/glossary pair from colonel_kernel + interface2</span></li><li><span class="sq-d">30 Jul 09:40</span><span class="sq-h">5172d3e</span><span class="sq-s">Activate the SessionStart guard</span></li><li><span class="sq-d">04 Aug 13:13</span><span class="sq-h">a48afde</span><span class="sq-s">GLOSSARY: distances between structures are EDGE-TO-EDGE, never centroid</span></li><li><span class="sq-d">06 Aug 11:33</span><span class="sq-h">8559010</span><span class="sq-s">Gate the vendored session-protocol pair &mdash; this repo had no freshness check at all</span></li><li><span class="sq-d">06 Aug 12:04</span><span class="sq-h">94a7415</span><span class="sq-s">GLOSSARY: state the distance convention, do not ban one</span></li></ol></div></div>
+          </div>
+        </details>
+
         <h3>Nine rules for a cure that survives a busy month</h3>
         <p>Each of these was bought with a cure that failed.</p>
         <ol>
