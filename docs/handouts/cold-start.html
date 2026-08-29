@@ -282,6 +282,45 @@
   }
   .warn b { font-weight: 600; }
 
+  /* ---- the fillable storage panel (2.1) ---- */
+  .fill { border: 1px solid var(--rule-firm); background: var(--surface); padding: 12px 13px; margin: 10px 0 0; }
+  .fill-k {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--faint); margin: 0 0 9px;
+  }
+  .fill label { display: block; margin-bottom: 9px; }
+  .fill label span { display: block; font-size: 13px; color: var(--muted); margin-bottom: 3px; }
+  .fill input {
+    width: 100%; padding: 6px 8px; background: var(--sunk); color: var(--ink);
+    border: 1px solid var(--rule); border-radius: 0;
+    font-family: var(--mono); font-size: 12.5px; line-height: 1.4;
+  }
+  .fill input::placeholder { color: var(--faint); }
+  .fill input:focus { border-color: var(--accent); outline: none; background: var(--surface); }
+  .fill-note { margin: 4px 0 0; font-size: 13px; color: var(--muted); }
+
+  /* The generated prompt. The whole panel is the copy control, so there is no
+     button inside it to nest. */
+  .gen {
+    border: 1px solid var(--accent); background: var(--surface);
+    margin: 12px 0 0; cursor: pointer;
+  }
+  .gen:hover, .gen:focus-visible { box-shadow: inset 0 0 0 1px var(--accent); }
+  .gen-head {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--accent-soft); padding: 6px 10px; border-bottom: 1px solid var(--accent);
+  }
+  .gen-hint {
+    margin-left: auto; font-family: var(--mono); font-size: 10.5px;
+    letter-spacing: .08em; text-transform: uppercase; color: var(--accent);
+    border: 1px solid var(--accent); padding: 2px 7px;
+  }
+  .gen.copied .gen-hint { background: var(--good); border-color: var(--good); color: var(--ground); }
+  .gen pre {
+    margin: 0; border: 0; background: var(--surface);
+    white-space: pre-wrap; padding: 11px 12px;
+  }
+
   /* ---- traps ---- */
   .traps { border-top: 2px solid var(--ink); padding-top: 14px; margin-top: 40px; }
   .traps h2 { margin-bottom: 10px; }
@@ -444,23 +483,32 @@
       <h2>Phase 2 &middot; Storage</h2>
       <span class="phase-time">20 min</span>
     </div>
-    <p class="phase-note"><b>Before an agent sees your data</b> &mdash; which is a different moment from when the data was made, and is almost certainly still ahead of you. You are not being asked to reorganize anything. You are being asked to be able to <i>say</i> where things live, before something else starts guessing.</p>
+    <p class="phase-note"><b>Before an agent sees your data</b> &mdash; which is a different moment from when the data was made, and is almost certainly still ahead of you. You are not being asked to reorganize anything. You are being asked to be able to <i>say</i> where things live, before something else starts guessing. <b>If the project has no data</b> &mdash; a website, a document, a small tool &mdash; this phase is one box and 2.3 does not apply to you.</p>
     <ol class="steps">
       <li data-id="2.1" data-open="0" data-done="0">
         <div class="srow">
-          <button class="head" type="button" aria-expanded="false" aria-controls="d-2.1"><span class="n">2.1</span>Write the storage rule &mdash; three sentences</button>
+          <button class="head" type="button" aria-expanded="false" aria-controls="d-2.1"><span class="n">2.1</span>Write down where things live</button>
           <span class="badge">Incomplete</span>
         </div>
         <div class="detail" id="d-2.1">
             <p class="why">Not which product you use. <b>Which class of storage holds what.</b> Big and regenerable in one place, small and shareable in another, and stated plainly enough that you never decide twice. If your data is already spread across four disks and an external drive, this is not a tidying job &mdash; write down where things <i>are</i>, and the rule for anything new.</p>
-            <pre>Raw and intermediate data live in the data root.
-Anything a person is meant to open lives in the review folder.
-Nothing large ever goes in the review folder.</pre>
+            <div class="fill">
+              <p class="fill-k">Fill these in. They stay in this browser.</p>
+              <label><span>Raw data lives at</span><input type="text" data-k="raw" spellcheck="false" placeholder="paste the path &mdash; or leave empty"></label>
+              <label><span>Working data the agent may write</span><input type="text" data-k="work" spellcheck="false" placeholder="paste the path &mdash; or leave empty"></label>
+              <label><span>Figures and documents for review</span><input type="text" data-k="review" spellcheck="false" placeholder="paste the path"></label>
+              <p class="fill-note"><b>No data at all?</b> If the project is a website, a document or a small tool, leave the first two empty. The third is the only one that matters, and it is where anything you want to look at later comes out.</p>
+            </div>
+            <div class="gen" role="button" tabindex="0" aria-label="Copy this prompt">
+              <div class="gen-head"><span class="prompt-k">Your first prompt</span><span class="gen-hint">Click to copy</span></div>
+              <pre id="gen-one"></pre>
+            </div>
+            <p class="why">That is the rule and it is also, as it stands, the first thing you will send an agent &mdash; step 4.2. Filling it in here means there is nothing left to edit when you get there.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" type="button" aria-pressed="false" aria-labelledby="c-2-1-0">&#10003;</button><span class="cbt" id="c-2-1-0">Three sentences exist, in a file</span></li>
-            <li><button class="cb" type="button" aria-pressed="false" aria-labelledby="c-2-1-1">&#10003;</button><span class="cbt" id="c-2-1-1">I can say where a 40&nbsp;GB output goes without thinking</span></li>
-            <li><button class="cb" type="button" aria-pressed="false" aria-labelledby="c-2-1-2">&#10003;</button><span class="cbt" id="c-2-1-2">I can say where a figure someone else needs to see goes</span></li>
+            <li><button class="cb" type="button" aria-pressed="false" aria-labelledby="c-2-1-0">&#10003;</button><span class="cbt" id="c-2-1-0">The boxes above are filled in, or deliberately left empty</span></li>
+            <li><button class="cb" type="button" aria-pressed="false" aria-labelledby="c-2-1-1">&#10003;</button><span class="cbt" id="c-2-1-1">I can say where the biggest thing I produce goes, without thinking</span></li>
+            <li><button class="cb" type="button" aria-pressed="false" aria-labelledby="c-2-1-2">&#10003;</button><span class="cbt" id="c-2-1-2">I can say where something another person needs to see goes</span></li>
         </ul>
       </li>
       <li data-id="2.2" data-open="0" data-done="0">
@@ -473,7 +521,7 @@ Nothing large ever goes in the review folder.</pre>
             <p class="why">The failure this prevents is not losing files. It is producing a good result that the only person who needs it cannot reach.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" type="button" aria-pressed="false" aria-labelledby="c-2-2-0">&#10003;</button><span class="cbt" id="c-2-2-0">The data root exists</span></li>
+            <li><button class="cb" type="button" aria-pressed="false" aria-labelledby="c-2-2-0">&#10003;</button><span class="cbt" id="c-2-2-0">The data root exists, or I have decided I do not need one</span></li>
             <li><button class="cb" type="button" aria-pressed="false" aria-labelledby="c-2-2-1">&#10003;</button><span class="cbt" id="c-2-2-1">The review folder exists, inside synced storage</span></li>
             <li><button class="cb" type="button" aria-pressed="false" aria-labelledby="c-2-2-2">&#10003;</button><span class="cbt" id="c-2-2-2">I have opened the review folder on a second device</span></li>
         </ul>
@@ -487,7 +535,7 @@ Nothing large ever goes in the review folder.</pre>
             <p class="why">Multi-gigabyte outputs will strangle a sync client, and a strangled sync client fails quietly in exactly the folder you were relying on.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" type="button" aria-pressed="false" aria-labelledby="c-2-3-0">&#10003;</button><span class="cbt" id="c-2-3-0">The data root is outside the synced folder, or excluded in the client</span></li>
+            <li><button class="cb" type="button" aria-pressed="false" aria-labelledby="c-2-3-0">&#10003;</button><span class="cbt" id="c-2-3-0">The data root is outside the synced folder, or excluded in the client &mdash; or there is no data root</span></li>
             <li><button class="cb" type="button" aria-pressed="false" aria-labelledby="c-2-3-1">&#10003;</button><span class="cbt" id="c-2-3-1">The sync client is not sitting on a huge pending queue</span></li>
         </ul>
       </li>
@@ -612,40 +660,15 @@ claude</pre>
           <span class="badge">Incomplete</span>
         </div>
         <div class="detail" id="d-4.2">
-            <p class="why">Fill in the four angle-bracket lines with your own paths and answers from Phase&nbsp;2 and the door questions. Everything else can go across as it stands.</p>
-            <div class="prompt">
-              <div class="prompt-head">
-                <span class="prompt-k">Paste this</span>
-                <button class="copy" type="button">Copy</button>
-              </div>
-              <pre>I am setting up a new project and I want the
-setup written down before anything depends on
-it. None of this is code.
-
-My setup:
-- Data lives at: &lt;PATH&gt;
-- Figures and documents I need to read or
-  share go to: &lt;PATH&gt;
-- I work on: &lt;one machine / these machines&gt;
-- I am working: &lt;alone / with ...&gt;
-
-Create docs/SETUP.md and write these down as
-rules, not description: which path holds what,
-what must never be written to the synced
-folder, and what a new session should read
-first.
-
-Then create a CLAUDE.md at the project root
-that points at it in one line.
-
-Do not create anything else. When you are
-done, list every file you created and print
-docs/SETUP.md back to me in full so I can
-check the paths.</pre>
+            <p class="why">This is the prompt you built in <b>2.1</b>. If it still says <i>paste the path</i>, go back and fill the boxes there &mdash; nothing else needs editing.</p>
+            <div class="gen" role="button" tabindex="0" aria-label="Copy this prompt">
+              <div class="gen-head"><span class="prompt-k">Paste this</span><span class="gen-hint">Click to copy</span></div>
+              <pre id="gen-two"></pre>
             </div>
+            <p class="why">Send it, and then do not touch anything until you have done 4.3.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" type="button" aria-pressed="false" aria-labelledby="c-4-2-0">&#10003;</button><span class="cbt" id="c-4-2-0">I replaced every angle-bracket line with my own answer before sending</span></li>
+            <li><button class="cb" type="button" aria-pressed="false" aria-labelledby="c-4-2-0">&#10003;</button><span class="cbt" id="c-4-2-0">The prompt has my real paths in it, not <i>paste the path</i></span></li>
             <li><button class="cb" type="button" aria-pressed="false" aria-labelledby="c-4-2-1">&#10003;</button><span class="cbt" id="c-4-2-1"><code>docs/SETUP.md</code> exists</span></li>
             <li><button class="cb" type="button" aria-pressed="false" aria-labelledby="c-4-2-2">&#10003;</button><span class="cbt" id="c-4-2-2"><code>CLAUDE.md</code> exists</span></li>
             <li><button class="cb" type="button" aria-pressed="false" aria-labelledby="c-4-2-3">&#10003;</button><span class="cbt" id="c-4-2-3">Nothing else was created &mdash; or I noticed what was</span></li>
@@ -1078,8 +1101,91 @@ or four A records:
   document.getElementById('pc-reset').addEventListener('click', function () {
     for (var k in state) delete state[k];
     save();
+    for (var pk in paths) delete paths[pk];
+    try { localStorage.setItem(PKEY, JSON.stringify(paths)); } catch (e) {}
+    [].forEach.call(document.querySelectorAll('.fill input'), function (i) { i.value = ''; });
+    render();
     steps.forEach(function (s) { s.li.dataset.open = '0'; s.paint(); });
     count();
+  });
+
+  // ---- the storage paths, filled in at 2.1 and used again at 4.2 ----
+  var PKEY = 'cold-start-paths-v1';
+  var paths = (function () {
+    try { return JSON.parse(localStorage.getItem(PKEY) || '{}') || {}; }
+    catch (e) { return {}; }
+  })();
+
+  var HOLD = '(paste the path)';
+
+  function prompt_one() {
+    var raw = (paths.raw || '').trim();
+    var work = (paths.work || '').trim();
+    var review = (paths.review || '').trim();
+    var L = [];
+    L.push('Here is where things live on this machine. Write it');
+    L.push('down before anything depends on it. Do not move or');
+    L.push('reorganize anything.');
+    L.push('');
+    if (raw) { L.push('Raw data, read-only \u2014 never write here:'); L.push('  ' + raw); }
+    if (work) { L.push('Working data you may write:'); L.push('  ' + work); }
+    L.push('Figures and documents I need to read or share:');
+    L.push('  ' + (review || HOLD));
+    if (!raw && !work) {
+      L.push('');
+      L.push('There is no separate data folder. Everything else');
+      L.push('lives in this project folder.');
+    }
+    L.push('');
+    L.push('Create docs/SETUP.md and state these as rules, not');
+    L.push('description: which path holds what, what must never');
+    L.push('be written where, and what a new session should read');
+    L.push('first.');
+    L.push('');
+    L.push('Then create a CLAUDE.md at the project root that');
+    L.push('points at it in one line.');
+    L.push('');
+    L.push('Do not create anything else. When you are done, list');
+    L.push('every file you created and print docs/SETUP.md back');
+    L.push('to me in full so I can check the paths.');
+    return L.join('\n');
+  }
+
+  var outs = [document.getElementById('gen-one'), document.getElementById('gen-two')];
+  function render() {
+    var t = prompt_one();
+    outs.forEach(function (el) { if (el) el.textContent = t; });
+  }
+
+  [].forEach.call(document.querySelectorAll('.fill input'), function (inp) {
+    var k = inp.dataset.k;
+    if (paths[k]) inp.value = paths[k];
+    inp.addEventListener('input', function () {
+      paths[k] = inp.value;
+      if (!inp.value.trim()) delete paths[k];
+      try { localStorage.setItem(PKEY, JSON.stringify(paths)); } catch (e) {}
+      render();
+    });
+  });
+  render();
+
+  [].forEach.call(document.querySelectorAll('.gen'), function (box) {
+    function grab() {
+      var text = box.querySelector('pre').textContent;
+      var ok = function () {
+        box.classList.add('copied');
+        var hint = box.querySelector('.gen-hint');
+        hint.textContent = 'Copied';
+        setTimeout(function () { box.classList.remove('copied'); hint.textContent = 'Click to copy'; }, 1500);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(ok, function () { fallback(text, ok); });
+      } else { fallback(text, ok); }
+    }
+    box.addEventListener('click', grab);
+    box.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); grab(); }
+    });
   });
 
   [].forEach.call(document.querySelectorAll('.copy'), function (btn) {
