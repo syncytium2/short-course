@@ -358,6 +358,23 @@
   body[data-depth="all"] .prov { display: block; }
   .prov b { color: var(--muted); font-weight: 500; }
 
+  /* The sequence blocks. The repository is private, so these are the commit log
+     brought TO the reader rather than a link they cannot follow — the same reason
+     paths on this page are named and not linked. Dates and subjects are verbatim
+     from `git log`; nothing is paraphrased. */
+  .seq { margin-top: 10px; }
+  .seq > b { color: var(--muted); font-weight: 600; }
+  ol.sq { list-style: none; margin: 6px 0 0; padding: 0; }
+  ol.sq li {
+    display: grid; grid-template-columns: 8.5em 5.5em minmax(0,1fr); gap: 0 10px;
+    padding: 3px 0; border-top: 1px solid var(--rule); align-items: baseline;
+  }
+  ol.sq li:first-child { border-top: 0; }
+  .sq-d { color: var(--muted); font-variant-numeric: tabular-nums; }
+  .sq-h { color: var(--accent); }
+  .sq-s { color: var(--faint); }
+  @media (max-width: 620px) { ol.sq li { grid-template-columns: 1fr; gap: 0; } }
+
   /* ---------------- tables ---------------- */
 
   .tw { overflow-x: auto; margin: 0 0 18px; max-width: 74ch; }
@@ -604,7 +621,7 @@
           <p>Twice in one day, in the same project, an agent could not resolve where the real data lived &mdash; and instead of stopping to ask, it derived its own numbers and reported them in a table. The first time it reversed the finding.</p>
           <p><b>The second one is the disturbing one.</b> A written contract saying which folder to use was correct, current, and sitting in the repository the whole time. It still happened, because nothing <i>declared</i> which folder was the live one in a form the agent could resolve.</p>
           <p class="caught">Caught by: a human supplying the canonical path after the review had already closed.</p>
-          <div class="prov"><b>Source.</b> <span class="path">docs/cases/2026-08-27-computed-instead-of-asking.md</span>, two incidents merged from two independent accounts. The eleven-role review covers <b>incident A only</b>; incident B is a self-report with artifacts.</div>
+          <div class="prov"><b>Source.</b> <span class="path">docs/cases/2026-08-27-computed-instead-of-asking.md</span>, two incidents merged from two independent accounts. The eleven-role review covers <b>incident A only</b>; incident B is a self-report with artifacts.<div class="seq"><b>The sequence, from this repo&rsquo;s log:</b><ol class="sq"><li><span class="sq-d">27 Aug 22:52</span><span class="sq-h">42e981c</span><span class="sq-s">The agent could not find the data, so it computed its own</span></li><li><span class="sq-d">27 Aug 22:56</span><span class="sq-h">f5d4dfd</span><span class="sq-s">B4 says instructions are unenforceable and its evidence was always a vague instruction</span></li><li><span class="sq-d">28 Aug 06:33</span><span class="sq-h">5bfea1a</span><span class="sq-s">Two case files were assumed to be duplicates and were two different incidents</span></li></ol></div></div>
         </div>
 
         <details class="more">
@@ -748,7 +765,7 @@
             <p>63 of 63 numbers verified correct. 91 site tests green and the project&rsquo;s own scanner clear. A kernel reimplementation agreeing with the reference to 8&times;10<sup>-9</sup>. Then an eleven-role adversarial review returned <b>31 blocking findings &mdash; and the five worst were not arithmetic at all.</b></p>
             <p><b>The anti-drift machinery worked perfectly and prevented nothing that mattered</b> &mdash; because it was all pointed at whether the numbers on the page were the numbers from the analysis, and the actual defect was that it was a page about the wrong thing.</p>
             <p>The human found what the reviewers structurally could not. Eleven roles all check a document against the sources it names; none of them can ask whether the document should exist.</p>
-            <div class="prov"><b>Source.</b> Case file <span class="path">docs/cases/2026-08-27-every-number-was-right.md</span>. Written by the party being evaluated &mdash; the same weakness the reconstruction node in this repo carries a banner for. Two of its own unverified rows were later re-run; <b>one did not reproduce.</b></div>
+            <div class="prov"><b>Source.</b> Case file <span class="path">docs/cases/2026-08-27-every-number-was-right.md</span>. Written by the party being evaluated &mdash; the same weakness the reconstruction node in this repo carries a banner for. Two of its own unverified rows were later re-run; <b>one did not reproduce.</b><div class="seq"><b>The sequence, from this repo&rsquo;s log:</b><ol class="sq"><li><span class="sq-d">27 Aug 23:11</span><span class="sq-h">74a8440</span><span class="sq-s">Every number was right, every gate was green, and the page was wrong</span></li><li><span class="sq-d">27 Aug 23:58</span><span class="sq-h">702b1b0</span><span class="sq-s">Re-running two of the case&rsquo;s own unverified rows, and one did not reproduce</span></li></ol></div></div>
           </div>
         </details>
 
@@ -866,7 +883,7 @@
             <p><b>Three instances now</b> &mdash; this gate&rsquo;s selftest, the safety tool&rsquo;s two green tests, and the positioning section of this project&rsquo;s own findings file, where no claim could have failed. All three are mine, written inside a fortnight, so it is a pattern in how I write checks rather than a measured pattern in the world.</p>
             <p><b>The correction it forces.</b> &ldquo;Build your own tools&rdquo; needs a caveat: a homemade gate is not more trustworthy for being homemade. It is <i>less</i> reviewed. Your own tools inherit the same distrust as everything else.</p>
             <p><b>The cure that lasts is mutation.</b> Break each tool on purpose and require its own test to notice. Anything that still passes was never testing what you thought.</p>
-            <div class="prov"><b>Source.</b> <span class="path">points.md</span> B7 rules 8 and 9; case file <span class="path">docs/cases/2026-08-28-the-tests-were-defending-the-bug.md</span>. Written by the party being evaluated. Rollout was paused before anything shipped. <b>Follow-on, 2026-08-28:</b> the mutation harness itself was then found to score catches without ever checking that a test was green to begin with &mdash; two of its eleven rows proved nothing. Same defect, one level up.</div>
+            <div class="prov"><b>Source.</b> <span class="path">points.md</span> B7 rules 8 and 9; case file <span class="path">docs/cases/2026-08-28-the-tests-were-defending-the-bug.md</span>. Written by the party being evaluated. Rollout was paused before anything shipped. <b>Follow-on, 2026-08-28:</b> the mutation harness itself was then found to score catches without ever checking that a test was green to begin with &mdash; two of its eleven rows proved nothing. Same defect, one level up.<div class="seq"><b>The sequence, from this repo&rsquo;s log:</b><ol class="sq"><li><span class="sq-d">28 Aug 07:16</span><span class="sq-h">fb03597</span><span class="sq-s">A safety tool shipped with the flaw it was built to catch, and two green tests were defending it</span></li><li><span class="sq-d">28 Aug 08:38</span><span class="sq-h">7f68340</span><span class="sq-s">Two of the three tools built last night had selftests that could not fail</span></li><li><span class="sq-d">28 Aug 09:04</span><span class="sq-h">1d0a0f3</span><span class="sq-s">Hours after documenting B4, the agent proposed a CLAUDE.md rule as the fix</span></li><li><span class="sq-d">28 Aug 14:47</span><span class="sq-h">1bbb19a</span><span class="sq-s">The mutation harness scored eleven catches without checking any test was green first</span></li></ol></div></div>
           </div>
         </details>
 
@@ -1045,7 +1062,7 @@
             <p><b>How it got there is the part worth keeping.</b> The review inferred what a tool <i>returned</i> from a source that shows only <i>that</i> a tool ran &mdash; and it had written that exact limitation into its own scope banner, three paragraphs above. <b>The lead finding was produced by precisely the inference its own stated limit forbids.</b></p>
             <p>Nobody was careless. The limit was stated, agreed, and walked past inside a single document.</p>
             <p>It is now struck through and marked rather than deleted, because a review that quietly loses its own lead finding is not a record of anything.</p>
-            <div class="prov"><b>Source.</b> <span class="path">docs/reviews/reconstruction-vs-log_2026-08-26.md</span>, corrected in place 2026-08-28 against the complete log. It stood unmarked for two days &mdash; not for want of evidence, which was in the same repository the whole time, but because how to correct it had been left undecided.</div>
+            <div class="prov"><b>Source.</b> <span class="path">docs/reviews/reconstruction-vs-log_2026-08-26.md</span>, corrected in place 2026-08-28 against the complete log. It stood unmarked for two days &mdash; not for want of evidence, which was in the same repository the whole time, but because how to correct it had been left undecided.<div class="seq"><b>The sequence, from this repo&rsquo;s log:</b><ol class="sq"><li><span class="sq-d">26 Aug 08:39</span><span class="sq-h">e68b7f3</span><span class="sq-s">The reconstruction invented an obstacle, dropped the best turn, and misdiagnosed its own errors</span></li><li><span class="sq-d">26 Aug 10:41</span><span class="sq-h">c56eaee</span><span class="sq-s">A source we chose not to import looked exactly like a source we could not get</span></li><li><span class="sq-d">26 Aug 22:45</span><span class="sq-h">50de78f</span><span class="sq-s">The scorecard said nobody checked; every check ran, and no two failed the same way</span></li><li><span class="sq-d">28 Aug 14:45</span><span class="sq-h">2e1c4ac</span><span class="sq-s">A review&rsquo;s lead finding was falsified for four days by a source sitting in the same repo</span></li></ol></div></div>
           </div>
         </details>
 
