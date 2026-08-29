@@ -1,0 +1,787 @@
+<title>Cold Start</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+  /* ---------------------------------------------------------------
+     Palette and type inherited from search-to-shipped.html and
+     four-barriers.html so the three handouts read as one system.
+     One addition: --good, used ONLY for the done state, because a
+     checklist that marks progress in the accent colour cannot then
+     use the accent to mean "look here".
+     --------------------------------------------------------------- */
+  :root {
+    --ground:  #FAFBFC;
+    --surface: #FFFFFF;
+    --sunk:    #F2F5F8;
+    --ink:     #171C23;
+    --muted:   #5C6875;
+    --faint:   #8B96A3;
+    --rule:    #E1E6EB;
+    --rule-firm:#C9D2DB;
+    --accent:  #15577D;
+    --accent-soft: #E7F0F6;
+    --caution: #8A5D0F;
+    --caution-soft: #FAF2E2;
+    --good:    #2E6A4F;
+    --good-soft: #E6F1EB;
+
+    --sans: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:  #0D1218;
+      --surface: #141A22;
+      --sunk:    #1A222B;
+      --ink:     #E3E8EE;
+      --muted:   #93A0AE;
+      --faint:   #6D7987;
+      --rule:    #232C36;
+      --rule-firm:#313D4A;
+      --accent:  #69B0DD;
+      --accent-soft: #16283A;
+      --caution: #D2A64E;
+      --caution-soft: #2A2213;
+      --good:    #74C39B;
+      --good-soft: #14261E;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground:  #0D1218;
+    --surface: #141A22;
+    --sunk:    #1A222B;
+    --ink:     #E3E8EE;
+    --muted:   #93A0AE;
+    --faint:   #6D7987;
+    --rule:    #232C36;
+    --rule-firm:#313D4A;
+    --accent:  #69B0DD;
+    --accent-soft: #16283A;
+    --caution: #D2A64E;
+    --caution-soft: #2A2213;
+    --good:    #74C39B;
+    --good-soft: #14261E;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.55;
+    margin: 0;
+    padding: 0 0 88px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+
+  /* The whole page is sized for a window docked beside a terminal.
+     560px is the column; a wide viewport just centres it. */
+  .page { max-width: 560px; margin: 0 auto; padding: 0 20px; }
+
+  /* ---- sticky progress strip ---- */
+  .bar {
+    position: sticky; top: 0; z-index: 5;
+    background: var(--ground);
+    border-bottom: 1px solid var(--rule);
+  }
+  .bar-in {
+    max-width: 560px; margin: 0 auto; padding: 9px 20px 8px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .bar-count {
+    font-family: var(--mono); font-size: 11.5px; letter-spacing: .06em;
+    color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap;
+  }
+  .bar-count b { color: var(--ink); font-weight: 600; }
+  .bar-track { flex: 1; height: 3px; background: var(--rule); position: relative; }
+  .bar-fill { position: absolute; inset: 0 auto 0 0; width: 0; background: var(--good); }
+  .bar-reset {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--faint);
+    background: none; border: 0; padding: 3px 2px; cursor: pointer;
+  }
+  .bar-reset:hover { color: var(--ink); }
+
+  /* ---- masthead ---- */
+  .mast { border-bottom: 2px solid var(--ink); padding: 30px 0 16px; margin-bottom: 8px; }
+  .eyebrow {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .13em;
+    text-transform: uppercase; color: var(--muted); margin: 0 0 10px;
+  }
+  h1 { font-size: 27px; font-weight: 600; letter-spacing: -.015em; margin: 0 0 10px; text-wrap: balance; }
+  .standfirst { color: var(--muted); margin: 0; }
+
+  .method {
+    background: var(--accent-soft); border-left: 2px solid var(--accent);
+    padding: 13px 15px; margin: 24px 0 30px; font-size: 14px;
+  }
+  .method p { margin: 0 0 7px; }
+  .method p:last-child { margin: 0; }
+  .method b { font-weight: 600; }
+
+  /* ---- the door questions ---- */
+  .door { margin: 0 0 34px; }
+  .door-head {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--caution); margin: 0 0 8px;
+  }
+  .door dl { margin: 0; border-top: 1px solid var(--rule); }
+  .door dt {
+    font-weight: 500; padding: 10px 0 0;
+  }
+  .door dd {
+    margin: 0 0 0; padding: 2px 0 10px; color: var(--muted); font-size: 14px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* ---- phases ---- */
+  .phase { margin: 0 0 30px; }
+  .phase-head {
+    display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
+    border-bottom: 1px solid var(--ink); padding-bottom: 7px; margin-bottom: 2px;
+  }
+  h2 { font-size: 16.5px; font-weight: 600; margin: 0; letter-spacing: -.01em; }
+  .phase-time {
+    font-family: var(--mono); font-size: 11px; color: var(--muted);
+    margin-left: auto; white-space: nowrap;
+  }
+  .phase-note { font-size: 13.5px; color: var(--muted); margin: 9px 0 0; }
+
+  /* ---- steps ---- */
+  ol.steps { list-style: none; margin: 0; padding: 0; }
+  ol.steps > li {
+    display: grid; grid-template-columns: 24px minmax(0,1fr); gap: 0 11px;
+    padding: 12px 0; border-bottom: 1px solid var(--rule);
+    align-items: start;
+  }
+
+  .tick {
+    width: 20px; height: 20px; margin-top: 3px; padding: 0;
+    border: 1px solid var(--rule-firm); background: var(--surface);
+    cursor: pointer; color: transparent;
+    font-family: var(--mono); font-size: 12px; line-height: 1;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .tick:hover { border-color: var(--good); color: var(--faint); }
+  li[data-done="1"] .tick { background: var(--good-soft); border-color: var(--good); color: var(--good); }
+
+  .head {
+    display: block; width: 100%; text-align: left; padding: 0; border: 0;
+    background: none; cursor: pointer; color: inherit;
+    font-family: inherit; font-size: 15px; line-height: 1.45; font-weight: 500;
+    text-wrap: pretty;
+  }
+  .head .n {
+    font-family: var(--mono); font-size: 12px; font-weight: 500;
+    color: var(--accent); font-variant-numeric: tabular-nums; margin-right: 8px;
+  }
+  li[data-done="1"] .head { color: var(--faint); font-weight: 400; }
+  li[data-done="1"] .head .n { color: var(--faint); }
+  .head:hover { color: var(--accent); }
+
+  .body { margin-top: 7px; }
+  li[data-open="0"] .body { display: none; }
+  .why { margin: 0 0 8px; color: var(--muted); font-size: 14px; }
+  .why:last-child { margin-bottom: 0; }
+  .body b { font-weight: 600; }
+
+  .done {
+    font-size: 13.5px; color: var(--muted); margin: 9px 0 0;
+    padding-left: 15px; position: relative;
+  }
+  .done::before { content: "\2192"; position: absolute; left: 0; color: var(--accent); }
+  .done b { color: var(--ink); font-weight: 500; }
+
+  /* ---- code and prompts ---- */
+  pre {
+    font-family: var(--mono); font-size: 12.5px; line-height: 1.6;
+    background: var(--sunk); border: 1px solid var(--rule);
+    padding: 10px 12px; margin: 8px 0; overflow-x: auto; white-space: pre;
+  }
+  code { font-family: var(--mono); font-size: .92em; }
+  p code, li code, .done code, dd code {
+    background: var(--sunk); padding: 1px 5px; border: 1px solid var(--rule);
+  }
+
+  .prompt { border: 1px solid var(--accent); margin: 10px 0 4px; background: var(--surface); }
+  .prompt-head {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--accent-soft); padding: 6px 10px;
+    border-bottom: 1px solid var(--accent);
+  }
+  .prompt-k {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--accent);
+  }
+  .copy {
+    margin-left: auto; font-family: var(--mono); font-size: 10.5px;
+    letter-spacing: .08em; text-transform: uppercase;
+    border: 1px solid var(--accent); background: var(--surface); color: var(--accent);
+    padding: 3px 8px; cursor: pointer;
+  }
+  .copy:hover { background: var(--accent); color: var(--ground); }
+  .prompt pre { margin: 0; border: 0; background: var(--surface); white-space: pre-wrap; }
+
+  /* ---- traps ---- */
+  .traps { border-top: 2px solid var(--ink); padding-top: 14px; margin-top: 40px; }
+  .traps h2 { margin-bottom: 10px; }
+  .traps ul { list-style: none; margin: 0; padding: 0; }
+  .traps li { padding: 11px 0; border-bottom: 1px solid var(--rule); }
+  .traps li:last-child { border-bottom: 0; }
+  .trap-k {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .09em;
+    text-transform: uppercase; color: var(--caution); display: block; margin-bottom: 3px;
+  }
+  .traps p { margin: 0; font-size: 14px; color: var(--muted); }
+  .traps p b { color: var(--ink); font-weight: 500; }
+
+  footer {
+    margin-top: 40px; padding-top: 14px; border-top: 1px solid var(--rule);
+    color: var(--faint); font-size: 12.5px;
+  }
+  footer p { margin: 0 0 6px; }
+  footer a { color: var(--faint); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .tick, .copy, .bar-fill { transition: background .12s ease, color .12s ease, border-color .12s ease, width .2s ease; }
+  }
+
+  @media (max-width: 460px) {
+    body { font-size: 14.5px; }
+    .page, .bar-in { padding-left: 14px; padding-right: 14px; }
+    ol.steps > li { grid-template-columns: 22px minmax(0,1fr); gap: 0 9px; }
+    .phase-time { margin-left: 0; }
+  }
+</style>
+
+<div class="bar">
+  <div class="bar-in">
+    <span class="bar-count"><b id="pc-n">0</b> / <span id="pc-d">0</span> done</span>
+    <span class="bar-track"><span class="bar-fill" id="pc-fill"></span></span>
+    <button class="bar-reset" id="pc-reset" type="button">Reset</button>
+  </div>
+</div>
+
+<div class="page">
+
+  <header class="mast">
+    <p class="eyebrow">Setup runbook &middot; keep this window open</p>
+    <h1>Cold Start</h1>
+    <p class="standfirst">An email address and a laptop, to a first agent session that leaves a record behind it. Every step in order, the two prompts to paste, and the condition that tells you each one worked.</p>
+  </header>
+
+  <div class="method">
+    <p><b>None of this is coding, and none of it is optional polish.</b> Every item is a decision the agent will otherwise make for you, silently, in your first hour &mdash; where your data lives, what it may run without asking, whether tonight&rsquo;s work reaches tomorrow&rsquo;s machine.</p>
+    <p><b>Every step ends with a &ldquo;done when&rdquo;.</b> An action and its report are two different events. Something that says it worked is telling you it reached the end of its own instructions, not that anything happened. Checking the world instead of the summary is the whole skill; these steps are just where you start practising it.</p>
+  </div>
+
+  <section class="door">
+    <p class="door-head">Two questions, asked at the door</p>
+    <dl>
+      <dt>One machine, or more than one?</dt>
+      <dd>More than one and a remote stops being optional. Work that lives only in a folder on one laptop reaches no other machine and no other session &mdash; and you find that out on the day you need it.</dd>
+      <dt>Alone, or with other people?</dt>
+      <dd>Working with anyone &mdash; including your own second session running in another window &mdash; adds Phase&nbsp;6. Alone on one laptop, you can skip Phase&nbsp;6 entirely and most of step 1.3.</dd>
+    </dl>
+  </section>
+
+  <section class="phase">
+    <div class="phase-head">
+      <h2>Phase 1 &middot; Accounts</h2>
+      <span class="phase-time">30 min, plus other people&rsquo;s time</span>
+    </div>
+    <p class="phase-note">Start here on day one even if you will not touch a keyboard for a week. Everything in this phase depends on somebody who is not you.</p>
+    <ol class="steps">
+      <li>
+        <button class="tick" type="button" aria-pressed="false" aria-label="Mark step 1.1 done">&#10003;</button>
+        <div>
+          <button class="head" type="button" aria-expanded="true"><span class="n">1.1</span>Create a GitHub account</button>
+          <div class="body">
+            <p class="why">Pick the username you are willing to be known by later; changing it breaks links other people have already saved. Turn on two-factor authentication during signup, not afterwards.</p>
+            <p class="why"><a href="https://github.com/">github.com</a></p>
+            <p class="done">You are signed in, and your account settings show two-factor <b>on</b>.</p>
+          </div>
+        </div>
+      </li>
+      <li>
+        <button class="tick" type="button" aria-pressed="false" aria-label="Mark step 1.2 done">&#10003;</button>
+        <div>
+          <button class="head" type="button" aria-expanded="true"><span class="n">1.2</span>Get an agent account &mdash; and find out which kind it is</button>
+          <div class="body">
+            <p class="why">This is the step people treat as a formality, and it is the one that forks. A <b>personal plan</b> is an allowance: you hit a ceiling and stop, which is annoying and safe. An <b>institutional billing code</b> is usually uncapped: nothing stops, nothing warns, and the number surfaces when somebody else reads the monthly statement.</p>
+            <p class="why">Institutional routes also tend to sit behind an employment check and an approval, which is days of somebody else&rsquo;s time. That is why this step is on day one.</p>
+            <p class="why"><a href="https://claude.com/pricing">claude.com/pricing</a></p>
+            <p class="done">You can sign in with the account you will actually use, and you can say in one sentence <b>what happens when you use too much</b> &mdash; it stops, or it bills.</p>
+          </div>
+        </div>
+      </li>
+      <li>
+        <button class="tick" type="button" aria-pressed="false" aria-label="Mark step 1.3 done">&#10003;</button>
+        <div>
+          <button class="head" type="button" aria-expanded="true"><span class="n">1.3</span>Only if you need them: research storage, cluster account, allocation</button>
+          <div class="body">
+            <p class="why">Skip unless you are handling terabytes or running jobs for hours. A laptop, synced storage and one repository covers most research computing, and knowing which side of that line you are on <i>is</i> step 2.1.</p>
+            <p class="why">If you do need them: a cluster <b>account</b> and an <b>allocation</b> are two separate requests, and only the second one lets you submit anything. Storage volumes are usually sponsored by a lab, not requested by an individual.</p>
+            <p class="done">The requests are filed. Days to weeks &mdash; and <b>everything below proceeds while they pend</b>, so do not wait.</p>
+          </div>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="phase">
+    <div class="phase-head">
+      <h2>Phase 2 &middot; Storage</h2>
+      <span class="phase-time">20 min</span>
+    </div>
+    <p class="phase-note">Before the first data file exists. This is cheap now and archaeology later.</p>
+    <ol class="steps">
+      <li>
+        <button class="tick" type="button" aria-pressed="false" aria-label="Mark step 2.1 done">&#10003;</button>
+        <div>
+          <button class="head" type="button" aria-expanded="true"><span class="n">2.1</span>Write the storage rule &mdash; three sentences</button>
+          <div class="body">
+            <p class="why">Not which product you use. <b>Which class of storage holds what.</b> Big and regenerable in one place, small and shareable in another, and the rule stated plainly enough that you never have to decide twice.</p>
+            <pre>Raw and intermediate data live in the data root.
+Anything a person is meant to open lives in the review folder.
+Nothing large ever goes in the review folder.</pre>
+            <p class="done">Three sentences exist in a file, and you can say <b>where a 40&nbsp;GB output goes</b> without thinking about it.</p>
+          </div>
+        </div>
+      </li>
+      <li>
+        <button class="tick" type="button" aria-pressed="false" aria-label="Mark step 2.2 done">&#10003;</button>
+        <div>
+          <button class="head" type="button" aria-expanded="true"><span class="n">2.2</span>Create the two roots and name them once</button>
+          <div class="body">
+            <p class="why">A <b>data root</b>, and a <b>review folder</b> &mdash; where figures and documents a human is supposed to read come out. Put the review folder in synced storage (Dropbox, OneDrive, Drive). It is the one folder that has to open on a second machine, on a phone, and in a meeting.</p>
+            <p class="why">The failure this prevents is not losing files. It is producing a good result that the only person who needs it cannot reach.</p>
+            <p class="done">Both folders exist, and the review folder <b>opens on a second device</b> &mdash; check it now, not later.</p>
+          </div>
+        </div>
+      </li>
+      <li>
+        <button class="tick" type="button" aria-pressed="false" aria-label="Mark step 2.3 done">&#10003;</button>
+        <div>
+          <button class="head" type="button" aria-expanded="true"><span class="n">2.3</span>Keep the data root out of the sync client</button>
+          <div class="body">
+            <p class="why">Multi-gigabyte outputs will strangle a sync client, and a strangled sync client fails quietly in exactly the folder you were relying on.</p>
+            <p class="done">The data root is <b>outside the synced folder</b>, or explicitly excluded in the sync client&rsquo;s settings.</p>
+          </div>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="phase">
+    <div class="phase-head">
+      <h2>Phase 3 &middot; The machine</h2>
+      <span class="phase-time">45 min</span>
+    </div>
+    <ol class="steps">
+      <li>
+        <button class="tick" type="button" aria-pressed="false" aria-label="Mark step 3.1 done">&#10003;</button>
+        <div>
+          <button class="head" type="button" aria-expanded="true"><span class="n">3.1</span>Install an editor, and find the terminal</button>
+          <div class="body">
+            <p class="why"><a href="https://code.visualstudio.com/">VS&nbsp;Code</a> is the safe default and has a terminal built into it. You need the editor to <i>read</i> what the agent writes; almost everything else happens in the terminal.</p>
+            <p class="done">You can open a folder in the editor and open a terminal inside it in the same window.</p>
+          </div>
+        </div>
+      </li>
+      <li>
+        <button class="tick" type="button" aria-pressed="false" aria-label="Mark step 3.2 done">&#10003;</button>
+        <div>
+          <button class="head" type="button" aria-expanded="true"><span class="n">3.2</span>Install a package manager, then five tools</button>
+          <div class="body">
+            <p class="why">On a Mac, <a href="https://brew.sh/">Homebrew</a>. Then:</p>
+            <pre>brew install git gh node ripgrep jq</pre>
+            <p class="why">Language runtimes come later and only the ones you need. Most people need one.</p>
+            <p class="done">Each of <code>git</code>, <code>gh</code>, <code>node</code>, <code>rg</code> and <code>jq</code> prints a version when you type <code>&lt;name&gt; --version</code>.</p>
+          </div>
+        </div>
+      </li>
+      <li>
+        <button class="tick" type="button" aria-pressed="false" aria-label="Mark step 3.3 done">&#10003;</button>
+        <div>
+          <button class="head" type="button" aria-expanded="true"><span class="n">3.3</span>Tell git who you are, and sign in to GitHub</button>
+          <div class="body">
+            <pre>git config --global user.name  "Your Name"
+git config --global user.email "you@example.edu"
+gh auth login</pre>
+            <p class="why">The name and email are stamped on every commit you ever make, and they are not retroactive.</p>
+            <p class="done"><code>gh auth status</code> names your account. <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh">SSH keys</a> are an alternative to the <code>gh</code> login, not an extra requirement.</p>
+          </div>
+        </div>
+      </li>
+      <li>
+        <button class="tick" type="button" aria-pressed="false" aria-label="Mark step 3.4 done">&#10003;</button>
+        <div>
+          <button class="head" type="button" aria-expanded="true"><span class="n">3.4</span>Install the agent and sign in</button>
+          <div class="body">
+            <pre>npm install -g @anthropic-ai/claude-code
+claude</pre>
+            <p class="why">Then <code>/login</code> inside the session. Platform notes and the alternative installers are in the <a href="https://docs.claude.com/en/docs/claude-code/setup">setup docs</a>.</p>
+            <p class="done"><code>claude --version</code> prints a number, and a session starts in the folder you are standing in. <b>It matters which folder</b> &mdash; that is the one it can see.</p>
+          </div>
+        </div>
+      </li>
+      <li>
+        <button class="tick" type="button" aria-pressed="false" aria-label="Mark step 3.5 done">&#10003;</button>
+        <div>
+          <button class="head" type="button" aria-expanded="true"><span class="n">3.5</span>Stop the machine sleeping through your own work</button>
+          <div class="body">
+            <p class="why">A long session or an unattended run dies when the display sleeps or the lid closes, and it dies without a result. This costs a minute and saves a night.</p>
+            <pre>caffeinate -dimsu     # macOS, built in, no install</pre>
+            <p class="why"><a href="https://apps.apple.com/us/app/amphetamine/id937984704?mt=12">Amphetamine</a> is the free app version with closed-lid operation. Windows: PowerToys Awake. Linux: <code>systemd-inhibit</code>.</p>
+            <p class="done">One long run has survived a closed lid. Try this <b>before</b> concluding you need a cluster &mdash; a good share of people asking for one need this instead.</p>
+          </div>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="phase">
+    <div class="phase-head">
+      <h2>Phase 4 &middot; The first session</h2>
+      <span class="phase-time">40 min</span>
+    </div>
+    <p class="phase-note">Two prompts, and the reading you do between them. The reading is the part that is easy to skip and is the reason the rest works.</p>
+    <ol class="steps">
+      <li>
+        <button class="tick" type="button" aria-pressed="false" aria-label="Mark step 4.1 done">&#10003;</button>
+        <div>
+          <button class="head" type="button" aria-expanded="true"><span class="n">4.1</span>Make the project folder and start a session inside it</button>
+          <div class="body">
+            <pre>mkdir -p ~/projects/first-project
+cd ~/projects/first-project
+claude</pre>
+            <p class="done">The session banner shows the path you just made. If it shows your home folder, you started it in the wrong place &mdash; quit and start again from the right one.</p>
+          </div>
+        </div>
+      </li>
+      <li>
+        <button class="tick" type="button" aria-pressed="false" aria-label="Mark step 4.2 done">&#10003;</button>
+        <div>
+          <button class="head" type="button" aria-expanded="true"><span class="n">4.2</span>First prompt &mdash; write the setup down</button>
+          <div class="body">
+            <p class="why">Fill in the four angle-bracket lines with your own paths and answers from Phase&nbsp;2 and the door questions. Everything else can go across as it stands.</p>
+            <div class="prompt">
+              <div class="prompt-head">
+                <span class="prompt-k">Paste this</span>
+                <button class="copy" type="button">Copy</button>
+              </div>
+              <pre>I am setting up a new project and I want the
+setup written down before anything depends on
+it. None of this is code.
+
+My setup:
+- Data lives at: &lt;PATH&gt;
+- Figures and documents I need to read or
+  share go to: &lt;PATH&gt;
+- I work on: &lt;one machine / these machines&gt;
+- I am working: &lt;alone / with ...&gt;
+
+Create docs/SETUP.md and write these down as
+rules, not description: which path holds what,
+what must never be written to the synced
+folder, and what a new session should read
+first.
+
+Then create a CLAUDE.md at the project root
+that points at it in one line.
+
+Do not create anything else. When you are
+done, list every file you created and print
+docs/SETUP.md back to me in full so I can
+check the paths.</pre>
+            </div>
+            <p class="done">Two files exist and nothing else does. If a third appeared, say so &mdash; noticing it is the exercise.</p>
+          </div>
+        </div>
+      </li>
+      <li>
+        <button class="tick" type="button" aria-pressed="false" aria-label="Mark step 4.3 done">&#10003;</button>
+        <div>
+          <button class="head" type="button" aria-expanded="true"><span class="n">4.3</span>Read what it wrote. Do not skim it.</button>
+          <div class="body">
+            <p class="why">It will have guessed at least one path, and the guess will be plausible. Four checks, none of which need code:</p>
+            <pre>1  open the file yourself, in the editor
+2  list the files that now exist
+3  read the diff for scope, not correctness
+4  run it and look</pre>
+            <p class="why">Then say what is wrong and have it fix that one thing.</p>
+            <p class="done">Every path in <code>docs/SETUP.md</code> is one you can <code>ls</code>. Not one that <b>looks</b> right &mdash; one you have listed.</p>
+          </div>
+        </div>
+      </li>
+      <li>
+        <button class="tick" type="button" aria-pressed="false" aria-label="Mark step 4.4 done">&#10003;</button>
+        <div>
+          <button class="head" type="button" aria-expanded="true"><span class="n">4.4</span>Second prompt &mdash; git, and what it may do without asking</button>
+          <div class="body">
+            <div class="prompt">
+              <div class="prompt-head">
+                <span class="prompt-k">Paste this</span>
+                <button class="copy" type="button">Copy</button>
+              </div>
+              <pre>Two things, in this order, and stop after each
+one so I can look.
+
+1. Git. Run git init if this is not a
+   repository yet. Write a .gitignore that
+   excludes my data by extension and excludes
+   the data root entirely. Make the first
+   commit. Then tell me the three commands I
+   will actually use day to day, and what each
+   one shows me.
+
+2. Permissions. Show me the current permission
+   settings and explain in plain language what
+   you can do right now without asking me.
+   Then propose allow / ask / deny for this
+   project: reading and searching should never
+   interrupt me; anything that deletes,
+   pushes, or writes outside this folder
+   should ask. Show me the file you would
+   write before you write it.</pre>
+            </div>
+            <p class="why">Inside a session you can see the settings yourself with <code>/permissions</code>; they live in <code>.claude/settings.json</code> (<a href="https://docs.claude.com/en/docs/claude-code/settings">reference</a>).</p>
+            <p class="done"><code>git log</code> shows one commit, <code>git status</code> is clean, and <b>you can name one thing the agent is not allowed to do</b>.</p>
+          </div>
+        </div>
+      </li>
+      <li>
+        <button class="tick" type="button" aria-pressed="false" aria-label="Mark step 4.5 done">&#10003;</button>
+        <div>
+          <button class="head" type="button" aria-expanded="true"><span class="n">4.5</span>Add the remote in the same sitting</button>
+          <div class="body">
+            <pre>gh repo create first-project --private --source=. --push</pre>
+            <p class="why">Not next week. A repository with no remote is a folder on one laptop, and the day you discover that is always the day it costs something.</p>
+            <p class="done">The repository is visible on github.com, and <code>git status</code> says your branch is up to date with <code>origin</code>.</p>
+          </div>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="phase">
+    <div class="phase-head">
+      <h2>Phase 5 &middot; The habits</h2>
+      <span class="phase-time">forever</span>
+    </div>
+    <p class="phase-note">This is the part that is not setup, and it is the part that decides whether any of the above was worth doing. Nothing here can be installed.</p>
+    <ol class="steps">
+      <li>
+        <button class="tick" type="button" aria-pressed="false" aria-label="Mark step 5.1 done">&#10003;</button>
+        <div>
+          <button class="head" type="button" aria-expanded="true"><span class="n">5.1</span>One thing at a time</button>
+          <div class="body">
+            <p class="why">One change. Verify. Commit. Next. Do not fill the waiting with a second project &mdash; some people are good at that, and nobody is good at it in the first month.</p>
+            <p class="done">Your commits are small enough that you could say what each one did without opening it.</p>
+          </div>
+        </div>
+      </li>
+      <li>
+        <button class="tick" type="button" aria-pressed="false" aria-label="Mark step 5.2 done">&#10003;</button>
+        <div>
+          <button class="head" type="button" aria-expanded="true"><span class="n">5.2</span>Say what finished looks like, before it starts</button>
+          <div class="body">
+            <p class="why">Five ways a task fails: wrong output; right output in the wrong place; it silently did nothing; it did more than you asked; it reported a success it never achieved. The first three announce themselves. <b>The last two do not</b>, and no amount of reading the reply catches them.</p>
+            <p class="done">Before you send a task you can state the file, the folder, or the number that will exist when it has worked.</p>
+          </div>
+        </div>
+      </li>
+      <li>
+        <button class="tick" type="button" aria-pressed="false" aria-label="Mark step 5.3 done">&#10003;</button>
+        <div>
+          <button class="head" type="button" aria-expanded="true"><span class="n">5.3</span>Keep a friction log, and let it decide what you build</button>
+          <div class="body">
+            <p class="why">Every setup has quirks &mdash; which machine, which path, which folder things get lost between. The agent inherits them without asking and nothing crashes. <b>Repetition is the signal.</b> When the same thing bites twice, write down what happened.</p>
+            <p class="done">There is one file you add a line to when something goes wrong, and it has more than one line in it.</p>
+          </div>
+        </div>
+      </li>
+      <li>
+        <button class="tick" type="button" aria-pressed="false" aria-label="Mark step 5.4 done">&#10003;</button>
+        <div>
+          <button class="head" type="button" aria-expanded="true"><span class="n">5.4</span>Build a guard only after something has gone wrong</button>
+          <div class="body">
+            <p class="why">Never in advance. Guarding against failure is necessary and it is also an absorbing pursuit &mdash; a beautiful start-up script will not analyse your data. Cures come in three kinds and only one is a tool: <b>a tool, a change of habit, or a check you accept forever.</b></p>
+            <p class="done">Every guard you have can be traced to the specific thing that went wrong first.</p>
+          </div>
+        </div>
+      </li>
+      <li>
+        <button class="tick" type="button" aria-pressed="false" aria-label="Mark step 5.5 done">&#10003;</button>
+        <div>
+          <button class="head" type="button" aria-expanded="true"><span class="n">5.5</span>End every session by leaving a note for the next one</button>
+          <div class="body">
+            <p class="why">Commit, push, and write three lines: what happened, what is unfinished, what to do next. A session that ran all night and delivered no handoff delivered nothing.</p>
+            <p class="done">Somebody else &mdash; including you on Monday &mdash; could pick it up from the note and the log alone.</p>
+          </div>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="phase">
+    <div class="phase-head">
+      <h2>Phase 6 &middot; Second machine, other people</h2>
+      <span class="phase-time">conditional</span>
+    </div>
+    <ol class="steps">
+      <li>
+        <button class="tick" type="button" aria-pressed="false" aria-label="Mark step 6.1 done">&#10003;</button>
+        <div>
+          <button class="head" type="button" aria-expanded="true"><span class="n">6.1</span>Clone it on the second machine and prove it runs there</button>
+          <div class="body">
+            <p class="why">The first thing to break is a path somebody hardcoded. This is the test of everything in Phase&nbsp;2, and it is the only test of it.</p>
+            <p class="done">The project runs on machine two <b>without editing a path</b>. If you had to edit one, that is your first friction-log entry.</p>
+          </div>
+        </div>
+      </li>
+      <li>
+        <button class="tick" type="button" aria-pressed="false" aria-label="Mark step 6.2 done">&#10003;</button>
+        <div>
+          <button class="head" type="button" aria-expanded="true"><span class="n">6.2</span>If more than one session can touch the work, they need somewhere to see each other</button>
+          <div class="body">
+            <p class="why">Two sessions cannot conflict in git over a file that does not exist yet, so both get written and you find out when a human reads the folder. A shared file saying who is doing what, committed and pushed, is enough. It is a message, not a lock &mdash; and the point is that the second person finds out <b>before</b> doing the work rather than after.</p>
+            <p class="done">There is one file in the repository that answers &ldquo;is anyone else in here?&rdquo;, and opening a claim in it takes under a minute.</p>
+          </div>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="traps">
+    <h2>Three ways this list goes wrong</h2>
+    <ul>
+      <li>
+        <span class="trap-k">Setting up the guards first</span>
+        <p>Phase 5 looks like the fun part and it is the one part you cannot do in advance. <b>Every guard built before its failure is a guess</b>, and guesses accumulate into a setup that takes longer to maintain than the work it protects.</p>
+      </li>
+      <li>
+        <span class="trap-k">&ldquo;Remember this&rdquo; as a fix</span>
+        <p>You find the mistake, you discover the better way, and you tell the agent to remember it. <b>A request is not a rule.</b> A project instructions file is not enforceable; use all the emphasis you like and the second sentence still gets skipped. If it has to hold, it has to be mechanical.</p>
+      </li>
+      <li>
+        <span class="trap-k">Reading the reply instead of the result</span>
+        <p>The explanation will sound right. It is written to sound right, and it is your only evidence of how you were understood &mdash; which is not the same as evidence that anything happened. <b>Open the artifact yourself.</b> Every &ldquo;done when&rdquo; above exists because of this one.</p>
+      </li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>Companion to <i>Search to Shipped</i> and <i>It Looked Right</i>. This sheet is the part that comes before both: it ends where a first project begins.</p>
+    <p>Drawn from the course working notes &mdash; the Step&nbsp;0 order, the storage rule, the five failure modes and the three kinds of cure. Every outbound link was checked on 29 August 2026 and <b>nothing re-checks them</b>; when one rots, this page will not tell you.</p>
+    <p>Ticks are stored in this browser only. They do not travel with the page.</p>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  var KEY = 'cold-start-v1';
+
+  function load() {
+    try { return JSON.parse(localStorage.getItem(KEY) || '{}') || {}; }
+    catch (e) { return {}; }
+  }
+  function save(state) {
+    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  }
+
+  var items = [].slice.call(document.querySelectorAll('ol.steps > li'));
+  var nEl = document.getElementById('pc-n');
+  var dEl = document.getElementById('pc-d');
+  var fill = document.getElementById('pc-fill');
+  var state = load();
+
+  dEl.textContent = items.length;
+
+  items.forEach(function (li, i) {
+    var head = li.querySelector('.head');
+    var tick = li.querySelector('.tick');
+    var id = head.querySelector('.n').textContent.trim();
+
+    li.dataset.id = id;
+
+    function render() {
+      var done = state[id] === 1;
+      li.dataset.done = done ? '1' : '0';
+      tick.setAttribute('aria-pressed', done ? 'true' : 'false');
+      var open = li.dataset.open !== '0';
+      head.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+
+    tick.addEventListener('click', function () {
+      if (state[id] === 1) { delete state[id]; li.dataset.open = '1'; }
+      else { state[id] = 1; li.dataset.open = '0'; }
+      save(state); render(); count();
+    });
+
+    head.addEventListener('click', function () {
+      li.dataset.open = li.dataset.open === '0' ? '1' : '0';
+      render();
+    });
+
+    if (state[id] === 1) { li.dataset.open = '0'; }
+    render();
+  });
+
+  function count() {
+    var n = items.filter(function (li) { return li.dataset.done === '1'; }).length;
+    nEl.textContent = n;
+    fill.style.width = items.length ? (100 * n / items.length) + '%' : '0';
+  }
+  count();
+
+  document.getElementById('pc-reset').addEventListener('click', function () {
+    state = {};
+    save(state);
+    items.forEach(function (li) {
+      li.dataset.done = '0';
+      li.dataset.open = '1';
+      li.querySelector('.tick').setAttribute('aria-pressed', 'false');
+      li.querySelector('.head').setAttribute('aria-expanded', 'true');
+    });
+    count();
+  });
+
+  [].forEach.call(document.querySelectorAll('.copy'), function (btn) {
+    btn.addEventListener('click', function () {
+      var pre = btn.closest('.prompt').querySelector('pre');
+      var text = pre.textContent;
+      var done = function () {
+        btn.textContent = 'Copied';
+        setTimeout(function () { btn.textContent = 'Copy'; }, 1400);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, function () { fallback(text, done); });
+      } else { fallback(text, done); }
+    });
+  });
+
+  function fallback(text, done) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); done(); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+})();
+</script>

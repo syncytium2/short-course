@@ -6,6 +6,7 @@ was made.
 
 | File | What it is | Live at |
 |---|---|---|
+| [`cold-start.html`](cold-start.html) | **Cold Start** — the setup runbook that comes before the other two. 21 steps from an email address to a first session that leaves a record, the two prompts to paste, and a *done when* on every step. Built for a narrow window docked beside a terminal: steps tick off, collapse, and persist in the browser. | artifact (private) |
 | [`search-to-shipped.html`](search-to-shipped.html) | One-page runbook, zero to a deployed web app, plus a second sheet on decision records | [artifact](https://claude.ai/code/artifact/38ccc999-1621-4a11-9936-e0a885d7a5ac) (private) |
 | [`four-barriers.html`](four-barriers.html) | **It Looked Right** — the walkthrough site. Four challenges, each with its worked incidents, plus step 0 and the record of how the material was made. Reading-depth control: headlines / + incidents / + sources | **public: [lookedright.tonydefazio.com](https://lookedright.tonydefazio.com/)** · [artifact](https://claude.ai/code/artifact/e72e2b76-5cff-4e46-a26f-985fa5c3d47e) (private) |
 
