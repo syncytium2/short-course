@@ -394,7 +394,7 @@ find out about each other. That is what a board is for, and it is why C3 in
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Mac/9b26b5c4 — append session-close handoff for 2026-08-29 afternoon
-- **Status:** ACTIVE
+- **Status:** DONE 2026-08-29
 - **Opened:** 2026-08-29
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
 - **Writes:** `HANDOFF.md` — **append only**, one new `## Session close` section at the end.
