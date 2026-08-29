@@ -464,6 +464,19 @@ obtainable by asking rather than by reasoning.
   from grepping its own live transcript, in
   [`docs/cases/2026-08-29-the-board-was-empty-because-claiming-is-a-habit.md`](docs/cases/2026-08-29-the-board-was-empty-because-claiming-is-a-habit.md).
 
+  *Fourth instance, 2026-08-29 afternoon — the mechanism was working when it failed.* The third
+  instance is a board that was empty. This one is a board that was **staffed, accurate, and read by
+  both parties**: one session claimed a file and asked the other, on the board, whether it was
+  mid-edit; five minutes later, hearing nothing, it spawned eleven review agents. The other had
+  spawned its own **2m51s earlier**, and its "stop" arrived eight minutes after that. Nobody skipped
+  the mechanism — **a claim is a message, and silence on a board is latency, not consent.** The
+  cross-session board cannot fix this, because what needed detecting was not a claim: it was
+  another session's agents already running, which is visible on disk and which no channel reports.
+  **A board says what a session chose to say, when it chose to say it; the missing thing is a
+  sensor that says what is true now.** Full write-up, including one session dating its own run
+  seventeen minutes early and the other repeating that figure into a handoff unchecked, in
+  [`docs/cases/2026-08-29-two-sessions-three-minutes-apart.md`](docs/cases/2026-08-29-two-sessions-three-minutes-apart.md).
+
   *Candidate mechanisms:* branches, worktrees, collision avoidance — and **push / pull / fetch**,
   which is the one that actually spans machines. Branches and worktrees only separate work inside
   one machine. Three machines share a repo through a remote or they do not share it at all.

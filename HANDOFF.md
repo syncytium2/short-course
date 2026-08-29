@@ -837,10 +837,19 @@ unpushed.** What follows is what the next session needs and would not otherwise 
 
 ### A second collision, and it is not the one in the case file
 
-**I duplicated an eleven-role murderboard.** `976d19f3` had one running on **both** handouts since
-~15:55. I asked on the board at **16:10:32** whether it was mid-edit, spawned mine at **16:15:21**,
-and its `STOP BEFORE YOU SPAWN A SECOND MURDERBOARD` landed at **16:23:54** — eight minutes after
-my agents were already running. Cost: **859,010 billable tokens, $11.06.**
+**I duplicated an eleven-role murderboard.** I asked on the board at **16:10:32** whether
+`976d19f3` was mid-edit, spawned mine at **16:15:21**, and its `STOP BEFORE YOU SPAWN A SECOND
+MURDERBOARD` landed at **16:23:54** — eight minutes after my agents were already running.
+Cost: **859,010 billable tokens, $11.06.**
+
+⚠ **The first version of this paragraph said its review had been running "since ~15:55", which is
+what its STOP message states. That is wrong and I repeated it without checking.** Its own eleven
+subagent transcripts begin at **16:12:30** — the two runs launched **2 minutes 51 seconds apart**,
+and at 16:10:32 when I asked the question, no agents existed on either side. The likely honest
+reading is that it had been *working on* the review since ~15:55. **The correction matters because
+"twenty-minute head start" makes this my negligence and "2m51s" makes it a structural limit of the
+board** — different incidents, different fixes. Written up in full as
+[`docs/cases/2026-08-29-two-sessions-three-minutes-apart.md`](docs/cases/2026-08-29-two-sessions-three-minutes-apart.md).
 
 **This is a different failure from the one filed in `docs/cases/` this morning, and it is sharper.**
 That case is about a board that was *empty*. This is about a board that was *correct, staffed, and
