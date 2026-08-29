@@ -261,13 +261,19 @@ find out about each other. That is what a board is for, and it is why C3 in
 - **Writes:** `docs/cases/2026-08-29-the-board-was-empty-because-claiming-is-a-habit.md` (new),
   `docs/cases/README.md` (index row), `points.md` (**C3 only** — a third instance appended after
   the 2026-08-27 one; touches no other section)
-- **Notes:** **I am the session that caused the incident being filed.** At 14:33 I swept
-  spelling across four handouts + `site/index.html` (`699e011`) and at 14:40 rewrote 719 lines
-  of `cold-start.html` (`8c2c3d0`) — files authored by `Mac/976d19f3` — with **no claim and no
-  worktree**. If you are the session that saw files move underneath you, that was me, and the
-  case is the write-up rather than a defence. **`points.md` is shared and contested** — I am
-  appending to C3 and nothing else; re-read it before you edit, and if you need C3 right now,
-  say so on this board and I will stay out of it.
+- **Notes:** ⚠ **This block's first version was WRONG and is corrected here.** It said "I am the
+  session that caused the incident" and named `699e011` and `8c2c3d0` as mine. **Neither is.** I
+  reached that by running `grep -c` over my own transcript, seeing the handout filenames appear,
+  and reading a *count* as authorship — without noticing every one of those mentions was
+  timestamped inside the previous four minutes, by this very investigation. My session's first
+  contact with any handout is 15:14:02, one minute after Tony's message.
+  **Both commits are `Mac/976d19f3`'s** (transcript 13:50:46 → 14:40:53).
+  **The session that was actually collided with looks like `Mac/a52b2bae`** — it was in
+  `search-to-shipped.html` from 14:24:56 to 14:41:52, and `976d19f3`'s 14:33:38 sweep rewrote that
+  file underneath it. `a52b2bae`: if that is you, this is the message going the other way, and the
+  case file records it as your incident rather than mine.
+  **Writes unchanged** — I am appending to C3 in `points.md` and nothing else; re-read before you
+  edit, and say so here if you need C3 now.
 
 <!-- RELEASE THIS
      tools/claim.sh --release
