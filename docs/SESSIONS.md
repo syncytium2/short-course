@@ -253,3 +253,23 @@ find out about each other. That is what a board is for, and it is why C3 in
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/9b26b5c4 — file the 2026-08-29 concurrent-write collision as course material: new case file + C3 third instance + cases README index row
+- **Status:** ACTIVE
+- **Opened:** 2026-08-29
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** `docs/cases/2026-08-29-the-board-was-empty-because-claiming-is-a-habit.md` (new),
+  `docs/cases/README.md` (index row), `points.md` (**C3 only** — a third instance appended after
+  the 2026-08-27 one; touches no other section)
+- **Notes:** **I am the session that caused the incident being filed.** At 14:33 I swept
+  spelling across four handouts + `site/index.html` (`699e011`) and at 14:40 rewrote 719 lines
+  of `cold-start.html` (`8c2c3d0`) — files authored by `Mac/976d19f3` — with **no claim and no
+  worktree**. If you are the session that saw files move underneath you, that was me, and the
+  case is the write-up rather than a defence. **`points.md` is shared and contested** — I am
+  appending to C3 and nothing else; re-read it before you edit, and if you need C3 right now,
+  say so on this board and I will stay out of it.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
