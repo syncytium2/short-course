@@ -155,7 +155,7 @@ obtainable by asking rather than by reasoning.
   Point 4 and its verification appendix.
 
 - **B3.** Identify annoyances and hindrances — repeated mistakes (heredoc!), files for review lost in some folder you have no clue where it's at (~/docs vs ~/dropbox/darkroom).
-- **B4.** Do not trust standard features built to prevent these issues. CLAUDE.md or equivalent is not reliable or enforceable. Use all the bad words you want and the second sentence is still skipped. Build your own tools (using AI) and keep them in a repo.
+- **B4.** Do not trust standard features built to prevent these issues. CLAUDE.md or equivalent is not reliable or enforceable. *(Refined by B7's second worked cure: prose fails when it is a RULE. A DEFINITION the session reads before it reasons — a glossary — is the one document that holds, because it replaces a prior instead of competing with one.)* Use all the bad words you want and the second sentence is still skipped. Build your own tools (using AI) and keep them in a repo.
 
   *Worked example — a declaration mistaken for wiring (`bugarach`, verified against the repo
   2026-08-27).* Commit `9582329`, 2026-08-17, titled *"The README stopped at the port plan, and
@@ -305,6 +305,58 @@ obtainable by asking rather than by reasoning.
   [`docs/cases/2026-08-27-computed-instead-of-asking.md`](docs/cases/2026-08-27-computed-instead-of-asking.md),
   incident B, point B4. A session that is *lost* rather than defiant is left lost by a gate
   that says only no, and it goes and churns somewhere else.
+
+  ---
+
+  *Second worked cure, and it is a different KIND — `foundations`, seeded 2026-07-22.*
+
+  **The friction.** The kernel app rests on one premise: spikes in, kernel, calcium trace
+  out. All three tabs assume it. **AP-independent calcium** — calcium with no action
+  potential behind it — is real, common, and breaks that premise. Every session reasoned
+  from the premise and got it wrong. Correcting it cost a correction each time and taught
+  nothing, because the next session had never seen the correction. The repo's own founding
+  ADR states it: *"sessions repeatedly get project-central concepts wrong because each
+  session is stateless and reasons from priors unless grounded in a document it reliably
+  reads."*
+
+  **The cure.** Two documents read before the session reasons about anything. `GLOSSARY.md`
+  — each term to exactly one definition, plus canonical figure labels and units.
+  `FOUNDATIONS.md` — how the concepts connect, and **what you must not infer**. Single-
+  definition rule: every fact lives in exactly one of the two, neither restates the other.
+  Vendored into each consumer, freshness-gated, read by a SessionStart hook.
+
+  **Why this does not contradict B4, and what it adds to it.** A project instructions file
+  is an *instruction to behave*: it competes with everything the model already believes, and
+  it loses — that is B4 and B4 is right. A glossary is not an instruction. It is **the fact
+  the session reasons from**. A rule asks the model to override a prior; a definition
+  replaces the prior. **B4 should say so:** prose fails when it is a rule, not when it is a
+  definition. That is a sharper claim than "documents don't work" and it is the one the
+  evidence supports.
+
+  **It withdraws words rather than clarifying them.** *modality / multimodal* retired for
+  colliding with the detector axis and causing a conflation; *rate-based* never used loosely,
+  having already drifted to per-ROI. A word that has caused an error twice is not explained
+  better, it is banned.
+
+  **What the unstated convention cost, measured on one population.** Edge-to-edge **8.10 px**
+  vs centroid **15.84 px** — nearly 2×, neither wrong. A deck built on the centroid figure
+  claimed the structures sat *"2–3 cell widths"* apart, dividing a centroid distance by a
+  diameter — different quantities. **The claim was retracted.** Edge-to-edge is 1.11 cell
+  widths: adjacent, not remote. Same data, opposite story. *"The failure was the unstated
+  convention, not the centroid."*
+
+  **And the cure's first draft was too strong — rule 8, in this repo, two days later.**
+  `a48afde`, 4 Aug: *distances are EDGE-TO-EDGE, never centroid* — a ban. `94a7415`, 6 Aug,
+  by Tony: *state the convention, do not ban one*, because centre-to-centre is the correct
+  measure where structures overlap and edge-to-edge saturates at 0. A cure that forbids the
+  right answer gets routed around, which returns you to no cure at all with the cost of
+  having built one.
+
+  **10 · A definition is not a rule, and only one of them survives a stateless reader.**
+  Where a cure has to change what an agent *believes* rather than what it *does*, the
+  artifact is a definition it reads first — not an instruction it is asked to obey.
+
+  ---
 
   *And the selftest is the weakest component in every cure here.* The gate in rule 8 had one:
   ten cases, two of them adversarial, every one driving the same parser — **and not one fixture
