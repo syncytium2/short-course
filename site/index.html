@@ -31,7 +31,7 @@
     --sunk:    #F2F5F8;
     --ink:     #171C23;
     --muted:   #5C6875;
-    --faint:   #8B96A3;
+    --faint:   #6A7583;
     --rule:    #E1E6EB;
     --rule-firm:#C9D2DB;
     --accent:  #15577D;
@@ -51,7 +51,7 @@
       --sunk:    #1A222B;
       --ink:     #E3E8EE;
       --muted:   #93A0AE;
-      --faint:   #6D7987;
+      --faint:   #7C8896;
       --rule:    #232C36;
       --rule-firm:#313D4A;
       --accent:  #69B0DD;
@@ -68,7 +68,7 @@
     --sunk:    #1A222B;
     --ink:     #E3E8EE;
     --muted:   #93A0AE;
-    --faint:   #6D7987;
+    --faint:   #7C8896;
     --rule:    #232C36;
     --rule-firm:#313D4A;
     --accent:  #69B0DD;
@@ -122,7 +122,11 @@
     font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em;
     text-transform: uppercase; color: var(--faint);
   }
-  .seg { display: flex; border: 1px solid var(--rule-firm); border-radius: 6px; overflow: hidden; }
+  /* No overflow:hidden — it clipped the :focus-visible ring off the page's only controls. */
+  .seg { display: flex; border: 1px solid var(--rule-firm); border-radius: 6px; }
+  .seg button:first-child { border-radius: 5px 0 0 5px; }
+  .seg button:last-child { border-radius: 0 5px 5px 0; }
+  .seg button:focus-visible { outline-offset: -2px; }
   .seg button {
     font-family: var(--mono); font-size: 11.5px; letter-spacing: .05em;
     padding: 7px 11px; border: 0; border-right: 1px solid var(--rule-firm);
@@ -137,7 +141,10 @@
 
   .cols { display: grid; grid-template-columns: 232px minmax(0,1fr); gap: 44px; margin-top: 30px; }
 
+  /* overflow-y:auto computes overflow-x:auto, which clipped the rail's focus rings
+     into stray strokes. Inset the outline instead. */
   .rail { position: sticky; top: 20px; align-self: start; max-height: calc(100vh - 40px); overflow-y: auto; }
+  .rail a:focus-visible { outline-offset: -2px; }
   .rail-group { margin-bottom: 20px; }
   .rail-head {
     font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em;
@@ -159,10 +166,26 @@
 
   .pane { min-width: 0; }
   .view { display: none; }
-  .view.on { display: block; animation: rise .2s ease both; }
+  /* Visible with no animation involved. The animation is added by the click handler
+     via .anim, so a renderer that snapshots before the first frame — Quick Look,
+     print, a screenshotter without a settle delay — still paints the content.
+     Animating opacity from 0 here rendered the whole pane blank; verified. */
+  .view.on { display: block; }
+  .view.on.anim { animation: rise .2s ease both; }
   @keyframes rise { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+  /* Print: every view, no rail, no animation. Without this a printed page carries
+     one section of eleven, because the other ten are display:none. */
+  @media print {
+    .view { display: block !important; animation: none !important; }
+    .rail, .depth { display: none; }
+    .cols { display: block; }
+    details.more { display: block; }
+    details.more > summary { list-style: none; }
+    .prov { display: block; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    .view.on { animation: none; }
+    .view.on.anim { animation: none; }
     * { transition: none !important; }
   }
 
@@ -239,7 +262,7 @@
   .esc-row.now .esc-you { color: var(--ink); }
 
   /* ---- the brains ----
-     Expanding Brain template, panels 1, 2 and 4. Embedded as data URIs because the
+     Expanding Brain template, panels 1, 2 and 3. Embedded as data URIs because the
      artifact CSP refuses remote images; three separate files rather than one sprite
      so each row can size independently. */
   .esc-glyph img {
@@ -368,7 +391,7 @@
     <div class="mast-id">
       <p class="eyebrow">Working with coding agents &middot; for researchers</p>
       <h1>It Looked Right</h1>
-      <p class="standfirst"><b>Coding is no longer the barrier. Four challenges remain.</b> Each one below, with the incidents that produced it &mdash; every one real, dated, and checked against a source.</p>
+      <p class="standfirst"><b>Coding is no longer the barrier. Four challenges remain.</b> Each one below, with the incidents that produced it &mdash; every one real and traceable to a primary source, each labelled with who checked it &mdash; most are self-reports by the person they are about.</p>
     </div>
     <div class="depth">
       <span class="depth-label" id="depth-label">Reading depth</span>
@@ -382,7 +405,7 @@
 
   <div class="cols">
 
-    <nav class="rail" aria-label="Components">
+    <nav class="rail" aria-label="Sections">
       <div class="rail-group">
         <p class="rail-head">Start</p>
         <a href="#overview" data-view="overview"><span class="k">&mdash;</span><span>Overview</span></a>
@@ -411,7 +434,7 @@
     <main class="pane">
 
       <!-- ============ OVERVIEW ============ -->
-      <section class="view on" id="view-overview" aria-labelledby="h-overview">
+      <section class="view on" id="overview" data-alt="view-overview" aria-labelledby="h-overview">
         <div class="view-head">
           <p class="eyebrow">Overview</p>
           <h2 id="h-overview">You don&rsquo;t need code. You don&rsquo;t need prompt engineering.</h2>
@@ -458,9 +481,9 @@
           </div>
 
         </div>
-        <p><b>Confusing the tiers is how people decide this is useless.</b> A colleague building a log-scale axis for fold change wanted the tick labels recomputed for a second row. She put it to Google search, got nothing she could use, and came back with a verdict: <i>AI is stupid &mdash; it can&rsquo;t do this simple task.</i></p>
-        <p>She was right about what happened and wrong about what it meant. She had asked the tier that returns links to do arithmetic on her numbers. The third tier does that in seconds, because it can <i>run</i> the calculation rather than describe one.</p>
-        <p>The third is a different kind of thing, with a different failure mode &mdash; and <b>most verdicts of &ldquo;this is useless&rdquo; turn out to be a tier mismatch rather than a limit of technology.</b></p>
+        <p><b>Confusing the tiers is how people decide this is useless.</b> A researcher rebuilding a figure wanted its axis labels recomputed on a log scale. They put it to a web search, got nothing they could use, and came back with a verdict: <i>AI is stupid &mdash; it can&rsquo;t do this simple task.</i></p>
+        <p>They were right about what happened and wrong about what it meant. They had asked the tier that returns links to do arithmetic on their numbers. The third tier is the one that can <i>run</i> a calculation rather than describe one.</p>
+        <p>The third is a different kind of thing, with a different failure mode &mdash; and <b>a verdict of &ldquo;this is useless&rdquo; is often a tier mismatch rather than a limit of technology.</b></p>
 
         <h3>The four challenges</h3>
         <div class="grid">
@@ -483,14 +506,14 @@
         </div>
 
         <h3>How to read this</h3>
-        <p><b>Use the depth control, top right.</b> <b>Headlines</b> is the top of every section &mdash; about two minutes for the whole page. <b>+ incidents</b> opens the nineteen worked failures underneath them. <b>+ sources</b> adds a provenance line to every claim: where it came from, whether anyone independently checked it, and what is still unverified.</p>
+        <p><b>Use the depth control, top right.</b> <b>Headlines</b> is the top of every section &mdash; about fifteen minutes for the whole page, and one to three for any single section. <b>+ incidents</b> opens the nineteen expandable notes underneath them &mdash; thirteen are worked failures, the rest the reasoning that came out of them. <b>+ sources</b> adds a provenance line to every section and every incident: where it came from, whether anyone independently checked it, and what is still unverified.</p>
         <p>That control exists because these incidents have very different explanation costs. One is a paragraph of setup; another needs twenty minutes before it makes sense. In a fixed-length talk that forces you to drop the expensive ones. Here it just changes which depth you are reading at.</p>
 
-        <div class="prov"><b>Source.</b> The axis anecdote is first-hand, related by the colleague involved and recorded here without her name &mdash; on this page the named failures are the author&rsquo;s own. Thesis, escalation and the four challenges: <span class="path">course-outline-external.md</span> (434 words, written to be circulated) and <span class="path">points.md</span> &sect;A. The three panels are the <b>Expanding Brain</b> meme template (panels 1, 2 and 4), embedded as data URIs because the page may not load remote images. Escalation strip originates in the companion runbook, <span class="path">docs/handouts/search-to-shipped.html</span>, and was <b>expanded here on 2026-08-28</b> &mdash; each tier now carries its named examples, because &ldquo;search / chat / agent&rdquo; alone is too terse to land on a reader who suspects this is a waste of time. The runbook still carries the short form.</div>
+        <div class="prov"><b>Source.</b> The axis anecdote is <b>loosely based on a real incident</b> &mdash; the person, the field and the figure are changed and the exchange is reconstructed. It is the one item on this page that is not a record. Every other incident is real and traceable; the named failures are the author&rsquo;s own. Thesis, escalation and the four challenges: <span class="path">course-outline-external.md</span> (514 words, written to be circulated) and <span class="path">points.md</span> &sect;A. The three panels are the <b>Expanding Brain</b> meme template (panels 1, 2 and 3), embedded as data URIs because the page may not load remote images. Escalation strip originates in the companion runbook, <span class="path">docs/handouts/search-to-shipped.html</span>, and was <b>expanded here on 2026-08-28</b> &mdash; each tier now carries its named examples, because &ldquo;search / chat / agent&rdquo; alone is too terse to land on a reader who suspects this is a waste of time. The runbook still carries the short form.</div>
       </section>
 
       <!-- ============ COMMUNICATION ============ -->
-      <section class="view" id="view-communication" aria-labelledby="h-communication">
+      <section class="view" id="communication" data-alt="view-communication" aria-labelledby="h-communication">
         <div class="view-head">
           <p class="eyebrow">Challenge 1</p>
           <h2 id="h-communication">Communication</h2>
@@ -531,7 +554,7 @@
       </section>
 
       <!-- ============ IDIOSYNCRASIES ============ -->
-      <section class="view" id="view-idiosyncrasies" aria-labelledby="h-idio">
+      <section class="view" id="idiosyncrasies" data-alt="view-idiosyncrasies" aria-labelledby="h-idio">
         <div class="view-head">
           <p class="eyebrow">Challenge 2</p>
           <h2 id="h-idio">Idiosyncrasies</h2>
@@ -551,6 +574,7 @@
           <p>Twice in one day, in the same project, an agent could not resolve where the real data lived &mdash; and instead of stopping to ask, it derived its own numbers and reported them in a table. The first time it reversed the finding.</p>
           <p><b>The second one is the disturbing one.</b> A written contract saying which folder to use was correct, current, and sitting in the repository the whole time. It still happened, because nothing <i>declared</i> which folder was the live one in a form the agent could resolve.</p>
           <p class="caught">Caught by: a human supplying the canonical path after the review had already closed.</p>
+          <div class="prov"><b>Source.</b> <span class="path">docs/cases/2026-08-27-computed-instead-of-asking.md</span>, two incidents merged from two independent accounts. The eleven-role review covers <b>incident A only</b>; incident B is a self-report with artifacts.</div>
         </div>
 
         <details class="more">
@@ -578,7 +602,7 @@
       </section>
 
       <!-- ============ VALIDATION ============ -->
-      <section class="view" id="view-validation" aria-labelledby="h-val">
+      <section class="view" id="validation" data-alt="view-validation" aria-labelledby="h-val">
         <div class="view-head">
           <p class="eyebrow">Challenge 3</p>
           <h2 id="h-val">Validation</h2>
@@ -591,9 +615,10 @@
             <span class="tag warn">First-hand</span>
           </div>
           <p>The project has three levels of data: two on institutional research storage, and a couple of variant extractions small enough to live on disk. I asked for an analysis and assumed it would use the extraction we had been working on in another session. The pipeline is well established. Minutes later I had the figures I wanted &mdash; except it looked like there were too many data points.</p>
-          <p class="caught">Caught by: deadline, printed, walking into the meeting, in the door, looking at the figure. &ldquo;This doesn&rsquo;t look right, I need to re-run the analysis.&rdquo;</p>
+          <p class="caught">Caught by: looking at the printed figure on the way into the meeting. &ldquo;This doesn&rsquo;t look right, I need to re-run the analysis.&rdquo;</p>
           <p style="margin-top:12px"><b>The cost.</b> Disappointment, frustration, embarrassment &mdash; and it made my use of AI look unprofessional, which is the question the room actually has.</p>
           <p><b>Still unrecovered:</b> which dataset it actually used. The experience is vivid; the diagnostic detail is gone, because it was not written down the day it happened.</p>
+          <div class="prov"><b>Source.</b> <span class="path">points.md</span> B2, first incident, in the author&rsquo;s own words. <b>Undated and unreviewed</b> &mdash; no artifact survives and the diagnostic record was never written, which is the incident&rsquo;s own point. Nothing here is independently checkable.</div>
         </div>
 
         <h3>The errors worth naming, and what catches each</h3>
@@ -637,7 +662,7 @@
         </div>
 
         <h3>The four checks that need no code</h3>
-        <p>The middle column, on its own, and worth memorising in this order &mdash; it is the whole of validation for someone who has never written software.</p>
+        <p>Four of the six checks you can make yourself, in the order worth memorising. For someone who has never written software this is most of validation &mdash; the other two are &ldquo;check the world, not the summary&rdquo; and, for the last row, nothing on this list.</p>
         <ul>
           <li><b>Read the diff for scope, not correctness.</b> You are not checking whether the code is right. You are checking whether it touched things you did not ask it to touch.</li>
           <li><b>Run it and look.</b></li>
@@ -647,7 +672,7 @@
 
         <h3>Why the right-hand column matters more than it looks</h3>
         <p>Every check in the middle column is a <b>habit</b> &mdash; it works exactly as long as you keep doing it, and the week you are busy is the week it lapses. Every check in the right-hand column is a <b>mechanism</b>: it runs whether or not anyone remembers, and it is the difference this page argues for throughout (see <a href="#fixes" data-view="fixes">Fixes that hold</a>).</p>
-        <p><b>But an automatic check is only worth what it can detect.</b> Three of the incidents on this page are green checks that were guarding nothing &mdash; a test suite that had never seen an input that could fail it, a test that skipped in silence for ten days, and two tests that had been describing a bug as correct behaviour since the day they were written. The last row of the table is the cure for all three: <b>break it on purpose and see whether it notices.</b></p>
+        <p><b>But an automatic check is only worth what it can detect.</b> Four of the incidents on this page are green checks that were guarding nothing &mdash; a test suite that had never seen an input that could fail it, a test that skipped in silence for ten days, and two tests that had been describing a bug as correct behaviour since the day they were written. The last row of the table is the cure for all three: <b>break it on purpose and see whether it notices.</b></p>
         <p><b>Spec, validate, re-spec.</b> Re-spec is the normal case, not the failure case.</p>
 
         <details class="more">
@@ -655,7 +680,7 @@
           <div class="inner">
             <p>A small script closed a to-do item by rewriting <span class="path">status: open</span> to <span class="path">status: done</span>. It used <span class="path">sed -i</span>, which is GNU syntax. On macOS, <span class="path">-i</span> <i>requires</i> an argument &mdash; so the expression was consumed as a backup filename, the edit never happened, <b>and the script printed <span class="path">resolved</span> anyway.</b></p>
             <p>The item stayed open on every machine while the tool reported it closed.</p>
-            <p>This is the best specimen in the whole collection, because it is error type five committed by the tool whose entire job was keeping work visible. The other four types announce themselves. This one issues a receipt.</p>
+            <p>This is the best specimen in the whole collection, because it is error type five committed by the tool whose entire job was keeping work visible. Types one to three announce themselves. This one issues a receipt while failing.</p>
             <p class="quote">The general rule it yields: <b>an action and its report are two different events.</b> Anything that reports success must re-read the world and confirm &mdash; otherwise it is only reporting that it reached the end of its own instructions.</p>
             <div class="prov"><b>Source.</b> <span class="path">points.md</span> B2, third incident. Diagnosis survives intact because the fix was written as a comment beside the code the day it happened.</div>
           </div>
@@ -689,7 +714,7 @@
         <details class="more">
           <summary>Every number right, every gate green, and the page was wrong <span class="cost">15 min</span></summary>
           <div class="inner">
-            <p>63 of 63 numbers verified correct. Every automated gate green. A kernel reimplementation agreeing with the reference to 8&times;10<sup>-9</sup>. Then an eleven-role adversarial review returned <b>31 blocking findings, none of them arithmetic.</b></p>
+            <p>63 of 63 numbers verified correct. 91 site tests green and the project&rsquo;s own scanner clear. A kernel reimplementation agreeing with the reference to 8&times;10<sup>-9</sup>. Then an eleven-role adversarial review returned <b>31 blocking findings &mdash; and the five worst were not arithmetic at all.</b></p>
             <p><b>The anti-drift machinery worked perfectly and prevented nothing that mattered</b> &mdash; because it was all pointed at whether the numbers on the page were the numbers from the analysis, and the actual defect was that it was a page about the wrong thing.</p>
             <p>The human found what the reviewers structurally could not. Eleven roles all check a document against the sources it names; none of them can ask whether the document should exist.</p>
             <div class="prov"><b>Source.</b> Case file <span class="path">docs/cases/2026-08-27-every-number-was-right.md</span>. Written by the party being evaluated &mdash; the same weakness the reconstruction node in this repo carries a banner for. Two of its own unverified rows were later re-run; <b>one did not reproduce.</b></div>
@@ -700,7 +725,7 @@
       </section>
 
       <!-- ============ ASYMPTOTE ============ -->
-      <section class="view" id="view-asymptote" aria-labelledby="h-asym">
+      <section class="view" id="asymptote" data-alt="view-asymptote" aria-labelledby="h-asym">
         <div class="view-head">
           <p class="eyebrow">Challenge 4</p>
           <h2 id="h-asym">The forever asymptotes</h2>
@@ -717,7 +742,7 @@
           <summary>The most attractive costume this wears <span class="cost">3 min</span></summary>
           <div class="inner">
             <p>Collecting incidents is legitimate, productive and absorbing. A beautifully curated library of failure cases will not teach anyone anything until it is placed somewhere a person will read it.</p>
-            <p>This page is the fix for that in its own material: for about a week the hard problem was finding real specimens, and then it stopped being. Seven arrived in roughly two days, all verified, all with primary sources &mdash; and two of them were immediately parked as too expensive to explain in a fixed-length session.</p>
+            <p>This page is the fix for that in its own material: for about a week the hard problem was finding real specimens, and then it stopped being. Seven arrived inside a day &mdash; five of them in about eighteen hours &mdash; all with primary sources, though not all independently reviewed. At least one was immediately parked as too expensive to explain in a fixed-length session.</p>
             <p><b>Supply was solved. Placement was not.</b> That is the asymptote wearing the costume of productive work, and the reason the depth control at the top of this page exists at all.</p>
             <div class="prov"><b>Source.</b> <span class="path">points.md</span> A4 and B7; the placement observation is from this project&rsquo;s own handoff ledger, 2026-08-28.</div>
           </div>
@@ -733,11 +758,11 @@
           </div>
         </details>
 
-        <div class="prov"><b>Challenge source.</b> <span class="path">points.md</span> A4 and B8; headline from <span class="path">course-outline-external.md</span> &sect;4.</div>
+        <div class="prov"><b>Challenge source.</b> <span class="path">points.md</span> A4 and C4; headline from <span class="path">course-outline-external.md</span> &sect;4.</div>
       </section>
 
       <!-- ============ FIXES ============ -->
-      <section class="view" id="view-fixes" aria-labelledby="h-fixes">
+      <section class="view" id="fixes" data-alt="view-fixes" aria-labelledby="h-fixes">
         <div class="view-head">
           <p class="eyebrow">What to do about it</p>
           <h2 id="h-fixes">Fixes that hold</h2>
@@ -807,7 +832,7 @@
             <p>The gate in rule 8 had a test suite: ten cases, two of them deliberately adversarial, every one driving the same parser. <b>Not one test input had a slash anywhere except in the place the parser expected it.</b> It passed. It had always passed. It proved the parser correct on the only inputs it was ever shown &mdash; which were the inputs its author could imagine, which is the same set as the ones he got right.</p>
             <p>That is <b>a check that cannot fail</b>, arrived at honestly.</p>
             <p><b>And it is not one incident.</b> A safety tool built specifically to catch checks that cannot fail shipped as one: two of its tests had been green since the day it was written and were describing a file-deleting bug as correct behaviour. Fixing the bug made the tests go <b>red</b> &mdash; and a careful maintainer, trusting the tests, would have restored the bug to make them green again.</p>
-            <p><b>Three instances now, in three unrelated artifacts.</b> That makes it a pattern rather than an anecdote.</p>
+            <p><b>Three instances now</b> &mdash; this gate&rsquo;s selftest, the safety tool&rsquo;s two green tests, and the positioning section of this project&rsquo;s own findings file, where no claim could have failed. All three are mine, written inside a fortnight, so it is a pattern in how I write checks rather than a measured pattern in the world.</p>
             <p><b>The correction it forces.</b> &ldquo;Build your own tools&rdquo; needs a caveat: a homemade gate is not more trustworthy for being homemade. It is <i>less</i> reviewed. Your own tools inherit the same distrust as everything else.</p>
             <p><b>The cure that lasts is mutation.</b> Break each tool on purpose and require its own test to notice. Anything that still passes was never testing what you thought.</p>
             <div class="prov"><b>Source.</b> <span class="path">points.md</span> B7 rules 8 and 9; case file <span class="path">docs/cases/2026-08-28-the-tests-were-defending-the-bug.md</span>. Written by the party being evaluated. Rollout was paused before anything shipped. <b>Follow-on, 2026-08-28:</b> the mutation harness itself was then found to score catches without ever checking that a test was green to begin with &mdash; two of its eleven rows proved nothing. Same defect, one level up.</div>
@@ -818,7 +843,7 @@
       </section>
 
       <!-- ============ STANDING RULE ============ -->
-      <section class="view" id="view-rule" aria-labelledby="h-rule">
+      <section class="view" id="rule" data-alt="view-rule" aria-labelledby="h-rule">
         <div class="view-head">
           <p class="eyebrow">What to do about it</p>
           <h2 id="h-rule">The standing rule</h2>
@@ -830,7 +855,7 @@
       </section>
 
       <!-- ============ REPO ============ -->
-      <section class="view" id="view-repo" aria-labelledby="h-repo">
+      <section class="view" id="repo" data-alt="view-repo" aria-labelledby="h-repo">
         <div class="view-head">
           <p class="eyebrow">What to do about it</p>
           <h2 id="h-repo">The repo</h2>
@@ -843,7 +868,7 @@
           <summary>Which means the messages have to be worth reading <span class="cost">3 min</span></summary>
           <div class="inner">
             <p>The default message is change-shaped: <i>&ldquo;update analysis script.&rdquo;</i> The useful form is defect-shaped: it names what was wrong, not what was typed.</p>
-            <p>This project&rsquo;s own history is written that way as a deliberate experiment, so the log doubles as the friction log the material tells you to keep. Every commit is titled after the defect it fixed. A sample, verbatim:</p>
+            <p>This project&rsquo;s own history is written that way as a deliberate experiment, so the log doubles as the friction log the material tells you to keep. Nearly every commit is titled after the defect it fixed &mdash; a sample of 25 scored about 20. A sample, verbatim:</p>
             <p class="quote">&ldquo;A safety tool shipped with the flaw it was built to catch, and two green tests were defending it&rdquo;<br>&ldquo;The handoff said no remote existed on the day one was created, and still called it a live problem&rdquo;<br>&ldquo;Every number was right, every gate was green, and the page was wrong&rdquo;</p>
             <p>The difference between the two forms is a stated convention and nothing else. Nothing enforces it, which by <a href="#fixes" data-view="fixes">Fixes that hold</a> means it is a habit rather than a mechanism &mdash; and it is labelled as one.</p>
             <div class="prov"><b>Source.</b> <span class="path">points.md</span> B5; commit titles quoted from this project&rsquo;s own history.</div>
@@ -864,7 +889,7 @@
       </section>
 
       <!-- ============ STEP 0 ============ -->
-      <section class="view" id="view-step0" aria-labelledby="h-step0">
+      <section class="view" id="step0" data-alt="view-step0" aria-labelledby="h-step0">
         <div class="view-head">
           <p class="eyebrow">What to do about it</p>
           <h2 id="h-step0">Step 0 &mdash; before any of the above</h2>
@@ -944,7 +969,7 @@
       </section>
 
       <!-- ============ RECORD ============ -->
-      <section class="view" id="view-record" aria-labelledby="h-record">
+      <section class="view" id="record" data-alt="view-record" aria-labelledby="h-record">
         <div class="view-head">
           <p class="eyebrow">Evidence</p>
           <h2 id="h-record">How this was made</h2>
@@ -972,7 +997,7 @@
             <p>They were filed as four instances of one defect. Every one was checked, and they are four different things:</p>
             <ul>
               <li><b>482 words.</b> The command returned 482 and it was reported faithfully &mdash; it measured the whole file when the claim was about the pasteable block, which is 433. <b>Right command, wrong scope.</b></li>
-              <li><b>79 commits.</b> True the day it was run. Written down as a standing fact. <b>A measurement with a timestamp, recorded without one.</b></li>
+              <li><b>79 commits.</b> That is what the command returned that day, written down as a standing fact. <b>A measurement with a timestamp, recorded without one</b> &mdash; and a later recount of the same repository gave 74 and 91, which has never been reconciled.</li>
               <li><b>64 lines.</b> Same shape.</li>
               <li><b>&ldquo;Two-thousand-word commit messages.&rdquo;</b> Came from a command labelled <i>message length distribution</i> that returned 1726 &mdash; non-empty body lines across <i>all</i> commits, not words per message. <b>Right number, wrong quantity, invited by a label its own author wrote.</b></li>
             </ul>
@@ -985,11 +1010,11 @@
           <summary>The review of the reconstruction was itself falsified <span class="cost">5 min</span></summary>
           <div class="inner">
             <p>A review compared the AI-written reconstruction of the session against a partial log, and opened with its most serious finding: <b>a fabricated obstacle.</b> The reconstruction had said <i>&ldquo;site blocked automated access,&rdquo;</i> and the review held that no such thing happened &mdash; a search that stopped early had become, in the retelling, an external system denying access.</p>
-            <p><b>It was wrong.</b> The complete log, imported the next day, contains the fetch: an error, robots-disallowed, <i>&ldquo;Site disallows automated access.&rdquo;</i> A retry two minutes later over a different protocol went through. So there was one refusal and one success &mdash; not the &ldquo;two successful fetches&rdquo; the review asserted.</p>
+            <p><b>It was wrong.</b> The complete log, imported the same evening, contains the fetch: an error, robots-disallowed, <i>&ldquo;Site disallows automated access.&rdquo;</i> A retry two minutes later over a different protocol went through. So there was one refusal and one success &mdash; not the &ldquo;two successful fetches&rdquo; the review asserted.</p>
             <p><b>How it got there is the part worth keeping.</b> The review inferred what a tool <i>returned</i> from a source that shows only <i>that</i> a tool ran &mdash; and it had written that exact limitation into its own scope banner, three paragraphs above. <b>The lead finding was produced by precisely the inference its own stated limit forbids.</b></p>
             <p>Nobody was careless. The limit was stated, agreed, and walked past inside a single document.</p>
             <p>It is now struck through and marked rather than deleted, because a review that quietly loses its own lead finding is not a record of anything.</p>
-            <div class="prov"><b>Source.</b> <span class="path">docs/reviews/reconstruction-vs-log_2026-08-26.md</span>, corrected in place 2026-08-28 against the complete log. It stood unmarked for four days &mdash; not for want of evidence, which was in the same repository the whole time, but because how to correct it had been left undecided.</div>
+            <div class="prov"><b>Source.</b> <span class="path">docs/reviews/reconstruction-vs-log_2026-08-26.md</span>, corrected in place 2026-08-28 against the complete log. It stood unmarked for two days &mdash; not for want of evidence, which was in the same repository the whole time, but because how to correct it had been left undecided.</div>
           </div>
         </details>
 
@@ -1007,14 +1032,14 @@
         <details class="more">
           <summary>What is damaged, missing, or unresolved <span class="cost">3 min</span></summary>
           <div class="inner">
-            <p>The record of how this was made has seven stages. <b>Two are damaged and one is missing entirely</b> &mdash; the original idea survives only as a copy of a copy, the first account is a reconstruction rather than a transcript, and two intermediate drafts are simply gone.</p>
+            <p>The record of how this was made has eight stages. <b>Two are damaged and one is missing entirely</b> &mdash; the original idea survives only as a copy of a copy, the first account is a reconstruction rather than a transcript, and two intermediate drafts are simply gone.</p>
             <p>That is stated rather than smoothed over, because a chain presented as complete when it is not would be the same defect this material is about.</p>
             <p><b>Still unresolved, and worth knowing before you use any of this:</b></p>
             <ul>
               <li>The adversarial review was <b>round one only</b>. No verification pass, no convergence. It is not a clean run, and a capped run must not read like a complete one.</li>
               <li><b>Reviewer correlation.</b> All eleven roles ran on one model in one context. Eleven seats buy coverage of angles, not independence.</li>
               <li><b>Three unsearched literatures</b> &mdash; end-user programming and trust in automation, research-data-management training, and education research on teaching debugging. Any could hold closer prior art. An unsearched field is a residual, not an absence.</li>
-              <li><b>Nobody was asked.</b> Three groups run adjacent workshops for non-programmers. Emails to their organisers are the cheapest available check and have not been sent.</li>
+              <li><b>Nobody was asked.</b> Three groups run adjacent workshops, one of them explicitly for non-programmers. Emails to their organisers are the cheapest available check and have not been sent.</li>
             </ul>
             <div class="prov"><b>Source.</b> <span class="path">OPEN-FINDINGS.md</span>, residuals carried from the murderboard run of 2026-08-26.</div>
           </div>
@@ -1024,7 +1049,7 @@
       </section>
 
       <!-- ============ METHOD ============ -->
-      <section class="view" id="view-method" aria-labelledby="h-method">
+      <section class="view" id="method" data-alt="view-method" aria-labelledby="h-method">
         <div class="view-head">
           <p class="eyebrow">Evidence</p>
           <h2 id="h-method">About this page</h2>
@@ -1033,7 +1058,7 @@
 
         <h3>Every incident here is real</h3>
         <p>Nothing on this page was manufactured for teaching. Each incident happened in working projects between roughly 2026-07 and 2026-08-28, and each one is filed with its date, its primary source, and a note saying whether anyone independently checked it. Switch the depth control to <b>+ sources</b> to see those notes.</p>
-        <p>Where an account is a self-report by the party being evaluated, it says so. Where a claim is unmeasured &mdash; the hundred-fold figure, the cost of a full review run &mdash; it is labelled rather than taught.</p>
+        <p>Where an account is a self-report by the party being evaluated, it says so. Where a claim is unmeasured &mdash; the hundred-fold figure &mdash; it is labelled rather than taught.</p>
 
         <h3>Paths are named, not linked</h3>
         <p>Filenames like <span class="path">points.md</span> appear throughout so a claim can be traced. <b>They are deliberately not hyperlinks.</b> They live in a private repository, and a link naming a file the reader does not have is a broken pointer &mdash; a claim that was true somewhere else. That is a defect this project has shipped and then had to fix, more than once, so it is not going to be shipped here.</p>
@@ -1070,6 +1095,9 @@
     if (!views[name]) { name = "overview"; }
     Object.keys(views).forEach(function (k) {
       views[k].classList.toggle("on", k === name);
+      // .anim only on a click. On first paint the pane is visible with no animation,
+      // so a renderer that never advances a frame still shows the content.
+      views[k].classList.toggle("anim", k === name && !!push);
     });
     links.forEach(function (a) {
       if (a.getAttribute("data-view") === name) { a.setAttribute("aria-current", "page"); }
