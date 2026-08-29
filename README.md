@@ -110,6 +110,15 @@ answered by not teaching. Three of the four (B2, B4, B5) rewrite one section, an
 route through them — emailing the Oxford, UW eScience and Southampton organisers — depends on
 other people replying, so it gets *more* urgent with a redesign starting, not less.
 
+**Where uncertainty goes.** Four channels, each with one job, and the newest is
+[`docs/doubt/`](docs/doubt/) — material nobody is confident in, parked, **with no decision owed**.
+That last clause is what separates it from [`OPEN-FINDINGS.md`](OPEN-FINDINGS.md) (a defect
+awaiting a call), [`docs/cases/OPEN-CORRECTIONS.md`](docs/cases/OPEN-CORRECTIONS.md) (a committed
+statement known to be wrong) and [`docs/chain/EXCLUDED.md`](docs/chain/EXCLUDED.md) (deliberately
+not held here). `tools/doubt.sh "…"` parks one in about twenty seconds; `--list` reads them back.
+It exists because the material arrives daily and the doubts arrive with it — and a doubt recorded
+only in prose, in one document, is a doubt that gets taught as a fact three weeks later.
+
 **Which file is live.** `points.md` is the working document and is where the redesign proceeds
 from; `course-outline.md` is draft 3, frozen as node 3 of the chain — the exact bytes the
 murderboard reviewed. Do not edit node 3 to bring it up to date; that is what the redesign
