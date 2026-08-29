@@ -20,6 +20,48 @@
 > **The body costs about ten minutes** — what a docstring is, what a pre-commit check is, and
 > why "the code was fine and the sentence about it was wrong" is the harder half.
 
+> ## 🧪 Teach it on a bench, and open with the wrong answer
+>
+> **The allegory is Tony's, and its first half is the diagnosis he arrived with** on the day —
+> which is the reason to open with it rather than the finding. Everyone in the room will supply
+> this version themselves, so it is worth being wrong out loud before it is corrected.
+>
+> **The version everyone arrives with.** A scientist leaves a post-it on the desk of the
+> assistant he assumes is doing it: *don't leave the pH probe out of solution overnight.* Nobody
+> notices the post-it. Least of all the assistant.
+>
+> That is a written instruction nobody read — [`points.md`](../../points.md) B4, which this
+> folder already has four instances of, and **it is not what happened.** Ask the room what they
+> would do next and they will say *bigger note, better place, tell them to their face.* Tony
+> reached for that. So did I.
+>
+> **What was actually on the bench.** Taped to the meter itself is a laminated card describing
+> the instrument. Somewhere in it: *"the probe is stored dry between runs."* True of a **new**
+> probe, out of the box, before conditioning. False, and ruinous, for every probe in the lab,
+> all of which have been conditioned and must stay in KCl.
+>
+> **Nobody is ignoring instructions.** They read the card — it is *on the instrument*, so it
+> reads as a fact about the instrument rather than as an order — and they store the probe dry.
+> **They are following the most authoritative document in the room.** The post-it was not
+> competing with forgetfulness. It was competing with the card, and losing.
+>
+> **And the line was added by the person who had already had to correct that card twice.** He
+> was fixing two other wrong statements on it, and while he had it down, added one more helpful
+> sentence nobody checked — because the whole job was being careful about that card. That is
+> Point 2, and it needs no software vocabulary at all.
+>
+> **The two-state part is what makes the analogy exact rather than decorative.** *Stored dry* is
+> true of an unconditioned probe and false of a conditioned one — the same shape as the field
+> named `locs`, which holds the peak in one kind of input and the half-rise in the other. One
+> sentence, true where it was written, false everywhere it travelled. Point 3's inversion lands
+> on the bench too: **no probe was actually harmed**, because nobody ran that protocol — but the
+> card was wrong in every methods section that quoted it.
+>
+> **The line to end on, and it is rule 10 read backwards:** *a note asks you to override what
+> you believe; a label tells you what to believe.* Only one of them wins with an assistant who
+> was not there for the conversation. **The fix was never a bigger post-it. It was taking the
+> card down and finding the sentence on it.**
+
 > ## ⚠ Provenance: written by a non-participant, about a repo it does not own
 >
 > **I did not do this work and I am not the party being evaluated**, which makes this the second
