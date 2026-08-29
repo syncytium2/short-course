@@ -101,12 +101,12 @@
   /* The panels are the first thing on the page — above the title, above
      everything. They only belong to the landing view, so they leave when you
      navigate; without that they would sit on top of Step 0 as well. */
-  .esc-hero { padding-top: 26px; }
+  .esc-hero { padding-top: 4px; margin-bottom: 30px; }
   body[data-view]:not([data-view="overview"]) .esc-hero { display: none; }
 
   .mast {
     border-bottom: 2px solid var(--ink);
-    padding: 26px 0 18px;
+    padding: 30px 0 18px;
     display: flex; flex-wrap: wrap; gap: 20px;
     align-items: flex-end; justify-content: space-between;
   }
@@ -435,6 +435,22 @@
 <body>
 <div class="shell">
 
+  <header class="mast">
+    <div class="mast-id">
+      <p class="eyebrow">It Looked Right &middot; for researchers</p>
+      <h1>Using coding agents today and tomorrow</h1>
+      <p class="standfirst"><b>Coding is no longer the barrier. Four challenges remain.</b> Each one below, with the incidents that produced it &mdash; every one real and traceable to a primary source, each labelled with who checked it &mdash; most are self-reports by the person they are about.</p>
+    </div>
+    <div class="depth">
+      <span class="depth-label" id="depth-label">Reading depth</span>
+      <div class="seg" role="group" aria-labelledby="depth-label">
+        <button type="button" data-depth="brief" aria-pressed="true">Headlines</button>
+        <button type="button" data-depth="full" aria-pressed="false">+ incidents</button>
+        <button type="button" data-depth="all" aria-pressed="false">+ sources</button>
+      </div>
+    </div>
+  </header>
+
   <div class="esc-hero">
     <div class="esc">
 
@@ -477,21 +493,6 @@
     </div>
   </div>
 
-  <header class="mast">
-    <div class="mast-id">
-      <p class="eyebrow">Working with coding agents &middot; for researchers</p>
-      <h1>It Looked Right</h1>
-      <p class="standfirst"><b>Coding is no longer the barrier. Four challenges remain.</b> Each one below, with the incidents that produced it &mdash; every one real and traceable to a primary source, each labelled with who checked it &mdash; most are self-reports by the person they are about.</p>
-    </div>
-    <div class="depth">
-      <span class="depth-label" id="depth-label">Reading depth</span>
-      <div class="seg" role="group" aria-labelledby="depth-label">
-        <button type="button" data-depth="brief" aria-pressed="true">Headlines</button>
-        <button type="button" data-depth="full" aria-pressed="false">+ incidents</button>
-        <button type="button" data-depth="all" aria-pressed="false">+ sources</button>
-      </div>
-    </div>
-  </header>
 
   <div class="cols">
 
