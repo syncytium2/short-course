@@ -375,6 +375,16 @@
   .sq-s { color: var(--faint); }
   @media (max-width: 620px) { ol.sq li { grid-template-columns: 1fr; gap: 0; } }
 
+  /* A standing caution the reader must not skim past — a real question with a
+     real answer that this page is not the right source for. */
+  .warn {
+    background: var(--caution-soft); border-left: 3px solid var(--caution);
+    border-radius: 0 7px 7px 0; padding: 15px 17px; margin: 0 0 18px; max-width: 74ch;
+  }
+  .warn p { margin: 0 0 10px; max-width: none; }
+  .warn p:last-child { margin-bottom: 0; }
+  .warn-note { font-size: 13px; color: var(--caution); }
+
   /* ---------------- tables ---------------- */
 
   .tw { overflow-x: auto; margin: 0 0 18px; max-width: 74ch; }
@@ -899,7 +909,31 @@
           <h2 id="h-repo">The repo</h2>
           <p class="lede"><b>Not undo.</b> A record of what happened and why.</p>
         </div>
-        <p>Three commands to start: <span class="path">commit</span>, <span class="path">diff</span>, <span class="path">log</span>.</p>
+        <p><b>Repo is short for repository.</b> It is a folder whose every change is recorded &mdash; what changed, when, and the reason the person gave at the time.</p>
+
+        <p><b>Git is the program that does the recording.</b> It runs on your own machine, keeps the entire history there, and asks you for a one-line reason each time you save a checkpoint.</p>
+
+        <p><b>Three commands to start</b>, and it is worth knowing what each one is before you type it:</p>
+        <ul>
+          <li><span class="path">commit</span> &mdash; save a checkpoint, with your one-line reason attached.</li>
+          <li><span class="path">diff</span> &mdash; show me exactly what changed: which lines, in which files. This is the one <a href="#validation" data-view="validation">Validation</a> asks you to read.</li>
+          <li><span class="path">log</span> &mdash; show me every checkpoint so far, and why each one was made.</li>
+        </ul>
+
+        <h3>Where the copy lives</h3>
+        <p>Git works entirely on your own machine and needs nothing else. A <b>host</b> is where you put a copy so it survives the laptop and reaches your other machines. The three most people meet:</p>
+        <ul>
+          <li><a href="https://github.com">GitHub</a> &mdash; the most common, and where most public research code sits.</li>
+          <li><a href="https://gitlab.com">GitLab</a> &mdash; the one institutions most often run themselves.</li>
+          <li><a href="https://bitbucket.org">Bitbucket</a> &mdash; common inside companies.</li>
+        </ul>
+        <p><b>Ask before you pick one.</b> Your university or your employer may already run its own &mdash; usually a private GitLab &mdash; and may require you to use it for anything touching research data or human-subjects material. That is a governance question, not a preference, and it is much cheaper to answer on day one than to migrate later.</p>
+
+        <div class="warn">
+          <p><b>And find out who owns the work before you put it anywhere public.</b> Most universities and companies claim some rights over what their people make. Whether it applies to you usually turns on your employment class, who funded the work, and whether the thing counts as <i>software</i> rather than as scholarship &mdash; and software is very often treated differently from a paper.</p>
+          <p>These policies are written down, they differ between institutions, and they are not settled by reasoning about them. The office that holds the answer is normally technology transfer, research administration, or whoever wrote your contract. <b>Ask them before you publish, before you push to a public host, and before you attach a licence</b> &mdash; all three are much harder to undo than to check.</p>
+          <p class="warn-note">Not legal advice. The point is that a real answer exists, it is specific to you, and somebody whose job it is will give it to you for the cost of one email.</p>
+        </div>
         <p>The reason to keep one is not that you will roll back &mdash; you almost never will. It is that six weeks later you will need to know <i>why</i> something is the way it is, and the only artifact that can tell you is a message written by the person who knew at the time.</p>
 
         <details class="more">
