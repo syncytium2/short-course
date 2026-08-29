@@ -8,7 +8,7 @@
      Palette and type inherited from search-to-shipped.html and
      four-barriers.html so the three handouts read as one system.
      One addition: --good, used ONLY for the done state, because a
-     checklist that marks progress in the accent colour cannot then
+     checklist that marks progress in the accent color cannot then
      use the accent to mean "look here".
      --------------------------------------------------------------- */
   :root {
@@ -84,7 +84,7 @@
   :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
 
   /* The whole page is sized for a window docked beside a terminal.
-     560px is the column; a wide viewport just centres it. */
+     560px is the column; a wide viewport just centers it. */
   .page { max-width: 560px; margin: 0 auto; padding: 0 20px; }
 
   /* ---- sticky progress strip ---- */
@@ -633,7 +633,7 @@ one so I can look.
             <pre>/usage     what you have spent, and against what limit
 /context   what is filling the window right now
 /insights  a report on how you actually work</pre>
-            <p class="why">In <code>/usage</code>, press <code>d</code> and <code>w</code> to switch between the last day and the last week. It breaks the spend down by what caused it &mdash; subagents, skills, individual tools &mdash; and flags any behaviour accounting for more than a tenth of it. Codex has the same three ideas under <code>/status</code>, <code>/usage</code> and <code>/statusline</code>.</p>
+            <p class="why">In <code>/usage</code>, press <code>d</code> and <code>w</code> to switch between the last day and the last week. It breaks the spend down by what caused it &mdash; subagents, skills, individual tools &mdash; and flags any behavior accounting for more than a tenth of it. Codex has the same three ideas under <code>/status</code>, <code>/usage</code> and <code>/statusline</code>.</p>
             <p class="why"><b>The thing that surprises everyone.</b> Your whole conversation is re-sent on every single request. A one-line question in a session you have had open all day still carries the whole day with it, and coming back after a long break re-processes the lot. Which makes <code>/clear</code> between unrelated tasks the largest single lever you have, and it costs nothing.</p>
             <p class="why">The mechanism is written down: <a href="https://code.claude.com/docs/en/costs">Manage costs effectively</a>, and its section <i>Why usage climbs in a long session</i> in particular.</p>
             <div class="warn"><b>&ldquo;Tokenmaxxing&rdquo; is the failure mode this step exists to prevent.</b> Spend is visible and measurable; work done is neither. So people start reading the number as if it were the work &mdash; and teams have gone as far as ranking engineers by it, which rewards whoever burns the most rather than whoever finishes. Read the usage screen to find your <i>waste</i>, never to score yourself. And do not conclude a limit changed because it felt different: in January 2026 a wave of developers reported their allowance had been cut, and the actual cause was a holiday bonus expiring (<a href="https://theregister.com/2026/01/05/claude_devs_usage_limits/">The Register, 5 Jan 2026</a> &mdash; journalism, not documentation).</div>
@@ -687,7 +687,7 @@ one so I can look.
         <div>
           <button class="head" type="button" aria-expanded="true"><span class="n">5.4</span>Build a guard only after something has gone wrong</button>
           <div class="body">
-            <p class="why">Never in advance. Guarding against failure is necessary and it is also an absorbing pursuit &mdash; a beautiful start-up script will not analyse your data. Cures come in three kinds and only one is a tool: <b>a tool, a change of habit, or a check you accept forever.</b></p>
+            <p class="why">Never in advance. Guarding against failure is necessary and it is also an absorbing pursuit &mdash; a beautiful start-up script will not analyze your data. Cures come in three kinds and only one is a tool: <b>a tool, a change of habit, or a check you accept forever.</b></p>
             <p class="done">Every guard you have can be traced to the specific thing that went wrong first.</p>
           </div>
         </div>
@@ -797,10 +797,10 @@ or four A records:
       <li>
         <button class="tick" type="button" aria-pressed="false" aria-label="Mark step 7.5 done">&#10003;</button>
         <div>
-          <button class="head" type="button" aria-expanded="true"><span class="n">7.5</span>Leave the cloud grey until the certificate exists</button>
+          <button class="head" type="button" aria-expanded="true"><span class="n">7.5</span>Leave the cloud gray until the certificate exists</button>
           <div class="body">
             <div class="warn"><b>This is where this chain fails, and it fails silently.</b> Cloudflare proxies by default &mdash; the orange cloud beside each record. With it on, GitHub&rsquo;s request to prove you own the domain never reaches GitHub, so the certificate is never issued, and <b>Enforce HTTPS</b> in the Pages settings simply stays greyed out with no error anywhere explaining why.</div>
-            <p class="why">Set the records to <b>DNS only</b> &mdash; the grey cloud &mdash; and wait. Fifteen minutes to an hour is normal, and GitHub says up to 24. If it will not budge, remove the custom domain in the Pages settings and add it again; that re-triggers the request.</p>
+            <p class="why">Set the records to <b>DNS only</b> &mdash; the gray cloud &mdash; and wait. Fifteen minutes to an hour is normal, and GitHub says up to 24. If it will not budge, remove the custom domain in the Pages settings and add it again; that re-triggers the request.</p>
             <p class="why">Once <b>Enforce HTTPS</b> is tickable, tick it. Only then turn the orange cloud back on if you want Cloudflare&rsquo;s caching in front of the site &mdash; and it is genuinely optional.</p>
             <p class="done"><code>https://</code> works, and the <b>Enforce HTTPS</b> box is ticked rather than greyed out.</p>
           </div>
@@ -824,7 +824,7 @@ or four A records:
         <span class="trap-k">&ldquo;Remember this&rdquo; as a fix<span class="wrong">Wrong</span></span>
         <p>You find the mistake, you discover the better way, and you tell the agent to remember it. <b>A request is not a rule.</b> A project instructions file is not enforceable; use all the emphasis you like and the second sentence still gets skipped.</p>
         <p class="incident"><b>What actually happened.</b> A hold was written into a project&rsquo;s instructions: queue page changes, do not publish them one at a time. It was written down clearly. It lost &mdash; because three separate machines in that project tell a session to publish, and none of them waits to be asked: a ready-to-paste command in the staleness report, a daily workflow summary, and a line in every session briefing. <b>The session that publishes is right by every signal available to it.</b> Nobody was careless. The repair was to move the hold to where those three signals are computed, so all three now print the hold instead of the publish command.</p>
-        <p><b>Instead:</b> ask what tier your fix is on. Prose in an instructions file costs nothing to ignore. A checklist costs nothing when you are busy. A test costs a red line. Structure means the wrong thing is not reachable. Move the fix down that list until it can no longer be skipped &mdash; usually to wherever the wrong behaviour is being suggested from.</p>
+        <p><b>Instead:</b> ask what tier your fix is on. Prose in an instructions file costs nothing to ignore. A checklist costs nothing when you are busy. A test costs a red line. Structure means the wrong thing is not reachable. Move the fix down that list until it can no longer be skipped &mdash; usually to wherever the wrong behavior is being suggested from.</p>
         <p><b>The one exception, and it is worth knowing:</b> a <i>definition</i> holds where an <i>instruction</i> does not. An instruction competes with what the model already believes and loses. A glossary the session reads before it reasons is the belief it starts from, so there is nothing to lose to.</p>
         <p class="src"><a href="https://lookedright.tonydefazio.com/#fixes">The full incident, and the four tiers &mdash; <i>It Looked Right</i>, Fixes that hold</a></p>
       </li>
