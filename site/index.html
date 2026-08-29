@@ -262,31 +262,29 @@
   .esc-row.now .esc-you { color: var(--ink); }
 
   /* ---- the escalation figure ----
-     Replaces three stock meme photographs. Those carried no information about the
-     escalation, were third-party images of unidentified copyright, and the meme's
-     own idiom is a sarcasm marker — it read the page's load-bearing claim as the
-     joke. This draws the axis the strip actually argues: who touches your files. */
+     Original artwork, not the meme. Same three-panel escalation the meme had, but
+     what escalates is the era and, in the last panel, the reach: the agent's cable
+     leaves its own frame and lands in your files. The other two never cross theirs. */
   .fig-wrap { margin: 0 0 22px; }
-  .fig-esc { display: block; width: 100%; height: auto; overflow: visible; }
-  .fig-wrap figcaption {
-    font-size: 13.5px; color: var(--muted); margin-top: 10px; max-width: 68ch;
-  }
-  .fig-esc text { font-family: var(--mono); }
-  .fig-esc .d-col text { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; fill: var(--faint); }
-  .fig-esc .d-lane { font-size: 12.5px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; fill: var(--ink); }
-  .fig-esc .d-rule { stroke: var(--rule); stroke-width: 1; }
-  .fig-esc .d-node { fill: var(--surface); stroke: var(--rule-firm); stroke-width: 1.4; }
-  .fig-esc .d-you  { stroke: var(--accent); stroke-width: 2; }
-  .fig-esc .d-files{ fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.6; }
-  .fig-esc .d-gap  { fill: none; stroke: var(--rule-firm); stroke-width: 1.4; stroke-dasharray: 4 4; }
-  .fig-esc .d-in   { font-size: 12px; fill: var(--ink); }
-  .fig-esc .d-none { font-size: 11px; fill: var(--faint); font-style: italic; }
-  .fig-esc .d-note { font-size: 10.5px; fill: var(--muted); }
-  .fig-esc .d-edge { stroke: var(--rule-firm); stroke-width: 1.6; fill: none; }
-  .fig-esc .d-strong { stroke: var(--accent); stroke-width: 2.2; }
-  .fig-esc .d-loop { stroke: var(--accent); stroke-width: 1.4; stroke-dasharray: 3 3; }
-  .fig-esc .d-head { fill: var(--rule-firm); }
-  .fig-esc .d-strong ~ .d-head, .fig-esc .d-loop + .d-head { fill: var(--accent); }
+  .fig-era { display: block; width: 100%; height: auto; overflow: visible; }
+  .fig-wrap figcaption { font-size: 13.5px; color: var(--muted); margin-top: 12px; max-width: 68ch; }
+  .fig-era text { font-family: var(--mono); }
+  .e-frame  { fill: none; stroke: var(--rule); stroke-width: 1.4; }
+  .e-body   { fill: var(--sunk); stroke: var(--muted); stroke-width: 2; stroke-linejoin: round; }
+  .e-screen { fill: var(--surface); stroke: var(--muted); stroke-width: 1.6; }
+  .e-txt    { stroke: var(--faint); stroke-width: 3; stroke-linecap: round; }
+  .e-link, .e-live { stroke: var(--accent); }
+  .e-key    { stroke: var(--faint); stroke-width: 2; stroke-linecap: round; }
+  .e-bubble { fill: none; stroke: var(--accent); stroke-width: 1.6; stroke-linejoin: round; }
+  .e-prompt { font-size: 13px; fill: var(--accent); font-weight: 600; }
+  .e-cable  { fill: none; stroke: var(--accent); stroke-width: 2.2; }
+  .e-head   { fill: var(--accent); }
+  .e-drawer { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.8; stroke-linejoin: round; }
+  .e-lab    { font-size: 11px; fill: var(--accent); letter-spacing: .06em; }
+  .e-era    { font-size: 10.5px; fill: var(--faint); letter-spacing: .14em; }
+  .e-name   { font-size: 12.5px; fill: var(--ink); font-weight: 600; letter-spacing: .05em; }
+
+  .spec-open { border-left-width: 4px; margin-bottom: 26px; }
 
   /* the cold open — the incident the page is named after, before anything else */
   .spec-open { border-left-width: 4px; margin-bottom: 26px; }
@@ -474,8 +472,8 @@
 
         <h3>How AI interaction has evolved</h3>
         <figure class="fig-wrap">
-          <svg class="fig-esc" viewBox="0 0 860 286" role="img" aria-label="Three lanes. Web search returns links and nothing reaches your files. An AI chatbot returns text which you carry to your files yourself. An AI coding agent changes your files directly, reading its own errors and trying again, with no step where you carry anything."><g class="d-col"><text x="215" y="30" text-anchor="middle">you ask</text><text x="405" y="30" text-anchor="middle">what comes back</text><text x="595" y="30" text-anchor="middle">who moves it</text><text x="782" y="30" text-anchor="middle">your files</text></g><line class="d-rule" x1="10" y1="48" x2="850" y2="48"/><text class="d-lane" x="10" y="100">Web search</text><text class="d-lane" x="10" y="167">AI chatbot</text><text class="d-lane" x="10" y="234">AI coding agent</text><rect class="d-node" x="172" y="80" width="86" height="30" rx="4"/><text class="d-in" x="215" y="99" text-anchor="middle">you</text><line class="d-edge" x1="260" y1="95" x2="359" y2="95"/><path class="d-head" d="M359,95 l-7,-4.5 l0,9 Z"/><rect class="d-node" x="362" y="80" width="86" height="30" rx="4"/><text class="d-in" x="405" y="99" text-anchor="middle">links</text><text class="d-none" x="782" y="99" text-anchor="middle">nothing</text><rect class="d-node" x="172" y="147" width="86" height="30" rx="4"/><text class="d-in" x="215" y="166" text-anchor="middle">you</text><line class="d-edge" x1="260" y1="162" x2="359" y2="162"/><path class="d-head" d="M359,162 l-7,-4.5 l0,9 Z"/><rect class="d-node" x="362" y="147" width="86" height="30" rx="4"/><text class="d-in" x="405" y="166" text-anchor="middle">text</text><line class="d-edge" x1="450" y1="162" x2="549" y2="162"/><path class="d-head" d="M549,162 l-7,-4.5 l0,9 Z"/><rect class="d-node d-you" x="552" y="147" width="86" height="30" rx="4"/><text class="d-in" x="595" y="166" text-anchor="middle">you</text><line class="d-edge" x1="640" y1="162" x2="736" y2="162"/><path class="d-head" d="M736,162 l-7,-4.5 l0,9 Z"/><rect class="d-node d-files" x="739" y="147" width="86" height="30" rx="4"/><text class="d-in" x="782" y="166" text-anchor="middle">your files</text><rect class="d-node" x="172" y="214" width="86" height="30" rx="4"/><text class="d-in" x="215" y="233" text-anchor="middle">you</text><line class="d-edge d-strong" x1="260" y1="229" x2="736" y2="229"/><path class="d-head" d="M736,229 l-7,-4.5 l0,9 Z"/><rect class="d-gap" x="552" y="214" width="86" height="30" rx="4"/><text class="d-none" x="595" y="234" text-anchor="middle">nobody</text><rect class="d-node d-files" x="739" y="214" width="86" height="30" rx="4"/><text class="d-in" x="782" y="233" text-anchor="middle">your files</text><path class="d-edge d-loop" d="M782,244 C782,256 405,256 405,244"/><path class="d-head" d="M405,244 l-4.5,7 l9,0 Z"/><text class="d-note" x="593" y="276" text-anchor="middle">reads the error, tries again</text></svg>
-          <figcaption>Three ways to use AI, and what each one touches. <b>The step missing from the bottom row is you.</b></figcaption>
+          <svg class="fig-era" viewBox="0 0 860 340" role="img" aria-label="Three machines in sequence. A 1977 desktop computer showing a list of links. A late-1990s all-in-one showing a speech bubble. A modern laptop showing a command prompt, with a cable leaving its own frame and running into a drawer of your files."><rect class="e-frame" x="10" y="10" width="250" height="205" rx="6"/><rect class="e-frame" x="300" y="10" width="250" height="205" rx="6"/><path class="e-frame" d="M590,209 L590,16 Q596,10 596,10 L834,10 Q840,10 840,16 L840,150"/><path class="e-frame" d="M590,209 L590,215 L740,215"/><rect class="e-body" x="65" y="46" width="140" height="104" rx="8"/><rect class="e-screen" x="79" y="59" width="112" height="70" rx="3"/><line class="e-txt e-link" x1="91" y1="73" x2="161" y2="73"/><line class="e-txt" x1="91" y1="87" x2="145" y2="87"/><line class="e-txt" x1="91" y1="101" x2="153" y2="101"/><line class="e-txt" x1="91" y1="115" x2="135" y2="115"/><rect class="e-body" x="118" y="150" width="34" height="9" rx="2"/><rect class="e-body" x="60" y="166" width="150" height="17" rx="3"/><line class="e-key" x1="69" y1="171" x2="77" y2="171"/><line class="e-key" x1="84" y1="171" x2="92" y2="171"/><line class="e-key" x1="99" y1="171" x2="107" y2="171"/><line class="e-key" x1="114" y1="171" x2="122" y2="171"/><line class="e-key" x1="129" y1="171" x2="137" y2="171"/><line class="e-key" x1="144" y1="171" x2="152" y2="171"/><line class="e-key" x1="159" y1="171" x2="167" y2="171"/><line class="e-key" x1="174" y1="171" x2="182" y2="171"/><line class="e-key" x1="189" y1="171" x2="197" y2="171"/><rect class="e-body" x="352" y="42" width="146" height="120" rx="36"/><rect class="e-screen" x="372" y="62" width="106" height="70" rx="4"/><path class="e-bubble" d="M385,74 h74 a6,6 0 0 1 6,6 v28 a6,6 0 0 1 -6,6 h-46 l-12,11 v-11 h-16 a6,6 0 0 1 -6,-6 v-28 a6,6 0 0 1 6,-6 z"/><line class="e-txt" x1="395" y1="88" x2="445" y2="88"/><line class="e-txt" x1="395" y1="101" x2="431" y2="101"/><ellipse class="e-body" cx="425" cy="170" rx="32" ry="8"/><rect class="e-body" x="648" y="48" width="134" height="84" rx="5"/><rect class="e-screen" x="656" y="55" width="118" height="70" rx="2"/><text class="e-prompt" x="667" y="80">&gt;</text><line class="e-txt" x1="681" y1="76" x2="725" y2="76"/><line class="e-txt" x1="681" y1="91" x2="739" y2="91"/><line class="e-txt e-live" x1="681" y1="106" x2="711" y2="106"/><path class="e-body" d="M637,138 L793,138 L781,150 L649,150 Z"/><path class="e-cable" d="M755,150 C755,196 787,214 787,236"/><path class="e-head" d="M787,242 l-5,-8 l10,0 Z"/><path class="e-drawer" d="M748,248 h34 l6,8 h34 a4,4 0 0 1 4,4 v34 a4,4 0 0 1 -4,4 h-74 a4,4 0 0 1 -4,-4 v-42 a4,4 0 0 1 4,-4 z"/><text class="e-lab" x="787" y="318" text-anchor="middle">your files</text><text class="e-era" x="26" y="34">1977</text><text class="e-name" x="26" y="241">WEB SEARCH</text><text class="e-era" x="316" y="34">1998</text><text class="e-name" x="316" y="241">AI CHATBOT</text><text class="e-era" x="606" y="34">now</text><text class="e-name" x="606" y="241">AI CODING AGENT</text></svg>
+          <figcaption>Three machines, and what each one can reach. <b>Only the last one leaves its own frame.</b></figcaption>
         </figure>
 
         <div class="esc">
