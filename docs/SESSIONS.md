@@ -232,12 +232,20 @@ find out about each other. That is what a board is for, and it is why C3 in
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
 
-### Mac/6414cc91 — reconstruct course-outline.md and session-record-2026-08-26.md from the 2026-08-26 claude.ai export and file them under docs/history/
+### Mac/6414cc91 — recover the outline drafts by replaying 01b's tool calls; file them as node 1c
 - **Status:** ACTIVE
 - **Opened:** 2026-08-29
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/chain/01c-recovered-drafts/` (new folder, 6 files) and one amended
+  bullet in `docs/chain/01-session-record.md`'s provenance banner.
+- **Notes:** **The claim opened wider than it landed.** It began as "reconstruct the outline
+  and the session record from the export" — both turned out to be already in the repo and in
+  better condition than anything I could produce: the outline is `course-outline.md` at root
+  (corrected four times since import) and the session record is `docs/chain/01-session-record.md`.
+  Adding either would have been a stale duplicate. What was genuinely missing is the
+  intermediate file states, which nobody had replayed. **Does not touch the root outline** —
+  including the one-character transit defect found on its line 98, which is documented in the
+  new README and deliberately left uncorrected there.
 
 <!-- RELEASE THIS
      tools/claim.sh --release

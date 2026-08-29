@@ -12,8 +12,12 @@
 >   the party being evaluated, with no second source.
 > - **It is organized defect-first**, which imposes a narrative of correction on a session
 >   that may not have had one. The shape is an argument, not a chronology.
-> - **Drafts 1 and 2 are not here.** Only descriptions of how they changed. Those artifacts
->   are gone and are not recoverable from this file.
+> - **Drafts 1 and 2 are not here.** Only descriptions of how they changed. They are not
+>   recoverable *from this file* — but they were never gone, which is what this line claimed
+>   until 2026-08-29. Replaying the tool calls in [`01b`](01b-real-log-complete.md) rebuilds
+>   all four drafts exactly; they are in [`01c-recovered-drafts/`](01c-recovered-drafts/).
+>   The claim stood for three days and was retired by going back to the source, not by
+>   remembering better.
 > - **It contains at least three unchecked numbers that a later review refuted** — see
 >   "Known defects in this node" below. The errors it reports about itself are therefore an
 >   undercount, established by measurement rather than suspicion.
