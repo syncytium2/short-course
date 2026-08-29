@@ -20,30 +20,46 @@
 > **The body costs about ten minutes** — what a docstring is, what a pre-commit check is, and
 > why "the code was fine and the sentence about it was wrong" is the harder half.
 
-> ## 🧪 Teach it on a bench, and open with the wrong answer
+> ## 🧪 Two channels, one bench — the allegory, and it carries the whole finding
 >
-> **The allegory is Tony's, and its first half is the diagnosis he arrived with** on the day —
-> which is the reason to open with it rather than the finding. Everyone in the room will supply
-> this version themselves, so it is worth being wrong out loud before it is corrected.
+> **Both halves are Tony's, told on the day.** An earlier draft of this block ran them as a wrong
+> answer corrected by a right one. That was wrong: **they are the two halves of one mechanism**,
+> and the first half is the one that explains why the instruction kept failing.
 >
-> **The version everyone arrives with.** A scientist leaves a post-it on the desk of the
-> assistant he assumes is doing it: *don't leave the pH probe out of solution overnight.* Nobody
-> notices the post-it. Least of all the assistant.
+> ### The channel with no readers — 12:15
 >
-> That is a written instruction nobody read — [`points.md`](../../points.md) B4, which this
-> folder already has four instances of, and **it is not what happened.** Ask the room what they
-> would do next and they will say *bigger note, better place, tell them to their face.* Tony
-> reached for that. So did I.
+> A scientist leaves a post-it on the desk of the assistant he assumes is doing it: *don't leave
+> the pH probe out of solution overnight.* Nobody notices it. Least of all the assistant.
 >
-> **What was actually on the bench.** Taped to the meter itself is a laminated card describing
+> **His real version has timestamps and is worse.** An email at **12:15**: *"time for a detailed
+> read of this manuscript."* Nobody opens it — they are working on the things they already had.
+> At **1:15** the sender appears expecting an edited draft back immediately, is already past
+> their own **1pm** departure for vacation, and names the delay as *you not responding.*
+>
+> Three things are true at once there, and all three recur with assistants:
+>
+> - **The message was correct, clear, and sent.** Nothing about its wording failed.
+> - **The recipients behaved reasonably.** They were doing the work previously assigned, in the
+>   absence of any signal that something had superseded it.
+> - **The sender's own slippage was attributed outward**, to the party who never saw the message.
+>   *"I cannot get the agents to stop"* is that sentence, and it was a completely reasonable thing
+>   to conclude.
+>
+> **Sending is not telling.** An instruction dropped into a channel nobody polls has not been
+> given, however many times it is repeated, and repetition is what it feels like from the sending
+> end.
+>
+> ### The channel everyone mounts — the card on the meter
+>
+> Taped to the meter itself is a laminated card describing
 > the instrument. Somewhere in it: *"the probe is stored dry between runs."* True of a **new**
 > probe, out of the box, before conditioning. False, and ruinous, for every probe in the lab,
 > all of which have been conditioned and must stay in KCl.
 >
 > **Nobody is ignoring instructions.** They read the card — it is *on the instrument*, so it
 > reads as a fact about the instrument rather than as an order — and they store the probe dry.
-> **They are following the most authoritative document in the room.** The post-it was not
-> competing with forgetfulness. It was competing with the card, and losing.
+> **They are following the most authoritative document in the room.** The post-it and the 12:15
+> email were never competing with forgetfulness. They were competing with the card, and losing.
 >
 > **And the line was added by the person who had already had to correct that card twice.** He
 > was fixing two other wrong statements on it, and while he had it down, added one more helpful
@@ -56,6 +72,19 @@
 > sentence, true where it was written, false everywhere it travelled. Point 3's inversion lands
 > on the bench too: **no probe was actually harmed**, because nobody ran that protocol — but the
 > card was wrong in every methods section that quoted it.
+>
+> ### Why the two halves are one picture, and the part that is specific to assistants
+>
+> **This is the incident, both sides of it.** Tony had said *duration is the exporter's* out loud,
+> repeatedly. Each session heard it **once**, inside its own conversation, and then ended. The
+> next one opened cold, read the module every detector imports, and found a sentence telling it
+> that the interval between two fields *is* the duration. **He had said it more times than the
+> card had. The card reached more readers.**
+>
+> **A session has no inbox.** Every conversation is the 12:15 email: it reaches exactly one
+> reader and does not survive them. The only channel an assistant reliably mounts is **the files
+> it opens** — which is why saying it again changed nothing for ten days, and deleting twelve
+> words worked in an afternoon.
 >
 > **The line to end on, and it is rule 10 read backwards:** *a note asks you to override what
 > you believe; a label tells you what to believe.* Only one of them wins with an assistant who
