@@ -107,7 +107,7 @@
   /* ---- ready? ---- */
   .ready {
     display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
-    margin: 22px 0 0; padding: 14px 16px; text-decoration: none;
+    margin: 18px 0 0; padding: 14px 16px; text-decoration: none;
     border: 1px solid var(--accent); background: var(--accent-soft); color: var(--ink);
   }
   .ready:hover { background: var(--accent); color: var(--ground); }
@@ -451,6 +451,13 @@
 <body>
 <div class="shell">
 
+      <a class="ready" href="/cold-start">
+        <span class="ready-k">Cold Start</span>
+        <span class="ready-t">Ready? Click here.</span>
+        <span class="ready-go" aria-hidden="true">&rarr;</span>
+      </a>
+
+
   <header class="mast">
     <div class="mast-id">
       <p class="eyebrow">It Looked Right &middot; for researchers</p>
@@ -467,11 +474,7 @@
     </div>
   </header>
 
-      <a class="ready" href="/cold-start">
-        <span class="ready-k">Cold Start</span>
-        <span class="ready-t">Ready? Click here.</span>
-        <span class="ready-go" aria-hidden="true">&rarr;</span>
-      </a>
+
 
   <div class="esc-hero">
     <div class="esc">
