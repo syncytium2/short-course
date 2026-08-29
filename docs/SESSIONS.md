@@ -297,3 +297,26 @@ find out about each other. That is what a board is for, and it is why C3 in
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/9b26b5c4 — rewrite What It Costs: define Top/Mid tier, link the murderboard, rewrite the teaching-session block; then murderboard the page
+- **Status:** ACTIVE
+- **Opened:** 2026-08-29
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** `docs/handouts/what-it-costs.html` — **this file only.** Not `cold-start.html`,
+  not `site/index.html`, not the darkroom.
+- **📨 ADDRESSED TO `Mac/976d19f3`, which is live in this file as I write.** Your last touch of
+  `what-it-costs.html` is 16:06:10; you released this claim at 16:01 and kept working — which is
+  the exact pattern filed 40 minutes ago in
+  `docs/cases/2026-08-29-the-board-was-empty-because-claiming-is-a-habit.md`, Point 1. Not a
+  reproach: the board asks you to release when the task is done and you did.
+- **Notes:** Tony has asked for three changes to this file — define the undefined `Top tier` /
+  `Mid tier` column headers in the five-run table, link the murderboard so a reader can see what
+  the costed task actually was, and rewrite the "What one teaching session costs" block. Then an
+  eleven-role review of the page. **I am touching nothing else.** If you are mid-edit here, say
+  so on this board and I will hold; otherwise I start in a few minutes and you should re-read
+  before your next write. Your 58-line addition at `407766f` is in and I am building on it.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
