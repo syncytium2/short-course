@@ -1,0 +1,417 @@
+<title>What It Costs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+  /* ---------------------------------------------------------------
+     Fourth sheet in the same system as cold-start.html,
+     search-to-shipped.html and four-barriers.html. Same tokens, same
+     two weights of one family. This one is prose rather than a
+     checklist, so it has no tick column and no progress strip.
+     --------------------------------------------------------------- */
+  :root {
+    --ground:  #FAFBFC;
+    --surface: #FFFFFF;
+    --sunk:    #F2F5F8;
+    --ink:     #171C23;
+    --muted:   #5C6875;
+    --faint:   #8B96A3;
+    --rule:    #E1E6EB;
+    --rule-firm:#C9D2DB;
+    --accent:  #15577D;
+    --accent-soft: #E7F0F6;
+    --caution: #8A5D0F;
+    --caution-soft: #FAF2E2;
+    --good:    #2E6A4F;
+    --good-soft: #E6F1EB;
+
+    --sans: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:  #0D1218;
+      --surface: #141A22;
+      --sunk:    #1A222B;
+      --ink:     #E3E8EE;
+      --muted:   #93A0AE;
+      --faint:   #6D7987;
+      --rule:    #232C36;
+      --rule-firm:#313D4A;
+      --accent:  #69B0DD;
+      --accent-soft: #16283A;
+      --caution: #D2A64E;
+      --caution-soft: #2A2213;
+      --good:    #74C39B;
+      --good-soft: #14261E;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground:  #0D1218;
+    --surface: #141A22;
+    --sunk:    #1A222B;
+    --ink:     #E3E8EE;
+    --muted:   #93A0AE;
+    --faint:   #6D7987;
+    --rule:    #232C36;
+    --rule-firm:#313D4A;
+    --accent:  #69B0DD;
+    --accent-soft: #16283A;
+    --caution: #D2A64E;
+    --caution-soft: #2A2213;
+    --good:    #74C39B;
+    --good-soft: #14261E;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0;
+    padding: 36px 20px 96px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page { max-width: 600px; margin: 0 auto; }
+
+  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+
+  /* ---- masthead ---- */
+  .mast { border-bottom: 2px solid var(--ink); padding-bottom: 16px; margin-bottom: 22px; }
+  .eyebrow {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .13em;
+    text-transform: uppercase; color: var(--muted); margin: 0 0 10px;
+  }
+  h1 { font-size: 27px; font-weight: 600; letter-spacing: -.015em; margin: 0 0 10px; text-wrap: balance; }
+  .standfirst { color: var(--muted); margin: 0; }
+
+  h2 {
+    font-size: 17px; font-weight: 600; margin: 40px 0 0; letter-spacing: -.01em;
+    border-bottom: 1px solid var(--ink); padding-bottom: 7px; text-wrap: balance;
+  }
+  h3 {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .11em; text-transform: uppercase;
+    color: var(--accent); font-weight: 500; margin: 24px 0 6px;
+  }
+  p { margin: 12px 0; }
+  b { font-weight: 600; }
+
+  .lede { font-size: 15.5px; }
+
+  /* ---- staleness banner: the loudest thing on the page ---- */
+  .stale {
+    background: var(--caution-soft); border-left: 2px solid var(--caution);
+    padding: 12px 14px; margin: 22px 0 0; font-size: 13.5px;
+  }
+  .stale p { margin: 0 0 7px; }
+  .stale p:last-child { margin: 0; }
+
+  .note {
+    background: var(--accent-soft); border-left: 2px solid var(--accent);
+    padding: 12px 14px; margin: 18px 0; font-size: 14px;
+  }
+  .note p { margin: 0 0 8px; }
+  .note p:last-child { margin: 0; }
+
+  .flag {
+    background: var(--sunk); border-left: 2px solid var(--rule-firm);
+    padding: 11px 13px; margin: 16px 0; font-size: 13.5px; color: var(--muted);
+  }
+  .flag b { color: var(--ink); }
+  .flag p { margin: 0 0 7px; }
+  .flag p:last-child { margin: 0; }
+
+  /* ---- the two shapes ---- */
+  .shapes { display: grid; gap: 14px; margin: 18px 0 0; }
+  .shape { border: 1px solid var(--rule-firm); padding: 14px 15px; background: var(--surface); }
+  .shape.meter { border-color: var(--caution); }
+  .shape-k {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--good); display: block; margin-bottom: 5px;
+  }
+  .shape.meter .shape-k { color: var(--caution); }
+  .shape h4 { margin: 0 0 6px; font-size: 15px; font-weight: 600; }
+  .shape p { margin: 0 0 8px; font-size: 14px; color: var(--muted); }
+  .shape p:last-child { margin: 0; }
+  .shape .worst { color: var(--ink); font-weight: 500; }
+
+  /* ---- money table ---- */
+  .tw { overflow-x: auto; margin: 16px 0; }
+  table { border-collapse: collapse; width: 100%; font-size: 13.5px; min-width: 380px; }
+  th, td { text-align: left; padding: 8px 10px 8px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .09em;
+    text-transform: uppercase; color: var(--faint); font-weight: 500;
+    border-bottom: 1px solid var(--rule-firm);
+  }
+  td.num { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  td.num b { font-weight: 600; }
+  caption {
+    caption-side: bottom; text-align: left; font-size: 12.5px; color: var(--faint);
+    padding-top: 8px;
+  }
+
+  ul.plain { margin: 12px 0; padding: 0; list-style: none; }
+  ul.plain > li { padding: 9px 0; border-bottom: 1px solid var(--rule); }
+  ul.plain > li:first-child { border-top: 1px solid var(--rule); }
+  ul.plain b { font-weight: 600; }
+  ul.plain .sub { display: block; color: var(--muted); font-size: 13.5px; margin-top: 2px; }
+
+  ol.acts { margin: 12px 0 0; padding: 0; list-style: none; counter-reset: a; }
+  ol.acts > li {
+    padding: 11px 0 11px 30px; border-bottom: 1px solid var(--rule);
+    position: relative; counter-increment: a;
+  }
+  ol.acts > li::before {
+    content: counter(a); position: absolute; left: 0; top: 11px;
+    font-family: var(--mono); font-size: 12px; color: var(--accent);
+  }
+  ol.acts .sub { display: block; color: var(--muted); font-size: 13.5px; margin-top: 2px; }
+
+  code { font-family: var(--mono); font-size: .92em; background: var(--sunk); padding: 1px 5px; border: 1px solid var(--rule); }
+
+  footer {
+    margin-top: 44px; padding-top: 14px; border-top: 1px solid var(--rule);
+    color: var(--faint); font-size: 12.5px;
+  }
+  footer p { margin: 0 0 6px; }
+  footer a { color: var(--faint); }
+
+  @media (max-width: 460px) {
+    body { padding: 26px 14px 72px; font-size: 14.5px; }
+  }
+</style>
+
+<div class="page">
+
+  <header class="mast">
+    <p class="eyebrow">Companion sheet &middot; Cold Start</p>
+    <h1>What It Costs</h1>
+    <p class="standfirst">Nobody tells you this part before you start, and the answer is different depending on who is paying. Written for someone who has never bought software.</p>
+  </header>
+
+  <p class="lede">The short version: <b>the floor is free and it is a real floor</b> &mdash; you can do everything in <i>Cold Start</i> without paying anyone. What costs money is the agent, and only above a certain amount of use. What you must not do is agree to pay for it in the shape that has no ceiling, which is the shape institutions hand out by default.</p>
+
+  <div class="stale">
+    <p><b>Every figure on this page was read on 29 August 2026 and will be wrong before you need it.</b> Plans get renamed, split, re-metered and re-priced faster than anything else here &mdash; one of them was split in two four months before this was written.</p>
+    <p>Treat the numbers as <i>orders of magnitude</i> and the links as the authority. When this matters, go and look at the vendor&rsquo;s page. Nothing on this page re-checks itself, and when it rots it will not tell you.</p>
+  </div>
+
+  <h2>What is assumed, and what that assumes</h2>
+
+  <p>This page assumes you already have a computer, an internet connection you are not paying for by the megabyte, and an email address. Those are not free &mdash; they are simply already bought, and for most people reading this they came with the job or the flat.</p>
+
+  <p>It is worth saying out loud, because it is the first place the ground is uneven: <b>the &ldquo;free&rdquo; floor below is free only on top of several hundred dollars of hardware and a monthly connection.</b> Everything after this treats those as given. Not everyone can.</p>
+
+  <h2>Free, and actually free</h2>
+
+  <ul class="plain">
+    <li>
+      <b>git</b>, the thing that keeps the history
+      <span class="sub">Free, open source, and always will be. It is a program on your computer, not a service.</span>
+    </li>
+    <li>
+      <b>A <a href="https://github.com/pricing">GitHub account</a></b>
+      <span class="sub">Free, including unlimited repositories &mdash; public or private. Some collaboration features on private repositories sit on the paid tiers, so check the plan page before you build a group around one. Nothing in <i>Cold Start</i> needs a paid tier.</span>
+    </li>
+    <li>
+      <b>An editor</b>
+      <span class="sub">VS Code and every serious alternative are free.</span>
+    </li>
+    <li>
+      <b>Somewhere to put a website</b>
+      <span class="sub">GitHub Pages and Cloudflare&rsquo;s free tier both host a static site for nothing. A domain name is the only part of Phase 7 that costs, and it is roughly the price of a coffee a month, paid once a year.</span>
+    </li>
+  </ul>
+
+  <p>So: <b>the record, the history, the editor and the publishing are free.</b> That is most of the setup, and it is genuinely, permanently free rather than free-for-now.</p>
+
+  <h2>The one thing that costs: the agent</h2>
+
+  <p>Every one of these is sold in one of three shapes, and the shape matters more than the number. Learn to ask which one you are being handed, because nobody will tell you unprompted.</p>
+
+  <div class="shapes">
+    <div class="shape">
+      <span class="shape-k">Shape 1 &mdash; a ceiling</span>
+      <h4>A subscription</h4>
+      <p>You pay a fixed amount each month. When you have used your allowance, <b>it stops</b> and tells you when it resets. Some plans let you deliberately buy past the limit; that is a decision you make, not a default.</p>
+      <p class="worst">Worst case: you cannot work for a few hours.</p>
+    </div>
+    <div class="shape meter">
+      <span class="shape-k">Shape 2 &mdash; a meter</span>
+      <h4>Pay per use, on your own card</h4>
+      <p>You are billed for what you consume. There is no natural stopping point &mdash; nothing pauses, nothing warns, and a loop left running overnight is billed the same as work. Most such accounts <i>can</i> be given a spend limit. Almost nobody sets one.</p>
+      <p class="worst">Worst case: a number you did not agree to, arriving after the fact.</p>
+    </div>
+    <div class="shape meter">
+      <span class="shape-k">Shape 3 &mdash; somebody else&rsquo;s meter</span>
+      <h4>An institutional billing code</h4>
+      <p>The same meter, pointed at a department. It feels free, because you never enter a card. It is not free, it is usually uncapped, and <b>the person who reads the statement is not you</b> &mdash; so the feedback arrives weeks later and lands on somebody who did not do the spending.</p>
+      <p class="worst">Worst case: a conversation with your head of department about a number.</p>
+    </div>
+  </div>
+
+  <div class="note">
+    <p><b>If you are paying for this yourself, buy a ceiling.</b> Not because it is cheaper &mdash; often it is not &mdash; but because the failure mode is &ldquo;you stop for four hours&rdquo; instead of &ldquo;you owe money you did not decide to spend&rdquo;. That difference is worth more than the price gap, especially in the first month when you have no instinct for what a task costs.</p>
+    <p>And a meter is the correct choice for some people. Just choose it, rather than being handed it.</p>
+  </div>
+
+  <h2>Numbers, with all the caveats attached</h2>
+
+  <div class="tw">
+    <table>
+      <caption>Read 29 August 2026 from the vendors&rsquo; own pages. Individual plans; team and enterprise pricing differs. Currency as published, US dollars.</caption>
+      <thead>
+        <tr><th>What</th><th>Roughly</th><th>Shape</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Free tiers &mdash; <a href="https://github.com/google-gemini/gemini-cli">Gemini CLI</a>, Codex on a free ChatGPT account</td>
+          <td class="num"><b>$0</b></td>
+          <td>Ceiling</td>
+        </tr>
+        <tr>
+          <td>Entry paid tier &mdash; <a href="https://developers.openai.com/codex/pricing">ChatGPT Go</a></td>
+          <td class="num"><b>$8</b>/mo</td>
+          <td>Ceiling</td>
+        </tr>
+        <tr>
+          <td>The common tier &mdash; <a href="https://claude.com/pricing">Claude Pro</a>, ChatGPT Plus</td>
+          <td class="num"><b>$20</b>/mo<br><span style="color:var(--muted)">$17 annual</span></td>
+          <td>Ceiling</td>
+        </tr>
+        <tr>
+          <td>Heavy tiers &mdash; Claude Max, ChatGPT Pro</td>
+          <td class="num"><b>$100&ndash;200</b>/mo</td>
+          <td>Ceiling</td>
+        </tr>
+        <tr>
+          <td>Per-token, on a card or a billing code</td>
+          <td class="num">whatever<br>you use</td>
+          <td>Meter</td>
+        </tr>
+        <tr>
+          <td>A domain name</td>
+          <td class="num">~<b>$10&ndash;15</b>/yr</td>
+          <td>Ceiling</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>What heavy use actually looks like</h3>
+
+  <p>Anthropic&rsquo;s own cost documentation reports that across enterprise deployments the average is around <b>$13 per developer per active day</b>, and <b>$150&ndash;250 per developer per month</b>, with 90% of users staying under $30 on an active day.</p>
+
+  <div class="flag">
+    <p><b>That is not you, and reading it as if it were is the mistake this section exists to prevent.</b> Those are professional software engineers using an agent as their primary tool, all day, every working day. A researcher who uses one for a few hours a week is nowhere near it.</p>
+    <p>The figure is useful for one thing only: it is roughly the <b>ceiling</b> of what a single very heavy human being can spend. If your bill approaches it, you are not being unlucky, you are working like a full-time engineer.</p>
+  </div>
+
+  <h3>What one teaching session costs</h3>
+
+  <p>The one case anybody has costed here: six students, one ninety-minute session. Sizing it from an institutional per-user monthly stipend gives an order of <b>$5&ndash;15 a student</b>, so <b>$30&ndash;90 for the room</b>. At that size the cost question answers itself and the decision becomes a pedagogical one.</p>
+
+  <div class="flag">
+    <p><b>That is an estimate and not a measurement.</b> It is recorded here anyway, because the estimate already changed a decision &mdash; and an estimate that changes a decision belongs somewhere the decision can be revisited. One measured run is still owed.</p>
+  </div>
+
+  <h2>What actually drives the number</h2>
+
+  <p>The useful thing about the bill is that you have more control over it than the pricing page suggests. Four things move it, in roughly this order:</p>
+
+  <ul class="plain">
+    <li>
+      <b>How long the conversation has been open</b>
+      <span class="sub">Your entire conversation is re-sent on every single request. A one-line question in a session you have had open all day carries the whole day with it. Starting a fresh session between unrelated tasks costs nothing and is the largest lever you have.</span>
+    </li>
+    <li>
+      <b>Which model</b>
+      <span class="sub">The largest models cost several times the smaller ones for the same request. Most work does not need the largest.</span>
+    </li>
+    <li>
+      <b>How many agents at once</b>
+      <span class="sub">Each one runs its own conversation, so the cost scales with the number of them and how long each lives. This is the fastest way to be surprised.</span>
+    </li>
+    <li>
+      <b>Vagueness</b>
+      <span class="sub">&ldquo;Improve this code&rdquo; makes it read everything. A specific request reads two files. The cheap prompt and the good prompt are the same prompt.</span>
+    </li>
+  </ul>
+
+  <p><i>Cold Start</i> step 4.6 is where you go and look at your own numbers. The mechanism is documented in full under <a href="https://code.claude.com/docs/en/costs">Manage costs effectively</a>.</p>
+
+  <h2>The equity problem, stated plainly</h2>
+
+  <p class="lede">This is the part that usually goes unsaid, and it should not, because it changes what you are allowed to assign to other people.</p>
+
+  <h3>The free tier is not the same tool</h3>
+  <p>&ldquo;There is a free tier&rdquo; is true and it is not the whole truth. Free tiers are rate-limited and often run smaller models. The difference that matters is not quality per answer &mdash; it is <b>how many attempts you get before you have to stop</b>. Since the entire method is <i>spec, check, re-spec</i>, a person with fewer attempts is not doing a slightly worse version of the work. They are doing a different, shorter thing, and they will conclude they are bad at it.</p>
+
+  <h3>The institutional route is not evenly available</h3>
+  <p>Checked at one large public university in August 2026: <b>every student gets a chat box for free, and the agent sits behind an employment check and a departmental billing code</b> &mdash; staff and faculty only, students excluded, sharing prohibited. A graduate student employed as a research or teaching assistant can often be sponsored; a student on a taught course generally cannot.</p>
+  <p>So the institution itself draws a line between <i>chat</i> and <i>agent</i>, and it draws it along employment status. That is a better demonstration of the difference between the two than any classroom demo &mdash; and it is also a line straight through the middle of a cohort.</p>
+
+  <h3>Student credit programmes have borders</h3>
+  <p>The vendor credit schemes that look like the obvious answer carry eligibility conditions that are easy to miss. One offering $100 of credits to students, verified against a university email address, is <b>United States and Canada only</b>. In an international research group that excludes a real fraction of the room, and it excludes them quietly, one at a time, at the point of sign-up.</p>
+
+  <h3>If you are teaching, you are assigning an expense</h3>
+  <p>Set work that requires an agent and you have set work that costs money, and it will not fall evenly. The people it falls hardest on are the least likely to say so. Three things follow:</p>
+  <ul class="plain">
+    <li>
+      <b>Find out what it costs before you assign it, not after</b>
+      <span class="sub">Measure one real session. An estimate you have not tested is how a course accidentally becomes means-tested.</span>
+    </li>
+    <li>
+      <b>Provision centrally if you possibly can</b>
+      <span class="sub">One billing arrangement you control beats twenty personal cards, and it is the only version where you can actually see what was spent.</span>
+    </li>
+    <li>
+      <b>Do not let the free tier be the punishment</b>
+      <span class="sub">Pairing works, and it is good pedagogy in its own right &mdash; two people arguing about what the agent just did is the exercise. But choose it as pedagogy. If it is quietly the contingency for whoever could not pay, everyone in the room can tell.</span>
+    </li>
+  </ul>
+
+  <h3>And the uncomfortable one</h3>
+  <p>Where spending is uncapped, the amount spent tracks <b>who feels entitled to spend it</b> rather than who needs it. Some organisations have gone as far as ranking people by token consumption &mdash; which measures budget and confidence, not work, and rewards exactly the person who least needed encouragement. If a number is going to be visible, make it the work.</p>
+
+  <h2>What to actually do</h2>
+
+  <ol class="acts">
+    <li>
+      <b>Start on the free floor and stay there until it hurts twice.</b>
+      <span class="sub">Not once. Twice, on real work, doing something you needed to do anyway. Hitting a limit while playing is not evidence of anything.</span>
+    </li>
+    <li>
+      <b>If it is your own money, buy a ceiling.</b>
+      <span class="sub">The cheapest paid tier first. You can always move up; the instinct for what a task costs takes about a month to develop and it is cheaper to develop it behind a limit.</span>
+    </li>
+    <li>
+      <b>If it is a meter, set the spend limit the same day you set up the account.</b>
+      <span class="sub">Before the first real session, while you still remember it exists. This is a five-minute job that stops the only genuinely bad outcome on this page.</span>
+    </li>
+    <li>
+      <b>If it is institutional, ask who reads the statement.</b>
+      <span class="sub">In writing, before the first long session: is there a cap, who sees the number, and what happens if it is larger than expected. &ldquo;Nobody mentioned a limit&rdquo; is not the same as &ldquo;there is no limit&rdquo;.</span>
+    </li>
+    <li>
+      <b>Look at your own usage in the first week.</b>
+      <span class="sub">Not the third month. <i>Cold Start</i> 4.6.</span>
+    </li>
+  </ol>
+
+  <footer>
+    <p>Companion to <i>Cold Start</i>, and the fourth sheet alongside <i>Search to Shipped</i> and <i>It Looked Right</i>.</p>
+    <p><b>Filed as its own page on purpose.</b> Cost material decays faster than anything else in this course and is tied to one institution and one moment, so it is kept where it can rot without taking the teaching material with it. When it next matters, go and touch the systems rather than editing around the dates.</p>
+    <p>Prices and plan shapes read from the vendors&rsquo; own pages on 29 August 2026. The heavy-use figures are from Anthropic&rsquo;s cost documentation, the same day. The institutional and student-credit facts were checked at one university on 27 August 2026 and are generalised here. The teaching-session figure is an estimate and is labelled as one. Every outbound link was checked on 29 August 2026 and <b>nothing re-checks them</b>.</p>
+  </footer>
+
+</div>

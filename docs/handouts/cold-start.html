@@ -231,6 +231,19 @@
   .copy:hover { background: var(--accent); color: var(--ground); }
   .prompt pre { margin: 0; border: 0; background: var(--surface); white-space: pre-wrap; }
 
+  /* ---- the tier list (1.2) ---- */
+  ul.tier { list-style: none; margin: 10px 0 0; padding: 0; border-top: 1px solid var(--rule); }
+  ul.tier > li { padding: 9px 0; border-bottom: 1px solid var(--rule); display: grid; gap: 2px; }
+  ul.tier .t-n { font-weight: 500; }
+  ul.tier .t-w { color: var(--muted); font-size: 13.5px; }
+
+  /* ---- warn block: used where the failure is silent ---- */
+  .warn {
+    background: var(--caution-soft); border-left: 2px solid var(--caution);
+    padding: 10px 12px; margin: 10px 0 0; font-size: 13.5px;
+  }
+  .warn b { font-weight: 600; }
+
   /* ---- traps ---- */
   .traps { border-top: 2px solid var(--ink); padding-top: 14px; margin-top: 40px; }
   .traps h2 { margin-bottom: 10px; }
@@ -241,8 +254,20 @@
     font-family: var(--mono); font-size: 11px; letter-spacing: .09em;
     text-transform: uppercase; color: var(--caution); display: block; margin-bottom: 3px;
   }
-  .traps p { margin: 0; font-size: 14px; color: var(--muted); }
+  .traps p { margin: 0 0 8px; font-size: 14px; color: var(--muted); }
+  .traps p:last-child { margin-bottom: 0; }
   .traps p b { color: var(--ink); font-weight: 500; }
+  .wrong {
+    display: inline-block; background: var(--caution); color: var(--ground);
+    font-family: var(--mono); font-size: 10px; letter-spacing: .14em;
+    padding: 1px 6px; margin-left: 7px; vertical-align: 1px;
+  }
+  .traps .incident {
+    background: var(--sunk); border-left: 2px solid var(--rule-firm);
+    padding: 10px 12px; font-size: 13.5px;
+  }
+  .traps .src { font-size: 13px; }
+  .traps .src::before { content: "\2192"; color: var(--accent); margin-right: 6px; }
 
   footer {
     margin-top: 40px; padding-top: 14px; border-top: 1px solid var(--rule);
@@ -299,13 +324,16 @@
       <h2>Phase 1 &middot; Accounts</h2>
       <span class="phase-time">30 min, plus other people&rsquo;s time</span>
     </div>
-    <p class="phase-note">Start here on day one even if you will not touch a keyboard for a week. Everything in this phase depends on somebody who is not you.</p>
+    <p class="phase-note">Start here on day one even if you will not touch a keyboard for a week. Everything in this phase depends on somebody who is not you. <b>1.1 and 1.2 are both required</b> &mdash; only 1.3 is conditional, and most people skip it.</p>
     <ol class="steps">
       <li>
         <button class="tick" type="button" aria-pressed="false" aria-label="Mark step 1.1 done">&#10003;</button>
         <div>
-          <button class="head" type="button" aria-expanded="true"><span class="n">1.1</span>Create a GitHub account</button>
+          <button class="head" type="button" aria-expanded="true"><span class="n">1.1</span>Create a GitHub account &mdash; this one is not optional</button>
           <div class="body">
+            <p class="why"><b>Why it is not optional, when it looks like it should be.</b> It reads as a step for people who publish software, and you are not publishing software. But it is what gives your project a <i>second place to exist</i>. Without it, everything you and the agent make lives in one folder on one laptop: it reaches no other machine, no collaborator, and no future session &mdash; and none of that announces itself. The day it matters, it is already too late to have done this.</p>
+            <p class="why">Three things follow from the account and from nothing else. <b>A record</b> of what changed, when, and why &mdash; which is the only account of the work that survives you, and the only way to answer &ldquo;when did this figure change?&rdquo; six months on. <b>A way off this machine</b>, whether that is a second computer, a collaborator, a cluster, or a laptop that has died. And <b>somewhere to put the work</b> if you ever do want a page, a DOI, or a link in a paper.</p>
+            <p class="why">This is the step people skip because it seems premature, and it is the one whose absence is documented twice in this course&rsquo;s own material: eleven hours of finished work sitting where nothing else could see it, and a night&rsquo;s work that reached the next morning as nothing at all. It is free, and it takes four minutes.</p>
             <p class="why">Pick the username you are willing to be known by later; changing it breaks links other people have already saved. Turn on two-factor authentication during signup, not afterwards.</p>
             <p class="why"><a href="https://github.com/">github.com</a></p>
             <p class="done">You are signed in, and your account settings show two-factor <b>on</b>.</p>
@@ -319,7 +347,31 @@
           <div class="body">
             <p class="why">This is the step people treat as a formality, and it is the one that forks. A <b>personal plan</b> is an allowance: you hit a ceiling and stop, which is annoying and safe. An <b>institutional billing code</b> is usually uncapped: nothing stops, nothing warns, and the number surfaces when somebody else reads the monthly statement.</p>
             <p class="why">Institutional routes also tend to sit behind an employment check and an approval, which is days of somebody else&rsquo;s time. That is why this step is on day one.</p>
-            <p class="why"><a href="https://claude.com/pricing">claude.com/pricing</a></p>
+            <p class="why"><b>The others in this tier.</b> They all do the same job &mdash; a terminal agent that edits files on your disk &mdash; and they are all sold through a subscription rather than per-token. Pick one and learn it properly; the second one is easy once the first is understood.</p>
+            <ul class="tier">
+              <li>
+                <span class="t-n"><a href="https://claude.com/pricing">Claude Code</a></span>
+                <span class="t-w">Anthropic. Subscription tiers; no free tier. This page&rsquo;s examples use it.</span>
+              </li>
+              <li>
+                <span class="t-n"><a href="https://developers.openai.com/codex/pricing">OpenAI Codex</a></span>
+                <span class="t-w">Has no price of its own &mdash; it is bundled into whichever ChatGPT plan you already have, so your plan choice sets your ceiling.</span>
+              </li>
+              <li>
+                <span class="t-n"><a href="https://github.com/google-gemini/gemini-cli">Gemini CLI</a></span>
+                <span class="t-w">Google. Open source, and the free tier is the most generous of the four.</span>
+              </li>
+              <li>
+                <span class="t-n"><a href="https://github.com/features/copilot/plans">GitHub Copilot CLI</a></span>
+                <span class="t-w">Sits closest to GitHub itself, which matters if your work already lives there.</span>
+              </li>
+              <li>
+                <span class="t-n"><a href="https://cursor.com/pricing">Cursor</a></span>
+                <span class="t-w">The odd one out: an editor with the agent inside it rather than a terminal tool. Same tier of capability, different place to stand.</span>
+              </li>
+            </ul>
+            <div class="warn"><b>Do not trust a price you read anywhere, including here.</b> This row moves faster than anything else on the page &mdash; plans get renamed, split, metered differently, and re-priced. Those are pointers to the vendors&rsquo; own pages; the number is whatever the page says on the day you look.</div>
+            <p class="why"><b>What this actually costs, before you commit to anything:</b> <a href="https://claude.ai/code/artifact/f515ee18-33ae-43f1-b2fd-6969eedd95db">What It Costs</a> &mdash; the free floor and how far it goes, the three shapes a bill can take and which one to refuse, real numbers with their caveats attached, and the equity problem, which is real and is usually left unsaid. <b>Read it before 1.2, not after.</b> It is short.</p>
             <p class="done">You can sign in with the account you will actually use, and you can say in one sentence <b>what happens when you use too much</b> &mdash; it stops, or it bills.</p>
           </div>
         </div>
@@ -430,7 +482,7 @@ gh auth login</pre>
           <div class="body">
             <pre>npm install -g @anthropic-ai/claude-code
 claude</pre>
-            <p class="why">Then <code>/login</code> inside the session. Platform notes and the alternative installers are in the <a href="https://docs.claude.com/en/docs/claude-code/setup">setup docs</a>.</p>
+            <p class="why">Then <code>/login</code> inside the session. Platform notes and the alternative installers are in the <a href="https://code.claude.com/docs/en/setup">setup docs</a>.</p>
             <p class="done"><code>claude --version</code> prints a number, and a session starts in the folder you are standing in. <b>It matters which folder</b> &mdash; that is the one it can see.</p>
           </div>
         </div>
@@ -516,11 +568,12 @@ check the paths.</pre>
           <div class="body">
             <p class="why">It will have guessed at least one path, and the guess will be plausible. Four checks, none of which need code:</p>
             <pre>1  open the file yourself, in the editor
-2  list the files that now exist
-3  read the diff for scope, not correctness
+2  look at the folder and see what is now in it
+3  read the list of changes for scope, not correctness
 4  run it and look</pre>
+            <p class="why">Check 3 has a name you will hear constantly: the list of changes is a <b>diff</b>. You are not reading it to judge whether the code is right. You are reading it to see <i>how much</i> was touched, which is a thing you can judge on day one.</p>
             <p class="why">Then say what is wrong and have it fix that one thing.</p>
-            <p class="done">Every path in <code>docs/SETUP.md</code> is one you can <code>ls</code>. Not one that <b>looks</b> right &mdash; one you have listed.</p>
+            <p class="done">Every path in <code>docs/SETUP.md</code> is one you have <b>opened yourself</b> &mdash; in the editor, or in Finder. Not one that looks right. One you have been to.</p>
           </div>
         </div>
       </li>
@@ -555,7 +608,7 @@ one so I can look.
    should ask. Show me the file you would
    write before you write it.</pre>
             </div>
-            <p class="why">Inside a session you can see the settings yourself with <code>/permissions</code>; they live in <code>.claude/settings.json</code> (<a href="https://docs.claude.com/en/docs/claude-code/settings">reference</a>).</p>
+            <p class="why">Inside a session you can see the settings yourself with <code>/permissions</code>; they live in <code>.claude/settings.json</code> (<a href="https://code.claude.com/docs/en/settings">reference</a>).</p>
             <p class="done"><code>git log</code> shows one commit, <code>git status</code> is clean, and <b>you can name one thing the agent is not allowed to do</b>.</p>
           </div>
         </div>
@@ -568,6 +621,24 @@ one so I can look.
             <pre>gh repo create first-project --private --source=. --push</pre>
             <p class="why">Not next week. A repository with no remote is a folder on one laptop, and the day you discover that is always the day it costs something.</p>
             <p class="done">The repository is visible on github.com, and <code>git status</code> says your branch is up to date with <code>origin</code>.</p>
+          </div>
+        </div>
+      </li>
+      <li>
+        <button class="tick" type="button" aria-pressed="false" aria-label="Mark step 4.6 done">&#10003;</button>
+        <div>
+          <button class="head" type="button" aria-expanded="true"><span class="n">4.6</span>Find the usage screen before you need it</button>
+          <div class="body">
+            <p class="why">You have just spent something. Go and look at what, while the session is small enough to understand &mdash; not in week three when you have hit a limit mid-task and are trying to work out why.</p>
+            <pre>/usage     what you have spent, and against what limit
+/context   what is filling the window right now
+/insights  a report on how you actually work</pre>
+            <p class="why">In <code>/usage</code>, press <code>d</code> and <code>w</code> to switch between the last day and the last week. It breaks the spend down by what caused it &mdash; subagents, skills, individual tools &mdash; and flags any behaviour accounting for more than a tenth of it. Codex has the same three ideas under <code>/status</code>, <code>/usage</code> and <code>/statusline</code>.</p>
+            <p class="why"><b>The thing that surprises everyone.</b> Your whole conversation is re-sent on every single request. A one-line question in a session you have had open all day still carries the whole day with it, and coming back after a long break re-processes the lot. Which makes <code>/clear</code> between unrelated tasks the largest single lever you have, and it costs nothing.</p>
+            <p class="why">The mechanism is written down: <a href="https://code.claude.com/docs/en/costs">Manage costs effectively</a>, and its section <i>Why usage climbs in a long session</i> in particular.</p>
+            <div class="warn"><b>&ldquo;Tokenmaxxing&rdquo; is the failure mode this step exists to prevent.</b> Spend is visible and measurable; work done is neither. So people start reading the number as if it were the work &mdash; and teams have gone as far as ranking engineers by it, which rewards whoever burns the most rather than whoever finishes. Read the usage screen to find your <i>waste</i>, never to score yourself. And do not conclude a limit changed because it felt different: in January 2026 a wave of developers reported their allowance had been cut, and the actual cause was a holiday bonus expiring (<a href="https://theregister.com/2026/01/05/claude_devs_usage_limits/">The Register, 5 Jan 2026</a> &mdash; journalism, not documentation).</div>
+            <p class="why">What the numbers mean in money, and what drives them: <a href="https://claude.ai/code/artifact/f515ee18-33ae-43f1-b2fd-6969eedd95db">What It Costs</a>.</p>
+            <p class="done">You have opened <code>/usage</code> once, and you can name the <b>one thing</b> in this session that cost the most.</p>
           </div>
         </div>
       </li>
@@ -663,27 +734,113 @@ one so I can look.
     </ol>
   </section>
 
+  <section class="phase">
+    <div class="phase-head">
+      <h2>Phase 7 &middot; A name of your own</h2>
+      <span class="phase-time">30 min, then a wait</span>
+    </div>
+    <p class="phase-note">Only when you have something to put on it. Three companies, each doing one job: <b>Porkbun</b> sells you the name, <b>Cloudflare</b> answers questions about where it points, and <b>GitHub</b> serves the pages. Keeping those three jobs separate in your head is most of the difficulty.</p>
+    <ol class="steps">
+      <li>
+        <button class="tick" type="button" aria-pressed="false" aria-label="Mark step 7.1 done">&#10003;</button>
+        <div>
+          <button class="head" type="button" aria-expanded="true"><span class="n">7.1</span>Buy the name at Porkbun</button>
+          <div class="body">
+            <p class="why"><a href="https://porkbun.com/">porkbun.com</a>. Two things to look at that the checkout does not put in front of you: <b>the renewal price, not the first-year price</b> &mdash; on some endings those differ by a factor of ten &mdash; and whether WHOIS privacy is included, which at Porkbun it is. Decline the rest of the upsells; you can add any of them later and will probably never want to.</p>
+            <p class="why">A name you will still want in five years beats a clever one. It goes on papers.</p>
+            <p class="done">The domain is in your account and <b>you know what it costs next year</b>, not just this year.</p>
+          </div>
+        </div>
+      </li>
+      <li>
+        <button class="tick" type="button" aria-pressed="false" aria-label="Mark step 7.2 done">&#10003;</button>
+        <div>
+          <button class="head" type="button" aria-expanded="true"><span class="n">7.2</span>Hand the DNS to Cloudflare</button>
+          <div class="body">
+            <p class="why">DNS is the phone book: it turns your name into the address of a machine. Porkbun can run it, and Cloudflare is worth the extra step because everything later &mdash; a second site, a subdomain, mail, a redirect &mdash; is done in one place, and it is free.</p>
+            <p class="why">Add the site at Cloudflare; it reads your existing records and then gives you <b>two nameservers</b>. Paste those into Porkbun&rsquo;s authoritative-nameserver field, replacing what is there. That single change is the whole handover. (<a href="https://developers.cloudflare.com/dns/zone-setups/full-setup/setup/">Cloudflare&rsquo;s own instructions</a>.)</p>
+            <p class="why">Propagation is usually minutes and occasionally hours. Nothing is broken while you wait; it is a queue, not an error.</p>
+            <p class="done">Cloudflare&rsquo;s dashboard says the zone is <b>Active</b>. Until it says that, nothing below will work and re-doing it will not help.</p>
+          </div>
+        </div>
+      </li>
+      <li>
+        <button class="tick" type="button" aria-pressed="false" aria-label="Mark step 7.3 done">&#10003;</button>
+        <div>
+          <button class="head" type="button" aria-expanded="true"><span class="n">7.3</span>Decide who actually serves the site &mdash; before wiring anything</button>
+          <div class="body">
+            <p class="why">Serving the site from Cloudflare itself &mdash; Pages or Workers &mdash; skips the next two steps entirely. The domain is already in the account doing the serving, so the custom domain is one button and the certificate is somebody else&rsquo;s problem. It is the shorter road, and worth knowing before you walk the long one.</p>
+            <p class="why">One thing it costs: the deploy tool signs in through a browser, <b>once per machine</b>, and that step cannot be scripted or handed to an agent. Budget a minute for it on every new computer.</p>
+            <p class="done">You have decided <b>who serves the site</b> before wiring anything, rather than discovering the decision halfway through the certificate step.</p>
+          </div>
+        </div>
+      </li>
+      <li>
+        <button class="tick" type="button" aria-pressed="false" aria-label="Mark step 7.4 done">&#10003;</button>
+        <div>
+          <button class="head" type="button" aria-expanded="true"><span class="n">7.4</span>Point it at GitHub Pages</button>
+          <div class="body">
+            <p class="why">Two ends to connect, and both are needed. <b>At GitHub:</b> repository &rarr; Settings &rarr; Pages &rarr; Custom domain. That writes a file called <code>CNAME</code> into the repository, which is how the server knows this domain is yours.</p>
+            <p class="why"><b>At Cloudflare</b>, add the records:</p>
+            <pre>www   CNAME  USERNAME.github.io
+
+the bare name (example.com) needs either
+  ALIAS / ANAME  &rarr; USERNAME.github.io
+or four A records:
+  185.199.108.153   185.199.110.153
+  185.199.109.153   185.199.111.153</pre>
+            <p class="why">Cloudflare supports the ALIAS form, so prefer it &mdash; four literal addresses are four things that can change under you. (<a href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site">GitHub&rsquo;s record reference</a>; <a href="https://kb.porkbun.com/article/64-how-to-connect-your-domain-to-github-pages">Porkbun&rsquo;s version</a>, if you skip Cloudflare and keep DNS at Porkbun.)</p>
+            <p class="done">GitHub&rsquo;s Pages settings shows the domain with a green tick beside it, and the name loads in a browser.</p>
+          </div>
+        </div>
+      </li>
+      <li>
+        <button class="tick" type="button" aria-pressed="false" aria-label="Mark step 7.5 done">&#10003;</button>
+        <div>
+          <button class="head" type="button" aria-expanded="true"><span class="n">7.5</span>Leave the cloud grey until the certificate exists</button>
+          <div class="body">
+            <div class="warn"><b>This is where this chain fails, and it fails silently.</b> Cloudflare proxies by default &mdash; the orange cloud beside each record. With it on, GitHub&rsquo;s request to prove you own the domain never reaches GitHub, so the certificate is never issued, and <b>Enforce HTTPS</b> in the Pages settings simply stays greyed out with no error anywhere explaining why.</div>
+            <p class="why">Set the records to <b>DNS only</b> &mdash; the grey cloud &mdash; and wait. Fifteen minutes to an hour is normal, and GitHub says up to 24. If it will not budge, remove the custom domain in the Pages settings and add it again; that re-triggers the request.</p>
+            <p class="why">Once <b>Enforce HTTPS</b> is tickable, tick it. Only then turn the orange cloud back on if you want Cloudflare&rsquo;s caching in front of the site &mdash; and it is genuinely optional.</p>
+            <p class="done"><code>https://</code> works, and the <b>Enforce HTTPS</b> box is ticked rather than greyed out.</p>
+          </div>
+        </div>
+      </li>
+    </ol>
+  </section>
+
   <section class="traps">
     <h2>Three ways this list goes wrong</h2>
+    <p style="margin-bottom:14px">Each of these is a fix that feels like a fix. Each one below it is something that actually happened, and each links to the full account.</p>
     <ul>
       <li>
-        <span class="trap-k">Setting up the guards first</span>
-        <p>Phase 5 looks like the fun part and it is the one part you cannot do in advance. <b>Every guard built before its failure is a guess</b>, and guesses accumulate into a setup that takes longer to maintain than the work it protects.</p>
+        <span class="trap-k">Setting up the guards first<span class="wrong">Wrong</span></span>
+        <p>Phase&nbsp;5 looks like the enjoyable part and it is the one part you cannot do in advance. <b>Every guard built before its failure is a guess</b>, and guesses accumulate into a setup that costs more to maintain than the work it was protecting.</p>
+        <p class="incident"><b>What actually happened.</b> Across one estate, the scripts that run automatically when a session opens had grown to 39, 34, 27, 17, 11, 9 and 7 kilobytes. One kept growing until sessions stopped opening at all, against a sixty-second ceiling the editor hardcodes. Raising the script&rsquo;s own timeout changed nothing &mdash; it was never the thing enforcing the limit. The guard had eaten the thing it was guarding.</p>
+        <p><b>Instead:</b> build a guard only from friction that has actually happened to you, and keep its off switch somewhere the broken thing cannot reach &mdash; a switch inside the project is unreachable when the broken thing is what opens the project.</p>
+        <p class="src"><a href="https://lookedright.tonydefazio.com/#asymptote">The full incident &mdash; <i>It Looked Right</i>, challenge 4</a></p>
       </li>
       <li>
-        <span class="trap-k">&ldquo;Remember this&rdquo; as a fix</span>
-        <p>You find the mistake, you discover the better way, and you tell the agent to remember it. <b>A request is not a rule.</b> A project instructions file is not enforceable; use all the emphasis you like and the second sentence still gets skipped. If it has to hold, it has to be mechanical.</p>
+        <span class="trap-k">&ldquo;Remember this&rdquo; as a fix<span class="wrong">Wrong</span></span>
+        <p>You find the mistake, you discover the better way, and you tell the agent to remember it. <b>A request is not a rule.</b> A project instructions file is not enforceable; use all the emphasis you like and the second sentence still gets skipped.</p>
+        <p class="incident"><b>What actually happened.</b> A hold was written into a project&rsquo;s instructions: queue page changes, do not publish them one at a time. It was written down clearly. It lost &mdash; because three separate machines in that project tell a session to publish, and none of them waits to be asked: a ready-to-paste command in the staleness report, a daily workflow summary, and a line in every session briefing. <b>The session that publishes is right by every signal available to it.</b> Nobody was careless. The repair was to move the hold to where those three signals are computed, so all three now print the hold instead of the publish command.</p>
+        <p><b>Instead:</b> ask what tier your fix is on. Prose in an instructions file costs nothing to ignore. A checklist costs nothing when you are busy. A test costs a red line. Structure means the wrong thing is not reachable. Move the fix down that list until it can no longer be skipped &mdash; usually to wherever the wrong behaviour is being suggested from.</p>
+        <p><b>The one exception, and it is worth knowing:</b> a <i>definition</i> holds where an <i>instruction</i> does not. An instruction competes with what the model already believes and loses. A glossary the session reads before it reasons is the belief it starts from, so there is nothing to lose to.</p>
+        <p class="src"><a href="https://lookedright.tonydefazio.com/#fixes">The full incident, and the four tiers &mdash; <i>It Looked Right</i>, Fixes that hold</a></p>
       </li>
       <li>
-        <span class="trap-k">Reading the reply instead of the result</span>
-        <p>The explanation will sound right. It is written to sound right, and it is your only evidence of how you were understood &mdash; which is not the same as evidence that anything happened. <b>Open the artifact yourself.</b> Every &ldquo;done when&rdquo; above exists because of this one.</p>
+        <span class="trap-k">Reading the reply instead of the result<span class="wrong">Wrong</span></span>
+        <p>The explanation will sound right. It is written to sound right, and it is your only evidence of how you were understood &mdash; which is not evidence that anything happened. A green check is evidence about the check, not about the work.</p>
+        <p class="incident"><b>What actually happened.</b> A complaint came in about a job. Jobs have numbers. The person answering meant to type <i>the below job number</i>, and typed <i>the blow job number</i> instead. Spell check passed it: &ldquo;blow&rdquo; is a word. Grammar check passed it: the sentence parses. Both tools did exactly what they are built to do, and neither was built to ask whether this is the word you meant. It was caught by the recipient.</p>
+        <p><b>Instead:</b> open the artifact yourself, and when you rely on an automatic check, break it on purpose once and confirm it notices. A check that has never failed has not been shown to work &mdash; it has been shown to pass.</p>
+        <p class="src"><a href="https://lookedright.tonydefazio.com/#validation">The full incident, and the errors worth naming &mdash; <i>It Looked Right</i>, challenge 3</a></p>
       </li>
     </ul>
   </section>
 
   <footer>
-    <p>Companion to <i>Search to Shipped</i> and <i>It Looked Right</i>. This sheet is the part that comes before both: it ends where a first project begins.</p>
-    <p>Drawn from the course working notes &mdash; the Step&nbsp;0 order, the storage rule, the five failure modes and the three kinds of cure. Every outbound link was checked on 29 August 2026 and <b>nothing re-checks them</b>; when one rots, this page will not tell you.</p>
+    <p>Companion to <i>Search to Shipped</i> and <i>It Looked Right</i>. This sheet is the part that comes before both: it ends where a first project begins. <a href="https://claude.ai/code/artifact/f515ee18-33ae-43f1-b2fd-6969eedd95db">What It Costs</a> is its money half, filed separately so it can go out of date on its own.</p>
+    <p>Drawn from the course working notes &mdash; the Step&nbsp;0 order, the storage rule, the five failure modes and the three kinds of cure. The vendor pages, the cost documentation and the DNS records in Phase&nbsp;7 were read on 29 August 2026; every outbound link was checked the same day and <b>nothing re-checks them</b>. When one rots, this page will not tell you.</p>
     <p>Ticks are stored in this browser only. They do not travel with the page.</p>
   </footer>
 
