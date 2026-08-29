@@ -255,7 +255,7 @@ find out about each other. That is what a board is for, and it is why C3 in
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Mac/9b26b5c4 — file the 2026-08-29 concurrent-write collision as course material: new case file + C3 third instance + cases README index row
-- **Status:** ACTIVE
+- **Status:** DONE 2026-08-29
 - **Opened:** 2026-08-29
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
 - **Writes:** `docs/cases/2026-08-29-the-board-was-empty-because-claiming-is-a-habit.md` (new),
