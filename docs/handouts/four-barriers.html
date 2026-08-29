@@ -482,10 +482,10 @@
       </div>
       <div class="rail-group">
         <p class="rail-head">What to do about it</p>
+        <a href="#step0" data-view="step0"><span class="k">&rsaquo;</span><span>Step 0</span></a>
         <a href="#fixes" data-view="fixes"><span class="k">&rsaquo;</span><span>Fixes that hold</span></a>
         <a href="#rule" data-view="rule"><span class="k">&rsaquo;</span><span>The standing rule</span></a>
         <a href="#repo" data-view="repo"><span class="k">&rsaquo;</span><span>The repo</span></a>
-        <a href="#step0" data-view="step0"><span class="k">&rsaquo;</span><span>Step 0</span></a>
       </div>
       <div class="rail-group">
         <p class="rail-head">Evidence</p>
@@ -793,6 +793,85 @@
       </section>
 
       <!-- ============ FIXES ============ -->
+      <section class="view" id="step0" data-alt="view-step0" aria-labelledby="h-step0">
+        <div class="view-head">
+          <p class="eyebrow">What to do about it</p>
+          <h2 id="h-step0">Step 0 &mdash; the set-up, in dependency order</h2>
+          <p class="lede">Set-up and decisions that come before the first task. <b>The order is not arbitrary: each layer can only be verified once the one below it exists.</b></p>
+        </div>
+
+        <p>You cannot test a path helper before there is a filesystem to point it at, or a handoff before there are two machines. One thing runs the other way &mdash; <b>the items that take longest are the ones involving people who are not you</b>, so they start first and finish last.</p>
+
+        <p><b>Two of these are questions, not items:</b> one machine or several, and solo or with others. The answers change what the rest of this covers, which is why they are asked at the door rather than discovered in week three. <b>A solo researcher on one laptop drops phase 0, phase 6 and most of phase 3</b> &mdash; a much shorter list than the one below.</p>
+
+        <div class="phase opt">
+          <p class="phase-k">Phase 0 &middot; conditional &middot; days to weeks</p>
+          <h4>Skip unless you need research storage or a computing cluster</h4>
+          <ol>
+            <li><b>A research storage volume</b> &mdash; usually sponsored by a lab or department, not requested individually.</li>
+            <li><b>A cluster account <i>and</i> an allocation</b> &mdash; two separate things, and only the second one lets you submit work.</li>
+          </ol>
+          <p style="font-size:14px;color:var(--muted);margin-top:10px">Most people need neither. A laptop, synced storage and one repository covers the majority of research computing, and knowing which side of that line you are on <i>is</i> the storage decision. These take days to weeks because someone else has to approve them, so file them now and carry on with everything below while they pend.</p>
+        </div>
+
+        <div class="phase">
+          <p class="phase-k">Phase 1 &middot; identity, before any code exists</p>
+          <ol start="3">
+            <li>Version-control account, SSH key, command-line login.</li>
+            <li>Agent plan &mdash; also where the cost question stops being abstract.</li>
+            <li>Institutional basics: login, VPN client, synced-storage client.</li>
+          </ol>
+        </div>
+
+        <div class="phase">
+          <p class="phase-k">Phase 2 &middot; machine baseline</p>
+          <ol start="6">
+            <li>A package manager, then the standard command-line tools.</li>
+            <li>The editor and its agent extension.</li>
+            <li>Language runtimes &mdash; only the ones you need. Most people need one.</li>
+            <li><b>Stop the machine sleeping through your own work.</b> A long run that outlasts your attention dies when the display sleeps or the lid closes, and it dies without a result. On macOS, <a href="https://apps.apple.com/us/app/amphetamine/id937984704?mt=12">Amphetamine</a> is free and handles closed-lid operation; <span class="path">caffeinate -dimsu</span> is built in and needs no install. Windows has PowerToys Awake; Linux has <span class="path">systemd-inhibit</span>.</li>
+          </ol>
+          <p style="font-size:14px;color:var(--muted);margin-top:10px"><b>Item 9 is phase 0&rsquo;s cheap alternative and it belongs before the request, not after.</b> Phase 0 says ask for a cluster when a run would pin a workstation for hours. A good share of those people do not need a cluster &mdash; they need the machine to stay awake. One of those costs a minute; the other takes weeks. Try the minute first.</p>
+        </div>
+
+        <div class="phase">
+          <p class="phase-k">Phase 3 &middot; storage, before the first data file</p>
+          <ol start="10">
+            <li>Create the data root and the figure-review folder.</li>
+            <li><b>Write the path helper before any script hardcodes a path.</b> Cheap now, archaeology later.</li>
+            <li><b>Write the storage-tier rule down.</b> Three sentences. It prevents both failures: multi-gigabyte outputs strangling a sync client, and small shareable results stranded where the other machine cannot see them.</li>
+          </ol>
+        </div>
+
+        <div class="phase">
+          <p class="phase-k">Phase 4 &middot; the first repository</p>
+          <ol start="13">
+            <li>Initialise it <b>and add the remote in the same sitting.</b></li>
+            <li>Exclude data by file extension. Pin line endings on shell scripts &mdash; a stray carriage return in the first line of a script is a &ldquo;bad interpreter&rdquo; failure on a Linux cluster, and it is a genuinely awful thing to debug from a Windows checkout.</li>
+            <li>The project instructions file, and the agent&rsquo;s permission settings: allow, ask, deny.</li>
+            <li><b>A commit hook stamping agent authorship.</b> Cheap now, impossible retroactively &mdash; otherwise everything before the day you add one has to be labelled &ldquo;assume agent authorship unless stated.&rdquo;</li>
+          </ol>
+        </div>
+
+        <div class="phase">
+          <p class="phase-k">Phase 5 &middot; the guard layer</p>
+          <ol start="17">
+            <li><b>Nothing here is set up in advance, and that is the point.</b> Every guard worth having exists because something specific went wrong first. Building them up front is <a href="#asymptote" data-view="asymptote">challenge 4</a> with extra steps.</li>
+          </ol>
+        </div>
+
+        <div class="phase">
+          <p class="phase-k">Phase 6 &middot; second machine, then cluster</p>
+          <ol start="18">
+            <li><b>The second machine is where &ldquo;one machine or several&rdquo; stops being a question</b>, and where a remote turns from good practice into an operational requirement.</li>
+            <li>Cluster work, once the allocation lands. Portal before command line; VPN before the browser.</li>
+            <li>Publishing, if any &mdash; and note that a login flow of this kind is once per machine and cannot be scripted.</li>
+          </ol>
+        </div>
+
+        <div class="prov"><b>Section source.</b> <span class="path">points.md</span> &sect;D, ordered 2026-08-27, seven phases. Institution-specific storage and cluster names have been generalised here; the sourced originals, with rates and dates, are in <span class="path">points.md</span> &sect;F and are expected to go stale.</div>
+      </section>
+
       <section class="view" id="fixes" data-alt="view-fixes" aria-labelledby="h-fixes">
         <div class="view-head">
           <p class="eyebrow">What to do about it</p>
@@ -920,85 +999,6 @@
       </section>
 
       <!-- ============ STEP 0 ============ -->
-      <section class="view" id="step0" data-alt="view-step0" aria-labelledby="h-step0">
-        <div class="view-head">
-          <p class="eyebrow">What to do about it</p>
-          <h2 id="h-step0">Step 0 &mdash; before any of the above</h2>
-          <p class="lede">Set-up and decisions that come before the first task. <b>The order is not arbitrary: each layer can only be verified once the one below it exists.</b></p>
-        </div>
-
-        <p>You cannot test a path helper before there is a filesystem to point it at, or a handoff before there are two machines. One thing runs the other way &mdash; <b>the items that take longest are the ones involving people who are not you</b>, so they start first and finish last.</p>
-
-        <p><b>Two of these are questions, not items:</b> one machine or several, and solo or with others. The answers change what the rest of this covers, which is why they are asked at the door rather than discovered in week three. <b>A solo researcher on one laptop drops phase 0, phase 6 and most of phase 3</b> &mdash; a much shorter list than the one below.</p>
-
-        <div class="phase opt">
-          <p class="phase-k">Phase 0 &middot; conditional &middot; days to weeks</p>
-          <h4>Skip unless you need research storage or a computing cluster</h4>
-          <ol>
-            <li><b>A research storage volume</b> &mdash; usually sponsored by a lab or department, not requested individually.</li>
-            <li><b>A cluster account <i>and</i> an allocation</b> &mdash; two separate things, and only the second one lets you submit work.</li>
-          </ol>
-          <p style="font-size:14px;color:var(--muted);margin-top:10px">Most people need neither. A laptop, synced storage and one repository covers the majority of research computing, and knowing which side of that line you are on <i>is</i> the storage decision. These take days to weeks because someone else has to approve them, so file them now and carry on with everything below while they pend.</p>
-        </div>
-
-        <div class="phase">
-          <p class="phase-k">Phase 1 &middot; identity, before any code exists</p>
-          <ol start="3">
-            <li>Version-control account, SSH key, command-line login.</li>
-            <li>Agent plan &mdash; also where the cost question stops being abstract.</li>
-            <li>Institutional basics: login, VPN client, synced-storage client.</li>
-          </ol>
-        </div>
-
-        <div class="phase">
-          <p class="phase-k">Phase 2 &middot; machine baseline</p>
-          <ol start="6">
-            <li>A package manager, then the standard command-line tools.</li>
-            <li>The editor and its agent extension.</li>
-            <li>Language runtimes &mdash; only the ones you need. Most people need one.</li>
-            <li><b>Stop the machine sleeping through your own work.</b> A long run that outlasts your attention dies when the display sleeps or the lid closes, and it dies without a result. On macOS, <a href="https://apps.apple.com/us/app/amphetamine/id937984704?mt=12">Amphetamine</a> is free and handles closed-lid operation; <span class="path">caffeinate -dimsu</span> is built in and needs no install. Windows has PowerToys Awake; Linux has <span class="path">systemd-inhibit</span>.</li>
-          </ol>
-          <p style="font-size:14px;color:var(--muted);margin-top:10px"><b>Item 9 is phase 0&rsquo;s cheap alternative and it belongs before the request, not after.</b> Phase 0 says ask for a cluster when a run would pin a workstation for hours. A good share of those people do not need a cluster &mdash; they need the machine to stay awake. One of those costs a minute; the other takes weeks. Try the minute first.</p>
-        </div>
-
-        <div class="phase">
-          <p class="phase-k">Phase 3 &middot; storage, before the first data file</p>
-          <ol start="10">
-            <li>Create the data root and the figure-review folder.</li>
-            <li><b>Write the path helper before any script hardcodes a path.</b> Cheap now, archaeology later.</li>
-            <li><b>Write the storage-tier rule down.</b> Three sentences. It prevents both failures: multi-gigabyte outputs strangling a sync client, and small shareable results stranded where the other machine cannot see them.</li>
-          </ol>
-        </div>
-
-        <div class="phase">
-          <p class="phase-k">Phase 4 &middot; the first repository</p>
-          <ol start="13">
-            <li>Initialise it <b>and add the remote in the same sitting.</b></li>
-            <li>Exclude data by file extension. Pin line endings on shell scripts &mdash; a stray carriage return in the first line of a script is a &ldquo;bad interpreter&rdquo; failure on a Linux cluster, and it is a genuinely awful thing to debug from a Windows checkout.</li>
-            <li>The project instructions file, and the agent&rsquo;s permission settings: allow, ask, deny.</li>
-            <li><b>A commit hook stamping agent authorship.</b> Cheap now, impossible retroactively &mdash; otherwise everything before the day you add one has to be labelled &ldquo;assume agent authorship unless stated.&rdquo;</li>
-          </ol>
-        </div>
-
-        <div class="phase">
-          <p class="phase-k">Phase 5 &middot; the guard layer</p>
-          <ol start="17">
-            <li><b>Nothing here is set up in advance, and that is the point.</b> Every guard worth having exists because something specific went wrong first. Building them up front is <a href="#asymptote" data-view="asymptote">challenge 4</a> with extra steps.</li>
-          </ol>
-        </div>
-
-        <div class="phase">
-          <p class="phase-k">Phase 6 &middot; second machine, then cluster</p>
-          <ol start="18">
-            <li><b>The second machine is where &ldquo;one machine or several&rdquo; stops being a question</b>, and where a remote turns from good practice into an operational requirement.</li>
-            <li>Cluster work, once the allocation lands. Portal before command line; VPN before the browser.</li>
-            <li>Publishing, if any &mdash; and note that a login flow of this kind is once per machine and cannot be scripted.</li>
-          </ol>
-        </div>
-
-        <div class="prov"><b>Section source.</b> <span class="path">points.md</span> &sect;D, ordered 2026-08-27, seven phases. Institution-specific storage and cluster names have been generalised here; the sourced originals, with rates and dates, are in <span class="path">points.md</span> &sect;F and are expected to go stale.</div>
-      </section>
-
       <!-- ============ RECORD ============ -->
       <section class="view" id="record" data-alt="view-record" aria-labelledby="h-record">
         <div class="view-head">
