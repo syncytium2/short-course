@@ -9,7 +9,30 @@ distinguish seven roles from eleven.
 
 ## The full session export
 
-**Status: exists, held by Tony, deliberately not imported.**
+**Status as of 2026-08-29: scoped, imported as [`01b`](01b-real-log-complete.md), and the
+whole-account original then deleted. It is no longer held by anyone.**
+
+*The status line below said "exists, held by Tony" from 2026-08-26 until 2026-08-29. It was
+true when written. The account-wide export sat in `~/Downloads/` — 67MB, 182 conversations,
+with every shell command and every file body intact — and was deleted on 2026-08-29 after
+confirming that the one conversation this chain needs is preserved here in full. That check
+was a byte comparison, not a glance: `01b-real-log-complete.source.json` and the copy in the
+export agree on all 40 messages and every tool call, differing only in the per-block UUIDs
+that each export run regenerates.*
+
+***A fresh export can be requested at any time*** *(claude.ai → Settings → Privacy → Export
+data; the emailed link expires in 24 hours and is single-use). What cannot be recovered is
+this particular snapshot: a new export reflects the account as it is then. Nothing in this
+chain depends on that, but a future session planning to re-derive something from the original
+should know it is asking for a rebuild, not a retrieval.*
+
+*The deletion was not tidying. An account-wide export is the single densest disclosure risk
+on the machine, it had already given this chain everything it could give, and Downloads is a
+folder people share the contents of by accident.*
+
+**Original status line, kept because a status that quietly changes is not a record:**
+
+> **Status: exists, held by Tony, deliberately not imported.**
 
 A complete transcript export is available. It is **not** in this repo and should not be dropped in
 as-is, for one reason: it is a whole-account export covering **many projects**, not this one. It
