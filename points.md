@@ -14,6 +14,37 @@ pressing problems. The barriers are:
 - **A3.** Validation
 - **A4.** The forever asymptote
 
+### Tier mismatch — the reason people bounce off this, recorded 2026-08-29
+
+*Filed because the page argues it and had no artifact behind it. Role 1 of the
+2026-08-28 murderboard found the opening anecdote traced to nothing in this
+repository — only to the page and its own generator. This is that record, plus a
+second instance.*
+
+**Instance 1 — the log-scale axis.** A colleague wanted the tick labels on a
+fold-change axis recomputed on a log scale, put the request to Google search, got
+nothing usable, and returned the verdict *"AI is stupid, it can't do this simple
+task."* Right about what happened, wrong about what it meant: the request went to
+the tier that returns links. **Undated, no artifact, related in conversation.**
+Published on the page in fictionalised form — person, field and figure changed —
+because the original is identifiable in a small field and consent was never
+obtained. Anonymisation is not consent.
+
+**Instance 2 — the genogram, 2026-08-29.** A reader of the page, unprompted, on
+first reading: *"I think it's definitely very useful. I had a similar-ish problem
+with the graphing trying to get chat gpt to make a genogram."* Same shape — a
+structured diagram put to the tier that returns text, which will describe one
+fluently and draw nothing. **Second-hand to the drafter, undated as to when it
+happened, not published.**
+
+*What these two do and do not support.* They are two instances, both reported
+rather than observed, one of them fictionalised for publication. That is enough
+to say a verdict of "this is useless" is **often** a tier mismatch. It is not
+enough for "most", which is what the page said until the murderboard caught it.
+**The cheap check is the one this repo keeps deferring: ask people.** Every
+researcher who has dismissed these tools has a story, and the denominator is
+obtainable by asking rather than by reasoning.
+
 ---
 
 ## B. The original eight
