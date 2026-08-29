@@ -392,3 +392,19 @@ find out about each other. That is what a board is for, and it is why C3 in
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/9b26b5c4 — append session-close handoff for 2026-08-29 afternoon
+- **Status:** ACTIVE
+- **Opened:** 2026-08-29
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** `HANDOFF.md` — **append only**, one new `## Session close` section at the end.
+  Touches no existing section.
+- **Notes:** Short-lived; released as soon as it is pushed. Two sessions were live at 16:50
+  (`ee31d240`, `976d19f3`). Claiming a two-minute append because `HANDOFF.md` is named in this
+  board's own "claim it" table, and because the session that skipped exactly this step today
+  duplicated an eleven-role review at a cost of $11.06.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->

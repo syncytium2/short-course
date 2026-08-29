@@ -802,3 +802,66 @@ Enforced rather than remembered:
 The guard is narrow and it is a heuristic. It will not catch course work filed under a name it
 does not recognise. That is stated here rather than left for you to discover, because a gate whose
 coverage is overstated is the failure mode this whole estate exists to avoid.
+
+---
+
+## Session close, 2026-08-29 afternoon — `Mac/9b26b5c4`
+
+Ended cleanly at Tony's word. **Three claims opened and all three released; tree clean; nothing
+unpushed.** What follows is what the next session needs and would not otherwise find.
+
+### What landed
+
+| | |
+|---|---|
+| [`docs/cases/2026-08-29-the-board-was-empty-because-claiming-is-a-habit.md`](docs/cases/2026-08-29-the-board-was-empty-because-claiming-is-a-habit.md) | The 14:33 concurrent-write collision. **First native case in a folder whose README scopes it to imported ones** — flagged there, charter change left for a human |
+| [`points.md`](points.md) C3 | Third instance, and the first about two sessions *simultaneously live* rather than about session end |
+| [`docs/handouts/what-it-costs.html`](docs/handouts/what-it-costs.html) | Tier columns defined, murderboard linked at the worked example, teaching-session block rewritten to price the room twice |
+| [`docs/reviews/what-it-costs_2026-08-29.md`](docs/reviews/what-it-costs_2026-08-29.md) | Eleven-role murderboard. **101 findings: 14 blocking.** Raw JSON beside it |
+| [`docs/doubt/`](docs/doubt/) + [`tools/doubt.sh`](tools/doubt.sh) | New channel: material nobody can stand behind, parked, **no decision owed**. Six seeded |
+
+### ⚠ The three things that actually need someone
+
+1. **The murderboard's 14 blocking findings are unrepaired and the page is live.** `976d19f3`
+   held the repair claim on both handouts and **has released it — they are unowned.** Cluster A
+   (five of eleven roles) is the worst: the page states a four-round *"ceiling"* and then reports
+   a fourteen-round run, never pricing it ($224–560). **The fix does not need the cap number** —
+   "ceiling" is wrong whether the cap is 3, 4 or unset, because a cap is a setting. Fix the
+   framing; the number is parked in `docs/doubt/`.
+2. **Cluster E is a live contradiction on a student-facing page.** Line 487 says *"students
+   excluded"*; seventy lines above, the page prices six students. `points.md:808–809` shows **two
+   routes** and the handout flattened them into one. This lands on exactly the reader deciding
+   whether to assign the course. **Verified independently, not just reported.**
+3. **`OPEN-CORRECTIONS.md` has no entry for this page.** By that file's own rule it should, since
+   the defects are in committed, published content.
+
+### A second collision, and it is not the one in the case file
+
+**I duplicated an eleven-role murderboard.** `976d19f3` had one running on **both** handouts since
+~15:55. I asked on the board at **16:10:32** whether it was mid-edit, spawned mine at **16:15:21**,
+and its `STOP BEFORE YOU SPAWN A SECOND MURDERBOARD` landed at **16:23:54** — eight minutes after
+my agents were already running. Cost: **859,010 billable tokens, $11.06.**
+
+**This is a different failure from the one filed in `docs/cases/` this morning, and it is sharper.**
+That case is about a board that was *empty*. This is about a board that was *correct, staffed, and
+answering* — and slower than my decision. I posted a question and treated five minutes of silence
+as an answer.
+
+> **A claim is a message, and a message has a round-trip time. Silence on the board is latency,
+> not consent.** Read the board again *immediately before you spawn agents or start writing*, not
+> only when you claim.
+
+**Not written up as a case.** It was offered and Tony ended the session instead — so it is
+recorded here and in the board block at 16:2x, and **the case is unwritten and available** if
+someone wants it. It is the better B4 instance of the two.
+
+### Smaller things worth knowing
+
+- **`tools/doubt.sh` and `tools/claim.sh` both had selftest bugs found by *running* them, not
+  reading them.** `--list` skips `DONE` blocks whole, so a session that honestly recorded a file
+  in a closed claim's `Writes:` line was invisible — replayed against the historical board, it
+  prints `(no active claims)` while the board names the file. And `grep -lc` on BSD prints the
+  count *and* the filename, so a one-file assertion read 2 and failed against a correct tool.
+- **The repo's own token-measurement method no longer reproduces.** `OPEN-CORRECTIONS` C1 sums
+  per-turn `usage` records; on this harness that field maxes at **17** on turns writing thousands
+  of words. Three mechanisms disagree by up to 8×. Parked in `docs/doubt/`.
