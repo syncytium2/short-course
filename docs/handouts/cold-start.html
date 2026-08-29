@@ -646,14 +646,22 @@ claude</pre>
           <span class="badge">Incomplete</span>
         </div>
         <div class="detail" id="d-4.1">
-            <pre>mkdir -p ~/projects/first-project
-cd ~/projects/first-project
-claude</pre>
+            <p class="why"><b>First, what the terminal is.</b> It is a window where you type instructions to the computer instead of clicking them. In VS&nbsp;Code: <b>Terminal &rarr; New Terminal</b>, and it opens along the bottom of the window. On a Mac you can also open the Terminal app directly. Nothing you type below can damage anything.</p>
+            <p class="why">Type these three lines <b>one at a time</b>, pressing Enter after each. Nothing appears to happen after the first two. That is correct.</p>
+            <pre>mkdir -p ~/projects/first-project   # make a folder
+cd ~/projects/first-project         # step into it
+claude                              # start the agent, here</pre>
+            <p class="why">What the words mean, once:</p>
+            <pre>mkdir  "make directory" — a directory is a folder
+cd     "change directory" — moves you into it
+~      your home folder, so this sits inside it
+#      everything after it is a note to you, not a command</pre>
+            <div class="warn"><b>The order of the last two lines is the whole point.</b> The agent can only see the folder you were standing in when you started it. <code>cd</code> moves you there; <code>claude</code> starts it there. Starting it in the wrong place is the most common way a first session goes wrong, and it does not announce itself &mdash; the agent simply looks around a folder you did not mean and reports confidently about what it found.</div>
         </div>
         <ul class="checks">
             <li><button class="cb" type="button" aria-pressed="false" aria-labelledby="c-4-1-0">&#10003;</button><span class="cbt" id="c-4-1-0">Project folder made</span></li>
             <li><button class="cb" type="button" aria-pressed="false" aria-labelledby="c-4-1-1">&#10003;</button><span class="cbt" id="c-4-1-1">Session started from inside it</span></li>
-            <li><button class="cb" type="button" aria-pressed="false" aria-labelledby="c-4-1-2">&#10003;</button><span class="cbt" id="c-4-1-2">The banner shows the path I just made</span></li>
+            <li><button class="cb" type="button" aria-pressed="false" aria-labelledby="c-4-1-2">&#10003;</button><span class="cbt" id="c-4-1-2">The banner shows the path I just made, not my home folder</span></li>
         </ul>
       </li>
       <li data-id="4.2" data-open="0" data-done="0">

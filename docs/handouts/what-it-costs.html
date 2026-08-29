@@ -342,6 +342,62 @@
     <p>The figure is useful for one thing only: it is roughly the <b>ceiling</b> of what a single very heavy human being can spend. If your bill approaches it, you are not being unlucky, you are working like a full-time engineer.</p>
   </div>
 
+  <h3>A worked example: one adversarial review</h3>
+
+  <p>Abstract monthly figures are hard to act on. Here is one real, repeated task, measured
+  rather than estimated &mdash; a document put through an eleven-agent adversarial review, where
+  each agent reads independently so that none of them can be talked round by the others.</p>
+
+  <div class="tw">
+    <table>
+      <caption>Five complete eleven-agent runs across three projects, summed per run from the
+      tool&rsquo;s own token log on 29 August 2026. Dollar figures computed from those token
+      counts at published list rates, with cache reads charged at a tenth of the input rate.
+      <b>Computed, not read off an invoice</b> &mdash; and the runs were not all on the same
+      model, so the range is a band rather than a price.</caption>
+      <thead>
+        <tr><th>Run</th><th>Billable tokens</th><th>Top tier</th><th>Mid tier</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>14 Aug</td><td class="num">3,141,042</td><td class="num">$40</td><td class="num">$16</td></tr>
+        <tr><td>17 Aug</td><td class="num">1,786,769</td><td class="num">$16</td><td class="num">$6</td></tr>
+        <tr><td>22 Aug</td><td class="num">1,863,469</td><td class="num">$26</td><td class="num">$10</td></tr>
+        <tr><td>24 Aug</td><td class="num">1,700,364</td><td class="num">$30</td><td class="num">$12</td></tr>
+        <tr><td>28 Aug</td><td class="num">1,597,426</td><td class="num">$26</td><td class="num">$10</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p><b>So: reviewing one document properly costs somewhere between $6 and $40.</b> Between
+  10.8 and 36.9 million further tokens were read back out of cache on top of those figures, which
+  is why the number is not simply proportional to how long the document was.</p>
+
+  <p>That is the number worth carrying around, because it is the shape of every real task: not a
+  monthly subscription, but <b>a few dollars for a serious piece of work, and a few cents for a
+  small one</b>. A month is just however many of those you did.</p>
+
+  <div class="flag">
+    <p><b>Two things this example teaches that the price alone does not.</b></p>
+    <p><b>The expensive part is the part that works.</b> Eleven agents cost roughly eleven times
+    one agent, and the reason to pay it is that they cannot see each other&rsquo;s reasoning. One
+    agent walking the same eleven checklists costs an eleventh as much and shares a mind with the
+    author, so it agrees with itself. Independence is the product, and independence is the line
+    item.</p>
+    <p><b>It can also run away.</b> The process allows the review to repeat until it converges, so
+    the ceiling for one document is four rounds &mdash; call it $64&ndash;160 at the top tier. One
+    recorded run went <b>fourteen</b> rounds before a person stopped it. Nothing was broken. Nobody
+    was watching.</p>
+  </div>
+
+  <div class="flag">
+    <p><b>And the measurement itself is a caution.</b> Before this was measured, the same review
+    was reported at 833,142 tokens by the agent that ran it, described as measured. It was not
+    measured &mdash; it was asserted, confidently, and it was <b>1.9&times; too low</b>. The real
+    figure only appeared when somebody totted up the token log afterwards.</p>
+    <p>If you take one thing from this page: <b>a number an agent gives you about its own
+    consumption is a claim, not a receipt.</b> The receipt is on the usage screen.</p>
+  </div>
+
   <h3>What one teaching session costs</h3>
 
   <p>The one case anybody has costed here: six students, one ninety-minute session. Sizing it from an institutional per-user monthly stipend gives an order of <b>$5&ndash;15 a student</b>, so <b>$30&ndash;90 for the room</b>. At that size the cost question answers itself and the decision becomes a pedagogical one.</p>
@@ -437,7 +493,7 @@
   <footer>
     <p>Companion to <i>Cold Start</i>, and the fourth sheet alongside <i>Search to Shipped</i> and <i>It Looked Right</i>.</p>
     <p><b>Filed as its own page on purpose.</b> Cost material decays faster than anything else in this course and is tied to one institution and one moment, so it is kept where it can rot without taking the teaching material with it. When it next matters, go and touch the systems rather than editing around the dates.</p>
-    <p>Prices and plan shapes read from the vendors&rsquo; own pages on 29 August 2026. The heavy-use figures are from Anthropic&rsquo;s cost documentation, the same day. The institutional and student-credit facts were checked at one university on 27 August 2026 and are generalized here. The teaching-session figure is an estimate and is labeled as one. Every outbound link was checked on 29 August 2026 and <b>nothing re-checks them</b>.</p>
+    <p>The five-run worked example is derived from a token log in <a href="https://github.com/syncytium2/murderboard">syncytium2/murderboard</a>, summed per run on 29 August 2026; the dollar figures are computed from those counts at list rates and are not invoices. <b>That log is not yet published</b> &mdash; a handoff asking for it has gone to that project, and until it lands the table is checkable only by someone with the file. Prices and plan shapes read from the vendors&rsquo; own pages on 29 August 2026. The heavy-use figures are from Anthropic&rsquo;s cost documentation, the same day. The institutional and student-credit facts were checked at one university on 27 August 2026 and are generalized here. The teaching-session figure is an estimate and is labeled as one. Every outbound link was checked on 29 August 2026 and <b>nothing re-checks them</b>.</p>
   </footer>
 
 </div>

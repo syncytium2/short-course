@@ -279,3 +279,21 @@ find out about each other. That is what a board is for, and it is why C3 in
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/976d19f3 — hand off the measured murderboard review cost to the murderboard team; add it to What It Costs
+- **Status:** DONE 2026-08-29
+- **Opened:** 2026-08-29
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** `docs/handouts/cold-start.html`, `docs/handouts/what-it-costs.html`, and TWO
+  darkroom folders &mdash; `<darkroom>/short-course/` and, unusually, `<darkroom>/murderboard/`.
+- **Notes:** **This session wrote into another project's darkroom folder**, following the
+  `<date>-FROM-<repo>-<subject>.md` convention already in use there. Nothing in the murderboard
+  *repo* was touched: that checkout was on `feedback-four-observations-2026-08-28` and belongs to
+  another session. The handoff asks murderboard to push `review-cost` / `metrics-cost`, which are
+  local-only on this laptop and are the sole copy of the measurement that
+  `docs/cases/OPEN-CORRECTIONS.md` C1 depends on. **C1 stays open until that lands.**
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
