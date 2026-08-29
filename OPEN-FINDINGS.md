@@ -188,8 +188,13 @@ for review. I have no clue what they refer to."* Filed here rather than in
 be **unread**, which is a different status and has no other home.
 
 **There was nothing to commit.** The two files dirty at 14:23 — `docs/handouts/README.md` and
-`docs/handouts/cold-start.html` — were committed 38 seconds later by `58cb7ee`, from a
-concurrent session on this checkout. Everything below is already on `origin/master`.
+`docs/handouts/cold-start.html` — were committed 38 seconds later by `58cb7ee`, from a second
+Claude session on this checkout. Everything below is already on `origin/master`.
+
+**Every commit in this repository carries the author's name and email**, because that is how
+Claude Code commits. Git authorship therefore distinguishes nothing here: there is one human and
+some number of Claude sessions, and the log looks identical either way. That is worth stating
+once, because it is the reason the question below could be asked at all.
 
 **What landed today**, `be331c0..HEAD`, 21 commits, 10 of them on the handouts or the site:
 
@@ -204,23 +209,34 @@ concurrent session on this checkout. Everything below is already on `origin/mast
 
 Net **+1,314 / −330** across six files.
 
-**The three things to decide, which are the author's and nobody else's:**
+**Who wrote the dirty files is settled, and it is the wrong question.** *(Corrected
+2026-08-29, by the author, against the first version of this entry, which left it open.)* There
+is one author plus Claude. The author reports having no idea what those edits refer to, which
+leaves one candidate: they were a Claude session's in-progress work, committed by that session
+seconds later. No lost human keystrokes, nothing to recover, and the 38-second timing needs no
+hedge.
 
-1. **Whether the two dirty files were yours.** Not recoverable from git — a working tree records
-   no author. The 38-second gap and `58cb7ee`'s own message (*"four gaps, all reported by the
-   author against the first draft"*) both say it was that session's in-progress work rather than
-   edits of yours it swept up. **That is an inference from timing, not a fact.** If you typed
-   something into either file today and cannot find it in the diff, say so now while the
-   transcripts still exist.
-2. **A public page changed unread.** `site/index.html` is the source of
+**What that leaves is the actual finding, and it is larger than the one it replaced.** A Claude
+session produced 1,300 lines of teaching material in a working afternoon, published two of them
+as artifacts, and edited a page that is live on the open web — and the one person who will stand
+behind it in a room cannot say what any of it changed. Nothing failed. No commit is wrong, no
+claim is known to be false, every message names its defect, and the work may well be good. The
+gap is entirely between what is committed and what has been read, and it opened at the speed the
+work was produced.
+
+**The two things to decide:**
+
+1. **A public page changed unread.** `site/index.html` is the source of
    [lookedright.tonydefazio.com](https://lookedright.tonydefazio.com/). Today's edit is a
    spelling pass and looks harmless in the diff. **Whether it has been redeployed is unknown** —
    nothing in the log records a `wrangler` run.
-3. **`cold-start.html` is effectively a new document.** More lines changed than the file had.
+2. **`cold-start.html` is effectively a new document.** More lines changed than the file had.
    Reviewing it as a diff will not work; it wants a read.
 
 *Related, not the same:* `points.md` **C3** and **G** are about work crossing sessions safely.
-This is an instance of it, filed as a finding rather than as evidence, because it is unresolved.
+Those are about work that is lost. **This is the opposite failure and it has no entry yet:** the
+work arrives intact, on every machine, correctly committed, and outruns the only person who can
+vouch for it. A handoff mechanism does not fix it, because the handoff worked.
 
 ---
 
