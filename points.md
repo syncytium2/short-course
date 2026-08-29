@@ -439,6 +439,31 @@ obtainable by asking rather than by reasoning.
   it had not been followed. It is a habit and not a mechanism — §7's second kind — so §5 applies
   to it in full.
 
+  *Third instance, 2026-08-29 — and the first that is not about stopping.* Both instances above
+  are session **end**: work left uncommitted, a handoff not delivered. This one is two sessions
+  **simultaneously live** in the same files — the case this point's own line names — and it
+  happened **after** the mechanism was built, with the mechanism working. `Mac/976d19f3` claimed
+  two handouts at 13:54, released at 14:03, and went on editing them until 14:40; at 14:33 it
+  normalised spelling across five files at once, one of which `Mac/a52b2bae` was inside at the
+  time. The board was blank throughout, and `tools/claim.sh --selftest` passes today.
+
+  *Three things it establishes that C3 did not have.* **(1)** Release is priced by B7 rule 3 to
+  be cheap, so it happens when the task feels done — but a session's contact with a file ends
+  when the *session* does, and only the first is on the board. **(2)** The board is per-file and
+  the collision was a five-file shallow sweep; no one file in it is worth a claim and the
+  aggregate was another session's whole working area. **(3)** `git` cannot attribute a commit to
+  a session at all — one machine, one checkout, one author name — so the board is not a courtesy,
+  it is *the only attribution record there is*. When it is blank, "who did this" is answerable
+  only by reading transcript logs, which nobody taking this course will do.
+
+  *And it is a B4 instance in the anti-B4 tooling.* Same `.claude/` directory, same week:
+  `push-goes-where-you-are.sh` is wired as a `PreToolUse` hook and fires whether or not anyone
+  remembers it; `claim.sh` is a command a session must remember to type. Tier 4 beside tier 2.
+  The board *looks* structural — committed, cross-machine, selftested — and its write path is a
+  habit. Full write-up, including the investigating session pushing a false confession derived
+  from grepping its own live transcript, in
+  [`docs/cases/2026-08-29-the-board-was-empty-because-claiming-is-a-habit.md`](docs/cases/2026-08-29-the-board-was-empty-because-claiming-is-a-habit.md).
+
   *Candidate mechanisms:* branches, worktrees, collision avoidance — and **push / pull / fetch**,
   which is the one that actually spans machines. Branches and worktrees only separate work inside
   one machine. Three machines share a repo through a remote or they do not share it at all.
