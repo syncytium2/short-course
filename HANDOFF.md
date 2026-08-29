@@ -729,6 +729,62 @@ that file's own argument.
 
 ---
 
+## Session close — 2026-08-29
+
+**A public site exists.** [`lookedright.tonydefazio.com`](https://lookedright.tonydefazio.com/) —
+Cloudflare Worker `lookedright`, assets-only, serving `site/index.html`, which is **generated** from
+`docs/handouts/four-barriers.html` by `tools/build_site.sh` and never edited. `--check` catches a
+stale build; nothing runs it automatically, which is a gate that is still a habit.
+
+It is the fifth destination on `tonydefazio.com`, added with a NEW sticker.
+
+### The murderboard ran on it — read the record before touching the page
+
+[`docs/reviews/four-barriers_2026-08-29.md`](docs/reviews/four-barriers_2026-08-29.md). Eleven
+roles, parallel, roster gate green. **~25 blocking, ~95 major. Round 1 only, unconverged, stopped by
+the escalation rule.** Roughly thirty corrections applied; the structural half handed back.
+
+**The finding, in one line:** the page's own furniture was the densest concentration of unchecked
+confident claims on it — the reading time (off 7×), the word count of the file it cites for
+provenance (434 vs 514), the counts of its own parts. Not the incidents, which were careful.
+
+**The eleven role reports exist only in that record.** They were subagent returns and are otherwise
+gone — which is the failure `2026-08-27-every-number-was-right.md` documents about its own run.
+
+### What the author changed after it
+
+Cold open, panels above the masthead, section order (`Step 0 · The repo · The standing rule · Fixes
+that hold`), the page title, the repo section rewritten to say what git *is* plus an
+institution-owns-your-work warning, `foundations` filed as B7's second worked cure, and the
+spell-check specimen in B2.
+
+### Open, in the order they cost something
+
+1. **Three emails** — Oxford, UW eScience, Southampton. **Fifth day.** Role 2 also found a fourth,
+   closer Southampton course for non-programmers with a reliability episode, recorded nowhere.
+2. **The attribution posture** — mutation testing is a 1971 discipline, the four tiers are the NIOSH
+   hierarchy of controls, and `murderboard` is the author's own repo linked as though external.
+   One clause each, none written.
+3. **`mutation_check.sh` is fault seeding, not mutation analysis** — no operator set, no score, and
+   seven mutants role 6 wrote against `build_site.sh` all survive. It also has a real safety bug: an
+   interrupted run can leave the push gate defanged in the working tree, silently.
+4. **The apex page still says "All four repositories are public"** — `short-course` is private — and
+   carries a no-analytics claim the fifth site breaks by loading Google Fonts.
+5. **The `.wrangler` account blob is still in history at `ddc7594`.** Untracked going forward; a
+   rewrite is the author's call.
+6. **Role 8's remaining cold-reader sections** — 9 of 11 were blocking, two have been fixed.
+7. **B1**, and the publication decision for this repo and `turnstile`.
+
+### The thing to carry forward
+
+**A review finding does not outrank the author on a question of tone.** Role 8's meme finding was a
+real observation and a judgement about voice, on a page whose author had already made that
+judgement. Treating it as a correctness call cost four rejected replacements and most of a day.
+
+**This section was appended by hand, which is still the defect** `5da72f8` diagnosed.
+
+---
+
 ## Boundary
 
 **The murderboard repo is for murderboard development only.** Course material, session plans,
