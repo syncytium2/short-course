@@ -219,8 +219,10 @@ find out about each other. That is what a board is for, and it is why C3 in
 - **Status:** DONE 2026-08-29
 - **Opened:** 2026-08-29
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** `docs/handouts/cold-start.html` (new), `docs/handouts/README.md`, and the
-  darkroom folder `<darkroom>/short-course/2026-08-29-cold-start/` (new).
+- **Writes:** `docs/handouts/cold-start.html` (new), `docs/handouts/what-it-costs.html` (new),
+  `docs/handouts/README.md`, `HANDOFF.md`, and `<darkroom>/short-course/` (two new files there,
+  flat alongside `search-to-shipped.html` rather than in a dated subfolder — matching what that
+  folder already does).
 - **Notes:** **New file plus the darkroom — both traps named at the top of this board.** The
   handout is a third student-facing page beside `search-to-shipped.html` and
   `four-barriers.html`; it takes their palette and type tokens deliberately so the three read

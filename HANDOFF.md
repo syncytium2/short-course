@@ -21,10 +21,10 @@ is for murderboard development only; see [Boundary](#boundary) below.
 | The working point list | [`points.md`](points.md) — A/B/C/D/E, the author's own words, unmerged |
 | Access, cost, routes, rates | [`points.md`](points.md) **§F** — sourced and dated 2026-08-27, expected to go stale |
 | The circulatable outline | [`course-outline-external.md`](course-outline-external.md) — 434 words, four barriers |
-| **What a learner is handed** | [`docs/handouts/`](docs/handouts/) — `search-to-shipped.html`, one-page runbook + a second sheet on decision records |
+| **What a learner is handed** | [`docs/handouts/`](docs/handouts/) — three sheets now: `cold-start.html` (setup, 29 steps, **new 2026-08-29**), `what-it-costs.html` (**new 2026-08-29** — the money and the equity question, filed separately so it can rot alone), `search-to-shipped.html` (runbook + decision records), `four-barriers.html` (the public walkthrough) |
 | **Hook safety / the decision tree** | [`tools/turnstile/`](tools/turnstile/) — vendored from [`syncytium2/turnstile`](https://github.com/syncytium2/turnstile); `turnstile decide`, `turnstile check` |
 | **Who else is working here** | [`docs/SESSIONS.md`](docs/SESSIONS.md) — claim before you write, `tools/claim.sh --list` |
-| **What has actually been delivered** | `<darkroom>/short-course/` — the runbook as a standalone page, plus a folder README. Claimed and written 2026-08-27; the repo copy is publisher source and does not open from Finder |
+| **What has actually been delivered** | `<darkroom>/short-course/` — `search-to-shipped.html`, `cold-start.html` and `what-it-costs.html` as standalone pages, plus a folder README. Claimed and written 2026-08-27 and 2026-08-29; the repo copies are publisher source and do not open from Finder |
 | Why the repo exists | [`README.md`](README.md) |
 
 **Remote: `syncytium2/short-course`, private, added 2026-08-27.** The paragraph here used to say
