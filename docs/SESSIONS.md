@@ -214,3 +214,20 @@ find out about each other. That is what a board is for, and it is why C3 in
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/976d19f3 — write the zero-to-hero setup runbook handout (cold-start) and deliver it to the darkroom
+- **Status:** ACTIVE
+- **Opened:** 2026-08-29
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** `docs/handouts/cold-start.html` (new), `docs/handouts/README.md`, and the
+  darkroom folder `<darkroom>/short-course/2026-08-29-cold-start/` (new).
+- **Notes:** **New file plus the darkroom — both traps named at the top of this board.** The
+  handout is a third student-facing page beside `search-to-shipped.html` and
+  `four-barriers.html`; it takes their palette and type tokens deliberately so the three read
+  as one system. It draws on `points.md` §D (Step 0, the phase order) and §F (access and cost)
+  and does **not** edit either.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
