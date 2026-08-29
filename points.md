@@ -474,6 +474,12 @@ obtainable by asking rather than by reasoning.
   none and is local only. C3 makes a remote an **operational** requirement. Those are the same
   decision, and the repo currently records only one half of it.
 
+  *Superset filed 2026-08-29 as **section G**.* C3 is session-end and pickup. G is the whole
+  continuity surface it belongs to: handoffs, PRs, carrying one subproject linearly across
+  sessions *and* machines, and the failure case C3 never reaches — the laptop closes, the
+  network goes, the machine keeps running, and the session has to be recovered rather than
+  resumed. Read them together; do not elaborate one without the other.
+
 - **C4. The force multiplier does not apply overnight.** It takes time to learn how this can make
   you, or your employees, 100x faster.
 
@@ -827,3 +833,60 @@ opposite of the conclusion the material reached before anyone looked.
 **That is an estimate and not a measurement** — `OPEN-FINDINGS.md` **N1** still wants one measured
 run. It is recorded here because the estimate already changed a decision, and an estimate that
 changes a decision belongs somewhere the decision can be revisited.
+
+---
+
+## G. Continuity — handoffs, PRs, and losing the machine
+
+*Raw capture, 2026-08-29, dictated during another session. Unelaborated and unordered by
+request; nothing here has been checked, argued, or turned into advice. **C3** is the same
+subject filed earlier and partly evidenced — G is the larger surface C3 sits inside, not a
+replacement for it. Extract, merge, or contradict freely; the one thing not to do is let it
+sit here unread.*
+
+### G1. Navigating handoffs
+
+- **G1a.** Handing work between sessions — what the receiving session needs and in what form.
+- **G1b.** Relationship to the five written channels in C3 (`interface2`): which of them a
+  course-sized project actually needs, and which are estate-scale overhead.
+
+### G2. Pull requests
+
+- **G2a.** PRs as a unit of work a non-programmer navigates: opening, reading, reviewing, merging.
+- **G2b.** PRs as the handoff artifact — a branch plus a description is a message addressed to
+  whoever picks it up, including yourself tomorrow. Overlaps G1.
+- **G2c.** Collides with §6's git scope (commit, diff, log — no branches, no remotes, no merge),
+  the same collision C3 already flags as unresolved.
+
+### G3. Carrying a subproject linearly across sessions and computers
+
+- **G3a.** *Linearly* is the operative word — one line of work, many sessions, no forking of the
+  narrative even when the machines change.
+- **G3b.** Sessions and computers are two different problems. C3: branches and worktrees separate
+  work inside one machine; push/pull/fetch is the only thing that spans machines.
+- **G3c.** What "the subproject" is as an object — does it have a file, a branch, a directory, a
+  name.
+
+### G4. You close the laptop and bike home
+
+The scenario, whole, because the parts only matter together:
+
+- **G4a.** **Internet is cut.** Mid-task, mid-tool-call, unannounced.
+- **G4b.** **The machine stays awake.** Amphetamine (or equivalent) is running, so the lid closing
+  does not suspend it — the session is alive, working, and unreachable. This is materially
+  different from the machine sleeping, and the difference is the whole point of the case.
+- **G4c.** **API errors.** What they look like, which ones are transient, which mean the work is
+  gone, and which mean the work happened but the report of it did not.
+- **G4d.** **How to recover.** On reopening: what state to establish before doing anything, how to
+  find out what actually completed, and how to tell a half-finished edit from a finished one.
+- **G4e.** Adjacent: rate limits, compaction firing while you are away, a session that has been
+  retrying for an hour.
+
+### G5. Notes on this section
+
+- **G5a.** Precedent exists in this repo for G4d — the 2026-08-28 case where a node reported the
+  drafts were gone and replaying its own tool calls brought all four back
+  (`docs/chain/01c-recovered-drafts/`). That is a recovery *method*, already recorded, not yet
+  connected to this section.
+- **G5b.** Where this lands in the running order (E) is undecided. It is not Step 0 and it is not
+  Part 1; it is the thing that happens on day three and ends the project when it is not covered.
