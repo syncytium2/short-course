@@ -500,9 +500,9 @@
       <div class="rail-group">
         <p class="rail-head">What to do about it</p>
         <a href="#step0" data-view="step0"><span class="k">&rsaquo;</span><span>Step 0</span></a>
-        <a href="#fixes" data-view="fixes"><span class="k">&rsaquo;</span><span>Fixes that hold</span></a>
-        <a href="#rule" data-view="rule"><span class="k">&rsaquo;</span><span>The standing rule</span></a>
         <a href="#repo" data-view="repo"><span class="k">&rsaquo;</span><span>The repo</span></a>
+        <a href="#rule" data-view="rule"><span class="k">&rsaquo;</span><span>The standing rule</span></a>
+        <a href="#fixes" data-view="fixes"><span class="k">&rsaquo;</span><span>Fixes that hold</span></a>
       </div>
       <div class="rail-group">
         <p class="rail-head">Evidence</p>
@@ -889,6 +889,54 @@
         <div class="prov"><b>Section source.</b> <span class="path">points.md</span> &sect;D, ordered 2026-08-27, seven phases. Institution-specific storage and cluster names have been generalised here; the sourced originals, with rates and dates, are in <span class="path">points.md</span> &sect;F and are expected to go stale.</div>
       </section>
 
+      <!-- ============ STANDING RULE ============ -->
+      <!-- ============ REPO ============ -->
+      <!-- ============ STEP 0 ============ -->
+      <!-- ============ RECORD ============ -->
+      <section class="view" id="repo" data-alt="view-repo" aria-labelledby="h-repo">
+        <div class="view-head">
+          <p class="eyebrow">What to do about it</p>
+          <h2 id="h-repo">The repo</h2>
+          <p class="lede"><b>Not undo.</b> A record of what happened and why.</p>
+        </div>
+        <p>Three commands to start: <span class="path">commit</span>, <span class="path">diff</span>, <span class="path">log</span>.</p>
+        <p>The reason to keep one is not that you will roll back &mdash; you almost never will. It is that six weeks later you will need to know <i>why</i> something is the way it is, and the only artifact that can tell you is a message written by the person who knew at the time.</p>
+
+        <details class="more">
+          <summary>Which means the messages have to be worth reading <span class="cost">3 min</span></summary>
+          <div class="inner">
+            <p>The default message is change-shaped: <i>&ldquo;update analysis script.&rdquo;</i> The useful form is defect-shaped: it names what was wrong, not what was typed.</p>
+            <p>This project&rsquo;s own history is written that way as a deliberate experiment, so the log doubles as the friction log the material tells you to keep. Nearly every commit is titled after the defect it fixed &mdash; a sample of 25 scored about 20. A sample, verbatim:</p>
+            <p class="quote">&ldquo;A safety tool shipped with the flaw it was built to catch, and two green tests were defending it&rdquo;<br>&ldquo;The handoff said no remote existed on the day one was created, and still called it a live problem&rdquo;<br>&ldquo;Every number was right, every gate was green, and the page was wrong&rdquo;</p>
+            <p>The difference between the two forms is a stated convention and nothing else. Nothing enforces it, which by <a href="#fixes" data-view="fixes">Fixes that hold</a> means it is a habit rather than a mechanism &mdash; and it is labelled as one.</p>
+            <div class="prov"><b>Source.</b> <span class="path">points.md</span> B5; commit titles quoted from this project&rsquo;s own history.</div>
+          </div>
+        </details>
+
+        <details class="more">
+          <summary>The one thing to decide at the start, not in week three <span class="cost">2 min</span></summary>
+          <div class="inner">
+            <p>Add the remote in the same sitting as you create the repository. Not because you need to publish anything &mdash; you can keep it private &mdash; but because <b>three machines share a repository through a remote or they do not share it at all.</b></p>
+            <p>Branches and separate working copies only separate work inside one machine. The moment there is a second laptop, or a collaborator, the remote is the mechanism and everything else is a hope.</p>
+            <p>This is cheap on day one and archaeology later.</p>
+            <div class="prov"><b>Source.</b> <span class="path">points.md</span> C3 and &sect;D phase 4, item 13.</div>
+          </div>
+        </details>
+
+        <div class="prov"><b>Section source.</b> <span class="path">points.md</span> B5; <span class="path">course-outline-external.md</span> &ldquo;The repo&rdquo;.</div>
+      </section>
+
+      <section class="view" id="rule" data-alt="view-rule" aria-labelledby="h-rule">
+        <div class="view-head">
+          <p class="eyebrow">What to do about it</p>
+          <h2 id="h-rule">The standing rule</h2>
+          <p class="lede"><b>Do one thing at a time.</b> One change. Verify. Commit. Next.</p>
+        </div>
+        <p>Do not fill the wait with a second project. Some people are good at that. In the beginning you need the focus &mdash; spec, data structure, problem, solution.</p>
+        <p>The temptation is real and it is specifically a beginner&rsquo;s trap, because the waiting is genuinely dead time and starting a second thread feels like efficiency. It is the fastest route to two half-finished pieces of work and no idea which change caused which result.</p>
+        <div class="prov"><b>Source.</b> <span class="path">points.md</span> B8, stated in the author&rsquo;s own words and in capitals.</div>
+      </section>
+
       <section class="view" id="fixes" data-alt="view-fixes" aria-labelledby="h-fixes">
         <div class="view-head">
           <p class="eyebrow">What to do about it</p>
@@ -969,54 +1017,6 @@
         <div class="prov"><b>Section source.</b> <span class="path">points.md</span> B4 and B7; <span class="path">course-outline-external.md</span> &ldquo;Fixes that hold&rdquo;. The four-tier table is from <span class="path">docs/cases/2026-08-28-the-weakest-fix-is-the-most-available.md</span>.</div>
       </section>
 
-      <!-- ============ STANDING RULE ============ -->
-      <section class="view" id="rule" data-alt="view-rule" aria-labelledby="h-rule">
-        <div class="view-head">
-          <p class="eyebrow">What to do about it</p>
-          <h2 id="h-rule">The standing rule</h2>
-          <p class="lede"><b>Do one thing at a time.</b> One change. Verify. Commit. Next.</p>
-        </div>
-        <p>Do not fill the wait with a second project. Some people are good at that. In the beginning you need the focus &mdash; spec, data structure, problem, solution.</p>
-        <p>The temptation is real and it is specifically a beginner&rsquo;s trap, because the waiting is genuinely dead time and starting a second thread feels like efficiency. It is the fastest route to two half-finished pieces of work and no idea which change caused which result.</p>
-        <div class="prov"><b>Source.</b> <span class="path">points.md</span> B8, stated in the author&rsquo;s own words and in capitals.</div>
-      </section>
-
-      <!-- ============ REPO ============ -->
-      <section class="view" id="repo" data-alt="view-repo" aria-labelledby="h-repo">
-        <div class="view-head">
-          <p class="eyebrow">What to do about it</p>
-          <h2 id="h-repo">The repo</h2>
-          <p class="lede"><b>Not undo.</b> A record of what happened and why.</p>
-        </div>
-        <p>Three commands to start: <span class="path">commit</span>, <span class="path">diff</span>, <span class="path">log</span>.</p>
-        <p>The reason to keep one is not that you will roll back &mdash; you almost never will. It is that six weeks later you will need to know <i>why</i> something is the way it is, and the only artifact that can tell you is a message written by the person who knew at the time.</p>
-
-        <details class="more">
-          <summary>Which means the messages have to be worth reading <span class="cost">3 min</span></summary>
-          <div class="inner">
-            <p>The default message is change-shaped: <i>&ldquo;update analysis script.&rdquo;</i> The useful form is defect-shaped: it names what was wrong, not what was typed.</p>
-            <p>This project&rsquo;s own history is written that way as a deliberate experiment, so the log doubles as the friction log the material tells you to keep. Nearly every commit is titled after the defect it fixed &mdash; a sample of 25 scored about 20. A sample, verbatim:</p>
-            <p class="quote">&ldquo;A safety tool shipped with the flaw it was built to catch, and two green tests were defending it&rdquo;<br>&ldquo;The handoff said no remote existed on the day one was created, and still called it a live problem&rdquo;<br>&ldquo;Every number was right, every gate was green, and the page was wrong&rdquo;</p>
-            <p>The difference between the two forms is a stated convention and nothing else. Nothing enforces it, which by <a href="#fixes" data-view="fixes">Fixes that hold</a> means it is a habit rather than a mechanism &mdash; and it is labelled as one.</p>
-            <div class="prov"><b>Source.</b> <span class="path">points.md</span> B5; commit titles quoted from this project&rsquo;s own history.</div>
-          </div>
-        </details>
-
-        <details class="more">
-          <summary>The one thing to decide at the start, not in week three <span class="cost">2 min</span></summary>
-          <div class="inner">
-            <p>Add the remote in the same sitting as you create the repository. Not because you need to publish anything &mdash; you can keep it private &mdash; but because <b>three machines share a repository through a remote or they do not share it at all.</b></p>
-            <p>Branches and separate working copies only separate work inside one machine. The moment there is a second laptop, or a collaborator, the remote is the mechanism and everything else is a hope.</p>
-            <p>This is cheap on day one and archaeology later.</p>
-            <div class="prov"><b>Source.</b> <span class="path">points.md</span> C3 and &sect;D phase 4, item 13.</div>
-          </div>
-        </details>
-
-        <div class="prov"><b>Section source.</b> <span class="path">points.md</span> B5; <span class="path">course-outline-external.md</span> &ldquo;The repo&rdquo;.</div>
-      </section>
-
-      <!-- ============ STEP 0 ============ -->
-      <!-- ============ RECORD ============ -->
       <section class="view" id="record" data-alt="view-record" aria-labelledby="h-record">
         <div class="view-head">
           <p class="eyebrow">Evidence</p>
