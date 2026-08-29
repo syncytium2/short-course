@@ -178,6 +178,52 @@ the session.
 
 ---
 
+## Raised after the run — not a review finding
+
+### N2 · A day of handout work is committed, pushed, and unread by the author
+
+**Provenance: the author, 2026-08-29, end of session.** *"Commit those handout edits and flag
+for review. I have no clue what they refer to."* Filed here rather than in
+`docs/cases/OPEN-CORRECTIONS.md` because nothing below is known to be **wrong** — it is known to
+be **unread**, which is a different status and has no other home.
+
+**There was nothing to commit.** The two files dirty at 14:23 — `docs/handouts/README.md` and
+`docs/handouts/cold-start.html` — were committed 38 seconds later by `58cb7ee`, from a
+concurrent session on this checkout. Everything below is already on `origin/master`.
+
+**What landed today**, `be331c0..HEAD`, 21 commits, 10 of them on the handouts or the site:
+
+| file | change | status |
+|---|---|---|
+| `cold-start.html` | **1,027 lines changed** over 7 commits — 21 steps became 29 in seven phases | private artifact |
+| `what-it-costs.html` | **new, 544 lines**, 6 commits | private artifact |
+| `four-barriers.html` | 32 lines — British → US spelling | **public** |
+| `site/index.html` | 32 lines — same spelling pass | **public**, if redeployed |
+| `search-to-shipped.html` | 6 lines — same spelling pass | private artifact |
+| `README.md` | 3 lines — index rows for the two above | — |
+
+Net **+1,314 / −330** across six files.
+
+**The three things to decide, which are the author's and nobody else's:**
+
+1. **Whether the two dirty files were yours.** Not recoverable from git — a working tree records
+   no author. The 38-second gap and `58cb7ee`'s own message (*"four gaps, all reported by the
+   author against the first draft"*) both say it was that session's in-progress work rather than
+   edits of yours it swept up. **That is an inference from timing, not a fact.** If you typed
+   something into either file today and cannot find it in the diff, say so now while the
+   transcripts still exist.
+2. **A public page changed unread.** `site/index.html` is the source of
+   [lookedright.tonydefazio.com](https://lookedright.tonydefazio.com/). Today's edit is a
+   spelling pass and looks harmless in the diff. **Whether it has been redeployed is unknown** —
+   nothing in the log records a `wrangler` run.
+3. **`cold-start.html` is effectively a new document.** More lines changed than the file had.
+   Reviewing it as a diff will not work; it wants a read.
+
+*Related, not the same:* `points.md` **C3** and **G** are about work crossing sessions safely.
+This is an instance of it, filed as a finding rather than as evidence, because it is unresolved.
+
+---
+
 ## Residual ⚠ carried from the run
 
 1. **Round-1 only.** No verify pass, no convergence table. Not a clean run.
