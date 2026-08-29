@@ -481,29 +481,10 @@
 
       <!-- ============ OVERVIEW ============ -->
       <section class="view on" id="overview" data-alt="view-overview" aria-labelledby="h-overview">
-        <p class="eyebrow" style="margin-bottom:14px">Overview &middot; start here</p>
-        <p><b>Confusing the tiers is how people decide this is useless.</b> A researcher rebuilding a figure wanted its axis labels recomputed on a log scale. They put it to a web search, got nothing they could use, and came back with a verdict: <i>AI is stupid &mdash; it can&rsquo;t do this simple task.</i></p>
-        <p>They were right about what happened and wrong about what it meant. They had asked the tier that returns links to do arithmetic on their numbers. The third tier is the one that can <i>run</i> a calculation rather than describe one.</p>
-        <p>The third is a different kind of thing, with a different failure mode &mdash; and <b>a verdict of &ldquo;this is useless&rdquo; is often a tier mismatch rather than a limit of technology.</b></p>
-
         <div class="view-head">
           <h2 id="h-overview">You don&rsquo;t need code. You don&rsquo;t need prompt engineering.</h2>
           <p class="lede">There is no secret phrasing. State the big picture, break it into parts, break each part into elements, review as you go.</p>
         </div>
-
-        <div class="spec spec-open">
-          <div class="spec-top">
-            <h4>Printed figures. Wrong dataset. Noticed at the door.</h4>
-            <span class="tag warn">First-hand</span>
-          </div>
-          <p>The project has three levels of data: two on institutional research storage, and a couple of variant extractions small enough to live on disk. I asked for an analysis and assumed it would use the extraction we had been working on in another session. The pipeline is well established. Minutes later I had the figures I wanted &mdash; except it looked like there were too many data points.</p>
-          <p class="caught">Caught by: looking at the printed figure on the way into the meeting. &ldquo;This doesn&rsquo;t look right, I need to re-run the analysis.&rdquo;</p>
-          <p style="margin-top:12px"><b>The cost.</b> Disappointment, frustration, embarrassment &mdash; and it made my use of AI look unprofessional, which is the question the room actually has.</p>
-          <p><b>Still unrecovered:</b> which dataset it actually used. The experience is vivid; the diagnostic detail is gone, because it was not written down the day it happened.</p>
-          <div class="prov"><b>Source.</b> <span class="path">points.md</span> B2, first incident, in the author&rsquo;s own words. <b>Undated and unreviewed</b> &mdash; no artifact survives and the diagnostic record was never written, which is the incident&rsquo;s own point. Nothing here is independently checkable.</div>
-        </div>
-
-
 
         <h3>The four challenges</h3>
         <div class="grid">
@@ -529,7 +510,19 @@
         <p><b>Use the depth control, top right.</b> <b>Headlines</b> is the top of every section &mdash; about fifteen minutes for the whole page, and one to three for any single section. <b>+ incidents</b> opens the nineteen expandable notes underneath them &mdash; thirteen are worked failures, the rest the reasoning that came out of them. <b>+ sources</b> adds a provenance line to every section and every incident: where it came from, whether anyone independently checked it, and what is still unverified.</p>
         <p>That control exists because these incidents have very different explanation costs. One is a paragraph of setup; another needs twenty minutes before it makes sense. In a fixed-length talk that forces you to drop the expensive ones. Here it just changes which depth you are reading at.</p>
 
-        <div class="prov"><b>Source.</b> The axis anecdote is <b>loosely based on a real incident</b> &mdash; the person, the field and the figure are changed and the exchange is reconstructed. It is the one item on this page that is not a record. Every other incident is real and traceable; the named failures are the author&rsquo;s own. Thesis, escalation and the four challenges: <span class="path">course-outline-external.md</span> (514 words, written to be circulated) and <span class="path">points.md</span> &sect;A. The three panels are the <b>Expanding Brain</b> meme &mdash; originating on Reddit’s r/dankmemes, 31 January 2017; the underlying photographs are third-party stock whose copyright holders are not publicly identified, and it is used here unmodified as a meme template. <b>It is decorative and carries no information</b> &mdash; the argument is in the three rows beside it. Four original replacements were drawn and rejected; the format is the joke, and the joke was the point. Escalation strip originates in the companion runbook, <span class="path">docs/handouts/search-to-shipped.html</span>, and was <b>expanded here on 2026-08-28</b> &mdash; each tier now carries its named examples, because &ldquo;search / chat / agent&rdquo; alone is too terse to land on a reader who suspects this is a waste of time. The runbook still carries the short form.</div>
+        <details class="more">
+          <summary>Why people decide this is useless <span class="cost">2 min</span></summary>
+          <div class="inner">
+            <p><b>Confusing the tiers is how people decide this is useless.</b> A researcher rebuilding a figure wanted its axis labels recomputed on a log scale. They put it to a web search, got nothing they could use, and came back with a verdict: <i>AI is stupid &mdash; it can&rsquo;t do this simple task.</i></p>
+            <p>They were right about what happened and wrong about what it meant. They had asked the tier that returns links to do arithmetic on their numbers. The third tier is the one that can <i>run</i> a calculation rather than describe one.</p>
+            <p>The third is a different kind of thing, with a different failure mode &mdash; and <b>a verdict of &ldquo;this is useless&rdquo; is often a tier mismatch rather than a limit of technology.</b></p>
+          </div>
+        </details>
+
+
+
+
+        <div class="prov"><b>Source.</b> The axis anecdote is <b>loosely based on a real incident</b> &mdash; the person, the field and the figure are changed and the exchange is reconstructed. It is the one item on this page that is not a record. Every other incident is real and traceable; the named failures are the author&rsquo;s own. Thesis, escalation and the four challenges: <span class="path">course-outline-external.md</span> (514 words, written to be circulated) and <span class="path">points.md</span> &sect;A. The three panels are the <b>Expanding Brain</b> meme &mdash; originating on Reddit’s r/dankmemes, 31 January 2017; the underlying photographs are third-party stock whose copyright holders are not publicly identified, and it is used here unmodified as a meme template. <b>It is decorative and carries no information</b> &mdash; the argument is in the text under each panel. Four original replacements were drawn and rejected; the format is the joke, and the joke was the point. Escalation strip originates in the companion runbook, <span class="path">docs/handouts/search-to-shipped.html</span>, and was <b>expanded here on 2026-08-28</b> &mdash; each tier now carries its named examples, because &ldquo;search / chat / agent&rdquo; alone is too terse to land on a reader who suspects this is a waste of time. The runbook still carries the short form.</div>
       </section>
 
       <!-- ============ COMMUNICATION ============ -->
@@ -629,7 +622,18 @@
           <p class="lede"><b>Everything can look right and be totally wrong.</b> Learn to identify errors, and develop the tools to check for them.</p>
         </div>
 
-        <p>That incident opens this page, under <a href="#validation" data-view="validation">Validation</a>, which is where the rest of it lives.</p>
+        <div class="spec">
+          <div class="spec-top">
+            <h4>Printed figures. Wrong dataset. Noticed at the door.</h4>
+            <span class="tag warn">First-hand</span>
+          </div>
+          <p>The project has three levels of data: two on institutional research storage, and a couple of variant extractions small enough to live on disk. I asked for an analysis and assumed it would use the extraction we had been working on in another session. The pipeline is well established. Minutes later I had the figures I wanted &mdash; except it looked like there were too many data points.</p>
+          <p class="caught">Caught by: looking at the printed figure on the way into the meeting. &ldquo;This doesn&rsquo;t look right, I need to re-run the analysis.&rdquo;</p>
+          <p style="margin-top:12px"><b>The cost.</b> Disappointment, frustration, embarrassment &mdash; and it made my use of AI look unprofessional, which is the question the room actually has.</p>
+          <p><b>Still unrecovered:</b> which dataset it actually used. The experience is vivid; the diagnostic detail is gone, because it was not written down the day it happened.</p>
+          <div class="prov"><b>Source.</b> <span class="path">points.md</span> B2, first incident, in the author&rsquo;s own words. <b>Undated and unreviewed</b> &mdash; no artifact survives and the diagnostic record was never written, which is the incident&rsquo;s own point. Nothing here is independently checkable.</div>
+        </div>
+
 
         <h3>The errors worth naming, and what catches each</h3>
         <p>Three of these announce themselves. The ones marked <span class="tag warn">silent</span> do not &mdash; and the last two of those hand you a confirmation while they do it, which is why they need a machine rather than a habit.</p>
