@@ -216,7 +216,7 @@ find out about each other. That is what a board is for, and it is why C3 in
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Mac/976d19f3 — write the zero-to-hero setup runbook handout (cold-start) and deliver it to the darkroom
-- **Status:** ACTIVE
+- **Status:** DONE 2026-08-29
 - **Opened:** 2026-08-29
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
 - **Writes:** `docs/handouts/cold-start.html` (new), `docs/handouts/README.md`, and the
