@@ -104,6 +104,22 @@
   .esc-hero { padding-top: 4px; margin-bottom: 30px; }
   body[data-view]:not([data-view="overview"]) .esc-hero { display: none; }
 
+  /* ---- ready? ---- */
+  .ready {
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    margin: 22px 0 0; padding: 14px 16px; text-decoration: none;
+    border: 1px solid var(--accent); background: var(--accent-soft); color: var(--ink);
+  }
+  .ready:hover { background: var(--accent); color: var(--ground); }
+  .ready:hover .ready-k, .ready:hover .ready-go { color: var(--ground); }
+  .ready-k {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .13em;
+    text-transform: uppercase; color: var(--accent);
+  }
+  .ready-t { font-weight: 600; }
+  .ready-go { margin-left: auto; color: var(--accent); font-size: 18px; line-height: 1; }
+  @media (max-width: 560px) { .ready-go { margin-left: 0; } }
+
   .mast {
     border-bottom: 2px solid var(--ink);
     padding: 30px 0 18px;
@@ -450,6 +466,12 @@
       </div>
     </div>
   </header>
+
+      <a class="ready" href="/cold-start">
+        <span class="ready-k">Cold Start</span>
+        <span class="ready-t">Ready? Click here.</span>
+        <span class="ready-go" aria-hidden="true">&rarr;</span>
+      </a>
 
   <div class="esc-hero">
     <div class="esc">
