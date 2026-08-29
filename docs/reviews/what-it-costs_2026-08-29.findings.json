@@ -1,0 +1,871 @@
+{
+ "rolesReturned": 11,
+ "rolesFailed": [],
+ "counts": {
+  "blocking": 14,
+  "major": 52,
+  "minor": 35
+ },
+ "tokens": {
+  "outputTokensBefore": 58326,
+  "outputTokensAfter": 276981,
+  "outputTokensThisRun": 218655,
+  "caveat": "OUTPUT tokens only. Not comparable to the billable figure in the page table, which is output + new input + cache creation, and excludes cache reads entirely."
+ },
+ "notes": [
+  {
+   "role": "prove-it",
+   "note": "The arithmetic that can be checked mostly holds: the 28 Aug row reproduces to the cent from C1 ($25.90 \u2192 $26 Opus, $10.37 \u2192 $10 Sonnet), the $64\u2013160 four-round figure is exactly 4 \u00d7 the $16\u201340 column, the 1.9\u00d7 understatement is 1,597,426 / 833,142 = 1.917, the 1.6\u20133.1M / median 1.8M range matches C1, the $30\u201390 room is 6 \u00d7 $5\u201315, and the Anthropic $13 / $150\u2013250 / 90%-under-$30 figures are verbatim correct against the cited doc, as are Claude Pro $20/$17, ChatGPT Go $8 and Codex-on-free. The weakness is not in the sums but in the sentences wrapped around them: an average is relabelled a ceiling, a ceiling is contradicted by the page's own next sentence, cache reads that make up over half the price are described as sitting on top of it, and the table's dollar columns cannot be reproduced from the one token column shown \u2014 on the page that ends by telling readers a number without a receipt is only a claim."
+  },
+  {
+   "role": "doi-or-die",
+   "note": "The arithmetic on this page is unusually clean \u2014 I reproduced the 28 Aug row exactly from the project's own token log ($25.91\u2192$26 at $5/$25, $10.36\u2192$10 at $2/$10), the 1.9\u00d7 understatement, and the $64\u2013160 four-round ceiling. The page is also genuinely honest where it is weakest: it volunteers that the token log is unpublished, that the teaching-session numbers are estimates, and that nothing re-checks itself. The weakness is elsewhere: the most quantitatively specific claims on the page \u2014 the $13/day heavy-use figures, the $5/$25 and $2/$10 rates the whole worked example rests on, the $50 allocation, the $100 student credits, the token-ranking anecdote \u2014 are attributed to unnamed pages, unnamed coverage, and unnamed organizations, while the three links the page does carry are for the least load-bearing rows. And in one place the footer's blanket \"were checked\" certifies a claim the project's own notes explicitly mark as the least verified thing they found."
+  },
+  {
+   "role": "cross-examiner",
+   "note": "The page's measured spine is sound \u2014 I reproduced the 28 Aug run's dollar figures to the cent from the token split in OPEN-CORRECTIONS C1, and the five-run range, median and the 1.9\u00d7 correction all agree with their sources. What fails is the connective tissue: figures are re-characterised as they travel down the page (an average becomes a ceiling, $6\u2013$40 becomes \"single dollars\", a four-round cap is disproved in its own paragraph), and \"ceiling\" and \"the one thing that costs\" each carry meanings the page elsewhere denies them. The most consequential single defect is line 487's blanket \"students excluded\", which contradicts both the page's own classroom pricing and points.md \u00a7F, and lands on precisely the reader deciding whether to assign this."
+  },
+  {
+   "role": "reviewer-2",
+   "note": "The page's honesty apparatus is its best feature and its worst liability: it holds every claim to a receipts standard that its own centrepiece does not meet. Its strongest section \u2014 the five-run worked example \u2014 is unreconcilable by any reader (no I/O split, no per-run cache column, and a $/token rate that swings 2\u00d7 across rows with no explanation), and its single most memorable line, \"the receipt is on the usage screen,\" disqualifies the very numbers it is printed next to. The three genuinely blocking items are arithmetic and logic, not tone: cache reads are described as sitting \"on top of\" dollar figures that already contain them, an enterprise *average* is relabelled a *ceiling*, and \"you can complete every step of Cold Start without paying anyone\" is false against Cold Start's own default (4.5 creates a private repo; GitHub Free will not serve Pages from one)."
+  },
+  {
+   "role": "kill-your-darlings",
+   "note": "The prose is unusually good for its genre: it is specific, it refuses to console, and its best sentences do real work rather than sound well. The best line in the document is line 473, \"The cheap prompt and the good prompt are the same prompt\" \u2014 it turns a money anxiety into a craft instruction in eight words and must survive every edit (runners-up: line 390's \"A month is just however many of those you did\", and line 484's \"They are doing a different, shorter thing, and they will conclude they are bad at it\"). The weakest thing is the back half of the provenance apparatus: two captions and a footer paragraph that say the same four caveats three times each, plus a maintainer's voice that keeps leaking into a student handout (\"still owed\", \"a handoff has gone to that project\"). And one darling \u2014 \"the ceiling for one document is four rounds\" \u2014 is contradicted by the sentence directly after it, which is the one place the page misleads on money."
+  },
+  {
+   "role": "rtfm",
+   "note": "The arithmetic is right and I could not break it: I reproduced the 28 Aug row to the cent from the source token log in OPEN-CORRECTIONS C1 ($25.90 \u2192 $26; $10.36 \u2192 $10), and the cited rates ($5/$25 Opus 5, $2/$10 Sonnet 5, cache reads at a tenth) match Anthropic's published list. The plan-versus-meter frame is the best thing on the page and is technically real. The weakness is that the prose repeatedly contradicts the numbers underneath it: a column labelled \"Billable tokens\" omits the tokens that supply half the bill, a stated \"ceiling\" is disproved two sentences later, \"an eleventh as much\" is arithmetically impossible, and the single biggest lever on the bill \u2014 output tokens, at 5\u00d7 input \u2014 is absent from the list of levers."
+  },
+  {
+   "role": "reinventing-the-wheel",
+   "note": "The page is a genuinely good extraction of `points.md` \u00a7F and `course-outline.md` \u00a710, and its arithmetic checks out (28 Aug run: 1,359,900 in \u00d7 $5/M + 236,512 out \u00d7 $25/M + 26,384,348 cache \u00d7 $0.50/M = $25.90 \u2192 the $26 printed; Sonnet column is exactly 2.5\u00d7 throughout; 1,597,426 \u00f7 833,142 = 1.92, so \"1.9\u00d7 too low\" is right). The weakness is systematic and one-directional: where a repo source carries a \u26a0 or a hedge beside a fact, the handout keeps the fact and leaves the hedge behind \u2014 the \"floor\" caveat on the five-run table, the \"least verified\" flag on sponsored keys, \u00a710's caching caveat, and the pruning window on the token log. Second weakness: it re-derives two lists (cost drivers, the ceiling/meter fork) that `course-outline.md` \u00a710 and `points.md` D2 already state more sharply, and drops the best sentence in each."
+  },
+  {
+   "role": "you-lost-me",
+   "note": "Read cold, top to bottom, as a biologist who has never run an agent. The prose voice is excellent and the money argument (three shapes, buy a ceiling) lands without any prior knowledge \u2014 that is the page's strength. It falls apart at the worked example: \"token\" is never defined anywhere on the page even though an entire table is denominated in millions of them, \"ceiling\" carries four different meanings, \"run\" and \"round\" are the same thing under two names, and the headline price ($6\u2013$40 to review a document) is contradicted fifteen lines later by the page itself ($64\u2013160). Findings are in the order I hit them, per my brief; severity is in the field."
+  },
+  {
+   "role": "show-dont-tell",
+   "note": "Census: ~3,430 words in the body plus a 259-word footer, carried by 2 tables, 4 lists, the three-shape grid, and 6 tinted boxes \u2014 and zero diagrams. The page is well broken up; there is no wall of prose here, and the three-shape grid (lines 262\u2013281) is the best thing on it, a real taxonomy shown as a structure and then reused as a column in the pricing table. The weakness is concentrated in three places where an argument that is literally a table has been written as paragraphs: the five-run table withholds the one column (cache reads) that explains its own numbers and then explains it in prose instead; the teaching-session section is a two-column plan-vs-meter comparison rendered as seven paragraphs; and the equity section flattens a four-row eligibility matrix that already exists in `points.md` \u00a7F into a sentence. Separately, the five-run caption and the footer are the two densest blocks on the page and are set in the smallest, faintest type \u2014 153 and 187 words of atomic sourced facts as unstructured prose."
+  },
+  {
+   "role": "ship-it",
+   "note": "The file is mechanically clean where it counts: PASS on encoding (pure us-ascii, zero non-ASCII bytes, no mojibake), PASS on entities (9 distinct, all terminated, no bare ampersands), PASS on tag balance (0 unbalanced elements, empty stack at EOF, no mismatched closes), PASS on CSS braces (59/59, final depth 0), PASS on table column counts (3/3 across all 8 rows of table 1, 4/4 across all 6 of table 2, no colspan, both captions correctly first-child), PASS on dark mode (all 14 colour tokens overridden in both the prefers-color-scheme block and the [data-theme=\"dark\"] block, identical sets, body background explicit, light path correctly guarded with :not([data-theme=\"light\"])), PASS on network (Google Fonts only \u2014 the one permitted host \u2014 with complete fallback stacks; zero scripts, images, iframes), and the missing doctype/head/body is correct, not a defect: docs/handouts/README.md documents these as artifact sources that get wrapped at publish time. Two FAILs: there is no @media print block at all (grep returns nothing, while sibling four-barriers.html has one), and the heading outline skips a level. The print failure is the one that matters \u2014 this is the sheet a nervous faculty member prints for a budget meeting, and for a dark-theme reader it prints as near-white text on white paper."
+  },
+  {
+   "role": "start-with-the-problem",
+   "note": "The macro-spine is sound and better than most cost pages: free floor \u2192 the shapes of a bill \u2192 prices \u2192 levers \u2192 equity \u2192 act. Reassurance (\"You can complete every step of Cold Start without paying anyone\", line 222) is correctly front-loaded, and the hardware caveat correctly precedes the free-tier claim it qualifies. The weakness is depth, not sequence: the page nominates its own most valuable sentence \u2014 \"the number worth carrying around\" \u2014 and files it at roughly 60% depth behind the scariest figure on the sheet, and the one five-minute action that prevents \"the only genuinely bad outcome on this page\" is 250 lines from the paragraph that names the danger. The closing action list also serves only one of the page's two audiences."
+  }
+ ],
+ "findings": [
+  {
+   "severity": "blocking",
+   "title": "Cache reads are already inside the dollar figures, not \"on top\"",
+   "where": "Line 385\u2013386: \"Between 10.8 and 36.9 million further tokens were read back out of cache on top of those figures\"",
+   "problem": "They are not on top of the dollar figures \u2014 they are the largest single component of them. Recomputing the 28 Aug run from OPEN-CORRECTIONS C1 (output 236,512; new input 1,359,900; cache creation 1,014; cache read 26,384,348) at the page's own rates: input 1.360914M \u00d7 $5 = $6.80; output 0.236512M \u00d7 $25 = $5.91; cache read 26.384348M \u00d7 $0.50 = $13.19. Total $25.90 \u2192 the $26 in the table. The cache-read line is 51% of the price. At Sonnet rates: $2.72 + $2.37 + $5.28 = $10.37 \u2192 the $10 in the table. An anxious reader \u2014 the audience this page names \u2014 reads \"on top of those figures\" and concludes the real bill is meaningfully above $40. It is not; the $40 already contains it.",
+   "fix": "Replace with: \"Those dollar figures already include 10.8\u201336.9 million tokens read back out of cache at a tenth of the input rate \u2014 on the 28 Aug run that cache reading is over half the price, which is why the cost is not proportional to the token count shown.\"",
+   "role": "prove-it"
+  },
+  {
+   "severity": "blocking",
+   "title": "A \"ceiling\" of four rounds that a recorded run exceeded by 3.5\u00d7",
+   "where": "Lines 399\u2013403: \"the ceiling for one document is four rounds \u2014 call it $64\u2013160 \u2026 One recorded run went fourteen rounds before a person stopped it.\"",
+   "problem": "$64\u2013160 is arithmetically right (4 \u00d7 the $16\u201340 Opus column) but it is not a ceiling, and the page falsifies its own word two sentences later. The recorded worst case is fourteen rounds: 14 \u00d7 $16\u201340 = $224\u2013560 for one document. That number is never given. On a page whose thesis is that a meter has no natural stopping point, the one measured runaway is the most decision-relevant figure available and it is the only one left unpriced \u2014 while the reassuring $64\u2013160 is the number set in bold and carried away.",
+   "fix": "Drop the word \"ceiling\": \"the process repeats until it converges \u2014 four rounds is the intended stop, call it $64\u2013160 at the larger model's rates. One recorded run went fourteen rounds before a person stopped it: $224\u2013560 for a single document. Nothing was broken. Nobody was watching.\"",
+   "role": "prove-it"
+  },
+  {
+   "severity": "blocking",
+   "title": "An average from the source is restated as a ceiling",
+   "where": "Line 342: \"it is roughly the ceiling of what a single very heavy human being can spend\"",
+   "problem": "The cited source (code.claude.com/docs/en/costs) says \"the average cost is around $13 per developer per active day and $150-250 per developer per month, with costs remaining below $30 per active day for 90% of users.\" Line 338 quotes that correctly, then line 342 converts the average into a ceiling. An average is not a ceiling \u2014 and the page's own next clause disproves it: if 90% stay under $30 per active day, a user at that 90th percentile runs roughly $450\u2013630 a month at 15\u201321 active days, two to three times the \"ceiling\". The page's own worked example disproves it too: the fourteen-round run above is $224\u2013560 for one document. Told $150\u2013250 is the ceiling, a reader who sees $400 concludes the tool is broken or they are being billed wrongly, when they are simply above the mean.",
+   "fix": "\"The figure is useful for one thing: it is roughly the middle of what a full-time engineer spends. It is an average, not a cap \u2014 one in ten exceeds $30 on an active day, and a single runaway task on this page costs more than a month of it. If your bill approaches $150\u2013250 you are working like a full-time engineer; if it passes it, nothing has gone wrong.\"",
+   "role": "prove-it"
+  },
+  {
+   "severity": "major",
+   "title": "The five-run table cannot be reproduced from the column it shows",
+   "where": "Lines 362\u2013363 (caption): \"Dollar figures computed from those token counts at published list rates\"; table columns at lines 372\u2013379",
+   "problem": "They are not computed from those token counts. \"Billable\" is input + output + cache creation; the dollar figures additionally require the output/input split and the per-run cache-read count, neither of which is on the page. Try it as a reader on the 28 Aug row: 1,597,426 tokens priced entirely as input is $7.99; entirely as output is $39.94; at the actual 85/15 split it is $12.71. None of these is $26. Worse, the table is non-monotonic in the only number shown \u2014 24 Aug (1,700,364 tokens) costs $30 while 22 Aug (1,863,469 tokens) costs $26 \u2014 so a reader who tries to sanity-check it concludes the table is wrong. The page insists the example is checkable (\"You can go and look at the task before you judge the price\"), and this is the one part of it that is not.",
+   "fix": "Add two columns \u2014 \"Output tokens\" and \"Cache read\" \u2014 or at minimum a footnote giving the 28 Aug row's full working ($6.80 input + $5.91 output + $13.19 cache read = $25.90), so one row can be verified end to end and the rest inherit its credibility.",
+   "role": "prove-it"
+  },
+  {
+   "severity": "major",
+   "title": "The 10.8M cache floor is incompatible with the 17 Aug row",
+   "where": "Line 376: \"17 Aug | 1,786,769 | $16 | $6\" against line 385: \"Between 10.8 and 36.9 million\"",
+   "problem": "The two money columns are exactly 2.5\u00d7 apart at every rate ($5/$2, $25/$10, $0.50/$0.20), so both columns constrain the same unknowns. Write cost = 5B + 20\u00b7output + 0.5\u00b7cache (millions). B = 1.786769, so 5B = $8.93. Rounding bounds the true Opus figure to [15.50, 16.25) \u2014 the upper bound comes from the Sonnet column needing to round to $6. So 20\u00b7output + 0.5\u00b7cache \u2208 [6.57, 7.32]. If cache \u2265 10.8M then 0.5\u00b7cache \u2265 5.40, forcing output \u2264 95,800 tokens across all eleven agents \u2014 8,709 each, below the smallest single agent's output in the only run we can inspect (14,272 on 28 Aug). Run the same algebra on the other four rows using the 28 Aug output share (14.8%) and they land at 21\u201334M cache, all comfortably in range; 17 Aug lands at 2.5\u20134.0M. Either the 17 Aug dollar figures are wrong or the stated minimum is not 10.8M.",
+   "fix": "Recheck the 17 Aug row against the token log. If its cache reads really are ~3M, the range is roughly 3\u201337M, not 10.8\u201336.9M, and the sentence explaining why cost is not proportional to length gets stronger, not weaker.",
+   "role": "prove-it"
+  },
+  {
+   "severity": "major",
+   "title": "The measured cost excludes the session that ran the review",
+   "where": "Line 384: \"reviewing one document properly costs somewhere between $6 and $40\"",
+   "problem": "OPEN-CORRECTIONS C1 states the figure \"counts the eleven reviewers only \u2014 the session that spawns them, reads eleven reports and writes the record is not in it, so the number is a floor.\" The page presents it as the cost of the review. The omitted session is not trivial: it reads eleven reports and writes the record, so it is a twelfth context on top of eleven. A reader budgeting a class or a grant line from $6\u201340 is budgeting from a number the source explicitly labels incomplete \u2014 and this page's own closing argument is that a number an agent reports about itself is a claim, not a receipt.",
+   "fix": "After the range, add: \"That counts the eleven reviewers only. The session that launches them, reads eleven reports and writes the record is not in it, so treat $6\u201340 as a floor.\"",
+   "role": "prove-it"
+  },
+  {
+   "severity": "major",
+   "title": "The $6\u201340 range silently switches models mid-range",
+   "where": "Line 384: \"between $6 and $40\"",
+   "problem": "$6 is the 17 Aug run priced at Sonnet; $40 is the 14 Aug run priced at Opus. No single model produces that band. Held at one model the ranges are $16\u201340 (Opus) and $6\u201316 (Sonnet). A reader plans on \"$6\u201340\", picks the larger model because the page has just told them independence is the product, and under-budgets the low end by 2.5\u00d7. The caption works hard to say the two columns are the same tokens at two models, then the prose that readers actually carry away collapses them into one span.",
+   "fix": "\"So: reviewing one document properly costs $16\u201340 on the larger model, or $6\u201316 on the mid-sized one \u2014 the model choice moves the price by 2.5\u00d7, and the length of the document moves it about the same again.\"",
+   "role": "prove-it"
+  },
+  {
+   "severity": "minor",
+   "title": "\"An eleventh as much\" is asserted with no measurement behind it",
+   "where": "Lines 395\u2013396: \"One agent walking the same eleven checklists costs an eleventh as much\"",
+   "problem": "Nothing measured supports it, and the mechanism argues against it. One agent walking eleven checklists in one context reads the document once but re-sends a context that grows with each checklist, so its cost is not the eleven-agent total divided by eleven. The preceding clause (\"Eleven agents cost roughly eleven times one agent\") is supported \u2014 C1's per-role billable spans 100,369\u2013186,886 against a total of 1,597,426 \u2014 but the converse is a different claim. On a page that ends by saying an unmeasured number is a claim and not a receipt, this is the one unmeasured number stated as fact.",
+   "fix": "Soften to the supported half: \"Eleven independent agents cost roughly eleven times one \u2014 C1's per-role figures run 100k\u2013187k billable each. One agent walking the same eleven checklists is cheaper, though not by eleven, and it shares a mind with the author, so it agrees with itself.\"",
+   "role": "prove-it"
+  },
+  {
+   "severity": "minor",
+   "title": "The $50 caveat points at the wrong university page",
+   "where": "Lines 443\u2013444: \"reported as $50 in secondary coverage; the university's own pricing page states no amount\"",
+   "problem": "points.md F attaches the $50 to the Codex for the Classroom stipend and says \"the ITS page itself states no amount\" \u2014 the classroom page, not the pricing page. The pricing page does state amounts: points.md records it publishing claude-opus-5 at $5.00/$25.00 per 1M, claude-sonnet-5 at $2.00/$10.00, claude-haiku-4-5 at $1.00/$5.00. A reader who follows the caveat to the pricing page finds prices there and concludes the caveat is overstated, which undermines the most carefully hedged claim on the page. The body text also flattens \"classroom stipend\" into \"classroom allocation\" (line 421), losing that it is a grant-bound figure.",
+   "fix": "\"reported as $50 per user per month in secondary coverage; the classroom page itself states no amount \u2014 the university's pricing page publishes per-token rates, not a stipend.\"",
+   "role": "prove-it"
+  },
+  {
+   "severity": "minor",
+   "title": "Two priced claims cite \"the vendor's page\" with no link",
+   "where": "Line 292 (caption): \"Read 29 August 2026 from the vendors' own pages \u2014 Claude, Codex, Gemini CLI, Dropbox\"; rows at lines 318\u2013320 and 328\u2013330",
+   "problem": "Claude, Codex and Gemini CLI are linked; Dropbox is named in the caption and in the 2 GB / ~$10 claims at line 210 and line 319 with no link anywhere on the page, and the $10\u201315/yr domain price at lines 214 and 329 has no registrar link at all. Line 226 sets the rule the page then breaks: \"Treat the numbers as orders of magnitude and the links as the authority. When this matters, go and look at the vendor's page.\" A reader told to go and look is given no address for two of the seven table rows.",
+   "fix": "Link the Dropbox plans page from the storage row and cite one named registrar's renewal price for the domain row, or drop Dropbox from the caption's source list and say plainly that the storage and domain figures are typical market prices rather than readings from a page.",
+   "role": "prove-it"
+  },
+  {
+   "severity": "blocking",
+   "title": "Footer certifies as \"checked\" a claim the source flags as least verified",
+   "where": "Line 487: \"A graduate student employed as a research or teaching assistant can often be sponsored\" \u2014 and line 541: \"The institutional and student-credit facts were checked at one university on 27 August 2026\"",
+   "problem": "points.md \u00a7F records this as: \"the FAQ indicates faculty may sponsor keys for employed students... \u26a0 Single source, read once, not confirmed on a second page. It is the most decision-relevant line found and the least verified.\" The handout drops every hedge \u2014 \"the FAQ indicates\" becomes a flat assertion, \"would cover GSRAs and GSIs\" becomes \"can often be sponsored\" \u2014 and then the footer sweeps it into a blanket statement that the institutional facts \"were checked.\" A reader has no way to tell this sentence apart from the four sentences around it that rest on four separate linked pages. This is precisely the defect the project itself names in OPEN-FINDINGS residual 6: \"a partial flag reads as a receipt... flagging one silently certifies the rest.\" The consequence is concrete: a faculty member reads this and tells a GSRA they can be sponsored, on the strength of one FAQ line nobody confirmed.",
+   "fix": "Carry the source's own flag into the sentence: \"a graduate student employed as an RA or TA appears to be sponsorable \u2014 this rests on a single FAQ line, read once and not confirmed elsewhere, and it is the least verified fact in this section.\" Then narrow the footer from \"the institutional and student-credit facts were checked\" to name which ones were and which one was not.",
+   "role": "doi-or-die"
+  },
+  {
+   "severity": "major",
+   "title": "The heavy-use figures name a source but link nothing",
+   "where": "Line 338: \"Anthropic's own cost documentation reports that across enterprise deployments the average is around $13 per developer per active day, and $150\u2013250 per developer per month, with 90% of users staying under $30 on an active day.\"",
+   "problem": "Three specific numbers and a percentile, attributed to an entire documentation site rather than a page, with no link. The page's whole point about heavy use \u2014 and the flag box at 340\u2013343 that builds an argument on it \u2014 rests on figures the reader cannot reach. There is an Anthropic docs link on the page (line 477, code.claude.com/docs/en/costs) but it is introduced 140 lines later as documentation of \"the mechanism\" for reading your own usage, so nothing tells the reader it is also the source for these numbers. If it is the source, the page has hidden it; if it is not, the source is nowhere. These figures also appear nowhere else in the repository \u2014 grep finds them only in this file \u2014 so there is no second record to fall back on.",
+   "fix": "Link the specific page at the point of use: \"<a href=\"https://code.claude.com/docs/en/costs\">Anthropic's own cost documentation</a> reports\u2026\" \u2014 and if that is not where the $13 / $150\u2013250 / 90%-under-$30 figures come from, name and link the page that is.",
+   "role": "doi-or-die"
+  },
+  {
+   "severity": "major",
+   "title": "The rates that produce every dollar in the worked example are sourced to \"the vendor's page\"",
+   "where": "Lines 366\u2013369: \"a larger model at $5 in / $25 out per million tokens and a mid-sized one at $2 in / $10 out, both read from the vendor's page on 29 August 2026\"",
+   "problem": "Every dollar figure in the five-run table, the \"$6 and $40\" headline at line 384, the \"$26 for a review\" at line 354 and the \"$64\u2013160\" ceiling at line 400 are computed from these two rate pairs. The rate pair is the only half of the calculation a reader could actually check today \u2014 the footer already concedes the token log \"is not yet published.\" And it is sourced to an unnamed \"the vendor's page,\" with no link, on a page that links claude.com/pricing three sections earlier for subscription plans. So both inputs to the page's most load-bearing number are unreachable, one of them for want of one href. (I confirmed the method reproduces: 1,359,900 new input + 1,014 cache creation at $5/M, 236,512 output at $25/M, 26,384,348 cache reads at $0.50/M = $25.91, the table's $26. A reader deserves the chance to do that themselves.)",
+   "fix": "Name and link the page the rates were read from, in the caption and again in the footer where the same $5/$25 and $2/$10 are repeated. points.md \u00a7F sources them as matching Anthropic list pricing; link claude.com/pricing or the API pricing page directly.",
+   "role": "doi-or-die"
+  },
+  {
+   "severity": "major",
+   "title": "$50 allocation sourced to unnamed \"secondary coverage,\" and blamed on the wrong page",
+   "where": "Lines 443\u2013444: \"The per-user monthly allocation is reported as $50 in secondary coverage; the university's own pricing page states no amount.\"",
+   "problem": "Two problems in one sentence. First, \"secondary coverage\" is never identified \u2014 not a publication, not a date, not a link \u2014 so a reader cannot weigh whether $50 is a trade-press figure, a forum post, or a press release, and the whole $30\u201390-for-the-room estimate hangs off it. Second, the page identified as silent is the wrong one. points.md \u00a7F attaches the warning to the Codex-for-the-Classroom bullet \u2014 \"the ITS page itself states no amount\" \u2014 while the university's actual pricing page is cited a few lines earlier as publishing amounts in detail ($5.00/$25.00 per 1M for claude-opus-5, and so on). A reader who follows this instruction goes to the pricing page, finds published rates, and concludes the handout is wrong about the one thing it flagged.",
+   "fix": "Name the secondary source or say what kind it is (\"reported at $50 in trade coverage of the program launch\"), and correct which page is silent: it is the classroom-programme page that states no per-user amount, not the pricing page.",
+   "role": "doi-or-die"
+  },
+  {
+   "severity": "major",
+   "title": "The $100 student credit programme is described but never named or linked",
+   "where": "Line 491: \"One offering $100 of credits to students, verified against a university email address, is United States and Canada only.\"",
+   "problem": "This is the single most actionable eligibility fact on the page for a student reader, and it is written so that they cannot act on it. The programme is unnamed and unlinked, so a student outside the US and Canada cannot confirm they are excluded, and one inside cannot go and claim it. points.md \u00a7F has everything needed and it was dropped: the $100 Codex student credits, the link at developers.openai.com/community/students, SheerID verification, 2,500 credits, a 12-month expiry, and the fact that it works on a free ChatGPT account. Anonymising a vendor programme is not the same editorial call as anonymising the university \u2014 there is no privacy interest here, only a lost citation.",
+   "fix": "Name and link it: \"OpenAI's <a href=\"https://developers.openai.com/community/students\">$100 Codex student credits</a>, verified by SheerID against a university address and usable on a free ChatGPT account, are United States and Canada only.\"",
+   "role": "doi-or-die"
+  },
+  {
+   "severity": "major",
+   "title": "Table caption claims four sources; the table carries links to two of them",
+   "where": "Line 292 caption: \"Read 29 August 2026 from the vendors' own pages \u2014 Claude, Codex, Gemini CLI, Dropbox\"",
+   "problem": "The caption makes an explicit provenance claim for all seven rows and then honours it for three. Dropbox is named as a source and appears nowhere on the page as a link \u2014 neither in this table's \"from ~$10/mo\" row nor at line 210 where the \"2 GB\" free-tier figure is stated. The heavy-tier row ($100\u2013200/mo, Claude Max and ChatGPT Pro) has no link. The domain row (~$10\u201315/yr) has no link and no registrar named. And the one link on the free-tier row points at github.com/google-gemini/gemini-cli \u2014 a source repository, not a pricing page, and not a page that states the free-tier quota the $0 depends on. A caption that says \"read from the vendors' own pages\" reads as a receipt for the whole table.",
+   "fix": "Either add the missing links (Dropbox plans, Anthropic and OpenAI plan pages for the heavy tiers, a named registrar for the domain figure, Google's Gemini CLI quota page rather than the repo), or narrow the caption to say which rows are linked and that the rest are order-of-magnitude figures held without a citation.",
+   "role": "doi-or-die"
+  },
+  {
+   "severity": "major",
+   "title": "\"Some organizations\" ranking people by token consumption has no source at all",
+   "where": "Line 511: \"Some organizations have gone as far as ranking people by token consumption\"",
+   "problem": "This is the closing claim of the equity section \u2014 the beat the whole argument lands on \u2014 and it is an empirical assertion about real organisations with no attribution of any kind: no organisation named, no coverage cited, no date, not even \"reported.\" It appears nowhere else in the repository; grep finds it only in this file. On a page whose own thesis is that \"a number an agent gives you about its own consumption is a claim, not a receipt\" (line 411), an unsourced claim about other people's numbers is the weakest sentence to end on.",
+   "fix": "Either cite it \u2014 name one organisation or the coverage it comes from \u2014 or demote it to a hypothetical the page owns: \"Where consumption is visible, it invites being ranked, and a ranking of tokens measures budget and confidence, not work.\" The argument survives the demotion; the unsourced factual claim does not need to be made.",
+   "role": "doi-or-die"
+  },
+  {
+   "severity": "minor",
+   "title": "The one verifiable run is dated a day off from the project's own record",
+   "where": "Line 379: \"<td>28 Aug</td><td class=\"num\">1,597,426</td>\"",
+   "problem": "This is the only row a reader with repository access could actually check, and the label makes it harder to find. docs/cases/OPEN-CORRECTIONS.md \u00a7C1 records these exact figures \u2014 1,597,426 billable, 26,384,348 cache read \u2014 as \"the run of 2026-08-27 21:51 EDT.\" The handout files it as 28 Aug, presumably in UTC. Anyone matching the table against the correction record looks for a 28 Aug run and finds a 27 Aug one. Given that the footer already concedes the log is unpublished, the date is the only handle a checker has.",
+   "fix": "State the timezone in the caption (\"run dates in UTC\") or relabel the row 27 Aug to match the record the figures come from.",
+   "role": "doi-or-die"
+  },
+  {
+   "severity": "minor",
+   "title": "Two anecdotes carrying the section's moral point nowhere the reader can check",
+   "where": "Line 401 \"One recorded run went fourteen rounds before a person stopped it\" and lines 408\u2013409 \"the same review was reported at 833,142 tokens by the agent that ran it, described as measured\"",
+   "problem": "Both are exact and both are attributed to nothing. \"One recorded run\" \u2014 recorded where? \"833,142 tokens\" is quoted to the digit with no pointer, and it carries the page's stated takeaway (\"If you take one thing from this page\"). Both are documented in this repository: OPEN-CORRECTIONS \u00a7C1 holds the 833,142 story in full, and notes the fourteen-round run is corroborated by a bugarach record carrying rounds: 14. A reader who wants to believe the page's most memorable lesson has nothing to follow. Worth noting too that C1's status is \"open, not yet applied,\" so the case file it corrects still prints 833,142 as fact at line 218 \u2014 pointing at C1 rather than the case file matters.",
+   "fix": "Add a one-clause pointer to each, the way line 352 does for murderboard \u2014 e.g. \"recorded in this project's own corrections log\" with a link, or name the record for the fourteen-round run.",
+   "role": "doi-or-die"
+  },
+  {
+   "severity": "minor",
+   "title": "Institutional facts checked at a university the page will not name",
+   "where": "Line 487: \"Checked at one large public university in August 2026\"",
+   "problem": "Anonymising the institution is a defensible editorial choice and the footer discloses it (\"checked at one university on 27 August 2026 and are generalized here\"), so this is not a hidden gap. But the effect on a reader is that four separately-linked, individually-checkable pages in points.md \u00a7F \u2014 the free chat service, the API gateway, the Claude Code page, the classroom programme \u2014 collapse into one assertion nobody outside this project can re-check, on a page whose own banner tells the reader to \"go and look at the vendor's page\" when it matters. Students taught at that institution are exactly the readers who would benefit from the four URLs.",
+   "fix": "If the course is taught at that institution, name it and link the four pages, dated. If it must stay anonymous, say why in one clause (\"anonymised because the arrangement is specific and will change\") so the reader knows the omission is deliberate rather than an unrecorded source.",
+   "role": "doi-or-die"
+  },
+  {
+   "severity": "blocking",
+   "title": "Page says students are excluded from agents, then prices six students on one",
+   "where": "Line 487: \"staff and faculty only, students excluded, sharing prohibited\" \u2014 against lines 417\u2013423",
+   "problem": "The equity section states flatly that at the checked university \"the agent sits behind an employment check and a departmental billing code \u2014 staff and faculty only, students excluded\", and line 488 generalises it: \"the institution itself draws a line between chat and agent, and it draws it along employment status.\" Seventy lines earlier the page prices \"six students, one ninety-minute session\" against \"the university['s] classroom allocation per user per month\". Both cannot be true. points.md \u00a7F resolves it: the table row \"Codex for the Classroom | students in a provisioned Canvas course | grant, else your Shortcode | Yes\" is a student-accessible agent route, and OPEN-FINDINGS N1 says so explicitly \u2014 \"The capped case exists only for students under a classroom grant.\" The \"students excluded\" line in the source applies to one row only (Claude Code via Toolkit), not to \"the agent\". A faculty reader deciding whether they can assign this is told no by one section and given a per-student price by another.",
+   "fix": "Scope the claim to the product it came from: \"one vendor's agent sits behind an employment check and a billing code \u2014 staff and faculty only. A second route exists for students in a provisioned course, on a grant or the same billing code, and it is the route the classroom figures below assume.\" Keep the chat-versus-agent point, which survives; drop the blanket \"students excluded\", which does not.",
+   "role": "cross-examiner"
+  },
+  {
+   "severity": "blocking",
+   "title": "A four-round ceiling stated as fact, disproved in the next sentence",
+   "where": "Lines 400\u2013403: \"the ceiling for one document is four rounds \u2014 call it $64\u2013160 \u2026 One recorded run went fourteen rounds before a person stopped it.\"",
+   "problem": "The paragraph states a bound and then reports a run that broke it by 3.5\u00d7, without ever saying the bound did not hold. A cost-anxious reader carries away $64\u2013160 as the worst case for one document. Fourteen rounds at the same $16\u201340-per-round band is $224\u2013560. OPEN-CORRECTIONS C1 corroborates the fourteen-round run (\"a bugarach record carries rounds: 14\") and states the mechanism \u2014 \"the cap bounds only rounds, and every round re-runs all eleven\" \u2014 so the fourteen-round run is not an anomaly the reader can discount. As written the page's largest published worst case is one it has already recorded being exceeded.",
+   "fix": "Either the four-round cap is configuration that was not on for the fourteen-round run \u2014 say so, and give both numbers: \"$64\u2013160 with the cap set; the one recorded uncapped run went fourteen rounds, which at the same rates is $224\u2013560\" \u2014 or the cap is aspirational, in which case delete the word \"ceiling\" and present $64\u2013160 as a typical converged run, not a bound.",
+   "role": "cross-examiner"
+  },
+  {
+   "severity": "major",
+   "title": "$150\u2013250/month is called the average, then used as the ceiling",
+   "where": "Line 338 \"the average is around $13 per developer per active day, and $150\u2013250 per developer per month\" vs line 342 \"it is roughly the ceiling of what a single very heavy human being can spend\"",
+   "problem": "The same figure carries two incompatible meanings four lines apart. An average has half the population above it; a ceiling has none. The flag's reassurance \u2014 \"If your bill approaches it, you are not being unlucky, you are working like a full-time engineer\" \u2014 only works if the number is a high percentile, but the sentence that introduced it says it is the mean of the same population. The page cites the 90th-percentile figure ($30 on an active day) in the same sentence, so it has the vocabulary for the distinction and does not use it. A reader who wants to know how bad it can get is given a number that is, by the page's own framing, routinely exceeded.",
+   "fix": "Pick one reading and hold it. If $150\u2013250 is the reported average, say so in the flag too and add a ceiling only if a percentile figure is available: \"that is the average, so plenty of engineers spend more; treat it as the middle of full-time professional use, not the top of it.\" Do not let \"average\" in line 338 become \"ceiling\" in line 342.",
+   "role": "cross-examiner"
+  },
+  {
+   "severity": "major",
+   "title": "\"Single dollars for a serious one\" is credited to a table that says $6\u2013$40",
+   "where": "Line 429: \"At the per-task rates established above \u2014 a few cents for a small task, single dollars for a serious one\"",
+   "problem": "What was established above is line 384, \"reviewing one document properly costs somewhere between $6 and $40\", and line 354's headline \"$26 for a review\". Neither $26 nor $40 is single dollars. The back-reference \"established above\" is load-bearing: the whole meter-priced classroom estimate \u2014 \"six students \u2026 plausibly consume a few dollars in total for the whole room\" \u2014 is derived from it. Line 390 introduces the same slippage first (\"a few dollars for a serious piece of work\") immediately after the $6\u2013$40 sentence. The result is that the page's most reassuring number for an instructor rests on a per-task rate the page's own measured table contradicts by roughly an order of magnitude.",
+   "fix": "Say what the measured band actually supports and where the classroom differs: \"the measured serious task above is $6\u2013$40, but that is eleven agents on one long document. A beginner's request is a single agent and a short session \u2014 cents to low single dollars \u2014 which is why six students for ninety minutes plausibly lands in the low tens of dollars at most.\" Cite the difference explicitly rather than restating $6\u2013$40 as \"single dollars\".",
+   "role": "cross-examiner"
+  },
+  {
+   "severity": "major",
+   "title": "The 17 Aug row and the 10.8M cache floor cannot both be right",
+   "where": "Line 376 \"17 Aug | 1,786,769 | $16 | $6\" against line 386 \"Between 10.8 and 36.9 million further tokens were read back out of cache\"",
+   "problem": "The 28 Aug row reproduces exactly from OPEN-CORRECTIONS C1 (1,360,914 in + 236,512 out + 26,384,348 cache read, at $5/$25 and a tenth of input: 6.81 + 5.91 + 13.19 = $25.91 \u2192 $26; Sonnet 2.72 + 2.37 + 5.28 = $10.36 \u2192 $10), which confirms the method. Apply it to 17 Aug: if cache reads were at least 10.8M, cache alone costs $5.40, leaving at most $10.60 for 1,786,769 billable tokens. Even charging all of them at the $5 input rate costs $8.93, so the output premium of $20/M can cover at most ~83,000 output tokens across eleven agents \u2014 against the 236,512 that C1 records for the smaller 28 Aug run. Holding the 28 Aug output share (14.8%) constant, 17 Aug implies about 3.6M cache reads, while the other four runs imply 22\u201333M. The stated floor of 10.8M is not reachable for that row.",
+   "fix": "Re-derive the cache range from the same log the dollars came from and print it per run rather than as one band, or drop the floor and state only what is on record (\"the one run with a published split read 26.4M further tokens out of cache\"). If $16 for 17 Aug is correct, the range is wrong; if the range is correct, that row's dollar figure is.",
+   "role": "cross-examiner"
+  },
+  {
+   "severity": "major",
+   "title": "Caption gives two incompatible accounts of where the price band comes from",
+   "where": "Lines 366\u2013369: \"the runs were not all on the same model, so the range is a band rather than a price\" and \"The two money columns are the same tokens priced at two different models\"",
+   "problem": "These explain the same band two different ways. If both columns are the same tokens repriced at two fixed rate cards, then which model each run actually used is irrelevant to the columns \u2014 the numbers would be identical either way. The data confirms it: the Sonnet column is exactly 0.4\u00d7 the Opus column in every row (40\u219216, 16\u21926.4, 26\u219210.4, 30\u219212, 26\u219210.4), which is precisely the ratio of $2/$10 to $5/$25. The band is produced entirely by the deliberate repricing and by run size, not by mixed models. The first clause tells a reader the underlying measurement is heterogeneous, which would undermine the table; the second tells them it is uniform, which is what the arithmetic shows.",
+   "fix": "Delete the first clause. The honest version is one sentence: \"the same measured tokens, priced at two rate cards; the band is the spread across five runs, doubled by the choice of model.\" If the runs genuinely used different models, that is a separate caveat about the token counts and needs stating as one, not as an explanation of the dollar range.",
+   "role": "cross-examiner"
+  },
+  {
+   "severity": "minor",
+   "title": "\"The one thing that costs\" heads a section listing three things that cost",
+   "where": "Line 258: \"<h2>The one thing that costs: the agent</h2>\"",
+   "problem": "The page opens with \"Four things in Cold Start can cost money\" (line 201) and the table under this heading prices two of the other three \u2014 \"Synced storage above the free tier \u2026 from ~$10/mo\" and \"A domain name \u2026 ~$10\u201315/yr\". The heading is shorthand for the sub-point at line 206 (\"the only one where the amount is open-ended\") but does not say so, and it directly negates the lede a reader saw 57 lines earlier. This is the same class of defect the git log already records being fixed once (\"The cost sheet said the floor was free while the runbook it costs charges for four things\").",
+   "fix": "Make the heading say the thing that is actually true: \"The one that is open-ended: the agent\". That keeps the emphasis and stops contradicting the lede.",
+   "role": "cross-examiner"
+  },
+  {
+   "severity": "minor",
+   "title": "\"Ceiling\" carries four different meanings on a page that polices exactly this",
+   "where": "Lines 264, 300\u2013330, 342, 400, 432",
+   "problem": "The page defines \"a ceiling\" at line 264 as Shape 1, a subscription with an allowance that stops you. It then uses the word for: a fixed recurring price with no allowance at all (line 330, a domain name at $10\u201315/yr \u2014 nothing about a domain stops); the top of a spending distribution (line 342); a cap on rounds (line 400); and prepaid capacity, \"a ceiling you have bought whether or not you reach it\" (line 432). The page shows it knows this is a hazard \u2014 the five-run caption stops to say \"'Tier' here means the model, not the plan \u2014 the plans in the table above are a different thing that unfortunately shares the word\" \u2014 and then does the same thing with its own headline term.",
+   "fix": "Reserve \"Ceiling\" in the Shape column for things that stop. Label the domain and storage rows \"Fixed\" or \"Flat fee\". At line 342 use \"the top end\" and at line 400 use \"the cap\", leaving \"ceiling\" to mean one thing.",
+   "role": "cross-examiner"
+  },
+  {
+   "severity": "minor",
+   "title": "Three shapes are defined, then the table collapses two of them into one row",
+   "where": "Line 323: \"Per-token, on a card or a billing code\" \u2014 Shape column \"Meter\"",
+   "problem": "Lines 269\u2013280 spend two panels arguing that a personal meter and an institutional billing code are different shapes with different worst cases (\"a number you did not agree to\" versus \"a conversation with your head of department\"), and line 222 promises \"there are three\". The table then merges them into a single row with a single label, and the Shape column never contains the third value. A reader scanning the table for the taxonomy they were just taught finds only two of the three shapes in it.",
+   "fix": "Split the row, or label it \"Meter (yours or theirs)\" and add a half-line pointing back to the distinction. The cheapest fix is two rows: \"Per-token, on your card \u2014 Meter\" and \"Per-token, on a billing code \u2014 Someone else's meter\".",
+   "role": "cross-examiner"
+  },
+  {
+   "severity": "minor",
+   "title": "Row dated 28 Aug is dated 27 Aug in the source the footer says to check it against",
+   "where": "Line 379: \"28 Aug | 1,597,426 | $26 | $10\"",
+   "problem": "OPEN-CORRECTIONS C1 attributes 1,597,426 to \"the run of 2026-08-27 21:51 EDT\". The footer's whole defence of this table is checkability against that log \u2014 \"summed per run on 29 August 2026 \u2026 the table is checkable only by someone with the file.\" A checker matching rows by date finds no 28 Aug run. The likely cause is a UTC rendering of a 21:51 EDT timestamp, which is a fine reason and an invisible one.",
+   "fix": "Label the rows in the same timezone as the log, or add \"(local dates; the 28 Aug row is the run of 27 Aug 21:51 EDT)\" to the caption.",
+   "role": "cross-examiner"
+  },
+  {
+   "severity": "minor",
+   "title": "A bolded absolute about the free floor rests on two hedged conditions",
+   "where": "Line 222: \"<b>You can complete every step of <i>Cold Start</i> without paying anyone</b>\"",
+   "problem": "The two cost items this depends on are both hedged twenty lines above: the review folder \"usually fits\" in a 2 GB free tier (line 210), and research storage is something \"most people need neither\" of (line 217). \"Usually\" and \"most people\" do not add up to \"every step\", stated in bold with no qualifier. This is the page's own hedge-consistency rule applied to its most reassuring sentence: the same fact is conditional in one place and absolute in another, and the absolute version is the one set in bold.",
+   "fix": "Carry the condition into the claim: \"<b>Most people can complete every step of Cold Start without paying anyone</b> \u2014 on free tiers, with no domain, provided the review folder stays inside a free storage tier and you do not need research storage.\" One clause, and the two hedges above stop being contradicted.",
+   "role": "cross-examiner"
+  },
+  {
+   "severity": "blocking",
+   "title": "\"Without paying anyone\" is false against Cold Start's own default",
+   "where": "Line 222: \"You can complete every step of Cold Start without paying anyone\"; line 244: \"Nothing in Cold Start needs a paid tier.\"; line 252 GitHub Pages bullet",
+   "problem": "Cold Start 4.5 hands the learner `gh repo create first-project --private --source=. --push` (cold-start.html:756) and Phase 7.4 then says \"repository \u2192 Settings \u2192 Pages \u2192 Custom domain\" (cold-start.html:960-965). GitHub's own docs: \"If the account that owns the repository uses GitHub Free or GitHub Free for organizations, the repository must be public.\" Pages from a private repo requires GitHub Pro. So the default path this course walks a reader down hits a paywall at Phase 7, on the exact page whose job is to promise it will not. The page compounds it by asserting \"unlimited repositories \u2014 public or private\" and \"GitHub Pages... serve a site for nothing\" three lines apart, so the reader assembles the false combination from two individually true statements. This is the most embarrassing item here: a check that could have failed, on the page's own headline claim, and nobody ran it.",
+   "fix": "Either add to the Pages bullet: \"On the free plan, Pages serves only from a public repository \u2014 Cold Start 4.5 creates a private one, so either make it public before Phase 7 or serve from Cloudflare Pages, which does publish from a private repo for free.\" Or change Cold Start 4.5's default. Do not leave line 222 as an unqualified promise.",
+   "role": "reviewer-2"
+  },
+  {
+   "severity": "blocking",
+   "title": "Cache reads are inside the dollar figures, not \"on top of\" them",
+   "where": "Lines 384-386: \"costs somewhere between $6 and $40. Between 10.8 and 36.9 million further tokens were read back out of cache on top of those figures\"",
+   "problem": "The nearest antecedent of \"those figures\" is the $6\u2013$40 range in the preceding clause, so the sentence tells the reader the cache reads are an uncounted extra. They are not \u2014 the caption (line 366-369) says cache reads are priced at a tenth of input, and they dominate. Recomputing the 28 Aug run from its logged split (output 236,512; new input 1,359,900; cache read 26,384,348 \u2014 OPEN-CORRECTIONS C1) at Opus-5 rates: $6.80 input + $5.91 output + $13.19 cache = $25.90, which is the table's $26. The cache reads are 51% of that number, already in it. A reader who believes line 385 concludes the real cost of a review exceeds $40; a reader who tries to budget adds a phantom second charge. Either way the page's own headline number is destroyed by the sentence immediately after it.",
+   "fix": "Rewrite as: \"Those dollar figures already include 10.8\u201336.9 million cache reads per run, billed at a tenth of the input rate \u2014 on the 28 Aug run that was $13 of the $26, which is why cost does not track the token column.\"",
+   "role": "reviewer-2"
+  },
+  {
+   "severity": "blocking",
+   "title": "An enterprise average is relabelled as a ceiling",
+   "where": "Line 342: \"it is roughly the ceiling of what a single very heavy human being can spend\" (referring to line 338's \"$150\u2013250 per developer per month\")",
+   "problem": "I fetched the source. Anthropic's cost docs say verbatim: \"the average cost is around $13 per developer per active day and $150-250 per developer per month, with costs remaining below $30 per active day for 90% of users.\" The quotation on line 338 is accurate; the gloss on line 342 is not. An average is not a ceiling \u2014 by construction a large share of that population spends more. The page's own quoted 90th-percentile figure proves it: if 10% of users exceed $30 on an active day, then at ~20 active days those users are above $600/month, 2.4\u20134\u00d7 the number the reader has just been told is the ceiling. The anxious department head this page is written for takes $250/month away as the worst case and is wrong by a factor of at least two. This is the page's single most consequential sentence for a budgeting decision and it is a misreading of a statistic printed four lines above it.",
+   "fix": "Replace with: \"That is an average, not a cap \u2014 the same document says 10% of users exceed $30 on an active day, which is north of $600 a month. Read it as: if your bill is in this range you are working like a full-time engineer, and there is no ceiling above it except one you set.\"",
+   "role": "reviewer-2"
+  },
+  {
+   "severity": "blocking",
+   "title": "The \"eleven times / an eleventh\" claim is the exact defect the page exists to warn about",
+   "where": "Lines 394-398: \"Eleven agents cost roughly eleven times one agent... One agent walking the same eleven checklists costs an eleventh as much\"",
+   "problem": "Two paragraphs later the page delivers its best line \u2014 \"a number an agent gives you about its own consumption is a claim, not a receipt\" (line 411-412) \u2014 and records that the last such claim was 1.9\u00d7 wrong. Yet the 11\u00d7 / 1/11 counterfactual has no measurement anywhere: there is no single-agent row in the table, no single-agent run in murderboard's log, and no arithmetic shown. It is also almost certainly wrong in the stated direction. One agent walking eleven checklists in one conversation accumulates context across all eleven, so its input grows superlinearly, while eleven parallel agents share a cached prefix \u2014 the 28 Aug run shows 26.4M cache reads against 1.36M new input, i.e. 95% of input served at a tenth price precisely because eleven readers hit the same prefix. The page's own data suggests the sequential single agent is nowhere near 1/11, and may not be cheaper at all. Asserting it flatly, in bold, on this page, is self-refuting.",
+   "fix": "Either measure it \u2014 one single-agent eleven-checklist run, added as a sixth row \u2014 or downgrade to what is actually known: \"Eleven agents cost roughly eleven times one agent's output. What one agent walking the same eleven checklists would cost has not been measured here; do not assume it is an eleventh, because a single long conversation carries all eleven checklists in its context at once.\"",
+   "role": "reviewer-2"
+  },
+  {
+   "severity": "major",
+   "title": "The five-run table cannot be checked by anyone, and its own rows contradict each other",
+   "where": "Lines 375-379 (the five data rows) and the caption at lines 361-370",
+   "problem": "The table gives one token column and two money columns, and no reader can get from the first to the second: the input/output split is absent, and the cache-read count \u2014 which the arithmetic above shows is over half the bill \u2014 has no column. Worse, the rows are mutually inconsistent on their face. 24 Aug (1,700,364 tokens \u2192 $30) has 4.8% FEWER billable tokens than 17 Aug (1,786,769 \u2192 $16) and costs 87.5% more: $17.64 per million billable against $8.95. Across the five rows the implied rate swings from $8.95/M to $17.64/M with no explanation offered. A skeptical reader concludes either that the token column is decorative or that the money column is wrong, and the footer confirms they cannot settle it \u2014 \"That log is not yet published... the table is checkable only by someone with the file.\" Meanwhile line 351 promises in bold \"You can go and look at the task before you judge the price\" and line 354 says \"It matters that this is checkable.\" The retraction is in 12.5px grey type 190 lines below the promise.",
+   "fix": "Add two columns \u2014 output tokens and cache reads \u2014 so each row's arithmetic closes, or drop the token column entirely and present the dollar range alone. And move the footer's \"the log is not yet published\" admission into the caption, where the checkability claim is made.",
+   "role": "reviewer-2"
+  },
+  {
+   "severity": "major",
+   "title": "\"Measured, not estimated\" \u2014 the vendor's own doc calls this exact method an estimate",
+   "where": "Lines 347-348: \"one real, repeated task, measured rather than estimated\"; line 412: \"The receipt is on the usage screen.\"",
+   "problem": "The figures are harness-reported token counts multiplied by list rates. The page's own linked source (code.claude.com/docs/en/costs, line 477) says of precisely this: \"Claude Code computes the dollar figure locally from token counts at list price... The figure is an estimate, so for authoritative billing see the Usage page in the Claude Console.\" The page then closes the same section by telling the reader the receipt is on the usage screen \u2014 while its own centrepiece has never been put next to one. The caption half-concedes this (\"Computed, not read off an invoice\") and the footer fully concedes it (\"are not invoices\"), which makes \"measured rather than estimated\" at line 347 the one place the page overclaims, and it is the sentence introducing the whole example. A vendor's pricing lead reading this would note that the page is teaching a discipline it exempts itself from.",
+   "fix": "Change line 347-348 to \"one real, repeated task, counted from the tool's own token log rather than guessed \u2014 and computed at list rates, not read off an invoice.\" Then reconcile one run against the Console usage page and say what the gap was; that single number would make this section unanswerable.",
+   "role": "reviewer-2"
+  },
+  {
+   "severity": "major",
+   "title": "A \"ceiling\" of four rounds, disproved in the next sentence and left unpriced",
+   "where": "Lines 399-403: \"the ceiling for one document is four rounds \u2014 call it $64\u2013160... One recorded run went fourteen rounds before a person stopped it.\"",
+   "problem": "$64\u2013160 is arithmetically right (4 \u00d7 the $16\u201340 per-round Opus range). But a ceiling that a recorded run passed by 3.5\u00d7 is not a ceiling, and the page declines to do the one multiplication that matters: 14 rounds \u00d7 $16\u201340 = $224\u2013560. The reader is handed the reassuring number in bold and the alarming one as a bare round-count with no dollars attached, in a section whose stated purpose is that \"it can also run away.\" That is convenient in exactly the direction that sells the page. It also sits badly against line 342's \"$150\u2013250 per developer per month\" \u2014 one unattended document can outspend a heavy engineer's entire month.",
+   "fix": "Price the real event: \"the process caps at four rounds \u2014 $64\u2013160 at the larger model's rates. One recorded run went fourteen rounds before a person stopped it, which is $224\u2013560 for a single document. Nothing was broken. Nobody was watching.\" And say whether the four-round cap existed when that run happened.",
+   "role": "reviewer-2"
+  },
+  {
+   "severity": "major",
+   "title": "The cost-driver section omits caching and so contradicts the page's own table by 5.6\u00d7",
+   "where": "Line 461: \"Your entire conversation is re-sent on every single request. A one-line question in a session you have had open all day carries the whole day with it.\"",
+   "problem": "Re-sent, yes; re-billed at full price, no. The linked Anthropic doc states it explicitly: \"With prompt caching, Claude Code re-reads that history at the cached token rate.\" The page knows this \u2014 its own caption charges cache reads at a tenth. Price the 28 Aug run under the mental model line 461 gives a reader: (1,359,900 + 26,384,348) \u00d7 $5/M + 236,512 \u00d7 $25/M = $144.63, against the $25.90 the table actually charges. The page's explanation of the cost model overstates its own worked example by 5.6\u00d7. A researcher who believes line 461 will also draw the wrong operational conclusion, since a fresh session discards a warm cache and can cost more on related work, not less \u2014 while line 461 calls starting fresh \"the largest lever you have\" with no evidence for the ranking.",
+   "fix": "Add to the sub-line: \"Most of that re-sent history is billed at a tenth of the normal input rate, because it is cached \u2014 on the measured run above, 95% of input tokens were cache reads, and they were still half the bill. Long sessions cost less than they look, and more than a short one.\" And either source the \"largest lever\" ranking or soften it to \"one of the largest.\"",
+   "role": "reviewer-2"
+  },
+  {
+   "severity": "major",
+   "title": "A per-seat monthly stipend prorated down to ninety minutes is not a budget",
+   "where": "Lines 421-423: \"sizes its classroom allocation per user per month, for a term... an order of $5\u201315 a student \u2014 $30\u201390 for the room\"; line 434: \"A plan is a ceiling you have bought whether or not you reach it\"",
+   "problem": "The page states the commitment unit \u2014 per user, per month, for a term \u2014 and then prices below it. You cannot buy a twentieth of a seat-month. At the $50/user/month figure the page cites, the minimum real commitment for six students is $300 for one month, or $1,200 across a four-month term, to run one ninety-minute session. The reader is told on line 433-434 to \"Budget with the first number\" and the first number is $30\u201390 \u2014 off by 3\u201313\u00d7 from anything a finance office can actually provision. The flag at lines 441-451 covers the $50 being unconfirmed but never touches this, which is the structural error and does not depend on the $50 at all. Separately, points.md \u00a7F calls this a \"stipend\" \u2014 something received, possibly as a grant \u2014 while line 434 calls it a plan \"you have bought.\" If it is a grant the marginal cost is $0 and the whole plan-versus-meter contrast this section is built on does not apply to this case.",
+   "fix": "Replace the derivation with the provisionable unit: \"You cannot buy part of a seat-month. Six students at the reported $50/user/month is $300 for one month and $1,200 across a term \u2014 that is what has to be committed to hold one ninety-minute session, even though the session itself will consume a few dollars.\" And say plainly whether the classroom allocation is bought or granted.",
+   "role": "reviewer-2"
+  },
+  {
+   "severity": "major",
+   "title": "\"Often it is not cheaper\" is unsourced and contradicted by the page's own numbers",
+   "where": "Line 284: \"Not because it is cheaper \u2014 often it is not\"",
+   "problem": "On a page that dates every figure and flags every estimate, the one comparative claim that decides where a reader's money goes carries no support at all. And the page's own data points the other way: it establishes that a serious task runs $6\u201340 on a meter (line 384) and that Claude Pro is $20/month (line 308-310). One review on a meter costs more than a month of the subscription. The page never puts those two of its own numbers side by side \u2014 which is the single most decision-relevant comparison a cost-anxious reader could be handed, and its absence makes \"a meter is the correct choice for some people\" (line 285) look like even-handedness with nothing behind it. A skeptical department head asks the obvious question and the page has no answer.",
+   "fix": "Either support the claim (name the usage pattern where the meter wins, e.g. very light or very bursty use where a $20/month floor goes unused) or drop \"often it is not\" and say what the numbers say: \"often it is also cheaper \u2014 one meter-priced review of the kind below costs more than a month of the $20 tier. The reason to buy a ceiling is the failure mode; the price usually agrees.\"",
+   "role": "reviewer-2"
+  },
+  {
+   "severity": "minor",
+   "title": "The staleness banner is the one check on the page that cannot fail",
+   "where": "Line 226: \"Treat the numbers as orders of magnitude and the links as the authority.\"",
+   "problem": "An order of magnitude is 10\u00d7. Read literally, the banner licenses $26 to mean anything from $2.60 to $260, and $30\u201390 for the room to mean $3 to $900 \u2014 which pre-forgives every error on the page, including the ones above, and makes the whole document unfalsifiable. No reader can ever come back and say a figure was wrong. It also sits oddly against the precision on display: seven-significant-figure token counts (3,141,042) under an instruction to treat everything as a power of ten. The banner is doing real work about link rot and plan renaming, but as written it is a blanket indemnity, and a hostile reader will spend it on whichever number they dislike.",
+   "fix": "Scope it to what actually decays: \"Plan names and prices move; treat those as approximate and check the vendor's page. The measured token counts and the arithmetic below do not decay \u2014 if they are wrong, they were wrong on the day.\"",
+   "role": "reviewer-2"
+  },
+  {
+   "severity": "blocking",
+   "title": "The stated four-round ceiling is disproved two sentences later",
+   "where": "Lines 399\u2013403: \"the ceiling for one document is four rounds \u2014 call it $64\u2013160 at the larger model's rates. One recorded run went fourteen rounds before a person stopped it.\"",
+   "problem": "The page hands a cost-anxious reader a hard number to budget against \u2014 a ceiling of four rounds, $64\u2013160 \u2014 and then, in the next sentence, narrates a run at fourteen rounds. Both cannot be true. The arithmetic makes the size of the miss plain: the five measured runs cost $16\u201340 each at Opus rates, so four rounds is $64\u2013160 as stated, but fourteen rounds is $224\u2013560, which is 3.5x the ceiling the reader was just told to expect. A reader budgeting from the bolded figure would be short by up to $400 on a single document. The rhetorical build (\"Nothing was broken. Nobody was watching.\") is excellent and should stay; it is the unexplained contradiction in front of it that is the defect.",
+   "fix": "Say which claim is true and why the other happened. Either the cap is configured and was off in the recorded run \u2014 \"the process can be capped at four rounds, call it $64\u2013160; the run that went fourteen had no cap set, and cost roughly $224\u2013560\" \u2014 or there is no cap and the \"ceiling\" language must go entirely. Do not leave both numbers standing unreconciled.",
+   "role": "kill-your-darlings"
+  },
+  {
+   "severity": "major",
+   "title": "The footer provenance paragraph is the one paragraph that could be cut",
+   "where": "Line 541, the paragraph beginning \"The five-run worked example is derived from a token log in\"",
+   "problem": "Almost every clause in this 190-word paragraph has already been said on the page, usually verbatim. \"Prices and plan shapes read from the vendors' own pages on 29 August 2026\" repeats the caption at line 292 and the banner at line 225. \"The teaching-session figures are estimates and are labeled as such\" repeats line 441. \"$50 from secondary coverage, and the university's own page states no amount\" repeats lines 443\u2013445 almost word for word. \"The two money columns ... are the same tokens priced at two different models ... and not two subscription plans\" repeats lines 366\u2013370 for the third time on one page. \"nothing re-checks them\" repeats line 226's \"Nothing on this page re-checks itself.\" The effect is that the page's carefulness, which is its best quality, starts to read as anxiety \u2014 and the two facts here that are genuinely new (the log is unpublished; the university facts are generalised from one institution) are buried in the middle of the restatements.",
+   "fix": "Cut to the two sentences that appear nowhere else: that the token log behind the five-run table is not yet published, so the table is checkable only by someone with the file; and that the institutional and student-credit facts were checked at one university on 27 August 2026 and generalised. Delete the rest \u2014 the captions and the banner already carry it.",
+   "role": "kill-your-darlings"
+  },
+  {
+   "severity": "major",
+   "title": "The five-run caption states the same cache-rate caveat twice in one caption",
+   "where": "Lines 361\u2013370: \"with cache reads charged at a tenth of the input rate\" ... and, 40 words later, \"with cached reading charged at a tenth of the input rate\"",
+   "problem": "One caption, 130 words, longer than the five-row table it explains, and it repeats its own central caveat inside itself in slightly different words \u2014 which reads less like emphasis than like two drafts that were merged and never reconciled. It also dates itself twice (\"on 29 August 2026\" at the start, \"on 29 August 2026\" again in the model-rates clause). A reader trying to understand a table has to get through a paragraph first, and a reader who notices the doubling starts to wonder what else was pasted rather than written.",
+   "fix": "One pass, one statement of each fact: five complete runs across three projects, summed per run from the tool's own token log on 29 August 2026; dollars computed from those counts at list rates, cache reads at a tenth of input; the runs used different models, so the columns are a band, not a price. Roughly half the current length.",
+   "role": "kill-your-darlings"
+  },
+  {
+   "severity": "major",
+   "title": "The caption defends a column header the table does not have",
+   "where": "Line 369: \"**\"Tier\" here means the model, not the plan** \u2014 the plans in the table above are a different thing that unfortunately shares the word.\"",
+   "problem": "The table's headers are \"Run | Billable tokens | At Opus-5 rates | At Sonnet-5 rates\" (line 372). The word \"Tier\" appears nowhere in it. The disclaimer is an orphan from an earlier version of the table, and it now creates the confusion it was written to prevent: a reader hunts for a \"Tier\" column, fails to find one, and is left unsure whether they are looking at the right table. The immediately preceding sentence \u2014 \"The two money columns are the same tokens priced at two different models, not two subscription plans\" \u2014 already does the whole job, and does it against the headers that actually exist.",
+   "fix": "Delete the \"Tier\" sentence outright. The column names Opus-5 and Sonnet-5 plus the preceding sentence already make the point.",
+   "role": "kill-your-darlings"
+  },
+  {
+   "severity": "major",
+   "title": "The maintainer's voice keeps surfacing in a student handout",
+   "where": "Line 417 \"The one case anybody here has costed\"; line 439 \"which is the opposite of the conclusion this material reached before anyone actually looked\"; line 450 \"**One measured session is still owed**\"; line 541 \"a handoff asking for it has gone to that project\"",
+   "problem": "These are project-ledger sentences that have been lifted from author-facing notes (they read almost verbatim from points.md \u00a7F) into a page addressed to a nervous faculty member. That reader has no idea what conclusion \"this material\" previously reached, who \"anybody here\" is, who is owed a measured session, or what a handoff to another project is. Each one asks them to hold a piece of the project's internal history in order to parse a sentence about money. It is a register break in a page that is otherwise disciplined about speaking to the reader, and it is worst at line 439, which ends a strong section on an inside joke.",
+   "fix": "Rewrite each in the reader's frame. Line 439: end at \"the decision becomes a pedagogical one\" and stop. Line 450: \"Nobody has yet measured a real session\" \u2014 the obligation is a fact, not a debt. Line 417: \"The one case that has been costed at all\". Line 541: \"the token log behind this table is not yet published\", without the handoff.",
+   "role": "kill-your-darlings"
+  },
+  {
+   "severity": "major",
+   "title": "\"Every one of these\" opens a section with no antecedent",
+   "where": "Line 260: \"Every one of these is sold in one of three shapes, and the shape matters more than the number.\"",
+   "problem": "The nearest plural before \"these\" is the list of permanently free things \u2014 git, GitHub, an editor, hosting \u2014 which are precisely the things that are not sold at all. The heading above (\"The one thing that costs: the agent\") is singular, so \"these\" has nothing to attach to and the reader has to reverse into it. It is the first sentence of the section the whole page is built around, and it makes the reader work before it has earned the right to.",
+   "fix": "Name the referent: \"Agents are sold in one of three shapes, and the shape matters more than the number.\" The rest of the paragraph \u2014 \"nobody will tell you unprompted\" \u2014 is good and needs nothing.",
+   "role": "kill-your-darlings"
+  },
+  {
+   "severity": "minor",
+   "title": "The page narrates its own structure five times",
+   "where": "Line 206 \"This is the whole of the rest of this page\"; line 341 \"the mistake this section exists to prevent\"; line 411 \"If you take one thing from this page\"; line 419 \"the disagreement is the whole argument of this page in miniature\"; line 437 \"Either way the conclusion is the same and it is the point of this section\"",
+   "problem": "Individually each is a defensible signpost. Five of them in one handout becomes a tic, and it flattens emphasis: when the page declares four different things to be its point, its argument, and its one takeaway, none of them lands as the point. Line 419's \"the whole argument of this page in miniature\" is the most inflated \u2014 it promises the reader a synthesis and then delivers two estimates that disagree, which is interesting but is not the whole argument of anything.",
+   "fix": "Keep one. Line 411 (\"a number an agent gives you about its own consumption is a claim, not a receipt\") earns its billing and should be the only sentence that claims takeaway status. Cut the framing clause from 419 and 437 and let the content assert itself; both paragraphs are strong enough without being introduced.",
+   "role": "kill-your-darlings"
+  },
+  {
+   "severity": "minor",
+   "title": "A flourish clause that reverses the sentence it ends",
+   "where": "Line 210: \"which is the same reason 2.3 tells you to keep the data root out of the sync client \u2014 a rule that is about reliability and happens to also be the thing keeping this line cheap.\"",
+   "problem": "This is the sound-good-say-little sentence of the page. It is inside a sub-line of a bullet that has already covered the free tier, the review folder, the exception, and the paid price; by the time the reader reaches \"happens to also be the thing keeping this line cheap\" they are four clauses deep in a footnote. The word order (\"happens to also be\") is awkward, and the clause actually undercuts the sentence before it: the cross-reference to 2.3 was made to explain a cost consequence, and the coda then says the rule is not really about cost.",
+   "fix": "End the sentence at \"keep the data root out of the sync client.\" The cross-reference does the work; the reflection on why the rule exists belongs in Cold Start 2.3, not here.",
+   "role": "kill-your-darlings"
+  },
+  {
+   "severity": "minor",
+   "title": "\"Some organizations\" is the only unsourced claim on a page that dates everything",
+   "where": "Line 511: \"Some organizations have gone as far as ranking people by token consumption\"",
+   "problem": "Every other assertion on this page carries a date, a link, or an explicit admission that it is an estimate \u2014 that discipline is the page's main claim on the reader's trust. This sentence, in the section explicitly labelled \"the uncomfortable one\", rests on an anonymous \"some organizations\" with no source at all. A sceptical reader who has been trained by the previous 400 lines to look for the citation will notice its absence exactly where the page is at its most rhetorical, which is the worst possible place to spend credibility.",
+   "fix": "Either attribute it (\"reported at least once in\u00a0\u2026\") or convert it to the conditional the argument actually needs: \"Where token consumption is ranked or made visible, the ranking measures budget and confidence, not work.\" The closing line \u2014 \"If a number is going to be visible, make it the work\" \u2014 survives either way and should.",
+   "role": "kill-your-darlings"
+  },
+  {
+   "severity": "blocking",
+   "title": "\"Billable tokens\" column omits the tokens that are half the bill",
+   "where": "Line 372 header \"Billable tokens\"; lines 384\u2013386 \"Between 10.8 and 36.9 million further tokens were read back out of cache on top of those figures\"",
+   "problem": "Cache reads are billable \u2014 at a tenth of input, but billed. For the 28 Aug run the source log (OPEN-CORRECTIONS C1) gives output 236,512 + new input 1,359,900 + cache creation 1,014 = the 1,597,426 in the table, and 26,384,348 cache-read tokens excluded from it. Priced at Opus rates: $5.91 output + $6.80 input + $13.19 cache reads = $25.90, which is the $26 in the table. So 50.9% of the money sits outside the column headed \"Billable tokens\", and the dollar figures already include it. The sentence \"on top of those figures\" sits immediately after \"costs somewhere between $6 and $40\", so the nearest antecedent is the dollars \u2014 telling the reader the price is an undercount when it is not. A researcher who reads this and then estimates their own cost from a token counter that reports the same column will be low by roughly 10\u201317\u00d7.",
+   "fix": "Rename the column \"Tokens excl. cache reads\" (or show cache reads as a fourth column), and rewrite the sentence to say the opposite of what it currently implies: \"The dollar figures already include a further 10.8\u201336.9 million tokens read back out of cache at a tenth of the input rate \u2014 on the 28 Aug run that cache reading was $13 of the $26.\"",
+   "role": "rtfm"
+  },
+  {
+   "severity": "blocking",
+   "title": "A \"ceiling\" of four rounds, disproved in the next sentence, with no replacement number",
+   "where": "Lines 399\u2013403: \"the ceiling for one document is four rounds \u2014 call it $64\u2013160 \u2026 One recorded run went fourteen rounds before a person stopped it.\"",
+   "problem": "Four rounds is not a ceiling if a run went fourteen; the page states as a bound something it then reports being exceeded by 3.5\u00d7, and gives no revised figure. This is the runaway-cost paragraph on a page written for readers who are anxious about runaway cost, and it is the one place where the actual worst observed number belongs. At the page's own $16\u201340 per round, fourteen rounds is $224\u2013560 \u2014 a number that changes whether someone points a departmental billing code at this, and it is the only number on the page that is withheld.",
+   "fix": "State it: \"The process is supposed to stop at four rounds \u2014 call it $64\u2013160. One recorded run went fourteen before a person stopped it, which at the same rates is $224\u2013560. The cap is a setting, not a wall.\" Then say what actually stopped it (a person, not the software), because that is the operative fact.",
+   "role": "rtfm"
+  },
+  {
+   "severity": "major",
+   "title": "\"An eleventh as much\" is arithmetically impossible on the page's own data",
+   "where": "Lines 394\u2013398: \"Eleven agents cost roughly eleven times one agent \u2026 One agent walking the same eleven checklists costs an eleventh as much\"",
+   "problem": "Eleven checklists produce eleven sets of findings whether one agent or eleven writes them, and output tokens do not shrink when you consolidate. In the measured run output was 236,512 tokens = $5.91 of the $25.90 total, or 22.8%. So even if the consolidated version's input were free, its floor is about one quarter of the parallel cost, not one eleventh. \"Eleven times one agent\" is also not a thing the data supports: per-role billable ranges 100,369\u2013186,886 (1.9\u00d7) and per-role cache reads 965,722\u20135,398,562 (5.6\u00d7), so there is no single \"one agent\" to multiply. The argument for independence does not need this claim and is weakened by resting on a number that does not survive division.",
+   "fix": "Replace the multiplier with the measured shape: \"Eleven independent readers cost several times one reader \u2014 not eleven times, because the eleven reports get written either way and writing is the expensive half. On the run above, output alone was $6 of the $26.\" The independence argument stands on its own without a fabricated ratio.",
+   "role": "rtfm"
+  },
+  {
+   "severity": "major",
+   "title": "Output tokens \u2014 5\u00d7 the price of input \u2014 are missing from the list of what drives the bill",
+   "where": "Lines 458\u2013475, the four-item list under \"What actually drives the number\"",
+   "problem": "On every rate the page cites, output costs five times input ($25 vs $5; $10 vs $2), and reasoning/thinking tokens are billed as output. In the page's own measured run, output was 14.8% of the tokens in that column but 46.5% of the non-cache money. None of the four levers mentions this. A researcher following this list concludes that conversation length and model choice are the whole story, and will not connect \"asked it to rewrite the whole file rather than tell me what to change\" or \"asked for maximum reasoning effort on an easy question\" to their bill \u2014 both of which are direct, free, quality-neutral savings.",
+   "fix": "Add a fifth item, ranked second or third: \"How much you ask it to write. Answers cost five times what questions cost, and the model's own reasoning is billed as writing. 'Tell me which three lines to change' is cheaper than 'give me the corrected file' \u2014 and easier to check.\"",
+   "role": "rtfm"
+  },
+  {
+   "severity": "major",
+   "title": "Caching is presented as a permanent discount; it is perishable, and that is the real mechanism behind lever 1",
+   "where": "Line 461 \"Your entire conversation is re-sent on every single request \u2026 Starting a fresh session between unrelated tasks costs nothing\"; the caption's \"cache reads charged at a tenth of the input rate\" (lines 363\u2013369)",
+   "problem": "The re-send is real, but the page never says the re-sent part is normally served from cache at a tenth \u2014 which is why its own run cost $26 rather than $145 (26,384,348 cache-read tokens at full input rate would be $131.92 instead of $13.19, a 5.6\u00d7 difference). More consequentially, the page presents the tenth as a static fact when it is a perishable one: the cache has a short time-to-live (five minutes by default on Anthropic, refreshed while you work), so the same long session is cheap while you are typing and re-pays full input price for the entire history on the first message after a coffee break or a meeting. That is the actionable, non-obvious fact, and its absence means readers will fear the wrong thing (long sessions) and not recognise the real one (interrupted long sessions). \"Starting a fresh session costs nothing\" is also not quite true \u2014 a fresh session re-reads the project context at full price, or at the 1.25\u00d7 cache-write rate.",
+   "fix": "Rewrite lever 1: \"Your whole conversation is re-sent every request, but a warm cache charges a tenth for the repeat \u2014 on the run above that was $13 instead of $131. The cache goes cold in minutes. Come back after lunch and the next message re-pays full price for the whole day. So the rule is not 'short sessions', it is 'finish a task, then start a new session' \u2014 which costs a little, not nothing.\"",
+   "role": "rtfm"
+  },
+  {
+   "severity": "major",
+   "title": "Lever ordering ranks a 2.5\u00d7 quality-costing lever above an 11\u00d7 free one",
+   "where": "Line 456 \"Four things move it, in roughly this order\"; lines 464\u2013466 (model, ranked 2) and 468\u2013469 (agents, ranked 3)",
+   "problem": "By the page's own table, model choice is exactly 2.5\u00d7 ($40 vs $16, $26 vs $10 \u2014 Opus 5 $5/$25 against Sonnet 5 $2/$10). Agent count in the same worked example is 11\u00d7, and rounds reached 14\u00d7. So the page ranks the smallest multiplier \u2014 and the only one of the four that is paid for in answer quality \u2014 above the two largest, both of which are free. \"The largest models cost several times the smaller ones\" also overstates 2.5\u00d7 as \"several\". A cost-anxious researcher following this order downgrades their model first, gets worse answers, and leaves the 11\u00d7 and 14\u00d7 levers untouched.",
+   "fix": "Reorder to context, fan-out, output, then model, and say why model is last: \"Which model. The gap is about 2.5\u00d7, not the order of magnitude people expect, and it is the only lever on this list you pay for in quality. Pull the other three first.\"",
+   "role": "rtfm"
+  },
+  {
+   "severity": "major",
+   "title": "Every dollar in the worked example is a meter dollar, on a page that tells most readers to buy a ceiling",
+   "where": "Lines 384\u2013390 (\"$6 and $40\", \"a few dollars for a serious piece of work\"); line 412 \"The receipt is on the usage screen\"; line 521 \"If it is your own money, buy a ceiling.\"",
+   "problem": "The five-run table prices tokens at API list rates \u2014 that is shape 2. The page's own advice sends most readers to shape 1, and on a subscription that eleven-agent review costs zero additional dollars and instead consumes allowance until it stops. The page never makes the translation, so the reader it is addressing cannot use its central number: they do not know whether \"$26\" means twenty-six dollars or roughly a third of today's allowance. The same gap breaks the page's best line \u2014 for a subscription user the agent's own usage screen reports API-equivalent dollars that appear on no statement, so \"the receipt is on the usage screen\" is true for shape 2 and 3 and misleading for shape 1, where the meaningful reading is the limit indicator, not the dollar figure.",
+   "fix": "Add one sentence after the $6\u2013$40 conclusion: \"That is the meter price. On a subscription the same review costs no extra money \u2014 it spends allowance, and $26 of tokens is roughly how much of a month you just used. Which sentence applies to you is the whole of the plan-versus-meter distinction.\" And branch line 412: on a ceiling, the receipt is the limit screen; the dollar figure the tool shows you is a list-price equivalent nobody bills.",
+   "role": "rtfm"
+  },
+  {
+   "severity": "minor",
+   "title": "The spend-limit advice never says what hitting a spend limit looks like",
+   "where": "Lines 525\u2013526: \"set the spend limit the same day \u2026 stops the only genuinely bad outcome on this page\"",
+   "problem": "Setting a spend limit is right, but it converts a meter into a ceiling with a materially worse failure mode than a subscription's, and the page describes none of it. A limit hit mid-run does not pause politely: work stops part-way through a task, and in a fan-out of the kind this page just spent a page describing, some agents finish and others die, leaving a result that looks complete and is not. This project's own records carry a candidate instance \u2014 OPEN-CORRECTIONS C1's scope note reports seven of eleven reviewers dying mid-run on a monthly spending limit (flagged there as uncorroborated). Advising the control without describing its failure mode leaves a reader unable to recognise it when it happens.",
+   "fix": "Add to the sub-line: \"Know what hitting it looks like: work stops where it is, not at a tidy boundary. If several agents were running, some finish and some do not, and the result can look finished. Treat an unexpectedly short answer near month end as a billing symptom, not a quality one.\"",
+   "role": "rtfm"
+  },
+  {
+   "severity": "minor",
+   "title": "Subscription worst case stated as hours; these plans meter on more than one clock",
+   "where": "Line 267 \"Worst case: you cannot work for a few hours.\" and line 284 \"you stop for four hours\"",
+   "problem": "The page tells readers to go and check the vendor's page for every price, then asserts a reset period without doing so. Current consumer plans on both vendors named meter against a short rolling window and a longer weekly one, so the worst case is not bounded by a few hours \u2014 a weekly cap means days, and it lands during exactly the sustained push that triggers it. This matters most for the reader the page is trying to reassure: someone deciding whether to run a class or hit a deadline on a $20 ceiling.",
+   "fix": "Soften to what is checkable and add the second clock: \"Worst case: you stop until it resets \u2014 usually hours, but these plans also carry a longer limit, so check what the reset actually says before you plan a deadline around it.\" Apply the same edit at line 284 rather than repeating \"four hours\" as a fact.",
+   "role": "rtfm"
+  },
+  {
+   "severity": "major",
+   "title": "The five-run table drops the \"this is a floor\" caveat its source prescribes",
+   "where": "Line 384: \"So: reviewing one document properly costs somewhere between $6 and $40.\"",
+   "problem": "`docs/cases/OPEN-CORRECTIONS.md` C1 is the owner of these token figures, and its correction table (line 25) prescribes a third edit that this page has not carried: \"that the figure counts **the eleven reviewers only** \u2014 the session that spawns them, reads eleven reports and writes the record is not in it, so the number is a floor\". The handout takes C1's numbers verbatim (1,597,426 matches C1 line 58 exactly; the five-run range 1.6\u20133.1M and median ~1.8M match C1 line 61) but presents the derived dollars as the cost of the review rather than a floor. Every downstream figure inherits it \u2014 \"$64\u2013160\" for four rounds, \"a few dollars for a serious piece of work\", and the teaching-session meter estimate that is explicitly extrapolated \"at the per-task rates established above\". A reader budgeting from this page is budgeting from a number its own source says is incomplete.",
+   "fix": "Add the caveat to the caption or the sentence at line 384, in C1's own terms: the counts are the eleven reviewers only \u2014 the session that spawns them, reads eleven reports and writes the record is not included, so $6\u201340 is a floor.",
+   "role": "reinventing-the-wheel"
+  },
+  {
+   "severity": "major",
+   "title": "Sponsored keys stated as fact; source flags it as the least verified line it has",
+   "where": "Line 487: \"A graduate student employed as a research or teaching assistant can often be sponsored; a student on a taught course generally cannot.\"",
+   "problem": "`points.md` \u00a7F (lines 839\u2013842) is the source, and it ends that bullet with \"\u26a0 *Single source, read once, not confirmed on a second page. It is the most decision-relevant line found and the least verified.*\" The handout carries the claim, hardens \"the FAQ indicates\" into \"can often be sponsored\", and drops the \u26a0 entirely. This is the one line on the page a faculty reader will act on when deciding whether a cohort can be covered \u2014 the source says so in as many words \u2014 and it is the one line whose provenance the page hides. The footer flags the teaching-session estimate and the unpublished token log but says nothing about this.",
+   "fix": "Restore the hedge inline: say it comes from a single FAQ line, read once, not confirmed on a second page \u2014 and that it is the most decision-relevant and least verified fact in the section. Or drop the claim until it is confirmed.",
+   "role": "reinventing-the-wheel"
+  },
+  {
+   "severity": "major",
+   "title": "\"Nothing was broken\" contradicts the source's account of the same fourteen-round run",
+   "where": "Lines 402\u2013403: \"One recorded run went <b>fourteen</b> rounds before a person stopped it. Nothing was broken. Nobody was watching.\"",
+   "problem": "The source for this run is `docs/cases/2026-08-28-the-tests-were-defending-the-bug.md` Point 5, which says of that same run: \"a review that ran **fourteen** rounds before a human stopped it \u2014 and, in the same run, seven of the eleven reviewers **died mid-run on a monthly spending limit** and had to be re-run a cheaper way.\" So something did break, and what broke was a ceiling doing exactly what Shape 1 (line 266, \"When you have used your allowance, it stops\") promises. The page drops the single best real-world illustration of its own central framing and replaces it with an assertion the source contradicts. `OPEN-CORRECTIONS.md` C1 (line 77) adds the honest qualifier the page could reuse: the fourteen-round count is corroborated by a `rounds: 14` record, but \"the spending-limit detail rests on the retelling.\"",
+   "fix": "Either restore the spending-limit half with C1's qualifier \u2014 a ceiling stopped seven of eleven reviewers mid-run, on a retold account \u2014 or delete \"Nothing was broken\", which is not supported by any source in the repo.",
+   "role": "reinventing-the-wheel"
+  },
+  {
+   "severity": "major",
+   "title": "The cost-driver list re-derives \u00a710's and drops its headline rule",
+   "where": "Lines 458\u2013475, the four items under \"What actually drives the number\"",
+   "problem": "`course-outline.md` \u00a710 line 419 already owns this list, ordered, under \"Where it actually goes, in rough order\": long sessions, **re-reading** (\"A file pasted or read into the room is paid for again on every subsequent turn, not once. Ask for the part you need rather than the file you have\"), fan-out, and **work a command does exactly** \u2014 which \u00a710 marks as \"the one that deserves a rule\" and then states: \"**The rule: if the answer is exactly computable, compute it.**\" The handout keeps items 1 and 3, substitutes \"which model\" and \"vagueness\", and loses both re-reading and the compute-it rule. That rule is the cheapest lever on the list for a non-programmer, it is free rather than a trade-off, and \u00a710 uses it to tie the cost material back to the course's own thesis about mechanisms. A student-facing cost sheet is the natural place for it and it is the one thing the sheet does not say.",
+   "fix": "Reuse \u00a710's list rather than inventing a parallel one: add \"work a command does exactly \u2014 if the answer is exactly computable, compute it\" as a fifth item, and fold \u00a710's re-reading point (\"ask for the part you need rather than the file you have\") into the vagueness item.",
+   "role": "reinventing-the-wheel"
+  },
+  {
+   "severity": "major",
+   "title": "Driver 1 is near-verbatim from cold-start 4.6, minus the clause that matters",
+   "where": "Line 461: \"Your entire conversation is re-sent on every single request. A one-line question in a session you have had open all day carries the whole day with it.\"",
+   "problem": "`docs/handouts/cold-start.html` line 777 \u2014 the step this page sends the reader to at line 477 \u2014 says: \"Your whole conversation is re-sent on every single request. A one-line question in a session you have had open all day still carries the whole day with it, **and coming back after a long break re-processes the lot.** Which makes `/clear` between unrelated tasks the largest single lever you have, and it costs nothing.\" The handout reproduces the sentence with \"whole\"\u2192\"entire\", drops the long-break clause, and replaces the actual command `/clear` with the vaguer \"starting a fresh session\". The dropped clause is the caching mechanism, which `course-outline.md` line 417 insists on carrying (\"Caching cuts part of this when turns come quickly, and how much depends on the plan and on the gap between turns\") \u2014 and which this page's own table depends on, since \"10.8 and 36.9 million further tokens\" of cache reads at a tenth rate are most of what the runs cost. Two sheets in the same system now state the same fact differently, neither points at the other, and the shorter one lost the half a reader acts on.",
+   "fix": "Either cross-reference cold-start 4.6 instead of restating it, or restore both dropped pieces: the long-break re-processing clause and the literal `/clear`.",
+   "role": "reinventing-the-wheel"
+  },
+  {
+   "severity": "major",
+   "title": "Ownership of the access material is now split between \u00a7F and this page, with no pointer either way",
+   "where": "Line 491 (\"Student credit programs have borders\") and line 487; footer line 541",
+   "problem": "`HANDOFF.md` line 22 still names `points.md` **\u00a7F** as the owner: \"Access, cost, routes, rates | `points.md` \u00a7F \u2014 sourced and dated 2026-08-27\", and \u00a7F itself (line 796) says \"Extract it the moment there is a better home.\" This page is that better home, but it extracted only part: it takes the $100 Codex credits and the Claude Code employment check, and leaves behind three routes \u00a7F records with dates and quotes \u2014 the Shortcode blocker (\u00a7F line 833, which blocks the Toolkit, Claude Code and classroom provisioning in one stroke, and which the author does not have), Claude Campus (\u00a7F line 845, \"applications closed\" as of 2026-08-26), and Anthropic AI for Science (\u00a7F line 846: up to **$20,000** in API credits over six months, reviewed the first Monday of each month, prioritising biology and life sciences). For an audience of academic researchers, that last one is arguably the most valuable line in \u00a7F, and a section headed \"Student credit programs have borders\" that names one programme reads as a survey when it is a sample of one.",
+   "fix": "Either name \u00a7F as the source and say this page is a summary of it, or complete the extraction: add the Shortcode blocker, the closed Campus programme, and AI for Science with their dates. Then update `HANDOFF.md` line 22 to say which document is now the owner.",
+   "role": "reinventing-the-wheel"
+  },
+  {
+   "severity": "minor",
+   "title": "Shape 3 drops the sentence that ties cost to the course's own thesis",
+   "where": "Lines 276\u2013280, \"Shape 3 \u2014 somebody else's meter\"",
+   "problem": "`points.md` D2 (lines 540\u2013547) is the source of this fork and states the conclusion the page never reaches: \"a ceiling is a crude mechanism but it is a mechanism; a Shortcode is a request that the spender be sensible, and B4 is about what happens to requests.\" That is the whole cost sheet reduced to one line, in the course's own established vocabulary, and it is the reason the ceiling/meter choice is a teaching point rather than a budgeting tip. The handout instead argues it from feedback latency (\"the feedback arrives weeks later\"). Note the sibling sheet has the same gap: `cold-start.html` line 429 also restates D2's fork (\"A personal plan is an allowance\u2026 An institutional billing code is usually uncapped: nothing stops, nothing warns\") without it.",
+   "fix": "Add D2's line to the note at 284\u2013286: a ceiling is a crude mechanism but it is a mechanism; a billing code is a request that the spender be sensible, and the rest of the course is about what happens to requests.",
+   "role": "reinventing-the-wheel"
+  },
+  {
+   "severity": "minor",
+   "title": "The $50 figure is attributed to the wrong page, and \"stipend\" has become \"allocation\"",
+   "where": "Line 444: \"The per-user monthly allocation is reported as <b>$50</b> in secondary coverage; <b>the university&rsquo;s own pricing page states no amount.</b>\"",
+   "problem": "`points.md` \u00a7F line 831 says: \"\u26a0 *A stipend of $50/user/month appears in secondary coverage; the ITS page itself states no amount.*\" \u2014 and \"the ITS page\" there is the Codex for the Classroom page, the subject of that bullet. The university's **pricing** page is a different page in \u00a7F (line 816) and it does state amounts: \"`claude-opus-5` **$5.00 / $25.00** per 1M tokens\u2026 `claude-sonnet-5` $2.00 / $10.00.\" A reader who follows the page's own advice and goes to look will find the pricing page full of numbers. Separately, \u00a7F and `OPEN-FINDINGS.md` N1 are careful that \"allotment/allocation\" is a loaded word here \u2014 N1 line 155 records that \"'What is the allotment' presumed a ceiling that is not there\" on the faculty path \u2014 so recasting a classroom *stipend* as an *allocation* on lines 422 and 444 blurs a distinction the sources were corrected into making.",
+   "fix": "Say which page was checked \u2014 the classroom-programme page, not the pricing page \u2014 and restore \u00a7F's word, \"stipend\".",
+   "role": "reinventing-the-wheel"
+  },
+  {
+   "severity": "minor",
+   "title": "The footer overstates how long the five-run table stays checkable",
+   "where": "Line 541: \"<b>That log is not yet published</b> &mdash; a handoff asking for it has gone to that project, and until it lands the table is checkable only by someone with the file.\"",
+   "problem": "`OPEN-CORRECTIONS.md` C1's provenance block (lines 82\u201389) carries two things this sentence drops. First, the check does not need the file: \"the numbers are still checkable the way they were derived: run the tool against the transcripts\" \u2014 and it names the tool, `metrics/measure_review_cost.py` in `syncytium2/murderboard`, which the page already links. Second, and more important, the window closes: \"while the transcripts exist. **The harness prunes them.**\" The handout implies a check that is merely inconvenient today; the source says it is a check with an expiry date. That is the page's own thesis about staleness, and it is the one claim on the page where the source is more alarming than the copy.",
+   "fix": "Replace with C1's version: the table is reproducible by running `metrics/measure_review_cost.py` against the subagent transcripts, for as long as the harness has not pruned them \u2014 and the branches carrying the CSV are still local-only.",
+   "role": "reinventing-the-wheel"
+  },
+  {
+   "severity": "minor",
+   "title": "The course's own loop is renamed in a phrase set as a quotation",
+   "where": "Line 484: \"Since the entire method is <i>spec, check, re-spec</i>\"",
+   "problem": "The canonical form throughout the repo is \"spec, validate, re-spec\" \u2014 `points.md` B6 line 253, `course-outline.md` \u00a73 line 226, `course-outline-external.md` line 63, and both sibling handouts: `search-to-shipped.html` line 642 (\"Spec, validate, re-spec.\") and `four-barriers.html` line 730 (\"<b>Spec, validate, re-spec.</b> Re-spec is the normal case, not the failure case.\"). This page italicises a third variant, which reads as a quotation of a named thing that is named differently everywhere else a student will encounter it \u2014 including on the two sheets handed out beside this one.",
+   "fix": "Change to \"spec, validate, re-spec\".",
+   "role": "reinventing-the-wheel"
+  },
+  {
+   "severity": "minor",
+   "title": "Two repo documents still carry the price estimate this page supersedes",
+   "where": "Lines 375\u2013379, the five-run table",
+   "problem": "`OPEN-FINDINGS.md` N1 (line 161) records \"What one full run consumes\u2026 **Still open.** One run, then read the usage back\", and reasons from an estimate at line 163: \"eleven roles at roughly 12k in / 2k out each is about **$1.20 a round**, so a three-round run lands in single digits of dollars.\" `HANDOFF.md` \u00a75 (line 93) repeats it: \"**Still outstanding: one measured run.** The arithmetic says single-digit dollars.\" This page's measured figure for an eleven-role round is $16\u201340 at Opus rates \u2014 roughly 20\u00d7 that estimate \u2014 and it does not say it is answering N1, while N1 and HANDOFF do not say they have been answered. A maintainer reading the repo cannot tell which of the two is current, which is the exact failure mode the page itself warns about at lines 224\u2013227.",
+   "fix": "Add one line to the caption or footer noting that these runs are the measurement `OPEN-FINDINGS.md` N1 asks for, and close or annotate N1 and `HANDOFF.md` \u00a75 in the same commit so the superseded $1.20/round arithmetic is not left standing.",
+   "role": "reinventing-the-wheel"
+  },
+  {
+   "severity": "major",
+   "title": "\"Agent\" is the subject of the page and is never defined",
+   "where": "Line 205, \"<b>The agent</b> &mdash; free tiers exist and are real\"; relied on again at line 488, \"the institution itself draws a line between <i>chat</i> and <i>agent</i>\"",
+   "problem": "The word arrives in the first list item as a thing that costs money, and by line 260 it is \"every one of these\" \u2014 plural, unenumerated. I never learn what an agent is, what it does, or how it differs from the chat box I have used. Line 488 then makes the chat/agent distinction load-bearing for the equity argument (\"a better demonstration of the difference between the two than any classroom demo\") while assuming I already hold that difference. Someone deciding whether to assign this to students is being asked to price a thing the page never names.",
+   "fix": "One clause at first use, line 205: \"<b>The agent</b> \u2014 the program that reads and writes files on your machine, as opposed to a chat box you paste into.\" That single contrast also does the work line 488 currently assumes.",
+   "role": "you-lost-me"
+  },
+  {
+   "severity": "minor",
+   "title": "Jargon inherited from Cold Start that this sheet never unpacks",
+   "where": "Line 210, \"keep the data root out of the sync client\"; line 484, \"the entire method is <i>spec, check, re-spec</i>\"",
+   "problem": "Both sentences carry real weight and both stop a cold reader. \"Data root\" and \"sync client\" are Cold Start vocabulary; here they sit inside a parenthetical justifying why storage stays cheap, so I cannot skip them and still follow the money. \"Spec, check, re-spec\" does more damage: it is the premise of the whole free-tier equity argument (\"a person with fewer attempts is not doing a slightly worse version of the work\"), so if I do not know what a spec is, the most important paragraph on the page is an assertion I have to take on faith.",
+   "fix": "Line 210: \"keep your data folder outside the folder Dropbox watches\". Line 484: gloss it once \u2014 \"the entire method is write down what you want, check what came back, write it down again better\".",
+   "role": "you-lost-me"
+  },
+  {
+   "severity": "major",
+   "title": "\"The record\" is promised in the free list and never appears in it",
+   "where": "Line 222, \"the record, the history, the editor, and somewhere to put a web page\"",
+   "problem": "That sentence sets up four free things and reads as a table of contents for the section immediately below. The section then lists git (\"the thing that keeps the history\"), a GitHub account, an editor, and hosting. Three of the four map cleanly; \"the record\" has no entry. I spent a paragraph working out whether the record is GitHub, a fifth thing I had missed, or the history under a second name. On a page whose promise is \"here is everything you will be charged for\", an item that appears in the summary and vanishes from the list reads like an omission, not a synonym.",
+   "fix": "Either name it in the list \u2014 make the GitHub bullet \"<b>A GitHub account</b>, the shared copy of the record\" \u2014 or drop \"the record\" from line 222 so the summary and the list have the same four members.",
+   "role": "you-lost-me"
+  },
+  {
+   "severity": "major",
+   "title": "\"Ceiling\" carries four different meanings, two of them contradictory",
+   "where": "Line 264 \"Shape 1 &mdash; a ceiling\"; lines 320 and 330 (Shape column: storage and a domain both marked \"Ceiling\"); line 342 \"roughly the <b>ceiling</b> of what a single very heavy human being can spend\"; line 400 \"the ceiling for one document is four rounds\"",
+   "problem": "This is the collision that cost me the most. Shape 1 defines a ceiling precisely and memorably: \"When you have used your allowance, <b>it stops</b> and tells you when it resets.\" Stopping is the whole definition \u2014 it is why line 284 tells me to buy one. The table then applies \"Ceiling\" to synced storage and to a domain name, neither of which stops or resets; there it silently means \"a predictable fixed price\". Line 342 uses it for an upper bound on plausible spend, line 400 for a number of repetitions. By line 434 (\"the ceiling is the one that cannot surprise you\") I no longer knew which sense was active. The page notices this class of hazard elsewhere and warns about it (line 369), so it is clearly known.",
+   "fix": "Keep \"ceiling\" for Shape 1 only. Mark storage and domain in the Shape column as \"Fixed\" (or add a fourth shape: \"a fixed fee \u2014 nothing to exhaust\"). At line 342 use \"upper bound\"; at line 400 use \"the cap is four rounds\".",
+   "role": "you-lost-me"
+  },
+  {
+   "severity": "major",
+   "title": "\"Token\" is never defined, and an entire table is denominated in it",
+   "where": "First use line 323, \"Per-token, on a card or a billing code\"; then line 372 \"Billable tokens\", line 367 \"$5 in / $25 out</b> per million tokens\", line 386 \"read back out of cache\"",
+   "problem": "I do not know what a token is. The page never tells me, and from line 323 onward it is the unit everything is priced in. \"3,141,042\" conveys nothing \u2014 I cannot tell whether that is a lot, whether it is the document or the reading of it, or why it is not simply the length of the file. \"$5 in / $25 out\" compounds it: nothing on the page says what goes in and what comes out, or why out costs five times in. \"Cache\" arrives at line 367 in the same condition, and \"token consumption\" closes the equity section at line 511. This is the section a cost-anxious reader most needs and the one that assumes the most.",
+   "fix": "Two sentences before the five-run table: \"Agents are billed by the <b>token</b> \u2014 roughly three-quarters of a word, counted both on the way in (everything the agent reads) and on the way out (everything it writes). Writing costs about five times as much as reading, which is why the two rates differ.\" Then gloss \"3.1 million tokens\" once in human terms.",
+   "role": "you-lost-me"
+  },
+  {
+   "severity": "minor",
+   "title": "\"Active day\" is an unexplained unit, and multiplying the two figures overshoots the range",
+   "where": "Line 338, \"around <b>$13 per developer per active day</b>, and <b>$150&ndash;250 per developer per month</b>\"",
+   "problem": "\"Active day\" is not defined \u2014 a day you touched it once, or a full working day? The first thing an anxious reader does with two numbers on one line is multiply: $13 \u00d7 20 working days = $260, above the top of the stated $150\u2013250 range, and $13 \u00d7 30 = $390 is far above it. The figures reconcile only if you assume 11\u201319 active days a month, which the page never says. The reader's own arithmetic makes the page look wrong at the exact moment it is trying to reassure.",
+   "fix": "State the reconciling fact: \"around $13 on a day they use it \u2014 and they use it 12 to 19 days a month, which is where the $150\u2013250 comes from.\"",
+   "role": "you-lost-me"
+  },
+  {
+   "severity": "major",
+   "title": "The caption disclaims the word \"Tier\", which does not appear in that table",
+   "where": "Line 369, \"<b>&ldquo;Tier&rdquo; here means the model, not the plan</b> &mdash; the plans in the table above are a different thing that unfortunately shares the word.\"",
+   "problem": "I hunted for \"Tier\" in the table headers and body and it is not there \u2014 the columns are Run, Billable tokens, At Opus\u20115 rates, At Sonnet\u20115 rates. A warning about a word I cannot find makes me assume I have missed a column, and it burns attention on a collision that no longer exists while the collision that does exist goes unhandled: nothing on this page says Opus\u20115 and Sonnet\u20115 are two sizes of model, or which is the \"larger\" one the caption's rates name. I had to infer that from column order. The same caption also fights itself \u2014 \"the runs were not all on the same model, so the range is a band\" (line 366) against \"the two money columns are the same tokens priced at two different models\" (line 368): if every row is repriced at one model per column, which model originally ran cannot matter.",
+   "fix": "Delete the \"Tier\" sentence (a leftover from an earlier header) and the \"not all on the same model\" clause, and spend the words on the mapping instead: \"Opus\u20115 and Sonnet\u20115 are two sizes of the same vendor's model \u2014 the larger at $5/$25 per million, the mid-sized at $2/$10.\"",
+   "role": "you-lost-me"
+  },
+  {
+   "severity": "blocking",
+   "title": "The headline price is per round; the page then says a document takes up to four",
+   "where": "Line 384, \"<b>So: reviewing one document properly costs somewhere between $6 and $40.</b>\" against line 400, \"the ceiling for one document is four rounds &mdash; call it $64&ndash;160\"",
+   "problem": "Both are stated as the cost of reviewing one document and they differ by a factor of four. The source settles which is right: OPEN-CORRECTIONS C1 records each of these measurements as \"One round of eleven reviewers\" and states \"Cost is roles \u00d7 rounds ... every round re-runs all eleven\". So the five rows are five rounds and $6\u2013$40 is one round, not one document. Line 388 then instructs me to carry the wrong number away \u2014 \"That is the number worth carrying around\" \u2014 and line 429's teaching estimate is built on it. A reader budgeting from this page underestimates the advertised unit by up to 4\u00d7. The page also never distinguishes \"run\" from \"round\": the caption says \"Five complete eleven-agent <b>runs</b>\", line 400 introduces \"rounds\" with no notice they are the same unit, so I could not tell whether four rounds meant four of the table's rows or something else again.",
+   "fix": "Use one word throughout \u2014 round \u2014 and state the unit at line 384: \"<b>So: one round of eleven readers costs $6 to $40, and a document usually takes two to four rounds \u2014 call it $12 to $160.</b>\" Line 388's \"number worth carrying around\" should then be the per-document figure.",
+   "role": "you-lost-me"
+  },
+  {
+   "severity": "major",
+   "title": "\"Fourteen rounds\" directly contradicts the ceiling stated two sentences earlier",
+   "where": "Lines 399-403, \"the ceiling for one document is four rounds ... One recorded run went <b>fourteen</b> rounds before a person stopped it.\"",
+   "problem": "I read \"the ceiling ... is four rounds\", took it as a hard limit \u2014 that is what ceiling has meant since line 264, where it is the thing that stops \u2014 and two sentences later the same paragraph reports fourteen. As written one of the two has to be false and a cold reader cannot tell which. The distinction the author holds (four is a configured cap; the fourteen-round run was not under it) is nowhere on the page. \"Until it converges\" is also unexplained, so I have no model of what ends a round. And the cost consequence is left unstated: fourteen rounds at these rates is roughly $224\u2013560, which is the actual worst case this paragraph exists to warn about.",
+   "fix": "\"The process repeats until the reviewers stop finding things. It is meant to stop at four rounds \u2014 call it $64\u2013160 \u2014 but that limit is set by whoever runs it, and one recorded run went fourteen before a person noticed: somewhere north of $200.\"",
+   "role": "you-lost-me"
+  },
+  {
+   "severity": "major",
+   "title": "\"Billable tokens\" excludes tokens the same caption says are billed",
+   "where": "Line 372 header \"Billable tokens\"; line 363 \"with cache reads charged at a tenth of the input rate\"; line 385, \"Between 10.8 and 36.9 million further tokens were read back out of cache <b>on top of those figures</b>\"",
+   "problem": "Two problems in one place. A column labelled \"Billable\" that omits tokens the caption says are charged is a contradiction on its face \u2014 OPEN-CORRECTIONS C1 is explicit that cache reads are billed at a fraction and excluded from the billable count, and warns that \"quoting either alone misleads\". Worse for me as a reader: \"on top of those figures\" lands immediately after \"<b>reviewing one document properly costs somewhere between $6 and $40</b>\", so its nearest antecedent is the dollar range. I concluded the real bill was $6\u2013$40 plus an unstated charge for 10.8\u201336.9 million more tokens. Whether the advertised price is the whole price is the single question this audience brings to the page.",
+   "fix": "Rename the column \"Tokens read and written\" (or \"Counted tokens\"), and make the antecedent explicit: \"A further 10.8 to 36.9 million tokens were re-read from cache \u2014 already included in the dollar figures, at a tenth of the normal rate, and the reason the price does not simply track the length of the document.\"",
+   "role": "you-lost-me"
+  },
+  {
+   "severity": "minor",
+   "title": "$5\u201315 a student appears with no derivation, and its input is withheld for two paragraphs",
+   "where": "Lines 422-423, \"The university sizes its classroom allocation per user <i>per month</i>, for a term. One session is a fraction of a month, which puts it at an order of <b>$5&ndash;15 a student</b>\"; the $50 it rests on appears only at line 443",
+   "problem": "\"Which puts it at\" performs a calculation I cannot see. I do not know the per-user monthly figure at this point \u2014 it is disclosed three paragraphs later, in a caveat box, as $50 from secondary coverage \u2014 so I cannot check $5\u201315, and I cannot tell whether \"a fraction of a month\" means a tenth or a third. This is the number a course convenor will actually take to a department head, so it is the one that most needs to be reproducible on sight. (The $30\u201390 for six students does check out: 6 \u00d7 $5\u201315.)",
+   "fix": "Put the input in the sentence: \"The university sizes its allocation per user per month \u2014 reported as $50, though its own page states no amount \u2014 and one 90-minute session is perhaps a tenth to a third of a month's use: an order of $5\u201315 a student, $30\u201390 for the room.\"",
+   "role": "you-lost-me"
+  },
+  {
+   "severity": "minor",
+   "title": "Nine references to Cold Start sections, not one of them a link",
+   "where": "Lines 210 (\"<i>Cold Start</i> 2.2\"), 213 (\"<i>Cold Start</i> Phase 7\"), 217 (\"<i>Cold Start</i> 1.3\"), 477 (\"<i>Cold Start</i> step 4.6\"), 534 (\"<i>Cold Start</i> 4.6.\")",
+   "problem": "Every cross-reference is dead text. cold-start.html sits in the same folder and already carries matching anchors (id=\"2.2\", id=\"1.3\", id=\"4.6\"), so each could be one click. As it stands the page's two most actionable instructions \u2014 \"step 4.6 is where you go and look at your own numbers\" and the final action item \"<i>Cold Start</i> 4.6\" \u2014 leave a reader who does not already have the other sheet open with nowhere to go. The reference style also shifts between bare numbers, \"Phase 7\" and \"step 4.6\", so I could not tell whether these were three different kinds of thing.",
+   "fix": "Link each one (<code>cold-start.html#2.2</code> and so on) and settle on one label form \u2014 \"Cold Start step 2.2\" throughout, including for Phase 7.",
+   "role": "you-lost-me"
+  },
+  {
+   "severity": "major",
+   "title": "Five-run table hides the column that explains its own numbers",
+   "where": "Lines 371\u2013381 (table head `<tr><th>Run</th><th>Billable tokens</th>\u2026`) and line 384\u2013386",
+   "problem": "The table invites the obvious arithmetic and then contradicts it: 17 Aug shows 1,786,769 tokens \u2192 $16, while 24 Aug shows fewer tokens (1,700,364) \u2192 nearly double the money ($30). A reader who trusts the table concludes the figures are wrong. The variable that resolves it \u2014 cache reads \u2014 is not in the table at all; it appears only as a range in the following paragraph (\"Between 10.8 and 36.9 million further tokens were read back out of cache\"). This is the page telling where it could show. It matters more than a normal ordering nit because cache reads are not a footnote: for the one run reconcilable against OPEN-CORRECTIONS C1 (28 Aug: 1,359,900 in / 236,512 out / 26,384,348 cache read), the arithmetic is 6.80 + 5.91 + 13.19 = $25.90 \u2192 the printed $26, of which 51% is cache reads. The majority of the headline price comes from a quantity the table does not print. The prose fix also introduces a misreading: \"on top of those figures\" sits directly under \"$6 and $40\", so it can be read as cache being an unbilled extra on top of the dollars, which would make the review cost roughly twice what the page says.",
+   "fix": "Add a fourth column, `Cache reads`, with the per-run figures (28 Aug is 26,384,348 from the C1 log; the others are the source of the 10.8\u201336.9M range already quoted). With that column present the non-proportionality is visible and the sentence at 384\u2013386 shrinks to \"cache reads are billed at a tenth of input, which is why dollars do not track billable tokens\" \u2014 no ambiguous \"on top of those figures\" needed. If a five-column table is too wide for 600px, drop `At Sonnet-5 rates` to a single summary line and keep cache reads: the cache column does explanatory work the second money column does not.",
+   "role": "show-dont-tell"
+  },
+  {
+   "severity": "major",
+   "title": "A 153-word caption carrying a rate card the columns should carry",
+   "where": "Lines 361\u2013370, `<caption>Five complete eleven-agent runs\u2026`",
+   "problem": "The caption is longer than the table it labels and holds five separable facts: provenance, computed-not-invoiced, model-not-plan, two full rate cards ($5 in / $25 out and $2 in / $10 out per million), and the cache discount. It is set at 12.5px in `var(--faint)` \u2014 the smallest, palest text on the page \u2014 and sits below a `min-width: 380px` overflow container, so on a phone it is the last thing reached and the hardest to read. It also says the same thing twice inside itself: line 363 \"with cache reads charged at a tenth of the input rate\" and lines 368\u2013369 \"with cached reading charged at a tenth of the input rate\". Two of its clauses (\"not two subscription plans\", \"'Tier' here means the model, not the plan\") exist purely to defend against a misreading the column headers themselves create by naming models with no rates attached.",
+   "fix": "Put the rates in the headers, where they cannot be missed: `At Opus-5 \u2014 $5/$25 per Mtok` and `At Sonnet-5 \u2014 $2/$10 per Mtok`. That kills both defensive clauses and one of the duplicate cache sentences. Reduce the caption to two sentences: what was measured and when, and \"computed from token counts at list rates, not read off an invoice.\"",
+   "role": "show-dont-tell"
+  },
+  {
+   "severity": "major",
+   "title": "The plan-vs-meter comparison is a two-column table written as seven paragraphs",
+   "where": "Lines 417\u2013439, \"It is worth doing twice, because the two ways of sizing it disagree\"",
+   "problem": "This section announces its own form \u2014 the same question costed two ways, and the gap between them is the argument. That is a comparison table by definition, and it is 404 words of prose with no visual break at all. The reader has to carry \"$5\u201315 a student \u2014 $30\u201390 for the room\" from one paragraph into the next to set it against \"a few dollars in total for the whole room, not per student\" \u2014 and the two are stated in different units (per student vs per room), so the comparison has to be reconstructed mentally before it can be felt. Worse, the size of the gap is never named. It is roughly 6\u00d7 to 30\u00d7 ($30\u201390 against ~$3\u20135 for the room), and \"the gap between those two answers is not an error\" lands far harder with a multiple attached than without one.",
+   "fix": "A four-row, two-column table: rows `Per student` / `For the room of six` / `What it is` / `What it protects you from`; columns `Priced as a plan (ceiling)` and `Priced as a meter`. Fill: $5\u201315 vs cents\u2013low dollars; $30\u201390 vs a few dollars; \"a ceiling you bought whether or not you reach it\" vs \"a bill for what you did\"; \"surprise in front of six students\" vs \"nothing\". Add one line naming the multiple. The closing paragraphs at 431\u2013439 then become the reading of the table rather than a substitute for it, and the section loses ~150 words.",
+   "role": "show-dont-tell"
+  },
+  {
+   "severity": "major",
+   "title": "The equity section flattens an eligibility matrix that already exists as a table upstream",
+   "where": "Lines 479\u2013511, esp. 487: \"every student gets a chat box for free, and the agent sits behind an employment check and a departmental billing code\"",
+   "problem": "525 words, five h3s, one list, no table \u2014 the longest stretch on the page with no tabular structure, and the one carrying the most row-and-column-shaped facts. `points.md` \u00a7F holds these same facts as an actual four-row table (Service / Who / Cost / An agent?), and the page has dissolved it into a sentence. The loss is not decorative: the paragraph's own claim is that the institution \"draws a line between chat and agent, and it draws it along employment status\" \u2014 a line through a cohort is exactly the thing a matrix makes visible in one glance and a sentence makes the reader assemble. The $100 student-credit facts at line 491 (US/Canada only, .edu verification, works on a free account) are a fifth row of the same matrix, currently stranded under a separate h3 as if unrelated.",
+   "fix": "One generic table before or after \"The institutional route is not evenly available\": rows = chat tool / agent via institutional gateway / classroom provisioning / vendor student credits / personal card; columns = `Who can get it`, `Who pays`, `Is it an agent?`. Keep it institution-neutral, as the prose already is. Then fold the student-credit h3 into that table's last row and keep only its one-sentence sting (\"it excludes them quietly, one at a time, at the point of sign-up\") as prose. Everything else in this section \u2014 the free-tier-is-a-different-tool argument, the uncomfortable one at 511 \u2014 is moral reasoning, not structure, and should stay exactly as prose.",
+   "role": "show-dont-tell"
+  },
+  {
+   "severity": "major",
+   "title": "The page's core cost mechanism gets one line of grey sub-text",
+   "where": "Line 461: \"Your entire conversation is re-sent on every single request.\"",
+   "problem": "This is the single fact a non-programmer will not intuit, and it silently underwrites four other claims on the page: why cache reads dwarf billable tokens in the five-run table, why \"start a fresh session\" is \"the largest lever you have\", why eleven agents cost eleven times one, and why a loop left running overnight bills like work. It is currently 26 words of `var(--muted)` 13.5px sub-text inside a bullet \u2014 the lowest-emphasis typography on the page for the highest-leverage idea. Every other structural claim on this page has been given a container (three shapes, two tables, four lists); this one has not, and it is the only argument here whose shape is genuinely hard to convey in a sentence because it is cumulative and quadratic.",
+   "fix": "The one place a figure earns its place. A small inline SVG, ~5 bars: turn 1 sends 1 unit, turn 2 sends 2, turn 3 sends 3, turn 5 sends 5 \u2014 with a caption giving the cumulative total (15 units of billing for 5 questions), and a second short bar beside it showing the same 5 questions asked in fresh sessions (5 units). Two bar groups, no axes needed. Alternatively, if no figure is wanted, promote the sentence out of the bullet into a `.note` box before the list, since the whole list depends on it.",
+   "role": "show-dont-tell"
+  },
+  {
+   "severity": "minor",
+   "title": "An explicitly ranked list rendered as an unranked one, with no magnitudes",
+   "where": "Line 456: \"Four things move it, in roughly this order\" followed by `<ul class=\"plain\">` at 458",
+   "problem": "The sentence makes an ordering claim and the markup discards it: `ul.plain` renders four visually identical, unnumbered rows, so nothing on screen distinguishes the largest lever from the smallest. The ranking survives only as a buried adjective in the first item's sub-text (\"the largest lever you have\"). The page has the right component for this already \u2014 `ol.acts` at line 168 draws visible accent-coloured numerals \u2014 and it is spent on \"What to do\", a list whose items are far less order-dependent. The two are backwards. Compounding it, three of the four levers have knowable magnitudes and none is given: model choice is \"several times\" (the caption's own rate cards make that $5/$25 vs $2/$10, i.e. 2.5\u00d7), agent count is linear in N, and vagueness is the difference between reading everything and reading two files.",
+   "fix": "Switch this list to `ol.acts` so the ranking is visible, and attach a magnitude to each item's sub-text where one exists \u2014 \"2.5\u00d7 between the largest and mid-sized model\", \"\u00d7N, and N is however many you launched\". The order claim then does not need the words \"in roughly this order\" at all.",
+   "role": "show-dont-tell"
+  },
+  {
+   "severity": "minor",
+   "title": "187-word provenance paragraph: seven discrete sources, no structure, smallest type",
+   "where": "Line 541, the third `<footer>` paragraph, \"The five-run worked example is derived from a token log\u2026\"",
+   "problem": "This is the densest block on the page and the least readable: 187 unbroken words at 12.5px in `var(--faint)`, containing seven separately-sourced claims (the token log, vendor prices, Anthropic's cost docs, the institutional check, the student-credit check, the teaching estimates, the link check) each with its own date and confidence level \u2014 including two genuinely load-bearing warnings that the log \"is not yet published\" and that the $50 figure is secondary-coverage-only. Provenance is a table of what / from where / when / how solid, and burying it as a run-on paragraph makes the two warnings indistinguishable from the routine dates around them. It also repeats material already stated in stronger positions upstream: the model-not-plan clarification (already twice in the caption at 366 and 369), the $50 caveat (already in the flag at 443), and \"29 August 2026\", which appears seven times across the page.",
+   "fix": "Convert to `ul.plain`, one row per source, with the source in `<b>` and date plus confidence in `.sub` \u2014 the component is already defined and styled. Drop the model-not-plan sentence entirely once the rate cards move into the table headers (see the caption finding), and drop the $50 restatement since the flag box at 441\u2013452 says it with more force. That is ~60 words removed and the two real warnings become the two rows a reader's eye can land on.",
+   "role": "show-dont-tell"
+  },
+  {
+   "severity": "minor",
+   "title": "Shape column collapses three shapes back into two; Shape 3 never appears",
+   "where": "Lines 294\u2013331, the `<th>Shape</th>` column, and line 323 \"Per-token, on a card or a billing code\"",
+   "problem": "The three-shape taxonomy is the page's best structural idea and the pricing table is where it should pay off \u2014 but the column reads Ceiling six times and Meter once, so it carries almost no information as printed, and the row that should carry Shape 3 merges it with Shape 2 under a single \"Meter\". Shape 3 is the one with the worst named failure mode (\"a conversation with your head of department about a number\") and the one most relevant to the faculty readers deciding whether to assign this, and it is the only shape absent from the table that is supposed to apply the taxonomy.",
+   "fix": "Split line 323 into two rows \u2014 \"Per-token, on your own card\" (Shape 2) and \"Per-token, on an institutional billing code\" (Shape 3) \u2014 and label the column cells `Shape 1`/`Shape 2`/`Shape 3` rather than the words, so the table reads as an index back into the grid above it. Both new rows keep \"whatever you use\"; what differs is who receives the bill, which is the whole point of separating them.",
+   "role": "show-dont-tell"
+  },
+  {
+   "severity": "major",
+   "title": "No print styles: dark-theme tokens survive onto paper",
+   "where": "Line 52 `:root[data-theme=\"dark\"] {` and line 55 `--ink:     #E3E8EE;`; `grep -n '@media print' what-it-costs.html` returns nothing",
+   "problem": "FAIL. The file has no `@media print` block \u2014 verified by grep, and by contrast `four-barriers.html` in the same directory has one. Two consequences. First and airtight: the dark palette at lines 52\u201367 is applied by a bare attribute selector with no media guard, so when a reader has explicitly chosen the dark theme (the artifact host stamps `data-theme=\"dark\"` on the root), those tokens are still in force at print time in every browser. Printing then strips `body { background: var(--ground) }` \u2014 browsers drop backgrounds by default \u2014 but keeps `color: var(--ink)`, which is `#E3E8EE`. That is a near-white grey on white paper. The page is the money sheet; the numbers, the three shapes, the equity section all come out blank. Second, and browser-specific: Chromium and WebKit evaluate `prefers-color-scheme` against the OS setting during print, so the block at lines 33\u201350 fires the same way for a system-dark reader who never touched the toggle. Beyond colour, nothing controls pagination \u2014 the two `.tw` tables, the three `.shape` cards and the `.flag` blocks can all be split across a page break, and the outbound URLs (claude.com/pricing, the murderboard repo, the costs docs) vanish entirely on paper, which is exactly the material the staleness banner at line 224 tells the reader to go and check.",
+   "fix": "Add a print block before the `@media (max-width: 460px)` rule at line 188: `@media print { :root, :root[data-theme=\"dark\"] { --ground:#fff; --surface:#fff; --sunk:#F2F5F8; --ink:#171C23; --muted:#444; --faint:#555; --rule:#CCC; --rule-firm:#999; --accent:#15577D; --accent-soft:#fff; --caution:#8A5D0F; --caution-soft:#fff; --good:#2E6A4F; } body { padding:0; font-size:11pt; } .page { max-width:none; } .tw, table, .shape, .flag, .note, .stale, ul.plain > li, ol.acts > li { break-inside: avoid; } h2, h3 { break-after: avoid; } .tw { overflow-x: visible; } table { min-width:0; } a[href^=\"http\"]::after { content:\" (\" attr(href) \")\"; font-size:9pt; color:#555; word-break:break-all; } }` The re-declaration of `:root[data-theme=\"dark\"]` inside the print block is the load-bearing part \u2014 without it the attribute selector wins.",
+   "role": "ship-it"
+  },
+  {
+   "severity": "minor",
+   "title": "Heading level skipped: h2 jumps straight to h4",
+   "where": "Lines 265, 271, 277 \u2014 `<h4>A subscription</h4>`, `<h4>Pay per use, on your own card</h4>`, `<h4>An institutional billing code</h4>`",
+   "problem": "FAIL on heading hierarchy. The document order is h1 (197) \u2192 h2 (229, 235, 258) \u2192 h4 (265, 271, 277), with no h3 anywhere before them; the first h3 does not appear until line 336. Level 3 is skipped, which breaks the document outline and heading-based navigation for anyone using a screen reader \u2014 the three card titles announce as level 4 nested directly under level 2. The visual hierarchy is inverted on top of that: `.shape h4` is 15px bold ink (line 141) while `h3` is 11px uppercase mono accent (lines 100\u2013103), so the element that claims the deeper level is the more prominent one. These are card titles inside `.shape` divs, not a subordinate section of the h2 above them.",
+   "fix": "Either promote them to `h3` and change the selector at line 141 from `.shape h4` to `.shape h3` (the existing `h3` rule at 100\u2013103 would need `.shape h3 { font-family: var(--sans); font-size: 15px; text-transform: none; letter-spacing: 0; color: var(--ink); font-weight: 600; margin: 0 0 6px; }` to keep the card look), or \u2014 simpler and truer to what they are \u2014 demote them to `<p class=\"shape-t\">` with the same styling, since a card title inside a three-card grid is not a section heading at all.",
+   "role": "ship-it"
+  },
+  {
+   "severity": "minor",
+   "title": "Long provenance caption trapped in a horizontal scroller",
+   "where": "Lines 359\u2013370: `<div class=\"tw\">` \u2026 `<caption>Five complete eleven-agent runs across three projects\u2026` (a ~750-character block), with `.tw { overflow-x: auto }` at line 147 and `min-width: 380px` at line 148",
+   "problem": "The `<caption>` is part of the table box, so it inherits the table's `min-width: 380px` and is laid out inside the `overflow-x: auto` scroller. On a 360px phone the body padding drops to 14px each side (line 189), leaving ~332px of content width against a 380px table, so roughly 48px \u2014 about six characters \u2014 is cut off the right edge of every line of that caption, and the reader has to scroll horizontally to read a 750-character methodology paragraph. The same applies to the shorter caption at line 292. This is the paragraph that carries the whole honesty case for the money figures \u2014 that they are computed rather than invoiced, that the two columns are models and not plans \u2014 and it is the one non-tabular element on the page put behind a horizontal scroll for no reason.",
+   "fix": "Move both caption blocks out of the tables and render them as siblings after the `.tw` div: `<p class=\"src\">\u2026</p>` with `.src { font-size: 12.5px; color: var(--faint); margin: 8px 0 0; }`, which reproduces the current `caption` styling at lines 157\u2013160. The tables lose nothing \u2014 `caption-side: bottom` was already putting them below \u2014 and the prose then wraps to the viewport.",
+   "role": "ship-it"
+  },
+  {
+   "severity": "minor",
+   "title": "Table 1's caption names four sources; one row comes from none of them",
+   "where": "Line 292 caption: \"Read 29 August 2026 from the vendors' own pages &mdash; Claude, Codex, Gemini CLI, Dropbox\" against line 328 row: \"A domain name &mdash; only if you want one\"",
+   "problem": "The caption enumerates the sources for the table exhaustively \u2014 four named vendors. The last row prices a domain name at ~$10\u201315/yr, which comes from a registrar and is not attributable to Claude, Codex, Gemini CLI or Dropbox. A caption that lists its sources by name and then omits one is a small hole in exactly the provenance discipline the rest of the page is built on, and it is the row a reader is most likely to want to check because the bullet at line 213 warns them the renewal price is the number that matters. (The Dropbox row at 318 is also the only row with no link, though the caption does name Dropbox as a source.)",
+   "fix": "Either extend the caption to \"\u2026Claude, Codex, Gemini CLI, Dropbox, and one registrar's published renewal prices\", or add an inline link on the domain row the way the Gemini CLI, ChatGPT Go and Claude Pro rows already carry one.",
+   "role": "ship-it"
+  },
+  {
+   "severity": "minor",
+   "title": "Dead custom property declared three times, never used",
+   "where": "Line 27 `--good-soft: #E6F1EB;`, line 48 `--good-soft: #14261E;`, line 66 `--good-soft: #14261E;`",
+   "problem": "`--good-soft` is defined in all three token blocks \u2014 light, prefers-dark, and `[data-theme=\"dark\"]` \u2014 and `grep` for `var(--good-soft)` across the file returns nothing. All 15 other tokens are used. It is carried over from a sibling sheet in the same system and now costs three lines of maintenance every time the palette is touched, with the standing risk that a future edit updates two of the three and nobody notices because nothing renders it.",
+   "fix": "Delete lines 27, 48 and 66. If the intent was to give the `.shape` cards (which use `--good` at line 138) a tinted background to match the `.shape.meter` treatment, use it \u2014 otherwise it should go.",
+   "role": "ship-it"
+  },
+  {
+   "severity": "major",
+   "title": "The page's own nominated takeaway sits at 60% depth",
+   "where": "Line 388: \"That is the number worth carrying around, because it is the shape of every real task\"",
+   "problem": "The page explicitly labels one sentence as the thing to carry away \u2014 \"a few dollars for a serious piece of work, and a few cents for a small one\" (lines 389-390) \u2014 and places it after five other sections, including the largest and most alarming number on the sheet ($13/day, $150-250/month, line 338) and a table of million-token counts. A frightened reader's first question is the order of magnitude of ordinary use. The standfirst (line 198) promises \"what a working setup actually costs\"; the plan prices arrive at the table (line 308), but the per-task magnitude \u2014 the one that converts fear into a working mental model \u2014 does not arrive until roughly 60% down. Readers who bail early leave with $150-250/month as their anchor.",
+   "fix": "Put the magnitude into the opening. At line 222, after \"You can complete every step of Cold Start without paying anyone\", add one clause: \"and when you do pay, ordinary work runs to cents for a small task and single dollars for a serious one \u2014 the rest of this page is where those figures come from.\" Leave the worked example exactly where it is; it then reads as evidence for a claim already made rather than a late reveal.",
+   "role": "start-with-the-problem"
+  },
+  {
+   "severity": "major",
+   "title": "The danger and its five-minute fix are 250 lines apart",
+   "where": "Line 272: \"Most such accounts <i>can</i> be given a spend limit. Almost nobody sets one.\" vs line 526",
+   "problem": "Shape 2 diagnoses the page's worst outcome and withholds the instruction. The instruction \u2014 \"If it is a meter, set the spend limit the same day you set up the account\" \u2014 is item 4 of 5 in the closing list at line 525, and the page itself says at line 526 that this \"stops the only genuinely bad outcome on this page.\" A reader who is currently on a meter, currently anxious, reads the diagnosis at line 272 and must survive nine screens of prices, token tables and equity argument before being told what to do about it. This is the one place on the page where reading order maps onto real financial exposure.",
+   "fix": "Make the imperative land inside the Shape 2 card. Replace \"Almost nobody sets one\" with \"Almost nobody sets one. Set yours today, before the first real session \u2014 it is a five-minute job and it is the only thing on this page that prevents a bill you did not agree to.\" Keep the item in the closing list as the reminder; the closing list is where it belongs as a checklist, not where it belongs as a first warning.",
+   "role": "start-with-the-problem"
+  },
+  {
+   "severity": "major",
+   "title": "The closing action list drops the instructor, one of the two audiences",
+   "where": "Lines 515-536, \"What to do\" \u2014 all five items",
+   "problem": "Every one of the five closing actions addresses an individual buying for themselves: \"your own money\", \"your own account\", \"who reads the statement\", \"your own usage.\" But the page spends two full sections on the teaching case (line 415, \"What one teaching session costs\") and an entire h2 on what you owe students (line 493, \"If you are teaching, you are assigning an expense\"). The instructor's actions exist only at lines 496-507, mid-page, inside the equity argument. A reader who came to this page to decide whether to assign it to students reaches the end and finds nothing addressed to them \u2014 the takeaway list silently reverts to the single-user frame the page had already outgrown.",
+   "fix": "Add a sixth item to the ol.acts: \"If you are assigning this to other people, cost one real session before you assign it\" with a sub carrying the two rules that already exist at lines 501-507 in compressed form \u2014 provision centrally if you can, and do not let the free tier be the contingency for whoever could not pay. It is three lines and it closes the loop the equity section opens.",
+   "role": "start-with-the-problem"
+  },
+  {
+   "severity": "minor",
+   "title": "Opening list gives its detail to the costs that do not matter",
+   "where": "Lines 203-220, and specifically line 206: \"This is the whole of the rest of this page, because it is the only one where the amount is open-ended.\"",
+   "problem": "The list's weights are inverted against the reader's fear. Item 1 (the agent) is the only open-ended cost and the reason anyone opened the page, and it gets one clause plus a deferral. Items 2-4 are bounded, small, or \u2014 by the page's own admission at line 217 \u2014 needed by almost nobody, and they get the prose. Item 2's sub (line 210) is the longest block in the list and detours into Cold Start 2.3's sync-reliability rule. So the first substantive paragraph on a page titled \"What It Costs\", for a reader anxious about agent bills, is about Dropbox's 2 GB tier. The deferral is defensible as structure; the imbalance in front of it is not.",
+   "fix": "Give item 1 a magnitude so the deferral is a promise rather than a withholding: \"free tiers exist and are real, but they are the part you outgrow first \u2014 for almost everyone the answer turns out to be $0-20 a month.\" Then cut item 2's sub to its first sentence plus the paid price, and drop the 2.3 cross-reference to a parenthetical; the reliability rationale is Cold Start's job, not this page's.",
+   "role": "start-with-the-problem"
+  },
+  {
+   "severity": "minor",
+   "title": "The loudest block on the page arrives 60 lines before the figures it governs",
+   "where": "Line 109 CSS comment \"staleness banner: the loudest thing on the page\"; banner at lines 224-227; the table it is about at lines 290-334",
+   "problem": "The banner is the first bordered, coloured block a reader hits, and it is deliberately the loudest thing on the sheet. Its content is meta \u2014 these numbers rot \u2014 not decision-relevant. For an anxious reader arriving in paragraph three, the strongest visual signal on the page currently says \"nothing here can be trusted\", before any of the page's credibility has been built and 60 lines before the table it actually governs. The h2 at line 288 is already titled \"Numbers, with all the caveats attached\", which is precisely where a caveat about numbers belongs.",
+   "fix": "Move the .stale block to sit immediately under the h2 at line 288, heading the section whose figures it qualifies. Keep one short sentence in its current position if the early warning is wanted \u2014 \"Every figure here was read on 29 August 2026; treat them as orders of magnitude\" \u2014 as plain text rather than the page's loudest block. The staleness argument does not weaken by being adjacent to the numbers; it gets stronger.",
+   "role": "start-with-the-problem"
+  }
+ ]
+}
