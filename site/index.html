@@ -262,27 +262,39 @@
   .esc-row.now .esc-you { color: var(--ink); }
 
   /* ---- the escalation figure ----
-     Original artwork, not the meme. Same three-panel escalation the meme had, but
-     what escalates is the era and, in the last panel, the reach: the agent's cable
-     leaves its own frame and lands in your files. The other two never cross theirs. */
+     Original artwork. The joke is not the hardware, it is that the SAME polite
+     sentence goes into all three boxes and only one of them does anything. */
   .fig-wrap { margin: 0 0 22px; }
-  .fig-era { display: block; width: 100%; height: auto; overflow: visible; }
+  .fig-ask { display: block; width: 100%; height: auto; overflow: visible; }
   .fig-wrap figcaption { font-size: 13.5px; color: var(--muted); margin-top: 12px; max-width: 68ch; }
-  .fig-era text { font-family: var(--mono); }
-  .e-frame  { fill: none; stroke: var(--rule); stroke-width: 1.4; }
-  .e-body   { fill: var(--sunk); stroke: var(--muted); stroke-width: 2; stroke-linejoin: round; }
-  .e-screen { fill: var(--surface); stroke: var(--muted); stroke-width: 1.6; }
-  .e-txt    { stroke: var(--faint); stroke-width: 3; stroke-linecap: round; }
-  .e-link, .e-live { stroke: var(--accent); }
-  .e-key    { stroke: var(--faint); stroke-width: 2; stroke-linecap: round; }
-  .e-bubble { fill: none; stroke: var(--accent); stroke-width: 1.6; stroke-linejoin: round; }
-  .e-prompt { font-size: 13px; fill: var(--accent); font-weight: 600; }
-  .e-cable  { fill: none; stroke: var(--accent); stroke-width: 2.2; }
-  .e-head   { fill: var(--accent); }
-  .e-drawer { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.8; stroke-linejoin: round; }
-  .e-lab    { font-size: 11px; fill: var(--accent); letter-spacing: .06em; }
-  .e-era    { font-size: 10.5px; fill: var(--faint); letter-spacing: .14em; }
-  .e-name   { font-size: 12.5px; fill: var(--ink); font-weight: 600; letter-spacing: .05em; }
+  .fig-ask text { font-family: var(--mono); }
+  .a-name    { font-size: 12px; fill: var(--ink); font-weight: 600; letter-spacing: .1em; }
+  .a-pill    { fill: var(--surface); stroke: var(--rule-firm); stroke-width: 1.5; }
+  .a-glass   { fill: none; stroke: var(--muted); stroke-width: 1.6; stroke-linecap: round; }
+  .a-q       { font-size: 11px; fill: var(--ink); }
+  .a-qt      { fill: var(--accent); }
+  .a-caret   { stroke: var(--accent); stroke-width: 1.4; }
+  .a-meta    { font-size: 9.5px; fill: var(--faint); }
+  .a-link    { stroke: var(--accent); stroke-width: 3.5; stroke-linecap: round; }
+  .a-snip    { stroke: var(--faint); stroke-width: 2.5; stroke-linecap: round; opacity: .55; }
+  .a-verdict { font-size: 11px; fill: var(--muted); font-style: italic; }
+  .a-you     { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.3; }
+  .a-them    { fill: var(--sunk); stroke: var(--rule); stroke-width: 1.3; }
+  .a-code    { fill: var(--surface); stroke: var(--rule-firm); stroke-width: 1.2; }
+  .a-codetxt { font-size: 10px; fill: var(--ink); }
+  .a-drag    { fill: none; stroke: var(--caution); stroke-width: 1.6; stroke-dasharray: 4 3; }
+  .a-head    { fill: var(--caution); }
+  .a-hand    { font-size: 10px; fill: var(--caution); }
+  .a-fl      { font-size: 9.5px; }
+  .a-term    { fill: var(--sunk); stroke: var(--rule-firm); stroke-width: 1.5; }
+  .a-prompt  { font-size: 12px; fill: var(--accent); font-weight: 700; }
+  .a-run     { font-size: 10.5px; fill: var(--muted); }
+  .a-done    { font-size: 10.5px; fill: var(--accent); font-weight: 600; }
+  .a-cable   { fill: none; stroke: var(--accent); stroke-width: 2; }
+  .a-head2   { fill: var(--accent); }
+  .a-file    { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.8; stroke-linejoin: round; }
+
+  .spec-open { border-left-width: 4px; margin-bottom: 26px; }
 
   .spec-open { border-left-width: 4px; margin-bottom: 26px; }
 
@@ -470,10 +482,10 @@
         </div>
 
 
-        <h3>How AI interaction has evolved</h3>
+        <h3>The same question, three places to put it</h3>
         <figure class="fig-wrap">
-          <svg class="fig-era" viewBox="0 0 860 340" role="img" aria-label="Three machines in sequence. A 1977 desktop computer showing a list of links. A late-1990s all-in-one showing a speech bubble. A modern laptop showing a command prompt, with a cable leaving its own frame and running into a drawer of your files."><rect class="e-frame" x="10" y="10" width="250" height="205" rx="6"/><rect class="e-frame" x="300" y="10" width="250" height="205" rx="6"/><path class="e-frame" d="M590,209 L590,16 Q596,10 596,10 L834,10 Q840,10 840,16 L840,150"/><path class="e-frame" d="M590,209 L590,215 L740,215"/><rect class="e-body" x="65" y="46" width="140" height="104" rx="8"/><rect class="e-screen" x="79" y="59" width="112" height="70" rx="3"/><line class="e-txt e-link" x1="91" y1="73" x2="161" y2="73"/><line class="e-txt" x1="91" y1="87" x2="145" y2="87"/><line class="e-txt" x1="91" y1="101" x2="153" y2="101"/><line class="e-txt" x1="91" y1="115" x2="135" y2="115"/><rect class="e-body" x="118" y="150" width="34" height="9" rx="2"/><rect class="e-body" x="60" y="166" width="150" height="17" rx="3"/><line class="e-key" x1="69" y1="171" x2="77" y2="171"/><line class="e-key" x1="84" y1="171" x2="92" y2="171"/><line class="e-key" x1="99" y1="171" x2="107" y2="171"/><line class="e-key" x1="114" y1="171" x2="122" y2="171"/><line class="e-key" x1="129" y1="171" x2="137" y2="171"/><line class="e-key" x1="144" y1="171" x2="152" y2="171"/><line class="e-key" x1="159" y1="171" x2="167" y2="171"/><line class="e-key" x1="174" y1="171" x2="182" y2="171"/><line class="e-key" x1="189" y1="171" x2="197" y2="171"/><rect class="e-body" x="352" y="42" width="146" height="120" rx="36"/><rect class="e-screen" x="372" y="62" width="106" height="70" rx="4"/><path class="e-bubble" d="M385,74 h74 a6,6 0 0 1 6,6 v28 a6,6 0 0 1 -6,6 h-46 l-12,11 v-11 h-16 a6,6 0 0 1 -6,-6 v-28 a6,6 0 0 1 6,-6 z"/><line class="e-txt" x1="395" y1="88" x2="445" y2="88"/><line class="e-txt" x1="395" y1="101" x2="431" y2="101"/><ellipse class="e-body" cx="425" cy="170" rx="32" ry="8"/><rect class="e-body" x="648" y="48" width="134" height="84" rx="5"/><rect class="e-screen" x="656" y="55" width="118" height="70" rx="2"/><text class="e-prompt" x="667" y="80">&gt;</text><line class="e-txt" x1="681" y1="76" x2="725" y2="76"/><line class="e-txt" x1="681" y1="91" x2="739" y2="91"/><line class="e-txt e-live" x1="681" y1="106" x2="711" y2="106"/><path class="e-body" d="M637,138 L793,138 L781,150 L649,150 Z"/><path class="e-cable" d="M755,150 C755,196 787,214 787,236"/><path class="e-head" d="M787,242 l-5,-8 l10,0 Z"/><path class="e-drawer" d="M748,248 h34 l6,8 h34 a4,4 0 0 1 4,4 v34 a4,4 0 0 1 -4,4 h-74 a4,4 0 0 1 -4,-4 v-42 a4,4 0 0 1 4,-4 z"/><text class="e-lab" x="787" y="318" text-anchor="middle">your files</text><text class="e-era" x="26" y="34">1977</text><text class="e-name" x="26" y="241">WEB SEARCH</text><text class="e-era" x="316" y="34">1998</text><text class="e-name" x="316" y="241">AI CHATBOT</text><text class="e-era" x="606" y="34">now</text><text class="e-name" x="606" y="241">AI CODING AGENT</text></svg>
-          <figcaption>Three machines, and what each one can reach. <b>Only the last one leaves its own frame.</b></figcaption>
+          <svg class="fig-ask" viewBox="0 0 860 336" role="img" aria-label="The same request typed into three different boxes. Typed into a web search box it returns four million results and a list of links. Typed into a chatbot it returns a paragraph and a code block you still have to copy somewhere. Typed to a coding agent it edits your file."><rect class="a-pill" x="10" y="30" width="250" height="34" rx="17"/><circle class="a-glass" cx="30" cy="47" r="6"/><line class="a-glass" x1="34" y1="51" x2="38" y2="56"/><text class="a-q" x="46" y="51">make my x-axis log scale</text><line class="a-caret" x1="200" y1="39" x2="200" y2="57"/><text class="a-meta" x="10" y="84">About 4,120,000 results</text><line class="a-link" x1="10" y1="104" x2="160" y2="104"/><line class="a-snip" x1="10" y1="115" x2="220" y2="115"/><line class="a-link" x1="10" y1="134" x2="130" y2="134"/><line class="a-snip" x1="10" y1="145" x2="220" y2="145"/><line class="a-link" x1="10" y1="164" x2="175" y2="164"/><line class="a-snip" x1="10" y1="175" x2="220" y2="175"/><text class="a-verdict" x="10" y="316">it answers. with links.</text><rect class="a-you" x="362" y="30" width="188" height="30" rx="8"/><text class="a-q" x="374" y="50">make my x-axis log scale</text><rect class="a-them" x="300" y="72" width="204" height="88" rx="8"/><line class="a-snip" x1="314" y1="90" x2="474" y2="90"/><line class="a-snip" x1="314" y1="105" x2="492" y2="105"/><line class="a-snip" x1="314" y1="120" x2="434" y2="120"/><rect class="a-code" x="314" y="132" width="174" height="20" rx="3"/><text class="a-codetxt" x="322" y="146">plt.xscale(&quot;log&quot;)</text><path class="a-drag" d="M390,152 C390,180 450,190 450,196"/><path class="a-head" d="M450,202 l-5,-8 l10,0 Z"/><text class="a-hand" x="308" y="216">now you move it</text><text class="a-verdict" x="300" y="316">it answers. you do the typing.</text><rect class="a-term" x="590" y="30" width="250" height="132" rx="6"/><text class="a-prompt" x="604" y="52">&gt;</text><text class="a-q a-qt" x="618" y="52">make my x-axis log scale</text><text class="a-run" x="606" y="76">&#183; reading plot.py</text><text class="a-run" x="606" y="96">&#183; editing plot.py</text><text class="a-run" x="606" y="116">&#183; re-running the figure</text><text class="a-done" x="606" y="150">&#10003; plot.py changed</text><path class="a-cable" d="M740,162 C740,188 776,196 776,204"/><path class="a-head2" d="M776,210 l-5,-8 l10,0 Z"/><path class="a-file" d="M740,214 h30 l6,7 h30 a4,4 0 0 1 4,4 v30 a4,4 0 0 1 -4,4 h-66 a4,4 0 0 1 -4,-4 v-37 a4,4 0 0 1 4,-4 z"/><text class="a-hand a-fl" x="740" y="272">your file,</text><text class="a-hand a-fl" x="740" y="285">already changed</text><text class="a-verdict" x="590" y="316">it answers by doing it.</text><text class="a-name" x="10" y="18">WEB SEARCH</text><text class="a-name" x="300" y="18">AI CHATBOT</text><text class="a-name" x="590" y="18">AI CODING AGENT</text></svg>
+          <figcaption>One request, typed into three different boxes. <b>Only the third one touches your figure</b> &mdash; and it does so before you have looked at anything.</figcaption>
         </figure>
 
         <div class="esc">
