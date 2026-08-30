@@ -67,6 +67,18 @@ as an exercise.
 on 2026-08-26, labelled as imports. A fabricated chronology in a repo about provenance would
 be self-refuting.
 
+**One human, and he did not write the commits.** 262 of 263 commits carry one author name.
+That is an artifact of one laptop and one checkout, not a claim about who did the work: most of
+these commits were written by Claude sessions, several at once, and **210 of them say so in a
+`Co-Authored-By` trailer while about 52 do not** — the trailer is added by hand here and hands
+forget. Every "session" named anywhere in this repo, on the board in
+[`docs/SESSIONS.md`](docs/SESSIONS.md), and in every case file, is an agent. There is exactly one
+person in the estate, so no case here describes anybody else's work, and `git` attributing all of
+it to him is the same defect [`docs/cases/2026-08-29-the-board-was-empty-because-claiming-is-a-habit.md`](docs/cases/2026-08-29-the-board-was-empty-because-claiming-is-a-habit.md)
+records from the inside: git cannot attribute a commit to a session. Stated here because a
+repository about provenance that let its own author line be read as a claim of authorship would
+be the defect it is about.
+
 ---
 
 ## The finding
