@@ -10,6 +10,21 @@ tools/claim.sh --release                     # closes yours
 git add docs/SESSIONS.md && git commit && git push   # ← an unpushed claim reaches nobody
 ```
 
+## Artifact URLs — name the artifact, do not paste its link
+
+This board is committed, and this repository may go public, at which point a
+`claude.ai/code/artifact/…` link sitting in a `DONE` block is a link anybody can try.
+Artifacts are private by default — but any one of them may have been shared by link at some
+point, and **nothing readable from here tells you which**. The board should not be the thing
+that decides that.
+
+**Five such URLs were removed on 2026-08-30**, pointing at *The Shortest Route* and *Show It
+Your Screen*. Both are **unpublished**: neither is in `docs/handouts/`, `site/` or
+`tools/pages.txt`, so a shared link would have been the only public copy. The blocks were not
+touched — `DONE` blocks are never deleted — and each title stays in place, so the record still
+says which artifact was meant. A session that needs the URL runs `/artifacts` or opens the
+gallery.
+
 ---
 
 ## Why this repo's board differs from `bugarach`'s and `interface2`'s
@@ -650,7 +665,7 @@ find out about each other. That is what a board is for, and it is why C3 in
   inverts: the folder road is unreachable and the GitHub-repo road is the only one left. Whoever
   next holds 7.3 decides whether it gains a second audience or this stays a separate sheet.
   **Not in `tools/pages.txt` and not built** — adding a row touches a file you are changing.
-  Artifact: https://claude.ai/code/artifact/45d1a208-319d-432e-9001-b73ac932ebab
+  Artifact: *The Shortest Route* (artifact URL withheld — see **Artifact URLs** at the top of this board)
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -697,7 +712,7 @@ find out about each other. That is what a board is for, and it is why C3 in
   **Top untested question:** can Cowork drive the GitHub connector to commit and push? If yes the
   no-repo route gains durability + auto-deploy and my record 0002 is superseded again.
   Not in `tools/pages.txt`, not built, never murderboarded.
-  Artifact: https://claude.ai/code/artifact/45d1a208-319d-432e-9001-b73ac932ebab
+  Artifact: *The Shortest Route* (artifact URL withheld — see **Artifact URLs** at the top of this board)
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -758,7 +773,7 @@ find out about each other. That is what a board is for, and it is why C3 in
   desktop app, try to read it from a phone; then ask Cowork to push via the GitHub connector. If
   the second works, record 0002 is superseded and the no-repo route wins outright.
   Never murderboarded. No beginner has been observed attempting either route.
-  Artifact: https://claude.ai/code/artifact/45d1a208-319d-432e-9001-b73ac932ebab
+  Artifact: *The Shortest Route* (artifact URL withheld — see **Artifact URLs** at the top of this board)
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -925,7 +940,7 @@ find out about each other. That is what a board is for, and it is why C3 in
   README**, so it had a commit to clone. The docs say create an *empty* repository — no commits, no
   branch. **Whether a cloud session can clone one is untested**, and it decides whether a learner's
   very first action works or fails unreadably.
-  Artifact: https://claude.ai/code/artifact/45d1a208-319d-432e-9001-b73ac932ebab
+  Artifact: *The Shortest Route* (artifact URL withheld — see **Artifact URLs** at the top of this board)
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -988,7 +1003,7 @@ find out about each other. That is what a board is for, and it is why C3 in
   plus the darkroom copy. **Nothing in this checkout modified.**
 - **Notes:** **`docs/handouts/README.md` NEEDS A ROW FOR THIS AND I DID NOT ADD ONE** — you hold that
   file. Title *Show It Your Screen*; artifact
-  https://claude.ai/code/artifact/4d4bfe02-ee70-4563-8a57-f0d0d2fe2f02
+  *Show It Your Screen* (artifact URL withheld — see **Artifact URLs** at the top of this board)
   **This is the first page in the repo written from a walk rather than from reading**, and the only
   one whose evidence happened to its authors. Tony asked for it after we published a real site
   together: *"the coding agent as guide and troubleshooter… no[body] needs to be an expert at web
