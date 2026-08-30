@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
-"""Audit every repo in ~/Developer: which hooks are installed, registered, and able to fire.
+"""Audit ~/Developer ON THE MACHINE THIS RUNS ON: which hooks are installed, registered, able to fire.
+
+SCOPE, because the first write-up of this got it wrong: this sees one disk. It takes no host
+argument and cannot reach another machine, so "8 of 18 repos" means 8 of the 18 checkouts that
+happen to be here. Repos whose real work lives on other machines -- interface2 is done on lab
+workstations -- are represented by whatever cold copy is on this laptop, which says nothing
+about the gates in force where the work actually happens. Run it there too, or say "on this
+machine" every time you quote a number from it.
+
 
 Read-only. The question it answers is not "is the file there" but "can it refuse".
 Three distinct ways a hook is present and dead:

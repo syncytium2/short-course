@@ -266,11 +266,32 @@ this failure misfiled.
 
 ---
 
-### N3 · Nothing propagates a gate to a new repo, and one checkout has fallen behind the branch that carries them
+### N3 · Nothing propagates a gate to a new repo — measured on one machine, which the first draft failed to say
 
 **Provenance: raised 2026-08-30 by `Mac/9b614630` while wiring the heredoc gate into this repo.
 Not a review finding — no panel has seen it.** The audit is reproducible:
 `python3 tools/hook_audit.py`, read-only over `~/Developer/*`.
+
+> ### ⚠ Scope: this audit saw ONE machine, and the first draft did not say so
+>
+> **Corrected 2026-08-30, same session, after Tony read it.** Every number below is
+> `~/Developer` **on this Mac**. It was written as though it described the estate, and it does
+> not. `tools/hook_audit.py` takes no machine argument and cannot reach another host, so
+> "8 of 18 repos" means *8 of the 18 checkouts that happen to be on this disk*.
+>
+> **The correction that prompted this:** *"my work on interface2 is done on lab workstations,
+> only work here in emergency situations. so yes it is stale, but because no one has touched it
+> on this computer in a long while."* The stale checkout is therefore **a cold standby, not a
+> place gates were lost while work continued** — which is how §"The stale-checkout finding"
+> below originally read, and it was wrong about that.
+>
+> **What this costs the finding is the part it was surest about.** The gate state of the lab
+> workstations — where interface2 work actually happens — is **unknown and not knowable from
+> here.** So the honest version of the coverage claim is: gates do not propagate to new repos on
+> this machine, and *nobody has measured any other machine.* A per-machine number presented as an
+> estate number is the same defect as
+> [the session that grepped its own transcript and pushed a false confession](docs/cases/2026-08-29-the-board-was-empty-because-claiming-is-a-habit.md);
+> filed that way deliberately rather than quietly rewritten.
 
 **The prompt was Tony's, and his hypothesis was right:** *"I was under the impression that each
 new repo acquired these features. I suspect there's a human step that was skipped."* There is no
@@ -279,7 +300,7 @@ hook and no `PreToolUse` hook at all, so nothing is inherited globally; every in
 `cp` plus a manual `settings.json` edit, exactly as murderboard's adoption block instructs. **The
 step was not skipped — it was never automated, and it is performed from memory per repo.**
 
-#### What the audit found — 18 git repos under `~/Developer` (worktrees excluded)
+#### What the audit found — 18 git repos under `~/Developer` **on this Mac** (worktrees excluded)
 
 | | count |
 |---|---|
@@ -303,7 +324,13 @@ source files, last commit 2026-08-16, and no gate.
    murderboard hook carries no declaration, so vendoring it unmodified would have installed a
    gate that could not refuse anything.
 
-#### The stale-checkout finding, which is the serious one
+#### The stale-checkout finding — reframed, and smaller than first written
+
+**Originally headed "which is the serious one." It is not, and the correction is Tony's:**
+this checkout is a **cold standby**. interface2 work is done on lab workstations; this copy is
+touched only in emergencies, and it is 102 commits behind because nothing has happened here, not
+because gates decayed underneath live work. **No session has been running unprotected.** What
+follows is kept because two smaller things in it survive the correction — see below the table.
 
 `~/Developer/interface2` is **102 commits behind `origin/main`** (local HEAD `c711e737`
 2026-08-22; `origin/main` `46643c46` 2026-08-28). Gates registered in each:
@@ -315,17 +342,32 @@ source files, last commit 2026-08-16, and no gate.
 | `no-figure-flash.hook.sh` | ❌ (on disk, unregistered) | ✅ |
 | `no-truncating-redirect.hook.sh` | ❌ (not on disk) | ✅ |
 
-**A session opened in that checkout today runs with three of four gates missing, and nothing
-says so.** The missing ones are not hypothetical: `no-truncating-redirect` exists because of
-commit `7235cedf`, *"a 'lock check' emptied nine PDFs"* — a probe written as
-`if ( : > "$f" )`, which reads as a read and is a write, and which emptied all nine figure PDFs
-in a darkroom folder. `no-figure-flash` and `plotting-roster` are two of the three gates the
-[six-prose-rules case](docs/cases/2026-08-28-six-prose-rules-zero-mechanized-rules.md) credits
-with changing the outcome — **that case's central evidence is partly unwired in the checkout it
-was written about.**
+**Two things survive the correction, and one of them is sharper than what was claimed.**
 
-This is a *fourth* enforcement tier failure, and it is not in the B4 table: not prose losing to
-a habit, but **a mechanism that is correct on the branch and absent at the desk**. `git pull`
+**1 · A cold standby is used in exactly the wrong conditions.** The emergency visit is the one
+where you are under time pressure, on an unfamiliar machine, doing something you do not normally
+do here — and it is the visit with three of four gates missing. That is the inverse of what you
+want from a standby, and it is invisible: nothing on entry says which gates this copy has. It is
+a smaller finding than "gates are decaying," and it is not nothing. **Cost to close: one
+`git pull`.** Whether a standby is worth a routine refresh is Tony's call, not a defect.
+
+**2 · The gates missing here are not hypothetical.** `no-truncating-redirect` exists because of
+commit `7235cedf`, *"a 'lock check' emptied nine PDFs"* — a probe written as `if ( : > "$f" )`,
+which reads as a read and is a write, and which emptied all nine figure PDFs in a darkroom
+folder. `no-figure-flash` and `plotting-roster` are two of the three gates the
+[six-prose-rules case](docs/cases/2026-08-28-six-prose-rules-zero-mechanized-rules.md) credits
+with changing the outcome. Note what that means for the case rather than for the machine: **the
+case's evidence lives on `origin/main`, which is intact — the local copy being thin says nothing
+about the case.** The first draft implied otherwise.
+
+**What is NOT claimed, and cannot be from here:** anything about the lab workstations. They are
+where interface2 work happens, their gate state is unmeasured, and `tools/hook_audit.py` would
+have to be run there to say anything at all.
+
+This is still a *fourth* enforcement tier the B4 table does not have — not prose losing to a
+habit, but **a mechanism that is correct on the branch and absent at a desk** — though the
+instance is now a standby rather than a live workspace, which weakens it as teaching material
+and should be said if it is ever used as such. `git pull`
 fixes it, which is precisely why nobody thinks of it as a safety step.
 
 #### The coverage gap in the gate itself, reported and deliberately not asserted
@@ -363,14 +405,22 @@ gate.
    should have and says which are missing is the obvious fix, and it is also another
    unpropagated file. The honest options are a real installer (`bootstrap-hooks.sh` run per repo)
    or accepting that this is a manual step and writing it into the new-repo checklist.
-2. **Which repos are in scope?** 10 have no gate; most are parked. `downLow` and `foundations`
-   are not.
-3. **Pull `interface2` and re-check**, and decide whether a stale-checkout warning belongs in
-   turnstile.
-4. **Should `# turnstile: gate` go upstream** into murderboard's canonical copy? Raised there,
+2. **Which repos are in scope?** 10 have no gate **on this machine**; most are parked. `downLow`
+   and `foundations` are not.
+3. **Run the audit where the work is.** This is now the first question, not the third: the lab
+   workstations hold the interface2 sessions and have never been measured. `tools/hook_audit.py`
+   is one read-only file and needs no install. Until it runs there, the coverage numbers above
+   describe a laptop.
+4. **Is a cold standby worth refreshing on a schedule?** `~/Developer/interface2` is an
+   emergency-only copy 102 commits behind, so its thin gate set costs nothing until the emergency
+   — which is the worst moment for it. A `git pull` closes it; a habit of pulling standbys is a
+   different question. Related: should turnstile warn on entry when a checkout is far behind its
+   remote, or is that scope creep into a tool whose one promise is that a hook cannot cost you
+   the session?
+5. **Should `# turnstile: gate` go upstream** into murderboard's canonical copy? Raised there,
    not fixed here — a consumer must not edit a vendored file's logic, and the two lines added
    here are stamped as a registration declaration with that reasoning.
-5. **Widen the matcher past `<<`?** Bigger, noisier, more false positives on the path every Bash
+6. **Widen the matcher past `<<`?** Bigger, noisier, more false positives on the path every Bash
    call takes. That is the trade, and it is not mine to make.
 
 **What is settled:** the gate is wired here, it blocks live (verified in-session on the exact
