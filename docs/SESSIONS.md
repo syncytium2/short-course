@@ -434,3 +434,22 @@ find out about each other. That is what a board is for, and it is why C3 in
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/8ca0d62c — Cold Start has no step for the VS Code extension — add it, and the workspace-trust gate that silently disables it
+- **Status:** ACTIVE
+- **Opened:** 2026-08-29
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** `docs/handouts/cold-start.html` (source), `site/cold-start.html` (build output),
+  `tools/build_site.sh` (the step count in META), `docs/handouts/README.md`, one new file in
+  `docs/doubt/`
+- **Notes:** This RENUMBERS Phase 3 — the new extension step becomes 3.5 and `caffeinate` moves
+  3.5 → 3.6. Checklist state is keyed by `data-id` + box index, so renumbering would silently
+  move saved ticks onto a different step; the storage key goes `cold-start-v2` → `-v3` to discard
+  rather than mis-assign. **The step count goes 29 → 30 and it is stated in four places** —
+  `build_site.sh` META, both `<meta description>` lines it generates, the reset dialog's
+  "Clear all 29 steps", and `docs/handouts/README.md`. Not deployed; deploy is the author's call.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
