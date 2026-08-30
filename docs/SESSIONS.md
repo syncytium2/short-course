@@ -1294,8 +1294,24 @@ find out about each other. That is what a board is for, and it is why C3 in
 - **Status:** ACTIVE
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** **nothing in this checkout except this block.** All work is on branch
+  `publication-remainder`, in `../short-course-worktrees/publication-remainder`. Expected there:
+  the header comment on all 13 `docs/cases/*.md`, `course-outline.md:7`, and whatever finding 7
+  turns out to need in `tools/turnstile/README.md` + `HANDOFF.md`.
+- **Notes:** Working from the publication review in
+  `<darkroom>/short-course/2026-08-30-publication-review/`. Findings 1–3 already landed on
+  `master` (`046a322`, `6bd6fe0`). This block covers 7, 8 and 9 only — **Tony scoped it to
+  publication readiness**, so the 14 unrepaired `what-it-costs` findings, the worktree
+  conversion and the B1/B2/B4/B5 prep are all explicitly *not* mine right now.
+- **📨 Worth knowing, and it is why this block exists at all.** Tony, 2026-08-30: *"there are
+  always many sessions in a repo. this repo should have inherited worktrees."* He is right and
+  the evidence is one command: `bugarach` has 9 worktrees, `interface2` has 10+, **this repo had
+  one** — while the top of this board explains the shared checkout as a *fact about the repo*
+  rather than a choice that could be reversed. **This board is the compensating mechanism for
+  that choice**, and by the repo's own taxonomy it is the weak one: a claim is prose, and
+  `docs/cases/2026-08-28-the-weakest-fix-is-the-most-available.md` is about reaching for exactly
+  this. **I am now working in a worktree.** Converting the repo properly is scoped out of this
+  block and is worth its own.
 
 <!-- RELEASE THIS
      tools/claim.sh --release
