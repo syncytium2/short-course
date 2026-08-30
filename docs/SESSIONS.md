@@ -1058,11 +1058,29 @@ find out about each other. That is what a board is for, and it is why C3 in
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Mac/942c2539 — four-barriers.html: one type scale (3 sizes, was 19), plain-language fix, bugarach described as the general tool it is, GitHub links on every repo named. Rebuild + deploy.
-- **Status:** ACTIVE
+- **Status:** DONE 2026-08-30
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
 - **Writes:** <files or folders you will change; "repo only" if nothing outside git>
 - **Notes:** <anything another session must know before touching the same thing>
+  **Deployed twice: 0.1.51, then a rebuild of all four pages.** Cloudflare f45c234b.
+  **THE TYPE SCALE IS NOW THREE TOKENS AND NOTHING ELSE** — `--t-head`, `--t-body`, `--t-label`,
+  plus `--t-mono` derived at .875 of body. The page had grown **nineteen** font sizes; the only
+  hardcoded size left anywhere in it is the `.875em` on inline mono, which is an optical
+  correction rather than a step in a scale. **Do not add a fourth**: subsection hierarchy is
+  carried by weight and italic from here on, which is the house rule.
+  `build_site.sh` injected the last one — the `.pv` version line at 11.5px. It now reads
+  `var(--t-label, 11.5px)`, so four-barriers takes the page scale and **the other three pages
+  render exactly as before**. That is why this deploy touched all four outputs.
+  **Two content corrections from Tony, both mine:** (1) *"At full strength, because a weakened
+  version of an objection is not answered"* was unreadable and is now plain. (2) **bugarach is a
+  GENERAL coordination-detection tool**, not one built for this lab — it carries features other
+  tools lack (parallel fast/slow streams) because this lab needed them. The page said *"built for
+  one laboratory's preparation"*, which reads as bespoke and is the opposite of true. Fixed on the
+  page and in the darkroom feedback document, which now says **general tool, calibrated per lab**.
+  **Every repository named on the page is now a link** — all four are public, and the two files
+  the page cites as evidence (`validation-status.md`, `detector_history.md`) are deep-linked.
+  All seven outbound links were checked with curl on 2026-08-30 and returned 200.
 
 <!-- RELEASE THIS
      tools/claim.sh --release
