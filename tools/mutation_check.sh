@@ -63,6 +63,8 @@ tools/turnstile/turnstile-run@@if [ "$rc" -ge 128 ] || [ "$elapsed" -ge "$BUDGET
 tools/turnstile/turnstile@@[ -f "$SELF_DIR/gate.template.sh" ]@@[ -f "/dev/null" ]@@template check defanged
 tools/check_pointers.sh@@[ -e "$cand" ] || printf@@[ -e "$cand" ] && printf@@pointer check inverts its test
 tools/build_site.sh@@ "</body>\n"@@ "\n"@@standalone loses its closing body tag
+tools/build_site.sh@@    desc = desc.format(steps=n_steps, phases=WORDS.get(n_phases, n_phases))@@    desc = desc.format(steps=3, phases="two")@@step count hardcoded instead of counted
+tools/build_site.sh@@n_steps  = len(re.findall(r'data-id="[\d.]+"', s))@@n_steps  = 3@@step count stops tracking the source
 docs/handouts/cold-start.html@@state[stepKey][bk] = 1;@@state[stepKey][i] = 1;@@checklist ticks migrate by position again@@tools/checklist_state.sh
 docs/handouts/cold-start.html@@var bk = boxKeys[+i];@@var bk = boxKeys[0];@@every migrated tick lands on the first box of its step@@tools/checklist_state.sh
 docs/handouts/cold-start.html@@if (localStorage.getItem(KEY) !== null) return;@@if (false) return;@@migration re-runs over a reader already on v4@@tools/checklist_state.sh

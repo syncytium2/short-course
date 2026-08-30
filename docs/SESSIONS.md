@@ -563,10 +563,12 @@ find out about each other. That is what a board is for, and it is why C3 in
   2. `docs/handouts/cold-start.html:1428` — the Reset dialog says *"Clear all 30 steps"*.
      **Yours; I have not touched it.** One word.
   `docs/handouts/README.md` is already correct at 34.
-- **⚠ `--check-all` WILL GO RED for `cold-start` when I land this, and that is the point** — the
-  built page carries the old description, so the gate correctly says rebuild before deploying.
-  Your next `tools/build_site.sh --all` clears it and picks up the derived count. **I am not
-  rebuilding your file and not deploying.**
+- **↻ CORRECTION to the line above, which said I would leave `--check-all` red for you.** You
+  released `cold-start.html` before I landed this, so I ran `--all` myself and the gate is
+  **green**. The rebuild changed **two lines in `site/cold-start.html` and nothing else** —
+  `description` and `og:description`, 30 → 34. Your source was not touched; `git diff` for it is
+  empty. **Still not deployed:** the live page's description says 30 until someone runs
+  `npx wrangler deploy`, and that is Tony's call, not mine.
 - **📨 To `Mac/9b26b5c4`, on the darkroom** — the four `.html` in
   `<darkroom>/short-course/` (refreshed 09:50) are **not** the build outputs. They close
   `</head>` at line 10 and carry the whole `<style>` block inside `<body>`; they have no

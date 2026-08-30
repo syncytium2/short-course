@@ -34,7 +34,7 @@ wrap() {
     [ -n "$TITLE" ] || { echo "refusing: $SRC has no <title>" >&2; return 1; }
 
     SRC="$SRC" OUT="$OUT" HOST="$HOST" TITLE="$TITLE" PAGEPATH="$PAGEPATH" python3 - <<'PY'
-import io, os, sys
+import io, os, re, sys
 from urllib.parse import quote
 src, out, host, title = os.environ["SRC"], os.environ["OUT"], os.environ["HOST"], os.environ["TITLE"]
 page = os.environ.get("PAGEPATH", "")
@@ -50,7 +50,7 @@ META = {
         "Four challenges in working with coding agents, for researchers \u2014 with the real "
         "incidents behind each one, readable at three depths.", "\U0001F9F1"),
     "cold-start.html": (
-        "Zero to a working coding-agent setup: 30 steps in seven phases, each a checklist "
+        "Zero to a working coding-agent setup: {steps} steps in {phases} phases, each a checklist "
         "that stays red until every box is checked.", "\U0001F9CA"),
     "search-to-shipped.html": (
         "Zero to a deployed web app for a researcher who has never written software \u2014 "
@@ -64,6 +64,30 @@ if key not in META:
     sys.stderr.write("refusing: no page metadata for %s \u2014 add it to META in build_site.sh\n" % key)
     raise SystemExit(1)
 desc, emoji = META[key]
+
+# COUNTS ARE DERIVED, NEVER RESTATED. This description said "29 steps", then "30", while the
+# page had 34 -- and the wrong number was LIVE, in the <meta description> that is what a search
+# result and a pasted link show. Three places named the count and two were stale, because
+# nothing connects a sentence in a build script to a document it does not read.
+#
+# The gate above catches a built page drifting from its source. It cannot catch a build script
+# drifting from a source it never counted, which is a different failure with the same shape.
+# So the count is now COUNTED: {steps} and {phases} are filled from the source on every build
+# and there is no copy of the number to fall behind.
+#
+# A description that uses neither placeholder is left exactly as written -- most pages have no
+# count to state, and format() on a string with no fields is a no-op.
+n_steps  = len(re.findall(r'data-id="[\d.]+"', s))
+n_phases = len(re.findall(r'<section class="phase">', s))
+if "{steps}" in desc or "{phases}" in desc:
+    if not n_steps or not n_phases:
+        sys.stderr.write("refusing: %s states a count but has %d steps and %d phases\n"
+                         % (key, n_steps, n_phases))
+        raise SystemExit(1)
+    WORDS = {1:"one",2:"two",3:"three",4:"four",5:"five",6:"six",7:"seven",
+             8:"eight",9:"nine",10:"ten"}
+    desc = desc.format(steps=n_steps, phases=WORDS.get(n_phases, n_phases))
+
 icon = ("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E"
         "%3Ctext y='.9em' font-size='90'%3E" + quote(emoji) + "%3C/text%3E%3C/svg%3E")
 canon = "https://%s/%s" % (host, page.lstrip("/"))
@@ -137,7 +161,15 @@ if [ "${1:-}" = "--selftest" ]; then
     # Sources must be NAMED for a real page: metadata is keyed on the basename,
     # so the selftest uses the real names rather than a stand-in.
     printf '<title>It Looked Right</title>\n<style>body{color:red}</style>\n<p>hello</p>\n' > "$T/four-barriers.html"
-    printf '<title>Cold Start</title>\n<style>body{color:blue}</style>\n<p>steps</p>\n' > "$T/cold-start.html"
+    # THE COLD START FIXTURE CARRIES REAL STEPS AND PHASES, because its description is the
+    # one that derives its counts. A fixture with none of either would only ever exercise the
+    # refusal path. Three steps in two phases -- deliberately NOT the live page's numbers, so
+    # an assertion cannot pass by coincidence if the derivation silently reads the wrong file.
+    printf '%s' '<title>Cold Start</title>
+<style>body{color:blue}</style>
+<section class="phase"><li data-id="1.1"></li><li data-id="1.2"></li></section>
+<section class="phase"><li data-id="2.1"></li></section>
+' > "$T/cold-start.html"
 
     if wrap "$T/four-barriers.html" "$T/out.html" "example.com" "" >/dev/null 2>&1; then
         printf '  ok   a source wraps\n'
@@ -182,6 +214,33 @@ if [ "${1:-}" = "--selftest" ]; then
        && ! grep -q 'Four challenges' "$T/cs.html"; then
         printf '  ok   description belongs to the page, not to four-barriers\n'
     else printf '  FAIL description did not track the source\n'; fail=1; fi
+
+    # ---------------------------------------------------------------- derived counts
+    # The description said "29 steps", then "30", while the page had 34, and the wrong number
+    # was LIVE. Nothing connected a sentence in this script to a document it never counted.
+    # Now it counts, and these are the assertions that say so.
+    if grep -q 'content="Zero to a working coding-agent setup: 3 steps in two phases' "$T/cs.html"; then
+        printf '  ok   the step and phase counts are COUNTED from the source\n'
+    else printf '  FAIL counts not derived: %s\n' "$(grep -o 'name="description" content="[^"]*"' "$T/cs.html")"; fail=1; fi
+
+    if ! grep -q '{steps}\|{phases}' "$T/cs.html"; then
+        printf '  ok   no placeholder survives into the built page\n'
+    else printf '  FAIL an unfilled placeholder shipped in the description\n'; fail=1; fi
+
+    # ADDING A STEP MUST MOVE THE NUMBER. Without this the two checks above pass against a
+    # hardcoded 3 -- which is the exact defect being fixed, reintroduced in the test.
+    printf '<section class="phase"><li data-id="3.1"></li></section>\n' >> "$T/cold-start.html"
+    wrap "$T/cold-start.html" "$T/cs2.html" "example.com" "cold-start" >/dev/null 2>&1
+    if grep -q 'setup: 4 steps in three phases' "$T/cs2.html"; then
+        printf '  ok   adding a step and a phase moves both numbers\n'
+    else printf '  FAIL counts did not track an edit: %s\n' "$(grep -o 'content="Zero[^"]*"' "$T/cs2.html")"; fail=1; fi
+
+    # A page that STATES a count and has none is refused, not shipped with a zero.
+    printf '<title>Cold Start</title>\n<style>x{}</style>\n<p>no steps here</p>\n' > "$T/nosteps.html"
+    cp "$T/nosteps.html" "$T/cold-start.html"
+    if wrap "$T/cold-start.html" "$T/cs3.html" "example.com" "cold-start" >/dev/null 2>&1; then
+        printf '  FAIL a description stating a count was built from a source with no steps\n'; fail=1
+    else printf '  ok   refuses to state a count it cannot derive\n'; fi
 
     if grep -q "Built by tools/build_site.sh from $T/cold-start.html" "$T/cs.html"; then
         printf '  ok   the GENERATED line names the real source\n'
