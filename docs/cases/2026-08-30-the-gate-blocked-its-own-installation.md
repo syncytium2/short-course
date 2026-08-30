@@ -40,6 +40,11 @@
 > because a case written by the evaluated party that omits the evaluated party's error is worth
 > nothing.
 >
+> **Point 6 is a defect committed while committing this file, found by the session I collided
+> with.** It is the strongest material here and the least flattering: I published the exact
+> failure Point 1 describes, ninety seconds after writing Point 1. Its narrative comes partly
+> from that session's account; every mechanical claim in it is replayed in the appendix.
+>
 > **One claim is not verifiable from artifacts and is marked wherever it appears:** the harness
 > instruction quoted in Point 4. It exists in this session's context window, not in any file in
 > any repo. You have my transcription and nothing else.
@@ -258,6 +263,77 @@ N3 now carries a scope banner, the demotion, and the lab workstations named as u
 corrected in `bad17c6`, in the hour, **before** this case was requested — which matters, because
 a correction made while writing up your own case is worth less than one made when it was found.
 
+## Point 6 — the checker passed, and ninety seconds later I pushed the thing it was built to prevent
+
+**Added after the fact.** This happened while committing the file you are reading, and it was
+found by the session I collided with, not by me.
+
+The sequence, all of it inside about two minutes:
+
+1. I appended my index row to [`docs/cases/README.md`](README.md). The editor returned a warning
+   with the success: *"the file had been modified on disk since you last read it — the edit
+   applied cleanly, but the file contains other changes not in your context."* **Another session
+   had added its own row while I was writing.** I read the warning and did nothing with it.
+2. I ran [`tools/check_pointers.sh`](../../tools/check_pointers.sh) — the tool that exists
+   *specifically* because broken pointers reached `master` twice in two hours on 2026-08-28. It
+   printed **`every pointer resolves`**, exit 0.
+3. I ran `git add docs/cases/README.md` — the whole file — which staged **both rows**, mine and
+   theirs.
+4. `git status --short` printed, in output I read,
+   `?? docs/cases/2026-08-30-the-hedge-that-crossed-a-session-boundary.md`. Their case file was
+   **untracked**. Their row now pointed at a file that would not be in the commit.
+5. I pushed `37360fd`, then `98b3016`. **Two commits on `master` carrying an index link to a file
+   that did not exist in the tree.**
+6. Their next commit, `0936db2`, fixed it — *"The index already pointed at this file, so master
+   had a dangling link."*
+
+**Why the checker could not help, and this is the point of the whole case restated.**
+`check_pointers.sh` scans the **working tree** — its own usage line says so, it is not a bug. In
+my working tree their file was present, merely untracked, so every pointer did resolve. What I
+published was not my working tree; it was a commit. Replayed against what I actually shipped:
+
+```
+checker against the COMMITTED tree of 37360fd:
+  BROKEN ./docs/cases/README.md:45:2026-08-30-the-hedge-that-crossed-a-session-boundary.md
+  1 broken pointer(s).                                     exit=1
+
+checker against the working tree, as I ran it:
+  every pointer resolves                                   exit=0
+```
+
+**The tool was right both times.** It was pointed at the wrong tree — which is
+[Point 1](#point-1--the-gate-would-have-installed-unable-to-refuse-and-the-manufacturers-test-cannot-see-it)
+verbatim: *a check run in a configuration that is not the deployed configuration.* I wrote that
+sentence about somebody else's adoption instructions, and then committed the identical error
+against my own repo in the same minute. Knowing the failure by name, in writing, on the screen,
+did not put it into the hands that ran the next command.
+
+**Two aggravating details worth keeping.**
+
+`check_pointers.sh` **is not wired to anything.** `.claude/settings.json` registers two gates and
+neither is this. It is a tier-2 mechanism — a script somebody must remember to run — sitting in a
+repo whose B4 section is about exactly that confusion. It ran here only because I happened to
+think of it, and thinking of it is what B4 says you cannot rely on.
+
+And my board note, published in the same commit, said the hedge case *"is NOT in the README
+index"* and *"still owes it a row."* **It was false when I wrote it and my own `git add`
+falsified it a second later.** That is the six-prose-rules case's central artifact reproduced
+exactly — *a commit whose message asserts the opposite of its own diff* — except mine asserts an
+absence that its own diff removes.
+
+**Proportion, because this is a small incident with a large lesson.** Nothing was lost. The two
+rows appended to different parts of the table and did not conflict. The dangling link lived for
+two commits and was caught by the other session quickly. `git add <shared-file>` in a shared
+checkout commits whatever else is in that file, and your commit message describes what you did,
+not what you swept up — that is the whole mechanism, and it costs one `git add -p` or one
+pathspec-with-intent to avoid.
+
+**It is filed here rather than as a fourth case file.** Three cases about cross-session collision
+were filed in this repo today; a fourth would be indexing the same class of failure rather than
+teaching it. As a sixth point on a case whose thesis is *the verification ran in the wrong
+configuration*, it is the second instance, produced by the author, ninety seconds after writing
+the first one up. That is worth more attached than standing alone.
+
 ## Where this fits the existing material
 
 - **[`points.md`](../../points.md) B4** — Point 4 is a **refinement, not another instance**. The
@@ -277,8 +353,17 @@ a correction made while writing up your own case is worth less than one made whe
   gap past `<<` is reported by the selftest as a `NOTE` that does not vote on pass/fail,
   deliberately, because asserting a known gap as expected behaviour is
   [the tests were defending the bug](2026-08-28-the-tests-were-defending-the-bug.md).
-- **A3 / B2 (*validation; cultivate your suspicion*)** — Point 5. The suspicion that would have
-  paid was not about the repos. It was about the instrument's reach.
+- **A3 / B2 (*validation; cultivate your suspicion*)** — Points 5 and 6. In both, the suspicion
+  that would have paid was not about the subject but about **the instrument**: its reach in
+  Point 5, the tree it was pointed at in Point 6.
+- **C3 (*a mechanism is what a habit cannot be*)** — Point 6 is a fifth instance, and a mild one:
+  two sessions in one checkout, one shared file, no loss. Its value is not the collision but
+  what the collision proves about the checker.
+- **B4, a third time** — Point 6. `check_pointers.sh` is a **tier-2 mechanism** (remember to run
+  it) in a repo whose B4 section is about that exact confusion, and it ran only because I thought
+  of it. **A candidate mechanization is cheap:** a `PrePush`/pre-commit hook that runs it against
+  the committed tree rather than the working tree would have caught this one. Proposed, not
+  built — see [`OPEN-FINDINGS.md` N4](../../OPEN-FINDINGS.md).
 - **C1 (*communication is two-way*)** — Point 5 again. The user supplied the one fact that
   invalidated the framing, and it was a fact about **where he works**, which no audit of any
   machine could have produced.
@@ -297,8 +382,11 @@ a correction made while writing up your own case is worth less than one made whe
 > [`README.md`](README.md) already flags the estate's over-indexing on one operator's projects.
 > Point 5 partly answers that — the error in it was found by the human — but only partly.
 >
-> **Strongest use:** Point 4 as B4's replacement diagnosis, and Point 1 as §8's second incident.
-> Neither needs the rest of the file.
+> **Strongest use:** Point 4 as B4's replacement diagnosis, and **Points 1 + 6 read as a pair**
+> — the same failure in someone else's tool and then in the author's own hands ninety seconds
+> later. That pairing is the most teachable thing in the file and needs about four minutes:
+> *knowing a failure by name does not put it in the hands that run the next command.* Point 6
+> alone needs only `git add` and "a link that points at nothing."
 
 ## Verification appendix
 
@@ -323,6 +411,14 @@ Run 2026-08-30 in `~/Developer/short-course` unless stated.
 | interface2 here is a cold standby | — | **Tony's account. It is also the only way to know this, and no audit could have produced it** |
 | Lab workstation gate state | — | **unmeasured. `hook_audit.py` has never run there** |
 | The harness instruction in Point 4 | — | **transcription from this session's context. Exists in no file; unverifiable** |
+| `37360fd` added **two** rows to `cases/README.md` | `git show 37360fd -- docs/cases/README.md` → `+` lines for the hedge case **and** this one; the message mentions only this one | verified |
+| The hedge case was absent from both commits | `git ls-tree -r 37360fd docs/cases/` and same for `98b3016` → no match | verified |
+| It landed in `0936db2` | `git log --diff-filter=A -- <path>` → one commit, *"The index already pointed at this file, so master had a dangling link"* | verified |
+| The checker passes on the working tree and fails on the commit | **replayed, not reasoned:** `git archive 37360fd \| tar -x -C $T` then `sh $T/tools/check_pointers.sh` → `BROKEN …hedge…`, `exit=1`; same script on the working tree → `every pointer resolves`, `exit=0` | verified by execution |
+| `check_pointers.sh` is not wired to any hook | `.claude/settings.json` registers the push guard and the heredoc gate; nothing invokes it | verified |
+| The editor warned me the file had changed | the warning is quoted in Point 6 and was returned with a successful edit | **in the retelling; no artifact** |
+| Nothing was lost in the collision | the two rows append to different table regions; no conflict, no overwrite | verified |
+| The collision was found by the other session | its commit `0936db2` and its account | **its account for the narrative; the commit is the artifact** |
 
 **The two rows that carry the most weight are both unverifiable from artifacts**, and they point
 opposite ways. Point 4's harness instruction is the case's sharpest claim and you have only my

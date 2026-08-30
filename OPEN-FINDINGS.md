@@ -427,3 +427,56 @@ gate.
 `\rightarrow` payload from the incident log), and all five selftest checks pass — including the
 two that no ordinary check catches: **with no `python` on `PATH`** (the 2026-08-18 fail-open that
 shipped to seven repos) and **through turnstile** (the advisory downgrade).
+
+---
+
+### N4 · `check_pointers.sh` scans the working tree, and what reaches `master` is a commit
+
+**Provenance: raised 2026-08-30 by `Mac/9b614630`, from a broken pointer it pushed itself.
+Not a review finding.** Full account:
+[Point 6 of the gate case](docs/cases/2026-08-30-the-gate-blocked-its-own-installation.md).
+
+[`tools/check_pointers.sh`](tools/check_pointers.sh) exists because two broken pointers reached
+`master` inside two hours on 2026-08-28. On 2026-08-30 a third reached `master`, **twenty seconds
+after the tool was run and passed.**
+
+The tool is not wrong and this is not a bug in it — its usage line says *"check the working
+tree"*. The gap is that the working tree and the commit are different objects in a shared
+checkout. Another session had added an index row for a case file it had not yet committed; a
+whole-file `git add` swept that row into `37360fd`; the row pointed at a path that was present on
+disk and absent from the tree. Replayed:
+
+| pointed at | result |
+|---|---|
+| the working tree, as run | `every pointer resolves` — `exit=0` |
+| the committed tree of `37360fd` | `BROKEN …the-hedge-that-crossed-a-session-boundary.md` — `exit=1` |
+
+```sh
+git archive 37360fd | tar -x -C "$T" && sh "$T/tools/check_pointers.sh"
+```
+
+**Two things make this worth a finding rather than a shrug:**
+
+1. **It is a tier-2 mechanism in the repo that named the tier problem.** `check_pointers.sh` is
+   registered in no hook — `.claude/settings.json` carries the push guard and the heredoc gate
+   and nothing else. It runs when somebody remembers, which is the thing B4 says is not a
+   mechanism. It ran this time and still missed, which is worse: **a check that runs and passes
+   buys more confidence than one nobody ran.**
+2. **Untracked files make the working tree systematically more optimistic than the commit.** Any
+   pointer to a file another session has created but not committed resolves locally and dangles
+   on `master`. In a shared single checkout with ~18 sessions this is not an edge case.
+
+**Decisions needed — author's call, none taken**
+
+1. **Wire it, and point it at the right tree.** A `PrePush` hook running the checker against
+   `HEAD` (or the pushed tree) rather than the working tree would have caught this one. It must
+   go through `turnstile-run` **with a `# turnstile: gate` line**, or it installs advisory — see
+   N3, which is the same trap one file over.
+2. **Or add a `--committed` flag** and leave invocation manual, which is cheaper and keeps the
+   tier-2 status honest rather than dressing it up.
+3. **Either way, `--selftest` needs a case for this.** The current selftest proves the checker
+   can fail; it does not prove it can fail *on a tree that differs from the working directory*,
+   which is the only failure mode that produced a real defect.
+4. **Unrelated to the tool: `git add <shared-file>` in this checkout.** A whole-file add commits
+   whatever else is in that file, and the commit message describes what you did, not what you
+   swept up. Worth one line in the board's preamble; not worth a mechanism.

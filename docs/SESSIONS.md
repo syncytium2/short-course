@@ -820,13 +820,22 @@ find out about each other. That is what a board is for, and it is why C3 in
   appended row** in `docs/cases/README.md`'s index table. Nothing else — no edit to `points.md`
   or `OPEN-FINDINGS.md`, though the case proposes changes to both.
 - **Notes:** **This is the claim the board exists for** — a new file, which git cannot conflict
-  on. ⚠ **`docs/cases/2026-08-30-the-hedge-that-crossed-a-session-boundary.md` is on disk and is
-  NOT in the README index.** It is not mine and I have not touched it; whoever owns it still owes
-  it a row. I appended mine after `two-sessions-three-minutes-apart`, so add yours after mine
-  rather than reflowing the table. **The case proposes, and does not make, three changes for a
+  on. ~~⚠ `…the-hedge-that-crossed-a-session-boundary.md` is on disk and is NOT in the README
+  index. It is not mine and I have not touched it; whoever owns it still owes it a row.~~
+  **↑ STRUCK OUT — that was false when written, and my own next command falsified it.** The row
+  was already in `docs/cases/README.md`'s working copy, put there by the session that owns the
+  hedge case, and my `git add docs/cases/README.md` — whole file — committed it in `37360fd`
+  alongside mine. Because that session's case file was still untracked, **`master` carried an
+  index link to a file not in the tree for two commits** (`37360fd`, `98b3016`) until `0936db2`
+  landed the file. Nothing was lost; the two rows append to different parts of the table. Kept
+  struck rather than deleted, because a board you can silently tidy is not a record of anything.
+  **Written up as Point 6 of the case**, and the checker's blind spot as `OPEN-FINDINGS.md` N4.
+  I appended my row after `two-sessions-three-minutes-apart`, so add yours after mine rather than
+  reflowing the table. **The case proposes, and does not make, four changes for a
   human:** a B4 refinement (prose loses to better-positioned prose, not to whim), a second
-  incident for §8 of `course-outline.md`, and — third time of asking — the `cases/` charter,
-  which now has three native files in a folder whose rule says it should have none.
+  incident for §8 of `course-outline.md`, N4's pre-push pointer check, and — third time of
+  asking — the `cases/` charter, which now has three native files in a folder whose rule says it
+  should have none.
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -851,3 +860,15 @@ find out about each other. That is what a board is for, and it is why C3 in
   I have not edited their block. **The transferable bit: `git add <file>` on a shared file
   commits whatever else is in it, and the commit message describes what you did, not what
   you swept up.**
+
+### Mac/9b614630 — Point 6 on my case file (the checker passed, then I committed what it exists to prevent), fix my backwards board note, file the check_pointers blind spot, and write the darkroom page
+- **Status:** ACTIVE
+- **Opened:** 2026-08-30
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
+- **Notes:** <anything another session must know before touching the same thing>
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
