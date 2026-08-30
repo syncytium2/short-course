@@ -813,7 +813,7 @@ find out about each other. That is what a board is for, and it is why C3 in
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Mac/9b614630 — new case file: docs/cases/2026-08-30-the-gate-blocked-its-own-installation.md — the heredoc wiring session, written by the party being evaluated
-- **Status:** ACTIVE
+- **Status:** DONE 2026-08-30
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
 - **Writes:** `docs/cases/2026-08-30-the-gate-blocked-its-own-installation.md` (new) and **one
