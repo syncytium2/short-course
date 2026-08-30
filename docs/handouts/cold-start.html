@@ -570,7 +570,7 @@
           <span class="badge">Incomplete</span>
         </div>
         <div class="detail" id="d-2.1">
-            <p class="why">Not which product you use. <b>Which class of storage holds what.</b> Big and regenerable in one place, small and shareable in another, and stated plainly enough that you never decide twice. If your data is already spread across four disks and an external drive, this is not a tidying job &mdash; write down where things <i>are</i>, and the rule for anything new.</p>
+            <p class="why">Not which product you use. <b>Which class of storage holds what.</b> Big and regenerable in one place, small and shareable in another, and stated plainly enough that you do not decide twice. If your data is already spread across four disks and an external drive, this is not a tidying job &mdash; write down where things <i>are</i>, and the rule for anything new.</p>
             <div class="fill">
               <p class="fill-k">Fill these in. They stay in this browser.</p>
               <label><span>Raw data lives at</span><input type="text" data-k="raw" spellcheck="false" placeholder="paste the path &mdash; or leave empty"></label>
@@ -705,7 +705,7 @@ claude</pre>
             <p class="why"><b>Cmd+Shift+X</b> (<b>Ctrl+Shift+X</b> on Windows and Linux) opens the Extensions view. Search <b>Claude Code</b>, click <b>Install</b>. If nothing appears afterwards, run <b>Developer: Reload Window</b> from the Command Palette.</p>
             <div class="warn"><b>Now the part that is nobody&rsquo;s fault and stops people anyway: you will not be able to find it.</b> The button is a small orange spark at the <b>top right of the editor</b> &mdash; <i>not</i> in the left rail where every other extension puts its icon. And, in the vendor&rsquo;s own words, <b><i>&ldquo;the icon only appears when you have a file open.&rdquo;</i></b>
             <br><br>A folder you have just opened shows no file. So it shows no icon. So the obvious conclusion &mdash; that the install failed &mdash; is available, reasonable, and wrong. <b>Open any file in the folder first.</b> Then the spark is there, and it was there all along.</div>
-            <p class="why"><b>Learn the route that does not depend on the icon, because it is the one that always works.</b> <b>Cmd+Shift+P</b> (<b>Ctrl+Shift+P</b>) opens the Command Palette; type <code>Claude Code</code> and pick <b>Open in New Tab</b>. That works with nothing open at all. <b>Cmd+Esc</b> (<b>Ctrl+Esc</b>) is the fast way in, but it needs a file focused &mdash; the same condition as the icon &mdash; so it is the second thing to learn, not the first.</p>
+            <p class="why"><b>Learn the route that does not depend on the icon, because it is the one that keeps working.</b> <b>Cmd+Shift+P</b> (<b>Ctrl+Shift+P</b>) opens the Command Palette; type <code>Claude Code</code> and pick <b>Open in New Tab</b>. That works with nothing open at all. <b>Cmd+Esc</b> (<b>Ctrl+Esc</b>) is the fast way in, but it needs a file focused &mdash; the same condition as the icon &mdash; so it is the second thing to learn, not the first.</p>
             <p class="why">The same palette has <b>Claude Code: Open Walkthrough</b>, a four-step tour from the people who wrote it.</p>
             <p class="why"><b>This step is written for one agent and says so.</b> None of the alternatives in 1.2 was checked for this page &mdash; not one of them was installed on the machine this was written on. Whether each has an editor extension at all, where its button lives, and whether it hides itself the same way, is unverified here.</p>
         </div>
@@ -862,7 +862,7 @@ one so I can look.
    settings and explain in plain language what
    you can do right now without asking me.
    Then propose allow / ask / deny for this
-   project: reading and searching should never
+   project: reading and searching should not
    interrupt me; anything that deletes,
    pushes, or writes outside this folder
    should ask. Show me the file you would
@@ -907,7 +907,7 @@ one so I can look.
             <p class="why">In <code>/usage</code>, press <code>d</code> and <code>w</code> to switch between the last day and the last week. It breaks the spend down by what caused it &mdash; subagents, skills, individual tools &mdash; and flags any behavior accounting for more than a tenth of it. Codex has the same three ideas under <code>/status</code>, <code>/usage</code> and <code>/statusline</code>.</p>
             <p class="why"><b>The thing that surprises everyone.</b> Your whole conversation is re-sent on every single request &mdash; re-read at about a tenth of the input price, because of caching, but the <i>whole</i> thing, every time. A one-line question in a session you have had open all day still carries the whole day with it, and coming back after a break longer than an hour misses the cache and re-processes the lot at full price. Which makes <code>/clear</code> between unrelated tasks the largest single lever you have, and it costs nothing.</p>
             <p class="why">The mechanism is written down: <a href="https://code.claude.com/docs/en/costs">Manage costs effectively</a>, and its section <i>Why usage climbs in a long session</i> in particular.</p>
-            <div class="warn"><b>&ldquo;Tokenmaxxing&rdquo; is the failure mode this step exists to prevent.</b> Spend is visible and measurable; work done is neither. So people start reading the number as if it were the work &mdash; and teams have gone as far as ranking engineers by it, which rewards whoever burns the most rather than whoever finishes. Read the usage screen to find your <i>waste</i>, never to score yourself. And do not conclude a limit changed because it felt different: in January 2026 a wave of developers reported their allowance had been cut, and the actual cause was a holiday bonus expiring (<a href="https://theregister.com/2026/01/05/claude_devs_usage_limits/">The Register, 5 Jan 2026</a> &mdash; journalism, not documentation).</div>
+            <div class="warn"><b>&ldquo;Tokenmaxxing&rdquo; is the failure mode this step exists to prevent.</b> Spend is visible and measurable; work done is neither. So people start reading the number as if it were the work &mdash; and teams have gone as far as ranking engineers by it, which rewards whoever burns the most rather than whoever finishes. Read the usage screen to find your <i>waste</i>, not to score yourself. And do not conclude a limit changed because it felt different: in January 2026 a wave of developers reported their allowance had been cut, and the actual cause was a holiday bonus expiring (<a href="https://theregister.com/2026/01/05/claude_devs_usage_limits/">The Register, 5 Jan 2026</a> &mdash; journalism, not documentation).</div>
             <p class="why">What the numbers mean in money, and what drives them: <a href="https://lookedright.tonydefazio.com/what-it-costs">What It Costs</a>.</p>
         </div>
         <ul class="checks">
@@ -934,7 +934,7 @@ one so I can look.
         <div class="detail" id="d-4.7">
             <p class="why">Both are one line. Both are impossible to apply retroactively, which is the only reason they are worth a step of their own this early.</p>
             <p class="why"><b>Line endings.</b> A <code>.gitattributes</code> pinning <code>eol=lf</code> on shell scripts. A carriage return in the first line of a script is a <code>bad interpreter</code> failure on a Linux machine, and it is a genuinely awful thing to debug from a Windows checkout because nothing you can see is wrong.</p>
-            <p class="why"><b>Who wrote it.</b> A commit hook that marks commits the agent made. Add it now and your history can always answer &ldquo;did I write this or did it?&rdquo;. Add it in a year and the honest answer for everything before today is <i>assume the agent unless a commit says otherwise</i> &mdash; which is what a sibling project in this estate has to say, because it added the hook late.</p>
+            <p class="why"><b>Who wrote it.</b> A commit hook that marks commits the agent made. Add it now and your history can answer &ldquo;did I write this or did it?&rdquo;. Add it in a year and the honest answer for everything before today is <i>assume the agent unless a commit says otherwise</i> &mdash; which is what a sibling project in this estate has to say, because it added the hook late.</p>
             <div class="prompt">
               <div class="prompt-head"><span class="prompt-k">Paste this</span><button class="copy" type="button">Copy</button></div>
               <pre>Two small things, and stop after each.
@@ -962,7 +962,7 @@ one so I can look.
           <span class="badge">Incomplete</span>
         </div>
         <div class="detail" id="d-5.1">
-            <p class="why">One change. Verify. Commit. Next. Do not fill the waiting with a second project &mdash; some people are good at that, and nobody is good at it in the first month.</p>
+            <p class="why">One change. Verify. Commit. Next. Do not fill the waiting with a second project &mdash; some people are good at that, and few are good at it in the first month.</p>
         </div>
         <ul class="checks">
             <li><button class="cb" data-key="say-last-three-commits" type="button" aria-pressed="false" aria-labelledby="c-5-1-0">&#10003;</button><span class="cbt" id="c-5-1-0">I could say what each of my last three commits did, without opening them</span></li>
@@ -1001,7 +1001,7 @@ one so I can look.
           <span class="badge">Incomplete</span>
         </div>
         <div class="detail" id="d-5.4">
-            <p class="why">Never in advance. Guarding against failure is necessary and it is also an absorbing pursuit &mdash; a beautiful start-up script will not analyze your data. Cures come in three kinds and only one is a tool: <b>a tool, a change of habit, or a check you accept forever.</b></p>
+            <p class="why">Not in advance. Guarding against failure is necessary and it is also an absorbing pursuit &mdash; a beautiful start-up script will not analyze your data. Cures come in three kinds and only one is a tool: <b>a tool, a change of habit, or a check you accept forever.</b></p>
         </div>
         <ul class="checks">
             <li><button class="cb" data-key="guard-traces-back-something" type="button" aria-pressed="false" aria-labelledby="c-5-4-0">&#10003;</button><span class="cbt" id="c-5-4-0">Every guard I have traces back to something that actually went wrong</span></li>
@@ -1055,7 +1055,7 @@ one so I can look.
         <ul class="checks">
             <li><button class="cb" data-key="file-answers-anyone-else" type="button" aria-pressed="false" aria-labelledby="c-6-2-0">&#10003;</button><span class="cbt" id="c-6-2-0">There is one file that answers &ldquo;is anyone else in here?&rdquo;</span></li>
             <li><button class="cb" data-key="opening-claim-takes-under" type="button" aria-pressed="false" aria-labelledby="c-6-2-1">&#10003;</button><span class="cbt" id="c-6-2-1">Opening a claim in it takes under a minute</span></li>
-            <li><button class="cb" data-key="claim-committed-pushed-unpushed" type="button" aria-pressed="false" aria-labelledby="c-6-2-2">&#10003;</button><span class="cbt" id="c-6-2-2">The claim is committed and pushed &mdash; an unpushed claim reaches nobody</span></li>
+            <li><button class="cb" data-key="claim-committed-pushed-unpushed" type="button" aria-pressed="false" aria-labelledby="c-6-2-2">&#10003;</button><span class="cbt" id="c-6-2-2">The claim is committed and pushed &mdash; an unpushed claim stays on one machine</span></li>
         </ul>
       </li>
       <li data-key="allocation-lands" data-id="6.3" data-open="0" data-done="0" data-optional="1">
@@ -1092,7 +1092,7 @@ one so I can look.
         </div>
           <p class="links"><a href="https://porkbun.com/">porkbun.com</a></p>
         <div class="detail" id="d-7.1">
-            <p class="why"><a href="https://porkbun.com/">porkbun.com</a>. Two things to look at that the checkout does not put in front of you: <b>the renewal price, not the first-year price</b> &mdash; on some endings those differ by a factor of ten &mdash; and whether WHOIS privacy is included, which at Porkbun it is. Decline the rest of the upsells; you can add any of them later and will probably never want to.</p>
+            <p class="why"><a href="https://porkbun.com/">porkbun.com</a>. Two things to look at that the checkout does not put in front of you: <b>the renewal price, not the first-year price</b> &mdash; on some endings those differ by a factor of ten &mdash; and whether WHOIS privacy is included, which at Porkbun it is. Decline the rest of the upsells; you can add any of them later and will probably not want to.</p>
             <p class="why">A name you will still want in five years beats a clever one. It goes on papers.</p>
         </div>
         <ul class="checks">
@@ -1205,7 +1205,7 @@ or four A records:
         <span class="trap-k">Reading the reply instead of the result<span class="wrong">Wrong</span></span>
         <p>The explanation will sound right. It is written to sound right, and it is your only evidence of how you were understood &mdash; which is not evidence that anything happened. A green check is evidence about the check, not about the work.</p>
         <p class="incident"><b>What actually happened.</b> A complaint came in about a job. Jobs have numbers. The person answering meant to type <i>the below job number</i>, and typed <i>the blow job number</i> instead. Spell check passed it: &ldquo;blow&rdquo; is a word. Grammar check passed it: the sentence parses. Both tools did exactly what they are built to do, and neither was built to ask whether this is the word you meant. It was caught by the recipient.</p>
-        <p><b>Instead:</b> open the artifact yourself, and when you rely on an automatic check, break it on purpose once and confirm it notices. A check that has never failed has not been shown to work &mdash; it has been shown to pass.</p>
+        <p><b>Instead:</b> open the artifact yourself, and when you rely on an automatic check, break it on purpose once and confirm it notices. A check you have not seen fail has not been shown to work &mdash; it has been shown to pass.</p>
         <p class="src"><a href="https://lookedright.tonydefazio.com/#validation">The full incident, and the errors worth naming &mdash; <i>It Looked Right</i>, challenge 3</a></p>
       </li>
     </ul>
@@ -1456,7 +1456,7 @@ or four A records:
     L.push('down before anything depends on it. Do not move or');
     L.push('reorganize anything.');
     L.push('');
-    if (raw) { L.push('Raw data, read-only \u2014 never write here:'); L.push('  ' + raw); }
+    if (raw) { L.push('Raw data, read-only \u2014 do not write here:'); L.push('  ' + raw); }
     if (work) { L.push('Working data you may write:'); L.push('  ' + work); }
     L.push('Figures and documents I need to read or share:');
     L.push('  ' + (review || HOLD));
@@ -1467,7 +1467,7 @@ or four A records:
     }
     L.push('');
     L.push('Create docs/SETUP.md and state these as rules, not');
-    L.push('description: which path holds what, what must never');
+    L.push('description: which path holds what, what must not');
     L.push('be written where, and what a new session should read');
     L.push('first.');
     L.push('');
