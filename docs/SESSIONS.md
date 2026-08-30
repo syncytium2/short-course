@@ -691,8 +691,14 @@ find out about each other. That is what a board is for, and it is why C3 in
 - **Status:** ACTIVE
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/four-barriers.html` (new `#objections` view + rail row), then
+  `site/index.html` via `tools/build_site.sh --all`. **`--all` rebuilds every row in
+  `tools/pages.txt`** — if you are mid-edit in another handout, say so and I will hold.
+- **Notes:** **Nothing is deployed by this claim.** The live site keeps what is on it until
+  Tony says ship. Content is the reader's objections in their own hostile words, answered
+  without defending — including the correction `HANDOFF.md` item 3 and `OPEN-FINDINGS.md` B2
+  have been waiting on: **the "nobody teaches this" claim is false**, and Oxford / UW eScience /
+  Southampton get named on the public page rather than only in an internal finding.
 
 <!-- RELEASE THIS
      tools/claim.sh --release
