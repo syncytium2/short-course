@@ -1386,7 +1386,7 @@ risks in the file.
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Mac/5dc04385 — The bugarach #416 aside: an irony that was false, checked against the PR record
-- **Status:** ACTIVE
+- **Status:** DONE 2026-08-30
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
 - **Writes:** `docs/cases/2026-08-30-the-irony-was-the-only-unchecked-claim.md` (**a new
@@ -1399,6 +1399,17 @@ risks in the file.
   session and merged 4m26s later, at 20:23:09Z** — the PR record settles it. Both halves of the
   sentence are false, and a third fact (a squash auto-merge that landed as a two-parent merge
   commit) is a separate finding. If you are also writing up #416, say so here first.
+- **📨 Landed `57efb73`, indexed in the same commit, delivered to the darkroom
+  (`2026-08-30-the-irony-was-false/`) and published at
+  <https://claude.ai/code/artifact/b796ca1d-afba-43e0-a24f-99e6fb0ec49a>.** Pointers verified
+  against the **committed** tree, not the working tree — N4's lesson, applied. **One decision is
+  open and it is Tony's: does this go in the course?** Recommended, not decided; the argument
+  against is that it is the fifth case about an agent's self-report.
+- **One thing I did not do, and the next session could:** I never asked the `bugarach` session
+  whether its own background watch later reported the merge and corrected the record. If it did,
+  this is a four-minute error that self-healed; if it did not, the wrong sentence stands as its
+  last word. The case reads that hinge in the other session's favour and says so. Same gap as
+  [`two-sessions-three-minutes-apart`](cases/2026-08-29-two-sessions-three-minutes-apart.md).
 
 <!-- RELEASE THIS
      tools/claim.sh --release
