@@ -25,6 +25,17 @@
     --shadow: 0 1px 2px rgba(23,28,35,.05), 0 8px 24px -16px rgba(23,28,35,.28);
 
     --sans: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+    /* THE WHOLE TYPE SCALE. Three declared sizes and one derived, replacing the
+       nineteen this page had grown -- 10, 10.5, 11, 11.5, 12, 12.5, 13, 13.5, 14,
+       14.5, 15.5, 16, 16.5, 17.5, 18 and two clamps. Nothing below sets a font-size
+       in pixels; hierarchy is carried by WEIGHT and ITALIC, which is the house rule.
+       --t-mono is derived because mono at the same pixel size reads one step larger
+       than sans, the correction `code, .path` already made inline. */
+    --t-head:  26px;
+    --t-body:  16px;
+    --t-label: 11px;
+    --t-mono:  calc(var(--t-body) * .875);
     --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   }
 
@@ -68,7 +79,7 @@
     background: var(--ground);
     color: var(--ink);
     font-family: var(--sans);
-    font-size: 15.5px;
+    font-size: var(--t-body);
     line-height: 1.6;
     margin: 0;
     padding: 0;
@@ -97,11 +108,11 @@
   .ready:hover { background: var(--accent); color: var(--ground); }
   .ready:hover .ready-k, .ready:hover .ready-go { color: var(--ground); }
   .ready-k {
-    font-family: var(--mono); font-size: 11px; letter-spacing: .13em;
+    font-family: var(--mono); font-size: var(--t-label); letter-spacing: .13em;
     text-transform: uppercase; color: var(--accent);
   }
   .ready-t { font-weight: 600; }
-  .ready-go { margin-left: auto; color: var(--accent); font-size: 18px; line-height: 1; }
+  .ready-go { margin-left: auto; color: var(--accent); font-size: var(--t-body); line-height: 1; }
   @media (max-width: 560px) { .ready-go { margin-left: 0; } }
 
   /* The sceptic's door, above the reader's. It carries the objection in the reader's
@@ -126,11 +137,11 @@
   }
   .mast-id { max-width: 62ch; }
   .eyebrow {
-    font-family: var(--mono); font-size: 11px; letter-spacing: .13em;
+    font-family: var(--mono); font-size: var(--t-label); letter-spacing: .13em;
     text-transform: uppercase; color: var(--muted); margin: 0 0 8px;
   }
   h1 {
-    font-size: clamp(24px, 3.4vw, 31px); font-weight: 600; letter-spacing: -.02em;
+    font-size: var(--t-head); font-weight: 600; letter-spacing: -.02em;
     margin: 0; text-wrap: balance;
   }
   .standfirst { color: var(--muted); margin: 8px 0 0; max-width: 60ch; }
@@ -139,7 +150,7 @@
 
   .depth { display: flex; flex-direction: column; gap: 6px; }
   .depth-label {
-    font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em;
+    font-family: var(--mono); font-size: var(--t-label); letter-spacing: .12em;
     text-transform: uppercase; color: var(--faint);
   }
   /* No overflow:hidden — it clipped the :focus-visible ring off the page's only controls. */
@@ -148,7 +159,7 @@
   .seg button:last-child { border-radius: 0 5px 5px 0; }
   .seg button:focus-visible { outline-offset: -2px; }
   .seg button {
-    font-family: var(--mono); font-size: 11.5px; letter-spacing: .05em;
+    font-family: var(--mono); font-size: var(--t-label); letter-spacing: .05em;
     padding: 7px 11px; border: 0; border-right: 1px solid var(--rule-firm);
     background: var(--surface); color: var(--muted); cursor: pointer;
     transition: background .12s ease, color .12s ease;
@@ -167,13 +178,13 @@
   .rail a:focus-visible { outline-offset: -2px; }
   .rail-group { margin-bottom: 20px; }
   .rail-head {
-    font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em;
+    font-family: var(--mono); font-size: var(--t-label); letter-spacing: .12em;
     text-transform: uppercase; color: var(--faint); margin: 0 0 8px;
   }
   .rail a {
     display: flex; gap: 10px; align-items: baseline;
     padding: 6px 9px; border-radius: 5px; text-decoration: none;
-    color: var(--muted); font-size: 14px; line-height: 1.35;
+    color: var(--muted); font-size: var(--t-body); line-height: 1.35;
     border-left: 2px solid transparent;
   }
   .rail a:hover { background: var(--sunk); color: var(--ink); }
@@ -181,7 +192,7 @@
     background: var(--accent-soft); color: var(--ink); font-weight: 500;
     border-left-color: var(--accent);
   }
-  .rail .k { font-family: var(--mono); font-size: 11px; color: var(--faint); flex: none; width: 1.4em; }
+  .rail .k { font-family: var(--mono); font-size: var(--t-label); color: var(--faint); flex: none; width: 1.4em; }
   .rail a[aria-current="page"] .k { color: var(--accent); }
 
   .pane { min-width: 0; }
@@ -212,16 +223,16 @@
   /* ---------------- typography inside a view ---------------- */
 
   .view h2 {
-    font-size: clamp(21px, 2.6vw, 25px); font-weight: 600; letter-spacing: -.015em;
+    font-size: var(--t-head); font-weight: 600; letter-spacing: -.015em;
     margin: 0; text-wrap: balance;
   }
   .view-head { border-bottom: 1px solid var(--rule); padding-bottom: 16px; margin-bottom: 26px; }
   .view-head .eyebrow { margin-bottom: 6px; }
-  .lede { font-size: 17.5px; line-height: 1.5; margin: 12px 0 0; max-width: 60ch; text-wrap: pretty; }
+  .lede { font-size: var(--t-body); line-height: 1.5; margin: 12px 0 0; max-width: 60ch; text-wrap: pretty; }
   .lede b { font-weight: 600; }
 
   .view h3 {
-    font-size: 16px; font-weight: 600; margin: 34px 0 10px; letter-spacing: -.005em;
+    font-size: var(--t-body); font-weight: 600; margin: 34px 0 10px; letter-spacing: -.005em;
   }
   .view p { max-width: 68ch; margin: 0 0 14px; }
   .view ul, .view ol { max-width: 68ch; margin: 0 0 16px; padding-left: 22px; }
@@ -250,11 +261,11 @@
   }
   .card:hover { border-color: var(--accent); transform: translateY(-1px); }
   .card .k {
-    font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em;
+    font-family: var(--mono); font-size: var(--t-label); letter-spacing: .12em;
     text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 7px;
   }
-  .card h4 { font-size: 16.5px; font-weight: 600; margin: 0 0 6px; letter-spacing: -.01em; }
-  .card p { font-size: 14px; color: var(--muted); margin: 0; max-width: none; }
+  .card h4 { font-size: var(--t-body); font-weight: 600; margin: 0 0 6px; letter-spacing: -.01em; }
+  .card p { font-size: var(--t-body); color: var(--muted); margin: 0; max-width: none; }
 
   /* ---------------- the escalation strip ---------------- */
 
@@ -270,17 +281,17 @@
   .esc-glyph { display: block; }
   .esc-name {
     display: block; padding: 13px 15px 0;
-    font-family: var(--mono); font-size: 12.5px; font-weight: 600; letter-spacing: .04em;
+    font-family: var(--mono); font-size: var(--t-label); font-weight: 600; letter-spacing: .04em;
     text-transform: uppercase; color: var(--ink); line-height: 1.3;
   }
   .esc-row.now .esc-name { color: var(--accent); }
   .esc-eg {
-    font-family: var(--mono); font-size: 10.5px; line-height: 1.45; color: var(--faint);
+    font-family: var(--mono); font-size: var(--t-mono); line-height: 1.45; color: var(--faint);
     display: flex; flex-wrap: wrap; gap: 1px 9px; padding: 5px 15px 0;
   }
   .esc-b { padding: 10px 15px 0; }
-  .esc .esc-v { margin: 0 0 7px; font-size: 14.5px; max-width: none; }
-  .esc .esc-you { margin: 0; font-size: 13.5px; color: var(--muted); max-width: none; }
+  .esc .esc-v { margin: 0 0 7px; font-size: var(--t-body); max-width: none; }
+  .esc .esc-you { margin: 0; font-size: var(--t-body); color: var(--muted); max-width: none; }
   .esc-row.now .esc-you { color: var(--ink); }
 
   /* ---- the escalation panels ----
@@ -321,17 +332,17 @@
   details.more > summary {
     list-style: none; cursor: pointer; padding: 11px 0;
     display: flex; align-items: baseline; gap: 10px;
-    font-size: 14.5px; color: var(--accent); font-weight: 500;
+    font-size: var(--t-body); color: var(--accent); font-weight: 600;
   }
   details.more > summary::-webkit-details-marker { display: none; }
   details.more > summary::before {
-    content: "+"; font-family: var(--mono); font-size: 13px;
+    content: "+"; font-family: var(--mono); font-size: var(--t-mono);
     color: var(--faint); width: 1em; flex: none;
   }
   details.more[open] > summary::before { content: "\2212"; }
   details.more > summary:hover { color: var(--ink); }
   details.more > summary .cost {
-    font-family: var(--mono); font-size: 11px; letter-spacing: .06em;
+    font-family: var(--mono); font-size: var(--t-label); letter-spacing: .06em;
     color: var(--faint); text-transform: uppercase; margin-left: auto; font-weight: 400;
   }
   details.more .inner { padding: 2px 0 18px 1.6em; }
@@ -344,18 +355,18 @@
     border-radius: 0 7px 7px 0; padding: 15px 17px; margin: 0 0 13px; max-width: 74ch;
   }
   .spec-top { display: flex; flex-wrap: wrap; gap: 10px; align-items: baseline; margin-bottom: 7px; }
-  .spec-top h4 { font-size: 15.5px; font-weight: 600; margin: 0; letter-spacing: -.005em; }
+  .spec-top h4 { font-size: var(--t-body); font-weight: 600; margin: 0; letter-spacing: -.005em; }
   .tag {
-    font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase;
+    font-family: var(--mono); font-size: var(--t-label); letter-spacing: .1em; text-transform: uppercase;
     padding: 2px 7px; border-radius: 3px; background: var(--accent-soft); color: var(--accent);
     white-space: nowrap;
   }
   .tag.warn { background: var(--caution-soft); color: var(--caution); }
-  .spec p { font-size: 14.5px; margin: 0 0 10px; max-width: none; }
+  .spec p { font-size: var(--t-body); margin: 0 0 10px; max-width: none; }
   .spec p:last-child { margin-bottom: 0; }
 
   .caught {
-    font-family: var(--mono); font-size: 12px; color: var(--caution);
+    font-family: var(--mono); font-size: var(--t-mono); color: var(--caution);
     background: var(--caution-soft); border-radius: 4px; padding: 8px 11px;
     margin: 10px 0 0; display: block; max-width: none;
   }
@@ -364,7 +375,7 @@
 
   .prov {
     display: none;
-    font-family: var(--mono); font-size: 11.5px; line-height: 1.65;
+    font-family: var(--mono); font-size: var(--t-mono); line-height: 1.65;
     color: var(--faint); border-top: 1px dashed var(--rule);
     padding-top: 9px; margin-top: 12px; max-width: none;
     overflow-x: auto;
@@ -397,7 +408,7 @@
   }
   .warn p { margin: 0 0 10px; max-width: none; }
   .warn p:last-child { margin-bottom: 0; }
-  .warn-note { font-size: 13px; color: var(--caution); }
+  .warn-note { font-size: var(--t-body); color: var(--caution); }
 
   /* ---------------- tables ---------------- */
 
@@ -406,10 +417,10 @@
   .tw.wide td, .tw.wide th { padding-right: 20px; }
   .tw.wide td:first-child { min-width: 15em; }
   td .tag { display: inline-block; margin-left: 7px; vertical-align: 1px; }
-  table { border-collapse: collapse; width: 100%; font-size: 14px; }
+  table { border-collapse: collapse; width: 100%; font-size: var(--t-body); }
   th, td { text-align: left; padding: 9px 13px 9px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
   th {
-    font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase;
+    font-family: var(--mono); font-size: var(--t-label); letter-spacing: .1em; text-transform: uppercase;
     color: var(--muted); font-weight: 500; border-bottom-color: var(--rule-firm);
   }
   td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
@@ -418,10 +429,10 @@
 
   .phase { border-left: 2px solid var(--rule-firm); padding: 0 0 4px 20px; margin: 0 0 22px; position: relative; }
   .phase-k {
-    font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+    font-family: var(--mono); font-size: var(--t-label); letter-spacing: .1em; text-transform: uppercase;
     color: var(--accent); margin: 0 0 3px;
   }
-  .phase h4 { font-size: 15.5px; font-weight: 600; margin: 0 0 8px; }
+  .phase h4 { font-size: var(--t-body); font-weight: 600; margin: 0 0 8px; }
   .phase ol { padding-left: 20px; margin-bottom: 0; }
   .phase.opt { border-left-style: dashed; }
 
@@ -429,9 +440,9 @@
 
   .foot {
     margin-top: 52px; padding-top: 20px; border-top: 1px solid var(--rule);
-    font-size: 13px; color: var(--faint); max-width: 74ch;
+    font-size: var(--t-body); color: var(--faint); max-width: 74ch;
   }
-  .foot p { max-width: none; margin: 0 0 9px; font-size: 13px; }
+  .foot p { max-width: none; margin: 0 0 9px; font-size: var(--t-body); }
 
   /* ---------------- narrow ---------------- */
 
@@ -462,13 +473,13 @@
   .draft-k {
     display: block;
     font-family: var(--mono);
-    font-size: 11.5px;
+    font-size: var(--t-label);
     letter-spacing: .07em;
     text-transform: uppercase;
     color: var(--caution);
     margin: 0 0 5px;
   }
-  .draft p { margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--ink); }
+  .draft p { margin: 0; font-size: var(--t-body); line-height: 1.55; color: var(--ink); }
   .draft p + p { margin-top: 7px; }
   @media print { .draft { break-inside: avoid; } }
 </style>
@@ -911,7 +922,7 @@
             <li><b>A research storage volume</b> &mdash; usually sponsored by a lab or department, not requested individually.</li>
             <li><b>A cluster account <i>and</i> an allocation</b> &mdash; two separate things, and only the second one lets you submit work.</li>
           </ol>
-          <p style="font-size:14px;color:var(--muted);margin-top:10px">Most people need neither. A laptop, synced storage and one repository covers the majority of research computing, and knowing which side of that line you are on <i>is</i> the storage decision. These take days to weeks because someone else has to approve them, so file them now and carry on with everything below while they pend.</p>
+          <p style="color:var(--muted);margin-top:10px">Most people need neither. A laptop, synced storage and one repository covers the majority of research computing, and knowing which side of that line you are on <i>is</i> the storage decision. These take days to weeks because someone else has to approve them, so file them now and carry on with everything below while they pend.</p>
         </div>
 
         <div class="phase">
@@ -931,7 +942,7 @@
             <li>Language runtimes &mdash; only the ones you need. Most people need one.</li>
             <li><b>Stop the machine sleeping through your own work.</b> A long run that outlasts your attention dies when the display sleeps or the lid closes, and it dies without a result. On macOS, <a href="https://apps.apple.com/us/app/amphetamine/id937984704?mt=12">Amphetamine</a> is free and handles closed-lid operation; <span class="path">caffeinate -dimsu</span> is built in and needs no install. Windows has PowerToys Awake; Linux has <span class="path">systemd-inhibit</span>.</li>
           </ol>
-          <p style="font-size:14px;color:var(--muted);margin-top:10px"><b>Item 9 is phase 0&rsquo;s cheap alternative and it belongs before the request, not after.</b> Phase 0 says ask for a cluster when a run would pin a workstation for hours. A good share of those people do not need a cluster &mdash; they need the machine to stay awake. One of those costs a minute; the other takes weeks. Try the minute first.</p>
+          <p style="color:var(--muted);margin-top:10px"><b>Item 9 is phase 0&rsquo;s cheap alternative and it belongs before the request, not after.</b> Phase 0 says ask for a cluster when a run would pin a workstation for hours. A good share of those people do not need a cluster &mdash; they need the machine to stay awake. One of those costs a minute; the other takes weeks. Try the minute first.</p>
         </div>
 
         <div class="phase">
@@ -985,20 +996,21 @@
 
         <h3>&ldquo;A vibe coder gone wild&rdquo;</h3>
         <p class="quote">&ldquo;Five sites, a home-made review process, a &lsquo;course&rsquo; nobody asked for &mdash; this is a vibe coder gone wild.&rdquo;</p>
-        <p><b>At full strength, because a weakened version of an objection is not answered.</b> Every public repository behind those sites was created in the last ten weeks. All of them have zero stars, zero forks and no contributors outside the author&rsquo;s own two accounts and an agent. Most of the code and much of the prose was written by an agent, including this sentence&rsquo;s first draft. <b>And commit counts are not evidence</b> &mdash; a machine produces a thousand commits cheaply, so the four-figure number on one of those repositories proves activity and nothing else.</p>
+        <p><b>Here is that objection made as strongly as it can be made, before any answer to it.</b> An easy version would be easy to knock down and would prove nothing. Every public repository behind those sites was created in the last ten weeks. All of them have zero stars, zero forks and no contributors outside the author&rsquo;s own two accounts and an agent. Most of the code and much of the prose was written by an agent, including this sentence&rsquo;s first draft. <b>And commit counts are not evidence</b> &mdash; a machine produces a thousand commits cheaply, so the four-figure number on one of those repositories proves activity and nothing else.</p>
         <p><b>Here is the part that is not cheap.</b> Every one of those projects is measured against something that could have said no &mdash; a reference implementation, a competing published method, or events planted at known times &mdash; rather than against its own opinion of itself.</p>
         <p><b>This paragraph is a correction.</b> It first said all four were ports of somebody else&rsquo;s published method. That is true of one of them and it mis-credits the rest: three of bugarach&rsquo;s six detectors were designed for that preparation, its learned detector was written from scratch, and the MATLAB originals of the code that <i>is</i> ported are the author&rsquo;s own. The error was written into a section about being confidently wrong, from the public repositories, in the direction that <b>understates</b> the work &mdash; which is the same defect as overstating it and considerably harder to notice, because it sounds like modesty.</p>
         <div class="tw">
           <table>
             <thead><tr><th>Project</th><th>What it is</th><th>The check a demo would not have</th></tr></thead>
             <tbody>
-              <tr><td><b>no_peak</b></td><td>The CLUSTER hormone pulse-detection algorithm, ported from the original Fortran and an Igor Pro port, running in the browser</td><td>Scored against simulated truth and head-to-head with a competing published tool. The repository publishes the table in which <b>its own algorithm loses</b>: 51.5&ndash;60.8% sensitivity with zero false positives, against AutoDecon&rsquo;s ~98%. A later finding in the same file records that the near-zero false-positive rate it is credited with is <b>partly a property of the benchmark</b></td></tr>
-              <tr><td><b>bugarach</b></td><td>Coordination detection built for one laboratory&rsquo;s preparation: <b>three detectors designed there</b>, two more constructed there on published ideas, one port, and a learned detector written from scratch. A paper is in preparation</td><td>Events planted at known times in simulated recordings, so a miss and a false alarm are counted rather than argued about &mdash; and the simulation is built from an <i>untreated</i> recording, so the effect the experiment was run to measure is not spent on the instrument that measures it. 113 test files and a CI run that is green today</td></tr>
-              <tr><td><b>colonel_kernel</b></td><td>An instrument for testing whether a single linear kernel links action potentials to a calcium signal &mdash; written because on real recordings one often does not exist, and <b>that failure is the finding rather than a fault</b></td><td>It reports mechanical facts and <b>refuses to print a pass or fail verdict</b>, because asserting that the deconvolution failed <i>is</i> the scientific judgement it exists to leave to the human. Its own foundations put it in a line: <i>&ldquo;a poor fit is not a tool failure &mdash; it is the scientifically interesting answer.&rdquo;</i> Standalone methods page, written to be citable</td></tr>
-              <tr><td><b>murderboard</b></td><td>The eleven-role adversarial review used on this material</td><td>Apache-2.0, its own gates workflow and test suite, and a freshness check for the copies vendored into the other repositories</td></tr>
+              <tr><td><b><a href="https://github.com/syncytium2/no_peak">no_peak</a></b></td><td>The CLUSTER hormone pulse-detection algorithm, ported from the original Fortran and an Igor Pro port, running in the browser</td><td>Scored against simulated truth and head-to-head with a competing published tool. The repository publishes <a href="https://github.com/syncytium2/no_peak/blob/main/docs/validation-status.md">the table in which <b>its own algorithm loses</b></a>: 51.5&ndash;60.8% sensitivity with zero false positives, against AutoDecon&rsquo;s ~98%. A later finding in the same file records that the near-zero false-positive rate it is credited with is <b>partly a property of the benchmark</b></td></tr>
+              <tr><td><b><a href="https://github.com/syncytium2/bugarach">bugarach</a></b></td><td>A general tool for finding the moments when many cells fire together. It carries things other tools in the field do not &mdash; parallel data streams for fast and slow events, for one &mdash; because this laboratory needed them. <b>Three of its six detectors were designed by the author</b>, two more built here on published ideas, one is a port, and the learned detector was written from scratch. A paper is in preparation</td><td>Events planted at known times in simulated recordings, so a miss and a false alarm are counted rather than argued about &mdash; and the simulation is built from an <i>untreated</i> recording, so the effect the experiment was run to measure is not spent on the instrument that measures it. 113 test files, a CI run that is green today, and <a href="https://github.com/syncytium2/bugarach/blob/main/docs/detector_history.md">a lineage document</a> that says which detectors are the author&rsquo;s and which are not</td></tr>
+              <tr><td><b><a href="https://github.com/syncytium2/colonel_kernel">colonel_kernel</a></b></td><td>An instrument for testing whether a single linear kernel links action potentials to a calcium signal &mdash; written because on real recordings one often does not exist, and <b>that failure is the finding rather than a fault</b></td><td>It reports mechanical facts and <b>refuses to print a pass or fail verdict</b>, because asserting that the deconvolution failed <i>is</i> the scientific judgement it exists to leave to the human. Its own foundations put it in a line: <i>&ldquo;a poor fit is not a tool failure &mdash; it is the scientifically interesting answer.&rdquo;</i> Standalone methods page, written to be citable</td></tr>
+              <tr><td><b><a href="https://github.com/syncytium2/murderboard">murderboard</a></b></td><td>The eleven-role adversarial review used on this material</td><td>Apache-2.0, its own gates workflow and test suite, and a freshness check for the copies vendored into the other repositories</td></tr>
             </tbody>
           </table>
         </div>
+        <p><b>Every name in that table is a link, and all four repositories are public.</b> The claims in the right-hand column are checkable in a browser, without cloning anything: the losing table, the lineage document, the tests, the workflow runs. The one repository that is private is the one behind <i>this page</i>, which is the objection&rsquo;s strongest remaining foothold and is stated again below.</p>
         <p><b>So the tell is not who typed the code.</b> It is whether anybody scored the result against something that could have said no, and then published the score when it came back unflattering. That is the whole of the distinction being drawn, and it is the same distinction this page draws about your own work.</p>
 
         <details class="more">
@@ -1086,7 +1098,7 @@
         <div class="prov"><b>Section source.</b> <span class="path">OPEN-FINDINGS.md</span> B2, B4 and B5 &mdash; blocking findings from the murderboard run of 2026-08-26, carried unresolved until now and answered here on the public page rather than in an internal file. Audience line quoted from the author, 2026-08-30. The three named programmes were found in one search on 2026-08-26 and <b>have not been re-checked since</b>; course offerings move.</div>
 
         <div class="foot">
-          <p><b>The other projects.</b> <a href="https://tonydefazio.com">tonydefazio.com</a> &mdash; Colonel Kernel, no_peak and bugarach are research tools with public repositories; the murderboard is the review process used on this material; this page is the fifth. What they have in common is not that they are ports &mdash; only one of them is. It is that each was built so that <b>something other than the author&rsquo;s own judgement can tell him he is wrong</b>: a reference implementation, an event planted at a known time, a published method that beats his, or a review he did not run himself.</p>
+          <p><b>The other projects.</b> <a href="https://tonydefazio.com">tonydefazio.com</a> &mdash; <a href="https://github.com/syncytium2/colonel_kernel">Colonel Kernel</a>, <a href="https://github.com/syncytium2/no_peak">no_peak</a> and <a href="https://github.com/syncytium2/bugarach">bugarach</a> are research tools, each with a public repository and a live site; <a href="https://github.com/syncytium2/murderboard">the murderboard</a> is the review process used on this material; this page is the fifth. What they have in common is not that they are ports &mdash; only one of them is. It is that each was built so that <b>something other than the author&rsquo;s own judgement can tell him he is wrong</b>: a reference implementation, an event planted at a known time, a published method that beats his, or a review he did not run himself.</p>
         </div>
       </section>
 
