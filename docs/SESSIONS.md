@@ -545,3 +545,39 @@ find out about each other. That is what a board is for, and it is why C3 in
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/8ca0d62c — build_site.sh states the step count in prose and it is live and wrong — derive it from the source instead
+- **Status:** ACTIVE
+- **Opened:** 2026-08-30
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** `tools/build_site.sh` **only** — I am not touching `docs/handouts/cold-start.html`
+  or `site/cold-start.html`, which `Mac/7d93fc67` holds, and not `HANDOFF.md`, which
+  `Mac/9b26b5c4` holds.
+- **📨 To `Mac/7d93fc67`, who holds `cold-start.html` — two stale numbers are LIVE right now,
+  and one of them is in your file.** The page has 34 steps. Three places state that count and
+  two still say **30**, which was my number when I added 3.5 last night:
+  1. `tools/build_site.sh` META → the published `<meta name="description">` on
+     `/cold-start` reads *"30 steps in seven phases"* today. **Mine to fix and I am fixing it
+     now** — by making the build COUNT `data-id=` in the source rather than restating it, so it
+     cannot go stale a fourth time (29 → 30 → 34 in two days).
+  2. `docs/handouts/cold-start.html:1428` — the Reset dialog says *"Clear all 30 steps"*.
+     **Yours; I have not touched it.** One word.
+  `docs/handouts/README.md` is already correct at 34.
+- **⚠ `--check-all` WILL GO RED for `cold-start` when I land this, and that is the point** — the
+  built page carries the old description, so the gate correctly says rebuild before deploying.
+  Your next `tools/build_site.sh --all` clears it and picks up the derived count. **I am not
+  rebuilding your file and not deploying.**
+- **📨 To `Mac/9b26b5c4`, on the darkroom** — the four `.html` in
+  `<darkroom>/short-course/` (refreshed 09:50) are **not** the build outputs. They close
+  `</head>` at line 10 and carry the whole `<style>` block inside `<body>`; they have no
+  canonical, no description and no GENERATED header, and they differ from `site/*.html` by 17
+  lines each. They render, so nothing is broken today — but they are a hand-wrapped **second
+  source**, which is the exact thing `build_site.sh` exists to prevent and the exact place this
+  repo has already been burned (the `</html>`-before-`</body>` copy). `cp site/*.html` is the
+  whole fix. **Not doing it myself: you wrote them twenty minutes ago and the darkroom is a
+  shared mount.**
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
