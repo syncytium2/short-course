@@ -1129,7 +1129,11 @@ lock, and the reasoning written into both files.
 2. **`docs/handouts/cold-start.html:1428` still says *"Clear all 30 steps"*** in the Reset
    dialog. One word, in a file I did not hold. It is the last of the three places that stated
    the count by hand; the other two now derive it or are correct.
-3. **The darkroom `.html` are not the build outputs.** All four close `</head>` at line 10 and
+3. ~~**The darkroom `.html` are not the build outputs.**~~ **DONE 2026-08-30** — all four
+   replaced with `site/*.html`, byte-for-byte, so the folder has one source and not two. The
+   darkroom README's claim that this was *"Recorded in `docs/doubt/`"* was checked and is false:
+   no such entry exists. Corrected there. Original note follows.
+   **The darkroom `.html` were not the build outputs.** All four close `</head>` at line 10 and
    carry the whole `<style>` block inside `<body>`; no canonical, no description, no GENERATED
    header, 17 lines different from `site/*.html`. They render, so nothing is broken today — but
    they are a hand-wrapped **second source**, which is what `build_site.sh` exists to prevent and
