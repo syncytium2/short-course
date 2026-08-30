@@ -489,7 +489,7 @@
             <li><button class="cb" data-key="read-costs" type="button" aria-pressed="false" aria-labelledby="c-1-2-2">&#10003;</button><span class="cbt" id="c-1-2-2">I have read <a href="https://lookedright.tonydefazio.com/what-it-costs"><i>What It Costs</i></a></span></li>
         </ul>
       </li>
-      <li data-key="research-storage" data-id="1.3" data-open="0" data-done="0">
+      <li data-key="research-storage" data-id="1.3" data-open="0" data-done="0" data-optional="1">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-1.3"><span class="n">1.3</span>Only if you need them: research storage, cluster account, allocation</button>
           <span class="badge">Incomplete</span>
@@ -502,6 +502,7 @@
             <li><button class="cb" data-key="decided-whether-need-these" type="button" aria-pressed="false" aria-labelledby="c-1-3-0">&#10003;</button><span class="cbt" id="c-1-3-0">I have decided whether I need these at all</span></li>
             <li><button class="cb" data-key="yes-storage-cluster-account" type="button" aria-pressed="false" aria-labelledby="c-1-3-1">&#10003;</button><span class="cbt" id="c-1-3-1">If yes: storage, cluster account and allocation are all requested</span></li>
             <li><button class="cb" data-key="carrying-rest-while-pend" type="button" aria-pressed="false" aria-labelledby="c-1-3-2">&#10003;</button><span class="cbt" id="c-1-3-2">I am carrying on with the rest while they pend</span></li>
+            <li><button class="skipbtn" type="button">Not needed &mdash; no cluster, no terabytes</button></li>
         </ul>
       </li>
     </ol>
@@ -513,7 +514,24 @@
       <span class="phase-time">20 min</span>
     </div>
     <p class="phase-note"><b>Before an agent sees your data</b> &mdash; which is a different moment from when the data was made, and is almost certainly still ahead of you. You are not being asked to reorganize anything. You are being asked to be able to <i>say</i> where things live, before something else starts guessing. <b>If the project has no data</b> &mdash; a website, a document, a small tool &mdash; this phase is one box and 2.3 does not apply to you.</p>
+    <p class="phase-note"><b>This phase is the decision, not the construction.</b> Deciding where things live needs nothing installed, which is why it is here. The part that needs an editor and an agent &mdash; writing the path helper so nothing ever hardcodes a path &mdash; is step 3.7, after the machine exists.</p>
     <ol class="steps">
+      <li data-key="institutional-basics" data-id="1.4" data-open="0" data-done="0">
+        <div class="srow">
+          <button class="head" type="button" aria-expanded="false" aria-controls="d-1.4"><span class="n">1.4</span>Install the institutional basics &mdash; login, VPN, synced storage</button>
+          <span class="badge">Incomplete</span>
+        </div>
+        <div class="detail" id="d-1.4">
+            <p class="why">These come from your university or employer rather than from you, which is why they belong beside the other things that wait on somebody else.</p>
+            <p class="why"><b>Two later steps already assume you have them.</b> Step 2.3 asks you to exclude a folder from your sync client, which presumes the client is installed and signed in; Phase&nbsp;6 assumes you can reach a second machine. Neither said so, and this is where that stops being an assumption.</p>
+            <p class="why">The VPN matters in a particular order: anything living inside the institution&rsquo;s network wants it connected <i>before</i> you open the thing, not after a failure that looks like something else.</p>
+        </div>
+        <ul class="checks">
+            <li><button class="cb" data-key="institution-login" type="button" aria-pressed="false" aria-labelledby="c-1-4-0">&#10003;</button><span class="cbt" id="c-1-4-0">I can sign in to my institution&rsquo;s account</span></li>
+            <li><button class="cb" data-key="vpn-once" type="button" aria-pressed="false" aria-labelledby="c-1-4-1">&#10003;</button><span class="cbt" id="c-1-4-1">The VPN client is installed and I have connected through it at least once</span></li>
+            <li><button class="cb" data-key="sync-client" type="button" aria-pressed="false" aria-labelledby="c-1-4-2">&#10003;</button><span class="cbt" id="c-1-4-2">The synced-storage client is installed and signed in</span></li>
+        </ul>
+      </li>
       <li data-key="write-down-paths" data-id="2.1" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-2.1"><span class="n">2.1</span>Write down where things live</button>
@@ -693,6 +711,33 @@ claude</pre>
     </div>
     <p class="phase-note">Two prompts, and the reading you do between them. The reading is the part that is easy to skip and is the reason the rest works.</p>
     <ol class="steps">
+      <li data-key="path-helper" data-id="3.7" data-open="0" data-done="0">
+        <div class="srow">
+          <button class="head" type="button" aria-expanded="false" aria-controls="d-3.7"><span class="n">3.7</span>Write the path helper, before anything hardcodes a path</button>
+          <span class="badge">Incomplete</span>
+        </div>
+        <div class="detail" id="d-3.7">
+            <p class="why"><b>This is the step that needed the machine to exist first.</b> Phase&nbsp;2 decided where things live; you now have an editor and an agent, so this is where that decision becomes a file.</p>
+            <p class="why">A path helper is one small file answering a single question &mdash; <i>where is the data on this machine?</i> &mdash; so no script ever contains a literal path. Scripts ask the helper instead.</p>
+            <div class="prompt">
+              <div class="prompt-head"><span class="prompt-k">Paste this</span><button class="copy" type="button">Copy</button></div>
+              <pre>Write me a path helper: one small file that
+answers where my data, my working folder and my
+review folder are on this machine, reading those
+paths from docs/SETUP.md rather than repeating
+them. Show me how a script would ask it.
+
+Then tell me what would change on a second
+computer.</pre>
+            </div>
+            <p class="why"><b>Cheap now and archaeology later.</b> Step 6.1 is the test of this one: if the project runs on a second machine without you editing a path, the helper did its job. If you have to edit one, that is your first friction-log entry.</p>
+        </div>
+        <ul class="checks">
+            <li><button class="cb" data-key="helper-exists" type="button" aria-pressed="false" aria-labelledby="c-3-7-0">&#10003;</button><span class="cbt" id="c-3-7-0">One file answers &ldquo;where does the data live on this machine&rdquo;</span></li>
+            <li><button class="cb" data-key="no-literal-paths" type="button" aria-pressed="false" aria-labelledby="c-3-7-1">&#10003;</button><span class="cbt" id="c-3-7-1">No script of mine contains a literal path to my data</span></li>
+            <li><button class="cb" data-key="second-machine-known" type="button" aria-pressed="false" aria-labelledby="c-3-7-2">&#10003;</button><span class="cbt" id="c-3-7-2">I know what would change on a second computer</span></li>
+        </ul>
+      </li>
       <li data-key="project-folder" data-id="4.1" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-4.1"><span class="n">4.1</span>Make the project folder and start a session inside it</button>
@@ -849,6 +894,36 @@ one so I can look.
     </div>
     <p class="phase-note">This is the part that is not setup, and it is the part that decides whether any of the above was worth doing. Nothing here can be installed.</p>
     <ol class="steps">
+      <li data-key="cheap-now-impossible-later" data-id="4.7" data-open="0" data-done="0">
+        <div class="srow">
+          <button class="head" type="button" aria-expanded="false" aria-controls="d-4.7"><span class="n">4.7</span>Two settings that cannot be added afterwards</button>
+          <span class="badge">Incomplete</span>
+        </div>
+        <div class="detail" id="d-4.7">
+            <p class="why">Both are one line. Both are impossible to apply retroactively, which is the only reason they are worth a step of their own this early.</p>
+            <p class="why"><b>Line endings.</b> A <code>.gitattributes</code> pinning <code>eol=lf</code> on shell scripts. A carriage return in the first line of a script is a <code>bad interpreter</code> failure on a Linux machine, and it is a genuinely awful thing to debug from a Windows checkout because nothing you can see is wrong.</p>
+            <p class="why"><b>Who wrote it.</b> A commit hook that marks commits the agent made. Add it now and your history can always answer &ldquo;did I write this or did it?&rdquo;. Add it in a year and the honest answer for everything before today is <i>assume the agent unless a commit says otherwise</i> &mdash; which is what a sibling project in this estate has to say, because it added the hook late.</p>
+            <div class="prompt">
+              <div class="prompt-head"><span class="prompt-k">Paste this</span><button class="copy" type="button">Copy</button></div>
+              <pre>Two small things, and stop after each.
+
+1. Add a .gitattributes that pins eol=lf on
+   shell scripts, and explain in one sentence
+   what breaks without it.
+
+2. Add a commit hook that marks commits you
+   made, so my history can tell your commits
+   from mine. Show me the file before you
+   write it, and show me what a marked commit
+   looks like in the log.</pre>
+            </div>
+        </div>
+        <ul class="checks">
+            <li><button class="cb" data-key="gitattributes" type="button" aria-pressed="false" aria-labelledby="c-4-7-0">&#10003;</button><span class="cbt" id="c-4-7-0"><code>.gitattributes</code> exists and pins <code>eol=lf</code> on shell scripts</span></li>
+            <li><button class="cb" data-key="authorship-hook" type="button" aria-pressed="false" aria-labelledby="c-4-7-1">&#10003;</button><span class="cbt" id="c-4-7-1">A commit the agent made is marked as such</span></li>
+            <li><button class="cb" data-key="log-tells-who" type="button" aria-pressed="false" aria-labelledby="c-4-7-2">&#10003;</button><span class="cbt" id="c-4-7-2">I can tell from <code>git log</code> alone which commits are mine</span></li>
+        </ul>
+      </li>
       <li data-key="one-thing" data-id="5.1" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-5.1"><span class="n">5.1</span>One thing at a time</button>
@@ -949,6 +1024,23 @@ one so I can look.
             <li><button class="cb" data-key="file-answers-anyone-else" type="button" aria-pressed="false" aria-labelledby="c-6-2-0">&#10003;</button><span class="cbt" id="c-6-2-0">There is one file that answers &ldquo;is anyone else in here?&rdquo;</span></li>
             <li><button class="cb" data-key="opening-claim-takes-under" type="button" aria-pressed="false" aria-labelledby="c-6-2-1">&#10003;</button><span class="cbt" id="c-6-2-1">Opening a claim in it takes under a minute</span></li>
             <li><button class="cb" data-key="claim-committed-pushed-unpushed" type="button" aria-pressed="false" aria-labelledby="c-6-2-2">&#10003;</button><span class="cbt" id="c-6-2-2">The claim is committed and pushed &mdash; an unpushed claim reaches nobody</span></li>
+        </ul>
+      </li>
+      <li data-key="allocation-lands" data-id="6.3" data-open="0" data-done="0" data-optional="1">
+        <div class="srow">
+          <button class="head" type="button" aria-expanded="false" aria-controls="d-6.3"><span class="n">6.3</span>When the cluster allocation lands, weeks later</button>
+          <span class="badge">Incomplete</span>
+        </div>
+        <div class="detail" id="d-6.3">
+            <p class="why">Step 1.3 filed the request. Nothing has told you what to do when it is granted, and by then you will have forgotten what you asked for &mdash; which is the gap this step exists to close.</p>
+            <p class="why"><b>Portal before SSH; VPN before the browser.</b> Use the web portal once to confirm the account works at all, before debugging a connection method as well as an account. Then run the smallest job you can think of, end to end, before running the one you care about.</p>
+            <p class="why">And put the cluster&rsquo;s data path into the path helper from 3.7 rather than typing it into a script. A third machine is exactly the situation the helper was written for.</p>
+        </div>
+        <ul class="checks">
+            <li><button class="cb" data-key="portal-once" type="button" aria-pressed="false" aria-labelledby="c-6-3-0">&#10003;</button><span class="cbt" id="c-6-3-0">I have logged in through the portal once</span></li>
+            <li><button class="cb" data-key="trivial-job" type="button" aria-pressed="false" aria-labelledby="c-6-3-1">&#10003;</button><span class="cbt" id="c-6-3-1">I have run one trivial job end to end</span></li>
+            <li><button class="cb" data-key="cluster-path-in-helper" type="button" aria-pressed="false" aria-labelledby="c-6-3-2">&#10003;</button><span class="cbt" id="c-6-3-2">The cluster&rsquo;s data path is in the path helper, not typed into a script</span></li>
+            <li><button class="skipbtn" type="button">Not needed &mdash; no cluster</button></li>
         </ul>
       </li>
     </ol>
@@ -1089,7 +1181,7 @@ or four A records:
 
   <footer>
     <p>Companion to <i>Search to Shipped</i> and <i>It Looked Right</i>. This sheet is the part that comes before both: it ends where a first project begins. <a href="https://lookedright.tonydefazio.com/what-it-costs">What It Costs</a> is its money half, filed separately so it can go out of date on its own.</p>
-    <p>Drawn from the course working notes &mdash; the Step&nbsp;0 order, the storage rule, the five failure modes and the three kinds of cure. The vendor pages, the cost documentation and the DNS records in Phase&nbsp;7 were read on 29 August 2026; every outbound link was checked the same day and <b>nothing re-checks them</b>. When one rots, this page will not tell you.</p>
+    <p>Drawn from the course working notes. Every numbered item of the Step&nbsp;0 order is covered here; where this sheet and that order disagree about phase numbers, it is because storage is split &mdash; the decision early, the construction at 3.7 &mdash; and both halves are present. The vendor pages, the cost documentation and the DNS records in Phase&nbsp;7 were read on 29 August 2026; every outbound link was checked the same day and <b>nothing re-checks them</b>. When one rots, this page will not tell you.</p>
     <p>A step is complete when every box under it is ticked, and not before. Ticks are stored in this browser only; they do not travel with the page.</p>
   </footer>
 
