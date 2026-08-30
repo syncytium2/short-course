@@ -120,6 +120,20 @@
   .ready-go { margin-left: auto; color: var(--accent); font-size: 18px; line-height: 1; }
   @media (max-width: 560px) { .ready-go { margin-left: 0; } }
 
+  /* The sceptic's door, above the reader's. It carries the objection in the reader's
+     own words rather than a label, because "Objections" is a thing you skip and
+     "nobody works this way" is a thing you recognise. Quieter than .ready on purpose:
+     position gives it primacy, so the colour does not have to fight for it. */
+  .ready.sceptic {
+    border-color: var(--rule-firm); background: var(--surface);
+  }
+  .ready.sceptic:hover { background: var(--ink); color: var(--ground); border-color: var(--ink); }
+  .ready.sceptic .ready-k, .ready.sceptic .ready-go { color: var(--muted); }
+  .ready.sceptic:hover .ready-k, .ready.sceptic:hover .ready-go { color: var(--ground); }
+  .ready.sceptic .ready-t { font-weight: 500; font-style: italic; }
+  /* Once you are reading the objections, the door you came through is noise. */
+  body[data-view="objections"] .ready.sceptic { display: none; }
+
   .mast {
     border-bottom: 2px solid var(--ink);
     padding: 30px 0 18px;
@@ -499,6 +513,12 @@
     <p>This page and the two it links to are drafts. The arguments have been reviewed as text; the setup runbook they point at has <b>not been walked end to end by anyone</b>, and its prices have not been re-checked since they were written.</p>
   </div>
   
+      <a class="ready sceptic" href="#objections" data-view="objections">
+        <span class="ready-k">Objections</span>
+        <span class="ready-t">&ldquo;Nobody works this way. Why are you teaching it?&rdquo;</span>
+        <span class="ready-go" aria-hidden="true">&rarr;</span>
+      </a>
+
       <a class="ready" href="/cold-start">
         <span class="ready-k">Cold Start</span>
         <span class="ready-t">Ready? Click here.</span>
@@ -511,7 +531,7 @@
       <p class="eyebrow">It Looked Right &middot; for researchers</p>
       <h1>Using coding agents today and tomorrow</h1>
       <p class="standfirst"><b>Coding is no longer the barrier. Four challenges remain.</b> Each one below, with the incidents that produced it &mdash; every one real and traceable to a primary source, each labeled with who checked it &mdash; most are self-reports by the person they are about.</p>
-    <p class="pv">Version <b>0.1.47</b> &middot; 30 Aug 2026<span class="pv-born">First published 28 Aug 2026</span></p>
+    <p class="pv">Version <b>0.1.48</b> &middot; 30 Aug 2026<span class="pv-born">First published 28 Aug 2026</span></p>
     </div>
     <div class="depth">
       <span class="depth-label" id="depth-label">Reading depth</span>
