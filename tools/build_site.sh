@@ -127,9 +127,14 @@ seam = os.environ.get("BS_PROVENANCE", "")
 # build_site.sh cds to the repo root on line 2, so without -C every question was asked
 # of THIS repo about a path that might not be in it -- which is how the selftest's
 # throwaway repo came back "not tracked" while being perfectly tracked.
-GITDIR = os.path.dirname(os.path.abspath(src)) or "."
+# ...and about the ABSOLUTE path. `git -C <dir>` resolves relative paths against <dir>,
+# so passing the caller-relative `docs/handouts/x.html` made git look for
+# docs/handouts/docs/handouts/x.html and report a tracked file as untracked. The
+# refusal was correct about what it was asked; the question was wrong.
+SRCABS = os.path.abspath(src)
+GITDIR = os.path.dirname(SRCABS) or "."
 def _git(*args):
-    return _sh(["git", "-C", GITDIR] + list(args))
+    return _sh(["git", "-C", GITDIR] + [SRCABS if a is src else a for a in args])
 if seam:
     n_rev, born_iso, rev_iso = seam.split("|")
 else:

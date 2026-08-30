@@ -304,6 +304,23 @@
     .phase-time { margin-left: 0; width: 100%; }
     .phase-head { flex-wrap: wrap; }
   }
+
+  /* Version line under the masthead. Derived at build time by tools/build_site.sh
+     from the source's git history -- there is nothing here to edit or to forget. */
+  .pv {
+    margin: 10px 0 0;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    line-height: 1.5;
+    letter-spacing: .02em;
+    color: var(--faint);
+  }
+  .pv b { font-weight: 600; color: var(--muted); }
+  .pv-born { display: block; }
+  @media (min-width: 620px) {
+    .pv-born { display: inline; }
+    .pv-born::before { content: " \00B7 "; }
+  }
 </style>
 </head>
 <body>
@@ -313,6 +330,7 @@
     <p class="eyebrow">Runbook · one page</p>
     <h1>Search to Shipped</h1>
     <p class="standfirst">Zero to a deployed web app, for a researcher who has never written software. Every step, in order, with the condition that tells you it worked.</p>
+    <p class="pv">Version <b>0.1.4</b> &middot; 29 Aug 2026<span class="pv-born">First published 27 Aug 2026</span></p>
   </header>
 
   <div class="escalation">

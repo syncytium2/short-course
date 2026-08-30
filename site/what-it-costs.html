@@ -231,6 +231,23 @@
   .draft p { margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--ink); }
   .draft p + p { margin-top: 7px; }
   @media print { .draft { break-inside: avoid; } }
+
+  /* Version line under the masthead. Derived at build time by tools/build_site.sh
+     from the source's git history -- there is nothing here to edit or to forget. */
+  .pv {
+    margin: 10px 0 0;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    line-height: 1.5;
+    letter-spacing: .02em;
+    color: var(--faint);
+  }
+  .pv b { font-weight: 600; color: var(--muted); }
+  .pv-born { display: block; }
+  @media (min-width: 620px) {
+    .pv-born { display: inline; }
+    .pv-born::before { content: " \00B7 "; }
+  }
 </style>
 </head>
 <body>
@@ -244,6 +261,7 @@
     <p class="eyebrow">Companion sheet &middot; <a href="https://lookedright.tonydefazio.com/cold-start">Cold Start</a></p>
     <h1>What It Costs</h1>
     <p class="standfirst">What a working setup actually costs, who ends up paying, and which part of it is genuinely free.</p>
+    <p class="pv">Version <b>0.1.9</b> &middot; 30 Aug 2026<span class="pv-born">First published 29 Aug 2026</span></p>
   </header>
 
   <p class="lede"><b>Four things in <a href="https://lookedright.tonydefazio.com/cold-start"><i>Cold Start</i></a> can cost money</b>, and it is worth having them in front of you before you start rather than meeting them one at a time:</p>

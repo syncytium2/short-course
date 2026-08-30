@@ -473,6 +473,23 @@
   .draft p { margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--ink); }
   .draft p + p { margin-top: 7px; }
   @media print { .draft { break-inside: avoid; } }
+
+  /* Version line under the masthead. Derived at build time by tools/build_site.sh
+     from the source's git history -- there is nothing here to edit or to forget. */
+  .pv {
+    margin: 10px 0 0;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    line-height: 1.5;
+    letter-spacing: .02em;
+    color: var(--faint);
+  }
+  .pv b { font-weight: 600; color: var(--muted); }
+  .pv-born { display: block; }
+  @media (min-width: 620px) {
+    .pv-born { display: inline; }
+    .pv-born::before { content: " \00B7 "; }
+  }
 </style>
 </head>
 <body>
@@ -494,6 +511,7 @@
       <p class="eyebrow">It Looked Right &middot; for researchers</p>
       <h1>Using coding agents today and tomorrow</h1>
       <p class="standfirst"><b>Coding is no longer the barrier. Four challenges remain.</b> Each one below, with the incidents that produced it &mdash; every one real and traceable to a primary source, each labeled with who checked it &mdash; most are self-reports by the person they are about.</p>
+    <p class="pv">Version <b>0.1.44</b> &middot; 30 Aug 2026<span class="pv-born">First published 28 Aug 2026</span></p>
     </div>
     <div class="depth">
       <span class="depth-label" id="depth-label">Reading depth</span>
@@ -1246,7 +1264,7 @@
 
         <div class="foot">
           <p><b>Companion page.</b> A one-page runbook, <i>Search to Shipped</i> &mdash; zero to a deployed web application for a researcher who has never written software, with the condition that tells you each step worked. Separate page, same system.</p>
-          <p>Last revised 2026-08-28. Outbound links were checked on the day this was written; nothing re-checks them, and when one rots this page will not tell you.</p>
+          <p>Outbound links were checked on the day this was written; nothing re-checks them, and when one rots this page will not tell you. <b>The revision date is under the title</b>, derived from this page&rsquo;s own history rather than typed here &mdash; this line said <i>&ldquo;Last revised 2026-08-28&rdquo;</i> for two days after that stopped being true.</p>
         </div>
       </section>
 

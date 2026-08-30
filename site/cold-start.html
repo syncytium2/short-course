@@ -433,6 +433,23 @@
   .draft p { margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--ink); }
   .draft p + p { margin-top: 7px; }
   @media print { .draft { break-inside: avoid; } }
+
+  /* Version line under the masthead. Derived at build time by tools/build_site.sh
+     from the source's git history -- there is nothing here to edit or to forget. */
+  .pv {
+    margin: 10px 0 0;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    line-height: 1.5;
+    letter-spacing: .02em;
+    color: var(--faint);
+  }
+  .pv b { font-weight: 600; color: var(--muted); }
+  .pv-born { display: block; }
+  @media (min-width: 620px) {
+    .pv-born { display: inline; }
+    .pv-born::before { content: " \00B7 "; }
+  }
 </style>
 </head>
 <body>
@@ -455,6 +472,7 @@
     <p class="eyebrow">Setup runbook &middot; keep this window open</p>
     <h1>Cold Start</h1>
     <p class="standfirst">An email address and a laptop, to a first agent session that leaves a record behind it. Every step in order, the two prompts to paste, and the condition that tells you each one worked.</p>
+    <p class="pv">Version <b>0.1.16</b> &middot; 30 Aug 2026<span class="pv-born">First published 29 Aug 2026</span></p>
   </header>
 
   <div class="method">
