@@ -595,6 +595,9 @@ find out about each other. That is what a board is for, and it is why C3 in
   born from the commit that added the source, `<n>` from the commit count touching it, the
   version date from the last commit touching it. Nothing is typed into a page, for the same
   reason the step count is now counted rather than restated.
+  **LANDED** `b37b907` (sources + tools) and `0623b78` (rebuild). `--check-all` green, selftest
+  green, 21 mutations caught / 0 missed. Extending to the darkroom copies, which are hand-wrapped
+  and would otherwise be the only copies without a version.
   **⚠ THIS CHANGES THE BUILD ORDER FOR EVERYONE.** `build_site.sh` now **refuses to build from a
   source with uncommitted changes**, because the commit count and date would be a lie about the
   bytes it is wrapping. The order becomes: edit source → **commit the source** → rebuild →
