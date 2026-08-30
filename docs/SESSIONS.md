@@ -453,3 +453,21 @@ find out about each other. That is what a board is for, and it is why C3 in
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/8ca0d62c — Deploy site/ to lookedright.tonydefazio.com — carries the new cold-start 3.5
+- **Status:** ACTIVE
+- **Opened:** 2026-08-29
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** nothing in the repo — **the LIVE SITE**, `lookedright.tonydefazio.com`, via
+  `npx wrangler deploy`
+- **Notes:** `wrangler deploy` ships **the whole of `site/`**, not one page. All three pages
+  `--check` clean against their sources as of this claim, so nothing stale goes out — but if you
+  are mid-edit on `four-barriers.html`, `cold-start.html` or `what-it-costs.html` and have
+  rebuilt into `site/`, **my deploy publishes your unfinished work**. Say so here and I will
+  hold. Authorised by Tony, who has confirmed nobody is on the site. Side effect: the cold-start
+  storage key moves `v2` → `v3`, so every visitor's saved checklist ticks are discarded.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
