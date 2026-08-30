@@ -1,0 +1,651 @@
+<title>Show It Your Screen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+  :root {
+    --ground:  #FAFBFC;
+    --surface: #FFFFFF;
+    --sunk:    #F2F5F8;
+    --ink:     #171C23;
+    --muted:   #5C6875;
+    --faint:   #6A7583;
+    --rule:    #E1E6EB;
+    --accent:  #15577D;
+    --accent-soft: #E7F0F6;
+    --caution: #8A5D0F;
+    --caution-soft: #FAF2E2;
+
+    --sans: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:  #0D1218;  --surface: #141A22;  --sunk:    #1A222B;
+      --ink:     #E3E8EE;  --muted:   #93A0AE;  --faint:   #7C8896;
+      --rule:    #232C36;  --accent:  #69B0DD;  --accent-soft: #16283A;
+      --caution: #D2A64E;  --caution-soft: #2A2213;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:  #0D1218;  --surface: #141A22;  --sunk:    #1A222B;
+    --ink:     #E3E8EE;  --muted:   #93A0AE;  --faint:   #7C8896;
+    --rule:    #232C36;  --accent:  #69B0DD;  --accent-soft: #16283A;
+    --caution: #D2A64E;  --caution-soft: #2A2213;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--ground); color: var(--ink);
+    font-family: var(--sans); font-size: 15px; line-height: 1.55;
+    margin: 0; padding: 40px 24px 96px; -webkit-font-smoothing: antialiased;
+  }
+  .page { max-width: 860px; margin: 0 auto; }
+
+  .mast { border-bottom: 2px solid var(--ink); padding-bottom: 18px; margin-bottom: 8px; }
+  .eyebrow {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.13em;
+    text-transform: uppercase; color: var(--muted); margin: 0 0 10px;
+  }
+  h1 { font-size: 26px; font-weight: 600; letter-spacing: -0.015em; margin: 0 0 10px; text-wrap: balance; }
+  .standfirst { color: var(--muted); margin: 0; max-width: 62ch; }
+
+  .status {
+    background: var(--caution-soft); border-left: 2px solid var(--caution);
+    padding: 13px 16px; margin: 22px 0 30px; font-size: 14px;
+  }
+  .method {
+    background: var(--accent-soft); border-left: 2px solid var(--accent);
+    padding: 13px 16px; margin: 0 0 34px; font-size: 14px;
+  }
+  .status p, .method p { margin: 0 0 8px; max-width: none; }
+  .status p:last-child, .method p:last-child { margin: 0; }
+  .status b, .method b { font-weight: 600; }
+
+  .sect { margin: 0 0 38px; }
+  .sect-head {
+    display: flex; align-items: baseline; gap: 12px;
+    border-bottom: 1px solid var(--ink); padding-bottom: 7px; margin-bottom: 14px;
+  }
+  h2 { font-size: 17px; font-weight: 600; margin: 0; letter-spacing: -0.01em; }
+  .sect-tag {
+    font-family: var(--mono); font-size: 11px; color: var(--muted);
+    margin-left: auto; white-space: nowrap; letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  h3 { font-size: 14px; font-weight: 600; margin: 22px 0 8px; }
+  p { margin: 0 0 12px; max-width: 74ch; }
+
+  /* ---- the loop ---- */
+  ol.beats { list-style: none; margin: 0; padding: 0; }
+  ol.beats > li {
+    display: grid; grid-template-columns: 40px 1fr; gap: 0 14px;
+    padding: 14px 0; border-bottom: 1px solid var(--rule);
+  }
+  .n { font-family: var(--mono); font-size: 13px; color: var(--accent); font-weight: 500; padding-top: 1px; }
+  .b-title { font-weight: 600; margin: 0 0 6px; }
+  .b-body { color: var(--muted); margin: 0 0 8px; }
+  .b-body:last-child { margin: 0; }
+
+  /* ---- stoppages ---- */
+  .stop { border: 1px solid var(--rule); background: var(--surface); margin: 0 0 16px; }
+  .stop-head {
+    display: flex; align-items: baseline; gap: 10px; padding: 12px 16px;
+    border-bottom: 1px solid var(--rule); background: var(--sunk);
+  }
+  .stop-n {
+    font-family: var(--mono); font-size: 11px; color: var(--accent);
+    letter-spacing: 0.06em; white-space: nowrap;
+  }
+  .stop-t { font-weight: 600; font-size: 14px; }
+  .stop-tag {
+    margin-left: auto; font-family: var(--mono); font-size: 10.5px;
+    letter-spacing: 0.07em; text-transform: uppercase; white-space: nowrap;
+  }
+  .by-loop { color: var(--accent); }
+  .not-loop { color: var(--caution); }
+  .stop-body { padding: 14px 16px; }
+  .stop-body p { font-size: 14px; margin: 0 0 10px; }
+  .stop-body p:last-child { margin: 0; }
+
+  figure { margin: 0 0 12px; }
+  .shot {
+    border: 1px solid var(--rule); background: var(--sunk); border-radius: 3px;
+    padding: 0; overflow: hidden;
+  }
+  .shot img { display: block; width: 100%; height: auto; }
+  .shot-slot {
+    padding: 22px 18px; text-align: center; color: var(--faint);
+    font-family: var(--mono); font-size: 11.5px; line-height: 1.7;
+  }
+  .shot-slot b { display: block; color: var(--muted); font-weight: 500; margin-bottom: 4px; }
+  figcaption {
+    font-size: 12.5px; color: var(--faint); padding-top: 7px; line-height: 1.5;
+  }
+  figcaption b { color: var(--muted); font-weight: 600; }
+
+  .said {
+    border-left: 2px solid var(--rule); padding: 2px 0 2px 14px;
+    margin: 10px 0; font-size: 14px;
+  }
+  .said .who {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--faint); display: block; margin-bottom: 3px;
+  }
+  .said p { margin: 0 0 6px; }
+  .said p:last-child { margin: 0; }
+
+  .verdict {
+    margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--rule);
+    font-size: 13.5px;
+  }
+  .verdict b { font-weight: 600; }
+
+  table { border-collapse: collapse; width: 100%; margin: 6px 0 16px; font-size: 14px; }
+  th, td { text-align: left; padding: 9px 12px 9px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--muted); font-weight: 400;
+    border-bottom: 1px solid var(--ink);
+  }
+  td.k { font-weight: 500; white-space: nowrap; padding-right: 20px; }
+  .tbl-wrap { overflow-x: auto; }
+
+  .path, code {
+    font-family: var(--mono); font-size: 12.5px;
+    background: var(--sunk); padding: 1px 5px; border-radius: 2px;
+  }
+  .prov {
+    font-size: 12.5px; color: var(--faint); border-top: 1px solid var(--rule);
+    padding-top: 12px; margin-top: 26px; max-width: none;
+  }
+  .prov b { color: var(--muted); font-weight: 600; }
+  a { color: var(--accent); }
+</style>
+
+<div class="page">
+
+  <div class="mast">
+    <p class="eyebrow">Handout · one page</p>
+    <h1>Show It Your Screen</h1>
+    <p class="standfirst">You do not need to become an expert at web deployment. Nobody stays one —
+    the dashboards are rebuilt faster than anybody can memorise them. What you need is a loop, and
+    the loop is four beats long.</p>
+  </div>
+
+  <div class="status">
+    <p><b>This one was walked, and it is the only page here that was.</b> Every stoppage below
+    happened on 2026-08-30, in one sitting, to two people putting a first site on the internet. The
+    screens are real screens. Nothing is illustrative.</p>
+  </div>
+
+  <div class="method">
+    <p><b>The finding this page exists for.</b> Across that walk the guide wrote instructions in
+    advance <b>five times</b> and was wrong <b>five times</b> — every click path, every field name,
+    even the settings it had called &ldquo;the stable part.&rdquo; The same guide then unstuck every
+    one of those within a single exchange, <b>the moment it could see the screen.</b></p>
+    <p><b>That gap is the whole lesson.</b> An agent is a poor map and an excellent guide. Ask it
+    what the buttons will say and it will confidently invent them. Show it what the buttons
+    <i>do</i> say and it will read them better than you can. <b>Stop asking for the map. Start
+    sending the view.</b></p>
+  </div>
+
+  <!-- ============ 1 ============ -->
+  <section class="sect">
+    <div class="sect-head">
+      <h2>1 · Why nobody is an expert at this</h2>
+      <span class="sect-tag">the premise</span>
+    </div>
+
+    <p>It is tempting to think there is a person who knows the deployment dashboard, and that your
+    problem is not being them. There is not. The dashboard is rebuilt on the vendor's schedule, not
+    yours, and it is rebuilt for reasons that have nothing to do with you: products get merged,
+    interfaces get redesigned, and — the one that catches everybody —
+    <b>features roll out to some accounts before others.</b></p>
+
+    <p>That last one matters more than staleness. When your screen disagrees with a written guide,
+    the ordinary assumption is that the guide is out of date. Sometimes it is. But sometimes
+    <b>both are current and describing different accounts</b>, and no amount of re-reading will ever
+    resolve that. Only looking at your own screen does.</p>
+
+    <p>So the skill is not knowing where the button is. <b>The skill is being unbothered when it
+    moves.</b></p>
+
+    <p><b>None of this is about being non-technical.</b> The guide in this walk had read the vendor's
+    current documentation minutes earlier and still got the path wrong four times running, because
+    the documentation described a dashboard neither of them was looking at.</p>
+  </section>
+
+  <!-- ============ 2 ============ -->
+  <section class="sect">
+    <div class="sect-head">
+      <h2>2 · The loop</h2>
+      <span class="sect-tag">four beats</span>
+    </div>
+
+    <ol class="beats">
+      <li>
+        <span class="n">1</span>
+        <div>
+          <p class="b-title">Try the thing.</p>
+          <p class="b-body">Do not read ahead, and do not ask for the full path first — you will be
+          given one, and it will be wrong. Click the most plausible button and see what happens. You
+          cannot break a deployment dashboard by pressing the wrong thing; the worst case is a
+          project you delete afterwards.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">2</span>
+        <div>
+          <p class="b-title">Notice you are stuck — and notice it early.</p>
+          <p class="b-body">Stuck is: the screen does not match what you were told, a field you were
+          not expecting is asking for something, or an error appeared. <b>Ten seconds is long enough
+          to be stuck.</b> The cost of asking is one message; the cost of guessing is a wrong setting
+          you will not connect to the failure twenty minutes later.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">3</span>
+        <div>
+          <p class="b-title">Screenshot the whole screen, and send it.</p>
+          <p class="b-body">Not a crop of the bit you think matters — the whole thing. In this walk
+          the deciding detail was twice in a part of the screen the person would not have cropped in:
+          once a green dot on an icon, once a greyed link at the very bottom of a card. See §3.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">4</span>
+        <div>
+          <p class="b-title">Do exactly the one next thing, then look again.</p>
+          <p class="b-body">One step, not the plan. The next screen will not be what either of you
+          expected, and a five-step instruction is four wrong steps stacked behind one right one.
+          <b>Done when</b> you can say what changed on screen — not what you were told would
+          change.</p>
+        </div>
+      </li>
+    </ol>
+
+    <p style="margin-top:16px"><b>Then repeat, and expect to.</b> This walk went round that loop
+    seven times to publish one page. That is not a sign anything went wrong. It is what the job
+    is.</p>
+  </section>
+
+  <!-- ============ 3 ============ -->
+  <section class="sect">
+    <div class="sect-head">
+      <h2>3 · What to send, and what it is worth</h2>
+      <span class="sect-tag">the craft</span>
+    </div>
+
+    <p>A screenshot on its own gets you an answer. A screenshot plus three sentences gets you the
+    right one.</p>
+
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Send</th><th>Because</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="k">The whole window</td>
+          <td>You do not know which part matters — that is why you are stuck. Twice in this walk the
+          answer was in furniture the person had no reason to think was relevant.</td>
+        </tr>
+        <tr>
+          <td class="k">What you clicked to get here</td>
+          <td>The same screen can be reached two ways and mean different things. One word saves an
+          exchange.</td>
+        </tr>
+        <tr>
+          <td class="k">What you expected</td>
+          <td>The gap between expected and actual is the diagnosis. Often you have not hit an error
+          at all — you are on a different, working path, and only the expectation is wrong.</td>
+        </tr>
+        <tr>
+          <td class="k">Error text, as text</td>
+          <td>Copy it verbatim rather than paraphrasing. The exact wording is what can be searched
+          and matched; a summary of an error is a different error.</td>
+        </tr>
+        <tr>
+          <td class="k">&ldquo;This doesn't match what you said&rdquo;</td>
+          <td><b>Say it plainly.</b> It is the single most useful sentence in this whole walk. It
+          ends the guessing immediately and costs you nothing — being wrong about a dashboard is not
+          embarrassing for either of you.</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <p><b>What not to bother with.</b> Cropping. Annotating with arrows. Apologising. Retyping what
+    the screen says. Working out the cause before you ask — that is the part you are delegating.</p>
+
+    <p><b>One thing to check before you send.</b> A screenshot of a dashboard can carry an account
+    id, an email address, a billing figure, or a token. Glance at the edges. Nothing in this walk
+    needed to be hidden, but the glance is cheap and the alternative is not.</p>
+  </section>
+
+  <!-- ============ 4 ============ -->
+  <section class="sect">
+    <div class="sect-head">
+      <h2>4 · Seven stoppages, in order, from one afternoon</h2>
+      <span class="sect-tag">the evidence</span>
+    </div>
+
+    <p>Publishing was budgeted at twenty minutes and described as the easy part. This is what
+    actually happened. <b>Three were solved by the loop. Four were not</b>, and saying which is which
+    is the honest half of the claim.</p>
+
+    <!-- 1 -->
+    <div class="stop">
+      <div class="stop-head">
+        <span class="stop-n">01</span>
+        <span class="stop-t">The dashboard was down, and the status page said it wasn't</span>
+        <span class="stop-tag not-loop">not the loop</span>
+      </div>
+      <div class="stop-body">
+        <div class="said">
+          <span class="who">The person</span>
+          <p>&ldquo;again! The Cloudflare Dashboard is temporarily unavailable.&rdquo;</p>
+        </div>
+        <p>The guide checked the vendor's status page: one active incident, an unrelated product.
+        Dashboard not listed. <b>The document said fine; the system said no.</b></p>
+        <p>The right move is not to re-read the status page. It is to believe the screen. A status
+        page is a document maintained by people who are currently busy with the outage.</p>
+        <div class="verdict"><b>Unstuck by:</b> waiting, and trying again. No advice helped.
+        <b>Cost:</b> the whole first attempt.</div>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="stop">
+      <div class="stop-head">
+        <span class="stop-n">02</span>
+        <span class="stop-t">The guide was refused permission mid-task</span>
+        <span class="stop-tag not-loop">not the loop</span>
+      </div>
+      <div class="stop-body">
+        <p>Asked to make a repository public, the agent's own safety layer refused — and then refused
+        the harmless read-only command after it. The person had already said yes.</p>
+        <p><b>This is worth expecting rather than being surprised by.</b> An agent is not a single
+        thing that either can or cannot act; it sits inside limits it does not control and cannot
+        always predict. When it stops, the useful response is the one it should give you: what it was
+        trying to do, and the command you can run yourself.</p>
+        <div class="verdict"><b>Unstuck by:</b> handing the action back to the person. <b>Note:</b>
+        this stoppage was never resolved — the route went around it.</div>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="stop">
+      <div class="stop-head">
+        <span class="stop-n">03</span>
+        <span class="stop-t">Every click path was wrong, four times running</span>
+        <span class="stop-tag by-loop">the loop</span>
+      </div>
+      <div class="stop-body">
+        <div class="said">
+          <span class="who">The person</span>
+          <p>&ldquo;i need the cloudflare steps. it doesn't match what you posted&rdquo;</p>
+        </div>
+        <p>The guide had written <code>Workers &amp; Pages → Create application → Pages → Connect to
+        Git</code>, from the vendor's current documentation. That path no longer existed. Checking
+        again turned up something worse: <b>the vendor's own docs disagreed with each other</b>,
+        because Pages was being folded into Workers and different pages had been updated at different
+        times.</p>
+
+        <figure>
+          <div class="shot">
+            <div class="shot-slot">
+              <b>[ screenshot 1 · &ldquo;Ship something new&rdquo; ]</b>
+              Header: <i>Create a Worker</i> — not &ldquo;Pages&rdquo; anywhere.<br>
+              Continue with GitHub &nbsp;·&nbsp; Connect GitLab &nbsp;·&nbsp; Start with Hello World!<br>
+              Select a template &nbsp;·&nbsp; Upload your static files<br>
+              and at the very bottom, small: <i>Looking to deploy Pages? Get started</i>
+            </div>
+          </div>
+          <figcaption><b>Two details neither person would have cropped to.</b> A green dot on the
+          GitHub icon — meaning the account was already connected, so that was the button. And Pages
+          demoted to a footnote link, which is how you learn a product is being retired without
+          anyone announcing it to you.</figcaption>
+        </figure>
+
+        <div class="verdict"><b>Unstuck by:</b> one screenshot. <b>One exchange</b>, after four
+        failed attempts to describe the path in advance.</div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="stop">
+      <div class="stop-head">
+        <span class="stop-n">04</span>
+        <span class="stop-t">The settings did not appear at all</span>
+        <span class="stop-tag by-loop">the loop</span>
+      </div>
+      <div class="stop-body">
+        <p>The guide had insisted that although click paths move, the settings are stable, and handed
+        over a table of them. The next screen asked for a project name and nothing else.</p>
+
+        <figure>
+          <div class="shot">
+            <div class="shot-slot">
+              <b>[ screenshot 2 · &ldquo;Set up your application&rdquo; ]</b>
+              syncytium2/route-test &nbsp;·&nbsp; Project name: route-test<br>
+              Back &nbsp;·&nbsp; <i>Deploy</i><br>
+              — no build command, no output directory, nothing else
+            </div>
+          </div>
+          <figcaption><b>The advice was not wrong so much as irrelevant.</b> A form with fewer fields
+          than you were warned about is not an error, and this is the moment people go looking for the
+          missing settings and break something. The answer was: press Deploy.</figcaption>
+        </figure>
+
+        <div class="verdict"><b>Unstuck by:</b> one screenshot. <b>Guide's record at this point:
+        five predictions, five wrong.</b></div>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="stop">
+      <div class="stop-head">
+        <span class="stop-n">05</span>
+        <span class="stop-t">The same screen, a moment later, had four more fields</span>
+        <span class="stop-tag by-loop">the loop</span>
+      </div>
+      <div class="stop-body">
+        <div class="said">
+          <span class="who">The person</span>
+          <p>&ldquo;revised screen&rdquo;</p>
+        </div>
+        <p>The form had finished loading. Now it showed a build command, a deploy command already
+        filled in with <code>npx wrangler deploy</code>, a checkbox, and a toggle.</p>
+
+        <figure>
+          <div class="shot">
+            <div class="shot-slot">
+              <b>[ screenshot 3 · the same screen, complete ]</b>
+              Build command: <i>Optional</i>, empty<br>
+              Deploy command: <code>npx wrangler deploy</code> &nbsp;←&nbsp; pre-filled<br>
+              Builds for non-production branches ☑ &nbsp;·&nbsp; Protect with Cloudflare Access ☐
+            </div>
+          </div>
+          <figcaption><b>Sending the same screen twice was the right call.</b> A screen that changes
+          under you is worth re-sending, and neither person would have known that from the first
+          image.</figcaption>
+        </figure>
+
+        <div class="verdict"><b>Unstuck by:</b> the person re-sending unprompted. <b>This is beat 3
+        used well</b> — not waiting to be asked.</div>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="stop">
+      <div class="stop-head">
+        <span class="stop-n">06</span>
+        <span class="stop-t">The pre-filled command needed a file nobody mentioned</span>
+        <span class="stop-tag by-loop">the loop, ahead of the failure</span>
+      </div>
+      <div class="stop-body">
+        <p><b>The most valuable moment of the walk, and it is not a rescue.</b> Reading screenshot 3,
+        the guide recognised that <code>npx wrangler deploy</code> requires a
+        <span class="path">wrangler.jsonc</span> in the repository — and the repository had two
+        files, neither of them that. <b>Nothing on the screen said so.</b> The command arrives
+        pre-filled, looking exactly like a default that works.</p>
+        <div class="said">
+          <span class="who">The guide</span>
+          <p>&ldquo;Stop before Deploy — that <code>npx wrangler deploy</code> will fail.&rdquo;</p>
+        </div>
+        <p>The config was written, pushed, and checked with a dry run before anything was clicked.
+        Nine lines:</p>
+        <p><code>{ "name": "route-test", "compatibility_date": "2026-08-30", "assets": { "directory":
+        "./public/" } }</code></p>
+        <p><b>This is what the guide is actually for.</b> Not knowing where buttons are — it had just
+        failed at that five times — but recognising, from a screenshot, a failure that had not
+        happened yet and would have given no usable message when it did.</p>
+        <div class="verdict"><b>Unstuck by:</b> the screenshot, before the error existed.
+        <b>A beginner would have clicked Deploy and been told nothing useful.</b></div>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="stop">
+      <div class="stop-head">
+        <span class="stop-n">07</span>
+        <span class="stop-t">It said it worked, which is not the same as working</span>
+        <span class="stop-tag not-loop">the habit</span>
+      </div>
+      <div class="stop-body">
+        <p>The build went green: four stages, 41 seconds, every tick present. That is a report, and
+        an action and its report are two different events.</p>
+        <p>So the page was fetched: <code>200</code>, 6242 bytes, <code>text/html</code> — and then
+        the body was checked for the page's own title, its buttons, and the name of its first record.
+        <b>A 404 can return 200 and a placeholder is still bytes.</b> Only the third check
+        distinguishes a live site from a live server.</p>
+        <div class="verdict"><b>Not a stoppage.</b> Included because it is the one step nobody is
+        tempted to do and the only one that proves anything.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5 ============ -->
+  <section class="sect">
+    <div class="sect-head">
+      <h2>5 · What your guide will get wrong, so you can price it</h2>
+      <span class="sect-tag">calibration</span>
+    </div>
+
+    <p>You are being asked to lean on something that was wrong five times in one afternoon. That is
+    a reasonable thing to be uneasy about, and the resolution is not trust — it is knowing which half
+    to trust.</p>
+
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Ask it for</th><th>Expect</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="k">A click path, in advance</td>
+          <td><b>Wrong, confidently.</b> It is describing a remembered or documented interface, not
+          yours. It will not hedge, because it does not know it is out of date.</td>
+        </tr>
+        <tr>
+          <td class="k">Field values, in advance</td>
+          <td>Better, and still unreliable — in this walk the fields it named did not exist on one
+          screen and were differently named on the next.</td>
+        </tr>
+        <tr>
+          <td class="k">What is on this screenshot</td>
+          <td><b>Reliable.</b> Every one of the seven was read correctly first time.</td>
+        </tr>
+        <tr>
+          <td class="k">What this error means</td>
+          <td><b>Reliable</b>, and the thing it is genuinely better at than you — including errors
+          that have not happened yet, which is stoppage 06.</td>
+        </tr>
+        <tr>
+          <td class="k">Whether it worked</td>
+          <td><b>Ask it to check, not to conclude.</b> Fetch the page, read the body. It will tell
+          you a thing succeeded on the same evidence you have, which is no evidence.</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <p><b>Say when it is wrong. It does not mind and the correction is fast.</b> The most productive
+    sentence in this entire walk was six words: <i>&ldquo;it doesn't match what you posted.&rdquo;</i>
+    Everything after that went quickly.</p>
+  </section>
+
+  <!-- ============ 6 ============ -->
+  <section class="sect">
+    <div class="sect-head">
+      <h2>6 · Where the loop does not help</h2>
+      <span class="sect-tag">honest scope</span>
+    </div>
+
+    <p>Four of the seven were not solved by showing anyone a screen, and a page that claimed
+    otherwise would be selling something.</p>
+
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Kind</th><th>What actually resolves it</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="k">The vendor is down</td>
+          <td>Waiting. Believe your screen over the status page, and go and do something else.</td>
+        </tr>
+        <tr>
+          <td class="k">A permission boundary</td>
+          <td>You do it. The guide should hand you the exact command and stop, rather than find a way
+          around — <b>a guide that routes around its own limits is the wrong kind of helpful.</b></td>
+        </tr>
+        <tr>
+          <td class="k">A decision only you can make</td>
+          <td>Public or private, what it is called, what it costs. Not the guide's to choose, and it
+          should say so.</td>
+        </tr>
+        <tr>
+          <td class="k">Anything that spends money</td>
+          <td>Read it yourself. This walk stayed on free tiers throughout, which was a decision, not
+          an accident.</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <p><b>And the count is the point.</b> Three of seven by the loop is not a disappointing number.
+    Those three had already resisted five careful attempts to write them down in advance, and they
+    each fell in one exchange. The other four were never the kind of thing an instruction sheet could
+    have covered either.</p>
+  </section>
+
+  <!-- ============ 7 ============ -->
+  <section class="sect">
+    <div class="sect-head">
+      <h2>7 · What this leaves you able to say</h2>
+      <span class="sect-tag">the claim</span>
+    </div>
+
+    <p>Not <i>&ldquo;I can deploy a website.&rdquo;</i> The dashboard will have moved by the time you
+    do it again, and that sentence will be false in a way you cannot feel.</p>
+
+    <p><b>What you can say is: I can get a website deployed, from a screen I have never seen, without
+    knowing in advance where anything is.</b> That claim survives the redesign. It survives changing
+    vendor. It is the one worth having, and it is the only one this afternoon actually
+    established.</p>
+
+    <p>The site that came out of it was one HTML file, a config of nine lines, and seven stoppages.
+    It is on the internet.</p>
+  </section>
+
+  <p class="prov"><b>Provenance.</b> Every stoppage, quotation and screen in §4 is from a single
+  working session on <b>2026-08-30</b>, recorded as it happened rather than reconstructed afterwards.
+  The person's words are verbatim; the guide's are verbatim or lightly trimmed for length. The full
+  walk log, including the three checks this route could <i>not</i> confirm, is in
+  <span class="path">docs/decisions/0002-route-to-a-learner-editable-site.html</span> §7 — and the
+  decision about which route a learner should take at all, which this page does not settle, is the
+  rest of that record. <b>The screens are described rather than reproduced</b> until the images are
+  dropped in; the descriptions are of what was actually on them. <b>This page has not been
+  murderboarded</b>, and it generalises from one afternoon, two people and one vendor — the loop is
+  reported as what worked, not as what has been tested against alternatives.</p>
+
+</div>
