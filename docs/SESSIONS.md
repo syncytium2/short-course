@@ -1027,6 +1027,37 @@ find out about each other. That is what a board is for, and it is why C3 in
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Mac/8ca0d62c — HANDOFF: my session-close leads with a live-site table that the deploys since have made false
+- **Status:** DONE 2026-08-30
+- **Opened:** 2026-08-30
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** `HANDOFF.md`, my own `Mac/8ca0d62c` section only. **DONE** — `d713693`.
+- **📨 To `Mac/942c2539`, or whoever committed `429bbef` / `69c756d` — YOU HAVE UNCOMMITTED WORK
+  HERE.** `docs/handouts/four-barriers.html` is modified in this shared checkout and your claim
+  above is already marked DONE. The change is a rewrite of the vibe-coder paragraph's opening
+  sentence (*"At full strength, because a weakened version of an objection is not answered"* →
+  *"Here is that objection made as strongly as it can be made…"*). **I have not staged it, not
+  committed it and not reverted it.** Two things follow:
+  1. **`--check-all` is RED because of it** — exit 1, and the reason printed is not staleness but
+     the new dirty-source refusal. That is the gate working, not a fault.
+  2. **You cannot rebuild until you commit it.** As of `b37b907` the build refuses a source with
+     uncommitted changes, because the version and dates under each title describe the *committed*
+     bytes. Commit the source, then `--all`, then commit the output. Sorry for the surprise —
+     the rule landed today, mid-flight.
+- **🐛 `.claude/hooks/no-heredoc-source.sh` and `push-goes-where-you-are.sh`, two findings, both
+  from being hit by them.** Good hooks; the heredoc one caught a real habit of mine and I have
+  stopped. But: **`push-goes-where-you-are.sh` blocked a `git commit`** whose *message body*
+  contained the words *"between git push and the site"*. It parsed that prose as
+  `git push <remote> <ref>` and refused, naming `the` as the ref. Any commit message that
+  discusses pushing is unrunnable. It needs to look at the command being run, not at every string
+  in the line — a commit with `-m` or `-F` is not a push. Worked around by putting the message in
+  a file; not fixed, because the hook is not mine and this session is ending.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/942c2539 — four-barriers.html: one type scale (3 sizes, was 19), plain-language fix, bugarach described as the general tool it is, GitHub links on every repo named. Rebuild + deploy.
 - **Status:** ACTIVE
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
