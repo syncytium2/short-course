@@ -645,6 +645,27 @@ the repo's one-shared-checkout premise, compiled into a gate.**
    and the parser story on the live site — *"It passed. It had always passed. It proved the parser
    correct on the only inputs it was ever shown."* **No selftest case has ever run from a worktree.**
 
+**And it has a second failure mode, found by trying to commit this finding.** The very next push
+was refused again, by the gate's *other* branch — the moved-under-you latch:
+
+> BLOCKED ONCE — the branch changed under you.
+> You last wrote from: publication-remainder
+> This checkout is now: master
+
+Nothing had changed under anything. The latch stores a remembered branch in
+`$(sc_state_dir)/last-branch` and compares it to `sc_branch()` — a **worktree** branch against
+the **shared checkout's** branch. For a session in a worktree those two differ *by construction
+and permanently*, so the latch is not detecting an event; it is reporting the worktree's
+existence, once per alternation, forever.
+
+**That is the worse half, because of how it resolves.** The latch fires once and then rewrites
+`last-branch`, so the retry succeeds. A worktree session therefore learns, correctly and within
+two commands, that **this alarm means nothing and the fix is to run it again** — and the alarm it
+has just been trained to retry through is the one that would report a *real* branch switch. An
+alarm that cries wolf is not a weaker alarm than none; it is a worse one, because it also
+consumes the attention a real one needed. This repo already carries that shape twice, in
+`docs/doubt/` and in the skip-was-the-whole-story case.
+
 **Filed rather than fixed.** Changing a declared gate on a shared file, from the session a wrong
 fix would lock out, is the move this repo warns about twice — and the real fix depends on a
 decision larger than the hook.
