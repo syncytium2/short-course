@@ -1168,3 +1168,15 @@ find out about each other. That is what a board is for, and it is why C3 in
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/4a487730 — Remove the absolutes (never/always/nobody/no one) from all four handout sources + rebuild site/
+- **Status:** ACTIVE
+- **Opened:** 2026-08-30
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
+- **Notes:** <anything another session must know before touching the same thing>
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
