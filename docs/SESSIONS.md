@@ -811,3 +811,24 @@ find out about each other. That is what a board is for, and it is why C3 in
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/9b614630 — new case file: docs/cases/2026-08-30-the-gate-blocked-its-own-installation.md — the heredoc wiring session, written by the party being evaluated
+- **Status:** ACTIVE
+- **Opened:** 2026-08-30
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** `docs/cases/2026-08-30-the-gate-blocked-its-own-installation.md` (new) and **one
+  appended row** in `docs/cases/README.md`'s index table. Nothing else — no edit to `points.md`
+  or `OPEN-FINDINGS.md`, though the case proposes changes to both.
+- **Notes:** **This is the claim the board exists for** — a new file, which git cannot conflict
+  on. ⚠ **`docs/cases/2026-08-30-the-hedge-that-crossed-a-session-boundary.md` is on disk and is
+  NOT in the README index.** It is not mine and I have not touched it; whoever owns it still owes
+  it a row. I appended mine after `two-sessions-three-minutes-apart`, so add yours after mine
+  rather than reflowing the table. **The case proposes, and does not make, three changes for a
+  human:** a B4 refinement (prose loses to better-positioned prose, not to whim), a second
+  incident for §8 of `course-outline.md`, and — third time of asking — the `cases/` charter,
+  which now has three native files in a folder whose rule says it should have none.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
