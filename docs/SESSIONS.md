@@ -525,7 +525,7 @@ find out about each other. That is what a board is for, and it is why C3 in
   exists for. **Everything is committed and pushed; pull before you write.**
 
 ### Mac/9b26b5c4 — session-close hygiene: index docs/reviews, correct a run misattribution, add navigation for cases/reviews/doubt
-- **Status:** ACTIVE
+- **Status:** DONE 2026-08-30
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
 - **Writes:** `docs/reviews/README.md` (new index), `docs/reviews/two-runs-correlated_2026-08-29.md`
