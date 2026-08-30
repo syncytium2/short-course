@@ -203,8 +203,53 @@ was a lie.
 > qualifier to be structural — a field, a banner, a required marker — because prose
 > hedges evaporate at every hop.
 
-The practical form of this for a course: *when an agent tells you what another agent
-or another person decided, ask for the words.* Not the summary. The words.
+The practical form of this for a course was originally stated here as: *when an agent
+tells you what another agent or another person decided, ask for the words. Not the
+summary. The words.*
+
+### ⚠ That rule is insufficient, and it was falsified the same day by a second agent
+
+**Added 2026-08-30, hours after this file was committed.** The other session in the
+incident — the one that received the misattribution — then committed the same failure
+itself, in the opposite direction, and **quoting verbatim did not prevent it.**
+
+It relayed a second hedged remark of Tony's about detector counts:
+
+> *"maybe just rewrite the text so it is independent of how many detectors are
+> currently enabled?"*
+
+**It quoted that exactly.** Hedge intact, question mark intact, in the message body.
+And in the sentence around the quote it wrote *"Tony had already given me the other
+instruction directly"* — and in a merged commit body, *"Tony asked for prose
+independent of the count."*
+
+The quote was accurate. **The frame was not, and the frame is what a skim keeps.**
+
+Its own account of it, which is the sharpest statement of the finding in this file
+and is not the author's:
+
+> *"the interesting part is that verbatim quoting did NOT prevent it — the quote was
+> accurate and the frame around it was not, so 'quote them exactly' is insufficient as
+> a rule. The frame needs the hedge too."*
+
+So the corrected rule:
+
+> **Carry the modality in the sentence, not only in the quotation.** A verbatim quote
+> with a hedge inside it, introduced as "he instructed", relays as an instruction.
+> The reader takes the frame and skims the quote — which is the opposite of the order
+> a careful person imagines they read in.
+
+**Two agents, one day, both directions, one of them holding a written case file about
+the failure at the time.** That is the strongest available evidence that this is
+structural rather than carelessness, and it is why the fix has to be a required field
+rather than a habit of quoting well.
+
+**What was done about the second instance:** nothing to the record. It is in merged
+history and stays there — that session declined to rewrite `main` over a modality slip
+and told Tony plainly instead, which is the right call and worth stating, because the
+alternative reads as tidying. The substance of its recommendation was correct on its
+merits and was adopted for that reason, with the hedge restored in the document that
+adopted it.
 
 ## 5 — Knowing the rule did not prevent breaking it
 
@@ -333,6 +378,7 @@ the same modality error would cause the same incident. It is a protocol problem.
 | The agent wrote "Settled today" | its own summary message | verified |
 | The agent sent "Tony's call" to a second agent | cross-session message, delivery receipt `af6806d1` | verified |
 | The agent's acknowledgement, quoted in full | session transcript, the turn after the correction | verified — complete, not excerpted |
+| **The second instance** (§4) — the other session framed a verbatim hedge as an instruction | its own cross-session message, and the merged commit body of PR #411 in `syncytium2/bugarach` | verified — **and self-reported by that session, which checked both places before confirming** |
 | A retraction was sent | cross-session message, receipt `38cecec5` | verified |
 | The second agent held the front-page file | its own prior message, listing `tools/build_site.py` | verified |
 | The prior "don't get 4" incident is recorded and predates this | source repo handoff, 2026-08-30 | verified |
