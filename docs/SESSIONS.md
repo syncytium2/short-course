@@ -1123,3 +1123,22 @@ find out about each other. That is what a board is for, and it is why C3 in
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/4a487730 — Publication review: audit all committed content and history for what should not go public
+- **Status:** ACTIVE
+- **Opened:** 2026-08-30
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** nothing in this checkout except this board block. The one real write is the
+  darkroom — `<darkroom>/short-course/2026-08-30-publication-review/`.
+- **Notes:** Read-only audit of every committed file **and of `git log --all`** for material
+  that should not be public. **No repo content is modified and no finding is filed to
+  `OPEN-FINDINGS.md` by this session** — the report is a deliverable for Tony, not a decision
+  taken on his behalf. If you are about to answer the publication question in `README.md`
+  ("Not published as a course") or `points.md` C3, read that darkroom folder first rather than
+  re-deriving it: it already prices the history rewrite, the third-party PII, and the
+  private-repo links.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
