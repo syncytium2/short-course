@@ -156,11 +156,11 @@
 <div class="page">
 
   <div class="mast">
-    <p class="eyebrow">Decision · one page</p>
+    <p class="eyebrow">Decision record 0002 · not student-facing</p>
     <h1>The Shortest Route</h1>
     <p class="standfirst">A website a learner can edit from the Claude app — whether it needs a
     repository, and whether an agent maintaining documentation can spare them from learning git.
-    Two questions, answered from material this course already holds.</p>
+    A decision addressed to the author, not a sheet to hand anyone.</p>
   </div>
 
   <div class="status">
@@ -178,6 +178,11 @@
     <span class="path">four-barriers.html</span>, <span class="path">points.md</span> or the vendors'
     own current documentation, cited in place. The order and timings are unconfirmed.
     <b>Never murderboarded.</b></p>
+    <p><b>This is a decision record, not a handout, and it moved folders to say so.</b> It was first
+    filed in <span class="path">docs/handouts/</span>, whose own front door defines that folder as
+    <i>&ldquo;things a learner is handed.&rdquo;</i> This is a memo to one person weighing one
+    choice. Nothing on it is ready to be handed to anybody, and it is deliberately not in
+    <span class="path">tools/pages.txt</span> or the build.</p>
   </div>
 
   <div class="method">
@@ -188,6 +193,31 @@
     specific things, both nameable, both already documented failures in this course's material.
     And documentation cannot replace the teaching, because on the shorter route there is
     <i>more</i> to hold, not less.</p>
+  </div>
+
+  <div class="status" style="margin:0 0 34px">
+    <p><b>Why this recommends a road nobody has walked, and says so instead of hiding it.</b></p>
+    <p><b>1 · The author does not use Cowork, and that is not evidence about a learner.</b> Recorded
+    in his own words, 2026-08-30: <i>&ldquo;i don't use cowork so i'm reluctant to include it. my
+    work is too chaotic for the claude app alone. that should not propagate to all users.&rdquo;</i>
+    That describes one working style — many concurrent sessions, several machines, a dozen
+    repositories — and it is a <b>fact about the author, not about the route.</b> A learner with one
+    laptop and one project has none of those conditions. It is written down here so it cannot
+    quietly become the reasoning, which is what an unexamined preference does.</p>
+    <p><b>2 · The two costs charged against Cowork below are vendor-documented, not preferences.</b>
+    Desktop-only with no cloud copy, and a manual re-upload to publish. Those are quoted in §2 and
+    would still be true if the author used Cowork daily. <b>Everything else about it is untested
+    here</b>, and nothing on this page claims Cowork is worse at the job it does.</p>
+    <p><b>3 · The default is chosen on asymmetry, not on a result.</b> Neither road has been walked
+    and there is no time to walk one. So the tie is broken on what each mistake costs.
+    <b>Wrong about the repository:</b> a learner who never needed a second machine paid one free
+    account and about ten minutes. <b>Wrong about Cowork:</b> a learner who did need one has their
+    only copy on a laptop, and finds out on the day the laptop is gone. The first is a refundable
+    ten minutes; the second is not refundable at all. <b>That is a reason to default, and a default
+    is a weaker thing than a finding.</b> This page claims only the weaker thing.</p>
+    <p><b>4 · The exclusion carries its own release condition</b>, so it does not become permanent by
+    inertia. See the fifteen-minute test in §7 — it is the whole of what would settle this, and it
+    needs no learner and no course.</p>
   </div>
 
   <!-- ============ 1 ============ -->
@@ -247,8 +277,10 @@
     true <b>only with a terminal</b> — it needs <code>wrangler</code>. Take the shell away and the
     ranking inverts: the shortest road becomes unreachable. <i>See §5.</i></p>
 
-    <p><b>So the real decision is B against C</b>, and it is a genuine one — both are defensible,
-    which is what makes it a decision rather than a step.</p>
+    <p><b>So the real decision is B against C.</b> Both are defensible, which is what makes it a
+    decision rather than a step — and <b>only one of the two has been used by anyone here.</b> The
+    table above is a field, not a scorecard: it says what each route requires, and it does not say
+    which is better at the job it does.</p>
   </section>
 
   <!-- ============ 2 ============ -->
@@ -312,8 +344,12 @@
     <div class="method" style="margin-top:22px">
       <p><b>So the honest statement.</b> Route B is shorter and it is not wrong. It is the right
       answer for a learner who will work on one machine, alone, on something they could rebuild in
-      an afternoon. <b>Route C costs one free account and buys the two things whose absence does not
-      announce itself.</b> That is the trade, and it is now a choice rather than a requirement.</p>
+      an afternoon — and <b>a course that told that learner they must have a GitHub account would be
+      wrong.</b> Route C costs one free account and buys the two things whose absence does not
+      announce itself. That is the trade, and it is now a choice rather than a requirement.</p>
+      <p><b>What this page will not claim.</b> That route B is worse. Nobody here has run it. The two
+      costs above are real and sourced; whether they matter to a given learner is a question about
+      that learner, and this course has not asked one.</p>
     </div>
   </section>
 
@@ -593,10 +629,12 @@
         <dt>What we rejected</dt>
         <dd><p><b>Cowork on a connected folder</b> — no repository, no terminal, real files the
         learner owns, and genuinely the shortest road. This is the option that could have won.
-        Rejected on two counts, both stated as costs rather than flaws: the project is desktop-only
-        with no cloud copy, so it reaches no second machine, no collaborator and no session started
-        anywhere else; and its only browser publish is a manual re-upload, which leaves the one state
-        a visitor can observe in a human's hands forever.</p>
+        <b>Set aside rather than beaten.</b> Two documented costs count against it: the project is
+        desktop-only with no cloud copy, so it reaches no second machine, no collaborator and no
+        session started anywhere else; and its only browser publish is a manual re-upload, which
+        leaves the one state a visitor can observe in a human's hands forever. <b>Nobody here has
+        used it</b>, so those are the only two things known about it, and neither is a judgement of
+        how well it does its job.</p>
         <p><b>Artifacts alone</b> — shortest of all, and the learner ends with no file they own and
         no address of their own.</p>
         <p><b>Cloudflare from a folder</b> (Cold Start 7.3) — shorter <i>if there is a terminal.</i>
@@ -606,7 +644,11 @@
         <dd><p>Not for version control, and not because anything forces it. <b>One free account buys
         two things whose absence does not announce itself</b> — a second place for the work to exist,
         and a deploy that happens without anyone remembering. Both are failures this course has
-        already recorded happening to people who knew better.</p></dd>
+        already recorded happening to people who knew better.</p>
+        <p><b>And because the two mistakes cost different amounts.</b> Neither road has been walked.
+        Choosing the repository and being wrong costs a learner ten refundable minutes; choosing the
+        folder and being wrong costs them the work. <b>This is a default broken on asymmetry, not a
+        result</b> — recorded as such so that nobody later cites it as evidence it is not.</p></dd>
 
         <dt>What it costs</dt>
         <dd><p>One free account and about ten minutes. <b>No git commands are taught</b> — four
@@ -614,12 +656,15 @@
         git.</p></dd>
 
         <dt>Revisit if</dt>
-        <dd><p>Cowork projects gain a cloud copy, or reach a second machine — the first rejection
-        reason goes. Or Cowork can reliably drive the GitHub connector to commit and push on the
-        learner's behalf, in which case route B acquires route C's durability without route C's
-        setup and <b>this record is superseded again.</b> Or the learner's institution mandates a
-        non-GitHub host, in which case cloud sessions become bundle-only and route C does not
-        survive.</p></dd>
+        <dd><p><b>The fifteen-minute test in §7 comes back the other way.</b> That is the cheapest
+        thing that could overturn this and it is the first thing to do when there is time.</p>
+        <p>Or Cowork projects gain a cloud copy, or reach a second machine — the first cost goes. Or
+        Cowork can reliably drive the GitHub connector to commit and push on the learner's behalf,
+        in which case route B acquires route C's durability without route C's setup and <b>this
+        record is superseded again.</b> Or the learner's institution mandates a non-GitHub host, in
+        which case cloud sessions become bundle-only and route C does not survive.</p>
+        <p><b>Or somebody teaches a learner and watches.</b> Everything above is reasoning from
+        documents. One person on one laptop, observed for an hour, outranks all of it.</p></dd>
       </dl>
     </div>
   </section>
@@ -636,11 +681,14 @@
       <thead><tr><th>Open</th><th>What it would change</th></tr></thead>
       <tbody>
         <tr>
-          <td class="k">Can Cowork push?</td>
-          <td><b>The one worth testing first.</b> Cowork authenticates to third-party services
-          through connectors including GitHub, and runs shell commands in its sandbox. If it can
-          commit and push a connected folder, route B gets route C's durability and auto-deploy for
-          no extra setup, and 0002 is superseded. <b>Untested. Nobody here has tried it.</b></td>
+          <td class="k">The fifteen-minute test</td>
+          <td><b>This is the whole of what would settle the exclusion, and it needs no learner and no
+          course — only a desktop app and a quarter of an hour.</b> Connect a folder in Cowork. Put
+          one file in it. Close the desktop app, and from a phone or another machine ask a session to
+          read that file. Then ask Cowork, on the desktop, to commit and push it to a GitHub
+          repository through the connector. <b>Done when</b> you can say which of those two worked.
+          <i>If the second one works, route B gains route C's durability for no extra setup and 0002
+          is superseded.</i> Untested — nobody here has tried it.</td>
         </tr>
         <tr>
           <td class="k">Cold Start 7.3</td>
@@ -661,16 +709,19 @@
           a proposal against an open tension, not a closure of it.</td>
         </tr>
         <tr>
-          <td class="k">Not walked</td>
-          <td>Nobody has run these five steps from a clean account on either road. Step 3 and step 5
-          are read, not confirmed — including the Cowork settings trap in step 3, which is taken from
-          a third-party troubleshooting write-up rather than from Anthropic.</td>
+          <td class="k">Not walked, and no learner asked</td>
+          <td>Nobody has run these five steps from a clean account on either road, and <b>no beginner
+          has been observed attempting either.</b> Step 3 and step 5 are read, not confirmed —
+          including the Cowork settings trap in step 3, which comes from a third-party
+          troubleshooting write-up rather than from Anthropic. Every conclusion here is reasoning
+          from documents about people who were not present.</td>
         </tr>
         <tr>
-          <td class="k">Not built or published</td>
-          <td>This file is not in <span class="path">tools/pages.txt</span> and has no row in the
-          build. Adding one touches a file another session is actively changing, so it was left alone
-          deliberately.</td>
+          <td class="k">A folder the course prescribes and the repo does not have</td>
+          <td>Search to Shipped Phase 4 teaches one small numbered file per decision, kept in the
+          repo forever — and this repository had <b>no <span class="path">decisions/</span>
+          folder</b> until this record needed one. That gap is worth someone's attention separately;
+          it is not this page's to close.</td>
         </tr>
         <tr>
           <td class="k">Never murderboarded</td>
