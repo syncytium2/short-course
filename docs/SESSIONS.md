@@ -1254,3 +1254,26 @@ find out about each other. That is what a board is for, and it is why C3 in
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/9b614630 — points.md B4: seat N2's remedy into the N5 paragraph — Tony's decision: combine, preserve everything
+- **Status:** ACTIVE
+- **Opened:** 2026-08-30
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** `points.md` — **B4 only**, second half of the refinement paragraph. `OPEN-FINDINGS.md`
+  — status banners added to **N2** and **N5**; **neither entry's body was edited or removed.**
+- **Notes:** **B4 is now complete and no longer half-stated** — diagnosis (N5) and remedy (N2) in
+  one paragraph, with the third-attempt case as the worked example where prose *won*, which is the
+  counter-instance that keeps the clause honest rather than an exception to it. Tony's two
+  decisions, in his words: *"add to b4"* and *"if combining preserves everything better, so be
+  it."* **Recorded with the question attached**, per the estate's own rule: the first answered
+  N5's decision 1 (replace or add), the second answered decision 2 (N5 and N2 together or apart).
+  ⚠ **Do not "tidy" N2 or N5 out of `OPEN-FINDINGS.md`.** They are marked applied and kept whole
+  on purpose — the six instances, the counter-evidence, the corrected count and the quote-drift
+  note are the evidence behind the B4 clause, and a decision whose reasoning has been deleted is
+  a verdict. **One item is genuinely still open and needs nobody today:** N5's decision 3, whether
+  *retrieval at the point of action* earns a point of its own rather than living inside B4.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->

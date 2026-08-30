@@ -222,6 +222,15 @@ the session.
 
 ### N2 · B4 says the mechanism fails and never says where to put the rule instead
 
+> **✅ DECIDED AND APPLIED 2026-08-30 — combined with [N5](#n5--b4-diagnoses-compliance-six-incidents-say-the-failure-is-retrieval), not taken separately.**
+> Tony's decision: *"it seems like we need to preserve it all. if combining preserves everything
+> better, so be it."* N2's clause is now the second half of B4's refinement paragraph in
+> [`points.md`](points.md), seated on N5's diagnosis rather than bolted on beside it, and carrying
+> the third-attempt case as its worked example. **The entry below is kept unedited** — the
+> reasoning that produced it, including the three doubts it lists, is the record. Doubt 1 (*does
+> this belong to rule 10 rather than B4?*) is answered by the composition: it belongs where its
+> diagnosis is. Doubts 2 and 3 stand and are worth re-reading before the clause is taught.
+
 **Provenance: raised 2026-08-29 while filing
 [`docs/cases/2026-08-29-the-third-attempt-introduced-the-defect.md`](docs/cases/2026-08-29-the-third-attempt-introduced-the-defect.md).
 Not a review finding — no panel has seen it.** Documented rather than applied because changing a
@@ -493,6 +502,15 @@ carelessness.
 ---
 
 ### N5 · B4 diagnoses compliance. Six incidents say the failure is **retrieval**
+
+> **✅ DECIDED AND APPLIED 2026-08-30 — added to B4, combined with [N2](#n2--b4-says-the-mechanism-fails-and-never-says-where-to-put-the-rule-instead).**
+> Two decisions, in Tony's words: *"add to b4"* (so B4's existing sentence is kept, not replaced)
+> and *"if combining preserves everything better, so be it"* (so the diagnosis and the remedy went
+> in as one paragraph). B4 now carries both halves in [`points.md`](points.md). **Nothing here was
+> removed** — the six instances, the counter-evidence, the corrected count and the quote-drift
+> note are the evidence behind the clause and are the reason to keep the entry, not a to-do list.
+> **Decision 3 is the one still genuinely open:** whether *retrieval at the point of action* earns
+> a point of its own rather than living inside B4. It needs nobody's attention today.
 
 **Provenance: raised 2026-08-30 by `Mac/9b614630`, at Tony's request, after he pointed out that
 the estate had produced the same finding several times without anyone writing it down once.

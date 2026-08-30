@@ -192,9 +192,22 @@ obtainable by asking rather than by reasoning.
   startup. That is why *"use all the bad words you want"* is exactly right, and it is why the
   remedy cannot be stronger wording. **It also explains the B7 refinement above**: a glossary
   holds not because a definition is a stronger genre than a rule, but because it is read *before
-  the session reasons* — which is to say it is already in the retrieval path. **The remedy half
-  of this is `OPEN-FINDINGS.md` N2 (*put it where they already look*) and is NOT decided;** until
-  it is, B4 carries the diagnosis and not the instruction that follows from it.
+  the session reasons* — which is to say it is already in the retrieval path.
+
+  *And therefore the remedy, which is the same finding's other half (`OPEN-FINDINGS.md` N2,
+  decided 2026-08-30 and combined here rather than bolted on).* If the rule was read and simply
+  was not in hand at the moment of action, then wording it harder cannot reach it and only two
+  things can: **put it in the channel already being read at that moment, or make it fire.** That
+  is what *"put it where they already look"* means, and it is not a preference about writing —
+  it is the only move the diagnosis leaves open. *Worked example, and it is the counter-instance
+  that keeps this honest:* in
+  [`docs/cases/2026-08-29-the-third-attempt-introduced-the-defect.md`](docs/cases/2026-08-29-the-third-attempt-introduced-the-defect.md)
+  **prose won** — twelve words in the docstring of the module every detector imports beat a month
+  of the same instruction repeated aloud, and deleting one sentence fixed in an afternoon what
+  repetition had not fixed in a fortnight. That is not an exception to B4. It is this clause:
+  the docstring was *where they already look*. **A session has no inbox** — every conversation
+  reaches one reader and does not survive them — so the channel that mounts itself wins, and the
+  one delivered closest to the decision wins among those.
 
   *Worked example — a declaration mistaken for wiring (`bugarach`, verified against the repo
   2026-08-27).* Commit `9582329`, 2026-08-17, titled *"The README stopped at the port plan, and
