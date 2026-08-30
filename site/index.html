@@ -511,7 +511,7 @@
       <p class="eyebrow">It Looked Right &middot; for researchers</p>
       <h1>Using coding agents today and tomorrow</h1>
       <p class="standfirst"><b>Coding is no longer the barrier. Four challenges remain.</b> Each one below, with the incidents that produced it &mdash; every one real and traceable to a primary source, each labeled with who checked it &mdash; most are self-reports by the person they are about.</p>
-    <p class="pv">Version <b>0.1.44</b> &middot; 30 Aug 2026<span class="pv-born">First published 28 Aug 2026</span></p>
+    <p class="pv">Version <b>0.1.45</b> &middot; 30 Aug 2026<span class="pv-born">First published 28 Aug 2026</span></p>
     </div>
     <div class="depth">
       <span class="depth-label" id="depth-label">Reading depth</span>
@@ -591,6 +591,7 @@
       </div>
       <div class="rail-group">
         <p class="rail-head">Evidence</p>
+        <a href="#objections" data-view="objections"><span class="k">&rsaquo;</span><span>Objections</span></a>
         <a href="#record" data-view="record"><span class="k">&rsaquo;</span><span>How this was made</span></a>
         <a href="#method" data-view="method"><span class="k">&rsaquo;</span><span>About this page</span></a>
       </div>
@@ -626,7 +627,7 @@
         </div>
 
         <h3>How to read this</h3>
-        <p><b>Use the depth control, top right.</b> <b>Headlines</b> is the top of every section &mdash; about fifteen minutes for the whole page, and one to three for any single section. <b>+ incidents</b> opens the nineteen expandable notes underneath them &mdash; thirteen are worked failures, the rest the reasoning that came out of them. <b>+ sources</b> adds a provenance line to every section and every incident: where it came from, whether anyone independently checked it, and what is still unverified.</p>
+        <p><b>Use the depth control, top right.</b> <b>Headlines</b> is the top of every section &mdash; about fifteen minutes for the whole page, and one to three for any single section. <b>+ incidents</b> opens the expandable notes underneath them &mdash; most are worked failures, the rest the reasoning that came out of them and the objections raised against them. <b>+ sources</b> adds a provenance line to every section and every incident: where it came from, whether anyone independently checked it, and what is still unverified.</p>
         <p>That control exists because these incidents have very different explanation costs. One is a paragraph of setup; another needs twenty minutes before it makes sense. In a fixed-length talk that forces you to drop the expensive ones. Here it just changes which depth you are reading at.</p>
 
         <details class="more">
@@ -989,6 +990,96 @@
       <!-- ============ STANDING RULE ============ -->
       <!-- ============ REPO ============ -->
       <!-- ============ STEP 0 ============ -->
+      <!-- ============ OBJECTIONS ============ -->
+      <section class="view" id="objections" data-alt="view-objections" aria-labelledby="h-obj">
+        <div class="view-head">
+          <p class="eyebrow">Evidence</p>
+          <h2 id="h-obj">Objections</h2>
+          <p class="lede">The things a sceptical reader says out loud, in the words they arrive in rather than in a polite paraphrase. <b>Two of the four are right</b>, and one of those was right about a claim this material actually made.</p>
+        </div>
+
+        <h3>&ldquo;Nobody works this way&rdquo;</h3>
+        <p class="quote">&ldquo;This guy&rsquo;s a joke. Nobody works like this.&rdquo;</p>
+        <p><b>Correct, and for most work nobody should.</b> Almost every mechanism described on this page &mdash; a board you claim a file on before you touch it, a build that refuses to run against an uncommitted source, a folder for material nobody is confident in &mdash; exists because one specific thing went wrong first, and most of them went wrong because several agent sessions were running in one checkout at the same time. That is an unusual way to work. Build any of it <i>before</i> the failure it answers and it is <a href="#asymptote" data-view="asymptote">challenge 4</a> with extra steps, which is the counterweight this page argues for everywhere else.</p>
+        <p><b>The useful question is who the objection is arguing with.</b> Stated in the author&rsquo;s own words: <i>if you are in a position to judge my use of session hooks, this is not for you.</i> It is written for someone whose alternative is not a better workflow &mdash; it is no workflow. First agent, own machine, own data, one copy of the data.</p>
+
+        <details class="more">
+          <summary>Which parts are load-bearing on day one, and which are not <span class="cost">2 min</span></summary>
+          <div class="inner">
+            <p><b>Load-bearing immediately, for anybody:</b></p>
+            <ul>
+              <li>A copy of the irreplaceable data that the agent is not pointed at. Not a sandbox &mdash; a copy.</li>
+              <li>Reading the diff for <i>scope</i>, and the other three checks that need no code (<a href="#validation" data-view="validation">Validation</a>).</li>
+              <li>One change at a time (<a href="#rule" data-view="rule">The standing rule</a>).</li>
+              <li>A repo, so &ldquo;what changed, and why&rdquo; has an answer that is not memory (<a href="#repo" data-view="repo">The repo</a>).</li>
+            </ul>
+            <p><b>Load-bearing only once a particular thing has bitten you:</b> the claim board (two sessions in one checkout), the freshness gate (a generated page that fell behind its source), the doubt folder (a claim nobody could source and nobody wanted to delete). Each is cheap <i>after</i> the incident and pure overhead before it.</p>
+            <p><b>And for a two-file analysis, honestly: most of the rest is ceremony.</b> Saying so is not a hedge. A method that cannot say which of its parts you do not need yet is selling something.</p>
+            <div class="prov"><b>Source.</b> <span class="path">tools/claim.sh</span> header &mdash; the board exists because two sessions wrote the same document minutes apart with no place to look first, which is this page&rsquo;s own <a href="#idiosyncrasies" data-view="idiosyncrasies">challenge 2</a> happening to the repository that describes it. Standing rule: <span class="path">points.md</span> B8.</div>
+          </div>
+        </details>
+
+        <h3>&ldquo;Who is this guy?&rdquo;</h3>
+        <p class="quote">&ldquo;Who is this guy, and why does he think he can teach in a day what takes weeks on Coursera?&rdquo;</p>
+        <p><b>Because it is not the same thing being taught.</b> A programming course teaches you to write software. That takes weeks, those courses are good, and nothing here attempts it &mdash; the premise of this page is that you are <i>not</i> going to write the code. What is left over is knowing what to ask for, how the answer fails, and how to check it without reading it. That is a day of material, not a term of it. It is also the part no programming course covers, because their student can read the code.</p>
+        <p><b>There is also no day.</b> The material was drafted as a two-part short course and postponed for redesign. Nothing is scheduled and nobody is being taught &mdash; see <a href="#method" data-view="method">About this page</a>.</p>
+        <p><b>The who is checkable rather than asserted, which is the only honest form of an answer to that question.</b> Richard Anthony DeFazio &mdash; associate research scientist at the University of Michigan, neuroendocrinology and calcium imaging; the ORCID record lists 57 works from 1999 to this year. The other projects, their public repositories and their live sites are at <a href="https://tonydefazio.com">tonydefazio.com</a>.</p>
+        <p><b>None of that is the credential that matters here</b>, and the page says so elsewhere: the honest answer to &ldquo;why believe any of this&rdquo; is that the same person built rigorous gates for the documents and left the data architecture unfixed, in the same project, in the same year (<a href="#record" data-view="record">How this was made</a>).</p>
+
+        <details class="more">
+          <summary>What a day buys, and what it cannot <span class="cost">2 min</span></summary>
+          <div class="inner">
+            <p><b>What fits:</b> the three tiers and why confusing them produces a verdict that AI is useless; the four checks that need no code; one change at a time; a repository and the three commands that make it worth having; and the setup, which is the part that actually kills these sessions at minute five.</p>
+            <p><b>What does not fit, in a day or in a term:</b></p>
+            <ul>
+              <li><b>Reviewing code you cannot read.</b> Nothing here claims to teach that. The checks are deliberately the ones that work without it.</li>
+              <li><b>Your domain knowledge.</b> The wrong-dataset figure in <a href="#validation" data-view="validation">challenge 3</a> was caught by somebody who knew what those data should look like. No course supplies that, and no agent does either.</li>
+              <li><b>Judgement about when to stop.</b> That is <a href="#asymptote" data-view="asymptote">challenge 4</a>, and it is named as unresolved rather than taught as a technique.</li>
+            </ul>
+          </div>
+        </details>
+
+        <h3>&ldquo;A vibe coder gone wild&rdquo;</h3>
+        <p class="quote">&ldquo;Five sites, a home-made review process, a &lsquo;course&rsquo; nobody asked for &mdash; this is a vibe coder gone wild.&rdquo;</p>
+        <p><b>At full strength, because a weakened version of an objection is not answered.</b> Every public repository behind those sites was created in the last ten weeks. All of them have zero stars, zero forks and no contributors outside the author&rsquo;s own two accounts and an agent. Most of the code and much of the prose was written by an agent, including this sentence&rsquo;s first draft. <b>And commit counts are not evidence</b> &mdash; a machine produces a thousand commits cheaply, so the four-figure number on one of those repositories proves activity and nothing else.</p>
+        <p><b>Here is the part that is not cheap.</b> Every one of those projects is a port or a re-implementation of somebody else&rsquo;s published method, and each one is scored against a reference rather than against its own opinion.</p>
+        <div class="tw">
+          <table>
+            <thead><tr><th>Project</th><th>What it is</th><th>The check a demo would not have</th></tr></thead>
+            <tbody>
+              <tr><td><b>no_peak</b></td><td>The CLUSTER hormone pulse-detection algorithm, ported from the original Fortran and an Igor Pro port, running in the browser</td><td>Scored against simulated truth and head-to-head with a competing published tool. The repository publishes the table in which <b>its own algorithm loses</b>: 51.5&ndash;60.8% sensitivity with zero false positives, against AutoDecon&rsquo;s ~98%. A later finding in the same file records that the near-zero false-positive rate it is credited with is <b>partly a property of the benchmark</b></td></tr>
+              <tr><td><b>bugarach</b></td><td>Six coordinated-event detectors lifted out of MATLAB into Python, plus a browser raster viewer</td><td>Events planted in simulated recordings so a detector is scored against what was actually there rather than against another detector. 113 test files and a CI run that is green today</td></tr>
+              <tr><td><b>colonel_kernel</b></td><td>Convolution and deconvolution between spikes and a calcium signal, as a teaching demonstrator</td><td>A standalone methods page written to be citable and readable without JavaScript, and a dependency-freshness gate in CI</td></tr>
+              <tr><td><b>murderboard</b></td><td>The eleven-role adversarial review used on this material</td><td>Apache-2.0, its own gates workflow and test suite, and a freshness check for the copies vendored into the other repositories</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><b>So the tell is not who typed the code.</b> It is whether anybody scored the result against something that could have said no, and then published the score when it came back unflattering. That is the whole of the distinction being drawn, and it is the same distinction this page draws about your own work.</p>
+
+        <details class="more">
+          <summary>What survives of the objection, and it is not nothing <span class="cost">3 min</span></summary>
+          <div class="inner">
+            <p><b>Nobody outside has used any of it.</b> Zero stars, zero forks, no outside contributors, no issues from strangers. Every figure above is a self-administered check, and a port validated against its own reference implementation is one person checking their own work with a good instrument &mdash; better than nothing, and not independent.</p>
+            <p><b>The reviews are correlated.</b> The eleven-role review that caught the numerical defects in this material ran on one model in one context, and it was round one with no verification pass. Eleven seats buy coverage of angles, not independence &mdash; stated in full under <a href="#record" data-view="record">How this was made</a>.</p>
+            <p><b>The course has never been taught to anybody.</b> No cohort, no feedback, no evidence that a day of it works on a real learner. What is here is material and a record, not a result.</p>
+            <p><b>The repository behind this page is private</b>, so the chain it advertises &mdash; idea, session log, drafts, review, what survived &mdash; cannot currently be inspected by the reader being asked to find it convincing. The paths named throughout are provenance, not links you can follow, and that is a real limit rather than a design flourish.</p>
+            <div class="prov"><b>Source.</b> Repository figures read from the GitHub API on <b>2026-08-30</b>: creation dates, stars, forks, contributors, workflow conclusions and test-file counts. Sensitivity figures from <span class="path">no_peak/docs/validation-status.md</span>, dated 2026-08-12 and carrying its own corrections. Publication record: ORCID <b>0000-0001-7302-7528</b>, 57 works. <b>All of it is the author&rsquo;s own accounting of the author&rsquo;s own work</b>; none of it has been re-run by anyone else.</div>
+          </div>
+        </details>
+
+        <h3>&ldquo;You said nobody else teaches this&rdquo;</h3>
+        <p class="quote">&ldquo;&lsquo;Nobody is teaching non-programmers to do this.&rsquo; That is simply false, and I can name three.&rdquo;</p>
+        <p><b>Right, and it is withdrawn.</b> One search refuted it: Oxford&rsquo;s AI Competency Centre runs an introduction for non-programmers using coding agents on their own research data; the UW eScience Institute runs a hands-on agent workshop for researchers; Southampton&rsquo;s research software group runs an advanced course on AI-assisted development. The vacancy claim was written without a search and could not have failed &mdash; three screens from an argument that suspicion without a method is just anxiety.</p>
+        <p><b>What survives, narrowed:</b> none of those centres <i>failure management</i>. That is a contrast claim rather than a gap claim, it names its competition, and it is the version a scientist should have written first.</p>
+        <p class="caught">Still open: nobody has written to any of the three organisers. Three emails are the cheapest available check on all of it and they have not been sent.</p>
+
+        <div class="prov"><b>Section source.</b> <span class="path">OPEN-FINDINGS.md</span> B2, B4 and B5 &mdash; blocking findings from the murderboard run of 2026-08-26, carried unresolved until now and answered here on the public page rather than in an internal file. Audience line quoted from the author, 2026-08-30. The three named programmes were found in one search on 2026-08-26 and <b>have not been re-checked since</b>; course offerings move.</div>
+
+        <div class="foot">
+          <p><b>The other projects.</b> <a href="https://tonydefazio.com">tonydefazio.com</a> &mdash; Colonel Kernel, no_peak and bugarach are research tools with public repositories; the murderboard is the review process used on this material; this page is the fifth. Every one of them is a port, a re-implementation or a record, which is not an accident of taste: they are the shapes of work where you can be told you are wrong by something other than your own judgement.</p>
+        </div>
+      </section>
+
       <!-- ============ RECORD ============ -->
       <section class="view" id="repo" data-alt="view-repo" aria-labelledby="h-repo">
         <div class="view-head">
