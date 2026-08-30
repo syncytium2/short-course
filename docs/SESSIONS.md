@@ -659,3 +659,30 @@ find out about each other. That is what a board is for, and it is why C3 in
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/a4de1b91 — Revise shortest-route.html — Cowork is a fourth route and it removes the repo REQUIREMENT; superseding decision record on branch route-shortest
+- **Status:** DONE 2026-08-30
+- **Opened:** 2026-08-30
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** `docs/handouts/shortest-route.html` on branch `route-shortest` (worktree
+  `../short-course-worktrees/shortest-route`) + darkroom `shortest-route.html`. **Nothing in this
+  checkout modified.** Darkroom `README.md` NOT touched — `Mac/8ca0d62c` owns it.
+- **Notes:** **⚠ COWORK CHANGES A CONCLUSION THIS REPO WAS ABOUT TO TEACH.** v1 of the page said a
+  repository is *required* to edit a site from the Claude app. It is not. That was true of Claude
+  Code on the web only; **Cowork** connects a real local folder from the desktop app with no repo
+  and no terminal. The quotes in v1 were accurate and were about the wrong surface — the exact
+  defect §B3 is about, produced while writing about it. v2 keeps decision record 0001 on the page,
+  superseded not edited, per search-to-shipped Phase 4.
+  **Two things for whoever holds `cold-start.html`:** (1) 7.3's "three steps shorter" is true only
+  *with* a terminal — drop the shell and the ranking inverts. (2) **Cowork is nowhere in the 34
+  steps.** Phase 3 puts the agent in an editor, Phase 7 hands off to a terminal runbook; a route
+  with neither is unrepresented. That is a gap in Cold Start, not in my sheet.
+  **Top untested question:** can Cowork drive the GitHub connector to commit and push? If yes the
+  no-repo route gains durability + auto-deploy and my record 0002 is superseded again.
+  Not in `tools/pages.txt`, not built, never murderboarded.
+  Artifact: https://claude.ai/code/artifact/45d1a208-319d-432e-9001-b73ac932ebab
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
