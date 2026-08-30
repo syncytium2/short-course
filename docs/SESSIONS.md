@@ -621,11 +621,22 @@ find out about each other. That is what a board is for, and it is why C3 in
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Mac/a4de1b91 — Shortest route to a website a learner can edit in the Claude app — extracted from existing handouts, written in worktree short-course-worktrees/shortest-route on branch route-shortest. No existing doc touched.
-- **Status:** ACTIVE
+- **Status:** DONE 2026-08-30
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/shortest-route.html` (**new**) on branch `route-shortest`, in
+  worktree `../short-course-worktrees/shortest-route`. Darkroom: `shortest-route.html` only —
+  **the darkroom `README.md` was NOT touched**; `Mac/8ca0d62c` refreshed it at 10:31 and owns it.
+- **Notes:** **Nothing in this checkout was modified.** `git status` in the worktree showed one
+  untracked file and zero modifications. `cold-start.html`, `build_site.sh` and `pages.txt` were
+  deliberately left alone while `Mac/8ca0d62c` holds them.
+  **⚠ One finding against `cold-start.html` 7.3, filed not fixed.** 7.3 says the Cloudflare-from-a-
+  folder road is "three steps shorter" and "the road most people should take". That is true **only
+  with a terminal** — it needs `wrangler`. For a learner who never opens a shell the ranking
+  inverts: the folder road is unreachable and the GitHub-repo road is the only one left. Whoever
+  next holds 7.3 decides whether it gains a second audience or this stays a separate sheet.
+  **Not in `tools/pages.txt` and not built** — adding a row touches a file you are changing.
+  Artifact: https://claude.ai/code/artifact/45d1a208-319d-432e-9001-b73ac932ebab
 
 <!-- RELEASE THIS
      tools/claim.sh --release
