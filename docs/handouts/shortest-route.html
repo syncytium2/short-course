@@ -1,0 +1,613 @@
+<title>The Shortest Route</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+  :root {
+    --ground:  #FAFBFC;
+    --surface: #FFFFFF;
+    --sunk:    #F2F5F8;
+    --ink:     #171C23;
+    --muted:   #5C6875;
+    --faint:   #6A7583;
+    --rule:    #E1E6EB;
+    --accent:  #15577D;
+    --accent-soft: #E7F0F6;
+    --caution: #8A5D0F;
+    --caution-soft: #FAF2E2;
+
+    --sans: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:  #0D1218;  --surface: #141A22;  --sunk:    #1A222B;
+      --ink:     #E3E8EE;  --muted:   #93A0AE;  --faint:   #7C8896;
+      --rule:    #232C36;  --accent:  #69B0DD;  --accent-soft: #16283A;
+      --caution: #D2A64E;  --caution-soft: #2A2213;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:  #0D1218;  --surface: #141A22;  --sunk:    #1A222B;
+    --ink:     #E3E8EE;  --muted:   #93A0AE;  --faint:   #7C8896;
+    --rule:    #232C36;  --accent:  #69B0DD;  --accent-soft: #16283A;
+    --caution: #D2A64E;  --caution-soft: #2A2213;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--ground); color: var(--ink);
+    font-family: var(--sans); font-size: 15px; line-height: 1.55;
+    margin: 0; padding: 40px 24px 96px; -webkit-font-smoothing: antialiased;
+  }
+  .page { max-width: 860px; margin: 0 auto; }
+
+  .mast { border-bottom: 2px solid var(--ink); padding-bottom: 18px; margin-bottom: 8px; }
+  .eyebrow {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.13em;
+    text-transform: uppercase; color: var(--muted); margin: 0 0 10px;
+  }
+  h1 { font-size: 26px; font-weight: 600; letter-spacing: -0.015em; margin: 0 0 10px; text-wrap: balance; }
+  .standfirst { color: var(--muted); margin: 0; max-width: 62ch; }
+
+  .status {
+    background: var(--caution-soft); border-left: 2px solid var(--caution);
+    padding: 13px 16px; margin: 22px 0 30px; font-size: 14px;
+  }
+  .status b { font-weight: 600; }
+  .status p { margin: 0 0 8px; }
+  .status p:last-child { margin: 0; }
+
+  .method {
+    background: var(--accent-soft); border-left: 2px solid var(--accent);
+    padding: 13px 16px; margin: 0 0 34px; font-size: 14px;
+  }
+  .method b { font-weight: 600; }
+  .method p { margin: 0 0 8px; }
+  .method p:last-child { margin: 0; }
+
+  .sect { margin: 0 0 38px; }
+  .sect-head {
+    display: flex; align-items: baseline; gap: 12px;
+    border-bottom: 1px solid var(--ink); padding-bottom: 7px; margin-bottom: 14px;
+  }
+  h2 { font-size: 17px; font-weight: 600; margin: 0; letter-spacing: -0.01em; }
+  .sect-tag {
+    font-family: var(--mono); font-size: 11px; color: var(--muted);
+    margin-left: auto; white-space: nowrap; letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  h3 { font-size: 14px; font-weight: 600; margin: 22px 0 8px; }
+
+  p { margin: 0 0 12px; max-width: 74ch; }
+
+  table { border-collapse: collapse; width: 100%; margin: 6px 0 16px; font-size: 14px; }
+  th, td { text-align: left; padding: 9px 12px 9px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--muted); font-weight: 400;
+    border-bottom: 1px solid var(--ink);
+  }
+  td.k { font-weight: 500; white-space: nowrap; padding-right: 20px; }
+  .yes { color: var(--accent); font-weight: 500; }
+  .no  { color: var(--caution); font-weight: 500; }
+  .tbl-wrap { overflow-x: auto; }
+
+  ol.steps { list-style: none; margin: 0; padding: 0; }
+  ol.steps > li {
+    display: grid; grid-template-columns: 40px 1fr; gap: 0 14px;
+    padding: 14px 0; border-bottom: 1px solid var(--rule);
+  }
+  .n {
+    font-family: var(--mono); font-size: 13px; color: var(--accent);
+    font-weight: 500; padding-top: 1px;
+  }
+  .s-title { font-weight: 600; margin: 0 0 6px; }
+  .s-body { color: var(--muted); margin: 0 0 8px; }
+  .s-body:last-child { margin: 0; }
+  .done {
+    font-size: 13px; color: var(--ink); background: var(--sunk);
+    border-left: 2px solid var(--rule); padding: 7px 11px; margin: 8px 0 0;
+  }
+  .done b { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.09em;
+            text-transform: uppercase; color: var(--muted); font-weight: 400;
+            display: block; margin-bottom: 2px; }
+
+  blockquote {
+    margin: 12px 0; padding: 0 0 0 15px; border-left: 2px solid var(--rule);
+    color: var(--muted); font-size: 14px; max-width: 74ch;
+  }
+  blockquote cite { display: block; margin-top: 5px; font-style: normal;
+                    font-family: var(--mono); font-size: 11px; color: var(--faint); }
+
+  .dr { background: var(--surface); border: 1px solid var(--rule); padding: 18px 20px; margin: 8px 0 0; }
+  .dr dl { margin: 0; display: grid; grid-template-columns: 150px 1fr; gap: 10px 18px; }
+  .dr dt {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--muted); padding-top: 3px;
+  }
+  .dr dd { margin: 0; }
+  .dr dd p { margin: 0 0 8px; }
+  .dr dd p:last-child { margin: 0; }
+  .dr-head {
+    font-family: var(--mono); font-size: 12px; color: var(--accent);
+    margin: 0 0 14px; letter-spacing: 0.04em;
+  }
+
+  .path, code {
+    font-family: var(--mono); font-size: 12.5px;
+    background: var(--sunk); padding: 1px 5px; border-radius: 2px;
+  }
+  .prov {
+    font-size: 12.5px; color: var(--faint); border-top: 1px solid var(--rule);
+    padding-top: 12px; margin-top: 26px; max-width: none;
+  }
+  .prov b { color: var(--muted); font-weight: 600; }
+  a { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    .dr dl { grid-template-columns: 1fr; gap: 3px 0; }
+    .dr dt { padding-top: 10px; }
+  }
+</style>
+
+<div class="page">
+
+  <div class="mast">
+    <p class="eyebrow">Decision · one page</p>
+    <h1>The Shortest Route</h1>
+    <p class="standfirst">A website a learner can edit from the Claude app — whether it needs a
+    repository, and whether an agent maintaining documentation can spare them from learning git.
+    Two questions, answered from material this course already holds.</p>
+  </div>
+
+  <div class="status">
+    <p><b>Assembled 2026-08-30 by extraction, not by walking it.</b> Every claim below comes from
+    <span class="path">cold-start.html</span>, <span class="path">search-to-shipped.html</span>,
+    <span class="path">four-barriers.html</span>, <span class="path">points.md</span> or the vendors'
+    own current documentation, cited in place. Nothing here was invented for this page.</p>
+    <p><b>Nobody has walked this route.</b> Neither has Cold Start — it carries the same warning. The
+    order and the timings are unconfirmed, and a step that is wrong has no way of announcing itself
+    here. <b>Never murderboarded.</b></p>
+  </div>
+
+  <div class="method">
+    <p><b>The two questions, as asked.</b> <i>Is a repo necessary?</i> — and <i>can the agent
+    maintain sufficient docs to avoid having to teach a noob git?</i></p>
+    <p><b>Short answers: yes, and no — but the second no is smaller than it looks.</b> The repo is
+    forced by the product, not by good practice. And the learner does not need git; they need four
+    facts about state, none of which is a command. That distinction is the whole page.</p>
+  </div>
+
+  <!-- ============ 1 ============ -->
+  <section class="sect">
+    <div class="sect-head">
+      <h2>1 · Three routes, and what each one actually is</h2>
+      <span class="sect-tag">the field</span>
+    </div>
+
+    <p>&ldquo;Edit it in the Claude app&rdquo; describes three different products with three
+    different requirements. They are not variants of one thing.</p>
+
+    <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>Route</th><th>Repo?</th><th>Terminal?</th><th>What you get</th><th>What it is not</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="k">A · Artifact</td>
+          <td class="no">none</td>
+          <td class="no">none</td>
+          <td>A page published from a conversation, private by default, at a claude.ai address.</td>
+          <td>Not a file the learner owns, not their domain, and its history lives inside somebody
+              else's system.</td>
+        </tr>
+        <tr>
+          <td class="k">B · Claude Code on the web</td>
+          <td class="yes">required</td>
+          <td class="no">none</td>
+          <td>A real project the learner edits by asking, from a browser or the mobile app.</td>
+          <td>Not repo-optional. See below.</td>
+        </tr>
+        <tr>
+          <td class="k">C · Folder &rarr; Cloudflare</td>
+          <td class="no">none</td>
+          <td class="yes">required</td>
+          <td>A custom domain served straight from a folder on the laptop.</td>
+          <td>Not editable from the Claude app, and the terminal is the thing being avoided.</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <p><b>Route A is not a straw man — this course runs on it.</b> All four handouts, this one
+    included, are published as artifacts and read that way. It is a real channel. What it cannot do
+    is be the learner's, at their own address, with a copy they keep.</p>
+  </section>
+
+  <!-- ============ 2 ============ -->
+  <section class="sect">
+    <div class="sect-head">
+      <h2>2 · Is a repo necessary? Yes — and the line is not where it looks</h2>
+      <span class="sect-tag">question one</span>
+    </div>
+
+    <p><b>A repository is not needed to put a site on the internet.</b> Cold Start already settles
+    that, and recommends against the repository road:</p>
+
+    <blockquote>
+      Cloudflare publishes straight from a folder on your computer. There is no repository involved
+      at all, so <b>your repo stays private</b> and it still costs nothing.
+      <cite>Cold Start 7.3 — &ldquo;This is the road most people should take, and it is three steps shorter.&rdquo;</cite>
+    </blockquote>
+
+    <p><b>The repository is needed to edit from the Claude app.</b> That is a hard requirement of the
+    product, stated twice in its own documentation:</p>
+
+    <blockquote>
+      Cloud sessions need access to your GitHub repositories to clone code and push branches.
+      <cite>Claude Code on the web — GitHub authentication options</cite>
+    </blockquote>
+    <blockquote>
+      <b>Platform restrictions:</b> repository cloning and pull request creation require GitHub.
+      <cite>Claude Code on the web — Limitations</cite>
+    </blockquote>
+
+    <p><b>There is an escape hatch and it does not help this learner.</b> A local repository with no
+    GitHub remote can be bundled and uploaded to a cloud session — but that is done by typing
+    <code>claude --cloud</code> in a terminal, and the documentation adds that
+    <i>&ldquo;sessions created from a bundle can't push back to a remote.&rdquo;</i> It requires the
+    terminal to avoid the terminal, and the work cannot come home. It is not a route.</p>
+
+    <h3>So the honest statement of the cost</h3>
+
+    <p>Not <i>&ldquo;you need version control.&rdquo;</i> It is: <b>one free account, created in a
+    browser in four minutes, because otherwise the editing surface will not open.</b> Cold Start
+    already asks for that account, on entirely separate grounds, as the first step of the first
+    phase — and already calls it the step people skip:</p>
+
+    <blockquote>
+      It reads as a step for people who publish software, and you are not publishing software. But
+      it is what gives your project <b>a second place to exist</b>. &hellip; This is the step people
+      skip because it seems premature, and it is the one whose absence is documented twice in this
+      course's own material.
+      <cite>Cold Start 1.1 — &ldquo;Create a GitHub account — this one is not optional&rdquo;</cite>
+    </blockquote>
+
+    <p><b>The decision therefore costs nothing new.</b> It removes an option Cold Start was already
+    telling people not to take.</p>
+
+    <h3>⚠ One thing this reverses, and it is a finding against Cold Start</h3>
+
+    <p><b>7.3's recommendation assumes a terminal. Take the terminal away and its ranking
+    inverts.</b> Cloudflare-from-a-folder is shorter <i>only</i> when <code>wrangler</code> and a
+    shell are already on the table. For a learner who never opens one, the folder road is not three
+    steps shorter — it is unreachable, and the repository road is the only one left.</p>
+
+    <p>This is filed as a finding, not fixed. <span class="path">cold-start.html</span> is
+    <b>not edited by this page</b>; another session holds it. Someone has to decide whether 7.3
+    gains a second audience or whether this route is a separate sheet.</p>
+  </section>
+
+  <!-- ============ 3 ============ -->
+  <section class="sect">
+    <div class="sect-head">
+      <h2>3 · Can documentation replace teaching git? No — and this course already says why</h2>
+      <span class="sect-tag">question two</span>
+    </div>
+
+    <p>The proposal is that the agent keeps the docs good enough that the learner never has to
+    understand what is underneath. That is a fix, and this course has a table for grading fixes:</p>
+
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Tier</th><th>What it is</th><th>What it costs to ignore</th></tr></thead>
+      <tbody>
+        <tr><td class="k">Prose</td><td>A rule written in an instructions file</td><td>Nothing. It is skipped silently.</td></tr>
+        <tr><td class="k">Checklist</td><td>A step someone must remember</td><td>Nothing, when they are busy.</td></tr>
+        <tr><td class="k">Test</td><td>Something that fails loudly</td><td>A red line. Cheap and visible.</td></tr>
+        <tr><td class="k">Structure</td><td>The wrong thing is not reachable</td><td>It cannot be ignored.</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <p><b>&ldquo;Agent-maintained docs&rdquo; is tier one.</b> It is the most available fix and the
+    weakest, which is exactly the pairing the course's own worst incident is about:</p>
+
+    <blockquote>
+      Writing a sentence costs nothing, takes five seconds, feels like having solved something, and
+      produces an artifact you can point at. Every stronger fix costs more and looks like less.
+      <b>The weakest mechanism is the most available one, and availability beats effectiveness
+      unless something forces the issue.</b>
+      <cite><span class="path">docs/cases/2026-08-28-the-weakest-fix-is-the-most-available.md</span></cite>
+    </blockquote>
+
+    <p><b>And documentation has a second defect the table does not show: it rots without saying
+    so.</b> Search to Shipped names it as one of six things that will bite you —</p>
+
+    <blockquote>
+      <b>Staleness.</b> Documentation was true when written and says nothing about the difference.
+      Including official pages, including yours, including what you told the agent to remember last
+      month.
+      <cite>Search to Shipped, Phase 6</cite>
+    </blockquote>
+
+    <p>A doc that Claude maintains is not exempt from this. It is <i>more</i> exposed to it, because
+    nobody re-reads a file that is always being updated by something else.</p>
+
+    <h3>The exception, which is the part worth keeping</h3>
+
+    <p>The material carves out one kind of document that does hold, and states precisely why:</p>
+
+    <blockquote>
+      A project instructions file is an <i>instruction to behave</i> — it competes with everything
+      the model already believes, and it loses. A glossary is not an instruction. It is <b>the fact
+      the session reasons from</b>. <b>A rule asks the model to override a prior; a definition
+      replaces the prior.</b> That is why one holds and the other does not.
+      <cite>It Looked Right, challenge 4</cite>
+    </blockquote>
+
+    <p><b>That is the answer, split in two.</b> Docs written as <i>rules for the learner</i>
+    (&ldquo;always commit before you deploy&rdquo;) are tier one and will be skipped. Docs written as
+    <i>definitions</i> — this word means this state — are the exception, and they are exactly what a
+    beginner is missing. Claude can maintain the glossary. It cannot maintain the discipline.</p>
+  </section>
+
+  <!-- ============ 4 ============ -->
+  <section class="sect">
+    <div class="sect-head">
+      <h2>4 · What the learner actually has to know, which is not git</h2>
+      <span class="sect-tag">the finding</span>
+    </div>
+
+    <p>On this route the learner types no git commands at all. Claude commits, Claude pushes.
+    So the teaching burden is not a command set — it is <b>four states, and the gap between each pair
+    of them.</b> Every one is a fact, not a habit, which puts them in the exception carved out
+    above.</p>
+
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>State</th><th>Means</th><th>The gap under it</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="k">Written</td>
+          <td>The file on the disk changed.</td>
+          <td>Nothing has been recorded. Closing the session can lose it.</td>
+        </tr>
+        <tr>
+          <td class="k">Committed</td>
+          <td>The change is in the record, with a reason attached.</td>
+          <td><b>Committing is not pushing.</b> An unpushed commit exists on exactly one machine and
+              reaches nobody, including you tomorrow on a different one.</td>
+        </tr>
+        <tr>
+          <td class="k">Pushed</td>
+          <td>It is on GitHub. A second machine, and Claude, can see it.</td>
+          <td><b>Pushed is not published.</b> The visitor still gets yesterday's page.</td>
+        </tr>
+        <tr>
+          <td class="k">Deployed</td>
+          <td>The address serves the new bytes.</td>
+          <td>This is the only one a reader can observe, and it is the last to happen.</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <p><b>Two of those four gaps are already documented failures in this estate, which is why they
+    are the ones on the list.</b> Committed-not-pushed is Search to Shipped step 12, written after
+    &ldquo;a night's work that reached the next morning as nothing at all.&rdquo; Pushed-not-deployed
+    happened during the writing of <i>this page</i>: the session board records a rebuilt page sitting
+    correct in the repository while <i>&ldquo;the live page's description says 30 until someone runs
+    <code>npx wrangler deploy</code>.&rdquo;</i> Four states, two of them already proven to catch
+    people who do know git.</p>
+
+    <h3>What this costs against the course's stated git scope</h3>
+
+    <p>The outline fixes the git scope at three commands — <i>commit, diff, log</i> — and says
+    explicitly: no branches, no remotes, no merge. <span class="path">points.md</span> already
+    records that this does not survive contact with step 0:</p>
+
+    <blockquote>
+      <b>D1 pre-empts §6.</b> If a GitHub account is step 0, a remote exists from the first hour, and
+      §6's &ldquo;commit, diff, log — no remotes&rdquo; is already contradicted at the door.
+      <cite><span class="path">points.md</span> §D</cite>
+    </blockquote>
+
+    <p><b>This route does not open that tension. It closes it in the cheap direction.</b> The scope
+    stops being a list of commands the learner runs and becomes a list of states they can check —
+    and <i>diff</i> survives unchanged, because reading a diff for scope is one of the four checks
+    that need no code. The learner reads; the agent types.</p>
+  </section>
+
+  <!-- ============ 5 ============ -->
+  <section class="sect">
+    <div class="sect-head">
+      <h2>5 · The route</h2>
+      <span class="sect-tag">one evening</span>
+    </div>
+
+    <p>Five steps. Nothing installed, nothing typed into a terminal, and every step ends with a
+    condition you can check — because <i>an action and its report are two different events.</i></p>
+
+    <ol class="steps">
+      <li>
+        <span class="n">1</span>
+        <div>
+          <p class="s-title">Create a GitHub account.</p>
+          <p class="s-body">Free, four minutes. Two-factor on during signup, not afterwards. Pick a
+          username you are willing to be known by later. If your work touches research data or human
+          subjects, ask first whether your institution requires its own host — that is a governance
+          question, not a preference. <i>Cold Start 1.1, unchanged.</i></p>
+          <p class="done"><b>Done when</b> you are signed in, 2FA is on, and the username is one you
+          will keep.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">2</span>
+        <div>
+          <p class="s-title">Get a Claude plan that includes Claude Code on the web, and find out which kind it is.</p>
+          <p class="s-body">The web product is in research preview for <b>Pro, Max and Team</b>
+          accounts — a free account will not open the door. Read <i>What It Costs</i> before
+          committing to anything: a personal plan is an allowance you hit and stop; an institutional
+          billing code is usually uncapped, and nothing stops or warns.</p>
+          <p class="done"><b>Done when</b> you can sign in at claude.ai/code, and you can say what
+          happens when you use too much — it stops, or it bills.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">3</span>
+        <div>
+          <p class="s-title">Make an empty repository on github.com, in the browser.</p>
+          <p class="s-body">New repository → tick <b>Add a README</b> → Create. That tick is what
+          makes it a repository with something in it, which is what a cloud session needs to clone.
+          Keep it private. Then at claude.ai/code, connect the GitHub account and pick the repo.
+          <b>No <code>git init</code>, no terminal.</b></p>
+          <p class="done"><b>Done when</b> the repository is visible on github.com in a browser, and
+          it appears in the picker at claude.ai/code.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">4</span>
+        <div>
+          <p class="s-title">Say the whole thing in one sentence, then ask for one element of it.</p>
+          <p class="s-body">&ldquo;A web page that shows my recordings one at a time and lets me mark
+          the bad ones.&rdquo; If you cannot say it in a sentence, you are not ready to ask for it.
+          Then break it into parts, and do <b>one element, never two.</b> Review the diff for scope —
+          what did it touch that you did not ask about? — and let Claude commit and push.</p>
+          <p class="done"><b>Done when</b> the change is visible on github.com, and you can name in
+          one line the single change that just happened.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">5</span>
+        <div>
+          <p class="s-title">Connect the repository to Cloudflare Pages, once.</p>
+          <p class="s-body">In the Cloudflare dashboard, connect the GitHub repository. Private
+          repositories are supported and the whole setup is in the browser. From then on
+          <b>every push redeploys</b>, which is what removes the fourth state from the learner's
+          hands — pushed and deployed stop being two events. The custom domain, if you want one, is
+          Cold Start Phase 7 and can wait.</p>
+          <p class="s-body">The alternative is GitHub Pages, also browser-only — but <b>on the free
+          plan it serves from public repositories only</b>, and private is the right default for
+          research. That trade is Cold Start 7.3's, restated.</p>
+          <p class="done"><b>Done when</b> the URL loads on your phone, off your wifi — and then
+          again after the next change, without you doing anything.</p>
+        </div>
+      </li>
+    </ol>
+
+    <p style="margin-top:18px"><b>Step 5 is doing more work than it looks.</b> Auto-deploy on push is
+    the only <b>structural</b> element on this page — tier four, <i>the wrong thing is not
+    reachable</i>. Every other protection here is prose. It is what lets the learner hold three
+    states instead of four, and it is bought once, in a browser, in about ten minutes.</p>
+  </section>
+
+  <!-- ============ 6 ============ -->
+  <section class="sect">
+    <div class="sect-head">
+      <h2>6 · The decision record</h2>
+      <span class="sect-tag">phase 4 format</span>
+    </div>
+
+    <p>Written in the form this course teaches, because this is exactly the case that form is for:
+    a choice between two real options, both defensible, made on a date.</p>
+
+    <div class="dr">
+      <p class="dr-head">decisions/0001-a-repository-is-required-for-the-claude-app-route.md<br>
+      Date: 2026-08-30 &nbsp;·&nbsp; Status: proposed</p>
+      <dl>
+        <dt>What we chose</dt>
+        <dd><p>A GitHub repository, created in a browser, as the substrate for the shortest route to
+        a learner-editable website. Claude Code on the web is the editing surface; Cloudflare Pages
+        on push is the publishing mechanism.</p></dd>
+
+        <dt>What we rejected</dt>
+        <dd><p><b>Artifacts alone</b> — no repository, no account, genuinely shortest. Rejected
+        because the learner ends with no file they own, no address of their own, and a history
+        living inside a system they cannot export. The course's whole second half is an argument
+        that the record is the point.</p>
+        <p><b>Cloudflare-from-a-folder</b> (Cold Start 7.3) — no repository, and shorter <i>if there
+        is a terminal.</i> Rejected because there is not one, and because the result is not editable
+        from the Claude app, which was the requirement.</p></dd>
+
+        <dt>Why</dt>
+        <dd><p>Not for version control, and not on best-practice grounds. <b>The product requires
+        it:</b> cloud sessions clone and push through GitHub, and the no-GitHub fallback needs a
+        terminal and cannot push back. Given that, the repository is free and Cold Start was already
+        asking for the account on independent grounds.</p></dd>
+
+        <dt>What it costs</dt>
+        <dd><p>One free account. <b>No git commands are taught</b> — four states are, and two of the
+        four have already caught people in this estate who do know git.</p></dd>
+
+        <dt>Revisit if</dt>
+        <dd><p>Claude Code on the web gains a browser-only path that does not require GitHub; or
+        artifacts gain an export the learner keeps and a custom domain; or the learner's institution
+        mandates a non-GitHub host, in which case cloud sessions become bundle-only and this route
+        does not survive.</p></dd>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ============ 7 ============ -->
+  <section class="sect">
+    <div class="sect-head">
+      <h2>7 · What is not settled</h2>
+      <span class="sect-tag">open</span>
+    </div>
+
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Open</th><th>Who decides</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="k">Cold Start 7.3</td>
+          <td>Its &ldquo;three steps shorter&rdquo; is true only with a terminal. Does 7.3 gain a
+          second audience, or does this route stay a separate sheet? <b>Not edited by this page</b> —
+          another session holds that file.</td>
+        </tr>
+        <tr>
+          <td class="k">§6's git scope</td>
+          <td><span class="path">points.md</span> records the commit/diff/log scope as already
+          contradicted at the door. This page proposes states-not-commands as the resolution. That
+          is a proposal against an open tension, not a closure of it.</td>
+        </tr>
+        <tr>
+          <td class="k">Not walked</td>
+          <td>Nobody has run these five steps from a clean account. Until someone has, step 3's
+          browser-only repository creation and step 5's Cloudflare connection are read, not
+          confirmed.</td>
+        </tr>
+        <tr>
+          <td class="k">Not built or published</td>
+          <td>This file is not in <span class="path">tools/pages.txt</span> and has no row in the
+          build. Adding one touches a file another session is actively changing, so it was left
+          alone deliberately.</td>
+        </tr>
+        <tr>
+          <td class="k">Never murderboarded</td>
+          <td>Same status as <i>Search to Shipped</i>. Nothing here has been attacked on purpose.</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <p class="prov"><b>Sources.</b> Route table, the four-minute account and the domain phase:
+  <span class="path">docs/handouts/cold-start.html</span> 1.1, 1.2, 7.3. One-sentence spec, one
+  element, the four checks, committing-is-not-pushing, staleness, and the decision-record format:
+  <span class="path">docs/handouts/search-to-shipped.html</span> steps 8–16 and Phase 6. Four tiers of
+  enforcement, &ldquo;a request is not a rule&rdquo;, and the definition/instruction exception:
+  <span class="path">docs/handouts/four-barriers.html</span> challenge 4, itself from
+  <span class="path">docs/cases/2026-08-28-the-weakest-fix-is-the-most-available.md</span>. The git
+  scope and its contradiction: <span class="path">points.md</span> §C3 and §D. The
+  pushed-not-deployed incident: <span class="path">docs/SESSIONS.md</span>, 2026-08-30.
+  Product requirements are quoted from Anthropic's <i>Claude Code on the web</i> documentation and
+  Cloudflare's <i>Pages Git integration</i> guide, <b>both read 2026-08-30</b> — these move, and
+  nothing re-checks them.</p>
+
+</div>
