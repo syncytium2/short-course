@@ -110,14 +110,33 @@ answered by not teaching. Three of the four (B2, B4, B5) rewrite one section, an
 route through them — emailing the Oxford, UW eScience and Southampton organisers — depends on
 other people replying, so it gets *more* urgent with a redesign starting, not less.
 
-**Where uncertainty goes.** Four channels, each with one job, and the newest is
-[`docs/doubt/`](docs/doubt/) — material nobody is confident in, parked, **with no decision owed**.
-That last clause is what separates it from [`OPEN-FINDINGS.md`](OPEN-FINDINGS.md) (a defect
-awaiting a call), [`docs/cases/OPEN-CORRECTIONS.md`](docs/cases/OPEN-CORRECTIONS.md) (a committed
-statement known to be wrong) and [`docs/chain/EXCLUDED.md`](docs/chain/EXCLUDED.md) (deliberately
-not held here). `tools/doubt.sh "…"` parks one in about twenty seconds; `--list` reads them back.
-It exists because the material arrives daily and the doubts arrive with it — and a doubt recorded
-only in prose, in one document, is a doubt that gets taught as a fact three weeks later.
+**Where everything else lives.** The chain above is provenance — how the course was made. Four
+other folders carry the working material, and each has its own front door:
+
+| folder | what is in it | front door |
+|---|---|---|
+| [`docs/cases/`](docs/cases/) | incidents used as **teaching material** — including two that happened here | [index](docs/cases/README.md) |
+| [`docs/reviews/`](docs/reviews/) | this repo's own work **attacked on purpose**, seven eleven-role runs | [index](docs/reviews/README.md) |
+| [`docs/handouts/`](docs/handouts/) | what a learner is actually handed | [index](docs/handouts/README.md) |
+| [`docs/doubt/`](docs/doubt/) | material nobody can vouch for, parked, **no decision owed** | [index](docs/doubt/README.md) |
+
+And two coordination files, because several Claude sessions share this one checkout:
+[`docs/SESSIONS.md`](docs/SESSIONS.md) says who is working on what **right now**
+(`tools/claim.sh --list`), and [`HANDOFF.md`](HANDOFF.md) is what the last session left for the next.
+
+**Four channels for uncertainty, each with one job.** Getting these confused is how a findings
+list becomes unreadable:
+
+| you have… | it goes… |
+|---|---|
+| a defect, and someone must make a call | [`OPEN-FINDINGS.md`](OPEN-FINDINGS.md) |
+| a **committed** statement now known to be **wrong** | [`docs/cases/OPEN-CORRECTIONS.md`](docs/cases/OPEN-CORRECTIONS.md) |
+| something deliberately **not** held here | [`docs/chain/EXCLUDED.md`](docs/chain/EXCLUDED.md) |
+| something that might be true, that you could not stand behind, **where nothing depends on it today** | [`docs/doubt/`](docs/doubt/) — `tools/doubt.sh "…"` parks one in about twenty seconds |
+
+The last one is newest, and its no-decision-owed rule is what stops it becoming a fifth backlog.
+It exists because material arrives daily and the doubts arrive with it — and a doubt recorded only
+in prose, in one document, is a doubt that gets taught as a fact three weeks later.
 
 **Which file is live.** `points.md` is the working document and is where the redesign proceeds
 from; `course-outline.md` is draft 3, frozen as node 3 of the chain — the exact bytes the

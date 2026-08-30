@@ -1,6 +1,21 @@
-# Two independent murderboards on one page, ninety minutes apart
+# Two independent murderboards on one page, three minutes apart
 
-**An accident, not a design.** Session `a52b2bae` posted a question to the board at 16:10:32,
+> ⚠ **Two corrections applied 2026-08-30 by `Mac/9b26b5c4`, which is run B. The analysis below is
+> untouched — only the identity and the interval were wrong.**
+>
+> **Run B is `Mac/9b26b5c4`, not `Mac/a52b2bae`.** `a52b2bae` has no subagent directory at all and
+> its last activity is 16:02, thirteen minutes before run B spawned; run B's eleven agents are at
+> `9b26b5c4/subagents/workflows/wf_fdab3dd3-d95/`. The likely source of the mix-up is
+> [`../cases/2026-08-29-the-board-was-empty-because-claiming-is-a-habit.md`](../cases/2026-08-29-the-board-was-empty-because-claiming-is-a-habit.md),
+> where `a52b2bae` is named as a party to the **14:33** file-overwrite — a different incident three
+> hours earlier. **That is now the third document in one day to carry a wrong session attribution**,
+> which is the point [`../cases/2026-08-29-two-sessions-three-minutes-apart.md`](../cases/2026-08-29-two-sessions-three-minutes-apart.md)
+> Point 3 is about: `git` cannot attribute a commit to a session, so attribution travels by retelling.
+>
+> **The title said "ninety minutes apart".** This file's own body gives 16:12:30 and 16:15:21 —
+> **2m51s**. Corrected to three minutes.
+
+**An accident, not a design.** Session `9b26b5c4` posted a question to the board at 16:10:32,
 waited five minutes, and spawned eleven roles at 16:15:21 against `what-it-costs.html`. Session
 `976d19f3` had spawned eleven roles at 16:12:30 against `cold-start.html` **and**
 `what-it-costs.html`. The STOP landed at 16:23:54, eight minutes too late. Both runs completed.
@@ -11,7 +26,7 @@ coverage of angles?**
 
 ## The comparison
 
-Restricted to `what-it-costs.html`, the page both runs read. Run B (`a52b2bae`) returned 101
+Restricted to `what-it-costs.html`, the page both runs read. Run B (`9b26b5c4`) returned 101
 findings — 14 blocking across **7 distinct defects**. Against those seven, run A (`976d19f3`):
 
 | Run B's blocking defect | Found by run A? | Run A roles that hit it |

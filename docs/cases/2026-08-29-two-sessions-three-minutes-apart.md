@@ -243,8 +243,12 @@ its own favour is not worth filing.
 
 - **`976d19f3` was never asked.** Its side of every judgement here is inferred. One message on the
   board would settle the `15:55` question and has not been sent, because it may have ended.
-- **The convergence test is a keyword floor**, not an adjudicated comparison. The two reviews'
-  findings have never been properly diffed — and that diff is the actual prize in this incident.
+- ~~**The convergence test is a keyword floor**, not an adjudicated comparison.~~ **Done, by
+  someone else, within the hour.** [`../reviews/two-runs-correlated_2026-08-29.md`](../reviews/two-runs-correlated_2026-08-29.md)
+  adjudicates the two runs defect by defect: **five of seven blocking defects found by both, one
+  partial, one missed — ~79% agreement.** My keyword floor understated it. That file arrived with
+  run B attributed to the wrong session and a title off by 87 minutes, both corrected 2026-08-30 —
+  which is Point 3 of this case happening to this case, in a third document, the same day.
 - **The pre-spawn sensor is filed, not built.**
 - **Its eleven reports are not merged into
   [`../reviews/what-it-costs_2026-08-29.md`](../reviews/what-it-costs_2026-08-29.md)**, which
