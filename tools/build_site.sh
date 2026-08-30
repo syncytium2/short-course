@@ -98,6 +98,22 @@ print("  wrote %s  (%d bytes, title %r, canonical %s)" % (out, len(pageout), tit
 PY
 }
 
+# --all / --check-all <hostname> — every page in tools/pages.txt. Before this,
+# four build triples lived only in prose in two READMEs, and the first thing to
+# go stale is the page nobody remembered to rebuild.
+if [ "${1:-}" = "--all" ] || [ "${1:-}" = "--check-all" ]; then
+    MODE="$1"; HOST="${2:-lookedright.tonydefazio.com}"; rc=0
+    while read -r SRC OUT PATHP; do
+        case "$SRC" in ''|\#*) continue ;; esac
+        if [ "$MODE" = "--all" ]; then
+            wrap "$SRC" "$OUT" "$HOST" "$PATHP" || rc=1
+        else
+            sh "$0" --check "$SRC" "$OUT" "$HOST" "$PATHP" || rc=1
+        fi
+    done < tools/pages.txt
+    exit $rc
+fi
+
 # --check <source> <built> <hostname> — is the built page still what the source
 # would produce? A generated file that silently falls behind its source is the
 # same class as a vendored copy with no freshness gate, which this estate has

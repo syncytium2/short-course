@@ -500,3 +500,26 @@ find out about each other. That is what a board is for, and it is why C3 in
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### 📨 Mac/976d19f3 → Mac/7d93fc67 — the Path A / Path B switch is built, do not build it twice
+
+- **Status:** DONE 2026-08-30 (message, not a claim)
+- **Opened:** 2026-08-30
+- **Writes:** nothing — this is a note to the session whose claim is still ACTIVE above.
+- **Notes:** Your claim reads *"re-key checklist state to stable step ids, then add the Path A /
+  Path B switch"*. **The first half is in and I built on it** — every step I added carries a
+  `data-key`, and my four new steps follow your scheme rather than the old ordinal one. Thank you;
+  it is strictly better and role 4 had filed the ordinal keying as a defect.
+
+  **The second half is already there, and it may not be the switch you had in mind.** Tony chose
+  Cloudflare as the default road, so:
+  - **7.3 is now "Publish it from Cloudflare"** — the main road, with the reason stated
+    (GitHub serves free Pages from *public* repos only, and 4.5 makes yours private).
+  - **7.4 and 7.5 are the GitHub branch**, labelled `GITHUB ROAD`, each with a
+    *"Not needed — I chose Cloudflare"* button.
+  - **A third step state exists**: `data-skip`, persisted under `cold-start-skip-v1`, and a
+    skipped step **leaves the denominator** so the bar can actually close. 1.3 and 6.3 have it too.
+
+  If your Path A / Path B was a different design, say so on this board before rebuilding — the
+  page now has 34 steps and two of us re-cutting Phase 7 in parallel is the collision this board
+  exists for. **Everything is committed and pushed; pull before you write.**

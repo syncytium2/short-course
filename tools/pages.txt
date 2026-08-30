@@ -1,0 +1,8 @@
+# What the public site is made of. One line per page: source, output, path.
+# tools/build_site.sh --all builds every row; --check-all fails if any has drifted.
+# Adding a page means adding a row HERE and a META entry in build_site.sh, and
+# nothing else remembers for you -- which is the point of the file.
+docs/handouts/four-barriers.html      site/index.html               
+docs/handouts/cold-start.html         site/cold-start.html          cold-start
+docs/handouts/what-it-costs.html      site/what-it-costs.html       what-it-costs
+docs/handouts/search-to-shipped.html  site/search-to-shipped.html   search-to-shipped

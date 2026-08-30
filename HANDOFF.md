@@ -874,3 +874,65 @@ someone wants it. It is the better B4 instance of the two.
 - **The repo's own token-measurement method no longer reproduces.** `OPEN-CORRECTIONS` C1 sums
   per-turn `usage` records; on this harness that field maxes at **17** on turns writing thousands
   of words. Three mechanisms disagree by up to 8×. Parked in `docs/doubt/`.
+
+---
+
+# Session handoff — Mac/976d19f3, 2026-08-29/30
+
+**Read this first if you are picking up the handouts.** Everything below is committed and
+pushed; nothing is only on one disk.
+
+## What is live
+
+Four pages at **lookedright.tonydefazio.com**, built by `tools/build_site.sh` from
+`docs/handouts/`, listed in **`tools/pages.txt`**:
+
+| path | source | reviewed? |
+|---|---|---|
+| `/` | `four-barriers.html` | murderboarded 2026-08-29 |
+| `/cold-start` | `cold-start.html` | murderboarded 2026-08-29, repaired |
+| `/what-it-costs` | `what-it-costs.html` | murderboarded **twice**, repaired |
+| `/search-to-shipped` | `search-to-shipped.html` | **never murderboarded** |
+
+`tools/build_site.sh --check-all` before any deploy; it fails if any page has drifted from its
+source. `npx wrangler deploy` publishes. **Do not edit `site/` — it is generated.**
+
+## The three records worth reading before you touch anything
+
+- **`docs/reviews/handouts_murderboard_2026-08-29.md`** — eleven roles, both new pages, what was
+  fixed before deploy and what was parked.
+- **`docs/reviews/what-it-costs_2026-08-29.md`** — the *other* session's independent eleven-role
+  run on the same page, 101 findings, with raw JSON beside it.
+- **`docs/reviews/two-runs-correlated_2026-08-29.md`** — the two runs compared. **~79% agreement
+  on blocking defects**, and the 21% that differed tracks the *briefing*, not the model. If you
+  are deciding whether to buy another review round, read this one first: a second run on the same
+  brief buys very little.
+
+## Open, in the order I would take them
+
+1. **`docs/cases/OPEN-CORRECTIONS.md` C1 is still open.** The case file
+   `2026-08-28-the-tests-were-defending-the-bug.md` still says **833,142 tokens**; the measured
+   figure is **1,597,426**. It cannot be closed until `syncytium2/murderboard` pushes the
+   `review-cost` branch — a handoff asking for that is in
+   `<darkroom>/murderboard/2026-08-29-FROM-short-course-…md` and **has had no reply**. Chase it or
+   close C1 by citing the local file and saying so.
+2. **`docs/doubt/` holds 22 parked findings** from the review. None blocks anything. The largest:
+   five failure modes here against six on the public page this sheet links to; 43% of Cold Start's
+   checkboxes are not observable; the teaching-cost figure may be 10× low; ten thousand words
+   across two sheets contain no diagrams, and three were specified.
+3. **Search to Shipped is public and unreviewed.** It was published because Cold Start's Phase 7
+   hands off to it. One round is ~$40.
+4. **§D coverage is correct and unenforced.** Cold Start now covers all twenty items of
+   `points.md` §D. Nothing checks that it stays true — which is the same shape as the claim that
+   was wrong yesterday. A sibling of `tools/check_pointers.sh` would fix it.
+5. **The cost measurement undercounts output.** `metrics/measure_review_cost.py` reported 44,247
+   output tokens for eleven roles over two pages; the other session's counter reported 218,655
+   for eleven over one. Different instruments, but the direction holds. Parked in `docs/doubt/`.
+
+## What I would not do
+
+**Do not re-run a murderboard on `what-it-costs.html` on the same brief.** It has had two. The
+correlation record says what that buys.
+
+**Do not edit `docs/handouts/*.html` without checking `docs/SESSIONS.md` first.** Two sessions
+worked in these files simultaneously on 29 August; it went well only because both posted.
