@@ -50,7 +50,7 @@ META = {
         "Four challenges in working with coding agents, for researchers \u2014 with the real "
         "incidents behind each one, readable at three depths.", "\U0001F9F1"),
     "cold-start.html": (
-        "Zero to a working coding-agent setup: 29 steps in seven phases, each a checklist "
+        "Zero to a working coding-agent setup: 30 steps in seven phases, each a checklist "
         "that stays red until every box is checked.", "\U0001F9CA"),
     "what-it-costs.html": (
         "What a coding-agent setup actually costs \u2014 the four things that charge, the three "

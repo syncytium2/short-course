@@ -356,7 +356,7 @@
   }
 
   @media print {
-    /* Without this the page prints as 29 headings and nothing else, and the
+    /* Without this the page prints as 30 headings and nothing else, and the
        sticky bar prints on top of the content. four-barriers.html learned this
        the same way, in commit 08a0af9. */
     .bar { display: none; }
@@ -554,7 +554,7 @@
   <section class="phase">
     <div class="phase-head">
       <h2>Phase 3 &middot; The machine</h2>
-      <span class="phase-time">45 min</span>
+      <span class="phase-time">55 min</span>
     </div>
     <ol class="steps">
       <li data-id="3.1" data-open="0" data-done="0">
@@ -565,11 +565,14 @@
           <p class="links"><a href="https://code.visualstudio.com/">VS&nbsp;Code</a></p>
         <div class="detail" id="d-3.1">
             <p class="why"><a href="https://code.visualstudio.com/">VS&nbsp;Code</a> is the safe default and has a terminal built into it. You need the editor to <i>read</i> what the agent writes; almost everything else happens in the terminal.</p>
+            <div class="warn"><b>The first time you open a folder it asks whether you trust it, and the answer decides whether 3.5 works.</b> The dialog says <i>&ldquo;Do you trust the authors of the files in this folder?&rdquo;</i> and offers <i>&ldquo;Yes, I trust the authors&rdquo;</i> or <i>&ldquo;No, I don&rsquo;t trust the authors&rdquo;</i>. For a folder you made yourself, on your own machine, it is yes.
+            <br><br>Answer no and the window opens in <b>Restricted Mode</b>, where <b>the agent&rsquo;s extension does not run at all</b> &mdash; it declares itself unsupported in an untrusted folder, so VS&nbsp;Code disables it and files it under <i>Disabled in Restricted Mode</i> in the Extensions view. What you see instead is an editor that looks normal and an agent that is simply not there. <b>Nothing on screen connects the missing agent to the question you answered.</b> The banner along the top says only <i>&ldquo;Restricted Mode: Some features are disabled because this folder is not trusted&rdquo;</i>, and it does not name any of them.</div>
         </div>
         <ul class="checks">
             <li><button class="cb" type="button" aria-pressed="false" aria-labelledby="c-3-1-0">&#10003;</button><span class="cbt" id="c-3-1-0">Editor installed</span></li>
             <li><button class="cb" type="button" aria-pressed="false" aria-labelledby="c-3-1-1">&#10003;</button><span class="cbt" id="c-3-1-1">I can open a folder in it</span></li>
-            <li><button class="cb" type="button" aria-pressed="false" aria-labelledby="c-3-1-2">&#10003;</button><span class="cbt" id="c-3-1-2">I can open a terminal inside that same window</span></li>
+            <li><button class="cb" type="button" aria-pressed="false" aria-labelledby="c-3-1-2">&#10003;</button><span class="cbt" id="c-3-1-2">I answered <b>yes</b> to the trust question &mdash; there is no <i>Restricted Mode</i> banner along the top</span></li>
+            <li><button class="cb" type="button" aria-pressed="false" aria-labelledby="c-3-1-3">&#10003;</button><span class="cbt" id="c-3-1-3">I can open a terminal inside that same window</span></li>
         </ul>
       </li>
       <li data-id="3.2" data-open="0" data-done="0">
@@ -623,11 +626,32 @@ claude</pre>
       </li>
       <li data-id="3.5" data-open="0" data-done="0">
         <div class="srow">
-          <button class="head" type="button" aria-expanded="false" aria-controls="d-3.5"><span class="n">3.5</span>Stop the machine sleeping through work you walked away from</button>
+          <button class="head" type="button" aria-expanded="false" aria-controls="d-3.5"><span class="n">3.5</span>Put the agent inside the editor &mdash; and find the button, which hides</button>
+          <span class="badge">Incomplete</span>
+        </div>
+          <p class="links"><a href="https://code.claude.com/docs/en/vs-code">Extension docs</a></p>
+        <div class="detail" id="d-3.5">
+            <p class="why"><b>3.4 installed a command. This installs an interface, and they are two separate things that do not imply each other.</b> The <code>npm</code> install gives you <code>claude</code> to type in a terminal. The editor extension is its own install and carries <b>its own copy of the agent</b> &mdash; the vendor states it plainly: <i>&ldquo;The extension bundles its own copy of the CLI. To run <code>claude</code> in VS&nbsp;Code&rsquo;s integrated terminal, you also need the standalone CLI install.&rdquo;</i> Do both. They share your login, your settings and your project.</p>
+            <p class="why"><b>Cmd+Shift+X</b> (<b>Ctrl+Shift+X</b> on Windows and Linux) opens the Extensions view. Search <b>Claude Code</b>, click <b>Install</b>. If nothing appears afterwards, run <b>Developer: Reload Window</b> from the Command Palette.</p>
+            <div class="warn"><b>Now the part that is nobody&rsquo;s fault and stops people anyway: you will not be able to find it.</b> The button is a small orange spark at the <b>top right of the editor</b> &mdash; <i>not</i> in the left rail where every other extension puts its icon. And, in the vendor&rsquo;s own words, <b><i>&ldquo;the icon only appears when you have a file open.&rdquo;</i></b>
+            <br><br>A folder you have just opened shows no file. So it shows no icon. So the obvious conclusion &mdash; that the install failed &mdash; is available, reasonable, and wrong. <b>Open any file in the folder first.</b> Then the spark is there, and it was there all along.</div>
+            <p class="why"><b>Learn the route that does not depend on the icon, because it is the one that always works.</b> <b>Cmd+Shift+P</b> (<b>Ctrl+Shift+P</b>) opens the Command Palette; type <code>Claude Code</code> and pick <b>Open in New Tab</b>. That works with nothing open at all. <b>Cmd+Esc</b> (<b>Ctrl+Esc</b>) is the fast way in, but it needs a file focused &mdash; the same condition as the icon &mdash; so it is the second thing to learn, not the first.</p>
+            <p class="why">The same palette has <b>Claude Code: Open Walkthrough</b>, a four-step tour from the people who wrote it.</p>
+            <p class="why"><b>This step is written for one agent and says so.</b> Every alternative in 1.2 has an editor extension too, and none of them was checked for this page. Where their button lives, and whether it hides itself the same way, is unverified here.</p>
+        </div>
+        <ul class="checks">
+            <li><button class="cb" type="button" aria-pressed="false" aria-labelledby="c-3-5-0">&#10003;</button><span class="cbt" id="c-3-5-0">The extension is listed as installed in the Extensions view</span></li>
+            <li><button class="cb" type="button" aria-pressed="false" aria-labelledby="c-3-5-1">&#10003;</button><span class="cbt" id="c-3-5-1">With a file open, I have found the spark at the top right and clicked it</span></li>
+            <li><button class="cb" type="button" aria-pressed="false" aria-labelledby="c-3-5-2">&#10003;</button><span class="cbt" id="c-3-5-2">With <i>no</i> file open, I have opened it from the Command Palette &mdash; so I am not relying on the icon</span></li>
+        </ul>
+      </li>
+      <li data-id="3.6" data-open="0" data-done="0">
+        <div class="srow">
+          <button class="head" type="button" aria-expanded="false" aria-controls="d-3.6"><span class="n">3.6</span>Stop the machine sleeping through work you walked away from</button>
           <span class="badge">Incomplete</span>
         </div>
           <p class="links"><a href="https://apps.apple.com/us/app/amphetamine/id937984704?mt=12">Amphetamine</a></p>
-        <div class="detail" id="d-3.5">
+        <div class="detail" id="d-3.6">
             <p class="why">This is not only about overnight jobs, and you do not need one for it to matter. <b>The first time it bites most people, they went to make coffee.</b> An agent working through a multi-step task keeps going while you are not watching &mdash; and if the display sleeps or the lid shuts, it stops, mid-task, with no result and no message saying so.</p>
             <p class="why">Learning the command now costs a minute. Learning it at the moment you need it means you have already lost whatever was running.</p>
             <pre>caffeinate -dimsu     # macOS, built in, no install</pre>
@@ -635,8 +659,8 @@ claude</pre>
             <p class="why"><b>If you ever do have a run that takes hours</b>, this is also the thing to try before concluding you need a cluster. A good share of people asking for one need the machine to stay awake instead, and that is a minute of work against a requisition that takes weeks.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" type="button" aria-pressed="false" aria-labelledby="c-3-5-0">&#10003;</button><span class="cbt" id="c-3-5-0">I know the command or the app for my platform</span></li>
-            <li><button class="cb" type="button" aria-pressed="false" aria-labelledby="c-3-5-1">&#10003;</button><span class="cbt" id="c-3-5-1">I have run it once, so I am not learning it at the moment I need it</span></li>
+            <li><button class="cb" type="button" aria-pressed="false" aria-labelledby="c-3-6-0">&#10003;</button><span class="cbt" id="c-3-6-0">I know the command or the app for my platform</span></li>
+            <li><button class="cb" type="button" aria-pressed="false" aria-labelledby="c-3-6-1">&#10003;</button><span class="cbt" id="c-3-6-1">I have run it once, so I am not learning it at the moment I need it</span></li>
         </ul>
       </li>
     </ol>
@@ -1047,9 +1071,16 @@ or four A records:
 
 <script>
 (function () {
-  // v2: state is per checklist ITEM, not per step. A step is done when every
+  // v3: state is per checklist ITEM, not per step. A step is done when every
   // one of its items is ticked, so the badge can never disagree with the list.
-  var KEY = 'cold-start-v2';
+  //
+  // WHY v3 AND NOT v2. State is keyed by the step's data-id plus the box's INDEX,
+  // so it survives edits to a box's wording and does not survive renumbering.
+  // Adding 3.5 pushed caffeinate to 3.6, which would have handed a returning
+  // reader's caffeinate ticks to a step about a VS Code extension -- silently, and
+  // looking exactly like progress. Bumping the key discards saved progress instead
+  // of mis-assigning it. Losing ticks is visible; wrong ticks are not.
+  var KEY = 'cold-start-v3';
 
   function load() {
     try { return JSON.parse(localStorage.getItem(KEY) || '{}') || {}; }
@@ -1118,7 +1149,7 @@ or four A records:
   count();
 
   document.getElementById('pc-reset').addEventListener('click', function () {
-    if (!window.confirm('Clear all 29 steps and the saved paths? This cannot be undone.')) return;
+    if (!window.confirm('Clear all 30 steps and the saved paths? This cannot be undone.')) return;
     for (var k in state) delete state[k];
     save();
     for (var pk in paths) delete paths[pk];
