@@ -1170,11 +1170,24 @@ find out about each other. That is what a board is for, and it is why C3 in
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Mac/4a487730 — Remove the absolutes (never/always/nobody/no one) from all four handout sources + rebuild site/
-- **Status:** ACTIVE
+- **Status:** DONE 2026-08-30
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** all four of `docs/handouts/*.html` and all four `site/*.html` build outputs.
+  **All eight, committed and pushed. Nothing else touched.**
+- **Notes:** **⛔ NOT DEPLOYED. `site/` is ahead of the live site and needs Tony's say-so** —
+  and `cold-start.html` changed, so a deploy discards readers' saved checklist ticks (the standing
+  rule on `Mac/7d93fc67`'s block).
+- **This is a house-style change, not a copy-edit, and it applies to anything you write next.**
+  Tony, 2026-08-30: *"remove these absolutes from the website entirely… they are demonstrably
+  untrue and not my style."* 55 of 115 occurrences of never / always / nobody / no one removed —
+  every one where a page asserted an absolute **in its own voice**. **59 were kept on purpose**,
+  in four categories he agreed before the edit: quoted objections (the Objections section quotes
+  an absolute to refute it), verbatim commit subjects in the commit strips (editing them would
+  make the page show a git log that does not match the repo), self-critical limitations
+  (*"Nobody outside has used any of it"*), and specific historical facts about one incident
+  (*"the edit never happened"*). **Do not "finish the job" by removing those 59** — that was the
+  decision, not an oversight. CSS/JS comments were left alone; they do not render.
 
 <!-- RELEASE THIS
      tools/claim.sh --release

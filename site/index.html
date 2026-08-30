@@ -545,7 +545,7 @@
       <p class="eyebrow">It Looked Right &middot; for researchers</p>
       <h1>Using coding agents today and tomorrow</h1>
       <p class="standfirst"><b>Coding is no longer the barrier. Four challenges remain.</b> Each one below, with the incidents that produced it &mdash; every one real and traceable to a primary source, each labeled with who checked it &mdash; most are self-reports by the person they are about.</p>
-    <p class="pv">Version <b>0.1.51</b> &middot; 30 Aug 2026<span class="pv-born">First published 28 Aug 2026</span></p>
+    <p class="pv">Version <b>0.1.52</b> &middot; 30 Aug 2026<span class="pv-born">First published 28 Aug 2026</span></p>
     </div>
     <div class="depth">
       <span class="depth-label" id="depth-label">Reading depth</span>
@@ -656,7 +656,7 @@
           </a>
           <a class="card" href="#asymptote" data-view="asymptote">
             <h4>The forever asymptotes</h4>
-            <p>An agent makes refinement nearly free. Error checks, analysis, interfaces &mdash; each can always be better.</p>
+            <p>An agent makes refinement nearly free. Error checks, analysis, interfaces &mdash; each can be made better.</p>
           </a>
         </div>
 
@@ -747,7 +747,7 @@
         <details class="more">
           <summary>Why this is structural and not carelessness <span class="cost">5 min</span></summary>
           <div class="inner">
-            <p>Asking costs one message and feels like failure. Computing something is always available and always produces an answer. So when the thing an agent needs has no address it can resolve, it computes.</p>
+            <p>Asking costs one message and feels like failure. Computing something is usually available and it produces an answer. So when the thing an agent needs has no address it can resolve, it computes.</p>
             <p><b>The failure tracked whether the source had a resolvable address &mdash; not how careful the agent was.</b> That is why two independent sessions, with no shared evidence between them, produced the same shape twelve hours apart. One instance invites &ldquo;that agent was careless.&rdquo; Two, one of them against a correct and present contract, rules it out.</p>
             <p>The narrower and worse version of the defect, found later: the agent recomputed a quantity that was already sitting in a column of the file it had open, on 150,703 of 150,715 rows.</p>
             <p><b>The repair was a function, not a better README.</b> Prose describing where data lives had already failed twice. What closed it was a canonical accessor &mdash; one call that returns the current path, so there is nothing left to infer.</p>
@@ -818,7 +818,7 @@
               <tr>
                 <td><b>Reported success it never achieved</b> <span class="tag warn">silent</span></td>
                 <td>Check the world, not the summary.</td>
-                <td>Break the check on purpose and see whether it notices. If it still passes, it was never testing anything.</td>
+                <td>Break the check on purpose and see whether it notices. If it still passes, it was not testing anything.</td>
               </tr>
               <tr>
                 <td><b>Right measurement, wrong cause</b> <span class="tag warn">silent</span></td>
@@ -909,13 +909,13 @@
         <div class="view-head">
           <p class="eyebrow">Challenge 4</p>
           <h2 id="h-asym">The forever asymptotes</h2>
-          <p class="lede"><b>An agent makes refinement nearly free.</b> Error-checking tools, the analysis, the interface &mdash; each can always be better. That is what makes them hard to stop.</p>
+          <p class="lede"><b>An agent makes refinement nearly free.</b> Error-checking tools, the analysis, the interface &mdash; each can be made better. That is what makes them hard to stop.</p>
         </div>
 
         <h3>The guarding becomes the work</h3>
         <p>Catching failures is a necessary end. It is also an absorbing one. A slick session-startup script will not analyze your data.</p>
 
-        <h3>The work itself is never perfect</h3>
+        <h3>The work itself resists being finished</h3>
         <p>The web app can be better. The detection algorithm can be improved. The simulated data can be more realistic. The model might do better with another layer.</p>
 
         <details class="more">
@@ -1064,7 +1064,7 @@
 
         <h3>&ldquo;Nobody works this way&rdquo;</h3>
         <p class="quote">&ldquo;This guy&rsquo;s a joke. Nobody works like this.&rdquo;</p>
-        <p><b>Correct, and for most work nobody should.</b> Almost every mechanism described on this page &mdash; a board you claim a file on before you touch it, a build that refuses to run against an uncommitted source, a folder for material nobody is confident in &mdash; exists because one specific thing went wrong first, and most of them went wrong because several agent sessions were running in one checkout at the same time. That is an unusual way to work. Build any of it <i>before</i> the failure it answers and it is <a href="#asymptote" data-view="asymptote">challenge 4</a> with extra steps, which is the counterweight this page argues for everywhere else.</p>
+        <p><b>Correct, and for most work it would be wasted effort.</b> Almost every mechanism described on this page &mdash; a board you claim a file on before you touch it, a build that refuses to run against an uncommitted source, a folder for material the author could not stand behind &mdash; exists because one specific thing went wrong first, and most of them went wrong because several agent sessions were running in one checkout at the same time. That is an unusual way to work. Build any of it <i>before</i> the failure it answers and it is <a href="#asymptote" data-view="asymptote">challenge 4</a> with extra steps, which is the counterweight this page argues for everywhere else.</p>
         <p><b>The useful question is who the objection is arguing with.</b> Stated in the author&rsquo;s own words: <i>if you are in a position to judge my use of session hooks, this is not for you.</i> It is written for someone whose alternative is not a better workflow &mdash; it is no workflow. First agent, own machine, own data, one copy of the data.</p>
 
         <details class="more">
@@ -1086,9 +1086,9 @@
         <h3>&ldquo;Why are you so weird about this?&rdquo;</h3>
         <p class="quote">&ldquo;Why are you so weird about this? Just use permissions and a <span class="path">CLAUDE.md</span>. Give it roles. The tools already do all of that.&rdquo;</p>
         <p><b>All three are used here, and the page tells you to use them.</b> The instructions file and the permission settings &mdash; allow, ask, deny &mdash; are on the setup list in <a href="#step0" data-view="step0">Step 0</a>, not as an afterthought. The eleven-role adversarial review that caught the numerical defects in this material <i>is</i> roles &mdash; eleven of them &mdash; and a run of the same kind on another document returned 31 blocking findings against a page whose numbers had all checked out. Nothing here is an argument against any of that.</p>
-        <p><b>The objection fails on one distinction, and it is the distinction this whole page is built on.</b> Permissions answer <i>may this command run.</i> They never answer <i>is this claim true.</i> Every incident described on this page passed every permission check it met: the wrong dataset was read with permission, the four wrong numbers came out of commands that were allowed to run, and the two sessions that wrote the same document minutes apart were both fully authorised. <b>Not one of those failures is a permissions failure</b>, so no permission setting would have caught any of them.</p>
+        <p><b>The objection fails on one distinction, and it is the distinction this whole page is built on.</b> Permissions answer <i>may this command run.</i> They do not answer <i>is this claim true.</i> Every incident described on this page passed every permission check it met: the wrong dataset was read with permission, the four wrong numbers came out of commands that were allowed to run, and the two sessions that wrote the same document minutes apart were both fully authorised. <b>Not one of those failures is a permissions failure</b>, so no permission setting would have caught any of them.</p>
         <p><b>And an instructions file is a request, not a rule</b> &mdash; that is <a href="#fixes" data-view="fixes">Fixes that hold</a>, which is on this page because it is the mistake people make immediately. You write the lesson down, the file grows, and the second sentence still gets skipped. The proof is dated and it is embarrassing: <b>hours after this project documented that instructions are unenforceable, the agent proposed a <span class="path">CLAUDE.md</span> rule as the fix</b> for the very defect being discussed. The file was not ignored by a careless machine; it was written by the party that had just finished explaining why it would not work. A role prompt is the same class of thing &mdash; a request, performed well until it is not.</p>
-        <p><b>So the weird half is small, and it is the half that refuses.</b> A build that will not run against an uncommitted source. A check that fails when a document names a file that does not exist. A hook that says no. <b>One of them refused this session, today</b>, while this very section was being written: an attempt to write a source file through a shell heredoc was blocked outright, by a gate that exists because that trick silently corrupted two files in one sitting and the diff still looked right. That rule had been written in prose, in more than one repository, and skipped anyway. As a gate, nobody has to remember it &mdash; which is the entire difference between a habit and a mechanism.</p>
+        <p><b>So the weird half is small, and it is the half that refuses.</b> A build that will not run against an uncommitted source. A check that fails when a document names a file that does not exist. A hook that says no. <b>One of them refused this session, today</b>, while this very section was being written: an attempt to write a source file through a shell heredoc was blocked outright, by a gate that exists because that trick silently corrupted two files in one sitting and the diff still looked right. That rule had been written in prose, in more than one repository, and skipped anyway. As a gate, it does not rely on anyone remembering it &mdash; which is the entire difference between a habit and a mechanism.</p>
 
         <details class="more">
           <summary>The three kinds of cure, and why only one of them is a file <span class="cost">3 min</span></summary>
@@ -1100,7 +1100,7 @@
               <li><b>A check you accept forever</b> &mdash; a gate that runs whether or not anyone is paying attention, and refuses.</li>
             </ul>
             <p><b>An instructions file is none of these.</b> It is a habit written down and then handed to something that does not have habits. It works, often, which is what makes it so hard to give up &mdash; and it fails silently and without a pattern, which is the worst possible failure shape for something you are relying on.</p>
-            <p><b>One kind of file does hold, and the distinction is worth the whole objection:</b> prose fails when it is a <i>rule</i> and survives when it is a <i>definition</i>. A rule competes with the model&rsquo;s own priors and loses quietly. A glossary read before any reasoning starts <b>replaces</b> a prior rather than arguing with one &mdash; and in this estate that is the one document that has held, mechanised into each project and opened by a session hook so nobody has to remember it. If you take one thing from this objection, it is that: write definitions, not instructions.</p>
+            <p><b>One kind of file does hold, and the distinction is worth the whole objection:</b> prose fails when it is a <i>rule</i> and survives when it is a <i>definition</i>. A rule competes with the model&rsquo;s own priors and loses quietly. A glossary read before any reasoning starts <b>replaces</b> a prior rather than arguing with one &mdash; and in this estate that is the one document that has held, mechanised into each project and opened by a session hook, so it does not rely on anyone remembering it. If you take one thing from this objection, it is that: write definitions, not instructions.</p>
             <p><b>Roles have a stated ceiling too, and it is not a low one.</b> On the run described in <a href="#validation" data-view="validation">challenge 3</a>, eleven roles returned 31 blocking findings against a document whose 63 numbers were all correct and whose gates were all green &mdash; and the five worst were not arithmetic at all. What eleven roles could <i>not</i> do was ask whether the document should exist; a human found that. And they ran on one model in one context, so they buy coverage of angles rather than independence. Use them; do not mistake a panel of prompts for a second opinion.</p>
             <p><b>None of this is free, and the page says where it stops.</b> Across one estate, session-start hooks grew to 39, 34, 27, 17, 11, 9 and 7 kilobytes, and one of them grew until sessions would not open at all. That is <a href="#asymptote" data-view="asymptote">challenge 4</a> eating the guard layer, and it is why the harness these hooks run under is <b>advisory by default with a kill switch you can reach without a session</b>. A gate that cannot be turned off is a new way to lose a day.</p>
             <div class="prov"><b>Source.</b> The three kinds of cure: <span class="path">points.md</span> B4 and the outline&rsquo;s <i>Fixes that hold</i>. The <span class="path">CLAUDE.md</span> instance is commit <b>1d0a0f3</b>, 28 Aug 09:04, <i>&ldquo;Hours after documenting B4, the agent proposed a CLAUDE.md rule as the fix.&rdquo;</i> The heredoc refusal happened in this repository on <b>2026-08-30</b> while this section was being written; the gate is vendored from <span class="path">tools/turnstile/</span>. Hook sizes are a measured census across one estate, in <a href="#asymptote" data-view="asymptote">challenge 4</a>.</div>
@@ -1172,7 +1172,7 @@
           <p>These policies are written down, they differ between institutions, and they are not settled by reasoning about them. The office that holds the answer is normally technology transfer, research administration, or whoever wrote your contract. <b>Ask them before you publish, before you push to a public host, and before you attach a license</b> &mdash; all three are much harder to undo than to check.</p>
           <p class="warn-note">Not legal advice. The point is that a real answer exists, it is specific to you, and somebody whose job it is will give it to you for the cost of one email.</p>
         </div>
-        <p>The reason to keep one is not that you will roll back &mdash; you almost never will. It is that six weeks later you will need to know <i>why</i> something is the way it is, and the only artifact that can tell you is a message written by the person who knew at the time.</p>
+        <p>The reason to keep one is not that you will roll back &mdash; you rarely will. It is that six weeks later you will need to know <i>why</i> something is the way it is, and the only artifact that can tell you is a message written by the person who knew at the time.</p>
 
         <details class="more">
           <summary>Which means the messages have to be worth reading <span class="cost">3 min</span></summary>
@@ -1231,7 +1231,7 @@
             </tbody>
           </table>
         </div>
-        <p>The mantra that beat every proposed fix in the incident that produced this table: <b>never change the data at source.</b> That is a structural answer, not a rule about behavior.</p>
+        <p>The mantra that beat every proposed fix in the incident that produced this table: <b>do not change the data at source.</b> That is a structural answer, not a rule about behavior.</p>
 
         <details class="more">
           <summary>A hold in a document is not ignored &mdash; it is outvoted <span class="cost">5 min</span></summary>
@@ -1275,7 +1275,7 @@
 
             <p><b>And the first version of the cure was too strong.</b> It said distances are edge-to-edge, <i>never</i> centroid &mdash; a ban. Two days later the author replaced it with a rule that states the convention and picks the one that fits the question, because centre-to-centre is the correct measure when structures overlap and edge-to-edge saturates at zero. A cure that forbids the right answer gets routed around, which is rule 8 of this section arriving in the author&rsquo;s own repository.</p>
 
-            <p><b>It is mechanized, not remembered.</b> The pair is vendored into each consuming project, gated for freshness so a stale copy is caught rather than discovered, and read by a session-start hook. Nobody has to remember to open the glossary.</p>
+            <p><b>It is mechanized, not remembered.</b> The pair is vendored into each consuming project, gated for freshness so a stale copy is caught rather than discovered, and read by a session-start hook. Opening the glossary is not left to memory.</p>
             <div class="prov"><b>Source.</b> <span class="path">syncytium2/foundations</span>, private, seeded 2026-07-22 from two existing repositories. Its founding decision record states the friction in its own words: <i>&ldquo;sessions repeatedly get project-central concepts wrong because each session is stateless and reasons from priors unless grounded in a document it reliably reads.&rdquo;</i> Figures and quoted rules are verbatim from that repository&rsquo;s glossary. <b>Written by the party being evaluated</b>; the retraction it describes is recorded there, not independently reviewed here.<div class="seq"><b>The sequence, from that repo&rsquo;s log:</b><ol class="sq"><li><span class="sq-d">22 Jul 14:19</span><span class="sq-h">9ee36a6</span><span class="sq-s">Seed canonical foundations/glossary pair from colonel_kernel + interface2</span></li><li><span class="sq-d">30 Jul 09:40</span><span class="sq-h">5172d3e</span><span class="sq-s">Activate the SessionStart guard</span></li><li><span class="sq-d">04 Aug 13:13</span><span class="sq-h">a48afde</span><span class="sq-s">GLOSSARY: distances between structures are EDGE-TO-EDGE, never centroid</span></li><li><span class="sq-d">06 Aug 11:33</span><span class="sq-h">8559010</span><span class="sq-s">Gate the vendored session-protocol pair &mdash; this repo had no freshness check at all</span></li><li><span class="sq-d">06 Aug 12:04</span><span class="sq-h">94a7415</span><span class="sq-s">GLOSSARY: state the distance convention, do not ban one</span></li></ol></div></div>
           </div>
         </details>
@@ -1284,11 +1284,11 @@
         <p>Each of these was bought with a cure that failed.</p>
         <ol>
           <li><b>One file per item, because of concurrency, not tidiness.</b> The obvious design is one shared list everyone edits. That fails the moment two people edit it at once.</li>
-          <li><b>Version control is the transport.</b> An uncommitted note reaches nobody; an unpushed resolution leaves the item open everywhere else.</li>
+          <li><b>Version control is the transport.</b> An uncommitted note stays on one machine; an unpushed resolution leaves the item open everywhere else.</li>
           <li><b>Resolving must be as cheap as filing.</b> Every dead list died the same way: open items accumulated until the list stopped being read.</li>
-          <li><b>Validate the envelope, not the contents.</b> Reject an item filed against a category that does not exist, because it would render nowhere and nobody would be told &mdash; but do not check whether the text is any good. A two-word note is a valid note.</li>
-          <li><b>Instructions travel with the item</b>, so nobody has to go and find the manual.</li>
-          <li><b>Done is never deleted, and you do not close what you did not verify yourself.</b></li>
+          <li><b>Validate the envelope, not the contents.</b> Reject an item filed against a category that does not exist, because it would render nowhere and go unreported &mdash; but do not check whether the text is any good. A two-word note is a valid note.</li>
+          <li><b>Instructions travel with the item</b>, so the reader does not have to go and find the manual.</li>
+          <li><b>Done is not deleted, and you do not close what you did not verify yourself.</b></li>
           <li><b>A cure&rsquo;s failure mode is a design choice, and loud-and-cheap beats strong.</b> A test and a gate can enforce the same rule. A broken test costs you a red line; a broken gate costs you the session. Prefer the mechanism whose failure is loud and cheap.</li>
           <li><b>A cure can fail by accusing the compliant.</b> One gate misparsed seven of 199 entries on a live board. Not one was a typo &mdash; every one was somebody who had complied exactly as instructed, and every one would have been refused with a lecture. A cure that refuses correct behavior is routed around within a week, which returns you to no cure at all, plus the cost of having built one. <b>Being right must be as cheap as being wrong.</b></li>
           <li><b>A gate should answer, not only refuse.</b> Someone who is lost rather than defiant is left lost by a gate that says only no, and they go and churn somewhere else. Every refusal should print the command that would have been right.</li>
@@ -1303,7 +1303,7 @@
             <p><b>And it is not one incident.</b> A safety tool built specifically to catch checks that cannot fail shipped as one: two of its tests had been green since the day it was written and were describing a file-deleting bug as correct behavior. Fixing the bug made the tests go <b>red</b> &mdash; and a careful maintainer, trusting the tests, would have restored the bug to make them green again.</p>
             <p><b>Three instances now</b> &mdash; this gate&rsquo;s selftest, the safety tool&rsquo;s two green tests, and the positioning section of this project&rsquo;s own findings file, where no claim could have failed. All three are mine, written inside a fortnight, so it is a pattern in how I write checks rather than a measured pattern in the world.</p>
             <p><b>The correction it forces.</b> &ldquo;Build your own tools&rdquo; needs a caveat: a homemade gate is not more trustworthy for being homemade. It is <i>less</i> reviewed. Your own tools inherit the same distrust as everything else.</p>
-            <p><b>The cure that lasts is mutation.</b> Break each tool on purpose and require its own test to notice. Anything that still passes was never testing what you thought.</p>
+            <p><b>The cure that lasts is mutation.</b> Break each tool on purpose and require its own test to notice. Anything that still passes was not testing what you thought.</p>
             <div class="prov"><b>Source.</b> <span class="path">points.md</span> B7 rules 8 and 9; case file <span class="path">docs/cases/2026-08-28-the-tests-were-defending-the-bug.md</span>. Written by the party being evaluated. Rollout was paused before anything shipped. <b>Follow-on, 2026-08-28:</b> the mutation harness itself was then found to score catches without ever checking that a test was green to begin with &mdash; two of its eleven rows proved nothing. Same defect, one level up.<div class="seq"><b>The sequence, from this repo&rsquo;s log:</b><ol class="sq"><li><span class="sq-d">28 Aug 07:16</span><span class="sq-h">fb03597</span><span class="sq-s">A safety tool shipped with the flaw it was built to catch, and two green tests were defending it</span></li><li><span class="sq-d">28 Aug 08:38</span><span class="sq-h">7f68340</span><span class="sq-s">Two of the three tools built last night had selftests that could not fail</span></li><li><span class="sq-d">28 Aug 09:04</span><span class="sq-h">1d0a0f3</span><span class="sq-s">Hours after documenting B4, the agent proposed a CLAUDE.md rule as the fix</span></li><li><span class="sq-d">28 Aug 14:47</span><span class="sq-h">1bbb19a</span><span class="sq-s">The mutation harness scored eleven catches without checking any test was green first</span></li></ol></div></div>
           </div>
         </details>
