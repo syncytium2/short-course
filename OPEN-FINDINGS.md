@@ -601,3 +601,75 @@ board so its author can decide. If the finding is used in the course, use the so
    the point of action* is arguably the estate's most-replicated finding and B4 is a container
    for it, not the claim itself.
 4. **The one-word quote drift** — the hedge case's author to decide, not me.
+
+---
+
+### N6 · The push gate reads the wrong checkout's branch, blocks a correct push, and its selftest passes
+
+**Native, 2026-08-30, and it happened to the session that filed it.** Working on branch
+`publication-remainder` in `../short-course-worktrees/publication-remainder`,
+`git push origin publication-remainder` was **refused** by
+[`.claude/hooks/push-goes-where-you-are.sh`](.claude/hooks/push-goes-where-you-are.sh):
+
+> You asked to push:   publication-remainder
+> This checkout is on: master
+
+**Both lines are stated confidently and the second is false.** The worktree was on
+`publication-remainder`. `master` is what the *other* checkout is on.
+
+**Mechanism, read from the source rather than inferred.** Lines 54–56:
+
+```sh
+HERE=$(dirname "$0")
+REPO=$(cd "$HERE/../.." 2>/dev/null && pwd) || REPO=""
+[ -n "$REPO" ] && cd "$REPO" 2>/dev/null
+```
+
+The hook is registered in `.claude/settings.json` by a path relative to the **project root**,
+which is the shared checkout — so `$0` resolves there, the hook `cd`s there, and `sc_branch()`
+answers for there. [`tools/session_identity.sh`](tools/session_identity.sh) says so in its own
+comment: *"the branch this CHECKOUT is on."* Singular. **This is not a slip in the hook. It is
+the repo's one-shared-checkout premise, compiled into a gate.**
+
+**Three things make it worse than a wrong answer.**
+
+1. **It fails CLOSED.** The hook carries `# turnstile: gate`, so its exit 2 refuses the call. A
+   guard whose premise has expired now stops correct work — and `tools/turnstile/` cannot bound
+   it, because refusing is what a declared gate is *for*.
+2. **Its advice is wrong too.** It says your work is on another branch and suggests
+   `git push origin HEAD`. That command works, so the session recovers — having been told a false
+   fact and handed a fix that worked for a reason it was not given.
+3. **`--selftest` PASSES.** All seven cases run and all seven are green, because every one runs in
+   the shared checkout, the single environment where the premise holds. That is
+   [the tests-were-defending-the-bug case](docs/cases/2026-08-28-the-tests-were-defending-the-bug.md)
+   and the parser story on the live site — *"It passed. It had always passed. It proved the parser
+   correct on the only inputs it was ever shown."* **No selftest case has ever run from a worktree.**
+
+**Filed rather than fixed.** Changing a declared gate on a shared file, from the session a wrong
+fix would lock out, is the move this repo warns about twice — and the real fix depends on a
+decision larger than the hook.
+
+**The finding under the finding, and it is Tony's:** *"there are always many sessions in a repo.
+this repo should have inherited worktrees"* (2026-08-30). One command sizes it —
+`interface2` 10+ worktrees, `bugarach` 9, **`short-course` 1**, until today.
+[`docs/SESSIONS.md`](docs/SESSIONS.md) states the shared checkout as a **fact about the repo**
+rather than a reversible choice, and everything above it is compensation: session-id addressing,
+`claim.sh`, the board, *"the branch is a fact, not an identity."* **A claim is prose** — the board
+says so itself, *"a message, not a lock"* — and
+[the weakest-fix case](docs/cases/2026-08-28-the-weakest-fix-is-the-most-available.md) is this
+repo's own study of reaching for exactly that. The board has since failed at least three times on
+record, once at a cost of **859,010 tokens and $11.06**.
+
+**Decisions needed — author's call, none taken**
+
+1. **Convert the repo to worktree-per-session?** The root fix. It retires this gate's premise
+   instead of patching it, and it makes the collision *impossible to express* — rung 5 of
+   turnstile's own decision tree, which the vendored README quotes as beating every gate.
+2. **Fix the hook regardless?** Small: resolve the repo from the caller's CWD, or ask
+   `git rev-parse --show-toplevel`. Worth doing even if 1 is a no, because the gate is wrong
+   today and blocks worktree sessions today.
+3. **Add a worktree case to `--selftest` and a row to `tools/mutation_check.sh`.** Without it the
+   next expired premise is caught the same way this one was — by a session losing a push.
+4. **Does this earn a case file?** Native, small, and it carries three of the estate's recurring
+   shapes in one incident: a confident false statement, a guard defending its own premise, and a
+   test that never saw an input that could fail it.
