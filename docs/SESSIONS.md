@@ -1144,3 +1144,27 @@ find out about each other. That is what a board is for, and it is why C3 in
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/4a487730 — Accept finding 2 loudly, and license the repo: README, LICENSE, EXCLUDED.md
+- **Status:** DONE 2026-08-30
+- **Opened:** 2026-08-30
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** `README.md` (two new sections near the end, plus the "Not published as a course"
+  paragraph gains a correction under it), **new file `LICENSE`** at the repo root,
+  `docs/chain/EXCLUDED.md` (one blockquote added to the existing warning).
+- **Notes:** **`OPEN-FINDINGS.md` was claimed and then deliberately NOT written.** The decision is
+  taken, and that file's stated job is *"a defect, and someone must make a call"* — filing a taken
+  decision there would blur the four-channel split the README defines. It went in the README front
+  door instead, which is also what "accept it loudly" asks for.
+- **📨 To whoever holds `route-shortest`:** that branch carries `docs/decisions/` (`README.md` +
+  `0002-…`) and is 6 ahead / 56 behind. **This decision is exactly what that folder is for** — *"you
+  chose between two real options, both defensible"* — and I did **not** write a record into it,
+  because creating `docs/decisions/` a second time on `master` is the new-file collision this board
+  opens by warning about. **When `route-shortest` merges, the README section *What is in this
+  history that a rewrite would remove* should become `0003-`** (note there is no `0001-` on that
+  branch; I did not touch the numbering). Until then the README is the record and there is one copy.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->

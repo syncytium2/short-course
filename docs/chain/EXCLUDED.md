@@ -59,6 +59,16 @@ This repo may become public. Anything committed here is committed forever, and a
 exactly how material from an unrelated private project ends up in a public history — discovered by
 someone else, months later, with no way to take it back.
 
+> **This file's own warning already came true once, by a different route, and the answer is not
+> here.** Two days after the sentence above was written, `git add -A` after a deploy swept
+> `.wrangler/cache/wrangler-account.json` into the history at `ddc7594` — a Cloudflare account id
+> and a personal address, committed forever exactly as described, without any bulk import. It was
+> found by a publication review on 2026-08-30 and **accepted rather than rewritten**, because the
+> rewrite changes all 261 commit hashes and falsifies the chain this folder exists to keep. The
+> priced decision is in the [top-level `README`](../../README.md), under *What is in this history
+> that a rewrite would remove* — **it is not an exclusion, so it does not live in this file.** It
+> is recorded here only because this is where the rule it broke is written.
+
 **The rule this sets:** nothing enters this chain that has not been *scoped to this project and
 read first*. Not scanned. Read. That applies to me and to any future session.
 

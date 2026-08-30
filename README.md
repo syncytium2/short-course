@@ -146,9 +146,65 @@ and carries none of the 2026-08-27 material.
 
 **Not published as a course.** `course-outline.md` contains a positioning section that names
 competitors candidly and a teaching note that is a personal admission. Both are load-bearing
-for the author and neither was written for an audience. The repository now has a **private**
+for the author and neither was written for an audience. The repository has a **private**
 remote (`syncytium2/short-course`, 2026-08-27) for backup and cross-machine access — that
 settled the operational half of the question and deliberately left the publication half open.
+
+**That paragraph was the whole basis of the decision until 2026-08-30, and it was 261 commits
+out of date.** A publication review read every committed file and all of `git log --all`. The
+two passages named above turned out to be the *least* risky things it found; the passage that
+exposes the author most — `points.md` **B2**, *"it made my use of AI look unprofessional"* —
+was not on the list at all, and would have gone public by omission rather than by choice. Two
+findings were acted on the same day: a stranger's email addresses were redacted from node 1b
+(see [`docs/chain/EXCLUDED.md`](docs/chain/EXCLUDED.md)), and the finding below was **accepted**.
+
+---
+
+## What is in this history that a rewrite would remove
+
+**`.wrangler/cache/wrangler-account.json` is in `git log` and is staying there.** It carries a
+Cloudflare account id and the address `Tony.defazio@gmail.com`. It entered at `ddc7594` when a
+`git add -A` followed the first deploy, and was untracked half an hour later at `11e5e11` —
+whose message already says *"STILL IN HISTORY, and stated rather than quietly left."* Both
+commits are ancestors of `master`, so **every clone gets it.** Neither value is a credential and
+the account id is not secret in the way a token is.
+
+**Decided 2026-08-30: accepted, not rewritten, and this paragraph is the decision.** The cost was
+priced before it was accepted, and the alternative was worse:
+
+- A `filter-repo` run is minutes of work, and **it changes all 261 commit hashes.** This README's
+  chain table pins node 3 to the exact reviewed bytes at `ad695d94`; the case files in
+  `docs/cases/` cite commits by hash throughout; `points.md` and `OPEN-FINDINGS.md` do the same.
+- So the rewrite that hides an account id **falsifies the provenance record that is the entire
+  point of the repository** — and it would do it silently, since every citation would still
+  *look* fine while resolving to nothing.
+- A repo whose stated rule is *everything that did not survive stays in the history* cannot
+  rewrite its history the first time that rule is inconvenient. **The exposure is smaller than
+  the precedent.**
+
+**The decision has a deadline attached, and it has passed by choice.** Rewriting was only ever
+cheap while the remote was private and unforked. After publication it is not a harder job, it is
+an impossible one — forks, GitHub's dangling-object cache and archive crawlers all keep it. That
+asymmetry is why this was decided deliberately rather than deferred, and it is why the answer is
+written here in the front door rather than in a commit message nobody re-reads.
+
+---
+
+## Licence
+
+**Three kinds of material, and they do not share one answer.**
+
+| what | licence |
+|---|---|
+| **Code** — `tools/`, `.claude/hooks/`, `tools/turnstile/` | **Apache-2.0**, in [`LICENSE`](LICENSE). Matches the siblings `syncytium2/murderboard` and `syncytium2/turnstile`, from which `tools/turnstile/` is vendored |
+| **The writing** — the course, `docs/cases/`, `docs/reviews/`, `docs/handouts/`, `docs/chain/` | **CC BY 4.0** ([creativecommons.org/licenses/by/4.0/](https://creativecommons.org/licenses/by/4.0/)). Teach it, adapt it, quote it; say where it came from |
+| **The three Expanding Brain panels** embedded as base64 in `docs/handouts/four-barriers.html` and `site/index.html` | **Neither — not the author's to license.** They are third-party images used as illustration and carry no attribution here |
+
+That third row is the reason this is a table and not a sentence. A single blanket `LICENSE` at
+the repo root would have asserted rights over images nobody here holds rights to, which is a
+quieter version of the same defect this repository is about. The panels are already public on
+[lookedright.tonydefazio.com](https://lookedright.tonydefazio.com/), so naming them is repo
+hygiene rather than a new exposure — and anyone reusing these pages should replace them.
 
 ## Related
 
