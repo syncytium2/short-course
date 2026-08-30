@@ -71,6 +71,8 @@ tools/build_site.sh@@    if _git("status", "--porcelain", "--", src):@@    if Fa
 docs/handouts/cold-start.html@@state[stepKey][bk] = 1;@@state[stepKey][i] = 1;@@checklist ticks migrate by position again@@tools/checklist_state.sh
 docs/handouts/cold-start.html@@var bk = boxKeys[+i];@@var bk = boxKeys[0];@@every migrated tick lands on the first box of its step@@tools/checklist_state.sh
 docs/handouts/cold-start.html@@if (localStorage.getItem(KEY) !== null) return;@@if (false) return;@@migration re-runs over a reader already on v4@@tools/checklist_state.sh
+tools/check_dated_ui.sh@@if (ui && !dt) print FN ":" id@@if (0) print FN ":" id@@undated button references are never reported
+tools/check_dated_ui.sh@@s = RSTART; l = RLENGTH@@s = RSTART; l = 1@@steps are swallowed because emit() clobbers RLENGTH
 TABLE
 )
 
