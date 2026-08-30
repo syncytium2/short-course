@@ -1,16 +1,17 @@
 <!-- Case study, 2026-08-30. DRAFT — the upstream artifact is an open PR still being revised. -->
 
-> ## 🚧 This is a draft, and its subject is still moving
+> ## 🚧 Draft — first pass cleaned 2026-08-30, one thing still open
 >
-> Every claim below is about [`bugarach`](https://github.com/syncytium2/bugarach) **PR #415**,
-> which was open and had CI in flight when this was written. The session that built it
-> (`bugarach-17`) is **live and revising it**, including the defect in Point 3 — which was
-> reported to that session from here, so the file it describes is expected to change.
+> Every claim below is about [`bugarach`](https://github.com/syncytium2/bugarach) **PR #415**.
+> **The defect in Point 3 has since been fixed** — the upstream session shipped
+> [`755fee1`] within the hour, and Point 3 now records the repair and what it added. Point 6's
+> bundling complaint is half-addressed: the ranking handoff was split out as **#416**.
 >
-> **Nothing here is settled and nothing has been reviewed.** Written at Tony's request —
-> *"start drafting, we'll clean it when they're done."* Every number carries the command that
-> produced it in the [appendix](#appendix--how-to-replay-every-number-here), so a cleanup pass
-> can re-run them rather than trust them.
+> **#415 is still open**, so the file it describes can still change. **Nothing here has been
+> reviewed by a panel.** Written at Tony's request — *"start drafting, we'll clean it when
+> they're done"* — and cleaned once against the landed revision. Every number carries the
+> command that produced it in the [appendix](#appendix--how-to-replay-every-number-here), so
+> the next pass can re-run them rather than trust them.
 
 > ## 📌 The folder rule, again
 >
@@ -176,11 +177,16 @@ markdown link:
 LINK = re.compile(r"\]\(([^)#][^)]*)\)")
 ```
 
-The file has ~34 pointers. **Eighteen are markdown links. The rest are bare code spans** —
+The file carries **50 distinct pointers. Eighteen are markdown links** — and those eighteen were
+the entire guarded set. **The other thirty-two are bare code spans** —
 `` `docs/learned/assessment_cossart.json` ``, `` `docs/learned/bakeoff.json` ``,
 `` `tools/build_site.py` `` — and code spans are what the *known traps* section uses almost
-throughout. So the guarded set excludes both the section most likely to be followed in a hurry
-and the Cossart pointer the file was written for.
+throughout. So the guard covered a third of the file, and the uncovered two-thirds contained both
+the section most likely to be followed in a hurry and the Cossart pointer the index was written
+for.
+
+**Fourteen of those thirty-two were the only pointer to their target anywhere in the file** — no
+link elsewhere pointed at the same place, so nothing else could have caught their rot.
 
 **And it was mutation-tested.** The PR says so: *"adding a dead row fails it, removing the row
 passes again."* That is a real check and this repo is right to demand it — but the mutation was a
@@ -189,6 +195,40 @@ does not prove the check covers its domain,** and a blind spot survives a mutati
 the sighted region. That is a sharper statement than
 [`the-tests-were-defending-the-bug`](2026-08-28-the-tests-were-defending-the-bug.md) reaches, and
 it is a live qualification to the remedy that case proposes.
+
+### What the repair added, and the one line worth stealing
+
+Fixed the same day in [`755fee1`], and the repair is larger than the defect. The row was
+repointed; the guard now resolves code spans as well as links, with a deliberately narrow pattern
+so that `` `--score-spec` `` and `` `n_hit / n_scored` `` are not mistaken for paths; five rows
+that used section-local shorthand were made explicit, on the stated ground that this is better
+for a *reader* than a looser test; the exemption for the one owed-and-unwritten file is a named
+constant rather than a loose pattern; and the two Cossart rows that were missing — the executable
+spec, and the handoff carrying the retracted numbers — were added. **Verified: every pointer in
+the revised file resolves against its own tree.**
+
+The line worth stealing is the new rule it introduced, because the dead row was not a typo:
+
+> **A row may only point at something that exists on `main`. Land it, then index it.**
+
+That is the general form of Point 3, and it is what makes an index survive a repo with fourteen
+worktrees. Note what kind of thing it is, though: it is **prose, in a file**, which is tier 1 and
+exactly what B4 says not to rely on. The reason it holds here is that the extended guard now
+mechanizes it as a side effect — a row citing a file that lives only on another branch does not
+resolve in the citing branch's own tree, so CI fails. **The rule is written down and separately
+enforced.** Worth teaching as the pair, not as the sentence.
+
+> **⚠ Counts disagree, and it is not resolved.** The upstream commit message says *"18 of the 49
+> pointers… the other 31 are bare code spans."* Running its own regexes over the file it
+> describes, I get **50 and 32**. One-off in both figures, and I cannot reconcile it — it may be
+> a dedup difference or an off-by-one on the exemption. **The numbers in this case are mine and
+> the appendix reproduces them;** the discrepancy is recorded rather than smoothed, because
+> quietly adopting the other party's count is how a wrong figure gets taught twice.
+
+**And the defect was found by review, not by the guard.** The upstream commit says so in its own
+first line. That is the honest boundary on everything Point 4 proposes: a mechanized check
+narrows the class of failures that can hide, and the thing that actually caught this one was
+somebody reading the file against a question the file was not built to answer.
 
 ## Point 4 — the four-tier table has no row for this, and probably needs one
 
@@ -243,11 +283,18 @@ it; this asks how it is found by the session that needs it.**
 
 ## Point 6 — one honest note about the artifact
 
-PR #415 is titled *"An index, because the Cossart work existed and could not be found"* and
-contains four unrelated things: the index, a SessionStart digest trim, 144 lines of authorship
-revisions to a detector history, and a 182-line ranking handoff. Reviewing it means reviewing
+PR #415 was titled *"An index, because the Cossart work existed and could not be found"* and
+contained four unrelated things: the index, a SessionStart digest trim, 144 lines of authorship
+revisions to a detector history, and a 182-line ranking handoff. Reviewing it meant reviewing
 four changes under one claim. Not a defect in the index, and worth naming in a folder whose whole
 argument is that a record should say what it is.
+
+**Half-addressed the same day**, and for a reason worth keeping: the ranking handoff was split
+out as **#416**, *"so a new session can pick it up"* — not because the bundle was untidy, but
+because **the handoff was stuck behind the index's review.** That is the same finding as Point 1
+wearing different clothes. Work that exists but cannot be reached is not available, and a PR
+queue is one more place a project can hold something a session cannot get to. The digest trim is
+still bundled in #415.
 
 ---
 
@@ -261,10 +308,11 @@ From a `bugarach` checkout with the branch fetched. Nothing below needs the DAND
 | 10 commits, 7 files, +543 | `git diff --stat origin/main...the-index` |
 | the four counts, at the index commit | `for d in docs/todo docs/learned docs/reviews; do git ls-tree -r --name-only d3d7baa -- $d \| wc -l; done` and `git ls-tree d3d7baa -- tools/ \| grep -c blob` |
 | the guard is green | `PYTHONPATH=$PWD/src .venv/bin/python -m pytest tests/test_index_resolves.py -q` |
-| the dead row's file is not on main | `git ls-tree -r --name-only origin/main docs/todo \| grep token-could` |
+| the dead row's file is not on main | `git ls-tree -r --name-only origin/main docs/todo \| grep token-could` — returns the **2026-08-28** file, not the 08-30 one the row cited |
 | …and where it does exist | `git log --all --oneline --diff-filter=A -- 'docs/todo/*site-types*'` → `8b4d654`, branch `site-derives-from-data` |
-| 18 links guarded | `grep -oE '\]\([^)#][^)]*\)' docs/INDEX.md \| sort -u \| wc -l` — written with the brackets escaped on purpose; the literal two-character sequence would trip this repo's own `check_pointers.sh`, which it did once while this file was being written |
-| the rest are code spans | `grep -o '`[^`]*`' docs/INDEX.md \| tr -d '`' \| grep -E '\.(py\|md\|json\|toml\|sh)$'` |
+| **50 pointers, 18 links, 32 spans** (at `d3d7baa`) | apply the test's own two regexes to `git show d3d7baa:docs/INDEX.md`; dedupe each, exempt `docs/decisions.md`. **Do not use `grep` for this** — the literal `](` sequence trips this repo's own `check_pointers.sh`, which it did once while this file was being written |
+| 14 spans were the only pointer to their target | same two sets; count unique spans whose basename matches no link target |
+| the repair is complete | apply the same regexes to `git show 755fee1:docs/INDEX.md` and resolve each against `git ls-tree -r --name-only 755fee1` → **0 unresolved** |
 | the Cossart machinery is real | `ls tools/import_dandi.py docs/learned/assessment_cossart.json` · `grep -n cossart current_export.toml` · `grep -n score-spec tools/fair_bakeoff.py` |
 | the effort's footprint | `git log --all --oneline --since=2026-08-25 -i --grep='dandi\|cossart\|transfer'` |
 
