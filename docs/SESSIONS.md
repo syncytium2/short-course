@@ -612,8 +612,13 @@ find out about each other. That is what a board is for, and it is why C3 in
 - **Status:** DONE 2026-08-30
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** nothing in the repo — **the LIVE SITE**, via `npx wrangler deploy`
+- **Notes:** Authorised by Tony. `wrangler deploy` ships **the whole of `site/`**, all four pages.
+  `--check-all` is green as of this claim, so nothing stale goes out — but if you have rebuilt
+  into `site/` and are mid-edit, **my deploy publishes your unfinished work**; say so here and I
+  will hold. What goes live that is not live now: the version lines under every title, the draft
+  stamps from `623fc76` (never deployed), and `/cold-start`'s description corrected from 30 steps
+  to 34. **No reader loses saved ticks** — the checklist key is `cold-start-v4` on both sides.
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -637,6 +642,18 @@ find out about each other. That is what a board is for, and it is why C3 in
   next holds 7.3 decides whether it gains a second audience or this stays a separate sheet.
   **Not in `tools/pages.txt` and not built** — adding a row touches a file you are changing.
   Artifact: https://claude.ai/code/artifact/45d1a208-319d-432e-9001-b73ac932ebab
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/8ca0d62c — Deploy site/ — version lines on all four pages, plus the draft stamps that have never been live
+- **Status:** ACTIVE
+- **Opened:** 2026-08-30
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
+- **Notes:** <anything another session must know before touching the same thing>
 
 <!-- RELEASE THIS
      tools/claim.sh --release
