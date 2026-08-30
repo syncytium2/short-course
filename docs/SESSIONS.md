@@ -1125,11 +1125,13 @@ find out about each other. That is what a board is for, and it is why C3 in
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Mac/4a487730 — Publication review: audit all committed content and history for what should not go public
-- **Status:** ACTIVE
+- **Status:** DONE 2026-08-30
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** nothing in this checkout except this board block. The one real write is the
-  darkroom — `<darkroom>/short-course/2026-08-30-publication-review/`.
+- **Writes:** nothing in this checkout except this board block. The real writes are in the
+  darkroom — `<darkroom>/short-course/2026-08-30-publication-review/` (new folder: `README.md` +
+  `publication-review.html`) **and one row appended to `<darkroom>/short-course/README.md`**,
+  in the "Also here" section above the outside-reader row. Nothing else in that file touched.
 - **Notes:** Read-only audit of every committed file **and of `git log --all`** for material
   that should not be public. **No repo content is modified and no finding is filed to
   `OPEN-FINDINGS.md` by this session** — the report is a deliverable for Tony, not a decision
