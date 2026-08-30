@@ -20,6 +20,22 @@ was a byte comparison, not a glance: `01b-real-log-complete.source.json` and the
 export agree on all 40 messages and every tool call, differing only in the per-block UUIDs
 that each export run regenerates.*
 
+***That comparison was true on 2026-08-29 and is no longer reproducible, by a later choice.***
+*On 2026-08-30 two third-party email addresses were redacted from message 7 of node 1b — they
+arrived inside a `web_search` result and belong to a member of the public with no connection to
+this project. The redaction is declared in full in the
+[node's banner](01b-real-log-complete.md). A fresh export will now differ at that string as well
+as at the UUIDs.*
+
+***And it exposes a gap in the rule below, which is the more useful finding.*** *The scoping rule
+was built to keep the **author's** other projects out of a public repo, and it did — this
+transcript contains no other project, client or private repo, and that was verified by reading.
+It has nothing to say about **someone else's** personal data riding in on a tool result, which is
+what a whole-account export is least likely to contain and a scoped extract is no safer from.
+**The rule now has a second clause: scoped to this project, read first — and read for other
+people's identifiers, not only for yours.** Found on 2026-08-30 by a publication review, four days
+after the import passed the original rule cleanly.*
+
 ***A fresh export can be requested at any time*** *(claude.ai → Settings → Privacy → Export
 data; the emailed link expires in 24 hours and is single-use). What cannot be recovered is
 this particular snapshot: a new export reflects the account as it is then. Nothing in this

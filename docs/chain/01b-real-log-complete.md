@@ -26,7 +26,29 @@
 > **Fidelity.** All 40 messages, in order, with every tool call, its input, and its output.
 > Assistant *thinking* blocks are included where present. Tool outputs longer than 4,000
 > characters are truncated with an explicit marker stating the original length; nothing else is
-> abridged, reordered, or reworded.
+> abridged, reordered, or reworded — **except for one redaction, declared next.**
+>
+> **One redaction, 2026-08-30 — third-party email addresses.** In message 7, a `web_search`
+> result quoting [`anthropics/claude-code` issue #45427](https://github.com/anthropics/claude-code/issues/45427)
+> carried the RFC author's signature line, including **two personal email addresses of a member
+> of the public with no connection to this project**. Both are replaced by a bracketed marker in
+> this file and in
+> [`01b-real-log-complete.source.json`](01b-real-log-complete.source.json); the author's name, the
+> issue title and the URL are kept, so the citation remains attributable and checkable at source.
+>
+> *Why this is a departure worth stating rather than making quietly.* The scoping rule in
+> [`EXCLUDED.md`](EXCLUDED.md) — *nothing enters this chain that has not been scoped to this
+> project and read first* — was written to keep **the author's** other projects out, and it did
+> that: this transcript contains no other project, client or private repo. It was not looking for
+> **someone else's** personal data arriving inside a tool result, and that is the gap this
+> redaction closes. A verbatim record is worth having; it is not worth republishing a stranger's
+> contact details to a public repository to get it.
+>
+> *Consequence for anyone re-deriving this node.* `01b-real-log-complete.source.json` is **no
+> longer byte-identical to a fresh account export.** The comparison recorded in
+> [`EXCLUDED.md`](EXCLUDED.md) was run on 2026-08-29 and was true then; a re-run will now differ at
+> this one string as well as at the per-block UUIDs. Nothing in the chain's argument depends on
+> that string.
 >
 > **Timestamps** are as exported (UTC). The session spans 2026-08-25 to 2026-08-26.
 
@@ -293,7 +315,7 @@ CLAUDE.md unreliable instructions ignored use hooks deterministic enforcement in
    "site_name": "GitHub"
   },
   "is_missing": false,
-  "text": "There is no mechanism to verify the model actually follows them. The model reads them, acknowledges them, and may ignore them during execution. Evidence: Issue #32193 documents systematic non-compliance across sessions.\n\nRFC: Deterministic Governance Enforcement for Claude Code Target repo: anthropics/claude-code Related issues: #32376, #32193, #43772, #31250, #35557, #44482, #38165 Author: Dimitri Geelen (dimitrigeelen@hotmail.com / dimitri@geelenandcom...\n\nCLAUDE.md instructions are advisory. There is no mechanism to verify the model actually follows them. The model reads them, acknowledges them, and may ignore them during execution. Evidence: Issue #32193 documents systematic non-complia
+  "text": "There is no mechanism to verify the model actually follows them. The model reads them, acknowledges them, and may ignore them during execution. Evidence: Issue #32193 documents systematic non-compliance across sessions.\n\nRFC: Deterministic Governance Enforcement for Claude Code Target repo: anthropics/claude-code Related issues: #32376, #32193, #43772, #31250, #35557, #44482, #38165 Author: Dimitri Geelen ([two email addresses redacted on 2026-08-30 — third party, see banner] ...\n\nCLAUDE.md instructions are advisory. There is no mechanism to verify the model actually follows them. The model reads them, acknowledges them, and may ignore them during execution. Evidence: Issue #32193 documents systematic non-complia
 [... truncated, 20,704 chars total ...]
 ```
 

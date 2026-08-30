@@ -749,7 +749,7 @@
         "site_name": "GitHub"
        },
        "is_missing": false,
-       "text": "There is no mechanism to verify the model actually follows them. The model reads them, acknowledges them, and may ignore them during execution. Evidence: Issue #32193 documents systematic non-compliance across sessions.\n\nRFC: Deterministic Governance Enforcement for Claude Code Target repo: anthropics/claude-code Related issues: #32376, #32193, #43772, #31250, #35557, #44482, #38165 Author: Dimitri Geelen (dimitrigeelen@hotmail.com / dimitri@geelenandcom...\n\nCLAUDE.md instructions are advisory. There is no mechanism to verify the model actually follows them. The model reads them, acknowledges them, and may ignore them during execution. Evidence: Issue #32193 documents systematic non-compliance across sessions.",
+       "text": "There is no mechanism to verify the model actually follows them. The model reads them, acknowledges them, and may ignore them during execution. Evidence: Issue #32193 documents systematic non-compliance across sessions.\n\nRFC: Deterministic Governance Enforcement for Claude Code Target repo: anthropics/claude-code Related issues: #32376, #32193, #43772, #31250, #35557, #44482, #38165 Author: Dimitri Geelen ([two email addresses redacted on 2026-08-30 — third party, see 01b-real-log-complete.md banner] ...\n\nCLAUDE.md instructions are advisory. There is no mechanism to verify the model actually follows them. The model reads them, acknowledges them, and may ignore them during execution. Evidence: Issue #32193 documents systematic non-compliance across sessions.",
        "is_citable": true,
        "prompt_context_metadata": {
         "age": "April 8, 2026",
