@@ -441,7 +441,7 @@ find out about each other. That is what a board is for, and it is why C3 in
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
 - **Writes:** `docs/handouts/cold-start.html` (source), `site/cold-start.html` (build output),
   `tools/build_site.sh` (the step count in META), `docs/handouts/README.md`, one new file in
-  `docs/doubt/`
+  `docs/doubt/`, and **the darkroom** — `<darkroom>/short-course/2026-08-29-cold-start-vscode/`
 - **Notes:** This RENUMBERS Phase 3 — the new extension step becomes 3.5 and `caffeinate` moves
   3.5 → 3.6. Checklist state is keyed by `data-id` + box index, so renumbering would silently
   move saved ticks onto a different step; the storage key goes `cold-start-v2` → `-v3` to discard
