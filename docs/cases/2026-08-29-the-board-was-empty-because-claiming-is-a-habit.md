@@ -1,4 +1,4 @@
-<!-- Case study, 2026-08-29. Internal use — links point at real commits and files in THIS repo. -->
+<!-- Case study, 2026-08-29. Native — this happened here. Evidence: commits and files in this repo, so an outside reader can check all of it. -->
 
 > ## 📌 The first native case in this folder, and the rule it breaks
 >

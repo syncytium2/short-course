@@ -1,4 +1,4 @@
-<!-- Case study, 2026-08-29. Native — this happened in this repo. Internal use. -->
+<!-- Case study, 2026-08-29. Native — this happened in this repo. Evidence: commits and files here, so an outside reader can check all of it. -->
 
 > ## 📌 The second native case, and the folder rule it breaks
 >

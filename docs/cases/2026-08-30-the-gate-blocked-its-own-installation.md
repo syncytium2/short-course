@@ -1,4 +1,4 @@
-<!-- Case study, 2026-08-30. Internal use — links point at real commits and files in THIS repo. -->
+<!-- Case study, 2026-08-30. Native — this happened here. Evidence: commits and files in this repo, including the vendored copy at tools/turnstile/, so an outside reader can check the case without reaching syncytium2/turnstile, which is PRIVATE. -->
 
 > ## 📌 The third native case, and the same folder rule it breaks
 >
