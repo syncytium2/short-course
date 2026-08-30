@@ -1384,3 +1384,23 @@ risks in the file.
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/5dc04385 — The bugarach #416 aside: an irony that was false, checked against the PR record
+- **Status:** ACTIVE
+- **Opened:** 2026-08-30
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** `docs/cases/2026-08-30-the-irony-was-the-only-unchecked-claim.md` (**a new
+  file** — the trap this board's header names), a row in [`cases/README.md`](cases/README.md),
+  and `<darkroom>/short-course/2026-08-30-the-irony-was-false/`. Nothing else.
+- **Notes:** **Different PR from the claim above.** `Mac/fb238a63` holds the `bugarach` **#415**
+  index case; this is **#416**, the ranking handoff split out of it, and I am not touching that
+  file. Subject is one aside a `bugarach` session wrote at ~20:20Z: *"the PR whose job is to land
+  the handoff … was itself the thing that never landed."* **It had auto-merge armed by the same
+  session and merged 4m26s later, at 20:23:09Z** — the PR record settles it. Both halves of the
+  sentence are false, and a third fact (a squash auto-merge that landed as a two-parent merge
+  commit) is a separate finding. If you are also writing up #416, say so here first.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
