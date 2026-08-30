@@ -25,8 +25,9 @@ against something on this machine:
 Not the content — the **scope**. This machine has exactly one agent extension installed
 (`anthropic.claude-code`, seven versions of it) and no Codex, Cursor, Copilot or Gemini
 extension. So for the other four I have opened nothing, clicked nothing and read no manifest.
-I do not know whether their button is in the left rail, the title bar or a panel, whether it
-disappears with no file open the same way, or whether any of them is blocked by workspace trust.
+I do not know whether each of them even ships an editor extension, and if it does, whether its
+button is in the left rail, the title bar or a panel, whether it disappears with no file open the
+same way, or whether workspace trust blocks it.
 
 The step says so in its own last paragraph. **That is a disclosure, not a fix** — a reader who
 picked Codex in 1.2 arrives at 3.5 and gets a paragraph explaining that this page does not
@@ -34,7 +35,8 @@ cover them.
 
 ## What would settle it
 
-Install the other four extensions on one machine and, for each: read `contributes.menus` and
+Find out which of the other four ship an editor extension at all; install those on one machine
+and, for each: read `contributes.menus` and
 `capabilities.untrustedWorkspaces` out of its `package.json`, then open a fresh untrusted folder
 with no file and record what is actually visible. That is an afternoon, and it is the same method
 already used here, run four more times.
