@@ -41,7 +41,14 @@
 set -u
 cd "$(dirname "$0")/.." || exit 1
 
-# file @@ find @@ replace @@ what it breaks
+# file @@ find @@ replace @@ what it breaks @@ [selftest to run, if not the file itself]
+#
+# THE FIFTH FIELD. Most rows mutate a tool and run that same tool's --selftest. But the
+# thing under test is not always a shell script: cold-start.html carries the checklist's
+# state migration, and the test that proves it lives in tools/checklist_state.sh. Without
+# somewhere to say so, a page whose behaviour has a selftest could not be mutated at all,
+# and "we only mutate what is convenient to mutate" is how a suite quietly stops covering
+# the part that matters.
 MUTATIONS=$(cat <<'TABLE'
 tools/claim.sh@@&& mv "$BOARD.tmp" "$BOARD"@@|| true@@release never writes the board back
 tools/claim.sh@@cat >> "$BOARD" <<BLOCK@@cat > /dev/null <<BLOCK@@claiming appends nothing
@@ -56,28 +63,36 @@ tools/turnstile/turnstile-run@@if [ "$rc" -ge 128 ] || [ "$elapsed" -ge "$BUDGET
 tools/turnstile/turnstile@@[ -f "$SELF_DIR/gate.template.sh" ]@@[ -f "/dev/null" ]@@template check defanged
 tools/check_pointers.sh@@[ -e "$cand" ] || printf@@[ -e "$cand" ] && printf@@pointer check inverts its test
 tools/build_site.sh@@ "</body>\n"@@ "\n"@@standalone loses its closing body tag
+docs/handouts/cold-start.html@@state[key][b.dataset.key] = 1;@@state[key][i] = 1;@@checklist ticks migrate by position again@@tools/checklist_state.sh
+docs/handouts/cold-start.html@@if (numbering !== V3_NUMBERING) return;@@if (false) return;@@migration runs against a renumbered document@@tools/checklist_state.sh
+docs/handouts/cold-start.html@@if (localStorage.getItem(KEY) !== null) return;@@if (false) return;@@migration re-runs over a reader already on v4@@tools/checklist_state.sh
 TABLE
 )
 
-[ "${1:-}" = "--list" ] && { printf '%s\n' "$MUTATIONS" | while IFS='@' read -r f _ a _ b _ l; do
-    printf '  %-46s %s\n' "$f" "$l"; done; exit 0; }
+[ "${1:-}" = "--list" ] && { printf '%s\n' "$MUTATIONS" | while IFS='@' read -r f _ a _ b _ l _ t; do
+    printf '  %-46s %-52s %s\n' "$f" "$l" "${t:-}"; done; exit 0; }
 
 caught=0; missed=0; errors=0
 BAK=$(mktemp -d) || exit 1
 : > "$BAK/ok"; : > "$BAK/miss"; : > "$BAK/err"
 trap 'rm -rf "$BAK"' EXIT INT TERM
 
-printf '%s\n' "$MUTATIONS" | while IFS='@' read -r FILE _ FROM _ TO _ LABEL; do
+printf '%s\n' "$MUTATIONS" | while IFS='@' read -r FILE _ FROM _ TO _ LABEL _ TOOL; do
     [ -n "$FILE" ] || continue
     printf '  %-52s ' "$LABEL"
 
+    # The tool whose selftest must go red. Defaults to the mutated file, which is the
+    # common case; the fifth column names it when the two differ.
+    TOOL="${TOOL:-$FILE}"
+
     if [ ! -f "$FILE" ]; then printf 'ERROR no such file: %s\n' "$FILE"; echo E >> "$BAK/err"; continue; fi
+    if [ ! -f "$TOOL" ]; then printf 'ERROR no such selftest: %s\n' "$TOOL"; echo E >> "$BAK/err"; continue; fi
 
     # BASELINE FIRST. "The mutated selftest said FAIL" is only evidence if the unmutated one
     # said PASS. Computed once per file and cached, because these run several mutations each.
-    KEY=$(printf '%s' "$FILE" | tr -c 'A-Za-z0-9' '_')
+    KEY=$(printf '%s' "$TOOL" | tr -c 'A-Za-z0-9' '_')
     if [ ! -f "$BAK/base.$KEY" ]; then
-        sh "$FILE" --selftest 2>/dev/null | tail -1 > "$BAK/base.$KEY"
+        sh "$TOOL" --selftest 2>/dev/null | tail -1 > "$BAK/base.$KEY"
     fi
     BASE=$(cat "$BAK/base.$KEY" 2>/dev/null)
     if [ "$BASE" != PASS ]; then
@@ -107,7 +122,7 @@ printf '%s\n' "$MUTATIONS" | while IFS='@' read -r FILE _ FROM _ TO _ LABEL; do
     fi
 
     cp "$BAK/mutated" "$FILE"
-    out=$(sh "$FILE" --selftest 2>/dev/null | tail -1)
+    out=$(sh "$TOOL" --selftest 2>/dev/null | tail -1)
     cp "$BAK/orig" "$FILE"
 
     if [ "$out" = "FAIL" ]; then printf 'caught\n'; echo C >> "$BAK/ok"
