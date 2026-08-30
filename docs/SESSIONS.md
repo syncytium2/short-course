@@ -1003,6 +1003,19 @@ find out about each other. That is what a board is for, and it is why C3 in
   and calls it the easy part; it was stopped **seven times**. The repairs suggested by the walk:
   name **outcomes and settings**, not click paths, and link the vendor's own page for navigation
   because their link survives their reorganisations and our prose does not.
+- **↻ CORRECTION to the paragraph above, same session, 2026-08-30.** *"Both are built almost entirely
+  out of"* named buttons **is false, and I wrote it without counting.** Counted:
+  **Cold Start 8 of 34 steps (23%) name a UI element, 7 of them undated. Search to Shipped: 1 of
+  50.** And **every Cold Start step that names one already carries a "done when" — 0% unfalsifiable.**
+  The runbooks are mostly built the right way already; the exposure is **seven undated steps in one
+  file**, and they cluster exactly where you would predict — 3.5, 4.x and 7.2/7.3, the steps that
+  reach into a specific vendor's UI. **7.3 is the step I independently found broken by walking it**,
+  which is the count agreeing with the walk rather than a coincidence.
+  **So the fix is small, not a rewrite:** date those seven (or derive the date at build time, the way
+  version metadata already is), point once at the loop, and add a `mutation_check.sh` row that fails
+  when a step names a button with no date. **Caveat: the counter has false positives** — it flags
+  generic uses of *click* and *select*; my own new handout scores 1 of 4 on a step that names no
+  button at all. Size a problem with it, do not gate on it unrefined.
   **Also still open from earlier today:** Cowork appears nowhere in Cold Start's 34 steps; the
   Desktop app has three tabs (Chat / **Cowork** / Code) so they are not rival products; 7.3's *"three
   steps shorter"* holds only *with* a terminal.
