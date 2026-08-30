@@ -1399,7 +1399,23 @@
     if (push && location.hash !== "#" + name) {
       history.pushState(null, "", "#" + name);
     }
-    window.scrollTo({ top: 0, behavior: "auto" });
+    // LAND ON THE CONTENT, NOT ON THE TOP OF THE PAGE. This used to scroll to 0 on every
+    // switch, which is correct only for the landing view. Everywhere else the run-up --
+    // the draft banner, two call-to-action doors, the masthead, the depth control -- is
+    // taller than it looks, so the pane that just changed sat below the fold and the click
+    // appeared to do nothing at all. Reported by a reader who pressed the sceptic's door
+    // three times before realising it had worked the first time. A control that changes
+    // something you cannot see is indistinguishable from a broken one.
+    // The same applies to a link somebody was SENT -- "#objections" in a pasted URL has to
+    // open on the objections, not on the masthead above them -- so this is not gated on the
+    // click. Only the landing view goes to the top, because the top is what it is for.
+    if (name === "overview") {
+      window.scrollTo({ top: 0, behavior: "auto" });
+    } else {
+      var head = views[name].querySelector(".view-head") || views[name];
+      var y = head.getBoundingClientRect().top + (window.pageYOffset || 0) - 16;
+      window.scrollTo({ top: y > 0 ? y : 0, behavior: "auto" });
+    }
   }
 
   // Any link that names a view switches panes instead of jumping.
