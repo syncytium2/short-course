@@ -547,7 +547,7 @@ find out about each other. That is what a board is for, and it is why C3 in
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Mac/8ca0d62c — build_site.sh states the step count in prose and it is live and wrong — derive it from the source instead
-- **Status:** ACTIVE
+- **Status:** DONE 2026-08-30
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
 - **Writes:** `tools/build_site.sh` **only** — I am not touching `docs/handouts/cold-start.html`
