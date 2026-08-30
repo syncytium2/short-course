@@ -874,11 +874,28 @@ find out about each other. That is what a board is for, and it is why C3 in
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Mac/a4de1b91 — Record the route walk-log in decision 0002 (branch route-shortest) + darkroom refresh
-- **Status:** ACTIVE
+- **Status:** DONE 2026-08-30
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/decisions/0002-*.html` on branch `route-shortest` + its darkroom copy.
+  **Nothing in this checkout modified.** Also created `syncytium2/route-test` on GitHub (private,
+  throwaway, outside this repo) — **delete freely: `gh repo delete syncytium2/route-test`.**
+- **Notes:** **Route C was WALKED 2026-08-30** — the first evidence this page has had. 3 of 7 checks
+  confirmed, **1 came back NOT DONE**, 3 unreachable without a GUI. The NOT DONE one is *"run it and
+  look"*, which the runbook calls the check that matters most; it was syntax-checked instead, and
+  that is recorded as a skip rather than dressed up as verification.
+  **Tony confirmed step 3a from having done it** — the only row on the page confirmed by a human.
+  His correction split step 3 in two: linking the GitHub *account* is one-time and in-app; creating
+  the *repository* is a separate errand on github.com. The page had collapsed them.
+  **⚠ For whoever holds `cold-start.html` — three findings, none fixed by me:** (1) the Desktop app
+  has three tabs — Chat, **Cowork**, Code — so Cowork and Claude Code are tabs in ONE app, not rival
+  products; (2) **Cowork appears nowhere in the 34 steps**; (3) 7.3's *"three steps shorter"* holds
+  only *with* a terminal, and inverts without one.
+  **⚠ Untested risk the walk introduced rather than removed:** the test repo was created **with a
+  README**, so it had a commit to clone. The docs say create an *empty* repository — no commits, no
+  branch. **Whether a cloud session can clone one is untested**, and it decides whether a learner's
+  very first action works or fails unreadably.
+  Artifact: https://claude.ai/code/artifact/45d1a208-319d-432e-9001-b73ac932ebab
 
 <!-- RELEASE THIS
      tools/claim.sh --release
