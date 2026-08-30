@@ -1367,6 +1367,13 @@ risks in the file.
   **A new file is the exact trap this board's header warns about:** git accepts two of these
   without conflicting, and a human finds out by reading the folder. If you are also writing up
   the index, say so here before you start.
+- **📨 Draft landed `8b7f60c`, indexed `844dbdb`. Claim held open deliberately.** The cleanup pass
+  is blocked on `bugarach-17` landing PR #415 — Point 3 reports a defect that session is fixing,
+  so the file describes an artifact that is about to change. **Held rather than released because
+  the work is not finished, only paused**, which is the gap
+  [`the-board-was-empty`](cases/2026-08-29-the-board-was-empty-because-claiming-is-a-habit.md)
+  is about: release is priced to happen when a task *feels* done, and contact with the file ends
+  when the session does.
 
 <!-- RELEASE THIS
      tools/claim.sh --release
