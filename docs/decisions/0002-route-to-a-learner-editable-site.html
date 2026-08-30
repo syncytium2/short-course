@@ -173,10 +173,12 @@
     surface its author already knew, and read as a fact about the whole product. Nothing in it was
     unchecked — the quotes were real and are still on the page. They were quotes about a different
     route.</p>
-    <p><b>Assembled by extraction, and nobody has walked it.</b> Every claim comes from
+    <p><b>Assembled by extraction, then partly walked.</b> Every claim comes from
     <span class="path">cold-start.html</span>, <span class="path">search-to-shipped.html</span>,
     <span class="path">four-barriers.html</span>, <span class="path">points.md</span> or the vendors'
-    own current documentation, cited in place. The order and timings are unconfirmed.
+    own current documentation, cited in place. On 2026-08-30 route C was walked as far as a path with
+    no GUI can go: <b>three of its seven checks came back confirmed, one came back NOT DONE, and
+    three could not be reached.</b> Which is which is in §7, and no row is left to look like another.
     <b>Never murderboarded.</b></p>
     <p><b>This is a decision record, not a handout, and it moved folders to say so.</b> It was first
     filed in <span class="path">docs/handouts/</span>, whose own front door defines that folder as
@@ -196,7 +198,10 @@
   </div>
 
   <div class="status" style="margin:0 0 34px">
-    <p><b>Why this recommends a road nobody has walked, and says so instead of hiding it.</b></p>
+    <p><b>Why this recommends a road that has been half-walked at most, and says so instead of
+    hiding it.</b> §7 added evidence for route C on 2026-08-30. <b>Route B has still never been
+    run by anyone here</b>, so the asymmetry below is what the recommendation rests on, not a
+    comparison of results.</p>
     <p><b>1 · The author does not use Cowork, and that is not evidence about a learner.</b> Recorded
     in his own words, 2026-08-30: <i>&ldquo;i don't use cowork so i'm reluctant to include it. my
     work is too chaotic for the claude app alone. that should not propagate to all users.&rdquo;</i>
@@ -672,7 +677,98 @@
   <!-- ============ 7 ============ -->
   <section class="sect">
     <div class="sect-head">
-      <h2>7 · What is not settled</h2>
+      <h2>7 · The walk log</h2>
+      <span class="sect-tag">2026-08-30 · partial</span>
+    </div>
+
+    <p><b>Route C was walked on 2026-08-30, as far as a path with no GUI can go.</b> Until this
+    section existed, every claim on this page was reasoning from documents. Some of them now have a
+    result attached, and the ones that do not are marked so rather than left to look the same.</p>
+
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Step</th><th>Result</th><th>What the evidence actually is</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="k">1 · Paid plan</td>
+          <td class="no">unverifiable</td>
+          <td>Not tested. The walker already had a plan, which is not the same as watching someone
+          acquire one and discover which kind it is.</td>
+        </tr>
+        <tr>
+          <td class="k">2 · One sentence</td>
+          <td class="no">not a test</td>
+          <td>The course's own example sentence was reused. Nothing about a learner's ability to
+          produce one was tested, and that is the step most likely to actually stop somebody.</td>
+        </tr>
+        <tr>
+          <td class="k">3a · Link GitHub</td>
+          <td class="yes">confirmed</td>
+          <td><b>Confirmed by the author, from having done it</b> &mdash; the first walked evidence on
+          this page, and the only step confirmed by a human rather than by a machine. Backed by the
+          documented flow: <i>&ldquo;Connecting GitHub is a one-time step.&rdquo;</i> No terminal.</td>
+        </tr>
+        <tr>
+          <td class="k">3b · Create the repo</td>
+          <td class="no">proxy only</td>
+          <td>A private repository with a README was created and cloned successfully &mdash; but by
+          <code>gh repo create --add-readme</code>, <b>not by the browser form the step actually tells
+          a learner to use.</b> The flag maps onto <i>tick Add a README</i>; the form itself remains
+          unwalked.</td>
+        </tr>
+        <tr>
+          <td class="k">4 · One element</td>
+          <td class="yes">confirmed</td>
+          <td>A working one-page site was written, committed and pushed, and its presence on
+          github.com was verified <b>through the API rather than by taking the push's word for it</b>
+          &mdash; the step's own &ldquo;done when&rdquo;, checked the way this page says to check
+          things.</td>
+        </tr>
+        <tr>
+          <td class="k">4 · Run it and look</td>
+          <td class="no">NOT DONE</td>
+          <td><b>The most important check on the page, and it was skipped.</b> The script was
+          syntax-checked and its marking logic exercised &mdash; neither of which is looking at it.
+          Nobody has opened the page in a browser. <i>&ldquo;You have seen the thing work, not read a
+          message saying it does&rdquo;</i> is not yet true of this walk.</td>
+        </tr>
+        <tr>
+          <td class="k">5 · Publish</td>
+          <td class="no">not reached</td>
+          <td>Cloudflare's connect flow is a dashboard action, handed back as a card. <b>The route
+          therefore has no live URL, which is the only state a reader can observe.</b></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <p><b>What the walk actually bought.</b> Three of seven rows are green, one of them on a human's
+    say-so and two on a machine's. <b>It did not confirm the route.</b> It confirmed that the
+    machine-checkable half does what the page says, and it turned the unexamined half into a named
+    list &mdash; which is the smaller claim, and the true one.</p>
+
+    <p><b>And it turned up one thing worth more than the confirmations.</b> Step 3's two halves are
+    not one step. Linking the GitHub <i>account</i> to Claude happens once, inside the app, and is
+    what the author had already done. Creating the <i>repository</i> happens on github.com and is a
+    different action on a different site &mdash; <i>&ldquo;To start a new project, create an empty
+    repository on GitHub first.&rdquo;</i> This page had collapsed the two, which made a done thing
+    look undone and a two-site errand look like one.</p>
+
+    <div class="status" style="margin:18px 0 0">
+      <p><b>⚠ An untested risk this walk introduced rather than removed.</b> The repository here was
+      created <b>with a README</b>, so it had a commit to clone. The documentation says to create an
+      <i>empty</i> repository, and an empty repository has no commits and no branch. <b>Whether a
+      cloud session can clone one is untested</b> &mdash; and it is the difference between a
+      learner's first action working and failing with a message they cannot read. Step 3 says tick
+      <i>Add a README</i> for exactly this reason; that instruction is now load-bearing and is
+      <b>still a guess.</b></p>
+    </div>
+  </section>
+
+  <!-- ============ 8 ============ -->
+  <section class="sect">
+    <div class="sect-head">
+      <h2>8 · What is not settled</h2>
       <span class="sect-tag">open</span>
     </div>
 
@@ -709,12 +805,13 @@
           a proposal against an open tension, not a closure of it.</td>
         </tr>
         <tr>
-          <td class="k">Not walked, and no learner asked</td>
-          <td>Nobody has run these five steps from a clean account on either road, and <b>no beginner
-          has been observed attempting either.</b> Step 3 and step 5 are read, not confirmed —
-          including the Cowork settings trap in step 3, which comes from a third-party
-          troubleshooting write-up rather than from Anthropic. Every conclusion here is reasoning
-          from documents about people who were not present.</td>
+          <td class="k">Still no learner</td>
+          <td>§7 records what one walk confirmed. <b>It was walked by the people who wrote it</b>,
+          from an account already linked and a plan already bought &mdash; the one starting position
+          this route is not written for. <b>No beginner has been observed attempting either road</b>,
+          and the two steps most likely to stop one (2 and 3b) are the two the walk could not test.
+          Route B was not walked at all, and the Cowork settings trap in step 3 still comes from a
+          third-party write-up rather than from Anthropic.</td>
         </tr>
         <tr>
           <td class="k">A folder the course prescribes and the repo does not have</td>
