@@ -511,7 +511,7 @@
       <p class="eyebrow">It Looked Right &middot; for researchers</p>
       <h1>Using coding agents today and tomorrow</h1>
       <p class="standfirst"><b>Coding is no longer the barrier. Four challenges remain.</b> Each one below, with the incidents that produced it &mdash; every one real and traceable to a primary source, each labeled with who checked it &mdash; most are self-reports by the person they are about.</p>
-    <p class="pv">Version <b>0.1.46</b> &middot; 30 Aug 2026<span class="pv-born">First published 28 Aug 2026</span></p>
+    <p class="pv">Version <b>0.1.47</b> &middot; 30 Aug 2026<span class="pv-born">First published 28 Aug 2026</span></p>
     </div>
     <div class="depth">
       <span class="depth-label" id="depth-label">Reading depth</span>
@@ -995,7 +995,7 @@
         <div class="view-head">
           <p class="eyebrow">Evidence</p>
           <h2 id="h-obj">Objections</h2>
-          <p class="lede">The things a sceptical reader says out loud, in the words they arrive in rather than in a polite paraphrase. <b>Two of the four are right</b>, and one of those was right about a claim this material actually made.</p>
+          <p class="lede">The things a sceptical reader says out loud, in the words they arrive in rather than in a polite paraphrase. <b>Several of them are right</b>, and one was right about a claim this material actually made and has now withdrawn.</p>
         </div>
 
         <h3>&ldquo;Nobody works this way&rdquo;</h3>
@@ -1016,6 +1016,30 @@
             <p><b>Load-bearing only once a particular thing has bitten you:</b> the claim board (two sessions in one checkout), the freshness gate (a generated page that fell behind its source), the doubt folder (a claim nobody could source and nobody wanted to delete). Each is cheap <i>after</i> the incident and pure overhead before it.</p>
             <p><b>And for a two-file analysis, honestly: most of the rest is ceremony.</b> Saying so is not a hedge. A method that cannot say which of its parts you do not need yet is selling something.</p>
             <div class="prov"><b>Source.</b> <span class="path">tools/claim.sh</span> header &mdash; the board exists because two sessions wrote the same document minutes apart with no place to look first, which is this page&rsquo;s own <a href="#idiosyncrasies" data-view="idiosyncrasies">challenge 2</a> happening to the repository that describes it. Standing rule: <span class="path">points.md</span> B8.</div>
+          </div>
+        </details>
+
+        <h3>&ldquo;Why are you so weird about this?&rdquo;</h3>
+        <p class="quote">&ldquo;Why are you so weird about this? Just use permissions and a <span class="path">CLAUDE.md</span>. Give it roles. The tools already do all of that.&rdquo;</p>
+        <p><b>All three are used here, and the page tells you to use them.</b> The instructions file and the permission settings &mdash; allow, ask, deny &mdash; are on the setup list in <a href="#step0" data-view="step0">Step 0</a>, not as an afterthought. The eleven-role adversarial review that caught the numerical defects in this material <i>is</i> roles &mdash; eleven of them &mdash; and a run of the same kind on another document returned 31 blocking findings against a page whose numbers had all checked out. Nothing here is an argument against any of that.</p>
+        <p><b>The objection fails on one distinction, and it is the distinction this whole page is built on.</b> Permissions answer <i>may this command run.</i> They never answer <i>is this claim true.</i> Every incident described on this page passed every permission check it met: the wrong dataset was read with permission, the four wrong numbers came out of commands that were allowed to run, and the two sessions that wrote the same document minutes apart were both fully authorised. <b>Not one of those failures is a permissions failure</b>, so no permission setting would have caught any of them.</p>
+        <p><b>And an instructions file is a request, not a rule</b> &mdash; that is <a href="#fixes" data-view="fixes">Fixes that hold</a>, which is on this page because it is the mistake people make immediately. You write the lesson down, the file grows, and the second sentence still gets skipped. The proof is dated and it is embarrassing: <b>hours after this project documented that instructions are unenforceable, the agent proposed a <span class="path">CLAUDE.md</span> rule as the fix</b> for the very defect being discussed. The file was not ignored by a careless machine; it was written by the party that had just finished explaining why it would not work. A role prompt is the same class of thing &mdash; a request, performed well until it is not.</p>
+        <p><b>So the weird half is small, and it is the half that refuses.</b> A build that will not run against an uncommitted source. A check that fails when a document names a file that does not exist. A hook that says no. <b>One of them refused this session, today</b>, while this very section was being written: an attempt to write a source file through a shell heredoc was blocked outright, by a gate that exists because that trick silently corrupted two files in one sitting and the diff still looked right. That rule had been written in prose, in more than one repository, and skipped anyway. As a gate, nobody has to remember it &mdash; which is the entire difference between a habit and a mechanism.</p>
+
+        <details class="more">
+          <summary>The three kinds of cure, and why only one of them is a file <span class="cost">3 min</span></summary>
+          <div class="inner">
+            <p>Every fix that has held in this work has been one of three things, and it is worth knowing which one you are reaching for:</p>
+            <ul>
+              <li><b>A tool</b> &mdash; something that now does the job, so the job is no longer yours to remember.</li>
+              <li><b>A change of habit</b> &mdash; you, doing something differently, forever, on purpose.</li>
+              <li><b>A check you accept forever</b> &mdash; a gate that runs whether or not anyone is paying attention, and refuses.</li>
+            </ul>
+            <p><b>An instructions file is none of these.</b> It is a habit written down and then handed to something that does not have habits. It works, often, which is what makes it so hard to give up &mdash; and it fails silently and without a pattern, which is the worst possible failure shape for something you are relying on.</p>
+            <p><b>One kind of file does hold, and the distinction is worth the whole objection:</b> prose fails when it is a <i>rule</i> and survives when it is a <i>definition</i>. A rule competes with the model&rsquo;s own priors and loses quietly. A glossary read before any reasoning starts <b>replaces</b> a prior rather than arguing with one &mdash; and in this estate that is the one document that has held, mechanised into each project and opened by a session hook so nobody has to remember it. If you take one thing from this objection, it is that: write definitions, not instructions.</p>
+            <p><b>Roles have a stated ceiling too, and it is not a low one.</b> On the run described in <a href="#validation" data-view="validation">challenge 3</a>, eleven roles returned 31 blocking findings against a document whose 63 numbers were all correct and whose gates were all green &mdash; and the five worst were not arithmetic at all. What eleven roles could <i>not</i> do was ask whether the document should exist; a human found that. And they ran on one model in one context, so they buy coverage of angles rather than independence. Use them; do not mistake a panel of prompts for a second opinion.</p>
+            <p><b>None of this is free, and the page says where it stops.</b> Across one estate, session-start hooks grew to 39, 34, 27, 17, 11, 9 and 7 kilobytes, and one of them grew until sessions would not open at all. That is <a href="#asymptote" data-view="asymptote">challenge 4</a> eating the guard layer, and it is why the harness these hooks run under is <b>advisory by default with a kill switch you can reach without a session</b>. A gate that cannot be turned off is a new way to lose a day.</p>
+            <div class="prov"><b>Source.</b> The three kinds of cure: <span class="path">points.md</span> B4 and the outline&rsquo;s <i>Fixes that hold</i>. The <span class="path">CLAUDE.md</span> instance is commit <b>1d0a0f3</b>, 28 Aug 09:04, <i>&ldquo;Hours after documenting B4, the agent proposed a CLAUDE.md rule as the fix.&rdquo;</i> The heredoc refusal happened in this repository on <b>2026-08-30</b> while this section was being written; the gate is vendored from <span class="path">tools/turnstile/</span>. Hook sizes are a measured census across one estate, in <a href="#asymptote" data-view="asymptote">challenge 4</a>.</div>
           </div>
         </details>
 
