@@ -872,3 +872,33 @@ find out about each other. That is what a board is for, and it is why C3 in
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/a4de1b91 — Record the route walk-log in decision 0002 (branch route-shortest) + darkroom refresh
+- **Status:** ACTIVE
+- **Opened:** 2026-08-30
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
+- **Notes:** <anything another session must know before touching the same thing>
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/942c2539 — Deploy site/ — the Objections section (five objections incl. permissions/CLAUDE.md), the mis-credit correction, and the version bump to 0.1.47. Authorised by Tony.
+- **Status:** DONE 2026-08-30
+- **Opened:** 2026-08-30
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
+- **Notes:** <anything another session must know before touching the same thing>
+  **Deployed 2026-08-30, version ID d95d162b.** One file changed on the wire (`index.html`);
+  the other three pages were already uploaded and are byte-identical to what was live. Verified
+  on the live URL, not just from the build: the Objections section, all five objections, the
+  bugarach mis-credit correction and version 0.1.47 are all present at
+  https://lookedright.tonydefazio.com/. **No reader lost saved state** — nothing on this page
+  keys any.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
