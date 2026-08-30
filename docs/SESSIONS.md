@@ -1291,7 +1291,7 @@ find out about each other. That is what a board is for, and it is why C3 in
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Mac/4a487730 — Publication readiness in worktree publication-remainder: review findings 7/8/9 + the course-outline before-sharing banner
-- **Status:** ACTIVE
+- **Status:** DONE 2026-08-30
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
 - **Writes:** **nothing in this checkout except this block.** All work is on branch
@@ -1312,6 +1312,25 @@ find out about each other. That is what a board is for, and it is why C3 in
   `docs/cases/2026-08-28-the-weakest-fix-is-the-most-available.md` is about reaching for exactly
   this. **I am now working in a worktree.** Converting the repo properly is scoped out of this
   block and is worth its own.
+
+**DONE — everything is on `origin/publication-remainder`, six commits, and `master` is untouched
+by this session apart from this block.** Findings 4, 7, 8 and 9 of the publication review are
+closed. `syncytium2/turnstile` is **public** (Apache-2.0, Tony's call) and all six links to it
+resolve anonymously, checked with `curl`. The twelve case files say where their evidence lives
+and whether an outside reader can reach it. Five artifact URLs are out of this board and a rule
+sits at the top saying why. `course-outline.md:7` now leads with B2/B5 instead of the two lowest
+risks in the file.
+
+> **⚠ And the worktree immediately broke a gate — filed as `OPEN-FINDINGS.md` N6, unfixed.**
+> [`.claude/hooks/push-goes-where-you-are.sh`](../.claude/hooks/push-goes-where-you-are.sh)
+> resolves the repo from `$0`, which is the **shared checkout**, so from a worktree it reports
+> *"This checkout is on: master"* — confidently, and falsely — and **refuses the push**. Its
+> moved-under-you latch then fires on every alternation, because it compares a worktree branch to
+> the shared checkout's branch and those differ permanently. It fires once and the retry
+> succeeds, **so a worktree session is trained within two commands to retry through the one alarm
+> that would report a real branch switch.** `--selftest` is seven-of-seven green, because no case
+> has ever run from a worktree. **If you are working in a worktree, this gate is lying to you.**
+> Do not "fix" it without reading N6 — the decision it depends on is bigger than the hook.
 
 <!-- RELEASE THIS
      tools/claim.sh --release
