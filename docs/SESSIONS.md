@@ -932,3 +932,20 @@ find out about each other. That is what a board is for, and it is why C3 in
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/942c2539 — four-barriers.html: sceptic's door above the Cold Start button, then rebuild and deploy — authorised by Tony
+- **Status:** DONE 2026-08-30
+- **Opened:** 2026-08-30
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
+- **Notes:** <anything another session must know before touching the same thing>
+  **Deployed, version 0.1.48, Cloudflare version ID 212e0c4a.** The button carries the objection
+  in the reader's own words — *"Nobody works this way. Why are you teaching it?"* — rather than a
+  label, and sits ABOVE the Cold Start call to action: a sceptic who is not ready for a setup
+  runbook was previously offered nothing but the rail, which they leave before they open it.
+  It hides itself once you are reading the objections. Darkroom copy refreshed; live URL checked.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
