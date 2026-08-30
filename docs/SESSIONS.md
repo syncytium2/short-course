@@ -688,7 +688,7 @@ find out about each other. That is what a board is for, and it is why C3 in
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Mac/942c2539 — four-barriers.html: add an Objections section — the hostile questions a reader arrives with ("nobody works this way", "why should this take a day when Coursera takes weeks"), answered honestly. Source + rebuild site/index.html; NOT deployed without a separate say-so.
-- **Status:** ACTIVE
+- **Status:** DONE 2026-08-30
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
 - **Writes:** `docs/handouts/four-barriers.html` (new `#objections` view + rail row), then
@@ -699,6 +699,22 @@ find out about each other. That is what a board is for, and it is why C3 in
   without defending — including the correction `HANDOFF.md` item 3 and `OPEN-FINDINGS.md` B2
   have been waiting on: **the "nobody teaches this" claim is false**, and Oxford / UW eScience /
   Southampton get named on the public page rather than only in an internal finding.
+  **DONE and pushed, NOT deployed.** `site/index.html` is rebuilt and committed; the live site
+  still shows the old page until Tony says ship. Darkroom `four-barriers.html` refreshed and its
+  `README.md` now says that copy is ahead of the live site.
+  **Two drifts found while writing, one fixed:** (1) the overview said *"the nineteen expandable
+  notes ... thirteen are worked failures"* and the page held **21** before I added any — a hand-typed
+  count with nothing maintaining it, the same shape as the 29/30-vs-34 step count. **Fixed by
+  deleting the numbers**, not by restating them: the artifact source is published unbuilt, so a
+  `{placeholder}` filled by `build_site.sh` would render literally in the artifact. (2) **The
+  landing page at `tonydefazio.com` advertises this page as "19 worked failures"** — same stale
+  count, different repo (`syncytium2/tonydefazio.com`), **not mine to fix and not fixed.**
+  **⚠ The artifact copy is stale and was already stale:** the published artifact is 131KB against a
+  166KB source, so `docs/handouts/README.md`'s *"republish and the two stay identical"* is not true
+  of `four-barriers.html`. Republishing now requires reading the live copy first; I did not.
+  **Content note:** `OPEN-FINDINGS.md` **B2/B4/B5 are answered on the public page** — the vacancy
+  claim is withdrawn in public and Oxford / UW eScience / Southampton are named. B5's residual
+  stands: nobody has emailed them.
 
 <!-- RELEASE THIS
      tools/claim.sh --release
