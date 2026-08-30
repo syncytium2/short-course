@@ -488,3 +488,15 @@ find out about each other. That is what a board is for, and it is why C3 in
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/7d93fc67 — cold-start.html: re-key checklist state to stable step ids, then add the Path A / Path B switch
+- **Status:** ACTIVE
+- **Opened:** 2026-08-30
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** docs/handouts/cold-start.html (sole source), site/cold-start.html via build
+- **Notes:** Two-part job agreed with Tony. (1) checklist state is keyed by box POSITION; re-key to the stable ids already in the file. (2) then a top-of-page switch: Path A (website/document/small tool, Claude desktop app) vs Path B (research computing, current CLI route). Both converge on Phase 5. Re-keying is blocking — branching first would cost a second state migration. Deploy discards saved ticks, so ask Tony before any deploy.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
