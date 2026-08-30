@@ -588,6 +588,27 @@ find out about each other. That is what a board is for, and it is why C3 in
 - **Status:** DONE 2026-08-30
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** `tools/build_site.sh`, `tools/mutation_check.sh`, `docs/handouts/four-barriers.html`
+  (one stale line removed), all four `site/*.html` via build, `docs/handouts/README.md`
+- **Notes:** Tony asked for **born-on date, version and version date** on the home page and every
+  linked page, version numbered `0.1.<n>`. All three are **derived at build time from git** —
+  born from the commit that added the source, `<n>` from the commit count touching it, the
+  version date from the last commit touching it. Nothing is typed into a page, for the same
+  reason the step count is now counted rather than restated.
+  **⚠ THIS CHANGES THE BUILD ORDER FOR EVERYONE.** `build_site.sh` now **refuses to build from a
+  source with uncommitted changes**, because the commit count and date would be a lie about the
+  bytes it is wrapping. The order becomes: edit source → **commit the source** → rebuild →
+  commit the output. Two commits, not one. The refusal message says so.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/8ca0d62c — Born-on date, version and version date on all four public pages — derived at build time
+- **Status:** ACTIVE
+- **Opened:** 2026-08-30
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
 - **Writes:** <files or folders you will change; "repo only" if nothing outside git>
 - **Notes:** <anything another session must know before touching the same thing>
 
