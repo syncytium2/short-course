@@ -87,30 +87,71 @@ esac
 # ------------------------------------------------------------------ releasing
 if [ "${1:-}" = "--release" ]; then
     FRAG="${2:-$ADDR}"
-    LN=$(grep -n "^### .*$FRAG" "$BOARD" | head -1 | cut -d: -f1)
-    [ -n "$LN" ] || die "no block matching '$FRAG'. Try: tools/claim.sh --list"
+
+    # THE FIRST *ACTIVE* MATCH, NOT THE FIRST MATCH. `grep "^### .*$FRAG" | head -1` finds
+    # the first block bearing your address whether or not it is still open -- and a session
+    # that has already closed one claim today has exactly such a block. Reproduced on the
+    # real board 2026-08-29, where a release printed the title of a claim it had closed
+    # twenty minutes earlier. Fenced code is skipped for the same reason `list_active`
+    # skips it: the board documents its own block format inside a fence.
+    LN=$(awk -v frag="$FRAG" '
+        /^```/ { fence = 1 - fence; next }
+        fence  { next }
+        /^### / { hdr = NR; hit = (index($0, frag) > 0); next }
+        hit && /^- \*\*Status:\*\* ACTIVE/ { print hdr; exit }
+    ' "$BOARD")
+    [ -n "$LN" ] || die "no ACTIVE block matching '$FRAG'. Try: tools/claim.sh --list"
 
     # NOT `sed -i`. That is GNU syntax; on BSD/macOS -i REQUIRES an argument, so the
     # expression is eaten as a backup suffix, the edit never happens, and the script
     # prints success anyway. This estate has already paid for that once, in
     # interface2's file_todo.sh. awk into a temp file behaves the same on both.
+    #
+    # AND THE BLOCK ENDS AT THE NEXT HEADER. Without that guard `inblk` stayed 1 until the
+    # awk found *some* ACTIVE Status further down the file. With the target block already
+    # DONE, the next one it found belonged to ANOTHER SESSION, and this closed it -- the
+    # tool whose entire job is keeping sessions off each other, quietly telling one of them
+    # its work was finished.
+    #
+    # THIS GUARD IS THE SECOND LOCK AND IT IS DELIBERATELY UNREACHABLE. `LN` is now only
+    # ever the header of a block that HAS an ACTIVE Status before the next header, so the
+    # awk always stops inside its own block and never reaches this line. It is kept because
+    # the catastrophic behaviour above returns the moment the `LN` selection regresses, and
+    # a second lock costs one line. It is deliberately NOT in `mutation_check.sh`: no test
+    # can kill an unreachable branch, and a permanent MISSED row is how a report stops being
+    # read. The pair is covered by the mutation "release targets a block that is already
+    # DONE", which breaks the first lock and IS caught.
     awk -v ln="$LN" -v d="$TODAY" '
-        NR==ln { inblk=1 }
+        NR==ln { inblk=1; print; next }
+        inblk && /^### / { inblk=0 }
         inblk && /^- \*\*Status:\*\* ACTIVE/ {
             print "- **Status:** DONE " d; inblk=0; next
         }
         { print }
     ' "$BOARD" > "$BOARD.tmp" && mv "$BOARD.tmp" "$BOARD"
 
-    # AND CHECK IT HAPPENED. The bug above was invisible precisely because nothing
-    # confirmed the write.
-    if grep -q "^- \*\*Status:\*\* DONE $TODAY" "$BOARD"; then
+    # AND CHECK THE RIGHT LINE. The old check was `grep -q "DONE $TODAY"` across the whole
+    # board, which ANY release earlier the same day already satisfied -- so on the day the
+    # bug above fired, the verification could not fail. It now reads the one block it aimed
+    # at, and gives up at the next header rather than accepting a DONE from further down.
+    #
+    # THE FLAG, NOT `exit 0`. First draft of this check used `exit 0` inside the rule --
+    # but awk runs END on its way out, and END's own `exit 1` replaces the status. So it
+    # reported FAILED on a release that had already been written to disk: the board said
+    # DONE and the tool said it had not managed it. Caught by asserting on what --release
+    # PRINTS; every content-only assertion above sailed past it.
+    if awk -v ln="$LN" '
+        NR < ln { next }
+        NR > ln && /^### / { exit }
+        /^- \*\*Status:\*\* DONE / { ok = 1; exit }
+        END { exit (ok ? 0 : 1) }
+    ' "$BOARD"; then
         printf 'released: %s\n' "$(sed -n "${LN}p" "$BOARD")"
         printf '  COMMIT AND PUSH — an unreleased claim on one disk blocks nobody and helps nobody.\n'
         exit 0
     fi
     rm -f "$BOARD.tmp"
-    die "FAILED to release — $BOARD still has no 'DONE $TODAY'. Edit it by hand."
+    die "FAILED to release — the block at line $LN of $BOARD is not DONE. Edit it by hand."
 fi
 
 if [ "${1:-}" = "--selftest" ]; then
@@ -145,6 +186,35 @@ if [ "${1:-}" = "--selftest" ]; then
     # releasing something that is not there must NOT report success
     sh "$0" --release definitely-not-on-this-board >/dev/null 2>&1
     ck "releasing a missing block fails loudly" 2 "$?"
+
+    # ---------------------------------------------------------------- two blocks
+    # EVERY CASE ABOVE USES A BOARD WITH ONE CLAIM ON IT, WHICH IS WHY THEY WERE ALL
+    # GREEN WHILE --release COULD CLOSE SOMEBODY ELSE'S WORK. The bug needs a second
+    # block to show itself, so the tests need one too. Reproduced on the real board
+    # 2026-08-29 and fixed the same hour.
+
+    # (a) my own claim is already closed, and another session is live below it.
+    #     --release must refuse. It used to walk out of my dead block and close theirs.
+    {
+      printf '# scratch board\n'
+      printf '\n### %s — mine, closed earlier today\n- **Status:** DONE %s\n' "$ADDR" "$TODAY"
+      printf '\n### Mac/somebodyelse — not mine, still running\n- **Status:** ACTIVE\n'
+    } > "$SC_BOARD"
+    sh "$0" --release >/dev/null 2>&1
+    ck "with no open claim of mine, release refuses"      2 "$?"
+    ck "and another session's claim is untouched"         1 "$(grep -c '^- \*\*Status:\*\* ACTIVE' "$SC_BOARD")"
+
+    # (b) I hold two blocks, the first closed. It must close the SECOND and say so.
+    #     It used to close the second and report the first one's title.
+    {
+      printf '# scratch board\n'
+      printf '\n### %s — mine, closed earlier today\n- **Status:** DONE %s\n' "$ADDR" "$TODAY"
+      printf '\n### %s — mine, the one actually open\n- **Status:** ACTIVE\n' "$ADDR"
+    } > "$SC_BOARD"
+    OUT=$(sh "$0" --release 2>&1)
+    ck "with two of mine, the open one is closed"         0 "$(grep -c '^- \*\*Status:\*\* ACTIVE' "$SC_BOARD")"
+    ck "and the line it PRINTS is the one it closed"      1 "$(printf '%s' "$OUT" | grep -c 'the one actually open')"
+    ck "not the one it closed earlier"                    0 "$(printf '%s' "$OUT" | grep -c 'closed earlier today')"
 
     rm -rf "$TD"; unset SC_BOARD
     [ $fail -eq 0 ] && { echo PASS; exit 0; } || { echo FAIL; exit 1; }

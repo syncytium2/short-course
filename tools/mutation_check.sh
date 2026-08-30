@@ -46,6 +46,7 @@ MUTATIONS=$(cat <<'TABLE'
 tools/claim.sh@@&& mv "$BOARD.tmp" "$BOARD"@@|| true@@release never writes the board back
 tools/claim.sh@@cat >> "$BOARD" <<BLOCK@@cat > /dev/null <<BLOCK@@claiming appends nothing
 tools/claim.sh@@print "- **Status:** DONE " d@@print "- **Status:** ACTIVE"@@release leaves the block ACTIVE
+tools/claim.sh@@        hit && /^- \*\*Status:\*\* ACTIVE/ { print hdr; exit }@@        hit { print hdr; exit }@@release targets a block that is already DONE
 tools/session_identity.sh@@printf '%s/%s\n' "$SC_MACHINE" "$SC_SESSION"@@printf 'XXX/XXX\n'@@address returns a constant
 tools/session_identity.sh@@SC_BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)@@SC_BRANCH=main@@branch is hardcoded
 .claude/hooks/push-goes-where-you-are.sh@@                exit 2 ;;@@                exit 0 ;;@@push gate fails open
