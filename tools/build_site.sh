@@ -52,6 +52,9 @@ META = {
     "cold-start.html": (
         "Zero to a working coding-agent setup: 30 steps in seven phases, each a checklist "
         "that stays red until every box is checked.", "\U0001F9CA"),
+    "search-to-shipped.html": (
+        "Zero to a deployed web app for a researcher who has never written software \u2014 "
+        "every step in order, with the condition that tells you it worked.", "\U0001F6A2"),
     "what-it-costs.html": (
         "What a coding-agent setup actually costs \u2014 the four things that charge, the three "
         "billing shapes, measured figures, and the equity problem stated plainly.", "\U0001F4B5"),
