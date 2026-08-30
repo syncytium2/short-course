@@ -5,6 +5,43 @@ is for murderboard development only; see [Boundary](#boundary) below.
 
 ---
 
+## If you are coming back to this cold
+
+**2026-08-30. Parked, deliberately, and nothing is decaying.** Everything is committed and pushed
+to the private remote. There is no clock on any of it. The course was already postponed on
+2026-08-27 and the postponement removed the deadline, not the findings — that is still true and
+still costs nothing to leave alone.
+
+**What is actually valuable here, ranked by value per hour spent — because they are not equal and
+the order is not obvious:**
+
+1. **The capture-cost result.** `tools/doubt.sh` — twenty seconds, no decision owed — is an answer
+   to the one thing that killed twenty years of design-rationale research (IBIS, gIBIS, QOC): people
+   will not file the rationale while doing the work. This repo has five days of evidence that a
+   zero-obligation channel gets used. That is the most defensible and least written-up thing here,
+   and it is one page.
+2. **The verification ledger.** Nine mechanisms that failed at the class of error they were built to
+   catch, and in none of them was the tool wrong. Written up 2026-08-30 —
+   `<darkroom>/short-course/2026-08-30-verification-asymmetry/`. Done; costs nothing more.
+3. **The chain and the four channels.** The provenance record and the obligation-typed uncertainty
+   folders. Valuable as a *demonstrated method*, and it is already demonstrated. Adding to it does
+   not make it more so.
+4. **The course itself.** Lowest value per hour right now, and the only item that needs other people
+   (the Oxford / UW eScience / Southampton emails behind B2, B4, B5). Do not start here.
+
+**The one thing with a real clock on it is not in the repo.** The files will keep. What decays is
+the reason any of it was done — the part that lives only in the author's head. If there is ever
+half an hour, spend it on that and not on building.
+
+**A warning this repo has earned the right to make.** §4 of the course is the forever asymptote:
+the guarding becomes the work, and both pursuits are legitimate, which is what makes them hard to
+stop. This repository will absorb any amount of attention and feel productive the entire time. It
+is a good place to put attention and a bad place to hide. Written down here because a session that
+opens this file next has no way to know that, and because it is the course's own point aimed at the
+course.
+
+---
+
 ## Where things are
 
 | You want | It is at |

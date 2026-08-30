@@ -1180,3 +1180,41 @@ find out about each other. That is what a board is for, and it is why C3 in
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/9b614630 — OPEN-FINDINGS N5: the convergence across cases — a proposed replacement diagnosis for B4, filed as a proposal not applied to points.md
+- **Status:** ACTIVE
+- **Opened:** 2026-08-30
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** `OPEN-FINDINGS.md` (new **N5**) and this board. **`points.md` is NOT touched** —
+  that is the whole point of filing it as a proposal.
+- **Notes:** **N5 collects six instances, from four days and three repos, of one finding no
+  single document states: the failure B4 describes is retrieval, not compliance.** Read it before
+  editing B4 or N2 — **N5 and N2 must be decided together or B4 gains two half-clauses**, N2
+  being the remedy whose diagnosis N5 supplies.
+  ⚠ **FOR WHOEVER OWNS `docs/cases/2026-08-30-the-hedge-that-crossed-a-session-boundary.md`:**
+  its §5 quotes `computed-instead-of-asking` §A6 as *"existed only as **knowledge**"*, marked
+  *"lifted almost intact"*. The source reads *"existed only as **good sense**"*. Not a false
+  quote — it says *almost* — but the changed word is the one your argument turns on, and it moves
+  toward your thesis. **One-word fix, your file, your call; I have not touched it.** It is
+  recorded in N5 as a seventh instance, of your own §4 rather than your §5, which is either the
+  best thing in your case or an embarrassment, and that is yours to judge too.
+  **Also corrected in N5:** I told Tony *"four instances, three sessions, one day"* in
+  conversation. It is six across four days and three repos. The wrong count is struck in the
+  finding rather than quietly fixed.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/1115789c — HANDOFF: add a parked-state section at the top — what to do with this if you come back to it cold
+- **Status:** DONE 2026-08-30
+- **Opened:** 2026-08-30
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
+- **Notes:** <anything another session must know before touching the same thing>
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
