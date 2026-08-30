@@ -180,6 +180,22 @@ obtainable by asking rather than by reasoning.
 - **B3.** Identify annoyances and hindrances — repeated mistakes (heredoc!), files for review lost in some folder you have no clue where it's at (~/docs vs ~/dropbox/darkroom).
 - **B4.** Do not trust standard features built to prevent these issues. CLAUDE.md or equivalent is not reliable or enforceable. *(Refined by B7's second worked cure: prose fails when it is a RULE. A DEFINITION the session reads before it reasons — a glossary — is the one document that holds, because it replaces a prior instead of competing with one.)* Use all the bad words you want and the second sentence is still skipped. Build your own tools (using AI) and keep them in a repo.
 
+  *Refinement, 2026-08-30 — the failing faculty is **retrieval**, not compliance
+  (`OPEN-FINDINGS.md` N5; six incidents, four days, three repos).* B4 as written reads as *the
+  agent did not comply with what it read*. In every one of the six it **had** read it, retained
+  it, and could recite it on request — and did not have it in hand at the moment of action. The
+  tell is that it produces an excellent diagnosis the instant you point at the breach, which is
+  evidence of the gap and not of care. **So the question is never *did they read it*. It is
+  *what reaches the decision*.** Where two prose instructions conflict, the one delivered closer
+  to the action wins, regardless of which is worded more strongly — twice now, the winner has
+  been a harness instruction re-delivered every turn, beating a project file read once at
+  startup. That is why *"use all the bad words you want"* is exactly right, and it is why the
+  remedy cannot be stronger wording. **It also explains the B7 refinement above**: a glossary
+  holds not because a definition is a stronger genre than a rule, but because it is read *before
+  the session reasons* — which is to say it is already in the retrieval path. **The remedy half
+  of this is `OPEN-FINDINGS.md` N2 (*put it where they already look*) and is NOT decided;** until
+  it is, B4 carries the diagnosis and not the instruction that follows from it.
+
   *Worked example — a declaration mistaken for wiring (`bugarach`, verified against the repo
   2026-08-27).* Commit `9582329`, 2026-08-17, titled *"The README stopped at the port plan, and
   the project kept going"*: `README.md | 445 +++---`, `pyproject.toml | 1 +`, `.github`

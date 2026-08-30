@@ -1231,3 +1231,26 @@ find out about each other. That is what a board is for, and it is why C3 in
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/9b614630 — points.md: add N5's diagnosis to B4 (Tony's decision: add, not replace)
+- **Status:** ACTIVE
+- **Opened:** 2026-08-30
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** `points.md` — **B4 only**, one indented refinement paragraph inserted before its
+  first worked example. No other point touched, nothing removed.
+- **Notes:** ⚠ **`points.md` is the spine and I held it briefly — re-read B4 before quoting it.**
+  This is **Tony's decision, taken 2026-08-30: add to B4, do not replace it.** The quoted
+  authority is his instruction *"add to b4"*, answering N5's decision 1, which offered replace or
+  add. **B4 now carries the diagnosis (N5) and NOT the remedy (N2, *put it where they already
+  look*), because N2 is still undecided** — and the inserted paragraph says so in its own last
+  sentence, so the half-state is visible to a reader of `points.md` rather than only to a reader
+  of `OPEN-FINDINGS.md`. **If N2 is taken later, it belongs at the end of that same paragraph,
+  not as a third bolt-on.** The paragraph also states that N5 retro-explains the B7 glossary
+  refinement already inline in B4 — a definition holds because it is read before the session
+  reasons, i.e. it is in the retrieval path. If you disagree with that link, it is the one claim
+  in the addition that is mine rather than the evidence's.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
