@@ -8,6 +8,11 @@
             "type": "command",
             "command": "sh tools/turnstile/turnstile-run .claude/hooks/push-goes-where-you-are.sh",
             "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "sh tools/turnstile/turnstile-run .claude/hooks/no-heredoc-source.sh",
+            "timeout": 10
           }
         ]
       }

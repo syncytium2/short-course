@@ -752,9 +752,13 @@ find out about each other. That is what a board is for, and it is why C3 in
 - **Status:** ACTIVE
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** `.claude/hooks/no-heredoc-source.sh` (new, vendored), `.claude/settings.json`
-  (a second `PreToolUse` Bash hook beside the push guard), `OPEN-FINDINGS.md`. No page, no
-  handout, no darkroom folder.
+- **Writes:** `.claude/hooks/no-heredoc-source.sh` (new, vendored),
+  `.claude/hooks/no-heredoc-source.selftest.sh` (new), `.claude/settings.json` (a second
+  `PreToolUse` Bash hook beside the push guard), `tools/hook_audit.py` (new),
+  `OPEN-FINDINGS.md` (new finding N3). No page, no handout, no darkroom folder.
+  **Two files added beyond the original claim** — the selftest, because the gate blocks its
+  own paste-in verification commands, and the audit, because a finding nobody can re-run is
+  an anecdote.
 - **Notes:** **`.claude/settings.json` is the collision risk.** It already carries
   `push-goes-where-you-are.sh` and every session in this shared checkout runs under it — a
   clobber there disables a live gate for all of us at once. If you need that file while this

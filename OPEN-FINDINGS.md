@@ -263,3 +263,117 @@ look.* That converts B4 from a warning into an instruction, and it is what actua
 **What would settle it:** a second instance from a different repo where a mounted file beat a
 repeated instruction, and a check on whether any of the four existing B4 instances is actually
 this failure misfiled.
+
+---
+
+### N3 · Nothing propagates a gate to a new repo, and one checkout has fallen behind the branch that carries them
+
+**Provenance: raised 2026-08-30 by `Mac/9b614630` while wiring the heredoc gate into this repo.
+Not a review finding — no panel has seen it.** The audit is reproducible:
+`python3 tools/hook_audit.py`, read-only over `~/Developer/*`.
+
+**The prompt was Tony's, and his hypothesis was right:** *"I was under the impression that each
+new repo acquired these features. I suspect there's a human step that was skipped."* There is no
+propagation mechanism of any kind. `~/.claude/settings.json` registers one `UserPromptSubmit`
+hook and no `PreToolUse` hook at all, so nothing is inherited globally; every install is a manual
+`cp` plus a manual `settings.json` edit, exactly as murderboard's adoption block instructs. **The
+step was not skipped — it was never automated, and it is performed from memory per repo.**
+
+#### What the audit found — 18 git repos under `~/Developer` (worktrees excluded)
+
+| | count |
+|---|---|
+| `no-heredoc-source` registered and able to fire | **8** (incl. this repo as of today) |
+| turnstile vendored | **1 of 18** — only here |
+| no heredoc gate at all | **10**, of which `downLow` and `foundations` are live agent repos |
+
+`downLow` is the one that should be looked at first: `CLAUDE.md`, a `.claude/` directory, 22
+source files, last commit 2026-08-16, and no gate.
+
+#### Three ways a gate is present and dead — and this estate has all three
+
+1. **ORPHAN — on disk, registered nowhere.** It never runs. `bugarach` carries
+   `.claude/hooks/session-start.sh` and `tools/hook_spill_census.sh` this way.
+2. **STALE CHECKOUT — registered on the branch, absent from the working copy.** See below.
+   This is the one nobody is watching for.
+3. **ADVISORY — registered through turnstile with no `# turnstile: gate` line.** It runs, exits
+   2, and is overruled; turnstile says so on stderr and nobody reads a stream that is working.
+   **None currently, and only because this repo is the only turnstile consumer** — the trap is
+   armed for the next repo that vendors it. It nearly caught this session: the canonical
+   murderboard hook carries no declaration, so vendoring it unmodified would have installed a
+   gate that could not refuse anything.
+
+#### The stale-checkout finding, which is the serious one
+
+`~/Developer/interface2` is **102 commits behind `origin/main`** (local HEAD `c711e737`
+2026-08-22; `origin/main` `46643c46` 2026-08-28). Gates registered in each:
+
+| | local working copy | `origin/main` |
+|---|---|---|
+| `no-heredoc-source.hook.sh` | ✅ | ✅ |
+| `plotting-roster.hook.sh` | ❌ | ✅ |
+| `no-figure-flash.hook.sh` | ❌ (on disk, unregistered) | ✅ |
+| `no-truncating-redirect.hook.sh` | ❌ (not on disk) | ✅ |
+
+**A session opened in that checkout today runs with three of four gates missing, and nothing
+says so.** The missing ones are not hypothetical: `no-truncating-redirect` exists because of
+commit `7235cedf`, *"a 'lock check' emptied nine PDFs"* — a probe written as
+`if ( : > "$f" )`, which reads as a read and is a write, and which emptied all nine figure PDFs
+in a darkroom folder. `no-figure-flash` and `plotting-roster` are two of the three gates the
+[six-prose-rules case](docs/cases/2026-08-28-six-prose-rules-zero-mechanized-rules.md) credits
+with changing the outcome — **that case's central evidence is partly unwired in the checkout it
+was written about.**
+
+This is a *fourth* enforcement tier failure, and it is not in the B4 table: not prose losing to
+a habit, but **a mechanism that is correct on the branch and absent at the desk**. `git pull`
+fixes it, which is precisely why nobody thinks of it as a safety step.
+
+#### The coverage gap in the gate itself, reported and deliberately not asserted
+
+`.claude/hooks/no-heredoc-source.selftest.sh` prints it as a `NOTE` and does not vote on
+pass/fail: the matcher tests for `<<` **first**, so every non-heredoc channel that writes a
+source file walks straight past it — `python -c`, `printf`, `sed -i`, `tee`. That is not a
+theoretical hole. The 2026-08-18 MATLAB corruption was produced by exactly such a detour
+**after** the heredoc was blocked. It is a `NOTE` rather than a check because asserting the gap
+as expected behaviour is the failure in
+[the-tests-were-defending-the-bug](docs/cases/2026-08-28-the-tests-were-defending-the-bug.md).
+
+**The false-positive side, found the same hour.** The gate refuses a commit message that
+*describes* a heredoc. The commit that installed it was blocked on its first attempt, because
+quoting the blocked pattern in prose puts the pattern in the command line; it went in with
+`git commit -F` instead. Harmless once, and worth writing down for two reasons: **this repo's
+whole subject is writing about these patterns**, so it will recur, and the workaround is cheap,
+silent, and one step away from `--no-verify`. A gate does not usually get uninstalled in anger —
+it gets routed around by someone in a hurry, which is
+[§2.2 of the six-prose-rules case](docs/cases/2026-08-28-six-prose-rules-zero-mechanized-rules.md)
+happening to the person who installed it.
+
+**And the pressure is upstream of the gate.** This session's harness instruction, delivered fresh
+every turn, reads: *"make file changes with sed, heredocs, or short scripts, rather than using
+the dedicated Read, Edit, or Write tools."* The gate's own message says the opposite —
+*"USE THE Write OR Edit TOOL INSTEAD."* Two live instructions in direct contradiction, one of
+them re-delivered every turn and naming the least-covered channel (`sed`) first. **`CLAUDE.md`
+is not losing to the model's whim; it is losing to a better-positioned instruction.** That is a
+sharper statement of B4 than the repo currently makes, and it is the reason the gate has to be a
+gate.
+
+#### Decisions needed — author's call, none taken
+
+1. **Does a gate get pushed, or pulled?** A `SessionStart` check that names the gates a repo
+   should have and says which are missing is the obvious fix, and it is also another
+   unpropagated file. The honest options are a real installer (`bootstrap-hooks.sh` run per repo)
+   or accepting that this is a manual step and writing it into the new-repo checklist.
+2. **Which repos are in scope?** 10 have no gate; most are parked. `downLow` and `foundations`
+   are not.
+3. **Pull `interface2` and re-check**, and decide whether a stale-checkout warning belongs in
+   turnstile.
+4. **Should `# turnstile: gate` go upstream** into murderboard's canonical copy? Raised there,
+   not fixed here — a consumer must not edit a vendored file's logic, and the two lines added
+   here are stamped as a registration declaration with that reasoning.
+5. **Widen the matcher past `<<`?** Bigger, noisier, more false positives on the path every Bash
+   call takes. That is the trade, and it is not mine to make.
+
+**What is settled:** the gate is wired here, it blocks live (verified in-session on the exact
+`\rightarrow` payload from the incident log), and all five selftest checks pass — including the
+two that no ordinary check catches: **with no `python` on `PATH`** (the 2026-08-18 fail-open that
+shipped to seven repos) and **through turnstile** (the advisory downgrade).
