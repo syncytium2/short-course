@@ -1353,7 +1353,8 @@ risks in the file.
 - **Status:** ACTIVE
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** `docs/cases/2026-08-30-the-index-that-pointed-at-a-branch.md` (**a new file**), and
+- **Writes:** `docs/cases/2026-08-30-nothing-was-missing-and-it-could-not-be-found.md`
+  (**a new file**; named for the finding, not for the index's own defect, which is Point 3), and
   when it is no longer a draft, a row in [`cases/README.md`](cases/README.md)'s index table.
   Nothing else in this checkout.
 - **Notes:** **Draft only**, at Tony's request — *"start drafting, we'll clean it when they're
