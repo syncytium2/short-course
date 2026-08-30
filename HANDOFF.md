@@ -1060,14 +1060,24 @@ Started from an observation of Tony's — *the website never explains how to use
 VS Code* — and it was correct: the runbook went install VS Code → `npm install` the CLI → type
 `claude` in a terminal, and never said an editor extension exists.
 
-### ⚠ Read this first — the live site is behind, and not in the way the entry above says
+### ✅ RESOLVED — this section used to open by telling you the live site was behind
 
-| | live now | in the repo |
+**↻ Corrected 2026-08-30, after the deploy.** Everything in the table below was true when it was
+written and **none of it is true now**. It is kept rather than deleted because it is the evidence
+for what the deploy fixed — but it is struck through, because a stale warning at the top of the
+front door is worse than no warning: it is the first thing a reader acts on.
+
+| | ~~live then~~ → **live now** | in the repo |
 |---|---|---|
 | checklist state | `cold-start-v4`, 132 `data-key` handles | same |
 | `/cold-start` steps | 34 | 34 |
-| **draft stamps** | **absent on all three pages** | present |
-| `/cold-start` description | *"30 steps"* | *"34 steps"* |
+| **draft stamps** | ~~absent on all three pages~~ → **present** | present |
+| `/cold-start` description | ~~*"30 steps"*~~ → **34 steps** | *"34 steps"* |
+
+**As of the last check, all four pages are byte-for-byte identical to their build outputs**, and
+other sessions have deployed since — `/` is now 0.1.50. Verify before relying on it:
+`for p in "" cold-start what-it-costs search-to-shipped; do curl -s …; done`, or just run
+`tools/build_site.sh --check-all` and compare the served bytes.
 
 **↻ Correction to `Mac/7d93fc67`'s close above, which says *"the live site serves v3 and none of
 this."*** It serves **v4**. Measured against the served bytes, not inferred: the live page
@@ -1075,11 +1085,13 @@ carries the `data-key` handles and the v4 migration from `bed5b57`/`f5ffe94`, an
 carry the draft stamps from `623fc76`. I do not know who deployed it or when — only what the
 bytes contain. The rest of that entry stands and its warning about `V3_MAP` is unaffected.
 
-**What is actually missing from the live site is `623fc76` — the draft stamps.** All three pages
-that gained one are serving without it. That commit is named *"Three pages were published in a
-confident voice about a runbook nobody has ever executed"*, so the pages are, right now, doing
-the thing it was written to stop. Nobody has authorised a deploy; this is the reason to ask for
-one.
+~~**What is actually missing from the live site is `623fc76` — the draft stamps.**~~ **Deployed
+2026-08-30, version `1b3edaa7`.** That commit is named *"Three pages were published in a confident
+voice about a runbook nobody has ever executed"*, and it sat committed and undeployed for four
+hours while the pages went on doing the thing it was written to stop. **The gap was between
+`git push` and the site, and no gate watched it** — `--check-all` proves the repo is
+self-consistent and says nothing about what is served. That is still true and is the next guard
+worth building: a check that compares the deployed bytes to `site/`.
 
 ### What landed
 
