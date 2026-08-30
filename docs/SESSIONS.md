@@ -471,3 +471,20 @@ find out about each other. That is what a board is for, and it is why C3 in
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/8ca0d62c — Fix claim.sh --release: it targets the first block bearing your address, ACTIVE or not, and its edit runs past the block end
+- **Status:** ACTIVE
+- **Opened:** 2026-08-29
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** `tools/claim.sh` only
+- **Notes:** ⚠ **Until this lands, `--release` can close YOUR ACTIVE claim while I run it.**
+  Reproduced: it picks the first `### ` block containing your address whether or not that block
+  is still ACTIVE, and the awk that rewrites the Status line is never stopped at the block
+  boundary — so when your own block is already DONE it walks on and closes the next ACTIVE
+  Status on the board, which is somebody else's. If your claim goes DONE and you did not do it,
+  that is this. Fix + the selftest cases that would have caught it, landing now.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
