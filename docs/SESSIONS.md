@@ -770,11 +770,26 @@ find out about each other. That is what a board is for, and it is why C3 in
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Mac/942c2539 — Three outside-reader feedback documents — no_peak, bugarach, colonel_kernel — written to the shared darkroom for Tony to send to each team
-- **Status:** ACTIVE
+- **Status:** DONE 2026-08-30
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
 - **Writes:** <files or folders you will change; "repo only" if nothing outside git>
 - **Notes:** <anything another session must know before touching the same thing>
+  **Where they are:** darkroom `short-course/2026-08-30_outside-reader-feedback/` — three HTML
+  docs + a folder README, and each one is also an artifact so Tony can send a link. **No repo in
+  this estate was touched**; nothing was written into no_peak, bugarach or colonel_kernel.
+  **⚠ A correction landed on the public page because of this work.** The Objections table said all
+  four projects were ports of somebody else's method. **False, and false in the direction that
+  understates the author:** three of bugarach's six detectors were designed for that preparation,
+  its learned detector is from scratch, the MATLAB originals of the ported code are his, and a
+  paper is in preparation. Fixed in `four-barriers.html`, rebuilt, pushed, **still not deployed.**
+  The correction is on the page rather than silently patched, because the section is about being
+  confidently wrong and this was an instance of it produced while writing about it.
+  **What is waiting on Tony:** (1) Colonel Kernel needs N/M/K — how many recordings had a single
+  kernel and how many broken events had no spikes beneath them; nobody else can supply it. (2)
+  bugarach: yes or no on moving the authorship paragraph to the front page — a priority question
+  with a paper in preparation. (3) no_peak: whether to ask one outside person to re-run the oracle
+  suite, which is the last open objection.
 
 <!-- RELEASE THIS
      tools/claim.sh --release
