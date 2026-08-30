@@ -34,13 +34,33 @@ shown only at the **Sources** depth, and the page is self-contained without them
 carries a GENERATED header; nobody edits it. Before deploying:
 
 ```sh
-tools/build_site.sh docs/handouts/four-barriers.html site/index.html lookedright.tonydefazio.com
-tools/build_site.sh --check docs/handouts/four-barriers.html site/index.html lookedright.tonydefazio.com
+git commit -m "…"  docs/handouts/four-barriers.html   # ← the source, FIRST and on its own
+tools/build_site.sh --all                             # every row in tools/pages.txt
+tools/build_site.sh --check-all
+git commit -m "rebuild"  site/                        # ← then the output
 npx wrangler deploy
 ```
 
-`--check` fails if the built page has fallen behind its source, which is the freshness
+`--check-all` fails if any built page has fallen behind its source, which is the freshness
 gate `tools/turnstile/` still does not have.
+
+**⚠ The source is committed BEFORE the build, and that order is enforced.** Each page carries
+a born-on date, a version `0.1.<n>` and a version date under its title, all three derived from
+the source's own git history — `n` is the number of commits touching it. Those describe the
+*committed* source, so building from a file with uncommitted edits would stamp the page with a
+version belonging to different bytes. **`build_site.sh` refuses**, and says so:
+
+```
+refusing: docs/handouts/cold-start.html has uncommitted changes.
+  The version and dates describe the COMMITTED source; building now would stamp
+  this page with a version belonging to different bytes.
+  Commit the source first, then build, then commit the output.
+```
+
+Two commits per change, not one. The alternative was a page that quietly claims the wrong
+version, which is the failure this repo exists to be suspicious of — and it had already
+happened once in prose: the *It Looked Right* footer read *"Last revised 2026-08-28"* for two
+days after that stopped being true. That line is gone; the date under the title replaces it.
 
 **Every outbound link was checked on the day the file was committed** and the footer says
 so. Nothing re-checks them. When one rots, the page will not tell you — see the **stale**

@@ -88,6 +88,115 @@ if "{steps}" in desc or "{phases}" in desc:
              8:"eight",9:"nine",10:"ten"}
     desc = desc.format(steps=n_steps, phases=WORDS.get(n_phases, n_phases))
 
+# ---------------------------------------------------------------- provenance
+# BORN-ON, VERSION, VERSION DATE -- asked for by Tony 2026-08-30, and DERIVED, never
+# typed. The footer of four-barriers said "Last revised 2026-08-28" on a page last
+# changed 2026-08-30: a date restated by hand is a second source and goes stale
+# exactly like the step count did (29 -> 30 while the page had 34). So:
+#
+#   born     the commit that ADDED the source. Immutable -- it can never move.
+#   0.1.<n>  n = commits touching the source. The major.minor is a deliberate
+#            statement that this is pre-1.0; the patch counts real revisions.
+#   revised  the last commit touching the source.
+#
+# WHY THE BUILD REFUSES A DIRTY SOURCE. All three describe the COMMITTED source. If
+# the file on disk has uncommitted edits, the page would carry a version and a date
+# that belong to different bytes than the ones being wrapped -- confidently, and
+# with nothing on the page to show it. That is the defect this whole repo is about,
+# so it is refused rather than rendered. The cost is a two-step order, stated in the
+# error: commit the source, then build, then commit the output.
+#
+# BS_PROVENANCE is a TEST SEAM, not a feature, in the same spirit as claim.sh's
+# SC_BOARD: the selftest builds fixtures in a temp dir that git has never heard of,
+# so it supplies the three values directly rather than being unable to test at all.
+def _sh(cmd):
+    import subprocess
+    try:
+        r = subprocess.run(cmd, capture_output=True, text=True)
+    except Exception:
+        return ""
+    return r.stdout.strip() if r.returncode == 0 else ""
+
+def _pretty(iso):
+    y, m, d = iso.split("-")
+    MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+    return "%d %s %s" % (int(d), MON[int(m) - 1], y)
+
+seam = os.environ.get("BS_PROVENANCE", "")
+# GIT IS ASKED FROM THE SOURCE'S OWN DIRECTORY, not from wherever this script cd'd to.
+# build_site.sh cds to the repo root on line 2, so without -C every question was asked
+# of THIS repo about a path that might not be in it -- which is how the selftest's
+# throwaway repo came back "not tracked" while being perfectly tracked.
+GITDIR = os.path.dirname(os.path.abspath(src)) or "."
+def _git(*args):
+    return _sh(["git", "-C", GITDIR] + list(args))
+if seam:
+    n_rev, born_iso, rev_iso = seam.split("|")
+else:
+    if _git("rev-parse", "--is-inside-work-tree") != "true":
+        sys.stderr.write("refusing: %s -- not inside a git work tree, so the version cannot be derived\n" % key)
+        raise SystemExit(1)
+    if _git("ls-files", "--error-unmatch", src) == "":
+        sys.stderr.write("refusing: %s is not tracked by git, so it has no born-on date or version\n" % key)
+        raise SystemExit(1)
+    if _git("status", "--porcelain", "--", src):
+        sys.stderr.write(
+            "refusing: %s has uncommitted changes.\n"
+            "  The version and dates describe the COMMITTED source; building now would stamp\n"
+            "  this page with a version belonging to different bytes.\n"
+            "  Commit the source first, then build, then commit the output.\n" % src)
+        raise SystemExit(1)
+    n_rev    = _git("rev-list", "--count", "HEAD", "--", src)
+    born_iso = (_git("log", "--diff-filter=A", "--follow",
+                     "--format=%ad", "--date=short", "--", src) or "").split("\n")[-1].strip()
+    rev_iso  = _git("log", "-1", "--format=%ad", "--date=short", "--", src)
+
+if not (n_rev and born_iso and rev_iso):
+    sys.stderr.write("refusing: %s -- git returned no history (n=%r born=%r revised=%r)\n"
+                     % (key, n_rev, born_iso, rev_iso))
+    raise SystemExit(1)
+
+version = "0.1.%s" % n_rev
+provenance = (
+    '<p class="pv">Version <b>%s</b> &middot; %s'
+    '<span class="pv-born">First published %s</span></p>'
+) % (version, _pretty(rev_iso), _pretty(born_iso))
+
+PV_CSS = """
+  /* Version line under the masthead. Derived at build time by tools/build_site.sh
+     from the source's git history -- there is nothing here to edit or to forget. */
+  .pv {
+    margin: 10px 0 0;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    line-height: 1.5;
+    letter-spacing: .02em;
+    color: var(--faint);
+  }
+  .pv b { font-weight: 600; color: var(--muted); }
+  .pv-born { display: block; }
+  @media (min-width: 620px) {
+    .pv-born { display: inline; }
+    .pv-born::before { content: " \\00B7 "; }
+  }
+"""
+
+# UNDER THE TITLE, which is where Tony asked for it: immediately after the first
+# standfirst. FIRST, not every one -- search-to-shipped is two sheets on one page
+# and the second masthead is a section heading, not the document's identity.
+marker = '</p>'
+i = body.find('class="standfirst"')
+if i < 0:
+    sys.stderr.write("refusing: %s has no <p class=\"standfirst\"> to put the version under\n" % key)
+    raise SystemExit(1)
+j = body.find(marker, i)
+if j < 0:
+    sys.stderr.write("refusing: %s -- the standfirst is never closed\n" % key)
+    raise SystemExit(1)
+j += len(marker)
+body = body[:j] + "\n    " + provenance + body[j:]
+head = head[:head.rindex("</style>")] + PV_CSS + "</style>"
+
 icon = ("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E"
         "%3Ctext y='.9em' font-size='90'%3E" + quote(emoji) + "%3C/text%3E%3C/svg%3E")
 canon = "https://%s/%s" % (host, page.lstrip("/"))
@@ -160,13 +269,21 @@ if [ "${1:-}" = "--selftest" ]; then
 
     # Sources must be NAMED for a real page: metadata is keyed on the basename,
     # so the selftest uses the real names rather than a stand-in.
-    printf '<title>It Looked Right</title>\n<style>body{color:red}</style>\n<p>hello</p>\n' > "$T/four-barriers.html"
+    # THE FIXTURES CARRY A STANDFIRST, because the version line is injected under it.
+    # BS_PROVENANCE is the test seam: these live in a temp dir git has never heard of,
+    # so without it the build would correctly refuse and nothing here could be tested.
+    export BS_PROVENANCE='7|2026-08-01|2026-08-30'
+    printf '%s' '<title>It Looked Right</title>
+<style>body{color:red}</style>
+<p class="standfirst">hello</p>
+' > "$T/four-barriers.html"
     # THE COLD START FIXTURE CARRIES REAL STEPS AND PHASES, because its description is the
     # one that derives its counts. A fixture with none of either would only ever exercise the
     # refusal path. Three steps in two phases -- deliberately NOT the live page's numbers, so
     # an assertion cannot pass by coincidence if the derivation silently reads the wrong file.
     printf '%s' '<title>Cold Start</title>
 <style>body{color:blue}</style>
+<p class="standfirst">steps</p>
 <section class="phase"><li data-id="1.1"></li><li data-id="1.2"></li></section>
 <section class="phase"><li data-id="2.1"></li></section>
 ' > "$T/cold-start.html"
@@ -184,7 +301,7 @@ if [ "${1:-}" = "--selftest" ]; then
         printf '  ok   doctype < body < /body < /html\n'
     else printf '  FAIL tag ORDER wrong: doctype=%s body=%s /body=%s /html=%s\n' "$d" "$b" "$cb" "$ch"; fail=1; fi
 
-    grep -q '<p>hello</p>' "$T/out.html" \
+    grep -q 'class="standfirst">hello</p>' "$T/out.html" \
       && printf '  ok   the source body survived\n' \
       || { printf '  FAIL body content was lost\n'; fail=1; }
 
@@ -214,6 +331,106 @@ if [ "${1:-}" = "--selftest" ]; then
        && ! grep -q 'Four challenges' "$T/cs.html"; then
         printf '  ok   description belongs to the page, not to four-barriers\n'
     else printf '  FAIL description did not track the source\n'; fail=1; fi
+
+    # ---------------------------------------------------------------- provenance
+    # Born-on, version and version date, asked for 2026-08-30. All three DERIVED, and
+    # the footer they replace ("Last revised 2026-08-28" on a page changed 2026-08-30)
+    # is why: a date typed by hand is a second source.
+    if grep -q 'Version <b>0.1.7</b> &middot; 30 Aug 2026' "$T/out.html"; then
+        printf '  ok   the version and version date are rendered from the source history\n'
+    else printf '  FAIL version line wrong: %s\n' "$(grep -o '<p class="pv">[^<]*<b>[^<]*</b>[^<]*' "$T/out.html")"; fail=1; fi
+
+    grep -q 'First published 1 Aug 2026' "$T/out.html" \
+      && printf '  ok   the born-on date is rendered\n' \
+      || { printf '  FAIL born-on date missing or wrong\n'; fail=1; }
+
+    # UNDER THE TITLE, not anywhere in the file: it must follow the standfirst.
+    if [ "$(grep -n 'class="standfirst"' "$T/out.html" | head -1 | cut -d: -f1)" -lt \
+         "$(grep -n 'class="pv"' "$T/out.html" | head -1 | cut -d: -f1)" ]; then
+        printf '  ok   the version line sits under the standfirst\n'
+    else printf '  FAIL version line is not under the title\n'; fail=1; fi
+
+    # ONE version line per page. search-to-shipped has two mastheads on one page and
+    # only the first is the document's identity; a naive replace-all stamps both.
+    if [ "$(grep -c 'class="pv"' "$T/out.html")" -eq 1 ]; then
+        printf '  ok   exactly one version line per page\n'
+    else printf '  FAIL %s version lines on one page\n' "$(grep -c 'class="pv"' "$T/out.html")"; fail=1; fi
+
+    # A page with no standfirst is REFUSED, not silently built without a version.
+    printf '<title>Cold Start</title>\n<style>x{}</style>\n<p>no standfirst</p>\n' > "$T/nosf.html"
+    cp "$T/nosf.html" "$T/cold-start.html"
+    if wrap "$T/cold-start.html" "$T/nsf.html" "example.com" "cold-start" >/dev/null 2>&1; then
+        printf '  FAIL a page with nowhere to put the version was built anyway\n'; fail=1
+    else printf '  ok   refuses a page with no standfirst to sit under\n'; fi
+
+    # AND THE REAL PATH, unseamed: a source git has never heard of must be refused
+    # rather than given a made-up version. Without this the seam hides the gate.
+    unset BS_PROVENANCE
+    printf '%s' '<title>Cold Start</title>
+<style>x{}</style>
+<p class="standfirst">s</p>
+<section class="phase"><li data-id="1.1"></li></section>
+' > "$T/cold-start.html"
+    if wrap "$T/cold-start.html" "$T/ung.html" "example.com" "cold-start" >/dev/null 2>&1; then
+        printf '  FAIL an untracked source was given a version\n'; fail=1
+    else printf '  ok   refuses to version a source git does not track\n'; fi
+    # ---------------------------------------------------- the REAL git path
+    # EVERYTHING ABOVE RUNS THROUGH THE SEAM, so none of it touches the code that
+    # actually reads git -- including the dirty-source refusal, which is the gate the
+    # whole build order now rests on. `mutation_check.sh` proved that by disabling the
+    # refusal and going green. So this case builds a THROWAWAY GIT REPO in the temp
+    # dir and exercises the unseamed path end to end.
+    unset BS_PROVENANCE
+    G="$T/repo"; mkdir -p "$G"
+    ( cd "$G" \
+      && git init -q . \
+      && git config user.email t@example.com && git config user.name t \
+      && printf '%s' '<title>Cold Start</title>
+<style>x{}</style>
+<p class="standfirst">s</p>
+<section class="phase"><li data-id="1.1"></li></section>
+' > cold-start.html \
+      && git add cold-start.html \
+      && GIT_AUTHOR_DATE='2026-08-01T09:00:00' GIT_COMMITTER_DATE='2026-08-01T09:00:00' \
+         git commit -q -m one ) >/dev/null 2>&1
+
+    if wrap "$G/cold-start.html" "$T/g1.html" "example.com" "cold-start" >/dev/null 2>&1; then
+        if grep -q 'Version <b>0.1.1</b> &middot; 1 Aug 2026' "$T/g1.html" \
+           && grep -q 'First published 1 Aug 2026' "$T/g1.html"; then
+            printf '  ok   a real git history produces the version and both dates\n'
+        else printf '  FAIL real git path wrong: %s\n' "$(grep -o '<p class=\"pv\">.*</p>' "$T/g1.html")"; fail=1; fi
+    else printf '  FAIL could not build from a tracked, clean source\n'; fail=1; fi
+
+    # A SECOND COMMIT MOVES THE PATCH NUMBER AND THE DATE, AND NOT THE BORN-ON DATE.
+    ( cd "$G" && printf '<p>more</p>\n' >> cold-start.html && git add cold-start.html \
+      && GIT_AUTHOR_DATE='2026-08-30T09:00:00' GIT_COMMITTER_DATE='2026-08-30T09:00:00' \
+         git commit -q -m two ) >/dev/null 2>&1
+    wrap "$G/cold-start.html" "$T/g2.html" "example.com" "cold-start" >/dev/null 2>&1
+    if grep -q 'Version <b>0.1.2</b> &middot; 30 Aug 2026' "$T/g2.html" \
+       && grep -q 'First published 1 Aug 2026' "$T/g2.html"; then
+        printf '  ok   a commit bumps the version and the date, and born-on does not move\n'
+    else printf '  FAIL second commit not tracked: %s\n' "$(grep -o '<p class=\"pv\">.*</p>' "$T/g2.html")"; fail=1; fi
+
+    # THE DIRTY-SOURCE REFUSAL, on a real repo. This is the gate the two-step build
+    # order depends on: an uncommitted edit means the version would describe bytes
+    # other than the ones being wrapped.
+    printf '<p>uncommitted</p>\n' >> "$G/cold-start.html"
+    if wrap "$G/cold-start.html" "$T/g3.html" "example.com" "cold-start" >/dev/null 2>&1; then
+        printf '  FAIL a source with uncommitted changes was stamped with a version\n'; fail=1
+    else printf '  ok   refuses to version a source with uncommitted changes\n'; fi
+
+    export BS_PROVENANCE='7|2026-08-01|2026-08-30'
+
+    # RESTORE THE FIXTURE. The two refusal cases above overwrote it, and the count
+    # assertions below read it. Leaving it clobbered made those tests measure the
+    # wrong file and fail for a reason that had nothing to do with counting.
+    printf '%s' '<title>Cold Start</title>
+<style>body{color:blue}</style>
+<p class="standfirst">steps</p>
+<section class="phase"><li data-id="1.1"></li><li data-id="1.2"></li></section>
+<section class="phase"><li data-id="2.1"></li></section>
+' > "$T/cold-start.html"
+    wrap "$T/cold-start.html" "$T/cs.html" "example.com" "cold-start" >/dev/null 2>&1
 
     # ---------------------------------------------------------------- derived counts
     # The description said "29 steps", then "30", while the page had 34, and the wrong number
