@@ -1123,9 +1123,11 @@ lock, and the reasoning written into both files.
 
 ### Open, in the order I would take them
 
-1. **Ask Tony to deploy.** Three pages are live without their draft stamps, and `/cold-start`
-   describes itself as 30 steps. `--check-all` is green, so it is one command. This is the
-   cheapest open item in the file.
+1. ~~**Ask Tony to deploy.**~~ **DONE 2026-08-30, version `1b3edaa7`.** All four pages
+   redeployed and verified byte-for-byte against the build. That put up the draft stamps, which
+   had been written and never published; corrected `/cold-start`'s description from 30 steps to
+   34; and shipped the version lines. Checklist key was `cold-start-v4` on both sides, so no
+   reader lost saved ticks.
 2. **`docs/handouts/cold-start.html:1428` still says *"Clear all 30 steps"*** in the Reset
    dialog. One word, in a file I did not hold. It is the last of the three places that stated
    the count by hand; the other two now derive it or are correct.
