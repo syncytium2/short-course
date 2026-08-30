@@ -217,3 +217,49 @@ the session.
    **Nothing here is adopted.** It is on a branch, awaiting the team, and residual 6 stays open
    until a run actually executes against an artifact. Recorded because "no remedy exists" and
    "a remedy is proposed and unmerged" are different facts.
+
+---
+
+### N2 · B4 says the mechanism fails and never says where to put the rule instead
+
+**Provenance: raised 2026-08-29 while filing
+[`docs/cases/2026-08-29-the-third-attempt-introduced-the-defect.md`](docs/cases/2026-08-29-the-third-attempt-introduced-the-defect.md).
+Not a review finding — no panel has seen it.** Documented rather than applied because changing a
+point's wording is the author's call, and because the evidence arrived on the same day and has
+not sat overnight.
+
+**B4 currently reads:** *"Do not trust standard features built to prevent these issues. CLAUDE.md
+or equivalent is not reliable or enforceable… Use all the bad words you want and the second
+sentence is still skipped."*
+
+**That is true and it is only the diagnosis.** The four instances this repo holds are all the
+same shape — *a written rule, ignored* — and none of them says what to do with the rule instead.
+Rule 10 supplies half an answer (*write a definition, not an instruction*) and is about what the
+artifact **says**. The bugarach case supplies the other half, which is about **where it lives**:
+
+> A session has no inbox. Every conversation reaches exactly one reader and does not survive
+> them, so the only channel an assistant reliably mounts is the files it opens.
+
+There, an instruction repeated out loud across many sessions lost for ten days to twelve words in
+the docstring of the module every detector imports. **The winning channel was not the more
+forceful one; it was the one that mounts itself.** Deleting the sentence fixed in an afternoon
+what repetition had not fixed in a fortnight.
+
+**The proposed addition, and it is one clause:** B4 should end with *put it where they already
+look.* That converts B4 from a warning into an instruction, and it is what actually worked.
+
+**Why it is not applied here.** Three things want checking first:
+
+1. **It may belong to rule 10 rather than B4**, as rule 10's second half — *what* a definition
+   says, then *where* it has to sit. B4 and rule 10 are already cross-referenced and the boundary
+   between them is not obvious.
+2. **The evidence is one incident in one repo**, written up by a non-participant on the day. The
+   [tier-mismatch precedent](points.md) — *"two instances is enough for often, not for most"* —
+   applies to this too.
+3. **It sits close to a claim this repo should not make casually**: that documentation works
+   after all. It does not. What worked was deleting one sentence from a file that was already
+   being read, which is a much narrower claim than *write better docs*.
+
+**What would settle it:** a second instance from a different repo where a mounted file beat a
+repeated instruction, and a check on whether any of the four existing B4 instances is actually
+this failure misfiled.
