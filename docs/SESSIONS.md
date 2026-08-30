@@ -490,7 +490,7 @@ find out about each other. That is what a board is for, and it is why C3 in
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Mac/7d93fc67 — cold-start.html: re-key checklist state to stable step ids, then add the Path A / Path B switch
-- **Status:** ACTIVE
+- **Status:** DONE 2026-08-30
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
 - **Writes:** docs/handouts/cold-start.html (sole source), site/cold-start.html via build

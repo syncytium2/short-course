@@ -936,3 +936,117 @@ correlation record says what that buys.
 
 **Do not edit `docs/handouts/*.html` without checking `docs/SESSIONS.md` first.** Two sessions
 worked in these files simultaneously on 29 August; it went well only because both posted.
+
+## Session close, 2026-08-30 — `Mac/7d93fc67`
+
+Started from a question of Tony's — *is Cold Start above most beginners' abilities, and has
+nobody built it into one app?* — and ended before the thing that question was heading towards.
+Three commits, all pushed. **Nothing here is deployed.**
+
+### What landed
+
+| | |
+|---|---|
+| `bed5b57` | Checklist state re-keyed from position to immutable `data-key` handles. 34 steps, 98 boxes. Storage `cold-start-v3` → `v4`, with a migration. New `tools/checklist_state.sh`. |
+| `f5ffe94` | The migration's first guard was wrong within the hour; replaced with a frozen `V3_MAP`. |
+| `623fc76` | Draft stamps on all three public pages. |
+
+### The one thing to know before touching `cold-start.html`
+
+**The live site serves v3 and none of this.** `site/*.html` is rebuilt and `--check` clean
+against its sources, so the *repo* is consistent; the *deployed* page is three commits behind.
+Deploying is what runs the v3 → v4 migration for real readers, and it was not authorised.
+
+`V3_MAP` in the page records what v3's display numbers and box positions pointed at.
+**It describes a document that no longer exists and must never be regenerated from the current
+page.** Regenerating it is the bug it was written to replace. `tools/checklist_state.sh
+--selftest` fails loudly if any handle it names has vanished.
+
+### Carried forward — decisions, not tasks
+
+1. **Path A's install route is undecided.** Tony asked for a top-of-page switch: Path A for a
+   website / document / small tool, Path B for research computing. The re-key was the
+   prerequisite and is done; **the branch itself was not started.** What blocks it is content,
+   not code: Path A has to tell a beginner what to install, and the three candidates are the
+   Claude desktop app (collapses Phase 3 to ~1 step; *Tony tried it and could not get it
+   working*), `claude.ai/code` in a browser (nothing to install; unverified, and unclear how it
+   reaches a local folder for Phase 7), or a trimmed VS Code path (verified, because it is what
+   this repo runs on, but keeps the hidden-button step that stops people). Tony's answer was
+   "I don't know. Discuss then decide."
+2. **Nobody has walked Cold Start.** This is the real blocker, and it is upstream of item 1 —
+   you cannot write Path A's route until something has been walked. A murderboard will **not**
+   settle it: all eleven roles read the document. Role 10, the most mechanical, checks encoding,
+   tables, heading hierarchy, refs, links, numbers and length. None of them installs Homebrew.
+   The cheap version is a fresh macOS user account, not a second machine.
+3. **Roughly a third of the checkboxes are self-report** — *I know*, *I have decided*, *I can
+   say*. So even a full walkthrough confirms about two-thirds of them. The figure is an estimate
+   from classifying the wording, **not a counted fact**; the doubt entry claiming 43% is an
+   unfilled template. So are several others in `docs/doubt/` — title only, body still
+   `<the claim, artifact or number, stated plainly>`.
+
+### A session committed to a claimed file
+
+`c3f022e` added four steps and twelve boxes to `cold-start.html` while `Mac/7d93fc67` held an
+active claim on it. No claim was opened. It did no damage — every new step and box got a
+`data-key`, so the scheme held — but it broke the migration guard, and only
+`tools/checklist_state.sh` going red caught it.
+
+This is the board's own subject matter happening on the file the board was written for, and it
+is a different failure from the one already in `docs/cases/`: that one is *nobody claimed*, this
+one is *somebody claimed and was worked over anyway*. **Not written up.** It is recorded here
+so it is not lost, and it is worth a case file if anyone wants it.
+
+### Left alone deliberately
+
+`docs/reviews/two-runs-correlated_2026-08-29.md` and `docs/reviews/README.md` were uncommitted
+in the working tree at close. They belong to `Mac/9b26b5c4`, which holds an active claim on
+them. Not mine, not touched, not committed.
+
+
+---
+
+## Session close, 2026-08-30 — `Mac/9b26b5c4`, final
+
+Continues the 2026-08-29 afternoon entry above; read that one first. **All claims released, tree
+clean, nothing unpushed, `check_pointers.sh` green.**
+
+### Everything from this session, and where to find it
+
+**Start at [`README.md`](README.md) — it now has a front-door table** for `docs/cases/`,
+`docs/reviews/`, `docs/handouts/` and `docs/doubt/`, plus the four-channel table for where
+uncertainty goes. Nothing from this session is reachable only by knowing it exists.
+
+| new | |
+|---|---|
+| [`docs/cases/2026-08-29-the-board-was-empty-because-claiming-is-a-habit.md`](docs/cases/2026-08-29-the-board-was-empty-because-claiming-is-a-habit.md) | the 14:33 overwrite |
+| [`docs/cases/2026-08-29-two-sessions-three-minutes-apart.md`](docs/cases/2026-08-29-two-sessions-three-minutes-apart.md) | the 16:15 duplicated review |
+| [`docs/reviews/what-it-costs_2026-08-29.md`](docs/reviews/what-it-costs_2026-08-29.md) + `.findings.json` | 101 findings, 14 blocking |
+| [`docs/reviews/README.md`](docs/reviews/README.md) | **new index — the folder had nine files and no front door** |
+| [`docs/doubt/`](docs/doubt/) + [`tools/doubt.sh`](tools/doubt.sh) | six items parked |
+
+Both cases are indexed in [`docs/cases/README.md`](docs/cases/README.md) and pointed at from
+[`points.md`](points.md) C3, which now has four instances.
+
+### ⚠ Still needs a person — unchanged and unowned
+
+1. **14 blocking findings against `what-it-costs.html` are unrepaired and the page is live.**
+   Worst: a four-round *"ceiling"* contradicted by a fourteen-round run in the next sentence, and
+   *"students excluded"* seventy lines below a paragraph pricing six students. **Neither needs the
+   round-cap number** — see [`docs/doubt/`](docs/doubt/).
+2. **No `OPEN-CORRECTIONS.md` entry exists for either 2026-08-29 handout run**, which that file's
+   own rule requires for known-wrong committed content.
+3. **`Mac/976d19f3` was never asked** about the `"~15:55"` discrepancy. One board message settles it.
+
+### The thing this session got wrong three times
+
+**Session attribution, in three documents, in one day.** A grep count read as authorship (retracted
+`6a54330`); a collided party inferred from timestamps and never asked; another session's start time
+repeated into a handoff, off by 17 minutes. A fourth instance arrived from a *different* session on
+2026-08-30 — [`two-runs-correlated`](docs/reviews/two-runs-correlated_2026-08-29.md) had run B
+attributed to `a52b2bae`, corrected in place.
+
+**The root cause is structural, not carelessness:** `git` cannot attribute a commit to a session —
+one machine, one checkout, one author name — so attribution travels by retelling, and retelling
+does not carry its own evidence. **Check `subagents/` mtimes and workflow directories under
+`~/.claude/projects/<project>/<session>/` before naming a session in anything committed.**
+That is the one habit worth carrying out of this session.
