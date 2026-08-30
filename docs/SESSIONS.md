@@ -1348,3 +1348,26 @@ risks in the file.
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/fb238a63 — Draft the bugarach index case: retrieval at scale, and the tool for a project that outgrows a context window
+- **Status:** ACTIVE
+- **Opened:** 2026-08-30
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** `docs/cases/2026-08-30-the-index-that-pointed-at-a-branch.md` (**a new file**), and
+  when it is no longer a draft, a row in [`cases/README.md`](cases/README.md)'s index table.
+  Nothing else in this checkout.
+- **Notes:** **Draft only**, at Tony's request — *"start drafting, we'll clean it when they're
+  done."* Subject is `bugarach` PR #415: an index built after a session re-derived the
+  Cossart/DANDI transfer machinery that was already sitting in its own tree. **The upstream
+  session (`bugarach-17`) is still live and revising that PR**, so every number in the draft is
+  provisional and the file says so at the top. Bears on [`OPEN-FINDINGS.md`](../OPEN-FINDINGS.md)
+  **N5 decision 3** — whether *retrieval at the point of action* earns a `points.md` entry of its
+  own — and supplies the second-repo instance **N2** named as what would settle it.
+  **A new file is the exact trap this board's header warns about:** git accepts two of these
+  without conflicting, and a human finds out by reading the folder. If you are also writing up
+  the index, say so here before you start.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
