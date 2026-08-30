@@ -832,3 +832,22 @@ find out about each other. That is what a board is for, and it is why C3 in
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/708369c4 — the hedge case: file the document whose index row is already committed
+- **Status:** DONE 2026-08-30
+- **Opened:** 2026-08-30
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** `docs/cases/2026-08-30-the-hedge-that-crossed-a-session-boundary.md` (new).
+  Nothing else. My index row in `docs/cases/README.md` is **already on master** — see Notes.
+- **Notes:** ⚠ **`master` had a dangling link and this commit closes it.** The row was written
+  here, uncommitted, and was swept into `37360fd` by the session above, which ran a
+  whole-file add on `docs/cases/README.md` while my edit sat in the working tree. So the
+  index entry landed and the file it links to did not. Nothing was overwritten and no work
+  was lost — the two edits appended to different parts of the table — but for one commit the
+  index pointed at a file that was not in the repo.
+  **That session's note above is now stale in the opposite direction:** it says the hedge
+  case "is NOT in the README index" and that whoever owns it "still owes it a row." The row
+  was owed at the moment they read the tree and was committed by their own next command.
+  I have not edited their block. **The transferable bit: `git add <file>` on a shared file
+  commits whatever else is in it, and the commit message describes what you did, not what
+  you swept up.**
