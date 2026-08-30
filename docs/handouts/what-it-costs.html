@@ -188,10 +188,41 @@
   @media (max-width: 460px) {
     body { padding: 26px 14px 72px; font-size: 14.5px; }
   }
+
+  /* ---- draft stamp ---------------------------------------------------
+     NAMES WHAT IS UNVERIFIED, rather than saying "draft" and stopping.
+     "Draft" on its own reads as modesty and gets skipped; a reader needs to
+     know which part of the page they cannot lean on. Caution palette, not
+     --bad: this is a statement about confidence, not an error, and the page
+     already spends red on steps that are incomplete.
+     -------------------------------------------------------------------- */
+  .draft {
+    border: 1px solid var(--caution);
+    background: var(--caution-soft);
+    border-radius: 4px;
+    padding: 11px 14px;
+    margin: 18px 0 6px;
+  }
+  .draft-k {
+    display: block;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: var(--caution);
+    margin: 0 0 5px;
+  }
+  .draft p { margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--ink); }
+  .draft p + p { margin-top: 7px; }
+  @media print { .draft { break-inside: avoid; } }
 </style>
 
 <div class="page">
-
+  <div class="draft">
+    <b class="draft-k">Draft &mdash; prices unre-checked</b>
+    <p>Every figure here was read off a vendor page once, on the day it was written, and none has been checked since. Plans get renamed, split, metered differently and re-priced faster than this page moves. <b>Treat each number as a pointer to the vendor&rsquo;s own page, not as the price.</b></p>
+  </div>
+  
   <header class="mast">
     <p class="eyebrow">Companion sheet &middot; <a href="https://lookedright.tonydefazio.com/cold-start">Cold Start</a></p>
     <h1>What It Costs</h1>
