@@ -704,3 +704,30 @@ find out about each other. That is what a board is for, and it is why C3 in
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/a4de1b91 — Reclassify shortest-route as a decision record (new docs/decisions/), demote Cowork to a sourced exclusion, name the author's constraint as the author's — branch route-shortest
+- **Status:** DONE 2026-08-30
+- **Opened:** 2026-08-30
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** `docs/decisions/` (**new folder**: `README.md` + `0002-route-to-a-learner-editable-site.html`) on branch `route-shortest` only. Darkroom: one new file, its stale predecessor removed.
+  **Nothing in this checkout modified. Darkroom `README.md` NOT touched.**
+- **Notes:** **This repo had no `decisions/` folder**, while `search-to-shipped.html` Phase 4 teaches
+  one numbered file per decision and calls it *"the single highest-value habit on the page and the
+  one everybody skips."* The course was skipping the habit it teaches. Folder created on my branch
+  with a front door; **merge or discard is Tony's call, not mine.**
+  **⚠ For whoever holds `cold-start.html` — two findings, neither fixed by me:** (1) 7.3's "three
+  steps shorter" holds only *with* a terminal; drop the shell and the ranking inverts. (2) **Cowork
+  is nowhere in the 34 steps** — Phase 3 puts the agent in an editor, Phase 7 hands off to a
+  terminal runbook, and a route with neither is unrepresented.
+  **⚠ And a claim this repo was close to teaching is false:** "the Claude app needs a repo" is true
+  of Claude Code on the web only. Cowork connects a local folder with no repo and no terminal.
+  **The cheapest open question, 15 min, needs no learner:** connect a Cowork folder, close the
+  desktop app, try to read it from a phone; then ask Cowork to push via the GitHub connector. If
+  the second works, record 0002 is superseded and the no-repo route wins outright.
+  Never murderboarded. No beginner has been observed attempting either route.
+  Artifact: https://claude.ai/code/artifact/45d1a208-319d-432e-9001-b73ac932ebab
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
