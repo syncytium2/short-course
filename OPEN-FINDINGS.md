@@ -480,3 +480,106 @@ git archive 37360fd | tar -x -C "$T" && sh "$T/tools/check_pointers.sh"
 4. **Unrelated to the tool: `git add <shared-file>` in this checkout.** A whole-file add commits
    whatever else is in that file, and the commit message describes what you did, not what you
    swept up. Worth one line in the board's preamble; not worth a mechanism.
+
+**⚠ It happened again within the hour, with the roles reversed, and that settles one thing.**
+While N5 was being written, `Mac/1115789c` committed `0c9adb1` — a `HANDOFF.md` change — and swept
+**this session's** uncommitted claim block into it, exactly as `37360fd` had swept that session's
+index row. Nothing was lost either time; the board is append-only and both blocks survive. **Two
+sessions, opposite directions, ninety minutes apart, neither aware.** That moves this row from
+*a thing I did* to *what a shared checkout does to anyone in it* — which is the argument for
+decision 4 being worth more than the one line it was given, and against filing it as anybody's
+carelessness.
+
+---
+
+### N5 · B4 diagnoses compliance. Six incidents say the failure is **retrieval**
+
+**Provenance: raised 2026-08-30 by `Mac/9b614630`, at Tony's request, after he pointed out that
+the estate had produced the same finding several times without anyone writing it down once.
+Not a review finding — no panel has seen it.**
+
+**Filed as a proposal and deliberately not applied**, following [N2](#n2--b4-says-the-mechanism-fails-and-never-says-where-to-put-the-rule-instead)'s
+precedent: changing a point's wording is the author's call. Nothing in `points.md` has been
+touched.
+
+#### What B4 says now
+
+> *"Do not trust standard features built to prevent these issues. CLAUDE.md or equivalent is not
+> reliable or enforceable… Use all the bad words you want and the second sentence is still
+> skipped."*
+
+**That is true, and it names the wrong faculty.** It reads as *the agent did not comply with what
+it read*. Six incidents say the agent read it, retained it, could recite it on request — and did
+not have it in hand at the moment of action. Those are different failures with different fixes.
+
+#### The six, with the sentence each produced
+
+| # | date | repo · source | what it says |
+|---|---|---|---|
+| 1 | 2026-08-27 | bugarach · [`computed-instead-of-asking`](docs/cases/2026-08-27-computed-instead-of-asking.md) §A6 | *"The discipline that had a mechanism behind it held. The discipline that existed only as good sense did not."* The boards had a pre-commit gate; *"don't invent data"* had nothing. |
+| 2 | 2026-08-28 | interface2 · [`six-prose-rules`](docs/cases/2026-08-28-six-prose-rules-zero-mechanized-rules.md) §2.1 | Six prose rules broken, zero mechanized. *"It failed at **retrieval at the moment of action**, which is a different faculty from having read the file."* |
+| 3 | 2026-08-29 | source repo, filed 08-30 · [`the-hedge`](docs/cases/2026-08-30-the-hedge-that-crossed-a-session-boundary.md) §6 | *"don't get 4"* / *"i don't get 1"* read as **do not do item N** by two different agents in one day. One wrote its misreading into a durable handoff **as a ruling**. |
+| 4 | 2026-08-30 | source repo · [`the-hedge`](docs/cases/2026-08-30-the-hedge-that-crossed-a-session-boundary.md) §5 | The agent had read the prior incident's record **that same session**, summarised it back unprompted, then broke it on the next ambiguous input. *"Knowledge that is available on request but not at the point of action is not a control; it is a post-hoc explanation generator."* |
+| 5 | 2026-08-30 | this repo · [`the-gate`](docs/cases/2026-08-30-the-gate-blocked-its-own-installation.md) Point 4 | A harness instruction re-delivered every turn (*use sed, heredocs*) beat `CLAUDE.md` (*use Write/Edit*). **Both are prose.** Proximity to the decision settled it, not force of wording. |
+| 6 | 2026-08-30 | this repo · [`the-gate`](docs/cases/2026-08-30-the-gate-blocked-its-own-installation.md) Point 6 | The author ran the pointer checker, it passed, and he pushed the broken pointer it exists to catch — **ninety seconds after writing up that exact failure mode.** |
+
+#### The proposed replacement diagnosis
+
+> **Knowledge available on request but absent at the point of action is not a control.** An agent
+> that can recite the rule when asked will still break it, because reciting and retrieving-at-the-
+> moment-of-action are different faculties — and the agent will produce an excellent diagnosis
+> the instant you point at the breach, which is evidence of the gap, not of care.
+>
+> So the question is never *did they read it*. It is **what reaches the decision**. Where two
+> prose instructions conflict, the one delivered closer to the action wins, regardless of which
+> is worded more strongly — which is why writing it more forcefully changes nothing.
+
+**The fix that follows changes too:** not *state the rule harder*, but **get it closer to the
+decision, or make it fire.**
+
+#### How this composes with N2 — decide them together or not at all
+
+N2 proposes B4 end with *put it where they already look*. **N5 is the diagnosis; N2 is the
+remedy, and it is the special case** where the closer channel happens to be a file the agent
+already opens. Taken separately they produce a B4 with two unrelated half-clauses bolted on.
+Taken together the shape is: *the failure is retrieval → therefore put it where they already
+look, or make it fire.* **Order matters, and one decision covers both.**
+
+#### Counter-evidence, because six agreeing instances is exactly when to look for the seventh
+
+- **Instance 5 rests on an unverifiable transcription.** The harness instruction exists in a
+  context window and in no file. It is the sharpest instance and the least checkable.
+- **Instances 4 and 6 are self-reports by the party being evaluated**, as their own banners say.
+- **[The third-attempt case](docs/cases/2026-08-29-the-third-attempt-introduced-the-defect.md) is
+  a counter-instance, and it cuts the useful way.** There *prose won* — twelve words in a
+  docstring beat a month of repeated verbal instruction. That **supports** "proximity decides"
+  and **refutes** any reading of B4 as "writing it down never works." If B4 is reworded, that
+  case is the one that keeps the rewording honest.
+- **⚠ My own count was wrong when I first described this to Tony.** I said *"four instances,
+  three sessions, one day."* It is **six instances across four days and three repos**. Corrected
+  here rather than quietly; miscounting the evidence for a finding about miscounting is the
+  failure this repo files incidents about.
+
+#### An artifact found while verifying, and it belongs to another session
+
+The hedge case quotes instance 1 as *"The discipline that existed only as **knowledge** did not"*
+and marks it *"lifted almost intact."* The source reads *"existed only as **good sense**."*
+
+**It is not a false quote** — it says *almost*, and it is almost. But the one word that changed is
+the word the borrowing argument turns on: *good sense* is about judgment, *knowledge* is about
+having read the rule, and the substitution moves the sentence toward the borrower's thesis.
+**That is content drift under relay, one word wide, inside a case file about content drift under
+relay** — and it is the seventh instance, of the case's own §4 rather than its §5.
+
+**Not corrected by me.** It is that session's file and a one-word fix; flagged here and on the
+board so its author can decide. If the finding is used in the course, use the source wording.
+
+#### Decisions needed — author's call, none taken
+
+1. **Replace B4's diagnosis, or add to it?** Replacing is cleaner and discards a sentence that is
+   true. Adding leaves B4 saying two things.
+2. **N5 and N2 as one decision** — see above.
+3. **Does this earn a `points.md` entry of its own** rather than living inside B4? *Retrieval at
+   the point of action* is arguably the estate's most-replicated finding and B4 is a container
+   for it, not the claim itself.
+4. **The one-word quote drift** — the hedge case's author to decide, not me.
