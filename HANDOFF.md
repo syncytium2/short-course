@@ -1050,3 +1050,100 @@ one machine, one checkout, one author name — so attribution travels by retelli
 does not carry its own evidence. **Check `subagents/` mtimes and workflow directories under
 `~/.claude/projects/<project>/<session>/` before naming a session in anything committed.**
 That is the one habit worth carrying out of this session.
+
+---
+
+## Session close, 2026-08-30 — `Mac/8ca0d62c`
+
+Ran 2026-08-29 evening into 2026-08-30. **All claims released, tree clean, everything pushed.**
+Started from an observation of Tony's — *the website never explains how to use the agent in
+VS Code* — and it was correct: the runbook went install VS Code → `npm install` the CLI → type
+`claude` in a terminal, and never said an editor extension exists.
+
+### ⚠ Read this first — the live site is behind, and not in the way the entry above says
+
+| | live now | in the repo |
+|---|---|---|
+| checklist state | `cold-start-v4`, 132 `data-key` handles | same |
+| `/cold-start` steps | 34 | 34 |
+| **draft stamps** | **absent on all three pages** | present |
+| `/cold-start` description | *"30 steps"* | *"34 steps"* |
+
+**↻ Correction to `Mac/7d93fc67`'s close above, which says *"the live site serves v3 and none of
+this."*** It serves **v4**. Measured against the served bytes, not inferred: the live page
+carries the `data-key` handles and the v4 migration from `bed5b57`/`f5ffe94`, and does **not**
+carry the draft stamps from `623fc76`. I do not know who deployed it or when — only what the
+bytes contain. The rest of that entry stands and its warning about `V3_MAP` is unaffected.
+
+**What is actually missing from the live site is `623fc76` — the draft stamps.** All three pages
+that gained one are serving without it. That commit is named *"Three pages were published in a
+confident voice about a runbook nobody has ever executed"*, so the pages are, right now, doing
+the thing it was written to stop. Nobody has authorised a deploy; this is the reason to ask for
+one.
+
+### What landed
+
+| | |
+|---|---|
+| `b7f190b` | **Cold Start 3.5, new** — putting the agent inside the editor, and the button that hides. Plus the workspace-trust gate in 3.1. |
+| `bbbb5b7` | The paragraph disclaiming other agents made an unchecked claim about them. Corrected. |
+| `505a68b` | Deployed, authorised by Tony. **Superseded** — the site has moved on twice since, and what is live now is described in the table above. |
+| `70a5327` | **`claim.sh --release` could close another session's claim.** See below. |
+| *(this one)* | The build script restated the step count instead of counting it, and the wrong number was live. |
+
+**3.5 was checked against this machine, not written from memory** — the extension manifest and
+walkthrough under `~/.vscode/extensions/anthropic.claude-code-*`, VS Code's own
+`nls.metadata.json` for the exact trust and Restricted Mode wording, and the icon colour out of
+its SVG. The two mechanisms: the icon is contributed only to `menus.editor/title`, so it cannot
+exist until an editor does (*"the icon only appears when you have a file open"* — the vendor's
+sentence); and `capabilities.untrustedWorkspaces.supported: false`, so answering *no* to the
+trust dialog disables the extension with nothing on screen connecting the two.
+
+### The one that affects every session here
+
+**`tools/claim.sh --release` closed a claim that was not mine and reported one that was.** Found
+by using it, not reading it. Three defects, each hiding the next: it targeted the first block
+bearing your address whether or not it was still ACTIVE; the awk that rewrote the Status line
+was never stopped at the block boundary, so from a dead block it walked on and closed **the next
+ACTIVE claim on the board, belonging to someone else**; and the verification was
+`grep -q "DONE $TODAY"` over the whole file, which any earlier release the same day already
+satisfied — so on the only kind of day the bug could fire, the check was green before the edit
+ran. Reproduced on a scratch board. Nothing was damaged: `git show` confirms each release commit
+that day flipped exactly one Status line.
+
+**The fix had the same disease.** Its new check used `exit 0` inside an awk rule; awk runs END on
+the way out and END's `exit 1` replaced the status, so it reported FAILED on a release it had
+correctly written. Caught only by the one new assertion about what the tool *prints*.
+
+**Every selftest case used a board with one claim**, which is why they were all green while this
+was live. Two-block cases added. `mutation_check.sh` gained a row for the targeting bug (caught);
+a row for the block-boundary guard was **correctly MISSED** — with targeting fixed that guard is
+unreachable — so it was removed rather than left as a permanent red, the guard kept as a second
+lock, and the reasoning written into both files.
+
+### Open, in the order I would take them
+
+1. **Ask Tony to deploy.** Three pages are live without their draft stamps, and `/cold-start`
+   describes itself as 30 steps. `--check-all` is green, so it is one command. This is the
+   cheapest open item in the file.
+2. **`docs/handouts/cold-start.html:1428` still says *"Clear all 30 steps"*** in the Reset
+   dialog. One word, in a file I did not hold. It is the last of the three places that stated
+   the count by hand; the other two now derive it or are correct.
+3. **The darkroom `.html` are not the build outputs.** All four close `</head>` at line 10 and
+   carry the whole `<style>` block inside `<body>`; no canonical, no description, no GENERATED
+   header, 17 lines different from `site/*.html`. They render, so nothing is broken today — but
+   they are a hand-wrapped **second source**, which is what `build_site.sh` exists to prevent and
+   where this repo has already been burned once. `cp site/*.html` is the whole fix. Left alone
+   because another session had written them twenty minutes earlier.
+4. **`docs/doubt/2026-08-29-3-5-tells-the-reader-…`** — 1.2 offers five agents and 3.5 describes
+   one. No other agent's extension is installed on this machine, so nothing was opened or read
+   for the other four. This is the same gap `Mac/7d93fc67` hit from the other side in its Path A
+   item: *"a trimmed VS Code path (verified, because it is what this repo runs on)"* is verified
+   precisely because the alternatives never were.
+
+### What I would not do
+
+**Do not restate a count that the source can be asked for.** 29 → 30 → 34 in two days, wrong and
+public at the end of it, and `--check-all` could not see it: that gate compares a built page to a
+rebuild from its source, and both sides agreed on the same wrong sentence. A number copied out of
+a document is a second source, exactly like a hand-wrapped page, and it fails the same way.
