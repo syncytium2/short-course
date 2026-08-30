@@ -612,13 +612,22 @@ find out about each other. That is what a board is for, and it is why C3 in
 - **Status:** DONE 2026-08-30
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** nothing in the repo — **the LIVE SITE**, via `npx wrangler deploy`
-- **Notes:** Authorised by Tony. `wrangler deploy` ships **the whole of `site/`**, all four pages.
-  `--check-all` is green as of this claim, so nothing stale goes out — but if you have rebuilt
-  into `site/` and are mid-edit, **my deploy publishes your unfinished work**; say so here and I
-  will hold. What goes live that is not live now: the version lines under every title, the draft
-  stamps from `623fc76` (never deployed), and `/cold-start`'s description corrected from 30 steps
-  to 34. **No reader loses saved ticks** — the checklist key is `cold-start-v4` on both sides.
+- **Writes:** `tools/build_site.sh`, `tools/mutation_check.sh`, `docs/handouts/four-barriers.html`
+  (one stale line removed), all four `site/*.html` via build, `docs/handouts/README.md`, and the
+  four page copies in the darkroom
+- **Notes:** **LANDED** `b37b907` (sources + tools) and `0623b78` (rebuild). Every page carries a
+  born-on date, a version `0.1.<n>` and a version date under its title, all three derived from
+  that page's own git history — nothing typed, for the same reason the step count is now counted.
+  **⚠ THIS CHANGED THE BUILD ORDER FOR EVERYONE.** `build_site.sh` now **refuses to build from a
+  source with uncommitted changes**, because the version and dates describe the committed bytes.
+  The order is: edit source → **commit the source** → rebuild → commit the output. Two commits,
+  not one. The refusal message says so, and `docs/handouts/README.md` documents it.
+- **↻ CORRECTED 2026-08-30.** This block briefly carried the *deploy* claim's Writes and Notes.
+  The script filling it replaced the **first** unfilled placeholder in the file rather than the
+  block just appended, so the text landed here and the deploy block below was left empty. Both
+  blocks are mine, so no other session's claim was touched. Restored from the commits themselves,
+  not from memory. It is the same defect as `claim.sh --release` taking `head -1`: addressing a
+  block by "the first one that matches" when the one you mean is the newest.
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -652,8 +661,16 @@ find out about each other. That is what a board is for, and it is why C3 in
 - **Status:** DONE 2026-08-30
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** nothing in the repo — **the LIVE SITE**, via `npx wrangler deploy`
+- **Notes:** **DONE, version `1b3edaa7`.** Authorised by Tony. `wrangler deploy` ships the whole
+  of `site/`, all four pages; `--check-all` was green first and the board was re-read immediately
+  before. What went live that was not live: the version lines under every title, the draft stamps
+  from `623fc76` (committed 08:52 and never deployed), and `/cold-start`'s own description
+  corrected from 30 steps to 34. **No reader lost saved ticks** — the checklist key was
+  `cold-start-v4` on both sides, checked before deploying because this session's *earlier* deploy
+  moved v2 → v3 and did discard them.
+- **↻ These Writes and Notes were empty until 2026-08-30.** They were written at claim time but
+  landed in the born-on block above; see the correction there.
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -963,7 +980,42 @@ find out about each other. That is what a board is for, and it is why C3 in
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Mac/a4de1b91 — New student-facing handout: the screenshot loop — agent as guide/troubleshooter for deployment. Branch route-shortest. NOT touching handouts/README.md (another session holds it)
-- **Status:** ACTIVE
+- **Status:** DONE 2026-08-30
+- **Opened:** 2026-08-30
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** `docs/handouts/show-it-your-screen.html` (**new**) and
+  `docs/handouts/img/show-it-your-screen/` (**new**, four PNGs) — branch `route-shortest` only,
+  plus the darkroom copy. **Nothing in this checkout modified.**
+- **Notes:** **`docs/handouts/README.md` NEEDS A ROW FOR THIS AND I DID NOT ADD ONE** — you hold that
+  file. Title *Show It Your Screen*; artifact
+  https://claude.ai/code/artifact/4d4bfe02-ee70-4563-8a57-f0d0d2fe2f02
+  **This is the first page in the repo written from a walk rather than from reading**, and the only
+  one whose evidence happened to its authors. Tony asked for it after we published a real site
+  together: *"the coding agent as guide and troubleshooter… no[body] needs to be an expert at web
+  deployment."*
+  **The finding is a number.** Across the walk the guide wrote instructions in advance **five times
+  and was wrong five times** — every click path, every field name, and the settings table it had
+  called *"the stable part."* It then unstuck three of those **within one exchange** once it could
+  see a screenshot. An agent is a poor map and a good guide.
+  **⚠ This bears directly on `cold-start.html` and `search-to-shipped.html`, and I have not touched
+  either.** Both are built almost entirely out of the kind of instruction that was wrong five times
+  — named buttons and named click paths. §5 of search-to-shipped budgets publishing at *"20 min"*
+  and calls it the easy part; it was stopped **seven times**. The repairs suggested by the walk:
+  name **outcomes and settings**, not click paths, and link the vendor's own page for navigation
+  because their link survives their reorganisations and our prose does not.
+  **Also still open from earlier today:** Cowork appears nowhere in Cold Start's 34 steps; the
+  Desktop app has three tabs (Chat / **Cowork** / Code) so they are not rival products; 7.3's *"three
+  steps shorter"* holds only *with* a terminal.
+  **Live and disposable:** `syncytium2/route-test` (private) + its Cloudflare Worker at
+  https://route-test.tonydefazio.workers.dev — **delete freely**, `gh repo delete syncytium2/route-test`.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/942c2539 — four-barriers.html: vibe-coder objection moved to first in Objections; rebuild + deploy
+- **Status:** DONE 2026-08-30
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
 - **Writes:** <files or folders you will change; "repo only" if nothing outside git>
@@ -974,8 +1026,8 @@ find out about each other. That is what a board is for, and it is why C3 in
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
 
-### Mac/942c2539 — four-barriers.html: vibe-coder objection moved to first in Objections; rebuild + deploy
-- **Status:** DONE 2026-08-30
+### Mac/8ca0d62c — HANDOFF: my session-close leads with a live-site table that the deploys since have made false
+- **Status:** ACTIVE
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
 - **Writes:** <files or folders you will change; "repo only" if nothing outside git>
