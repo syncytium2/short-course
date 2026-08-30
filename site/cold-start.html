@@ -1252,13 +1252,53 @@ or four A records:
   // Runs only when v4 has never been written. A reader who has already migrated has
   // a v4 blob and never comes back through here, so a later edit to the page cannot
   // re-trigger it against a document whose boxes have since moved.
-  // The numbering this migration is valid against. v3's keys ARE display numbers,
-  // so mapping them onto handles is only meaningful while the document still carries
-  // the numbers those ticks were saved under. The path switch renumbers Phase 3. If
-  // the document has moved, we drop the old ticks rather than hand them to whichever
-  // step inherited the number -- losing ticks is visible, wrong ticks are not, which
-  // is the same reasoning that bumped v2 to v3.
-  var V3_NUMBERING = '1.1,1.2,1.3,2.1,2.2,2.3,3.1,3.2,3.3,3.4,3.5,3.6,4.1,4.2,4.3,4.4,4.5,4.6,5.1,5.2,5.3,5.4,5.5,6.1,6.2,7.1,7.2,7.3,7.4,7.5';
+  // WHAT v3's KEYS MEANT, FROZEN. v3 addressed steps by DISPLAY NUMBER and boxes by
+  // POSITION, so migrating one requires knowing what those numbers and positions pointed
+  // at ON THE DAY THEY WERE SAVED. That document is history and does not change, so it is
+  // recorded here rather than inferred from the live page.
+  //
+  // The first attempt compared a fingerprint of the current numbering against the old one
+  // and refused to migrate if they differed. It was wrong within the hour: c3f022e appended
+  // 1.4, 3.7, 4.7 and 6.3, which renumbered NOTHING and invalidated NOTHING, and the
+  // fingerprint still failed -- so every returning reader would have lost every tick, for
+  // an edit that was entirely safe. A guard that cannot tell an insertion from a renumber
+  // fails closed on both, and failing closed still costs the reader everything.
+  //
+  // This table cannot go stale, because the thing it describes already happened. DO NOT
+  // REGENERATE IT FROM THE CURRENT PAGE -- that would make it describe today's document
+  // instead of the one the ticks came from, which is the whole bug it replaces.
+  var V3_MAP = {
+    '1.1': ['github-account', ['account-created-signed', 'two-factor-authentication', 'username-willing-keep']],
+    '1.2': ['agent-account', ['sign-account-will-actually', 'say-happens-use-too', 'read-costs']],
+    '1.3': ['research-storage', ['decided-whether-need-these', 'yes-storage-cluster-account', 'carrying-rest-while-pend']],
+    '2.1': ['write-down-paths', ['boxes-above-filled-deliberately', 'say-biggest-thing-produce', 'say-something-another-person']],
+    '2.2': ['two-roots', ['data-root-exists-decided', 'review-folder-exists-inside', 'opened-review-folder-second']],
+    '2.3': ['data-root-unsynced', ['data-root-outside-synced', 'sync-client-sitting-huge']],
+    '3.1': ['editor', ['editor-installed', 'open-folder', 'answered-yes-trust-question', 'open-terminal-inside-same']],
+    '3.2': ['package-manager', ['package-manager-installed', 'git-gh-node-rg']],
+    '3.3': ['git-identity', ['git-config-name-email', 'gh-auth-status-names']],
+    '3.4': ['agent-install', ['claude-version-prints-number', 'signed-login', 'session-starts-folder-standing']],
+    '3.5': ['agent-in-editor', ['extension-listed-installed-extensions', 'file-open-found-spark', 'file-open-opened-command']],
+    '3.6': ['stay-awake', ['know-command-app-platform', 'run-once-learning-moment']],
+    '4.1': ['project-folder', ['project-folder-made', 'session-started-inside', 'banner-shows-path-made']],
+    '4.2': ['prompt-setup', ['prompt-real-paths-paste', 'docs-setup-md-exists', 'claude-md-exists', 'nothing-else-created-noticed']],
+    '4.3': ['read-what-it-wrote', ['opened-docs-setup-md', 'looked-folder-see-now', 'path', 'had-fix-wrong-thing']],
+    '4.4': ['prompt-git', ['looked-part-1-letting', 'git-log-shows-commit', 'git-status-clean', 'name-thing-agent-allowed']],
+    '4.5': ['remote', ['repository-visible-github-com', 'private-public-because-meant', 'git-status-says-up']],
+    '4.6': ['usage-screen', ['opened-usage-once', 'know-how-switch-between', 'name-thing-session-cost']],
+    '5.1': ['one-thing', ['say-last-three-commits', 'verify-change-starting-next']],
+    '5.2': ['define-done', ['name-five-ways-task', 'next-task-state-file']],
+    '5.3': ['friction-log', ['file-add-line-something', 'more-line']],
+    '5.4': ['guards-after', ['guard-traces-back-something', 'built-case']],
+    '5.5': ['handoff-note', ['last-session-ended-commit', 'left-three-lines-happened']],
+    '6.1': ['second-machine', ['cloned-second-machine', 'runs-without-editing-path', 'had-edit-friction-log']],
+    '6.2': ['claim-board', ['file-answers-anyone-else', 'opening-claim-takes-under', 'claim-committed-pushed-unpushed']],
+    '7.1': ['domain', ['domain-account', 'know-renewal-price-first', 'whois-privacy']],
+    '7.2': ['dns', ['cloudflare-site-given-two', 'those-two-pasted-into', 'cloudflare-s-dashboard-says']],
+    '7.3': ['who-serves', ['decided-serves-site-cloudflare', 'github-repository-public-paid', 'signed-deploy-tool-once']],
+    '7.4': ['github-pages', ['custom-domain-set-repository', 'www-cname-record-added', 'bare-name-record-added', 'name-loads-browser']],
+    '7.5': ['gray-cloud', ['record-pointed-github-set', 'enforce-https-tickable-rather', 'checked-https-works']],
+  };
 
   (function migrate() {
     if (localStorage.getItem(KEY) !== null) return;      // already on v4
@@ -1267,27 +1307,26 @@ or four A records:
     try { oldSkip  = JSON.parse(localStorage.getItem(OSKEY) || 'null'); } catch (e) {}
     if (!oldState && !oldSkip) return;                   // first-time reader, nothing to carry
 
-    var numbering = [].map.call(items, function (li) { return li.dataset.id; }).join(',');
-    if (numbering !== V3_NUMBERING) return;              // document moved; see V3_NUMBERING
-
-    [].forEach.call(items, function (li) {
-      var num = li.dataset.id, key = li.dataset.key;
+    Object.keys(V3_MAP).forEach(function (num) {
+      var stepKey = V3_MAP[num][0], boxKeys = V3_MAP[num][1];
       if (oldState && oldState[num]) {
-        var boxes = li.querySelectorAll('.cb');
         Object.keys(oldState[num]).forEach(function (i) {
-          var b = boxes[+i];                             // old key was the position
-          if (!b || !oldState[num][i]) return;
-          if (!state[key]) state[key] = {};
-          state[key][b.dataset.key] = 1;
+          var bk = boxKeys[+i];                          // v3's key was the position
+          if (!bk || !oldState[num][i]) return;
+          if (!state[stepKey]) state[stepKey] = {};
+          state[stepKey][bk] = 1;
         });
       }
-      if (oldSkip && oldSkip[num]) skipped[key] = 1;
+      if (oldSkip && oldSkip[num]) skipped[stepKey] = 1;
     });
     save(); saveSkip();
-    // The v3 blobs are deliberately LEFT IN PLACE rather than removed. If this
-    // migration is wrong, the only copy of the reader's progress is the thing it
-    // read from, and deleting it makes the mistake unrecoverable for the one person
-    // who could report it.
+    // The v3 blobs are deliberately LEFT IN PLACE rather than removed. If this migration
+    // is wrong, the only copy of the reader's progress is the thing it read from, and
+    // deleting it makes the mistake unrecoverable for the one person who could report it.
+    //
+    // A handle here that no longer appears in the page is harmless: nothing paints it.
+    // A tick for a step the reader can no longer see is not a tick shown against the
+    // wrong step, which is the failure this whole change is about.
   })();
   var nEl = document.getElementById('pc-n');
   var dEl = document.getElementById('pc-d');

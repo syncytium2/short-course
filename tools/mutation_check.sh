@@ -63,8 +63,8 @@ tools/turnstile/turnstile-run@@if [ "$rc" -ge 128 ] || [ "$elapsed" -ge "$BUDGET
 tools/turnstile/turnstile@@[ -f "$SELF_DIR/gate.template.sh" ]@@[ -f "/dev/null" ]@@template check defanged
 tools/check_pointers.sh@@[ -e "$cand" ] || printf@@[ -e "$cand" ] && printf@@pointer check inverts its test
 tools/build_site.sh@@ "</body>\n"@@ "\n"@@standalone loses its closing body tag
-docs/handouts/cold-start.html@@state[key][b.dataset.key] = 1;@@state[key][i] = 1;@@checklist ticks migrate by position again@@tools/checklist_state.sh
-docs/handouts/cold-start.html@@if (numbering !== V3_NUMBERING) return;@@if (false) return;@@migration runs against a renumbered document@@tools/checklist_state.sh
+docs/handouts/cold-start.html@@state[stepKey][bk] = 1;@@state[stepKey][i] = 1;@@checklist ticks migrate by position again@@tools/checklist_state.sh
+docs/handouts/cold-start.html@@var bk = boxKeys[+i];@@var bk = boxKeys[0];@@every migrated tick lands on the first box of its step@@tools/checklist_state.sh
 docs/handouts/cold-start.html@@if (localStorage.getItem(KEY) !== null) return;@@if (false) return;@@migration re-runs over a reader already on v4@@tools/checklist_state.sh
 TABLE
 )

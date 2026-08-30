@@ -48,12 +48,12 @@ if not m:
     raise SystemExit(1)
 body = m.group(1)
 
-n = re.search(r"var V3_NUMBERING = '([^']*)';", s)
+n = re.search(r"(  var V3_MAP = \{.*?\n  \};)", s, re.S)
 if not n:
-    sys.stderr.write("ERROR: no V3_NUMBERING in %s -- the migration has no numbering guard\n" % src)
+    sys.stderr.write("ERROR: no V3_MAP in %s -- the migration has no record of what v3 meant\n" % src)
     raise SystemExit(1)
-numbering = n.group(1)
-for marker in ("dataset.key", "oldState"):
+v3map = n.group(1)
+for marker in ("V3_MAP", "oldState"):
     if marker not in body:
         sys.stderr.write("ERROR: migrate() found but does not contain %r\n" % marker)
         raise SystemExit(1)
@@ -74,7 +74,7 @@ for a, b in zip(starts, ends):
 
 io.open(os.path.join(out, "migrate.js"), "w", encoding="utf-8").write(body)
 io.open(os.path.join(out, "steps.json"), "w", encoding="utf-8").write(json.dumps(steps))
-io.open(os.path.join(out, "numbering.txt"), "w", encoding="utf-8").write(numbering)
+io.open(os.path.join(out, "v3map.js"), "w", encoding="utf-8").write(v3map + "\nmodule.exports = V3_MAP;\n")
 PY
 
 cat > "$T/run.js" <<'JS'
@@ -82,7 +82,7 @@ const fs = require('fs');
 const DIR = process.env.T;
 const STEPS = JSON.parse(fs.readFileSync(DIR + '/steps.json', 'utf8'));
 const MIGRATE = fs.readFileSync(DIR + '/migrate.js', 'utf8');
-const V3_NUMBERING = fs.readFileSync(DIR + '/numbering.txt', 'utf8');
+const V3_MAP = require(DIR + '/v3map.js');
 
 // Minimal stand-ins for the two things migrate() touches: a list of steps that can
 // report their keys, and a localStorage that can be seeded and read back.
@@ -111,8 +111,8 @@ function run(seed, steps) {
   const saveSkip = () => localStorage.setItem(SKEY, JSON.stringify(skipped));
   const items = makeItems(steps);
   new Function('localStorage', 'KEY', 'OLD', 'SKEY', 'OSKEY',
-               'state', 'skipped', 'save', 'saveSkip', 'items', 'V3_NUMBERING', MIGRATE)
-    (localStorage, KEY, OLD, SKEY, OSKEY, state, skipped, save, saveSkip, items, V3_NUMBERING);
+               'state', 'skipped', 'save', 'saveSkip', 'items', 'V3_MAP', MIGRATE)
+    (localStorage, KEY, OLD, SKEY, OSKEY, state, skipped, save, saveSkip, items, V3_MAP);
   return { store, state, skipped };
 }
 
@@ -125,21 +125,28 @@ const byId = id => STEPS.find(s => s.id === id);
 const s11 = byId('1.1'), s36 = byId('3.6'), s74 = byId('7.4');
 if (!s11 || !s36 || !s74) { console.log('  FAIL fixture is missing 1.1, 3.6 or 7.4'); process.exit(1); }
 
-// 0. the guard has to describe the document it ships in. If someone renumbers the
-//    steps and leaves V3_NUMBERING behind, the migration silently stops running and
-//    every returning v3 reader loses their ticks with nothing said.
+// 0. every handle v3 ticks will land on must still exist in the page, or those ticks
+//    are carried across into somewhere nothing paints them.
 {
-  const actual = STEPS.map(s => s.id).join(',');
-  if (actual === V3_NUMBERING) ok('V3_NUMBERING matches the numbering in the page');
-  else bad('V3_NUMBERING is stale.\n         page says: ' + actual + '\n         guard says: ' + V3_NUMBERING);
+  const liveSteps = new Set(STEPS.map(s => s.key));
+  const liveBoxes = new Map(STEPS.map(s => [s.key, new Set(s.boxes)]));
+  const gone = [];
+  for (const num of Object.keys(V3_MAP)) {
+    const [stepKey, boxKeys] = V3_MAP[num];
+    if (!liveSteps.has(stepKey)) { gone.push(num + ' -> ' + stepKey); continue; }
+    for (const bk of boxKeys) if (!liveBoxes.get(stepKey).has(bk)) gone.push(num + ' -> ' + stepKey + '/' + bk);
+  }
+  if (!gone.length) ok('every handle in V3_MAP still exists in the page');
+  else bad('V3_MAP points at handles the page no longer has:\n         ' + gone.join('\n         '));
 }
 
 // 1. a returning v3 reader's ticks land on the box that carried them, by name
 {
   const r = run({ 'cold-start-v3': JSON.stringify({ '1.1': { '2': 1 }, '3.6': { '0': 1, '1': 1 } }) }, STEPS);
   const want = {};
-  want[s11.key] = {}; want[s11.key][s11.boxes[2]] = 1;
-  want[s36.key] = {}; want[s36.key][s36.boxes[0]] = 1; want[s36.key][s36.boxes[1]] = 1;
+  want[V3_MAP['1.1'][0]] = {}; want[V3_MAP['1.1'][0]][V3_MAP['1.1'][1][2]] = 1;
+  want[V3_MAP['3.6'][0]] = {}; want[V3_MAP['3.6'][0]][V3_MAP['3.6'][1][0]] = 1;
+                               want[V3_MAP['3.6'][0]][V3_MAP['3.6'][1][1]] = 1;
   if (eq(r.state, want)) ok('v3 ticks migrate onto the named boxes they were on');
   else bad('v3 ticks migrated wrong: ' + JSON.stringify(r.state));
 }
@@ -147,37 +154,32 @@ if (!s11 || !s36 || !s74) { console.log('  FAIL fixture is missing 1.1, 3.6 or 7
 // 2. a skipped step carries too, keyed by the step's handle and not its number
 {
   const r = run({ 'cold-start-skip-v1': JSON.stringify({ '7.4': 1 }) }, STEPS);
-  const want = {}; want[s74.key] = 1;
+  const want = {}; want[V3_MAP['7.4'][0]] = 1;
   if (eq(r.skipped, want)) ok('a skipped step migrates onto its handle');
   else bad('skip migrated wrong: ' + JSON.stringify(r.skipped));
 }
 
-// 3. THE POINT OF THE RE-KEY. A reader who is already on v4 is immune to the
-//    renumbering the path switch will do: their ticks are held by handle, so moving
-//    a step's number moves nothing.
+// 3. THE REGRESSION c3f022e CAUSED. Editing the page must not change what a v3 blob
+//    migrates to. The first guard compared the live numbering against a fingerprint and
+//    refused outright when four steps were appended, costing every reader every tick for
+//    an edit that renumbered nothing. Migration output must not depend on the page at all.
 {
-  const mine = {}; mine[s36.key] = {}; mine[s36.key][s36.boxes[0]] = 1;
-  const renumbered = STEPS.map(s => Object.assign({}, s));
-  const i36 = renumbered.findIndex(s => s.id === '3.6');
-  renumbered[i36] = Object.assign({}, renumbered[i36], { id: '3.2' });   // Phase 3 collapses
-  const r = run({ 'cold-start-v4': JSON.stringify(mine) }, renumbered);
-  if (eq(r.state, mine)) ok('renumbering a step does not move a v4 reader\'s ticks');
-  else bad('renumbering moved a v4 reader\'s ticks: ' + JSON.stringify(r.state));
+  const seed = { 'cold-start-v3': JSON.stringify({ '1.1': { '0': 1 }, '3.6': { '1': 1 } }) };
+  const asShipped = run(seed, STEPS).state;
+  const mangled = STEPS.concat([{ key: 'a-step-added-later', id: '9.9', boxes: ['x'] }])
+                       .map(s => Object.assign({}, s, { id: '0.0' }));   // every number destroyed
+  const anyway = run(seed, mangled).state;
+  if (eq(asShipped, anyway) && Object.keys(asShipped).length === 2)
+    ok('migration ignores the live page, so adding or renumbering steps changes nothing');
+  else bad('migration still depends on the page: ' + JSON.stringify(asShipped) + ' vs ' + JSON.stringify(anyway));
 }
 
-// 3b. AND THE HOLE THAT LEAVES. v3's keys are display numbers, so a v3 blob can only
-//     be mapped while the document still carries those numbers. If the switch has
-//     already renumbered, the migration must DROP the old ticks, not hand them to
-//     whichever step inherited the number. Losing ticks is visible; wrong ticks are not.
+// 3b. a v3 blob naming a step that did not exist at v3 is ignored, not crashed on
 {
-  const renumbered = STEPS.map(s => Object.assign({}, s)).filter(s => s.id !== '3.2');
-  const i36 = renumbered.findIndex(s => s.id === '3.6');
-  renumbered[i36] = Object.assign({}, renumbered[i36], { id: '3.2' });   // stay-awake inherits 3.2
-  const seed = { 'cold-start-v3': JSON.stringify({ '3.2': { '0': 1 } }) };  // package-manager ticks
-  const r = run(seed, renumbered);
-  if (eq(r.state, {}) && r.store['cold-start-v3'] === seed['cold-start-v3'])
-    ok('a v3 blob meeting a renumbered document is dropped, not mis-assigned');
-  else bad('v3 ticks were mis-assigned across a renumber: ' + JSON.stringify(r.state));
+  const r = run({ 'cold-start-v3': JSON.stringify({ '3.7': { '0': 1 }, '1.1': { '0': 1 } }) }, STEPS);
+  const want = {}; want[V3_MAP['1.1'][0]] = {}; want[V3_MAP['1.1'][0]][V3_MAP['1.1'][1][0]] = 1;
+  if (eq(r.state, want)) ok('a number with no v3 meaning is ignored');
+  else bad('unknown v3 number was not ignored: ' + JSON.stringify(r.state));
 }
 
 // 4. migration is once. a reader already on v4 is not re-migrated over.
