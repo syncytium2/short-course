@@ -1233,7 +1233,7 @@ find out about each other. That is what a board is for, and it is why C3 in
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Mac/9b614630 — points.md: add N5's diagnosis to B4 (Tony's decision: add, not replace)
-- **Status:** ACTIVE
+- **Status:** DONE 2026-08-30
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
 - **Writes:** `points.md` — **B4 only**, one indented refinement paragraph inserted before its
