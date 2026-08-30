@@ -865,8 +865,21 @@ find out about each other. That is what a board is for, and it is why C3 in
 - **Status:** ACTIVE
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** In repo — `docs/cases/2026-08-30-the-gate-blocked-its-own-installation.md`,
+  `docs/cases/README.md` (my row only), `OPEN-FINDINGS.md` (new **N4**), `docs/SESSIONS.md`.
+  ⚠ **In the darkroom** — `<darkroom>/short-course/the-gate-blocked-its-own-installation.html`
+  (new) and **one paragraph appended** to that folder's `README.md`.
+- **Notes:** ⚠ **THE DARKROOM IS THE CROSS-MACHINE ONE.** I touched its `README.md` while
+  `Mac/942c2539`'s outside-reader work was also in it; we appended to different sections and
+  both survive, but **read that file before you edit it — it moved twice while I held it.**
+  **Everything in this block is a correction to my own earlier work, not new ground:** my
+  previous commit `37360fd` did a whole-file `git add` on `docs/cases/README.md` and swept in the
+  hedge case's index row while that case file was untracked, so `master` carried a dangling index
+  link for two commits until `0936db2`. Nothing was lost. That is now Point 6 of the case and
+  **N4**, which asks for a pre-push pointer check run against `HEAD` rather than the working tree
+  — and warns that it must carry a `# turnstile: gate` line or it installs advisory, which is
+  N3's trap one file over. **Lesson worth stealing:** stage by pathspec in this checkout, and
+  check pointers against `git write-tree`, not the working directory. This commit did both.
 
 <!-- RELEASE THIS
      tools/claim.sh --release
