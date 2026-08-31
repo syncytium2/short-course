@@ -29,6 +29,16 @@ the order is not obvious:**
 4. **The course itself.** Lowest value per hour right now, and the only item that needs other people
    (the Oxford / UW eScience / Southampton emails behind B2, B4, B5). Do not start here.
 
+**Publication is unblocked as of 2026-08-30, and that is a change.** The README's two stated
+gates were checked against the files and neither holds. The positioning section names Udemy,
+Coursera and a list of no-code tools — companies, not people, and no institution unkindly; the
+§0b teaching note is the strongest paragraph in the outline and reads as maturity, not exposure.
+The third worry, that the cases expose colleagues' work, is void: **there is one human in this
+estate and every session named anywhere here is an agent**, so no case describes anybody else.
+The README now says so, because a stranger reads the author line and never reads the board.
+`Mac/4a487730` holds the remaining readiness work in a worktree. **The toggle itself is Tony's
+and nothing else is waiting on it.**
+
 **The one thing with a real clock on it is not in the repo.** The files will keep. What decays is
 the reason any of it was done — the part that lives only in the author's head. If there is ever
 half an hour, spend it on that and not on building.

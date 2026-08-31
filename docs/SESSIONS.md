@@ -1306,7 +1306,7 @@ find out about each other. That is what a board is for, and it is why C3 in
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Mac/4a487730 — Publication readiness in worktree publication-remainder: review findings 7/8/9 + the course-outline before-sharing banner
-- **Status:** ACTIVE
+- **Status:** DONE 2026-08-30
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
 - **Writes:** **nothing in this checkout except this block.** All work is on branch
@@ -1327,6 +1327,104 @@ find out about each other. That is what a board is for, and it is why C3 in
   `docs/cases/2026-08-28-the-weakest-fix-is-the-most-available.md` is about reaching for exactly
   this. **I am now working in a worktree.** Converting the repo properly is scoped out of this
   block and is worth its own.
+
+**DONE — everything is on `origin/publication-remainder`, six commits, and `master` is untouched
+by this session apart from this block.** Findings 4, 7, 8 and 9 of the publication review are
+closed. `syncytium2/turnstile` is **public** (Apache-2.0, Tony's call) and all six links to it
+resolve anonymously, checked with `curl`. The twelve case files say where their evidence lives
+and whether an outside reader can reach it. Five artifact URLs are out of this board and a rule
+sits at the top saying why. `course-outline.md:7` now leads with B2/B5 instead of the two lowest
+risks in the file.
+
+> **⚠ And the worktree immediately broke a gate — filed as `OPEN-FINDINGS.md` N6, unfixed.**
+> [`.claude/hooks/push-goes-where-you-are.sh`](../.claude/hooks/push-goes-where-you-are.sh)
+> resolves the repo from `$0`, which is the **shared checkout**, so from a worktree it reports
+> *"This checkout is on: master"* — confidently, and falsely — and **refuses the push**. Its
+> moved-under-you latch then fires on every alternation, because it compares a worktree branch to
+> the shared checkout's branch and those differ permanently. It fires once and the retry
+> succeeds, **so a worktree session is trained within two commands to retry through the one alarm
+> that would report a real branch switch.** `--selftest` is seven-of-seven green, because no case
+> has ever run from a worktree. **If you are working in a worktree, this gate is lying to you.**
+> Do not "fix" it without reading N6 — the decision it depends on is bigger than the hook.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/1115789c — HANDOFF: record that publication is unblocked, and that another session holds the readiness work
+- **Status:** DONE 2026-08-30
+- **Opened:** 2026-08-30
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
+- **Notes:** <anything another session must know before touching the same thing>
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/fb238a63 — Draft the bugarach index case: retrieval at scale, and the tool for a project that outgrows a context window
+- **Status:** ACTIVE
+- **Opened:** 2026-08-30
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** `docs/cases/2026-08-30-nothing-was-missing-and-it-could-not-be-found.md`
+  (**a new file**; named for the finding, not for the index's own defect, which is Point 3), and
+  when it is no longer a draft, a row in [`cases/README.md`](cases/README.md)'s index table.
+  Nothing else in this checkout.
+- **Notes:** **Draft only**, at Tony's request — *"start drafting, we'll clean it when they're
+  done."* Subject is `bugarach` PR #415: an index built after a session re-derived the
+  Cossart/DANDI transfer machinery that was already sitting in its own tree. **The upstream
+  session (`bugarach-17`) is still live and revising that PR**, so every number in the draft is
+  provisional and the file says so at the top. Bears on [`OPEN-FINDINGS.md`](../OPEN-FINDINGS.md)
+  **N5 decision 3** — whether *retrieval at the point of action* earns a `points.md` entry of its
+  own — and supplies the second-repo instance **N2** named as what would settle it.
+  **A new file is the exact trap this board's header warns about:** git accepts two of these
+  without conflicting, and a human finds out by reading the folder. If you are also writing up
+  the index, say so here before you start.
+- **📨 Draft landed `8b7f60c`, indexed `844dbdb`, first cleanup pass done.** `bugarach-17` shipped
+  the fix (`755fee1`) — dead row repointed, guard extended to code spans, two Cossart rows added,
+  and a new rule: *a row may only point at something that exists on `main`.* Verified independently:
+  **0 unresolved pointers** in the revised file. Point 3 now records the repair; Point 6 records
+  that the ranking handoff was split out as **#416**.
+- **Still open, and the reason this claim is not released:** **#415 has not merged.** One thing is
+  genuinely unresolved — the upstream commit counts **49/31** pointers where I count **50/32**,
+  and neither of us has reconciled it. The case states my number, reproduces it, and flags the
+  disagreement rather than adopting theirs. **If you are cleaning this file, that is the open
+  question.** Held rather than released because the work is paused, not finished — the gap
+  [`the-board-was-empty`](cases/2026-08-29-the-board-was-empty-because-claiming-is-a-habit.md)
+  is about.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/5dc04385 — The bugarach #416 aside: an irony that was false, checked against the PR record
+- **Status:** DONE 2026-08-30
+- **Opened:** 2026-08-30
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** `docs/cases/2026-08-30-the-irony-was-the-only-unchecked-claim.md` (**a new
+  file** — the trap this board's header names), a row in [`cases/README.md`](cases/README.md),
+  and `<darkroom>/short-course/2026-08-30-the-irony-was-false/`. Nothing else.
+- **Notes:** **Different PR from the claim above.** `Mac/fb238a63` holds the `bugarach` **#415**
+  index case; this is **#416**, the ranking handoff split out of it, and I am not touching that
+  file. Subject is one aside a `bugarach` session wrote at ~20:20Z: *"the PR whose job is to land
+  the handoff … was itself the thing that never landed."* **It had auto-merge armed by the same
+  session and merged 4m26s later, at 20:23:09Z** — the PR record settles it. Both halves of the
+  sentence are false, and a third fact (a squash auto-merge that landed as a two-parent merge
+  commit) is a separate finding. If you are also writing up #416, say so here first.
+- **📨 Landed `57efb73`, indexed in the same commit, delivered to the darkroom
+  (`2026-08-30-the-irony-was-false/`) and published at
+  <https://claude.ai/code/artifact/b796ca1d-afba-43e0-a24f-99e6fb0ec49a>.** Pointers verified
+  against the **committed** tree, not the working tree — N4's lesson, applied. **One decision is
+  open and it is Tony's: does this go in the course?** Recommended, not decided; the argument
+  against is that it is the fifth case about an agent's self-report.
+- **One thing I did not do, and the next session could:** I never asked the `bugarach` session
+  whether its own background watch later reported the merge and corrected the record. If it did,
+  this is a four-minute error that self-healed; if it did not, the wrong sentence stands as its
+  last word. The case reads that hinge in the other session's favour and says so. Same gap as
+  [`two-sessions-three-minutes-apart`](cases/2026-08-29-two-sessions-three-minutes-apart.md).
 
 <!-- RELEASE THIS
      tools/claim.sh --release
