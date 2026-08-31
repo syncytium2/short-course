@@ -269,7 +269,7 @@ Run 2026-08-29. Transcript logs store **UTC**; local is EDT, UTC−4.
 
 | Claim | How checked | Status |
 |---|---|---|
-| One worktree, three sessions | `git worktree list` → one line, `/Users/tonydefazio/Developer/short-course 8c2c3d0 [master]` | verified |
+| One worktree, three sessions | `git worktree list` → one line, `~/Developer/short-course 8c2c3d0 [master]` | verified |
 | `976d19f3` claimed two handouts | `git show 03c78b0:docs/SESSIONS.md` → block ACTIVE, **Writes** names `cold-start.html`, `what-it-costs.html` | verified |
 | It released at 14:03:26 | block is ACTIVE in `0e89447` (14:02:36) and DONE in `0ef3cf2` (14:03:26) | verified |
 | It worked 37 min past release | last transcript entry `2026-08-29T18:40:53.274Z` = 14:40:53 | verified |

@@ -1598,9 +1598,118 @@ risks in the file.
   gate, in the repo about exactly that.
 
 ### Tonys-MacBook-Pro/a4de1b91 — Major revision to decision 0002: step 1 becomes 'get the expert on your side', with a three-tier ladder (web / desktop Code mode / VS Code + Claude window). Worktree expert-ladder.
-- **Status:** ACTIVE
+- **Status:** DONE 2026-08-31
 - **Opened:** 2026-08-31
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** `docs/decisions/0002-*.html` on branch `expert-ladder`, merged. Superseded in practice
+  by the block below, which carries the full notes.
+- **Notes:** **This block lost its Writes/Notes to a merge conflict in this file and they are
+  restored here.** Two sessions' claim blocks interleaved; resolved by the rule this board states
+  for itself — *keep both blocks* — with a check that every `###` header on either side survived.
+  All 8 did. **If you resolve a conflict here by picking a side, somebody's record of what they
+  were doing is gone and nothing will tell you.**
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
+
+### Tonys-MacBook-Pro/4a487730 — Gate fix: interlock 1 refuses branch deletion, and fires on prose that merely mentions the command
+- **Status:** DONE 2026-08-31
+- **Opened:** 2026-08-31
+- **Branch when opened:** `delete-push-is-not-a-no-op` — my own worktree, so here the branch *is* the identity
+- **Writes:** [`../.claude/hooks/push-goes-where-you-are.sh`](../.claude/hooks/push-goes-where-you-are.sh)
+  and [`../tools/mutation_check.sh`](../tools/mutation_check.sh), on that branch only. **Nothing
+  in the shared checkout.**
+- **Notes:** **Two false positives in the gate repaired an hour earlier, both found by using it.**
+  `git push origin --delete <branch>` was refused — the N6 repair asks *is this refspec checked
+  out in a worktree*, and a deletion names one checked out **nowhere by definition**, so it
+  blocked the tidy-up step of the workflow it exists to support. And the first attempt to post
+  **this claim** was refused, because the claim *text* contained the words `git push` and the
+  parser read the prose as a command. The hook's own header promises *"verbs, not names"* and
+  excluded only `grep` — which aims at one tool when the class is prose, and in a repo about git
+  hygiene every claim, commit message and case file is such a sentence.
+- **⚠ For anyone adding a row to [`../tools/mutation_check.sh`](../tools/mutation_check.sh):** a
+  row may contain **neither `;;` nor an unbalanced `)`**. Its table is a quoted heredoc inside
+  `$( )` and bash 3.2 scans that for the closing paren, so either one makes the **whole file** a
+  syntax error, naming the file rather than your row. A `case` arm therefore cannot be a mutation
+  anchor; give the code a flag line and target that. Now in the file's header.
+- **Four wrong turns while fixing it, every one caught by a test rather than by me** — including
+  `mutation_check` reporting the new colon-deletion guard as **dead code** (the pre-existing
+  `*:*` arm already allowed it, so breaking it changed nothing) and both new mention cases as
+  passing for the wrong reason, because they quoted `master`, which every checkout has out.
+  33 caught, 0 missed, 0 errors.
+
+### Tonys-MacBook-Pro/5dc04385 — Survey bugarach and interface2 for the mechanisms short-course is missing, and write the adoption list
+- **Status:** DONE 2026-08-31
+- **Opened:** 2026-08-31
+- **Branch when opened:** `sibling-practices` — my own worktree, so here the branch *is* the identity
+- **Writes:** `docs/from-the-siblings.md` (**a new file**), this block, and
+  `<darkroom>/short-course/2026-08-31-from-the-siblings/`. **No tool, hook or setting touched**
+  in this repo, and nothing at all in `bugarach` or `interface2` — both were read only.
+- **Notes:** Tony, 2026-08-31: *"we have built the tools for these issues in other repos.
+  bugarach and interface2 are probably the best places to examine best practices."* **Survey, not
+  implementation** — six things to copy, in a stated order, each with the sibling's own header
+  quoted as its evidence. Headline: **this repo has no `SessionStart` hook at all**, and the
+  estate's is explicitly written to be vendored unchanged (`bugarach`'s copy says *"do NOT edit
+  here"*). That is N3 with the most useful hook in the estate as the example rather than the
+  heredoc gate. **If you are about to copy any of these in, say so here first** — six new files
+  is the exact trap this board names.
+- **⚠ Found while doing this, and it affects this board:** the machine half of a session address
+  is **not stable**. `claim.sh` produced `Mac/5dc04385` this morning and
+  `Tonys-MacBook-Pro/5dc04385` an hour ago — same session, same machine, same day, because
+  [`session_identity.sh`](../tools/session_identity.sh) uses `hostname -s`, which is a *network*
+  name. **One session now sits on this board under two addresses**, and `--release` / `--mine`
+  cannot reach the earlier ones. `interface2` already documents this exact case and returns
+  **empty rather than guessing**. Not fixed here — every tool sources that file. Written up in
+  [`from-the-siblings.md`](from-the-siblings.md).
+- **📨 Landed `a02f1f8`, delivered to `<darkroom>/short-course/2026-08-31-from-the-siblings/` and
+  published at <https://claude.ai/code/artifact/8fed9c0d-eac3-4d62-8b5d-674df2db69e3>.** **One
+  decision is open and it is Tony's: yes or no to the sequence** — 01+02 together, then 03, then
+  04; 05 and 06 independent. **Nothing is built and nothing is half-built.**
+- **How this reached `master` without touching anybody's tree, because it is worth copying.** The
+  shared checkout had `Tonys-MacBook-Pro/a4de1b91`'s claim sitting uncommitted, so an ordinary
+  merge there would have swept it — N4, a fourth time in two days. Instead:
+  `git push origin sibling-practices:master` **from the worktree** — a server-side fast-forward
+  that moves the ref and touches no working tree at all. The shared checkout's local `master` goes
+  stale for a moment and one `git pull --ff-only` fixes it. **This is the safe way to land from a
+  worktree while somebody else is mid-edit in the primary**, and it is not written down anywhere
+  else yet.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
+
+### Tonys-MacBook-Pro/47b9dcee — Settle draft-banner scope across all four public pages: the index's generic 'Draft' breaks the rule its own CSS states, and search-to-shipped (never murderboarded) carries no stamp at all
+- **Status:** DONE 2026-08-31
+- **Opened:** 2026-08-31
+- **Branch when opened:** `banner-scope` — a fact, not an identity; it may move under you
+- **Writes:** all four `docs/handouts/*.html` — **the `.draft` block only**, keyword and paragraph
+  — plus the regenerated `site/`. No step text, no colour token, no JS touched.
+- **Notes:** **Triggered from outside the repo.** Tony is putting the site on a résumé; the session
+  handling those emails said the link opens on the word *"Draft"* and a hiring manager reads that
+  as unfinished rather than candid. **The fix is not audience management** — the stamp's own CSS
+  comment already said *"NAMES WHAT IS UNVERIFIED, rather than saying 'draft' and stopping"*, and
+  `four-barriers.html`, the page that **contains that comment**, was the one page ignoring it. So
+  the word came off all four keywords rather than just the front door's, and each one now names
+  its own defect. **`search-to-shipped.html` gained a stamp it never had** — it is the only page
+  never murderboarded (`HANDOFF.md`, "What is live"), so the least-checked page was also the
+  quietest about it.
+  **Not fixed here, and it is the bigger half of that feedback:** the repo behind the site is
+  private, so the chain the front page advertises cannot be inspected by the reader being asked
+  to find it convincing. The page already says so under Objections. Making it public is Tony's
+  call and needs a scrub first, not a session's decision.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
+
+### Tonys-MacBook-Pro/4a487730 — Clean three things now readable on the public repo: gmail in the README, a private repo name in two screenshots, and home paths in two case files
+- **Status:** DONE 2026-08-31
+- **Opened:** 2026-08-31
+- **Branch when opened:** `clean-three-public-leaks` — a fact, not an identity; it may move under you
 - **Writes:** <files or folders you will change; "repo only" if nothing outside git>
 - **Notes:** <anything another session must know before touching the same thing>
 
@@ -1633,6 +1742,47 @@ risks in the file.
   **Naming finding, filed not fixed:** Tony asked *"what's 0002?"* about a record he had been
   revising all session. **`0002` is opaque where the slug is not.** If `docs/decisions/` grows,
   the index in its README is doing all the work and the number is doing none.
+### Tonys-MacBook-Pro/4a487730 — Rewrite the four draft banners: the front door opens by telling the reader nothing here has been checked
+- **Status:** DONE 2026-08-31
+- **Opened:** 2026-08-31
+- **Branch when opened:** `banner-reads-as-a-verdict` — a fact, not an identity; it may move under you
+- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
+- **Notes:** <anything another session must know before touching the same thing>
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
+
+### Tonys-MacBook-Pro/1ff63f40 — Add a fifth objection to four-barriers: 'if this is real, why is it free' — the field moves faster than a course can be sold. Worktree free-objection.
+- **Status:** DONE 2026-08-31
+- **Opened:** 2026-08-31
+- **Branch when opened:** `free-objection` — a fact, not an identity; it may move under you
+- **Writes:** [`../docs/handouts/four-barriers.html`](handouts/four-barriers.html) — the Objections
+  section only — and its build output [`../site/index.html`](../site/index.html). Nothing else.
+- **Notes:** Tony, 2026-08-31, in two parts: add the objection *"if this is real, why are you
+  giving it away for free?"* — answered as **it is the right thing to do**, and then as
+  arithmetic: the field moves faster than a course can be built, so yesterday's course is a
+  waste of a new user's time — and then *"add that this site is continually updated as new
+  issues arise."* The second half went into the headline paragraphs, not only the fold, because
+  at **Headlines** depth the `details` blocks are shut and the instruction would not be visible.
+  **Two claims in it are checkable and one is not:** the five wrong click paths and the dating
+  gate are sourced to `tools/check_dated_ui.sh`; the *"55 commits between 28 and 31 August"* is
+  from this repository's own log and **the repository is private**, so the section says so and
+  labels it a self-report rather than leaving the reader to discover the link is not there.
+  Also fixed in passing: `"none of those centres <i>failure management</i>"` in the objection
+  below it was missing its verb.
+- **⚠ Near-miss worth the next session's attention: the darkroom copy was taken from the shared
+  checkout and was a version behind.** The work was done in a worktree, merged and pushed —
+  and then `cp` ran against `/Users/tonydefazio/Developer/short-course/site/index.html`, which
+  is the **shared** checkout and had not pulled. That file was three commits old and did not
+  contain the section it was being delivered to show; `grep -c "Why is it free"` returned **0**,
+  which is the only reason it was caught. It was replaced from `git show origin/master:` and
+  verified again. **Worktrees moved the collision rather than removing it:** once you work off
+  to one side, the shared checkout is no longer a copy of anything current, and every habit that
+  says "the file is at `~/Developer/short-course/...`" is now quietly wrong. Deliver from
+  `git show origin/master:<path>`, and grep the delivered file for a string that only the new
+  version has.
 
 <!-- RELEASE THIS
      tools/claim.sh --release

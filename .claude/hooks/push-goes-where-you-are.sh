@@ -98,6 +98,29 @@ if [ "${1:-}" = "--selftest" ]; then
     chk "an unrelated command is not our business" \
         0 "$(run '{"tool_input":{"command":"ls -la"}}')"
 
+    # ---- deletion. Added 2026-08-31 after the gate refused the tidy-up step of its own
+    #      workflow: a merged branch being deleted names a ref checked out NOWHERE, which
+    #      is precisely what the N6 repair had just started refusing.
+    chk "--delete of a merged branch is allowed" \
+        0 "$(run '{"tool_input":{"command":"git push origin --delete some-merged-branch"}}')"
+    chk "-d is the same thing" \
+        0 "$(run '{"tool_input":{"command":"git push -d origin some-merged-branch"}}')"
+    chk "the colon deletion syntax is allowed" \
+        0 "$(run '{"tool_input":{"command":"git push origin :some-merged-branch"}}')"
+
+    # ---- mention vs use. Added the same hour, because this gate refused the board claim
+    #      being written ABOUT it: the words `git push` inside a quoted argument were read
+    #      as a command and `names` became the remote. In a repo about git hygiene, every
+    #      commit message and case file is such a sentence.
+    # These name a branch that is checked out NOWHERE, on purpose. The first version quoted
+    # `master`, which every checkout of this repo has out — so both cases passed through the
+    # worktree clause and would have passed with the mention filter deleted. mutation_check
+    # reported it MISSED. A test whose input cannot reach the code it names is not a test.
+    chk "a claim that quotes the command is not a command" \
+        0 "$(run '{"tool_input":{"command":"tools/claim.sh \"why git push origin not-my-branch went wrong\""}}')"
+    chk "a commit message that quotes it is not a command" \
+        0 "$(run '{"tool_input":{"command":"git commit -m \"do not run git push origin not-my-branch here\""}}')"
+
     # ---- interlock 1, worktree-aware. Added 2026-08-30 with the N6 fix.
     #
     # The case that mattered and did not exist: a refspec naming a branch that IS checked
@@ -170,6 +193,51 @@ case "$PAYLOAD" in
     *grep*"git push"*|*"git push"*grep*) exit 0 ;;
 esac
 
+# MENTION, NOT USE. Added 2026-08-31, minutes after the N6 repair, because this gate
+# refused the very claim that was being posted about it:
+#
+#     tools/claim.sh "Gate fix: git push --delete names a branch checked out nowhere…"
+#
+# The parser took everything after `git push` and read `names` as the remote and `a` as
+# the refspec, then refused. The header three lines above says this hook "must not fire
+# on merely *mentioning* a command -- verbs, not names", and only `grep` was excluded.
+# Every commit message, board claim, case file and handoff in a repository ABOUT git
+# hygiene is a sentence with `git push` in it, so the exception was aimed at one tool
+# when the class is "prose".
+#
+# The discriminator: inside the COMMAND, what comes immediately before `git push`. A real
+# invocation sits at the start of the command or right after a shell separator. A mention
+# sits after ordinary words -- `-m "do not run git push ..."`, `claim.sh "why git push ..."`.
+#
+# The first attempt tested the raw payload for a quote before `git push` and was WRONG: the
+# payload is JSON, so a real invocation is `"command":"git push ...` and carries a quote too.
+# It allowed every push through, and the selftest said FAIL on three pre-existing cases
+# immediately. Recorded because it is the same lesson twice in one file -- strip the
+# envelope before reasoning about the contents.
+CMD=$(printf '%s' "$PAYLOAD" | sed 's/.*"command"[[:space:]]*:[[:space:]]*"//')
+
+# Test the verb that actually matched. Testing `git push` unconditionally was wrong: for a
+# `git commit` payload there is no `git push` to cut, so the whole command became the
+# "prefix", every commit read as a mention, and interlock 2 stopped firing entirely. One
+# selftest case caught it — the only case in the suite that drives interlock 2 through a
+# commit rather than a push.
+VERB="git push"
+case "$CMD" in *"git push"*) VERB="git push" ;; *) VERB="git commit" ;; esac
+
+# Everything before that verb, trailing blanks removed, judged on its LAST CHARACTER alone.
+# One character on purpose: the first version of this block used `*"$("` as a case pattern,
+# which opens a command substitution inside the pattern and made the whole file a syntax
+# error — so the hook exited 2 on every call. The selftest went red on fourteen cases at
+# once, which is the only reason that is not in a commit.
+PRE=$(printf '%s' "$CMD" | sed "s/${VERB}.*//" | sed 's/[[:space:]]*$//')
+if [ -n "$PRE" ]; then
+    LAST=$(printf '%s' "$PRE" | sed 's/.*\(.\)$/\1/')
+    case "$LAST" in
+        ';'|'&'|'|'|'('|'{') : ;;                 # right after a separator: a real command
+        *) exit 0 ;;                              # after ordinary words: a mention
+    esac
+fi
+
 BRANCH=$(sc_branch)
 ADDR=$(sc_session_address)
 STATE=$(sc_state_dir)/last-branch
@@ -185,6 +253,24 @@ case "$PAYLOAD" in *"git push"*)
     # `git push origin master` on master was refused. Its selftest passed anyway,
     # because every case it happened to check was one where blocking was correct.
     TAIL=$(printf '%s' "$PAYLOAD" | sed 's/.*git push//' | sed 's/[\"}&;|].*//')
+
+    # A DELETION NAMES A BRANCH THAT IS CHECKED OUT NOWHERE, BY DEFINITION. Added
+    # 2026-08-31: the N6 repair made interlock 1 ask "is this refspec checked out in some
+    # worktree", which is right for a push and exactly backwards for a delete. It refused
+    # `git push origin --delete publication-remainder` on a branch that had just been
+    # merged and closed — the tidy-up step at the end of the very workflow this gate now
+    # exists to support. Deleting a ref is not the 2026-08-27 no-op-success: it moves
+    # something, and git refuses if the ref is checked out anywhere.
+    # Written as a flag rather than an inline `exit` so that tools/mutation_check.sh can
+    # target it: its table is a heredoc inside `$( )`, and under bash 3.2 a row containing
+    # `;;` or an unbalanced `)` makes that whole file a syntax error. A `case` arm cannot be
+    # a mutation anchor here. The flag line can.
+    IS_DELETE=no
+    case "$TAIL" in
+        *" --delete "*|*" --delete"|*" -d "*|*" -d"|*" --prune "*|*" --mirror "*) IS_DELETE=yes ;;
+    esac
+    [ "$IS_DELETE" = yes ] && exit 0
+
     REMOTE=""; REFSPEC=""
     for tok in $TAIL; do
         case "$tok" in
@@ -193,6 +279,13 @@ case "$PAYLOAD" in *"git push"*)
         if [ -z "$REMOTE" ]; then REMOTE="$tok"; continue; fi
         if [ -z "$REFSPEC" ]; then REFSPEC="$tok"; break; fi
     done
+
+    # The other delete syntax, `git push origin :branch`, needs no clause of its own: the
+    # `*:*` arm below already allows any refspec containing a colon. A guard was written for
+    # it here anyway and `tools/mutation_check.sh` reported it MISSED — breaking it changed
+    # nothing, because the selftest case was passing through the older arm the whole time.
+    # Removed rather than kept with a passing test in front of it, which is the shape this
+    # repo files case studies about. The selftest case stays: the behaviour is still asserted.
 
     if [ -n "$REFSPEC" ]; then
         case "$REFSPEC" in

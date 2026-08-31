@@ -1,3 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="You do not need to be an expert at web deployment. Seven real stoppages from one afternoon, four real screens, and the loop that got past three of them.">
+<link rel="canonical" href="https://lookedright.tonydefazio.com/show-it-your-screen">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%96%A5%3C/text%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Show It Your Screen">
+<meta property="og:description" content="You do not need to be an expert at web deployment. Seven real stoppages from one afternoon, four real screens, and the loop that got past three of them.">
+<meta property="og:url" content="https://lookedright.tonydefazio.com/show-it-your-screen">
+<meta name="twitter:card" content="summary">
+<!-- GENERATED FILE - do not edit.
+     Built by tools/build_site.sh from docs/handouts/show-it-your-screen.html,
+     which is the only source. Edit there, rebuild, deploy. -->
 <title>Show It Your Screen</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -158,8 +174,29 @@
   }
   .prov b { color: var(--muted); font-weight: 600; }
   a { color: var(--accent); }
-</style>
 
+  /* Version line under the masthead. Derived at build time by tools/build_site.sh
+     from the source's git history -- there is nothing here to edit or to forget. */
+  .pv {
+    margin: 10px 0 0;
+    font-family: var(--mono);
+    /* Takes the page's own label size where the page defines one -- four-barriers
+       collapsed to a three-token scale and a hardcoded 11.5 here was the last size
+       outside it. The fallback is what the other three pages still render at. */
+    font-size: var(--t-label, 11.5px);
+    line-height: 1.5;
+    letter-spacing: .02em;
+    color: var(--faint);
+  }
+  .pv b { font-weight: 600; color: var(--muted); }
+  .pv-born { display: block; }
+  @media (min-width: 620px) {
+    .pv-born { display: inline; }
+    .pv-born::before { content: " \00B7 "; }
+  }
+</style>
+</head>
+<body>
 <div class="page">
 
   <div class="mast">
@@ -168,6 +205,7 @@
     <p class="standfirst">You do not need to become an expert at web deployment. Nobody stays one —
     the dashboards are rebuilt faster than anybody can memorise them. What you need is a loop, and
     the loop is four beats long.</p>
+    <p class="pv">Version <b>0.1.3</b> &middot; 31 Aug 2026<span class="pv-born">First published 30 Aug 2026</span></p>
   </div>
 
   <div class="status">
@@ -654,3 +692,5 @@
   alternatives.</p>
 
 </div>
+</body>
+</html>

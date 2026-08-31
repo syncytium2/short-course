@@ -158,13 +158,21 @@
   <div class="mast">
     <p class="eyebrow">Decision record 0002 · not student-facing</p>
     <h1>The Shortest Route</h1>
-    <p class="standfirst">A website a learner can edit from the Claude app — whether it needs a
-    repository, and whether an agent maintaining documentation can spare them from learning git.
-    A decision addressed to the author, not a sheet to hand anyone.</p>
+    <p class="standfirst">A website a learner can edit from the Claude app. The first step is getting
+    the expert on your side — then whether it needs a repository, and whether an agent maintaining
+    documentation can spare them from learning git. A decision addressed to the author, not a sheet
+    to hand anyone.</p>
   </div>
 
   <div class="status">
-    <p><b>Revised 2026-08-30, same day, and the first version was wrong about the first
+    <p><b>Restructured 2026-08-31 around a first step it did not have.</b> The page used to open with
+    four routes laid side by side, as if the learner's first act were choosing between products.
+    <b>It is not. The first act is getting the expert on your side</b>, and the rest is downstream of
+    how much of your screen they can see — so §1 is now that ladder, and the routes moved to §2 where
+    they answer the narrower question they actually answer. <b>The decision in §6 did not change and
+    is therefore not superseded</b>; when it changes, 0002 gets a successor and stays on the page, as
+    0001 did.</p>
+    <p><b>Revised 2026-08-30, the day before, because the first version was wrong about the first
     question.</b> It said a repository is <i>required</i>. That is true of Claude Code on the web and
     it is not true of the Claude app, because <b>Cowork</b> connects a real folder with no repository
     and no terminal. The wrong version is not edited away: its decision record is kept below,
@@ -191,7 +199,7 @@
     <p><b>The two questions, as asked.</b> <i>Is a repo necessary?</i> — and <i>can the agent
     maintain sufficient docs to avoid having to teach a noob git?</i></p>
     <p><b>Answers: no, and no.</b> A repository is <i>not</i> necessary — Cowork removes the
-    requirement. It is still worth buying, and the price is one free account. What it buys is two
+    requirement. It is still worth taking, and <b>nothing this route does needs a paid GitHub tier</b> &mdash; the account, and unlimited private repositories, are free. What taking it gets you is two
     specific things, both nameable, both already documented failures in this course's material.
     And documentation cannot replace the teaching, because on the shorter route there is
     <i>more</i> to hold, not less.</p>
@@ -228,75 +236,170 @@
   <!-- ============ 1 ============ -->
   <section class="sect">
     <div class="sect-head">
-      <h2>1 · Four routes, and what each one actually is</h2>
-      <span class="sect-tag">the field</span>
+      <h2>1 · Get the expert on your side</h2>
+      <span class="sect-tag">step one</span>
     </div>
 
-    <p>&ldquo;Edit it in the Claude app&rdquo; describes four different products with four different
-    requirements. They are not variants of one thing, and only two of them end with a file the
-    learner owns at an address they control.</p>
+    <p><b>This is the first move, and everything else on this page is downstream of it.</b> Not
+    buying a plan, not choosing a host, not deciding about a repository. <b>Recruiting somebody who
+    already knows this, and putting them where they can see what you are doing.</b></p>
+
+    <p>The reason that is the first step rather than a nice idea is in §7. On 2026-08-30 this route
+    was walked, and instructions written <i>in advance</i> were wrong five times out of five — while
+    the same expert, <b>able to see the screen</b>, unstuck three of those within a single exchange.
+    <b>The expert is not valuable because they know the way. They are valuable because they can read
+    what is in front of you.</b> So the whole of step one is a question about how much they can
+    see.</p>
+
+    <h3>Three places to stand, and each one shows them more</h3>
 
     <div class="tbl-wrap">
     <table>
       <thead>
-        <tr>
-          <th>Route</th><th>Repo</th><th>Terminal</th><th>Edit from<br>the Claude app</th>
-          <th>Survives the<br>laptop</th><th>How it publishes</th>
-        </tr>
+        <tr><th></th><th>Where you are</th><th>What they can see</th><th>Money</th><th>Effort</th></tr>
       </thead>
       <tbody>
         <tr>
-          <td class="k">A · Artifact</td>
-          <td class="yes">none</td><td class="yes">none</td><td class="yes">yes</td>
-          <td class="no">n/a</td>
-          <td>Automatic. But it is a page in somebody else's system, not a file you keep.</td>
+          <td class="k">Minimum</td>
+          <td><b>Claude on the web</b><br>claude.ai, in a browser</td>
+          <td><b>Only what you paste.</b> They cannot open your files, run anything, or check a
+          result. You are their eyes, and everything arrives by hand.</td>
+          <td><b>None.</b> The free tier does this, artifacts included.</td>
+          <td>A login. <b>A real floor, not a consolation</b> — a page can be written here and copied
+          out. What runs out is <i>usage</i>, not features.</td>
         </tr>
         <tr>
-          <td class="k">B · Cowork on a folder</td>
-          <td class="yes">none</td><td class="yes">none</td><td class="yes">yes</td>
-          <td class="no">no</td>
-          <td><b>Drag the folder to Cloudflare, every time.</b> A step someone must remember.</td>
+          <td class="k">Middle</td>
+          <td><b>The Claude app, Code mode</b><br>desktop app, <b>Code</b> tab</td>
+          <td><b>A folder you choose.</b> They read and write real files in it, and every change
+          arrives as a diff you approve — file by file, or line by line, with your comments going
+          back in the same view.</td>
+          <td><b>Pro.</b> Cowork and Claude Code are both above the free line.</td>
+          <td>One download. <b>No terminal required</b>, though there is one in a pane if you ever
+          want it.</td>
         </tr>
         <tr>
-          <td class="k">C · Claude Code on the web</td>
-          <td class="no">required</td><td class="yes">none</td><td class="yes">yes</td>
-          <td class="yes">yes</td>
-          <td><b>Automatic on push.</b> Nobody remembers anything.</td>
-        </tr>
-        <tr>
-          <td class="k">D · Folder &rarr; wrangler</td>
-          <td class="yes">none</td><td class="no">required</td><td class="no">no</td>
-          <td class="no">no</td>
-          <td>A typed command. The terminal is the thing being avoided.</td>
+          <td class="k">Best</td>
+          <td><b>VS&nbsp;Code with the Claude window</b><br>the editor you will keep</td>
+          <td><b>The same folder — inside the editor you already work in.</b> Your extensions, your
+          other projects, your own place. You read the diff where the file actually lives rather
+          than in a viewer beside it.</td>
+          <td><b>The same Pro plan.</b> Rung 3 costs no more money than rung 2 — only more setup.</td>
+          <td>Cold Start Phase 3, about an hour, once. <b>3.5 is the step that catches people</b> —
+          the button is invisible until a file is open.</td>
         </tr>
       </tbody>
     </table>
     </div>
 
-    <p><b>Route A is not a straw man — this course runs on it.</b> All four handouts, this one
-    included, are published as artifacts and read that way. It is a real channel. What it cannot do
-    is be the learner's, at their own address, with a copy they keep.</p>
+    <div class="status" style="margin:0 0 20px">
+      <p><b>Where the money actually is, and it is one line: the plan.</b> Read on 2026-08-31 from
+      the vendor's own page — <b>Free $0</b>, <b>Pro $20/month, or $17 if paid annually</b>, Max from
+      $100. <b>Treat those as pointers, not as the price</b>; <i>What It Costs</i> is the sheet for
+      this and its own standing warning is that plan pages get renamed, split and re-metered faster
+      than any document tracks.</p>
+      <p><b>Nothing about the repository costs money at the tier this route uses.</b> A GitHub
+      account and unlimited private repositories are free, and hosting on Cloudflare's free tier is
+      free. <b>Paid GitHub tiers do exist</b> — some collaboration features on private repositories
+      sit behind them, and organisations buy them for reasons this route never reaches. The claim
+      here is the narrow one: <i>nothing this route does needs a paid GitHub tier.</i></p>
+      <p><b>The one other thing that takes cash is a domain name</b> — Cold Start Phase 7, roughly
+      $10–15 a year, and the renewal price is the number that matters. Without one the site still
+      works; it just lives at an address somebody else named.</p>
+    </div>
 
-    <p><b>Route D is Cold Start 7.3, and it is here to be ruled out.</b> 7.3 calls it <i>&ldquo;the
-    road most people should take, and it is three steps shorter.&rdquo;</i> That is true, and it is
-    true <b>only with a terminal</b> — it needs <code>wrangler</code>. Take the shell away and the
-    ranking inverts: the shortest road becomes unreachable. <i>See §5.</i></p>
+    <p><b>The ladder is ordered by what the expert can see, and that is the only axis that
+    matters.</b> Every rung up removes a thing you would otherwise have to describe to them, and
+    describing your own screen accurately is the hardest part of the minimum tier — you do not know
+    which detail matters, which is exactly why you are stuck.</p>
 
-    <p><b>So the real decision is B against C.</b> Both are defensible, which is what makes it a
-    decision rather than a step — and <b>only one of the two has been used by anyone here.</b> The
-    table above is a field, not a scorecard: it says what each route requires, and it does not say
-    which is better at the job it does.</p>
+    <p><b>Start where you can start today, and that can be for nothing.</b> The minimum rung is not
+    a trap and not a demo: a learner who opens a browser this afternoon on the free tier and copies
+    a page out of it has done the real thing. The ladder is there so that when it gets tiring — and
+    it gets tiring at the third file — you know what the next rung gets you and roughly what it
+    costs.</p>
+
+    <p><b>What runs out at the bottom is usage, not capability.</b> The free tier is not a crippled
+    version that refuses to write your page; it is the same thing with less of it. So the tell that
+    you have outgrown rung 1 is not <i>&ldquo;it cannot do this&rdquo;</i> — it is <b>the copying.</b>
+    Once you are pasting files back and forth, you are doing by hand the one thing rung 2 exists to
+    remove, and you are also the thing most likely to get it wrong.</p>
+
+    <div class="method" style="margin-top:22px">
+      <p><b>Cowork is not a fourth option, and this page said otherwise for a day.</b> The desktop
+      app has three tabs — <b>Chat</b>, <b>Cowork</b> and <b>Code</b> — so Cowork and Claude Code are
+      not rival products a learner chooses between. They are rooms in the middle rung. An earlier
+      version of this record set them against each other as routes B and C; that framing is gone
+      because it made the choice look bigger than it is.</p>
+    </div>
+
+    <p><b>What has not changed is the decision in §6</b>, which is about what carries the site once
+    the expert is beside you — a different question from where you stand, and answered separately in
+    §2. This section was rewritten on 2026-08-31; <b>the record's decision was not reversed, so it
+    is not superseded.</b> When the decision itself changes, 0002 gets a successor and stays on the
+    page, as 0001 did.</p>
   </section>
 
   <!-- ============ 2 ============ -->
   <section class="sect">
     <div class="sect-head">
-      <h2>2 · Is a repo necessary? No. Is it worth buying? Yes — at a stated price</h2>
+      <h2>2 · Is a repo necessary? No. Is it worth taking anyway? Yes — and it is free</h2>
       <span class="sect-tag">question one</span>
     </div>
 
+    <p><b>A different axis from §1.</b> Where you stand decides what the expert can see. This decides
+    <b>what carries the site</b> once they can see it — and the two are independent, which is why the
+    ladder does not answer this and this does not tell you which rung to be on. <b>The letters below
+    are used throughout the rest of this record</b>; B and C are the two that turn out to matter.</p>
+
+    <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>What carries it</th><th>Repo</th><th>Terminal</th>
+          <th>Survives the<br>laptop</th><th>How it publishes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="k">A · an artifact</td>
+          <td class="yes">none</td><td class="yes">none</td>
+          <td class="no">n/a</td>
+          <td>Automatic — but it is a page in somebody else's system, not a file you keep.</td>
+        </tr>
+        <tr>
+          <td class="k">B · a folder on your disk</td>
+          <td class="yes">none</td><td class="yes">none</td>
+          <td class="no">no</td>
+          <td><b>Drag it to Cloudflare, every time.</b> A step someone must remember.</td>
+        </tr>
+        <tr>
+          <td class="k">C · a GitHub repository</td>
+          <td class="no">required</td><td class="yes">none</td>
+          <td class="yes">yes</td>
+          <td><b>Automatic on push.</b> Nobody remembers anything.</td>
+        </tr>
+        <tr>
+          <td class="k">D · a folder + <code>wrangler</code></td>
+          <td class="yes">none</td><td class="no">required</td>
+          <td class="no">no</td>
+          <td>A typed command — and the terminal is the thing being avoided.</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <p><b>The artifact row is not a straw man — this course runs on it.</b> Every handout, this one
+    included, is published that way and read that way. What it cannot be is the learner's, at their
+    own address, with a copy they keep.</p>
+
+    <p><b>The last row is Cold Start 7.3, and it is here to be ruled out.</b> 7.3 calls it
+    <i>&ldquo;the road most people should take, and it is three steps shorter&rdquo;</i> — true, and
+    true <b>only with a terminal</b>. Take the shell away and the shortest road becomes unreachable.
+    Phase 7 now says so on the page itself.</p>
+
     <p><b>Cowork gives Claude a real folder on the learner's disk, from inside the Claude app, with
-    no repository and no terminal.</b> That is the whole of route B, and it is the shortest route to
+    no repository and no terminal.</b> That is the middle rung's own answer, and the shortest route to
     a website the learner owns:</p>
 
     <blockquote>
@@ -316,7 +419,7 @@
     independent grounds, and already calls it the step people skip. Nothing else changes: on route C
     the learner still types no git commands, because Claude commits and pushes.</p>
 
-    <h3>What it buys, and both are things this course has already watched fail</h3>
+    <h3>What it gets you, and both are things this course has already watched fail</h3>
 
     <p><b>One: a second place to exist.</b> A Cowork project lives on one laptop and does not leave
     it. Web and mobile sessions reach the folder <i>only while that desktop app is running</i>, and
@@ -350,7 +453,7 @@
       <p><b>So the honest statement.</b> Route B is shorter and it is not wrong. It is the right
       answer for a learner who will work on one machine, alone, on something they could rebuild in
       an afternoon — and <b>a course that told that learner they must have a GitHub account would be
-      wrong.</b> Route C costs one free account and buys the two things whose absence does not
+      wrong.</b> Route C costs one account, free at the tier this route uses, and gets you the two things whose absence does not
       announce itself. That is the trade, and it is now a choice rather than a requirement.</p>
       <p><b>What this page will not claim.</b> That route B is worse. Nobody here has run it. The two
       costs above are real and sourced; whether they matter to a given learner is a question about
@@ -516,14 +619,27 @@
       <li>
         <span class="n">1</span>
         <div>
-          <p class="s-title">Get a paid Claude plan, and find out which kind it is.</p>
-          <p class="s-body">Both routes need one: Cowork is <i>&ldquo;available on paid plans (Pro,
-          Max, Team, Enterprise)&rdquo;</i> and Claude Code on the web is in research preview for
-          Pro, Max and Team. A free account opens neither door. Read <i>What It Costs</i> first: a
-          personal plan is an allowance you hit and stop; an institutional billing code is usually
-          uncapped, and nothing stops or warns.</p>
-          <p class="done"><b>Done when</b> you can sign in, and you can say what happens when you use
-          too much — it stops, or it bills.</p>
+          <p class="s-title">Get the expert on your side, and pick how much of your screen they get.</p>
+          <p class="s-body"><b>This is §1, and it is the only step that changes what all the others
+          cost.</b> Take the highest rung you can reach today and no higher: <b>Claude on the web</b>
+          if you want to start in the next five minutes, <b>the Claude app in Code mode</b> if you
+          can spare one download, <b>VS&nbsp;Code with the Claude window</b> if you have Cold Start
+          Phase 3 behind you. You can move up later and nothing is wasted.</p>
+          <p class="s-body"><b>Rung 1 is free and rungs 2 and 3 are the same paid plan.</b> Cowork is
+          <i>&ldquo;available on paid plans (Pro, Max, Team, Enterprise)&rdquo;</i> and Claude Code on
+          the web is in research preview for Pro, Max and Team, so <b>one Pro subscription unlocks
+          both of the upper rungs at once</b> — the step from 2 to 3 is setup, not spending. Read
+          <i>What It Costs</i> before you pick, and check the plan page rather than any number
+          written here.</p>
+          <p class="s-body"><b>Then find out which shape of bill you have agreed to, before you lean
+          on it.</b> A personal plan is an allowance: you hit it and it stops, which is annoying and
+          safe. An institutional billing code is usually uncapped — nothing stops, nothing warns, and
+          the number surfaces when somebody else reads the statement. <b>That distinction matters
+          more than the amount</b>, and it is the one nobody is told unprompted.</p>
+          <p class="done"><b>Done when</b> the expert has named something back to you that you did not
+          tell them — a file in your folder, or a detail from a screenshot. That is the difference
+          between having an account and having them on your side. And you can say what happens when
+          you use too much: it stops, or it bills.</p>
         </div>
       </li>
       <li>
@@ -570,7 +686,7 @@
       <li>
         <span class="n">5</span>
         <div>
-          <p class="s-title">Publish, and notice which kind of publishing you bought.</p>
+          <p class="s-title">Publish, and notice which kind of publishing you set up.</p>
           <p class="s-body"><b>Route B.</b> Cloudflare dashboard → create a Pages project → drag the
           folder in. Browser only, no repository. Limits worth knowing: a zip or a single folder,
           1,000 files, 25 MiB each — ample for a website. <b>Every later change means dragging it in
@@ -588,7 +704,7 @@
 
     <p style="margin-top:18px"><b>Step 5 is the whole decision in one step.</b> Route C's auto-deploy
     is the only <b>tier-four</b> element available on either road — <i>the wrong thing is not
-    reachable.</i> Everything else on this page is prose. It is bought once, in a browser, in about
+    reachable.</i> Everything else on this page is prose. It is set up once, in a browser, in about
     ten minutes, and it is what the free account was actually for.</p>
   </section>
 
@@ -624,7 +740,7 @@
     </div>
 
     <div class="dr" style="margin-top:18px">
-      <p class="dr-head">decisions/0002-buy-the-repository-rather-than-require-it.md<br>
+      <p class="dr-head">decisions/0002-take-the-repository-though-nothing-requires-it.md<br>
       Date: 2026-08-30 &nbsp;·&nbsp; Status: proposed &nbsp;·&nbsp; Supersedes 0001</p>
       <dl>
         <dt>What we chose</dt>
@@ -646,7 +762,7 @@
         There is not one.</p></dd>
 
         <dt>Why</dt>
-        <dd><p>Not for version control, and not because anything forces it. <b>One free account buys
+        <dd><p>Not for version control, and not because anything forces it. <b>One account, free at the tier this route uses, gets you
         two things whose absence does not announce itself</b> — a second place for the work to exist,
         and a deploy that happens without anyone remembering. Both are failures this course has
         already recorded happening to people who knew better.</p>
@@ -742,7 +858,7 @@
     </table>
     </div>
 
-    <p><b>What the walk actually bought.</b> Three of seven rows are green, one of them on a human's
+    <p><b>What the walk actually established.</b> Three of seven rows are green, one of them on a human's
     say-so and two on a machine's. <b>It did not confirm the route.</b> It confirmed that the
     machine-checkable half does what the page says, and it turned the unexamined half into a named
     list &mdash; which is the smaller claim, and the true one.</p>
@@ -807,7 +923,7 @@
         <tr>
           <td class="k">Still no learner</td>
           <td>§7 records what one walk confirmed. <b>It was walked by the people who wrote it</b>,
-          from an account already linked and a plan already bought &mdash; the one starting position
+          from an account already linked and a plan already paid for &mdash; the one starting position
           this route is not written for. <b>No beginner has been observed attempting either road</b>,
           and the two steps most likely to stop one (2 and 3b) are the two the walk could not test.
           Route B was not walked at all, and the Cowork settings trap in step 3 still comes from a

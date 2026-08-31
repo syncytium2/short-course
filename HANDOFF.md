@@ -267,6 +267,15 @@ true. The guard being set is the quiet slide from *postponed* to *no longer bloc
 **A private remote exists.** `syncytium2/short-course`. Backup and cross-machine access settled;
 publication still open and deliberately so.
 
+> **Superseded 2026-08-31 — the remote is PUBLIC.** github.com/syncytium2/short-course. Tony
+> decided it when the site went on a résumé and the front page's strongest objection was that a
+> page arguing records make claims checkable pointed at a record nobody could open. The cost was
+> priced in `README.md` the day before — the Cloudflare account id and a gmail address in
+> `ddc7594` are permanent and now public, accepted rather than rewritten — and no file was
+> removed in order to publish. **Anything below this line reasoning from "the remote is private"
+> is reasoning from a fact that expired**, including the paragraph immediately above it, which is
+> left standing because that is what this file does.
+
 **Landed today, second session:**
 
 - **§D is ordered** — seven phases, from the two long-lead items that need someone else's approval

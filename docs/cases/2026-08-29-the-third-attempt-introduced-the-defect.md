@@ -381,7 +381,7 @@ direction.
 ## Verification appendix
 
 Run 2026-08-29, 16:30–16:45 EDT, from
-`/Users/tonydefazio/Developer/bugarach-worktrees/duration-is-the-exporters` at `042ec5e`.
+`~/Developer/bugarach-worktrees/duration-is-the-exporters` at `042ec5e`.
 
 | Claim | How checked | Status |
 |---|---|---|

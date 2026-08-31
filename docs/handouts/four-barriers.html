@@ -238,6 +238,11 @@
   .view ul, .view ol { max-width: 68ch; margin: 0 0 16px; padding-left: 22px; }
   .view li { margin-bottom: 7px; }
   .view li::marker { color: var(--faint); }
+  /* Others teaching this: one entry per programme, each a link then what it is and
+     who it is for. No new type size -- the page holds three, and a fourth is a rule
+     this file already broke once. */
+  .view ul.also { list-style: none; padding-left: 0; }
+  .view ul.also li { margin-bottom: 14px; padding-left: 14px; border-left: 2px solid var(--rule); }
 
   code, .path {
     font-family: var(--mono); font-size: .875em;
@@ -383,10 +388,18 @@
   body[data-depth="all"] .prov { display: block; }
   .prov b { color: var(--muted); font-weight: 500; }
 
-  /* The sequence blocks. The repository is private, so these are the commit log
-     brought TO the reader rather than a link they cannot follow — the same reason
-     paths on this page are named and not linked. Dates and subjects are verbatim
-     from `git log`; nothing is paraphrased. */
+  /* The sequence blocks: the commit log brought TO the reader rather than a link
+     they have to go and follow. Dates and subjects are verbatim from `git log`;
+     nothing is paraphrased.
+
+     THE REASON CHANGED ON 2026-08-31 AND THE BLOCKS DID NOT. They were built
+     because the repository was private and a link would have 404'd. It is public
+     now, so the paths on this page COULD be links. They still are not, and that is
+     a choice rather than an oversight: a reader deciding whether to believe this
+     page should not have to leave it to find out, and a log excerpted here is one
+     they can check afterwards against a repo that is now open to them. If that
+     stops being true — if the excerpts drift from the log — this comment is where
+     the wrong assumption is written down. */
   .seq { margin-top: 10px; }
   .seq > b { color: var(--muted); font-weight: 600; }
   ol.sq { list-style: none; margin: 6px 0 0; padding: 0; }
@@ -462,6 +475,14 @@
      know which part of the page they cannot lean on. Caution palette, not
      --bad: this is a statement about confidence, not an error, and the page
      already spends red on steps that are incomplete.
+
+     THIS PAGE BROKE THAT RULE FOR TWO WEEKS. The keyword here read exactly
+     "Draft" while cold-start and what-it-costs named their defect ("nobody has
+     walked this", "prices unre-checked"), so the one page that states the rule
+     in this comment was the one page ignoring it. Corrected 2026-08-31, and the
+     word "Draft" is gone from all four keywords rather than moved: it is the
+     token in the stamp that carries no information, and a reader who is told
+     what is unverified does not also need to be told it is a draft.
      -------------------------------------------------------------------- */
   .draft {
     border: 1px solid var(--caution);
@@ -486,8 +507,8 @@
 
 <div class="shell">
   <div class="draft">
-    <b class="draft-k">Draft</b>
-    <p>This page and the two it links to are drafts. The arguments have been reviewed as text; the setup runbook they point at has <b>not been walked end to end by anyone</b>, and its prices have not been re-checked since they were written.</p>
+    <b class="draft-k">Author-checked, not peer-reviewed</b>
+    <p>Every incident below is real and traceable to a primary source, and <b>every check on it was run by the author on the author&rsquo;s own work</b> &mdash; so read it as a self-report. It has not been re-run independently, and it has not yet been taught to a cohort. Each sheet linked from here states its own limits at the top. The strongest case against the whole approach is set out under <a href="#objections" data-view="objections">Objections</a>.</p>
   </div>
   
       <a class="ready sceptic" href="#objections" data-view="objections">
@@ -1010,7 +1031,7 @@
             </tbody>
           </table>
         </div>
-        <p><b>Every name in that table is a link, and all four repositories are public.</b> The claims in the right-hand column are checkable in a browser, without cloning anything: the losing table, the lineage document, the tests, the workflow runs. The one repository that is private is the one behind <i>this page</i>, which is the objection&rsquo;s strongest remaining foothold and is stated again below.</p>
+        <p><b>Every name in that table is a link, and all four repositories are public.</b> The claims in the right-hand column are checkable in a browser, without cloning anything: the losing table, the lineage document, the tests, the workflow runs. <b>So is <a href="https://github.com/syncytium2/short-course">the repository behind this page</a></b> &mdash; private until 31 August 2026, and the objection&rsquo;s strongest foothold for as long as it was. Every path named on this page resolves there now, including the ones recording things that went wrong in the making of it.</p>
         <p><b>So the tell is not who typed the code.</b> It is whether anybody scored the result against something that could have said no, and then published the score when it came back unflattering. That is the whole of the distinction being drawn, and it is the same distinction this page draws about your own work.</p>
 
         <details class="more">
@@ -1019,7 +1040,7 @@
             <p><b>Nobody outside has used any of it.</b> Zero stars, zero forks, no outside contributors, no issues from strangers. Every figure above is a self-administered check, and a port validated against its own reference implementation is one person checking their own work with a good instrument &mdash; better than nothing, and not independent.</p>
             <p><b>The reviews are correlated.</b> The eleven-role review that caught the numerical defects in this material ran on one model in one context, and it was round one with no verification pass. Eleven seats buy coverage of angles, not independence &mdash; stated in full under <a href="#record" data-view="record">How this was made</a>.</p>
             <p><b>The course has never been taught to anybody.</b> No cohort, no feedback, no evidence that a day of it works on a real learner. What is here is material and a record, not a result.</p>
-            <p><b>The repository behind this page is private</b>, so the chain it advertises &mdash; idea, session log, drafts, review, what survived &mdash; cannot currently be inspected by the reader being asked to find it convincing. The paths named throughout are provenance, not links you can follow, and that is a real limit rather than a design flourish.</p>
+            <p><b>The repository behind this page was private until 31 August 2026</b>, and for as long as it was, the chain it advertises &mdash; idea, session log, drafts, review, what survived &mdash; could not be inspected by the reader being asked to find it convincing. <a href="https://github.com/syncytium2/short-course">It is open now</a>, which answers <i>can I see it</i> and answers nothing else: it is still the author&rsquo;s own record of the author&rsquo;s own work, published by the party it is about, and <b>opening a record does not make it independent</b>. What publishing buys is that the failures in it are now checkable by someone who did not write them &mdash; including the ones this page does not mention.</p>
             <div class="prov"><b>Source.</b> Repository figures read from the GitHub API on <b>2026-08-30</b>: creation dates, stars, forks, contributors, workflow conclusions and test-file counts. Sensitivity figures from <span class="path">no_peak/docs/validation-status.md</span>, dated 2026-08-12 and carrying its own corrections. Publication record: ORCID <b>0000-0001-7302-7528</b>, 57 works. <b>All of it is the author&rsquo;s own accounting of the author&rsquo;s own work</b>; none of it has been re-run by anyone else.</div>
           </div>
         </details>
@@ -1089,13 +1110,37 @@
           </div>
         </details>
 
-        <h3>&ldquo;You said nobody else teaches this&rdquo;</h3>
-        <p class="quote">&ldquo;&lsquo;Nobody is teaching non-programmers to do this.&rsquo; That is simply false, and I can name three.&rdquo;</p>
-        <p><b>Right, and it is withdrawn.</b> One search refuted it: Oxford&rsquo;s AI Competency Centre runs an introduction for non-programmers using coding agents on their own research data; the UW eScience Institute runs a hands-on agent workshop for researchers; Southampton&rsquo;s research software group runs an advanced course on AI-assisted development. The vacancy claim was written without a search and could not have failed &mdash; three screens from an argument that suspicion without a method is just anxiety.</p>
-        <p><b>What survives, narrowed:</b> none of those centres <i>failure management</i>. That is a contrast claim rather than a gap claim, it names its competition, and it is the version a scientist should have written first.</p>
-        <p class="caught">Still open: nobody has written to any of the three organisers. Three emails are the cheapest available check on all of it and they have not been sent.</p>
+        <h3>&ldquo;Why is it free?&rdquo;</h3>
+        <p class="quote">&ldquo;If this is real, why are you giving it away for free? Nothing worth having is free.&rdquo;</p>
+        <p><b>The first answer is the honest one, and on its own it is worth nothing as evidence: because it is the right thing to do.</b> Everybody selling a course says that too, so do not take the sentence &mdash; take the licence. The writing is <b>CC&nbsp;BY&nbsp;4.0</b> and the tools are <b>Apache-2.0</b>, both stated in the repository&rsquo;s licence table: teach it, adapt it, quote it, charge for your own version of it. There is no mailing list to join, no cohort to buy into and nothing behind the free thing that is not also free.</p>
+        <p><b>The second answer is the one that actually settles the question, and it is arithmetic rather than virtue: this material is perishable, and a price is a promise it cannot keep.</b> A course takes days to build. The next leap in what the tools can do does not make it unfashionable, it makes it <i>wrong</i> &mdash; steps that are no longer necessary, a limitation that has quietly gone away, a careful workaround for something that has stopped happening. Selling somebody yesterday&rsquo;s course sells them hours of learning to route around a problem the tool fixed last month, and that is worse than selling them nothing.</p>
+        <p><b>That is not a forecast. It happened to this material before it was ever published, and it was counted.</b> Phase 7 of the companion sheet <a href="/cold-start">Cold Start</a> was walked end to end for the first time on <b>2026-08-30</b>. The click paths in it had been written in advance and were <b>wrong five times in one afternoon</b>: Cloudflare had rebuilt its dashboard around Workers between the instructions being written and the page being opened, so &ldquo;Pages&rdquo; had become a footnote link and settings the runbook named did not appear on the form at all. <b>Nothing announced it.</b> The instructions simply described somewhere that no longer existed &mdash; and that is a vendor&rsquo;s dashboard, which moves slowly next to the models.</p>
+        <p><b>What survived that afternoon is the half worth teaching, and it is exactly the half that does not perish.</b> Every outcome and every &ldquo;done when&rdquo; condition held; every named button failed. So the durable half &mdash; what must become true, how the answer fails, how to check it without reading it &mdash; is cheap to give away and cheap to keep true, and the perishable half now has to carry a date. A gate in this repository refuses a handout step that names a vendor&rsquo;s button without one, because an undated sentence claims <i>this is where the button is</i> while a dated one claims <i>this is where the button was on 30 August</i> &mdash; which stays true forever and lets the reader price it themselves.</p>
+        <p><b>So this is not a course that was finished; it is a page that gets rewritten as new things go wrong.</b> Every section here started as an incident, and the incidents keep arriving &mdash; the dating gate two paragraphs up exists because of a failure that happened <i>after</i> most of this page was written, and the section you are reading was added later still, because somebody asked this question. <b>Being free is what makes that possible.</b> There is no shipped version to support, no cohort halfway through a syllabus and nobody owed the edition they paid for, so a section that turns out to be wrong can simply be corrected in place &mdash; or withdrawn, as one below it was.</p>
 
-        <div class="prov"><b>Section source.</b> <span class="path">OPEN-FINDINGS.md</span> B2, B4 and B5 &mdash; blocking findings from the murderboard run of 2026-08-26, carried unresolved until now and answered here on the public page rather than in an internal file. Audience line quoted from the author, 2026-08-30. The three named programmes were found in one search on 2026-08-26 and <b>have not been re-checked since</b>; course offerings move.</div>
+        <details class="more">
+          <summary>What free does not buy you, and it is a real list <span class="cost">2 min</span></summary>
+          <div class="inner">
+            <p><b>Free is not costless, and this page does not pretend otherwise.</b> What it costs you is your time, a subscription and the tokens &mdash; a real number rather than a rhetorical one, which is why the companion sheet <a href="/what-it-costs">What It Costs</a> exists at all.</p>
+            <p><b>There is no support and nobody to complain to</b> &mdash; but there is no shipped-and-forgotten version either. This page is rewritten as new failures happen, which is the only maintenance model the pace allows: <b>55 commits touched this single file between 28 and 31 August</b>, and several sections on it exist because something went wrong in the days after the section above it was written. You can check that yourself: the repository is <a href="https://github.com/syncytium2/short-course">public</a>, so the commits and their dates are readable rather than asserted.</p>
+            <p><b>What that does not promise is forever.</b> One person maintains it, updates arrive when an incident produces one rather than on a schedule, and the day he stops, it stops &mdash; with no notice on the page saying so. A dated section that has not moved in a year is telling you something; check the dates before you trust the sentence.</p>
+            <p><b>The perishability argument cuts at this page as hard as at anybody&rsquo;s course.</b> It will go stale the same way, and the only defence built into it is that the parts most likely to rot say when they were true. Read the dates and discount accordingly &mdash; including on this section.</p>
+            <p><b>And free does not make it true.</b> Nothing here was checked by a purchaser either. No cohort has been taught, no stranger has re-run any of it, and the price changes not one of the limits set out at the top of this section.</p>
+            <div class="prov"><b>Source.</b> Licences: the table in the repository&rsquo;s <span class="path">README.md</span> &mdash; Apache-2.0 for <span class="path">tools/</span>, CC&nbsp;BY&nbsp;4.0 for the writing, and a third row for three embedded images that are <b>not the author&rsquo;s to license at all</b>. The five wrong click paths and what survived them: the header of <span class="path">tools/check_dated_ui.sh</span> and the standing warning in Phase 7 of <span class="path">docs/handouts/cold-start.html</span>, both from the walk of <b>2026-08-30</b>. The dating gate is that same tool, and it runs over <span class="path">docs/handouts/</span>.</div>
+          </div>
+        </details>
+
+        <h3>Others teaching this</h3>
+        <p>Three university programmes cover adjacent ground. Checked <b>31 August 2026</b> &mdash; go to the source, because course offerings move.</p>
+        <ul class="also">
+          <li><a href="https://oerc.ox.ac.uk/ai-centre/ai-centre-trainings/using-ai-agents-workshops-using-coding-agents-for-working-with-research-data-and-managing-the-research-process-introduction-to-non-programmers"><b>Oxford &mdash; AI Competency Centre</b></a>, e-Research Centre. <i>Using coding agents for working with research data and managing the research process: introduction to non-programmers.</i> Qualitative coding, document processing, building small tools for repetitive tasks, and reproducibility in AI-assisted research. Three hours, in person, 19 June 2026. <b>The closest to this material, and the only one of the three written for non-programmers.</b></li>
+          <li><a href="https://escience.washington.edu/events/coding-with-ai-agents-a-hands-on-workshop-for-researchers/"><b>University of Washington &mdash; eScience Institute</b></a>. <i>Coding with AI Agents: a hands-on workshop for researchers.</i> The agent ecosystem, how models plan and generate code, a live research-plan-implement cycle, then you build one. Three hours, 17 June 2026. For <b>researchers and research software engineers</b>; assumes no AI background, but expects a GitHub account.</li>
+          <li><a href="https://southampton-rsg-training.github.io/advanced-rs-ai-coding/"><b>Southampton &mdash; Research Software Group</b></a>. <i>Advanced Research Software Development using AI.</i> Agents and assistants inside an IDE, aimed at code quality and productivity. <b>Not for non-programmers</b> and does not claim to be: it lists Python, notebooks, VS&nbsp;Code and prior GitHub Copilot use as prerequisites. Self-paced materials, free to read.</li>
+        </ul>
+        <p><b>What is different here is the subject, not the audience.</b> Those three teach you to <i>use</i> the tools. This page is about what to do when they are confidently wrong &mdash; which is a smaller topic, and the one that produced every incident above.</p>
+
+        <div class="prov"><b>Section source.</b> <span class="path">OPEN-FINDINGS.md</span> B2, B4 and B5 &mdash; blocking findings from the murderboard run of 2026-08-26, answered here on the public page rather than in an internal file. Audience line quoted from the author, 2026-08-30. <b>The three programmes were re-checked on 2026-08-31</b>: all three pages resolve, and the descriptions above are from the programmes' own wording rather than from the 26 August search.
+        <b>This section used to be an objection</b> &mdash; <i>&ldquo;you said nobody else teaches this&rdquo;</i> &mdash; answering a claim the author never made. The primary source settles it: <i>&ldquo;Nobody is teaching a non-programmer to do agentic work on their own machine and their own files&rdquo;</i> was written by <b>the assistant</b>, in messages 7 and 9 of <span class="path">docs/chain/01b-real-log-complete.md</span>, and carried forward into the outline unchecked. Framing it as the author's put a sentence in his mouth that an agent wrote, so the objection is withdrawn and the useful half &mdash; the list &mdash; is what remains.</div>
 
         <div class="foot">
           <p><b>The other projects.</b> <a href="https://tonydefazio.com">tonydefazio.com</a> &mdash; <a href="https://github.com/syncytium2/colonel_kernel">Colonel Kernel</a>, <a href="https://github.com/syncytium2/no_peak">no_peak</a> and <a href="https://github.com/syncytium2/bugarach">bugarach</a> are research tools, each with a public repository and a live site; <a href="https://github.com/syncytium2/murderboard">the murderboard</a> is the review process used on this material; this page is the fifth. What they have in common is not that they are ports &mdash; only one of them is. It is that each was built so that <b>something other than the author&rsquo;s own judgement can tell him he is wrong</b>: a reference implementation, an event planted at a known time, a published method that beats his, or a review he did not run himself.</p>
@@ -1365,8 +1410,8 @@
         <p>Where an account is a self-report by the party being evaluated, it says so. Where a claim is unmeasured &mdash; the hundred-fold figure &mdash; it is labeled rather than taught.</p>
 
         <h3>Paths are named, not linked</h3>
-        <p>Filenames like <span class="path">points.md</span> appear throughout so a claim can be traced. <b>They are deliberately not hyperlinks.</b> They live in a private repository, and a link naming a file the reader does not have is a broken pointer &mdash; a claim that was true somewhere else. That is a defect this project has shipped and then had to fix, more than once, so it is not going to be shipped here.</p>
-        <p>Everything a reader needs is on this page. The paths are provenance, not navigation.</p>
+        <p>Filenames like <span class="path">points.md</span> appear throughout so a claim can be traced. <b>They are deliberately not hyperlinks.</b> Until 31 August 2026 the reason was that they lived in a private repository, and a link naming a file the reader does not have is a broken pointer &mdash; a defect this project has shipped and had to fix more than once. <b>The repository is <a href="https://github.com/syncytium2/short-course">public now, and the paths stayed as they are.</a></b> A reader deciding whether to believe a claim should not have to leave the page to do it, and a path they can resolve at their own pace afterwards is worth more than a link that takes them away mid-sentence.</p>
+        <p>Everything a reader needs is on this page. The paths are provenance, not navigation &mdash; and they now resolve.</p>
 
         <h3>What has been generalized</h3>
         <p>Project and repository names from the wider body of work have been replaced with descriptions of what they are. Institution-specific storage names, cluster names, billing arrangements and rates have been generalized, because they go stale and because they are not the point. The identifiable content that remains is mine and is here on purpose.</p>

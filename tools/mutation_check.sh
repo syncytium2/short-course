@@ -43,6 +43,24 @@ cd "$(dirname "$0")/.." || exit 1
 
 # file @@ find @@ replace @@ what it breaks @@ [selftest to run, if not the file itself]
 #
+# ⚠ NO `;;` AND NO UNBALANCED `)` IN A ROW. Not a style rule — the file stops parsing.
+#
+# This table is a quoted heredoc inside a `$( )` command substitution, and bash 3.2 (what
+# macOS ships, and what runs this) scans the substitution body for its closing paren instead
+# of treating the heredoc as opaque. So a `;;` in any row reads as a `case` terminator
+# outside a `case`, and a bare `)` closes the substitution early. Either way **the whole file
+# becomes a syntax error**: `sh -n` fails, every row stops running, and the message names
+# this file and a line number rather than the row that caused it.
+#
+# Cost 2026-08-31: four rows added for the push gate, each one alone enough to break it, and
+# the `;;` rule was written here first — then found to be only half of it, because `*) exit 0`
+# has no `;;` and broke it just the same.
+#
+# **A `case` arm cannot be a mutation anchor.** Give the code a flag line and target that:
+# `IS_DELETE=no` / `case ... ) IS_DELETE=yes ;;` / `[ "$IS_DELETE" = yes ] && exit 0`, then
+# mutate the last of those three. That is why the push gate is written that way; it is a
+# testability shape, not a preference.
+#
 # THE FIFTH FIELD. Most rows mutate a tool and run that same tool's --selftest. But the
 # thing under test is not always a shell script: cold-start.html carries the checklist's
 # state migration, and the test that proves it lives in tools/checklist_state.sh. Without
@@ -78,6 +96,9 @@ tools/worktree.sh@@    [ -z "$(git -C "$path" status --porcelain 2>/dev/null)" ]
 .claude/hooks/push-goes-where-you-are.sh@@                     | grep -qx "branch refs/heads/$REFSPEC"; then@@                     | grep -qx "branch refs/heads/NEVER-MATCHES"; then@@a live branch in another worktree is refused again (N6)
 .claude/hooks/push-goes-where-you-are.sh@@if [ "$WT_COUNT" -gt 1 ]; then@@if false; then@@interlock 2 cries wolf in a worktree again (N6)
 .claude/hooks/push-goes-where-you-are.sh@@WT_COUNT=$(git worktree list --porcelain 2>/dev/null | grep -c '^worktree ')@@WT_COUNT=99@@interlock 2 is skipped in a single checkout, where it is the whole point
+.claude/hooks/push-goes-where-you-are.sh@@[ "$IS_DELETE" = yes ] && exit 0@@[ "$IS_DELETE" = never ] && exit 0@@deleting a merged branch is refused again
+.claude/hooks/push-goes-where-you-are.sh@@if [ -n "$PRE" ]; then@@if false; then@@prose that merely mentions the command is treated as the command
+.claude/hooks/push-goes-where-you-are.sh@@sed "s/${VERB}.*//"@@sed "s/git push.*//"@@the mention test reads a fixed verb and silently kills interlock 2
 tools/check_dated_ui.sh@@if (ui && !dt) print FN ":" id@@if (0) print FN ":" id@@undated button references are never reported
 tools/check_dated_ui.sh@@s = RSTART; l = RLENGTH@@s = RSTART; l = 1@@steps are swallowed because emit() clobbers RLENGTH
 TABLE
