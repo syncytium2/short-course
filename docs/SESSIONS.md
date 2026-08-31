@@ -1475,3 +1475,15 @@ risks in the file.
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/a4de1b91 — Session close in HANDOFF.md for Mac/a4de1b91 — the walked route, the loop handout, and the new dated-UI gate
+- **Status:** DONE 2026-08-30
+- **Opened:** 2026-08-30
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
+- **Notes:** <anything another session must know before touching the same thing>
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
