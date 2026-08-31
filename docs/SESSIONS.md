@@ -1465,11 +1465,30 @@ risks in the file.
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Mac/5dc04385 — Accept the #416 irony case into the course: decision recorded, and the general form placed in points.md
-- **Status:** ACTIVE
+- **Status:** DONE 2026-08-30
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `points.md` (**C1** and **G5c** only),
+  `docs/cases/2026-08-30-the-irony-was-the-only-unchecked-claim.md`,
+  [`cases/README.md`](cases/README.md), and `<darkroom>/short-course/2026-08-30-the-irony-was-false/`.
+- **Notes:** **Tony's decision, taken 2026-08-30:** *"yes add it. we can pare down as needed."*
+  The `bugarach` #416 case is in the course. **`points.md` C1 gained its first instance** — the
+  report was in plain English and the plain English is what was wrong, which inverts C1's own
+  diagnosis — and **G5c** gained a PR-as-handoff pointer. Landed `1da1bce`; darkroom and artifact
+  updated to say the decision is taken.
+- **⚠ Two things left open, deliberately, for whoever picks this up:**
+  **(1)** He reports the case *"prompted a whole discussion in the philosophy section."* **That
+  discussion is not in this repo, was never seen here, and nothing written reflects it.** It is
+  flagged on the case file and in the darkroom rather than quietly absorbed. If it arrives, it
+  settles against the **C1** entry, not against the case file.
+  **(2)** The `bugarach` session that wrote the aside was **never asked** whether its own
+  background watch later caught the merge and corrected the record. The case reads that hinge in
+  its favour and says so.
+- **Housekeeping, and it is N4 again with the roles reversed:** my earlier claim block was swept
+  into `Mac/a4de1b91`'s commit, and this session's merge found `nothing-was-missing…` showing as
+  modified with **no content difference from `HEAD`** — a stat-only entry, not another session's
+  work. Backed it up and checked before touching anything, which is the only reason that is a
+  footnote and not an incident.
 
 <!-- RELEASE THIS
      tools/claim.sh --release

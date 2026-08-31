@@ -315,7 +315,7 @@ wearing different clothes. Work that exists but cannot be reached is not availab
 queue is one more place a project can hold something a session cannot get to. The digest trim is
 still bundled in #415.
 
-## Point 7 — the announcement cost more than the channel had, and knocked a safety fact out of the briefing
+## Point 7 — the announcement cost more than the channel had, and knocked out the line that says do not assume the textbook
 
 *Found 2026-08-31, and it corrects this case's own previous version.*
 
@@ -336,10 +336,32 @@ test_it_carries_the_ttx_fact
     AssertionError: the consequence must travel with the fact
 ```
 
-TTX is a drug this lab's analysis must not treat as a silencing control; the briefing carries that
-fact and the operational consequence together, deliberately, in one breath. **In the degraded form
-the consequence is dropped and the fact travels alone.** A fourth test states the design intent
-outright — *"the ladder is a backstop, not the normal path"* — and it fails too.
+The line the briefing carries is `TTX IS NOT A SILENCING CONTROL`, and it is there because of one
+specific incident: a session worked without reading the instructions and **proposed calibrating
+the detectors until TTX slices stopped showing coordination** — because the textbook says TTX
+silences the field, and the data did not agree. The briefing carries that correction together with
+its operational consequence in one breath. **In the degraded form the consequence is dropped and
+the fact travels alone.** A fourth test states the design intent outright — *"the ladder is a
+backstop, not the normal path"* — and it fails too.
+
+> **⚠ Correction, and it is the second time this case has misread its own evidence.** An earlier
+> version of this point called that a *"drug-safety consequence."* **It is nothing of the kind,
+> and the error inverted the meaning.** Nobody's safety is involved. TTX is an experimental
+> manipulation, and the line exists because a session imported the dominant-paradigm assumption —
+> *TTX silences, GABA inhibits* — and moved to tune the instrument until the observation matched
+> it. **That is the exact opposite of this lab's stated method, which is test and observe.**
+>
+> I reached for *safety* because it was the most alarming-sounding of four failing assertions and
+> I did not check what the line meant. **That is the neighbouring case's finding
+> ([`the-irony`](2026-08-30-the-irony-was-the-only-unchecked-claim.md)) committed inside this
+> one:** of everything in a report, the dramatic aside is the part that gets written unchecked.
+
+**And the corrected reading makes this the sharpest thing in the file**, because the dropped line
+is not incidental to the case — it is the same failure one layer down. The briefing spends bytes
+saying *do not substitute the paradigm for the measurement.* The session in Point 1 substituted
+its own reasoning for machinery the project had already built. **Both are the same act: computing
+an answer instead of retrieving the one the project had established by observation.** What the
+degradation drops is precisely the sentence guarding against the failure this whole case is about.
 
 **So the paragraph that exists so a session can find things pushed the briefing into the mode
 where it stops telling that session things.** Not a metaphor: the same channel, the same run, one
@@ -353,8 +375,9 @@ Three things it establishes, and the third is the general one:
    the price is, and the price was paid in a different file.
 2. **The budget mechanism worked perfectly and that is why this is hard to see.** Nothing failed
    open. The ladder fired as designed, the suite went red as designed, and the result is still a
-   briefing missing a safety consequence. **A graceful degradation path is a mechanism for
-   continuing to run while wrong**, and this repo's own material has no name for that yet.
+   briefing that has dropped a standing correction to a paradigm assumption. **A graceful
+   degradation path is a mechanism for continuing to run while wrong**, and this repo's own
+   material has no name for that yet.
 3. **The remedy for a retrieval problem consumes the scarcest resource the project has.** Point 1
    says the binding constraint is retrieval; Point 7 says the channel you must spend to fix it is
    the one already at its limit. That tension is the real content, and it is not resolved here.
