@@ -1,4 +1,4 @@
-<!-- Case study, 2026-08-30. DRAFT — the upstream artifact is an open PR still being revised. -->
+<!-- Case study, 2026-08-30. DRAFT — the upstream artifact is an open PR still being revised. Evidence: commits and files in syncytium2/bugarach (public) and in this repo. An outside reader can check all of it. -->
 
 > ## 🚧 Draft — first pass cleaned 2026-08-30, one thing still open
 >
