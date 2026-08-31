@@ -56,7 +56,7 @@ tools/claim.sh@@print "- **Status:** DONE " d@@print "- **Status:** ACTIVE"@@rel
 tools/claim.sh@@        hit && /^- \*\*Status:\*\* ACTIVE/ { print hdr; exit }@@        hit { print hdr; exit }@@release targets a block that is already DONE
 tools/session_identity.sh@@printf '%s/%s\n' "$SC_MACHINE" "$SC_SESSION"@@printf 'XXX/XXX\n'@@address returns a constant
 tools/session_identity.sh@@SC_BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)@@SC_BRANCH=main@@branch is hardcoded
-.claude/hooks/push-goes-where-you-are.sh@@                exit 2 ;;@@                exit 0 ;;@@push gate fails open
+.claude/hooks/push-goes-where-you-are.sh@@                    exit 2@@                    exit 0@@push gate fails open
 tools/turnstile/turnstile-run@@if [ "$MODE" != gate ]@@if false@@advisory hooks could block
 tools/turnstile/turnstile-run@@if [ -e "$KILL_SWITCH" ]; then@@if false; then@@kill switch ignored
 tools/turnstile/turnstile-run@@if [ "$rc" -ge 128 ] || [ "$elapsed" -ge "$BUDGET" ]; then@@if false; then@@budget not enforced
@@ -75,6 +75,9 @@ tools/worktree.sh@@git -C "$REPO" worktree add -q "$path" -b "$slug" "$base" || 
 tools/worktree.sh@@[ -e "$path" ] && die "worktree.sh: $path already exists.@@[ -e "/nonexistent-xyz" ] && die "worktree.sh: $path already exists.@@the same slug can be opened twice
 tools/worktree.sh@@wt_slug_ok "$slug" || die "worktree.sh: \"$slug\" is not usable@@wt_slug_ok "$slug" ; true || die "worktree.sh: \"$slug\" is not usable@@a malformed slug reaches git
 tools/worktree.sh@@    [ -z "$(git -C "$path" status --porcelain 2>/dev/null)" ] || \@@    [ -n "$(git -C "$path" status --porcelain 2>/dev/null)" ] || \@@--close discards a dirty worktree
+.claude/hooks/push-goes-where-you-are.sh@@                     | grep -qx "branch refs/heads/$REFSPEC"; then@@                     | grep -qx "branch refs/heads/NEVER-MATCHES"; then@@a live branch in another worktree is refused again (N6)
+.claude/hooks/push-goes-where-you-are.sh@@if [ "$WT_COUNT" -gt 1 ]; then@@if false; then@@interlock 2 cries wolf in a worktree again (N6)
+.claude/hooks/push-goes-where-you-are.sh@@WT_COUNT=$(git worktree list --porcelain 2>/dev/null | grep -c '^worktree ')@@WT_COUNT=99@@interlock 2 is skipped in a single checkout, where it is the whole point
 TABLE
 )
 

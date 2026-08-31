@@ -68,7 +68,10 @@ fi
 # Proves every branch of this gate can still fire. A guard nobody has watched fail is
 # a guess, and this estate has shipped a hook that could not fire and looked fine.
 if [ "${1:-}" = "--selftest" ]; then
-    SELF="$0"; fail=0; B=$(sc_branch); ST=$(sc_state_dir)/last-branch
+    # Absolute, because the scratch-repo cases below `cd` elsewhere and a relative $0
+    # stops resolving the moment they do. (That cost one debugging round on 2026-08-30.)
+    SELF=$(cd "$(dirname "$0")" 2>/dev/null && pwd)/$(basename "$0")
+    fail=0; B=$(sc_branch); ST=$(sc_state_dir)/last-branch
     run() { printf '%s' "$1" | sh "$SELF" >/dev/null 2>&1; printf '%s' "$?"; }
     chk() { # chk <label> <want> <got>
         if [ "$2" = "$3" ]; then printf '  ok   (%s) %s\n' "$3" "$1"
@@ -95,12 +98,53 @@ if [ "${1:-}" = "--selftest" ]; then
     chk "an unrelated command is not our business" \
         0 "$(run '{"tool_input":{"command":"ls -la"}}')"
 
-    # interlock 2, and that it fires exactly once
-    printf 'some-other-branch' > "$ST"
-    chk "a branch that moved under you blocks" \
-        2 "$(run '{"tool_input":{"command":"git commit -m x"}}')"
-    chk "...and lets the retry through" \
-        0 "$(run '{"tool_input":{"command":"git commit -m x"}}')"
+    # ---- interlock 1, worktree-aware. Added 2026-08-30 with the N6 fix.
+    #
+    # The case that mattered and did not exist: a refspec naming a branch that IS checked
+    # out somewhere. Before the fix this repo refused it, told the session its work was on
+    # `master`, and was believed. Every selftest case ran in the shared checkout, the one
+    # place the old premise held, so seven-of-seven stayed green through the whole defect.
+    OTHER_WT=$(git worktree list --porcelain 2>/dev/null \
+               | sed -n 's/^branch refs\/heads\///p' | grep -vx "$B" | head -1)
+    if [ -n "$OTHER_WT" ]; then
+        chk "a refspec checked out in ANOTHER worktree is allowed" \
+            0 "$(run "{\"tool_input\":{\"command\":\"git push origin $OTHER_WT\"}}")"
+    else
+        printf '  skip  no second worktree here, so the N6 case cannot be exercised\n'
+        printf '        (open one with tools/worktree.sh and re-run — this is the case\n'
+        printf '         whose absence let N6 ship)\n'
+    fi
+
+    # ---- interlock 2, in a scratch repo, because THIS repo has worktrees and the
+    #      interlock is skipped where it cannot mean anything. Driving it here is the only
+    #      way to keep watching it work after the N6 fix retired it locally.
+    T2=$(mktemp -d) || T2=""
+    if [ -n "$T2" ]; then
+        (
+            git init -q "$T2/solo" 2>/dev/null
+            cd "$T2/solo" || exit 1
+            git config user.email t@example.com; git config user.name t
+            mkdir -p tools .claude/hooks
+            cp "$REPO/tools/session_identity.sh" tools/ 2>/dev/null
+            cp "$SELF" .claude/hooks/g.sh
+            echo s > s.txt; git add -A; git commit -qm seed
+        ) >/dev/null 2>&1
+        G="$T2/solo/.claude/hooks/g.sh"
+        SB=$(git -C "$T2/solo" rev-parse --abbrev-ref HEAD 2>/dev/null)
+        SST=$( ( cd "$T2/solo" && . tools/session_identity.sh && sc_state_dir ) 2>/dev/null )/last-branch
+        srun() { printf '%s' "$1" | ( cd "$T2/solo" && sh "$G" ) >/dev/null 2>&1; printf '%s' "$?"; }
+
+        printf '%s' "$SB" > "$SST" 2>/dev/null
+        chk "one worktree: interlock 2 is live, and a moved branch blocks" \
+            2 "$(printf 'some-other-branch' > "$SST"; srun '{"tool_input":{"command":"git commit -m x"}}')"
+        chk "one worktree: ...and lets the retry through" \
+            0 "$(srun '{"tool_input":{"command":"git commit -m x"}}')"
+
+        git -C "$T2/solo" worktree add -q "$T2/solo-worktrees/w" -b w >/dev/null 2>&1
+        chk "two worktrees: interlock 2 is skipped instead of crying wolf" \
+            0 "$(printf 'some-other-branch' > "$SST"; srun '{"tool_input":{"command":"git commit -m x"}}')"
+        rm -rf "$T2"
+    fi
 
     # FAIL CLOSED with no python anywhere. The failure this estate actually shipped.
     got=$(printf '%s' '{"tool_input":{"command":"git push origin not-my-branch"}}' \
@@ -156,34 +200,81 @@ case "$PAYLOAD" in *"git push"*)
             HEAD) ;;                              # explicitly "wherever I am"
             "$BRANCH") ;;                         # matches reality
             *)
-                say ""
-                say "  BLOCKED — that push would move nothing."
-                say ""
-                say "  You asked to push:   $REFSPEC"
-                say "  This checkout is on: $BRANCH"
-                say ""
-                say "  \`git push $REMOTE $REFSPEC\` pushes the *$REFSPEC ref*, not your work."
-                say "  It would exit 0, print nothing alarming, and leave your commits on this"
-                say "  disk only. That happened here on 2026-08-27 and cost an hour to unpick."
-                say ""
-                say "  This checkout is SHARED — another session can move the branch under you"
-                say "  between one command and the next, which is exactly how it happened."
-                say ""
-                say "  What you probably want:"
-                say "      git push $REMOTE HEAD          # push where you actually are"
-                say "      git status -sb                 # branch + tracking gap, one line"
-                say ""
-                say "  If you truly mean the $REFSPEC ref, say so explicitly:"
-                say "      git push $REMOTE HEAD:$REFSPEC"
-                say "      SC_PUSH_OK=1 git push $REMOTE $REFSPEC"
-                say ""
-                exit 2 ;;
+                # A refspec CHECKED OUT IN SOME WORKTREE is not the 2026-08-27 defect.
+                #
+                # This clause was added 2026-08-30 (OPEN-FINDINGS N6) after the gate refused
+                # a correct push. The hook resolves $REPO from $0 and reads the branch there,
+                # which is the SHARED checkout -- so for a session working in a worktree it
+                # reported "This checkout is on: master", confidently and wrongly, and blocked.
+                #
+                # The original incident was `git push origin master` while master was checked
+                # out NOWHERE: the ref could not be what the session had been committing to.
+                # That test still holds and is the one worth making. "The branch I am pushing
+                # is checked out somewhere in this repo" cannot distinguish WHICH worktree is
+                # mine -- nothing available here can -- but it does separate a live branch from
+                # the dead ref that produced the no-op success.
+                if git worktree list --porcelain 2>/dev/null \
+                     | grep -qx "branch refs/heads/$REFSPEC"; then
+                    :
+                else
+                    say ""
+                    say "  BLOCKED — that push would move nothing."
+                    say ""
+                    say "  You asked to push:  $REFSPEC"
+                    say "  That branch is not checked out in ANY worktree of this repo."
+                    say ""
+                    say "  \`git push $REMOTE $REFSPEC\` pushes the *$REFSPEC ref*, not your work."
+                    say "  It would exit 0, print nothing alarming, and leave your commits on this"
+                    say "  disk only. That happened here on 2026-08-27 and cost an hour to unpick."
+                    say ""
+                    say "  Where the branches actually are:"
+                    say "      tools/worktree.sh --list"
+                    say ""
+                    say "  What you probably want:"
+                    say "      git push $REMOTE HEAD          # push where you actually are"
+                    say "      git status -sb                 # branch + tracking gap, one line"
+                    say ""
+                    say "  If you truly mean the $REFSPEC ref, say so explicitly:"
+                    say "      git push $REMOTE HEAD:$REFSPEC"
+                    say "      SC_PUSH_OK=1 git push $REMOTE $REFSPEC"
+                    say ""
+                    exit 2
+                fi ;;
         esac
     fi
     ;;
 esac
 
 # ------------------------------------------- interlock 2: the branch moved
+#
+# SKIPPED WHEN THIS REPO HAS MORE THAN ONE WORKTREE, and it says so. Added 2026-08-30,
+# OPEN-FINDINGS N6, second failure mode.
+#
+# This interlock compares a remembered branch against `sc_branch()`. That comparison is
+# only meaningful in a repo where one checkout is shared: it asks "did somebody switch the
+# branch under me." Once sessions work in their own worktrees, the two values it compares
+# are a WORKTREE branch and the SHARED CHECKOUT's branch, which differ by construction and
+# permanently -- so it fired on every alternation, reporting the worktree's existence rather
+# than any event.
+#
+# The resolution was the dangerous part. It fires once, rewrites the state, and the retry
+# succeeds -- so a worktree session learned within two commands that this alarm means
+# nothing and the fix is to run it again. The alarm it was being trained to ignore is the
+# one that would report a real branch switch. An alarm that cries wolf is worse than none,
+# because it also spends the attention a real one needed.
+#
+# Saying it was skipped rather than skipping silently is turnstile's guarantee 5: silence
+# from a guard is indistinguishable from a guard that ran and passed.
+WT_COUNT=$(git worktree list --porcelain 2>/dev/null | grep -c '^worktree ')
+[ -n "$WT_COUNT" ] || WT_COUNT=1
+
+if [ "$WT_COUNT" -gt 1 ]; then
+    printf '%s' "$BRANCH" > "$STATE" 2>/dev/null
+    say "  push-goes-where-you-are: interlock 2 SKIPPED — $WT_COUNT worktrees, so a branch"
+    say "  cannot move under you. Interlock 1 (the push refspec) still ran."
+    exit 0
+fi
+
 LAST=""
 [ -f "$STATE" ] && LAST=$(cat "$STATE" 2>/dev/null)
 
