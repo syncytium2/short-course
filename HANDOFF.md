@@ -1539,3 +1539,85 @@ authenticated request that would have found the repo whatever its visibility.
    session. The number does no work; the README index does all of it. Filed, not fixed.
 4. **The push gate false-positives in worktrees** — it reads the shared checkout's branch. Another
    session fixed one interlock (`abc5ea4`); it still fired wrongly on me twice today.
+
+---
+
+## The unification job — researched 2026-08-31, NOT started
+
+**Tony: *"we need to unify shortest route, step 0, and cold start. all three on one page. i asked
+for this somewhere and i cannot find it executed. check the repo for overlap. then get it done."***
+
+**Researched and specified here rather than begun, at his instruction — compaction was close and a
+half-built merge lost mid-flight would be worse than none.** Nothing was changed. This section is
+the spec.
+
+### First: I could not find where he asked
+
+Searched `*.md` and `*.html` across the repo for *one page / single page / unify / combine /
+merge*, and the Step 0 mentions in `points.md`, `HANDOFF.md`, `docs/SESSIONS.md`,
+`docs/reviews/` and `docs/doubt/`. **No prior request to merge these is recorded anywhere.**
+Either it was said in a session whose transcript is not in the repo — which is the failure the
+whole chain is about — or it was said and nobody wrote it down. **Recorded as not-found rather than
+quietly re-derived**, because "I asked for this somewhere" is itself a claim about the record, and
+the record does not support it.
+
+### There are FOUR accounts of this material, not three
+
+| | where | form | public? |
+|---|---|---|---|
+| **A** | [`points.md`](points.md) §D | the source list — D1–D6, plus the dependency-order argument | no |
+| **B** | [`four-barriers.html`](docs/handouts/four-barriers.html) §*Step 0 — the set-up, in dependency order* | prose, **Phases 0–6** | **YES — the home page** |
+| **C** | [`cold-start.html`](docs/handouts/cold-start.html) | 34 steps, **Phases 1–7**, every step a checklist | **YES — `/cold-start`** |
+| **D** | [`decisions/0002`](docs/decisions/0002-route-to-a-learner-editable-site.html) §5 | the 5-step shortest route, with the fork at step 3 | no |
+
+He named three. **B is the one that gets forgotten**, and it is on the front page.
+
+### ⚠ THE FINDING: two live public pages number the same phases differently
+
+They link to each other and a reader moving between them is silently misdirected.
+
+| | **B** — home page | **C** — `/cold-start` | |
+|---|---|---|---|
+| Phase 0 | conditional: research storage / cluster | *(exists as step 1.3, not a phase)* | ✗ |
+| Phase 1 | identity, before any code exists | Accounts | ✓ |
+| Phase 2 | **machine baseline** | **Storage** | ✗ **transposed** |
+| Phase 3 | **storage, before the first data file** | **The machine** | ✗ **transposed** |
+| Phase 4 | **the first repository** | **The first session** | ✗ |
+| Phase 5 | **the guard layer** | **The habits** | ✗ |
+| Phase 6 | second machine, then cluster | Second machine, other people | ✓ |
+| Phase 7 | — | A name of your own | ✗ |
+
+**"Phase 3" means storage on one public page and the machine on the other.** Four of eight rows
+disagree. Both were deployed; neither knows about the other.
+
+**This was already spotted and never written down.** Two files in `docs/doubt/` name it exactly —
+`2026-08-29-the-phase-numbering-is-inverted-against-points-md-d-while-th.md` and
+`2026-08-29-cold-start-drops-three-step-0-items-its-source-marks-unrecov.md`, both parked
+2026-08-29 by `Mac/976d19f3`. **Both are unfilled templates: every one of their four sections is
+still the placeholder `<the claim…>`.** So the title carries the whole finding and the evidence
+was never captured. `tools/doubt.sh` made parking cost twenty seconds, and that is exactly what it
+bought — a title and nothing behind it.
+
+### What the unification has to decide, in order
+
+1. **One phase numbering, and which page owns it.** Not a merge detail — it is the defect above,
+   and it is live. C's numbering is load-bearing (34 steps keyed `data-id="N.M"`, a checklist whose
+   badges derive from it, and `tools/check_dated_ui.sh` parses it), so **B should almost certainly
+   move to C's**, not the reverse.
+2. **What D's five steps become.** They are not a fifth phase; they are a *path through* C —
+   plan → one sentence → fork → one element → publish. Probably a short overlay on C ("if you only
+   want a web page, these are the steps that matter"), not new content.
+3. **Whether B stays at all.** If C is the runbook, B's Step 0 section may reduce to a paragraph
+   and a link. That is a content decision about the front page and is **Tony's, not a session's**.
+4. **A's status.** `points.md` §D is the source both were derived from and is still the only place
+   D5/D6 are stated as *branch points*. It stays; it is not student-facing.
+
+### Cost and constraints for whoever does it
+
+- **`cold-start.html` renumbering is the dangerous part.** State keys on `li.dataset.key` and
+  `b.dataset.key`, never `data-id` — so numbers may move if each block keeps its keys. **Run the
+  `{stepKey: [boxKeys]}` diff against `origin/master` before committing** (worked example in the
+  2026-08-31 close above). A broken renumber looks completely normal on screen.
+- **Two source-then-output commits**, and both pages rebuild: `four-barriers.html` → `site/index.html`.
+- **Fill the two doubt files or delete them.** Leaving a titled placeholder next to a fixed defect
+  is worse than either.

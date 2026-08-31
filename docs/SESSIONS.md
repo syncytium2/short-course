@@ -1894,3 +1894,32 @@ risks in the file.
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Tonys-MacBook-Pro/a4de1b91 — Research + handoff: unify shortest route / step 0 / cold start. FOUR overlapping accounts found, two live public pages disagree on phase numbering.
+- **Status:** DONE 2026-08-31 — **research only; the unification is NOT started and is unclaimed.**
+- **Opened:** 2026-08-31
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** `HANDOFF.md` only. **No page was changed.**
+- **Notes:** **⚠ TWO LIVE PUBLIC PAGES NUMBER THE SAME PHASES DIFFERENTLY, AND THEY LINK TO EACH
+  OTHER.** `four-barriers.html` §Step 0 (the home page) runs Phases 0–6; `cold-start.html` runs
+  Phases 1–7. **Four of eight rows disagree — "Phase 3" is *storage* on one and *the machine* on the
+  other.** Full table in `HANDOFF.md` under *"The unification job"*. Nothing is fixed; do not assume
+  a phase number means the same thing on both pages.
+  **Tony named three accounts; there are four.** A `points.md` §D (source), B `four-barriers.html`
+  §Step 0 (**public, and the one everyone forgets**), C `cold-start.html` (public runbook),
+  D `decisions/0002` §5 (the five-step route).
+  **⚠ Both `docs/doubt/` files that name this defect are UNFILLED TEMPLATES** —
+  `…the-phase-numbering-is-inverted…` and `…cold-start-drops-three-step-0-items…`, parked
+  2026-08-29 by `Mac/976d19f3`, every section still `<the claim…>`. The title carries the finding
+  and the evidence was never captured. Fill them or delete them when the defect is fixed.
+  **I could not find where Tony asked for this.** Searched the whole repo; no prior request is
+  recorded. Said so in the handoff rather than re-deriving it silently.
+  **If you take this on:** `cold-start.html`'s numbering is load-bearing (34 `data-id` keys, derived
+  badges, `check_dated_ui.sh` parses it), so B should almost certainly move to C's numbering rather
+  than the reverse — and **run the `{stepKey: [boxKeys]}` diff against `origin/master` before
+  committing any renumber.**
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
