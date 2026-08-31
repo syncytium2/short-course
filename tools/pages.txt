@@ -6,3 +6,4 @@ docs/handouts/four-barriers.html      site/index.html
 docs/handouts/cold-start.html         site/cold-start.html          cold-start
 docs/handouts/what-it-costs.html      site/what-it-costs.html       what-it-costs
 docs/handouts/search-to-shipped.html  site/search-to-shipped.html   search-to-shipped
+docs/handouts/show-it-your-screen.html site/show-it-your-screen.html show-it-your-screen

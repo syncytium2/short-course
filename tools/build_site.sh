@@ -58,6 +58,9 @@ META = {
     "what-it-costs.html": (
         "What a coding-agent setup actually costs \u2014 the four things that charge, the three "
         "billing shapes, measured figures, and the equity problem stated plainly.", "\U0001F4B5"),
+    "show-it-your-screen.html": (
+        "You do not need to be an expert at web deployment. Seven real stoppages from one "
+        "afternoon, four real screens, and the loop that got past three of them.", "\U0001F5A5"),
 }
 key = os.path.basename(src)
 if key not in META:
