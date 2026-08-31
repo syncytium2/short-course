@@ -27,18 +27,53 @@ gallery.
 
 ---
 
-## Why this repo's board differs from `bugarach`'s and `interface2`'s
+## One session, one branch, one worktree — 2026-08-30
 
-Those repos address a session **by its branch**, on the stated ground that one branch ↔
-one worktree ↔ one session is already the rule there.
+**Open a worktree before you write anything.** One command:
 
-**That rule does not hold here, and assuming it is what broke on 2026-08-27.** This repo
-is a single checkout that several sessions share. So:
+```sh
+tools/worktree.sh my-slug        # branch + worktree, from origin/master
+cd ../short-course-worktrees/my-slug
+tools/claim.sh "what you are about to do"
+```
 
-- **A session is addressed `<machine>/<session-id>`** — `Mac/a49d017b` — from
-  `$CLAUDE_CODE_SESSION_ID`, via [`../tools/session_identity.sh`](../tools/session_identity.sh).
-- **The branch is recorded as a fact, not as an identity.** It can move under you between
-  one command and the next, because it belongs to the checkout and the checkout is shared.
+`tools/worktree.sh --list` shows every worktree and who is dirty; `--where` tells you
+whether you are in your own or in the shared checkout; `--close` removes a clean one.
+
+**This reverses what this section used to say, and the reversal is the point.** It read:
+
+> *Those repos address a session by its branch, on the stated ground that one branch ↔ one
+> worktree ↔ one session is already the rule there. **That rule does not hold here.** This
+> repo is a single checkout that several sessions share.*
+
+That was written as a **fact about the repo**. It was a **choice**, and it was never
+examined — `bugarach` had 9 worktrees and `interface2` 10+ while this repo had one, shared
+by every session at once. Tony, 2026-08-30: *"there are always many sessions in a repo. this
+repo should have inherited worktrees."*
+
+**Everything below this line was compensation for that choice**, and it is worth knowing
+which parts were load-bearing and which were scaffolding:
+
+- **Addressing a session `<machine>/<session-id>`** — `Mac/a49d017b`, from
+  `$CLAUDE_CODE_SESSION_ID` via [`../tools/session_identity.sh`](../tools/session_identity.sh)
+  — **stays.** A worktree stops sessions colliding in git; it does not tell you who is
+  holding the darkroom, a decision, or a page you are about to rewrite. That is still this
+  board's job.
+- **"The branch is a fact, not an identity"** — **retired.** In your own worktree the branch
+  *is* your identity, and it cannot move under you. It is left in the history rather than
+  edited away, per this repo's rule.
+
+**What the shared checkout is now for:** reading, merging to `master`, and nothing else you
+would mind losing. It is still shared, nothing enforces that, and
+[`../tools/worktree.sh`](../tools/worktree.sh) is deliberately **not** a gate — it makes the
+right path cheaper than the wrong one rather than refusing the wrong one, because this
+estate has already shipped a gate that blocked its own installation.
+
+**The cost of not doing this sooner, on record:** three board failures, one of them 859,010
+tokens and $11.06 of duplicated review; and `OPEN-FINDINGS.md` **N6**, where the push gate
+told a worktree session its work was on `master` — confidently, falsely — and refused. Both
+of N6's failure modes are fixed, and its selftest now runs in a scratch repo so the case
+that was missing cannot go missing again.
 
 ## Which claims belong here
 

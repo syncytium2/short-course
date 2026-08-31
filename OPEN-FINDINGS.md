@@ -681,16 +681,29 @@ says so itself, *"a message, not a lock"* — and
 repo's own study of reaching for exactly that. The board has since failed at least three times on
 record, once at a cost of **859,010 tokens and $11.06**.
 
-**Decisions needed — author's call, none taken**
+**Decisions — taken 2026-08-30, and 1–3 are done.**
 
-1. **Convert the repo to worktree-per-session?** The root fix. It retires this gate's premise
-   instead of patching it, and it makes the collision *impossible to express* — rung 5 of
-   turnstile's own decision tree, which the vendored README quotes as beating every gate.
-2. **Fix the hook regardless?** Small: resolve the repo from the caller's CWD, or ask
-   `git rev-parse --show-toplevel`. Worth doing even if 1 is a no, because the gate is wrong
-   today and blocks worktree sessions today.
-3. **Add a worktree case to `--selftest` and a row to `tools/mutation_check.sh`.** Without it the
-   next expired premise is caught the same way this one was — by a session losing a push.
-4. **Does this earn a case file?** Native, small, and it carries three of the estate's recurring
-   shapes in one incident: a confident false statement, a guard defending its own premise, and a
-   test that never saw an input that could fail it.
+1. ~~**Convert the repo to worktree-per-session?**~~ **YES.** Tony: *"worktree per session, you
+   are colliding all the time."* [`tools/worktree.sh`](tools/worktree.sh) opens a branch and
+   worktree from `origin/master` in one command; [`docs/SESSIONS.md`](docs/SESSIONS.md) now leads
+   with it and records that its old premise was a choice, never examined, rather than a fact
+   about the repo. **Deliberately not a gate** — it makes the right path cheaper than the wrong
+   one, because this estate has already shipped a gate that blocked its own installation.
+2. ~~**Fix the hook regardless?**~~ **DONE, and not the way this entry proposed.** Resolving from
+   the caller's CWD does not work: the harness runs the hook with the **project root** as its
+   CWD, which is the shared checkout — so a hook cannot learn which worktree the caller is in,
+   and it was wrong to say it could. What it *can* ask is the question the 2026-08-27 incident
+   actually turned on: **is this refspec checked out in any worktree of this repo.** The original
+   no-op push named a ref checked out nowhere, so that test still catches it. Interlock 2 is
+   skipped when the repo has more than one worktree — its premise is gone — and it says so rather
+   than skipping in silence.
+3. ~~**Add a worktree case to `--selftest` and a row to `mutation_check.sh`.**~~ **DONE.** The
+   selftest now covers both worlds: a refspec live in a sibling worktree, and interlock 2 driven
+   inside a scratch single-worktree repo so it stays watched after being retired here. Three new
+   mutation rows — **and repairing this hook moved the target of a pre-existing row, which
+   `mutation_check.sh` reported as an ERROR rather than passing silently.** 28 caught, 0 missed.
+4. **Does this earn a case file? — STILL OPEN, and the only thing left in N6.** Native, small,
+   and it carries four of the estate's recurring shapes in one incident: a confident false
+   statement, a guard defending its own expired premise, a test that never saw an input that
+   could fail it, and an alarm that trains you to retry through it. It also has the cleanest
+   possible provenance — the gate refused the commit that filed the finding about the gate, twice.
