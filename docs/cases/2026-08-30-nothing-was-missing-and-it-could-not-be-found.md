@@ -108,8 +108,32 @@ reach was *machinery* — a working importer, a test, a config role, a documente
 That matters because it moves the finding out of B4's jurisdiction. B4 is about written rules,
 so a fix framed inside B4 will always be some version of *make the rule fire*. You cannot make an
 importer fire. The remedy for a rule that does not reach the decision is a hook; the remedy for
-information that has no address is **an address**. Those are different objects and B4 only has
-room for one of them.
+information that has no address is **an address**.
+
+> **⚠ Correction, 2026-08-31 — this point claimed novelty the course already has.** The paragraph
+> above originally ended *"those are different objects and B4 only has room for one of them,"* as
+> though the rule/not-a-rule distinction were new here. **It is already in
+> [`points.md`](../../points.md) B7, second worked cure**, which says it more sharply than this
+> case did:
+>
+> > *A rule asks the model to override a prior; a definition **replaces** the prior. **B4 should
+> > say so:** prose fails when it is a rule, not when it is a definition.*
+>
+> B7 carries the whole `foundations` pattern — `GLOSSARY.md` mapping each term to one definition,
+> `FOUNDATIONS.md` for how concepts connect and **what you must not infer**, both vendored,
+> freshness-gated, read by a SessionStart hook — and its founding quote is the diagnosis
+> verbatim: *"sessions repeatedly get project-central concepts wrong because each session is
+> stateless and reasons from priors unless grounded in a document it reliably reads."* **It is
+> also published**: the same material is a full section of `four-barriers.html`, which builds to
+> `site/index.html`, the landing page.
+
+**So what is actually new here is narrower, and it is an extension of B7 rather than a gap in
+B4.** B7's cure replaces priors about **concepts** — what a word means, what you may not infer
+from it. That works because a concept can be defined. **Machinery cannot.** No definition puts
+`tools/import_dandi.py` in a session's head; there is nothing to believe correctly. A glossary
+tells you what a word means and a foundations document tells you what not to conclude — **neither
+can tell you what exists.** That is the third kind of document, and it is the one this project
+had not built.
 
 **Put plainly: retrieval failure is not a property of instructions. It is a property of size.**
 Every project acquires more than one context window's worth of itself, and on that day the
