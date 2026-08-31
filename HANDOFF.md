@@ -1331,8 +1331,134 @@ to 7.3 are commented in the file and are now mutations.
 3. **The fifteen-minute Cowork test** in 0002 §8 — connect a folder, close the desktop app, try to
    read it from a phone; then ask Cowork to push via the GitHub connector. **If the second works,
    record 0002 is superseded and the no-repo route wins outright.** Nobody has tried it.
-4. **`syncytium2/route-test`** (still **private** — the attempt to make it public was refused by the
-   permission classifier) and its Worker at `route-test.tonydefazio.workers.dev` are the walked
-   evidence for §7. Disposable: `gh repo delete syncytium2/route-test`.
+4. ~~**`syncytium2/route-test`** (still **private**…) and its Worker are the walked evidence for
+   §7.~~ **BOTH DELETED 2026-08-31**, on Tony's decision, because a public page naming a private
+   repo is a leak with no upside and the repo's own description said *"delete freely."* The repo
+   is gone and the Worker returns 404. **What that costs is stated on the page rather than
+   absorbed:** the §7 walk is no longer independently checkable, and
+   `docs/handouts/show-it-your-screen.html`'s provenance block now records the description, the
+   file list and all three commit subjects with SHAs, plus the fact that `wrangler.jsonc` is
+   quoted in full in §4 — so the artifact the walk turned on survives on the page.
 5. **Cowork appears nowhere in Cold Start's 34 steps**, and the Desktop app has three tabs —
    Chat / Cowork / Code — so they are not rival products a learner chooses between.
+
+---
+
+## Session close, 2026-08-31 — `Mac/4a487730` · the repo went public, and the review that cleared it found its own gate lying
+
+**Opened as "review content for possible public repo." It is public now** — Tony flipped it on
+2026-08-31 — so this session spans the before and the after, and the after is where two of the
+findings actually landed.
+
+### The publication review — all nine findings closed
+
+Full report, kept current, in `<darkroom>/short-course/2026-08-31-publication-review/` and at
+<https://claude.ai/code/artifact/5f06c6e9-12e0-49a9-b1c7-dc2f2d99b735>.
+
+| # | finding | outcome |
+|---|---|---|
+| 1 | A stranger's two email addresses in node 1b | **Redacted** `046a322`. They arrived inside a `web_search` result — the RFC author's signature on `anthropics/claude-code#45427` |
+| 2 | Cloudflare account id + gmail permanently in `git log` | **Accepted, loudly** `6bd6fe0`. A priced README section, not a rewrite |
+| 3 | No `LICENSE` | **Apache-2.0**, CC BY 4.0 for prose, third row for the meme panels `6bd6fe0` |
+| 4 | The positioning section | Banner rewritten around B2/B5; later **withdrawn entirely** — see below |
+| 5 | The §0b teaching note | Safe. Published |
+| 6 | `points.md` B2 | **Went public undecided** — see *Still needs a person* |
+| 7 | Six links to the private `turnstile` | **turnstile published**, Apache-2.0, all six verified 200 anonymously |
+| 8 | `Internal use` on every case file | **Twelve rewritten** to name where their evidence lives and whether an outsider can reach it |
+| 9 | Artifact URLs on the board | **Five removed**; both pages they pointed at were unpublished |
+
+**Finding 2 is the one to read if you inherit this.** The rewrite that would hide an account id
+changes all 261 hashes, and this README pins node 3 to `ad695d94` while the case files cite
+commits by hash throughout — so it falsifies the provenance record the repo exists to keep, and
+does it silently, because every citation still *looks* fine. The exposure is smaller than the
+precedent.
+
+### The absolutes came off the site
+
+Tony: *"remove these absolutes from the website entirely… they are demonstrably untrue and not my
+style."* **55 of 115 removed** across all four handout sources — every one where a page asserted
+an absolute in its own voice. **59 kept deliberately**, in four categories he agreed before the
+edit: quoted objections, verbatim commit subjects in the strips, self-critical limitations, and
+specific historical facts about one incident. **Do not "finish the job" on those 59.**
+
+### Worktree-per-session, and the gate that was lying about it
+
+Tony: *"there are always many sessions in a repo. this repo should have inherited worktrees."*
+One command sized it — `interface2` 10+, `bugarach` 9, **this repo 1**.
+
+- **`tools/worktree.sh`** opens a branch and worktree from `origin/master` in one command.
+  Deliberately **not a gate**: it makes the right path cheaper than the wrong one.
+- **`docs/SESSIONS.md` leads with it**, and records that its old premise — *"this repo is a
+  single checkout that several sessions share"* — was a **choice nobody had revisited**, not a
+  fact. Session-id addressing stays; *"the branch is a fact, not an identity"* is retired.
+- **`OPEN-FINDINGS.md` N6** — the push gate told a worktree session *"This checkout is on:
+  master"*, confidently and falsely, and **refused the push**. Its moved-under-you latch then
+  fired on every alternation and resolved on retry, training a session to retry through the one
+  alarm that reports a real branch switch. `--selftest` was seven-of-seven green because **no
+  case had ever run from a worktree**. Both modes fixed; N6 decisions 1–3 closed.
+- Then the fixed gate refused `git push --delete` and refused the board claim written about it,
+  because the claim *text* contained the words `git push`. Both fixed. **Four wrong turns getting
+  there, every one caught by a test rather than by me.**
+
+**33 mutations caught, 0 missed, 0 errors. Every selftest PASS.**
+
+### The front page
+
+The résumé team kept reading the top as unfinished. Three rounds:
+
+1. **Four draft banners rewritten** — the front door had read *"Nobody outside has checked any of
+   this"*, a verdict on the whole page before the reader had seen a line of it.
+2. **The two "Still open" boxes deleted** — findings-backlog entries on a public page.
+3. **The stamp removed from the front page only.** Its own rule is that it names *"which part of
+   the page they cannot lean on"* — operational, for someone about to act. That earns its place
+   on the three sheets and not on an argument illustrated by incidents. **The page already does
+   the job twice, better:** 38 per-incident provenance blocks, and the Objections section. A
+   comment where the stamp stood says so, so its absence is not read as an oversight.
+
+**The "you said nobody else teaches this" objection is withdrawn — he never said it.** The
+primary source settles it: that sentence was written by **the assistant**, node 1b messages 7 and
+9, and carried into the outline unchecked. Replaced with the three programmes, **re-checked and
+linked on 2026-08-31** (the repo had never recorded URLs for them).
+
+### ⚠ Still needs a person
+
+1. **`points.md` B2 went public without a decision.** *"It made my use of AI look
+   unprofessional."* The review flagged it as the passage that exposes him most and the one on no
+   list; it is now readable by anyone. It is also the best incident here. **Nobody has decided
+   this — it was decided by omission**, which is the failure mode this repo is named after.
+2. **`OPEN-FINDINGS` B2 cites Southampton as refuting the vacancy claim.** Its own prerequisites —
+   Python, notebooks, VS Code, prior Copilot — say it does not serve non-programmers. **The list
+   on the live page is now more accurate than the finding that produced it.**
+3. **B5's cheapest check is still unsent**: three emails to the Oxford, UW and Southampton
+   organisers. Unchanged since 26 August.
+4. **N6 decision 4** — whether the push-gate incident earns a case file. It has four of the
+   estate's recurring shapes in one incident, and the gate refused the commit filing the finding
+   about the gate, twice.
+5. **`docs/from-the-siblings.md`** (another session) asks for one decision: yes/no to a six-item
+   adoption sequence. Headline: this repo has **no `SessionStart` hook at all**.
+6. **The machine half of a session address is unstable** — `Mac/` vs `Tonys-MacBook-Pro/` for the
+   same session, so one session sits on this board under two addresses and `--release` cannot
+   reach the earlier ones. Filed by another session, unfixed.
+
+### What is live
+
+`lookedright.tonydefazio.com`, Cloudflare version **`a1f4b85e`**, deployed and **verified against
+the live URL** rather than the deploy log — page byte-identical to the build, all three programme
+links 200 from the live page, and `cold-start-v4` / `cold-start-skip-v2` unchanged, so no reader
+lost saved ticks.
+
+### Housekeeping done
+
+Five worktrees of mine closed, their branches deleted locally and on the remote. **`expert-ladder`
+/ `expert-order` and `sibling-practices` are merged but belong to other sessions — left alone.**
+`kreuz-extraction` is unmerged and live. One ACTIVE claim on the board is `Mac/fb238a63`'s, not
+mine.
+
+### What I would not do
+
+**Do not put a banner back on the front page** without attaching it to a specific claim — read
+the comment where the old one stood first. **Do not redact the `show-it-your-screen` screenshots**:
+a redaction was built and reverted this session because the page's own provenance block promises
+they are *"otherwise unaltered — nothing cropped, annotated or reconstructed"*, and painting over
+six boxes while the prose named the repo eleven times would have been theatre. The repository was
+deleted instead.
