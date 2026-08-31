@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Zero to a working coding-agent setup: 34 steps in seven phases, each a checklist that stays red until every box is checked.">
+<meta name="description" content="Zero to a working coding-agent setup: 34 steps in eight phases, each a checklist that stays red until every box is checked.">
 <link rel="canonical" href="https://lookedright.tonydefazio.com/cold-start">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%8A%3C/text%3E%3C/svg%3E">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Cold Start">
-<meta property="og:description" content="Zero to a working coding-agent setup: 34 steps in seven phases, each a checklist that stays red until every box is checked.">
+<meta property="og:description" content="Zero to a working coding-agent setup: 34 steps in eight phases, each a checklist that stays red until every box is checked.">
 <meta property="og:url" content="https://lookedright.tonydefazio.com/cold-start">
 <meta name="twitter:card" content="summary">
 <!-- GENERATED FILE - do not edit.
@@ -164,6 +164,44 @@
     margin: 0 0 0; padding: 2px 0 10px; color: var(--muted); font-size: 14px;
     border-bottom: 1px solid var(--rule);
   }
+  .door-lede { margin: 0 0 12px; color: var(--muted); font-size: 14px; }
+
+  /* ---- the tier switch: how far are you going ----
+     Three buttons, not a dropdown. The options have to be readable side by side
+     to be a choice rather than a guess, and the one-line description under each
+     is what makes the difference between them legible before you commit. */
+  .tierpicks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  @media (max-width: 640px) { .tierpicks { grid-template-columns: 1fr; } }
+  .tierpick {
+    display: block; width: 100%; text-align: left; cursor: pointer;
+    font: inherit; color: inherit; background: var(--sunk);
+    border: 1px solid var(--rule-firm); border-radius: 6px; padding: 10px 12px;
+  }
+  .tierpick b { display: block; font-weight: 600; margin: 0 0 3px; }
+  .tierpick span { display: block; color: var(--muted); font-size: 13px; line-height: 1.4; }
+  .tierpick:hover { border-color: var(--accent); }
+  .tierpick[aria-pressed="true"] {
+    background: var(--accent-soft); border-color: var(--accent);
+    box-shadow: inset 0 0 0 1px var(--accent);
+  }
+  .tierpick[aria-pressed="true"] b { color: var(--accent); }
+  .door-now {
+    margin: 12px 0 0; font-size: 14px; color: var(--muted);
+    border-top: 1px solid var(--rule); padding-top: 10px;
+  }
+  .door-more { margin: 14px 0 0; }
+  .door-more > summary {
+    cursor: pointer; font-size: 13px; color: var(--muted);
+    font-family: var(--mono); letter-spacing: .02em;
+  }
+  .door-more dl { margin-top: 10px; }
+  .door-more > p { font-size: 14px; color: var(--muted); margin: 10px 0 0; }
+
+  /* A step or a whole phase that this tier does not use is REMOVED, not greyed.
+     Greying it would leave the reader deciding, one step at a time, whether a
+     faded thing applies to them -- which is the work the switch is supposed to
+     have done once, at the door. */
+  ol.steps > li[data-off="1"], section.phase[data-off="1"] { display: none; }
 
   /* ---- phases ---- */
   .phase { margin: 0 0 30px; }
@@ -492,7 +530,7 @@
     <p class="eyebrow">Setup runbook &middot; keep this window open</p>
     <h1>Cold Start</h1>
     <p class="standfirst">An email address and a laptop, to a first agent session that leaves a record behind it. Every step in order, the two prompts to paste, and the condition that tells you each one worked.</p>
-    <p class="pv">Version <b>0.1.23</b> &middot; 31 Aug 2026<span class="pv-born">First published 29 Aug 2026</span></p>
+    <p class="pv">Version <b>0.1.24</b> &middot; 31 Aug 2026<span class="pv-born">First published 29 Aug 2026</span></p>
   </header>
 
   <div class="method">
@@ -501,13 +539,33 @@
   </div>
 
   <section class="door">
-    <p class="door-head">Two questions, asked at the door</p>
-    <dl>
-      <dt>One machine, or more than one?</dt>
-      <dd>More than one and a remote stops being optional. Work that lives only in a folder on one laptop reaches no other machine and no other session &mdash; and you find that out on the day you need it.</dd>
-      <dt>Alone, or with other people?</dt>
-      <dd>Working with anyone &mdash; including your own second session running in another window &mdash; adds Phase&nbsp;6. Alone on one laptop, you can skip Phase&nbsp;6 entirely and most of step 1.3.</dd>
-    </dl>
+    <p class="door-head">One question, asked at the door: how far are you going?</p>
+    <p class="door-lede">This decides which steps you are shown. <b>Pick the smallest one that gets you what you want</b> &mdash; you can move up at any time, the page keeps every box you have ticked, and moving up only ever adds steps.</p>
+    <div class="tierpicks" role="group" aria-label="How far are you going">
+      <button class="tierpick" type="button" data-tier="min">
+        <b>A web app, in the browser</b>
+        <span>Nothing installed, no terminal. One evening to something published at a URL.</span>
+      </button>
+      <button class="tierpick" type="button" data-tier="mid">
+        <b>VS&nbsp;Code, on my laptop</b>
+        <span>Your own editor, your own copy, work that outlives a browser tab. The usual answer.</span>
+      </button>
+      <button class="tierpick" type="button" data-tier="max">
+        <b>A cluster, and other people</b>
+        <span>Research storage, an allocation, a second machine, and sessions that are not only yours.</span>
+      </button>
+    </div>
+    <p class="door-now" id="tier-now" hidden></p>
+    <details class="door-more">
+      <summary>The two questions underneath this one</summary>
+      <dl>
+        <dt>One machine, or more than one?</dt>
+        <dd>More than one and a remote stops being optional. Work that lives only in a folder on one laptop reaches no other machine and no other session &mdash; and you find that out on the day you need it.</dd>
+        <dt>Alone, or with other people?</dt>
+        <dd>Working with anyone &mdash; including your own second session running in another window &mdash; adds Phase&nbsp;6. Alone on one laptop, you can skip Phase&nbsp;6 entirely and most of step 1.3.</dd>
+      </dl>
+      <p><b>Answer &ldquo;more than one&rdquo; or &ldquo;with other people&rdquo; to either, and you are on the third tier</b> whatever else you had in mind. That is the whole of what the choice above is asking.</p>
+    </details>
   </section>
 
   <section class="phase">
@@ -515,9 +573,9 @@
       <h2>Phase 1 &middot; Accounts</h2>
       <span class="phase-time">30 min, plus other people&rsquo;s time</span>
     </div>
-    <p class="phase-note">Start here on day one even if you will not touch a keyboard for a week. Everything in this phase depends on somebody who is not you. <b>1.1 and 1.2 are both required</b> &mdash; 1.3 and 1.4 are conditional, and most people skip 1.3 entirely. <b>The expert comes first on purpose:</b> 1.2 is the one step here you do not have to do alone, because by then there is somebody to ask.</p>
+    <p class="phase-note">Start here on day one even if you will not touch a keyboard for a week. Everything in this phase depends on somebody who is not you. <b>1.1 and 1.2 are both required on every tier.</b> Anything else in this phase is conditional, and appears only on the tiers that need it. <b>The expert comes first on purpose:</b> 1.2 is the one step here you do not have to do alone, because by then there is somebody to ask.</p>
     <ol class="steps">
-      <li data-key="agent-account" data-id="1.1" data-open="0" data-done="0">
+      <li data-key="agent-account" data-id="1.1" data-tiers="min mid max" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-1.1"><span class="n">1.1</span>Get the expert on your side &mdash; and decide how much of your screen they get</button>
           <span class="badge">Incomplete</span>
@@ -590,7 +648,7 @@
             <li><button class="cb" data-key="read-costs" type="button" aria-pressed="false" aria-labelledby="c-1-1-2">&#10003;</button><span class="cbt" id="c-1-1-2">I have read <a href="https://lookedright.tonydefazio.com/what-it-costs"><i>What It Costs</i></a></span></li>
         </ul>
       </li>
-      <li data-key="github-account" data-id="1.2" data-open="0" data-done="0">
+      <li data-key="github-account" data-id="1.2" data-tiers="min mid max" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-1.2"><span class="n">1.2</span>Create a GitHub account &mdash; this one is not optional</button>
           <span class="badge">Incomplete</span>
@@ -609,7 +667,7 @@
             <li><button class="cb" data-key="username-willing-keep" type="button" aria-pressed="false" aria-labelledby="c-1-2-2">&#10003;</button><span class="cbt" id="c-1-2-2">The username is one I am willing to keep</span></li>
         </ul>
       </li>
-      <li data-key="research-storage" data-id="1.3" data-open="0" data-done="0" data-optional="1">
+      <li data-key="research-storage" data-id="1.3" data-tiers="max" data-open="0" data-done="0" data-optional="1">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-1.3"><span class="n">1.3</span>Only if you need them: research storage, cluster account, allocation</button>
           <span class="badge">Incomplete</span>
@@ -625,7 +683,7 @@
             <li><button class="skipbtn" type="button">Not needed &mdash; no cluster, no terabytes</button></li>
         </ul>
       </li>
-      <li data-key="institutional-basics" data-id="1.4" data-open="0" data-done="0">
+      <li data-key="institutional-basics" data-id="1.4" data-tiers="mid max" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-1.4"><span class="n">1.4</span>Install the institutional basics &mdash; login, VPN, synced storage</button>
           <span class="badge">Incomplete</span>
@@ -646,12 +704,102 @@
 
   <section class="phase">
     <div class="phase-head">
+      <h2>The short way &middot; a web app, in the browser</h2>
+      <span class="phase-time">one evening</span>
+    </div>
+    <p class="phase-note"><b>This replaces phases 2 to 4, and it is the whole of the browser tier.</b> Nothing is installed, there is no terminal, and there is no <code>git init</code>. It was walked end to end on <b>2026-08-30</b>, and what went wrong on that walk is written into the steps below rather than tidied out of them.</p>
+    <p class="phase-note"><b>You can stop here and have a working, published thing.</b> If you later want the machine underneath it &mdash; your own editor, your own copy, work that outlives a browser tab &mdash; switch to <i>VS&nbsp;Code on my laptop</i> at the top and the phases you skipped appear. Nothing you have ticked here is lost.</p>
+    <ol class="steps">
+      <li data-key="pick-a-rung" data-id="W1" data-tiers="min" data-open="0" data-done="0">
+        <div class="srow">
+          <button class="head" type="button" aria-expanded="false" aria-controls="d-W1"><span class="n">W1</span>Pick how much of your screen the expert gets</button>
+          <span class="badge">Incomplete</span>
+        </div>
+        <div class="detail" id="d-W1">
+            <p class="why"><b>Three rungs, and this is the only step that changes what all the others cost.</b> Claude on the web if you want to start in the next five minutes; the Claude desktop app in Code mode if you can spare one download; VS&nbsp;Code with the Claude window if you are willing to do phase 3 of this page first. <b>Take the highest rung you can reach today and no higher.</b> You can move up later and nothing is wasted.</p>
+            <p class="why">Rung 1 is free, and rungs 2 and 3 are the same paid plan &mdash; so one subscription unlocks both upper rungs at once, and the step between them is setup rather than spending. Check the plan page rather than any number written here.</p>
+            <p class="why"><b>Then find out which shape of bill you have agreed to, before you lean on it.</b> A personal plan is an allowance: you hit it and it stops, which is annoying and safe. An institutional billing code is usually uncapped &mdash; nothing stops, nothing warns, and the number surfaces when somebody else reads the statement. That distinction matters more than the amount, and it is the one nobody is told unprompted.</p>
+        </div>
+        <ul class="checks">
+            <li><button class="cb" data-key="rung-picked-highest-reachable" type="button" aria-pressed="false" aria-labelledby="c-w1-0">&#10003;</button><span class="cbt" id="c-w1-0">I have picked a rung, and it is the highest one I can reach today</span></li>
+            <li><button class="cb" data-key="named-something-back" type="button" aria-pressed="false" aria-labelledby="c-w1-1">&#10003;</button><span class="cbt" id="c-w1-1">The expert has named something back to me that I did not tell it &mdash; the difference between having an account and having them on your side</span></li>
+            <li><button class="cb" data-key="stops-or-bills" type="button" aria-pressed="false" aria-labelledby="c-w1-2">&#10003;</button><span class="cbt" id="c-w1-2">I can say what happens when I use too much: it stops, or it bills</span></li>
+        </ul>
+      </li>
+      <li data-key="one-sentence" data-id="W2" data-tiers="min" data-open="0" data-done="0">
+        <div class="srow">
+          <button class="head" type="button" aria-expanded="false" aria-controls="d-W2"><span class="n">W2</span>Say the whole thing in one sentence</button>
+          <span class="badge">Incomplete</span>
+        </div>
+        <div class="detail" id="d-W2">
+            <p class="why"><i>&ldquo;A web page that shows my recordings one at a time and lets me mark the bad ones.&rdquo;</i> <b>If you cannot say it in a sentence, you are not ready to ask for it.</b></p>
+            <p class="why">Then break it into parts, and plan to do one element, never two. This costs nothing, needs nothing installed, and is the same on every tier of this page.</p>
+        </div>
+        <ul class="checks">
+            <li><button class="cb" data-key="sentence-written-down" type="button" aria-pressed="false" aria-labelledby="c-w2-0">&#10003;</button><span class="cbt" id="c-w2-0">The sentence is written down somewhere I can see it</span></li>
+            <li><button class="cb" data-key="outsider-understands" type="button" aria-pressed="false" aria-labelledby="c-w2-1">&#10003;</button><span class="cbt" id="c-w2-1">Someone outside my field understands what it does</span></li>
+            <li><button class="cb" data-key="each-item-one-afternoon" type="button" aria-pressed="false" aria-labelledby="c-w2-2">&#10003;</button><span class="cbt" id="c-w2-2">Every item on my list is one afternoon or less</span></li>
+        </ul>
+      </li>
+      <li data-key="connect-or-repo" data-id="W3" data-tiers="min" data-open="0" data-done="0">
+        <div class="srow">
+          <button class="head" type="button" aria-expanded="false" aria-controls="d-W3"><span class="n">W3</span>The fork: connect a folder, or make a repository</button>
+          <span class="badge">Incomplete</span>
+        </div>
+        <div class="detail" id="d-W3">
+            <p class="why"><b>Route B &mdash; connect a folder.</b> In the Claude desktop app, make a project and connect a folder. Nothing is installed and nothing is created anywhere else. If a session later reports no connected folders, check <b>File &rarr; Settings &rarr; Cowork &rarr; &ldquo;Run new tasks in the cloud&rdquo;</b> &mdash; that path was there on <b>2026-08-30</b>, and with that setting on, tasks run in the cloud and cannot reach local files at all.</p>
+            <p class="why"><b>Route C &mdash; make a repository.</b> On github.com: <b>New repository &rarr; tick &ldquo;Add a README&rdquo; &rarr; Create</b>, as of <b>2026-08-30</b>. <b>That tick is the whole point:</b> it makes the repository one with something already in it, which is what a cloud session needs in order to clone it. Keep it private. Then connect the GitHub account at claude.ai/code and pick it. No <code>git init</code>, and no terminal.</p>
+            <p class="why"><b>Route C is worth the extra two minutes</b> for one reason that does not show up until W5: it is the route where publishing keeps happening without you.</p>
+        </div>
+        <ul class="checks">
+            <li><button class="cb" data-key="route-chosen-can-say" type="button" aria-pressed="false" aria-labelledby="c-w3-0">&#10003;</button><span class="cbt" id="c-w3-0">I have chosen route B or route C, and I can say which one I am on</span></li>
+            <li><button class="cb" data-key="named-file-or-repo-visible" type="button" aria-pressed="false" aria-labelledby="c-w3-1">&#10003;</button><span class="cbt" id="c-w3-1">Claude has named a file that is actually in my folder &mdash; or, on route C, the repository is visible on github.com and in the picker</span></li>
+        </ul>
+      </li>
+      <li data-key="one-element" data-id="W4" data-tiers="min" data-open="0" data-done="0">
+        <div class="srow">
+          <button class="head" type="button" aria-expanded="false" aria-controls="d-W4"><span class="n">W4</span>Do one element, then look at it yourself</button>
+          <span class="badge">Incomplete</span>
+        </div>
+        <div class="detail" id="d-W4">
+            <p class="why"><b>Review what changed for scope, not for correctness.</b> You are not checking whether the code is right &mdash; you are asking <i>what did it touch that I did not ask about?</i> That question needs no programming at all, and it is the one that catches the expensive mistakes.</p>
+            <p class="why">Then run it and look. List the files that now exist. Open the thing yourself. <b>None of those four checks requires you to read code</b>, and every one of them checks the world rather than the summary. On route C, let Claude commit and push once you are satisfied.</p>
+        </div>
+        <ul class="checks">
+            <li><button class="cb" data-key="scope-not-correctness" type="button" aria-pressed="false" aria-labelledby="c-w4-0">&#10003;</button><span class="cbt" id="c-w4-0">I can say what it touched that I did not ask about</span></li>
+            <li><button class="cb" data-key="seen-it-work-myself" type="button" aria-pressed="false" aria-labelledby="c-w4-1">&#10003;</button><span class="cbt" id="c-w4-1">I have seen the thing work, rather than read a message saying that it does</span></li>
+            <li><button class="cb" data-key="name-the-single-change" type="button" aria-pressed="false" aria-labelledby="c-w4-2">&#10003;</button><span class="cbt" id="c-w4-2">I can name in one line the single change that just happened</span></li>
+        </ul>
+      </li>
+      <li data-key="publish-and-notice" data-id="W5" data-tiers="min" data-open="0" data-done="0">
+        <div class="srow">
+          <button class="head" type="button" aria-expanded="false" aria-controls="d-W5"><span class="n">W5</span>Publish &mdash; and notice which kind of publishing you set up</button>
+          <span class="badge">Incomplete</span>
+        </div>
+        <div class="detail" id="d-W5">
+            <p class="why"><b>Route B.</b> In the Cloudflare dashboard, <b>create a Pages project and drag the folder in</b> &mdash; that was the path on <b>2026-08-30</b>. Browser only, no repository. The limits are ample for a website: a zip or a single folder, 1,000 files, 25&nbsp;MiB each. <b>Every later change means dragging it in again,</b> and that is the thing to notice.</p>
+            <p class="why"><b>Route C.</b> In the Cloudflare dashboard, <b>connect the GitHub repository</b> &mdash; also <b>2026-08-30</b>, also entirely in the browser, and private repositories are supported. From then on every push redeploys and nobody has to remember anything. GitHub Pages is the alternative and is equally browser-only, but on the free plan it serves from <b>public</b> repositories only &mdash; and private is the right default for research. That trade is step 7.3 of this page, restated.</p>
+            <p class="why"><b>This step is the whole decision in one step.</b> Route C's automatic redeploy is the only part of this route that keeps working when you are not there. Everything else here is something you do; that is something that then happens.</p>
+            <p class="why"><b>Expect the click paths above to be wrong.</b> When this route was walked, the dashboard had been rebuilt between the instructions being written and the page being opened, and the guide was wrong five times in one afternoon &mdash; then unstuck three of those inside a single exchange, once it could see a screenshot. If a named button is not where this says it is, that is the expected case and not your mistake. Show the expert your screen.</p>
+        </div>
+        <ul class="checks">
+            <li><button class="cb" data-key="url-loads-off-wifi" type="button" aria-pressed="false" aria-labelledby="c-w5-0">&#10003;</button><span class="cbt" id="c-w5-0">The URL loads on my phone, off my wifi</span></li>
+            <li><button class="cb" data-key="knows-if-redeploy-automatic" type="button" aria-pressed="false" aria-labelledby="c-w5-1">&#10003;</button><span class="cbt" id="c-w5-1">I can say whether my next change redeploys by itself, or needs me to drag a folder in again</span></li>
+            <li><button class="cb" data-key="loaded-again-after-change" type="button" aria-pressed="false" aria-labelledby="c-w5-2">&#10003;</button><span class="cbt" id="c-w5-2">I have loaded it again after making one change, and it was the new version</span></li>
+        </ul>
+      </li>
+    </ol>
+  </section>
+
+  <section class="phase">
+    <div class="phase-head">
       <h2>Phase 2 &middot; Storage</h2>
       <span class="phase-time">20 min</span>
     </div>
     <p class="phase-note"><b>Before an agent sees your data</b> &mdash; which is a different moment from when the data was made, and is almost certainly still ahead of you. You are not being asked to reorganize anything. You are being asked to be able to <i>say</i> where things live, before something else starts guessing. <b>If the project has no data</b> &mdash; a website, a document, a small tool &mdash; this phase is one box and 2.3 does not apply to you.</p>
     <p class="phase-note"><b>This phase is the decision, not the construction.</b> Deciding where things live needs nothing installed, which is why it is here. The part that needs an editor and an agent &mdash; writing the path helper so nothing ever hardcodes a path &mdash; is step 3.7, after the machine exists.</p>
-    <ol class="steps">      <li data-key="write-down-paths" data-id="2.1" data-open="0" data-done="0">
+    <ol class="steps">
+      <li data-key="write-down-paths" data-id="2.1" data-tiers="mid max" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-2.1"><span class="n">2.1</span>Write down where things live</button>
           <span class="badge">Incomplete</span>
@@ -677,7 +825,7 @@
             <li><button class="cb" data-key="say-something-another-person" type="button" aria-pressed="false" aria-labelledby="c-2-1-2">&#10003;</button><span class="cbt" id="c-2-1-2">I can say where something another person needs to see goes</span></li>
         </ul>
       </li>
-      <li data-key="two-roots" data-id="2.2" data-open="0" data-done="0">
+      <li data-key="two-roots" data-id="2.2" data-tiers="mid max" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-2.2"><span class="n">2.2</span>Create the two roots and name them once</button>
           <span class="badge">Incomplete</span>
@@ -692,7 +840,7 @@
             <li><button class="cb" data-key="opened-review-folder-second" type="button" aria-pressed="false" aria-labelledby="c-2-2-2">&#10003;</button><span class="cbt" id="c-2-2-2">I have opened the review folder on a second device</span></li>
         </ul>
       </li>
-      <li data-key="data-root-unsynced" data-id="2.3" data-open="0" data-done="0">
+      <li data-key="data-root-unsynced" data-id="2.3" data-tiers="mid max" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-2.3"><span class="n">2.3</span>Keep the data root out of the sync client</button>
           <span class="badge">Incomplete</span>
@@ -714,7 +862,7 @@
       <span class="phase-time">55 min</span>
     </div>
     <ol class="steps">
-      <li data-key="editor" data-id="3.1" data-open="0" data-done="0">
+      <li data-key="editor" data-id="3.1" data-tiers="mid max" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-3.1"><span class="n">3.1</span>Install an editor, and find the terminal</button>
           <span class="badge">Incomplete</span>
@@ -732,7 +880,7 @@
             <li><button class="cb" data-key="open-terminal-inside-same" type="button" aria-pressed="false" aria-labelledby="c-3-1-3">&#10003;</button><span class="cbt" id="c-3-1-3">I can open a terminal inside that same window</span></li>
         </ul>
       </li>
-      <li data-key="package-manager" data-id="3.2" data-open="0" data-done="0">
+      <li data-key="package-manager" data-id="3.2" data-tiers="mid max" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-3.2"><span class="n">3.2</span>Install a package manager, then five tools</button>
           <span class="badge">Incomplete</span>
@@ -748,7 +896,7 @@
             <li><button class="cb" data-key="git-gh-node-rg" type="button" aria-pressed="false" aria-labelledby="c-3-2-1">&#10003;</button><span class="cbt" id="c-3-2-1"><code>git</code>, <code>gh</code>, <code>node</code>, <code>rg</code> and <code>jq</code> each print a version</span></li>
         </ul>
       </li>
-      <li data-key="git-identity" data-id="3.3" data-open="0" data-done="0">
+      <li data-key="git-identity" data-id="3.3" data-tiers="mid max" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-3.3"><span class="n">3.3</span>Tell git who you are, and sign in to GitHub</button>
           <span class="badge">Incomplete</span>
@@ -764,7 +912,7 @@ gh auth login</pre>
             <li><button class="cb" data-key="gh-auth-status-names" type="button" aria-pressed="false" aria-labelledby="c-3-3-1">&#10003;</button><span class="cbt" id="c-3-3-1"><code>gh auth status</code> names my account</span></li>
         </ul>
       </li>
-      <li data-key="agent-install" data-id="3.4" data-open="0" data-done="0">
+      <li data-key="agent-install" data-id="3.4" data-tiers="mid max" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-3.4"><span class="n">3.4</span>Install the agent and sign in</button>
           <span class="badge">Incomplete</span>
@@ -781,7 +929,7 @@ claude</pre>
             <li><button class="cb" data-key="session-starts-folder-standing" type="button" aria-pressed="false" aria-labelledby="c-3-4-2">&#10003;</button><span class="cbt" id="c-3-4-2">A session starts in the folder I am standing in, not my home folder</span></li>
         </ul>
       </li>
-      <li data-key="agent-in-editor" data-id="3.5" data-open="0" data-done="0">
+      <li data-key="agent-in-editor" data-id="3.5" data-tiers="mid max" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-3.5"><span class="n">3.5</span>Put the agent inside the editor &mdash; and find the button, which hides</button>
           <span class="badge">Incomplete</span>
@@ -803,7 +951,7 @@ claude</pre>
             <li><button class="cb" data-key="file-open-opened-command" type="button" aria-pressed="false" aria-labelledby="c-3-5-2">&#10003;</button><span class="cbt" id="c-3-5-2">With <i>no</i> file open, I have opened it from the Command Palette &mdash; so I am not relying on the icon</span></li>
         </ul>
       </li>
-      <li data-key="stay-awake" data-id="3.6" data-open="0" data-done="0">
+      <li data-key="stay-awake" data-id="3.6" data-tiers="mid max" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-3.6"><span class="n">3.6</span>Stop the machine sleeping through work you walked away from</button>
           <span class="badge">Incomplete</span>
@@ -821,7 +969,7 @@ claude</pre>
             <li><button class="cb" data-key="run-once-learning-moment" type="button" aria-pressed="false" aria-labelledby="c-3-6-1">&#10003;</button><span class="cbt" id="c-3-6-1">I have run it once, so I am not learning it at the moment I need it</span></li>
         </ul>
       </li>
-      <li data-key="path-helper" data-id="3.7" data-open="0" data-done="0">
+      <li data-key="path-helper" data-id="3.7" data-tiers="mid max" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-3.7"><span class="n">3.7</span>Write the path helper, before anything hardcodes a path</button>
           <span class="badge">Incomplete</span>
@@ -857,7 +1005,8 @@ computer.</pre>
       <span class="phase-time">40 min</span>
     </div>
     <p class="phase-note">Two prompts, and the reading you do between them. The reading is the part that is easy to skip and is the reason the rest works.</p>
-    <ol class="steps">      <li data-key="project-folder" data-id="4.1" data-open="0" data-done="0">
+    <ol class="steps">
+      <li data-key="project-folder" data-id="4.1" data-tiers="mid max" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-4.1"><span class="n">4.1</span>Make the project folder and start a session inside it</button>
           <span class="badge">Incomplete</span>
@@ -881,7 +1030,7 @@ cd     "change directory" — moves you into it
             <li><button class="cb" data-key="banner-shows-path-made" type="button" aria-pressed="false" aria-labelledby="c-4-1-2">&#10003;</button><span class="cbt" id="c-4-1-2">The banner shows the path I just made, not my home folder</span></li>
         </ul>
       </li>
-      <li data-key="prompt-setup" data-id="4.2" data-open="0" data-done="0">
+      <li data-key="prompt-setup" data-id="4.2" data-tiers="mid max" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-4.2"><span class="n">4.2</span>First prompt &mdash; write the setup down</button>
           <span class="badge">Incomplete</span>
@@ -901,7 +1050,7 @@ cd     "change directory" — moves you into it
             <li><button class="cb" data-key="nothing-else-created-noticed" type="button" aria-pressed="false" aria-labelledby="c-4-2-3">&#10003;</button><span class="cbt" id="c-4-2-3">Nothing else was created &mdash; or I noticed what was</span></li>
         </ul>
       </li>
-      <li data-key="read-what-it-wrote" data-id="4.3" data-open="0" data-done="0">
+      <li data-key="read-what-it-wrote" data-id="4.3" data-tiers="mid max" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-4.3"><span class="n">4.3</span>Read what it wrote. Do not skim it.</button>
           <span class="badge">Incomplete</span>
@@ -922,7 +1071,7 @@ cd     "change directory" — moves you into it
             <li><button class="cb" data-key="had-fix-wrong-thing" type="button" aria-pressed="false" aria-labelledby="c-4-3-3">&#10003;</button><span class="cbt" id="c-4-3-3">I had it fix what was wrong, one thing at a time</span></li>
         </ul>
       </li>
-      <li data-key="prompt-git" data-id="4.4" data-open="0" data-done="0">
+      <li data-key="prompt-git" data-id="4.4" data-tiers="mid max" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-4.4"><span class="n">4.4</span>Second prompt &mdash; git, and what it may do without asking</button>
           <span class="badge">Incomplete</span>
@@ -964,7 +1113,7 @@ one so I can look.
             <li><button class="cb" data-key="name-thing-agent-allowed" type="button" aria-pressed="false" aria-labelledby="c-4-4-3">&#10003;</button><span class="cbt" id="c-4-4-3">I can name one thing the agent is not allowed to do</span></li>
         </ul>
       </li>
-      <li data-key="remote" data-id="4.5" data-open="0" data-done="0">
+      <li data-key="remote" data-id="4.5" data-tiers="mid max" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-4.5"><span class="n">4.5</span>Add the remote in the same sitting</button>
           <span class="badge">Incomplete</span>
@@ -980,7 +1129,7 @@ one so I can look.
             <li><button class="cb" data-key="git-status-says-up" type="button" aria-pressed="false" aria-labelledby="c-4-5-2">&#10003;</button><span class="cbt" id="c-4-5-2"><code>git status</code> says up to date with <code>origin</code></span></li>
         </ul>
       </li>
-      <li data-key="usage-screen" data-id="4.6" data-open="0" data-done="0">
+      <li data-key="usage-screen" data-id="4.6" data-tiers="mid max" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-4.6"><span class="n">4.6</span>Find the usage screen before you need it</button>
           <span class="badge">Incomplete</span>
@@ -1003,7 +1152,7 @@ one so I can look.
             <li><button class="cb" data-key="name-thing-session-cost" type="button" aria-pressed="false" aria-labelledby="c-4-6-2">&#10003;</button><span class="cbt" id="c-4-6-2">I can name the one thing in this session that cost the most</span></li>
         </ul>
       </li>
-      <li data-key="cheap-now-impossible-later" data-id="4.7" data-open="0" data-done="0">
+      <li data-key="cheap-now-impossible-later" data-id="4.7" data-tiers="mid max" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-4.7"><span class="n">4.7</span>Two settings that cannot be added afterwards</button>
           <span class="badge">Incomplete</span>
@@ -1042,7 +1191,8 @@ one so I can look.
       <span class="phase-time">forever</span>
     </div>
     <p class="phase-note">This is the part that is not setup, and it is the part that decides whether any of the above was worth doing. Nothing here can be installed.</p>
-    <ol class="steps">      <li data-key="one-thing" data-id="5.1" data-open="0" data-done="0">
+    <ol class="steps">
+      <li data-key="one-thing" data-id="5.1" data-tiers="min mid max" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-5.1"><span class="n">5.1</span>One thing at a time</button>
           <span class="badge">Incomplete</span>
@@ -1055,7 +1205,7 @@ one so I can look.
             <li><button class="cb" data-key="verify-change-starting-next" type="button" aria-pressed="false" aria-labelledby="c-5-1-1">&#10003;</button><span class="cbt" id="c-5-1-1">I verify one change before starting the next</span></li>
         </ul>
       </li>
-      <li data-key="define-done" data-id="5.2" data-open="0" data-done="0">
+      <li data-key="define-done" data-id="5.2" data-tiers="min mid max" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-5.2"><span class="n">5.2</span>Say what finished looks like, before it starts</button>
           <span class="badge">Incomplete</span>
@@ -1068,7 +1218,7 @@ one so I can look.
             <li><button class="cb" data-key="next-task-state-file" type="button" aria-pressed="false" aria-labelledby="c-5-2-1">&#10003;</button><span class="cbt" id="c-5-2-1">For my next task I can state the file, folder or number that proves it worked</span></li>
         </ul>
       </li>
-      <li data-key="friction-log" data-id="5.3" data-open="0" data-done="0">
+      <li data-key="friction-log" data-id="5.3" data-tiers="mid max" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-5.3"><span class="n">5.3</span>Keep a friction log, and let it decide what you build</button>
           <span class="badge">Incomplete</span>
@@ -1081,7 +1231,7 @@ one so I can look.
             <li><button class="cb" data-key="more-line" type="button" aria-pressed="false" aria-labelledby="c-5-3-1">&#10003;</button><span class="cbt" id="c-5-3-1">It has more than one line in it</span></li>
         </ul>
       </li>
-      <li data-key="guards-after" data-id="5.4" data-open="0" data-done="0">
+      <li data-key="guards-after" data-id="5.4" data-tiers="mid max" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-5.4"><span class="n">5.4</span>Build a guard only after something has gone wrong</button>
           <span class="badge">Incomplete</span>
@@ -1094,7 +1244,7 @@ one so I can look.
             <li><button class="cb" data-key="built-case" type="button" aria-pressed="false" aria-labelledby="c-5-4-1">&#10003;</button><span class="cbt" id="c-5-4-1">I have not built one just in case</span></li>
         </ul>
       </li>
-      <li data-key="handoff-note" data-id="5.5" data-open="0" data-done="0">
+      <li data-key="handoff-note" data-id="5.5" data-tiers="mid max" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-5.5"><span class="n">5.5</span>End every session by leaving a note for the next one</button>
           <span class="badge">Incomplete</span>
@@ -1116,7 +1266,7 @@ one so I can look.
       <span class="phase-time">conditional</span>
     </div>
     <ol class="steps">
-      <li data-key="second-machine" data-id="6.1" data-open="0" data-done="0">
+      <li data-key="second-machine" data-id="6.1" data-tiers="max" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-6.1"><span class="n">6.1</span>Clone it on the second machine and prove it runs there</button>
           <span class="badge">Incomplete</span>
@@ -1130,7 +1280,7 @@ one so I can look.
             <li><button class="cb" data-key="had-edit-friction-log" type="button" aria-pressed="false" aria-labelledby="c-6-1-2">&#10003;</button><span class="cbt" id="c-6-1-2">If I had to edit one, it is in the friction log</span></li>
         </ul>
       </li>
-      <li data-key="claim-board" data-id="6.2" data-open="0" data-done="0">
+      <li data-key="claim-board" data-id="6.2" data-tiers="max" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-6.2"><span class="n">6.2</span>If more than one session can touch the work, they need somewhere to see each other</button>
           <span class="badge">Incomplete</span>
@@ -1144,7 +1294,7 @@ one so I can look.
             <li><button class="cb" data-key="claim-committed-pushed-unpushed" type="button" aria-pressed="false" aria-labelledby="c-6-2-2">&#10003;</button><span class="cbt" id="c-6-2-2">The claim is committed and pushed &mdash; an unpushed claim stays on one machine</span></li>
         </ul>
       </li>
-      <li data-key="allocation-lands" data-id="6.3" data-open="0" data-done="0" data-optional="1">
+      <li data-key="allocation-lands" data-id="6.3" data-tiers="max" data-open="0" data-done="0" data-optional="1">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-6.3"><span class="n">6.3</span>When the cluster allocation lands, weeks later</button>
           <span class="badge">Incomplete</span>
@@ -1172,7 +1322,7 @@ one so I can look.
     <p class="phase-note">Only when you have something to put on it. Three companies, each doing one job: <b>Porkbun</b> sells you the name, <b>Cloudflare</b> answers questions about where it points, and <b>GitHub</b> serves the pages. Keeping those three jobs separate in your head is most of the difficulty.</p>
     <div class="warn"><b>Do not trust a button name you read anywhere, including here.</b> Every named button, tab and menu path in this phase <b>was true on 2026-08-30 and nowhere else</b>. That is the same warning 1.1 gives about prices, and it applies harder here: on that date this phase was walked end to end and <b>the click paths were wrong five times in one afternoon</b> &mdash; Cloudflare had rebuilt the dashboard around Workers, so &ldquo;Pages&rdquo; was a footnote link and the settings named below did not appear at all.<br><br><b>The steps are written as outcomes and &ldquo;done when&rdquo; conditions, and those held.</b> Read them as what must become true, not as where to press. When the screen does not match this page &mdash; and it will not &mdash; that is the expected case, not your mistake: <b>screenshot the whole window and show it to your agent.</b> Every one of those five was unstuck in a single exchange that way. The companion sheet <b>Show It Your Screen</b> is that loop and the evidence for it.</div>
     <ol class="steps">
-      <li data-key="domain" data-id="7.1" data-open="0" data-done="0">
+      <li data-key="domain" data-id="7.1" data-tiers="min mid max" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-7.1"><span class="n">7.1</span>Buy the name at Porkbun</button>
           <span class="badge">Incomplete</span>
@@ -1188,7 +1338,7 @@ one so I can look.
             <li><button class="cb" data-key="whois-privacy" type="button" aria-pressed="false" aria-labelledby="c-7-1-2">&#10003;</button><span class="cbt" id="c-7-1-2">WHOIS privacy is on</span></li>
         </ul>
       </li>
-      <li data-key="dns" data-id="7.2" data-open="0" data-done="0">
+      <li data-key="dns" data-id="7.2" data-tiers="min mid max" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-7.2"><span class="n">7.2</span>Hand the DNS to Cloudflare</button>
           <span class="badge">Incomplete</span>
@@ -1205,7 +1355,7 @@ one so I can look.
             <li><button class="cb" data-key="cloudflare-s-dashboard-says" type="button" aria-pressed="false" aria-labelledby="c-7-2-2">&#10003;</button><span class="cbt" id="c-7-2-2">Cloudflare&rsquo;s dashboard says the zone is <b>Active</b></span></li>
         </ul>
       </li>
-      <li data-key="who-serves" data-id="7.3" data-open="0" data-done="0">
+      <li data-key="who-serves" data-id="7.3" data-tiers="min mid max" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-7.3"><span class="n">7.3</span>Publish it from Cloudflare</button>
           <span class="badge">Incomplete</span>
@@ -1223,7 +1373,7 @@ one so I can look.
             <li><button class="cb" data-key="signed-deploy-tool-once" type="button" aria-pressed="false" aria-labelledby="c-7-3-2">&#10003;</button><span class="cbt" id="c-7-3-2">I have signed the deploy tool in once on this machine</span></li>
         </ul>
       </li>
-      <li data-key="github-pages" data-id="7.4" data-open="0" data-done="0" data-optional="1">
+      <li data-key="github-pages" data-id="7.4" data-tiers="min mid max" data-open="0" data-done="0" data-optional="1">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-7.4"><span class="n">7.4</span><span class="only">GitHub road</span>Point it at GitHub Pages</button>
           <span class="badge">Incomplete</span>
@@ -1249,7 +1399,7 @@ or four A records:
             <li><button class="skipbtn" type="button">Not needed &mdash; I chose Cloudflare</button></li>
         </ul>
       </li>
-      <li data-key="gray-cloud" data-id="7.5" data-open="0" data-done="0" data-optional="1">
+      <li data-key="gray-cloud" data-id="7.5" data-tiers="min mid max" data-open="0" data-done="0" data-optional="1">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-7.5"><span class="n">7.5</span><span class="only">GitHub road</span>Leave the cloud gray until the certificate exists</button>
           <span class="badge">Incomplete</span>
@@ -1503,6 +1653,7 @@ or four A records:
   function count() {
     var n = 0, d = 0;
     steps.forEach(function (s) {
+      if (s.li.dataset.off === '1') return;    // another tier's step is not yours to finish
       if (s.li.dataset.skip === '1') return;   // a skipped step leaves the denominator
       d++;
       if (s.li.dataset.done === '1') n++;
@@ -1513,8 +1664,80 @@ or four A records:
   }
   count();
 
+  // ---- the tier switch: how far are you going ----
+  //
+  // WHY THIS IS A FILTER AND NOT A SEPARATE PAGE. Three pages would be three
+  // copies of the same 34 steps, and this repo already knows what two copies of
+  // one list do to each other: the home page and this one numbered the same
+  // phases differently for two days, on two pages that link to each other,
+  // because each was edited without the other. One list, filtered, cannot drift
+  // from itself.
+  //
+  // WHY IT DOES NOT TOUCH `skipped`. A reader's "not needed" decisions are
+  // THEIRS and are keyed per step. Driving them from the tier would overwrite a
+  // considered choice with a blunt one and then persist it, so switching tier
+  // twice would silently lose what they had marked. The tier writes ONLY
+  // data-off, which is never saved against a step; `skipped` and `state` are
+  // untouched by everything below.
+  //
+  // WHY EVERY STEP STAYS IN THE DOM. Hidden, not deleted: a tick on a step the
+  // current tier hides is still in localStorage, still keyed by data-key, and
+  // comes back the moment the reader moves up a tier. Moving up must never cost
+  // anybody a box they had already earned.
+  var TKEY = 'cold-start-tier-v1';
+  var TIER_COPY = {
+    min: 'Showing the browser route. Nothing here needs anything installed.',
+    mid: 'Showing the laptop setup — your own editor, your own copy.',
+    max: 'Showing everything, including the parts that need somebody else to approve them. <b>Start the storage and allocation requests today</b> — they take days to weeks, and everything else here proceeds while they pend.'
+  };
+  var tierBtns = [].slice.call(document.querySelectorAll(".tierpick"));
+  var tierNow = document.getElementById('tier-now');
+  var phases = [].slice.call(document.querySelectorAll('section.phase'));
+
+  function readTier() {
+    try { var t = localStorage.getItem(TKEY); return TIER_COPY[t] ? t : null; }
+    catch (e) { return null; }
+  }
+
+  function applyTier(t) {
+    // No choice made yet shows everything. A first-time reader must be able to
+    // see what is on offer before being asked to narrow it; a page that starts
+    // filtered is a page that hides its own scope.
+    steps.forEach(function (s) {
+      var tiers = (s.li.dataset.tiers || '').split(' ');
+      s.li.dataset.off = (t && tiers.indexOf(t) === -1) ? '1' : '0';
+    });
+    // A phase whose every step belongs to other tiers is a heading over nothing.
+    phases.forEach(function (sec) {
+      var live = [].slice.call(sec.querySelectorAll('ol.steps > li'))
+                   .filter(function (li) { return li.dataset.off !== '1'; });
+      sec.dataset.off = live.length ? '0' : '1';
+    });
+    tierBtns.forEach(function (b) {
+      b.setAttribute('aria-pressed', b.dataset.tier === t ? 'true' : 'false');
+    });
+    if (t) { tierNow.innerHTML = TIER_COPY[t]; tierNow.hidden = false; }
+    else { tierNow.hidden = true; }
+    count();
+  }
+
+  tierBtns.forEach(function (b) {
+    b.setAttribute('aria-pressed', 'false');
+    b.addEventListener('click', function () {
+      var t = b.dataset.tier === readTier() ? null : b.dataset.tier;   // click again to see everything
+      try { if (t) localStorage.setItem(TKEY, t); else localStorage.removeItem(TKEY); } catch (e) {}
+      applyTier(t);
+    });
+  });
+
+  applyTier(readTier());
+
   document.getElementById('pc-reset').addEventListener('click', function () {
-    if (!window.confirm('Clear all 30 steps and the saved paths? This cannot be undone.')) return;
+    // COUNTED, NOT RESTATED. This said "all 30 steps" on a 34-step page: the
+    // number was typed once and the page grew past it, which is the same defect
+    // 37e8b81 fixed in the build script's page description. A number about the
+    // document belongs to the document.
+    if (!window.confirm('Clear all ' + steps.length + ' steps and the saved paths? This cannot be undone.')) return;
     for (var k in state) delete state[k];
     save();
     for (var sk in skipped) delete skipped[sk];
