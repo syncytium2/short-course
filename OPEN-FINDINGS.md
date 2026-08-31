@@ -681,67 +681,56 @@ says so itself, *"a message, not a lock"* — and
 repo's own study of reaching for exactly that. The board has since failed at least three times on
 record, once at a cost of **859,010 tokens and $11.06**.
 
-> ## ✅ DECISION 1 TAKEN, 2026-08-30 — worktree-per-session, for new sessions
->
-> **Tony, in one word:** *"worktrees. new sessions will have them. i'm sorry that didn't carry
-> over here."* The root fix, chosen over patching the premise. **Decisions 2–4 are not settled
-> by it and three of them just got more urgent, not less** — see below.
->
-> **It arrives in the middle, not at the start.** Existing sessions stay in the shared checkout,
-> so the repo now runs *both* models at once and every mechanism here has to hold in both. The
-> board, `claim.sh` and session-id addressing are not retired by this and should not be: they
-> are what covers the sessions that predate it, and one of the two things worktrees do **not**
-> fix is the collision they were built for.
+**Decisions — taken 2026-08-30, and 1–3 are done.**
 
-**Decisions needed — author's call, one taken**
+1. ~~**Convert the repo to worktree-per-session?**~~ **YES.** Tony: *"worktree per session, you
+   are colliding all the time."* [`tools/worktree.sh`](tools/worktree.sh) opens a branch and
+   worktree from `origin/master` in one command; [`docs/SESSIONS.md`](docs/SESSIONS.md) now leads
+   with it and records that its old premise was a choice, never examined, rather than a fact
+   about the repo. **Deliberately not a gate** — it makes the right path cheaper than the wrong
+   one, because this estate has already shipped a gate that blocked its own installation.
 
-1. ~~**Convert the repo to worktree-per-session?**~~ **DECIDED 2026-08-30 — yes, for new
-   sessions.** The root fix. It retires this gate's premise instead of patching it, and it makes
-   the collision *impossible to express* — rung 5 of turnstile's own decision tree, which the
-   vendored README quotes as beating every gate.
+   **He said it twice, to two sessions, and the second half is not in the first.** To
+   `Mac/5dc04385`, an hour later: *"worktrees. new sessions will have them. i'm sorry that didn't
+   carry over here."* **New** sessions — so this arrives in the middle and the repo runs both
+   models at once for a while. Every mechanism here has to hold in both, which is the argument
+   for `<machine>/<session-id>` staying as the address: with one worktree per session the
+   `branch ↔ session` rule holds again, but only for the sessions that have one.
 
-   **What it closes.** The whole **N4 sweep class**: a whole-file `git add` can no longer pick up
-   another session's uncommitted edits, because there is no longer a working tree in common. That
-   also removes N4's stated reason for decision 2 — *"untracked files make the working tree
-   systematically more optimistic than the commit"* is a shared-checkout fact and stops being
-   true. And it retires the 2026-08-27 branch-moved-under-you incident that
-   [`tools/session_identity.sh`](tools/session_identity.sh) exists to explain. **Three sweeps
-   happened on 2026-08-30 alone**, in both directions, between `Mac/5dc04385`, `Mac/a4de1b91` and
-   `Mac/fb238a63`; nothing was lost in any of them and that is luck, not design.
+   **What it closes: the N4 sweep class.** A whole-file `git add` can no longer pick up another
+   session's uncommitted edits, because there is no working tree in common — and N4's stated
+   reason for its decision 2, *"untracked files make the working tree systematically more
+   optimistic than the commit,"* is a shared-checkout fact that stops being true. **It happened
+   three times on 2026-08-30 alone**, between `Mac/5dc04385`, `Mac/a4de1b91` and `Mac/fb238a63`,
+   in both directions. Nothing was lost in any of them, which was luck.
 
-   **What it does not close, and somebody will assume it does.** **Two sessions writing the same
-   new file.** Worktrees do not help: two branches, two new files, git merges both without a
-   conflict, and a human finds out by reading the folder. That is the collision this board was
-   built for — 2026-08-27, two case files four minutes apart — and it is untouched. Nor does it
+   **What it does not close, and somebody will assume it does: two sessions writing the same new
+   file.** Worktrees do not help. Two branches, two new files, git merges both without a
+   conflict, and a human finds out by reading the folder — *the exact 2026-08-27 collision that
+   produced the board*, and the row its own table calls **"the one that bit us."** Nor does it
    close [C3](points.md)'s third and fourth instances, two sessions live in the same material at
-   once: worktrees turn a silent overwrite into a visible merge, which is better, and neither
-   session is any likelier to find out the other is there. **The board remains the only channel
-   for that, and it remains prose.**
+   once: a worktree turns a silent overwrite into a visible merge, which is better, and neither
+   session is any likelier to find out the other is there. **Worktrees remove a failure a claim
+   was never for. The board is still the only channel for the one it was.**
 
-   **And it promotes this finding's own defect from an edge case to the default path.** N6 was
-   found because Tony asked for *one* worktree — the first time this gate had ever run inside
-   one. If every new session starts in a worktree, **every new session meets the false refusal on
-   its first push**, and meets the moved-under-you latch on the one after that: the alarm that
-   fires by construction, resolves on retry, and teaches a session within two commands that this
-   alarm means nothing. Decision 2 stops being optional and decision 3 stops being hygiene.
-   **This is a fix whose adoption makes an unfixed bug universal, which is the argument for
-   sequencing them together.**
-2. **Fix the hook regardless?** Small: resolve the repo from the caller's CWD, or ask
-   `git rev-parse --show-toplevel`. Worth doing even if 1 is a no, because the gate is wrong
-   today and blocks worktree sessions today. **⏫ Decision 1 said yes, so this is no longer
-   "regardless" — it is the blocker.** Still unfixed as of `3f3b43b`: lines 54–56 are unchanged
-   and the last two commits to the hook (`c7dacbc`, `6dc2d39`) are about enforcement, not
-   resolution. **Not done here on purpose:** this is a declared `gate` on a shared file that
-   every session runs, its selftest cannot see the failing path (decision 3), and a wrong fix
-   locks out all of them — the one thing N6 already says about itself. It wants a session that
-   is *in* a worktree, so it can watch the fix go green where it currently goes red.
-3. **Add a worktree case to `--selftest` and a row to `tools/mutation_check.sh`.** Without it the
-   next expired premise is caught the same way this one was — by a session losing a push.
-   **⏫ Now the precondition for 2, not a follow-up to it.** Seven green cases in the shared
-   checkout cannot tell you whether a fix worked, because the shared checkout is the one
-   environment where the bug does not appear. A fix landed against this selftest would be
-   [the tests-were-defending-the-bug](docs/cases/2026-08-28-the-tests-were-defending-the-bug.md)
-   a second time, in the same repo, on a gate.
-4. **Does this earn a case file?** Native, small, and it carries three of the estate's recurring
-   shapes in one incident: a confident false statement, a guard defending its own premise, and a
-   test that never saw an input that could fail it.
+   *Written while proving it: this entry and the `docs/SESSIONS.md` rewrite were produced by two
+   sessions independently, from the same one-word instruction, and collided in git. Both accounts
+   are merged here rather than one being dropped.*
+2. ~~**Fix the hook regardless?**~~ **DONE, and not the way this entry proposed.** Resolving from
+   the caller's CWD does not work: the harness runs the hook with the **project root** as its
+   CWD, which is the shared checkout — so a hook cannot learn which worktree the caller is in,
+   and it was wrong to say it could. What it *can* ask is the question the 2026-08-27 incident
+   actually turned on: **is this refspec checked out in any worktree of this repo.** The original
+   no-op push named a ref checked out nowhere, so that test still catches it. Interlock 2 is
+   skipped when the repo has more than one worktree — its premise is gone — and it says so rather
+   than skipping in silence.
+3. ~~**Add a worktree case to `--selftest` and a row to `mutation_check.sh`.**~~ **DONE.** The
+   selftest now covers both worlds: a refspec live in a sibling worktree, and interlock 2 driven
+   inside a scratch single-worktree repo so it stays watched after being retired here. Three new
+   mutation rows — **and repairing this hook moved the target of a pre-existing row, which
+   `mutation_check.sh` reported as an ERROR rather than passing silently.** 28 caught, 0 missed.
+4. **Does this earn a case file? — STILL OPEN, and the only thing left in N6.** Native, small,
+   and it carries four of the estate's recurring shapes in one incident: a confident false
+   statement, a guard defending its own expired premise, a test that never saw an input that
+   could fail it, and an alarm that trains you to retry through it. It also has the cleanest
+   possible provenance — the gate refused the commit that filed the finding about the gate, twice.

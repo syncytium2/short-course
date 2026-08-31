@@ -27,37 +27,69 @@ gallery.
 
 ---
 
-## Why this repo's board differs from `bugarach`'s and `interface2`'s
+## One session, one branch, one worktree — 2026-08-30
 
-Those repos address a session **by its branch**, on the stated ground that one branch ↔
-one worktree ↔ one session is already the rule there.
+**Open a worktree before you write anything.** One command:
 
-> **⚠ This premise is being retired, 2026-08-30 — Tony's call.** *"worktrees. new sessions will
-> have them."* [`OPEN-FINDINGS.md` **N6** decision 1](../OPEN-FINDINGS.md). **Everything below is
-> still live and still correct**, because it arrives in the middle: existing sessions stay in the
-> shared checkout, so the repo runs both models at once and this board has to hold in both.
->
-> **What changes:** the sweep class goes away — no shared working tree, so a whole-file `git add`
-> can no longer commit another session's uncommitted edits (three of those happened on 2026-08-30
-> alone, in both directions, all recoverable by luck).
->
-> **What does not:** ***the new-file trap below is untouched.*** Two worktrees, two branches, two
-> new files, git merges both without a conflict, and a human finds out by reading the folder — the
-> exact 2026-08-27 collision that produced this board. **Worktrees do not make a claim
-> unnecessary; they remove the failure a claim was never for.**
->
-> **And do not switch the addressing to branch names.** With one worktree per session the
-> `branch ↔ session` rule holds again, the way it does in `bugarach` and `interface2` — but only
-> for sessions that have one, and the two models are running side by side. `<machine>/<session>`
-> is correct in both; a branch name is correct in one.
+```sh
+tools/worktree.sh my-slug        # branch + worktree, from origin/master
+cd ../short-course-worktrees/my-slug
+tools/claim.sh "what you are about to do"
+```
 
-**That rule does not hold here, and assuming it is what broke on 2026-08-27.** This repo
-is a single checkout that several sessions share. So:
+`tools/worktree.sh --list` shows every worktree and who is dirty; `--where` tells you
+whether you are in your own or in the shared checkout; `--close` removes a clean one.
 
-- **A session is addressed `<machine>/<session-id>`** — `Mac/a49d017b` — from
-  `$CLAUDE_CODE_SESSION_ID`, via [`../tools/session_identity.sh`](../tools/session_identity.sh).
-- **The branch is recorded as a fact, not as an identity.** It can move under you between
-  one command and the next, because it belongs to the checkout and the checkout is shared.
+**This reverses what this section used to say, and the reversal is the point.** It read:
+
+> *Those repos address a session by its branch, on the stated ground that one branch ↔ one
+> worktree ↔ one session is already the rule there. **That rule does not hold here.** This
+> repo is a single checkout that several sessions share.*
+
+That was written as a **fact about the repo**. It was a **choice**, and it was never
+examined — `bugarach` had 9 worktrees and `interface2` 10+ while this repo had one, shared
+by every session at once. Tony, 2026-08-30: *"there are always many sessions in a repo. this
+repo should have inherited worktrees."*
+
+**Everything below this line was compensation for that choice**, and it is worth knowing
+which parts were load-bearing and which were scaffolding:
+
+- **Addressing a session `<machine>/<session-id>`** — `Mac/a49d017b`, from
+  `$CLAUDE_CODE_SESSION_ID` via [`../tools/session_identity.sh`](../tools/session_identity.sh)
+  — **stays.** A worktree stops sessions colliding in git; it does not tell you who is
+  holding the darkroom, a decision, or a page you are about to rewrite. That is still this
+  board's job.
+- **"The branch is a fact, not an identity"** — **retired.** In your own worktree the branch
+  *is* your identity, and it cannot move under you. It is left in the history rather than
+  edited away, per this repo's rule.
+
+**⚠ What a worktree does not fix, because the next session will assume it does.** It removes
+the *sweep* — no shared working tree, so a whole-file `git add` can no longer commit another
+session's uncommitted edits; that happened **three times on 2026-08-30 alone**, in both
+directions, and nothing was lost by design. It does **not** remove the row in the table below
+that this board calls *"the one that bit us."* **Two worktrees, two branches, two new files —
+git merges both without a conflict and a human finds out by reading the folder.** That is the
+2026-08-27 collision that produced this board, and it is untouched. Same for two sessions live
+in the same material at once: a worktree turns a silent overwrite into a visible merge, which is
+better, and neither session is any likelier to know the other is there. **A worktree removes a
+failure a claim was never for. Claim anyway.**
+
+*Demonstrated while being written: this section and `OPEN-FINDINGS.md` N6 were rewritten by two
+sessions independently, from the same instruction, minutes apart, and collided in git. Both
+accounts were merged rather than one dropped — which is the good case, and only because they
+were edits to files that already existed.*
+
+**What the shared checkout is now for:** reading, merging to `master`, and nothing else you
+would mind losing. It is still shared, nothing enforces that, and
+[`../tools/worktree.sh`](../tools/worktree.sh) is deliberately **not** a gate — it makes the
+right path cheaper than the wrong one rather than refusing the wrong one, because this
+estate has already shipped a gate that blocked its own installation.
+
+**The cost of not doing this sooner, on record:** three board failures, one of them 859,010
+tokens and $11.06 of duplicated review; and `OPEN-FINDINGS.md` **N6**, where the push gate
+told a worktree session its work was on `master` — confidently, falsely — and refused. Both
+of N6's failure modes are fixed, and its selftest now runs in a scratch repo so the case
+that was missing cannot go missing again.
 
 ## Which claims belong here
 
@@ -1544,31 +1576,23 @@ risks in the file.
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
 
-### Mac/5dc04385 — Record Tony's N6 decision 1: worktree-per-session for new sessions, and what it does and does not fix
+### Mac/5dc04385 — Record Tony's N6 decision 1: worktree-per-session, and what it does and does not fix
 - **Status:** DONE 2026-08-30
 - **Opened:** 2026-08-30
-- **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** [`../OPEN-FINDINGS.md`](../OPEN-FINDINGS.md) **N6 only**, and the banner on this
-  board's *"Why this repo's board differs"* section. Nothing else; no hook touched.
-- **Notes:** **Tony's decision, 2026-08-30, in one word:** *"worktrees. new sessions will have
-  them. i'm sorry that didn't carry over here."* That answers **N6 decision 1** — the root fix,
-  taken over patching the premise. Recorded, with what it closes (the N4 sweep class) and what it
-  does not (**the new-file trap in this board's own header, which is untouched** — two worktrees
-  merge two new files without a conflict).
-- **⚠ Read this before your first push from a worktree.** **N6 is unfixed** and decision 1 makes
-  it universal: the push gate resolves the repo from `$0`, which is the *shared* checkout, so from
-  a worktree it tells you *"this checkout is on: master"* — confidently, and falsely — and refuses
-  a correct push. Its suggestion, `git push origin HEAD`, works. The next push then trips the
-  moved-under-you latch, which for a worktree fires **by construction**, rewrites its state, and
-  succeeds on retry. **Do not learn from that that the alarm means nothing**; it is the same alarm
-  that would report a real branch switch.
-- **I did not fix the hook, deliberately.** It is a declared `gate` on a shared file every session
-  runs, a wrong fix locks all of them out, and **its selftest cannot see the failing path** — seven
-  green cases, all in the shared checkout, the one environment where the bug does not appear.
-  N6 decision 3 is now the precondition for decision 2, not a follow-up to it. **It wants a session
-  that is in a worktree**, which can watch the fix go green where it currently goes red.
-
-<!-- RELEASE THIS
-     tools/claim.sh --release
-     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
-     and a release nobody can see leaves the door locked behind you. -->
+- **Branch when opened:** `master` — the shared checkout; this session predates `worktree.sh`
+- **Writes:** [`../OPEN-FINDINGS.md`](../OPEN-FINDINGS.md) **N6 decision 1 only**, and one
+  paragraph in this board's worktree section. No hook, no tool touched.
+- **Notes:** **Collided with the session that built `tools/worktree.sh`, and this block is the
+  receipt.** Tony gave the same instruction to both of us within the hour — to that session
+  *"worktree per session, you are colliding all the time"*, to this one *"worktrees. new sessions
+  will have them. i'm sorry that didn't carry over here."* We rewrote **the same two files**
+  independently and hit a real merge conflict in both. **Theirs is the better account and was
+  taken whole**; two things this session had that theirs did not were merged in rather than
+  dropped: the second quote (*"new sessions"* — so both models run side by side for a while,
+  which is why `<machine>/<session-id>` stays the address), and **what worktrees do not fix.**
+- **⚠ The correction, stated because it was nearly committed.** This session drafted N6 saying the
+  push gate was **still unfixed** and that decision 2 was the blocker. **It was fixed while that
+  was being written** — both failure modes, plus a selftest that now runs in a scratch repo. The
+  draft was checked against `origin/master` before landing and the false claim was dropped. Had
+  it landed it would have been a confident, checkable, wrong statement in the findings file, on a
+  gate, in the repo about exactly that.
