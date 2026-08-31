@@ -355,6 +355,14 @@ backstop, not the normal path"* — and it fails too.
 > I did not check what the line meant. **That is the neighbouring case's finding
 > ([`the-irony`](2026-08-30-the-irony-was-the-only-unchecked-claim.md)) committed inside this
 > one:** of everything in a report, the dramatic aside is the part that gets written unchecked.
+>
+> **And the answer was one file away, with numbers.** `bugarach/docs/FOUNDATIONS.md:301` states
+> it and measures it: coordination persists under TTX in **92–100%** of 39 archived baseline+TTX
+> slices, split by stream, with the 2026-08-13 incident named in the same entry. That file exists
+> **specifically** to destabilise imported paradigm assumptions. **I never opened it** — I
+> characterised another repo's science from four lines of pytest output, while working in a
+> different repo, inside a case about failing to retrieve what a project already holds.
+> **The destabiliser was not defeated. It was never loaded.**
 
 **And the corrected reading makes this the sharpest thing in the file**, because the dropped line
 is not incidental to the case — it is the same failure one layer down. The briefing spends bytes
