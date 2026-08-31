@@ -1796,6 +1796,19 @@ risks in the file.
   says "the file is at `~/Developer/short-course/...`" is now quietly wrong. Deliver from
   `git show origin/master:<path>`, and grep the delivered file for a string that only the new
   version has.
+- **LIVE, and this session did not deploy it.** Carried to the wire by another session's release
+  `679d957` at **11:37 on 2026-08-31**, Cloudflare version **`a1f4b85e`** — a deploy made for the
+  front-door standfirst, which took this section with it. **Verified by reading the body:**
+  `https://lookedright.tonydefazio.com/` returns 200 and its bytes are **sha256-identical** to
+  `origin/master:site/index.html`, which contains *"Why is it free?"* and the *"rewritten as new
+  things go wrong"* paragraph. All five public paths 200. Darkroom copy re-taken from
+  `origin/master` afterwards and diffed against the live bytes — **darkroom, master and the wire
+  are the same file.**
+- **The typo fix above no longer exists and that is correct.** Another session rewrote that whole
+  objection — `"You said nobody else teaches this"` is now **`"Others teaching this"`**, with the
+  three programmes named, dated *checked 31 August 2026* and sourced. The sentence that was
+  missing its verb was replaced wholesale, so nothing was lost in a merge; **do not go looking for
+  the fix.**
 
 <!-- RELEASE THIS
      tools/claim.sh --release
