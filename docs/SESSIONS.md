@@ -1506,3 +1506,21 @@ risks in the file.
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/a4de1b91 — Deployed site/ — Phase 7 dating and the button-name warning are live. Authorised by Tony.
+- **Status:** DONE 2026-08-30
+- **Opened:** 2026-08-30
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** deploy only — no files changed.
+- **Notes:** **DEPLOYED 2026-08-30, version ID `4c276edd-828b-4987-a8a0-54fec690f768`.** One file
+  changed on the wire (`/cold-start.html`); the other three were already byte-identical to what was
+  live. **Verified on the live URL by reading the body, not the status code** — the Phase 7
+  button-name warning and all four `2026-08-30` date stamps are present at
+  https://lookedright.tonydefazio.com/cold-start ; home page 200.
+  **No reader lost saved state.** The checklist keys ticks by step key, not by box position, and no
+  step id or box key changed — only prose was added inside existing steps.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
