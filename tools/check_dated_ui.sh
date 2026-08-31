@@ -19,7 +19,7 @@
 # WHAT SURVIVED, AND WHAT DID NOT. Every outcome and every "done when" held. Every named
 # button failed. So button names are not banned here -- they are genuinely useful on the
 # day they are true -- but they are PERISHABLE GOODS and this gate makes them carry a date,
-# exactly as step 1.2 already does for prices: "the number is whatever the page says on the
+# exactly as step 1.1 already does for prices: "the number is whatever the page says on the
 # day you look."
 #
 # WHY A DATE AND NOT A BAN. A ban would push authors into vaguer instructions, which is
@@ -116,5 +116,5 @@ printf '%s\n' "$BAD" | sed 's/^/  UNDATED /'
 printf '\n  %s step(s) name a vendor button without saying when it was there.\n' \
     "$(printf '%s\n' "$BAD" | wc -l | tr -d ' ')"
 printf '  On 2026-08-30 five such instructions were wrong in one afternoon. Add the date\n'
-printf '  you checked it, the way 1.2 does for prices -- do not remove the button name.\n'
+printf '  you checked it, the way 1.1 does for prices -- do not remove the button name.\n'
 exit 1

@@ -1230,7 +1230,7 @@ lock, and the reasoning written into both files.
    they are a hand-wrapped **second source**, which is what `build_site.sh` exists to prevent and
    where this repo has already been burned once. `cp site/*.html` is the whole fix. Left alone
    because another session had written them twenty minutes earlier.
-4. **`docs/doubt/2026-08-29-3-5-tells-the-reader-…`** — 1.2 offers five agents and 3.5 describes
+4. **`docs/doubt/2026-08-29-3-5-tells-the-reader-…`** — 1.1 offers five agents and 3.5 describes
    one. No other agent's extension is installed on this machine, so nothing was opened or read
    for the other four. This is the same gap `Mac/7d93fc67` hit from the other side in its Path A
    item: *"a trimmed VS Code path (verified, because it is what this repo runs on)"* is verified
@@ -1292,7 +1292,7 @@ the **four of seven the loop did not solve.**
 
 ### And the fix was already in the file
 
-Step 1.2 says of prices: *"Do not trust a price you read anywhere, including here… the number is
+Step 1.1 says of prices: *"Do not trust a price you read anywhere, including here… the number is
 whatever the page says on the day you look."* Exactly right, and never applied to buttons. **Phase 7
 now opens with the same warning for click paths**, and 3.5, 4.1, 4.6, 7.3 and 7.5 carry the date
 their controls were true. **Button names were not removed** — a date changes what the sentence

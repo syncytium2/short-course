@@ -290,7 +290,7 @@
   .copy:hover { background: var(--accent); color: var(--ground); }
   .prompt pre { margin: 0; border: 0; background: var(--surface); white-space: pre-wrap; }
 
-  /* ---- the tier list (1.2) ---- */
+  /* ---- the tier list (1.1) ---- */
   ul.tier { list-style: none; margin: 10px 0 0; padding: 0; border-top: 1px solid var(--rule); }
   ul.tier > li { padding: 9px 0; border-bottom: 1px solid var(--rule); display: grid; gap: 2px; }
   ul.tier .t-n { font-weight: 500; }
@@ -303,7 +303,7 @@
   }
   .warn b { font-weight: 600; }
 
-  /* ---- the expert ladder (1.2) ---- */
+  /* ---- the expert ladder (1.1) ---- */
   .tbl-wrap { overflow-x: auto; margin: 10px 0 0; }
   table.ladder {
     border-collapse: collapse; width: 100%; font-size: 13.5px; min-width: 460px;
@@ -477,33 +477,15 @@
       <h2>Phase 1 &middot; Accounts</h2>
       <span class="phase-time">30 min, plus other people&rsquo;s time</span>
     </div>
-    <p class="phase-note">Start here on day one even if you will not touch a keyboard for a week. Everything in this phase depends on somebody who is not you. <b>1.1 and 1.2 are both required</b> &mdash; only 1.3 is conditional, and most people skip it.</p>
+    <p class="phase-note">Start here on day one even if you will not touch a keyboard for a week. Everything in this phase depends on somebody who is not you. <b>1.1 and 1.2 are both required</b> &mdash; only 1.3 is conditional, and most people skip it. <b>The expert comes first on purpose:</b> 1.2 is the one step here you do not have to do alone, because by then there is somebody to ask.</p>
     <ol class="steps">
-      <li data-key="github-account" data-id="1.1" data-open="0" data-done="0">
+      <li data-key="agent-account" data-id="1.1" data-open="0" data-done="0">
         <div class="srow">
-          <button class="head" type="button" aria-expanded="false" aria-controls="d-1.1"><span class="n">1.1</span>Create a GitHub account &mdash; this one is not optional</button>
-          <span class="badge">Incomplete</span>
-        </div>
-        <div class="detail" id="d-1.1">
-            <p class="why"><b>Why it is not optional, when it looks like it should be.</b> It reads as a step for people who publish software, and you are not publishing software. But it is what gives your project a <i>second place to exist</i>. Without it, everything you and the agent make lives in one folder on one laptop: it reaches no other machine, no collaborator, and no future session &mdash; and none of that announces itself. The day it matters, it is already too late to have done this.</p>
-            <p class="why">Three things follow from the account and from nothing else. <b>A record</b> of what changed, when, and why &mdash; which is the only account of the work that survives you, and the only way to answer &ldquo;when did this figure change?&rdquo; six months on. <b>A way off this machine</b>, whether that is a second computer, a collaborator, a cluster, or a laptop that has died. And <b>somewhere to put the work</b> if you ever do want a page, a DOI, or a link in a paper.</p>
-            <p class="why">This is the step people skip because it seems premature, and it is the one whose absence is documented twice in this course&rsquo;s own material: eleven hours of finished work sitting where nothing else could see it, and a night&rsquo;s work that reached the next morning as nothing at all. It is free, and it takes four minutes.</p>
-            <div class="warn"><b>Ask first if your work touches research data or human subjects.</b> Your university or employer may run its own host — usually a private GitLab — and may <i>require</i> you to use it. That is a governance question, not a preference, and it is much cheaper to ask now than to move a repository later.</div>
-            <p class="why">Pick the username you are willing to be known by later; changing it breaks links other people have already saved. Turn on two-factor authentication during signup, not afterwards.</p>
-        </div>
-        <ul class="checks">
-            <li><button class="cb" data-key="account-created-signed" type="button" aria-pressed="false" aria-labelledby="c-1-1-0">&#10003;</button><span class="cbt" id="c-1-1-0">Account created and I am signed in</span></li>
-            <li><button class="cb" data-key="two-factor-authentication" type="button" aria-pressed="false" aria-labelledby="c-1-1-1">&#10003;</button><span class="cbt" id="c-1-1-1">Two-factor authentication is on</span></li>
-            <li><button class="cb" data-key="username-willing-keep" type="button" aria-pressed="false" aria-labelledby="c-1-1-2">&#10003;</button><span class="cbt" id="c-1-1-2">The username is one I am willing to keep</span></li>
-        </ul>
-      </li>
-      <li data-key="agent-account" data-id="1.2" data-open="0" data-done="0">
-        <div class="srow">
-          <button class="head" type="button" aria-expanded="false" aria-controls="d-1.2"><span class="n">1.2</span>Get the expert on your side &mdash; and decide how much of your screen they get</button>
+          <button class="head" type="button" aria-expanded="false" aria-controls="d-1.1"><span class="n">1.1</span>Get the expert on your side &mdash; and decide how much of your screen they get</button>
           <span class="badge">Incomplete</span>
         </div>
           <p class="links"><a href="https://claude.com/pricing">Claude Code</a><a href="https://developers.openai.com/codex/pricing">OpenAI Codex</a><a href="https://github.com/google-gemini/gemini-cli">Gemini CLI</a><a href="https://github.com/features/copilot/plans">GitHub Copilot CLI</a><a href="https://cursor.com/pricing">Cursor</a><a href="https://lookedright.tonydefazio.com/what-it-costs">What It Costs</a><a href="https://lookedright.tonydefazio.com/show-it-your-screen">Show It Your Screen</a></p>
-        <div class="detail" id="d-1.2">
+        <div class="detail" id="d-1.1">
             <p class="why"><b>You are not buying a tool. You are recruiting somebody who already knows this, and then deciding how much they are allowed to see.</b> That second half is the part people skip, and it is the part that decides what everything else costs. An agent that cannot see your screen has to be told what is on it &mdash; and describing your own screen accurately is the hardest thing a beginner is asked to do, because you do not know which detail matters. That is why you are stuck.</p>
 
             <p class="why"><b>Three places to stand.</b> Take the highest one you can reach today and no higher; you can move up later and nothing is wasted.</p>
@@ -561,13 +543,32 @@
               </li>
             </ul>
             <div class="warn"><b>Do not trust a price you read anywhere, including here.</b> This row moves faster than anything else on the page &mdash; plans get renamed, split, metered differently, and re-priced. Those are pointers to the vendors&rsquo; own pages; the number is whatever the page says on the day you look.</div>
-            <p class="why"><b>What this actually costs, before you commit to anything:</b> <a href="https://lookedright.tonydefazio.com/what-it-costs">What It Costs</a> &mdash; the free floor and how far it goes, the three shapes a bill can take and which one to refuse, real numbers with their caveats attached, and the equity problem, which is real and is usually left unsaid. <b>Read it before 1.2, not after.</b> It is short.</p>
+            <p class="why"><b>What this actually costs, before you commit to anything:</b> <a href="https://lookedright.tonydefazio.com/what-it-costs">What It Costs</a> &mdash; the free floor and how far it goes, the three shapes a bill can take and which one to refuse, real numbers with their caveats attached, and the equity problem, which is real and is usually left unsaid. <b>Read it before 1.1, not after.</b> It is short.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="sign-account-will-actually" type="button" aria-pressed="false" aria-labelledby="c-1-2-0">&#10003;</button><span class="cbt" id="c-1-2-0">I can sign in with the account I will actually use</span></li>
-            <li><button class="cb" data-key="which-rung-and-next" type="button" aria-pressed="false" aria-labelledby="c-1-2-4">&#10003;</button><span class="cbt" id="c-1-2-4">I can say which rung I am on, and what the next one would let it see</span></li>
-            <li><button class="cb" data-key="say-happens-use-too" type="button" aria-pressed="false" aria-labelledby="c-1-2-1">&#10003;</button><span class="cbt" id="c-1-2-1">I can say what happens when I use too much &mdash; it stops, or it bills</span></li>
-            <li><button class="cb" data-key="read-costs" type="button" aria-pressed="false" aria-labelledby="c-1-2-2">&#10003;</button><span class="cbt" id="c-1-2-2">I have read <a href="https://lookedright.tonydefazio.com/what-it-costs"><i>What It Costs</i></a></span></li>
+            <li><button class="cb" data-key="sign-account-will-actually" type="button" aria-pressed="false" aria-labelledby="c-1-1-0">&#10003;</button><span class="cbt" id="c-1-1-0">I can sign in with the account I will actually use</span></li>
+            <li><button class="cb" data-key="which-rung-and-next" type="button" aria-pressed="false" aria-labelledby="c-1-1-4">&#10003;</button><span class="cbt" id="c-1-1-4">I can say which rung I am on, and what the next one would let it see</span></li>
+            <li><button class="cb" data-key="say-happens-use-too" type="button" aria-pressed="false" aria-labelledby="c-1-1-1">&#10003;</button><span class="cbt" id="c-1-1-1">I can say what happens when I use too much &mdash; it stops, or it bills</span></li>
+            <li><button class="cb" data-key="read-costs" type="button" aria-pressed="false" aria-labelledby="c-1-1-2">&#10003;</button><span class="cbt" id="c-1-1-2">I have read <a href="https://lookedright.tonydefazio.com/what-it-costs"><i>What It Costs</i></a></span></li>
+        </ul>
+      </li>
+      <li data-key="github-account" data-id="1.2" data-open="0" data-done="0">
+        <div class="srow">
+          <button class="head" type="button" aria-expanded="false" aria-controls="d-1.2"><span class="n">1.2</span>Create a GitHub account &mdash; this one is not optional</button>
+          <span class="badge">Incomplete</span>
+        </div>
+        <div class="detail" id="d-1.2">
+            <p class="why"><b>Why it is not optional, when it looks like it should be.</b> It reads as a step for people who publish software, and you are not publishing software. But it is what gives your project a <i>second place to exist</i>. Without it, everything you and the agent make lives in one folder on one laptop: it reaches no other machine, no collaborator, and no future session &mdash; and none of that announces itself. The day it matters, it is already too late to have done this.</p>
+            <p class="why"><b>You do not have to do this one alone, and that is why it comes second.</b> 1.1 put somebody beside you who has done this a hundred times. The signup is four minutes of forms, but the questions underneath it are real &mdash; whether your institution requires its own host instead, what username you are willing to keep, what to make private &mdash; and they are worth asking out loud rather than guessing at. <b>Show them the screen you are on and ask what the box is for.</b></p>
+            <p class="why">Three things follow from the account and from nothing else. <b>A record</b> of what changed, when, and why &mdash; which is the only account of the work that survives you, and the only way to answer &ldquo;when did this figure change?&rdquo; six months on. <b>A way off this machine</b>, whether that is a second computer, a collaborator, a cluster, or a laptop that has died. And <b>somewhere to put the work</b> if you ever do want a page, a DOI, or a link in a paper.</p>
+            <p class="why">This is the step people skip because it seems premature, and it is the one whose absence is documented twice in this course&rsquo;s own material: eleven hours of finished work sitting where nothing else could see it, and a night&rsquo;s work that reached the next morning as nothing at all. It is free, and it takes four minutes.</p>
+            <div class="warn"><b>Ask first if your work touches research data or human subjects.</b> Your university or employer may run its own host — usually a private GitLab — and may <i>require</i> you to use it. That is a governance question, not a preference, and it is much cheaper to ask now than to move a repository later.</div>
+            <p class="why">Pick the username you are willing to be known by later; changing it breaks links other people have already saved. Turn on two-factor authentication during signup, not afterwards.</p>
+        </div>
+        <ul class="checks">
+            <li><button class="cb" data-key="account-created-signed" type="button" aria-pressed="false" aria-labelledby="c-1-2-0">&#10003;</button><span class="cbt" id="c-1-2-0">Account created and I am signed in</span></li>
+            <li><button class="cb" data-key="two-factor-authentication" type="button" aria-pressed="false" aria-labelledby="c-1-2-1">&#10003;</button><span class="cbt" id="c-1-2-1">Two-factor authentication is on</span></li>
+            <li><button class="cb" data-key="username-willing-keep" type="button" aria-pressed="false" aria-labelledby="c-1-2-2">&#10003;</button><span class="cbt" id="c-1-2-2">The username is one I am willing to keep</span></li>
         </ul>
       </li>
       <li data-key="research-storage" data-id="1.3" data-open="0" data-done="0" data-optional="1">
@@ -756,7 +757,7 @@ claude</pre>
             <br><br>A folder you have just opened shows no file. So it shows no icon. So the obvious conclusion &mdash; that the install failed &mdash; is available, reasonable, and wrong. <b>Open any file in the folder first.</b> Then the spark is there, and it was there all along.</div>
             <p class="why"><b>Learn the route that does not depend on the icon, because it is the one that keeps working.</b> <b>Cmd+Shift+P</b> (<b>Ctrl+Shift+P</b>) opens the Command Palette; type <code>Claude Code</code> and pick <b>Open in New Tab</b>. That works with nothing open at all. <b>Cmd+Esc</b> (<b>Ctrl+Esc</b>) is the fast way in, but it needs a file focused &mdash; the same condition as the icon &mdash; so it is the second thing to learn, not the first.</p>
             <p class="why">The same palette has <b>Claude Code: Open Walkthrough</b>, a four-step tour from the people who wrote it.</p>
-            <p class="why"><b>This step is written for one agent and says so.</b> None of the alternatives in 1.2 was checked for this page &mdash; not one of them was installed on the machine this was written on. Whether each has an editor extension at all, where its button lives, and whether it hides itself the same way, is unverified here.</p>
+            <p class="why"><b>This step is written for one agent and says so.</b> None of the alternatives in 1.1 was checked for this page &mdash; not one of them was installed on the machine this was written on. Whether each has an editor extension at all, where its button lives, and whether it hides itself the same way, is unverified here.</p>
             <p class="why"><b>The button positions above were true on 2026-08-30.</b> They are the perishable half of this step; the &ldquo;done when&rdquo; boxes are the durable half. If the spark is not where this says, you have not gone wrong &mdash; screenshot the window and ask your agent, which is the method in <b>Show It Your Screen</b>.</p>
         </div>
         <ul class="checks">
@@ -1134,7 +1135,7 @@ one so I can look.
       <span class="phase-time">30 min, then a wait</span>
     </div>
     <p class="phase-note">Only when you have something to put on it. Three companies, each doing one job: <b>Porkbun</b> sells you the name, <b>Cloudflare</b> answers questions about where it points, and <b>GitHub</b> serves the pages. Keeping those three jobs separate in your head is most of the difficulty.</p>
-    <div class="warn"><b>Do not trust a button name you read anywhere, including here.</b> Every named button, tab and menu path in this phase <b>was true on 2026-08-30 and nowhere else</b>. That is the same warning 1.2 gives about prices, and it applies harder here: on that date this phase was walked end to end and <b>the click paths were wrong five times in one afternoon</b> &mdash; Cloudflare had rebuilt the dashboard around Workers, so &ldquo;Pages&rdquo; was a footnote link and the settings named below did not appear at all.<br><br><b>The steps are written as outcomes and &ldquo;done when&rdquo; conditions, and those held.</b> Read them as what must become true, not as where to press. When the screen does not match this page &mdash; and it will not &mdash; that is the expected case, not your mistake: <b>screenshot the whole window and show it to your agent.</b> Every one of those five was unstuck in a single exchange that way. The companion sheet <b>Show It Your Screen</b> is that loop and the evidence for it.</div>
+    <div class="warn"><b>Do not trust a button name you read anywhere, including here.</b> Every named button, tab and menu path in this phase <b>was true on 2026-08-30 and nowhere else</b>. That is the same warning 1.1 gives about prices, and it applies harder here: on that date this phase was walked end to end and <b>the click paths were wrong five times in one afternoon</b> &mdash; Cloudflare had rebuilt the dashboard around Workers, so &ldquo;Pages&rdquo; was a footnote link and the settings named below did not appear at all.<br><br><b>The steps are written as outcomes and &ldquo;done when&rdquo; conditions, and those held.</b> Read them as what must become true, not as where to press. When the screen does not match this page &mdash; and it will not &mdash; that is the expected case, not your mistake: <b>screenshot the whole window and show it to your agent.</b> Every one of those five was unstuck in a single exchange that way. The companion sheet <b>Show It Your Screen</b> is that loop and the evidence for it.</div>
     <ol class="steps">
       <li data-key="domain" data-id="7.1" data-open="0" data-done="0">
         <div class="srow">
