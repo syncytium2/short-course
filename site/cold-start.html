@@ -319,6 +319,23 @@
   }
   .warn b { font-weight: 600; }
 
+  /* ---- the expert ladder (1.2) ---- */
+  .tbl-wrap { overflow-x: auto; margin: 10px 0 0; }
+  table.ladder {
+    border-collapse: collapse; width: 100%; font-size: 13.5px; min-width: 460px;
+  }
+  table.ladder th, table.ladder td {
+    text-align: left; padding: 8px 12px 8px 0;
+    border-bottom: 1px solid var(--rule); vertical-align: top;
+  }
+  table.ladder th {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.07em;
+    text-transform: uppercase; color: var(--muted); font-weight: 400;
+    border-bottom: 1px solid var(--ink); white-space: nowrap;
+  }
+  table.ladder td:first-child { white-space: nowrap; color: var(--accent); padding-right: 16px; }
+  table.ladder tbody tr:last-child td { border-bottom: none; }
+
   /* ---- the fillable storage panel (2.1) ---- */
   .fill { border: 1px solid var(--rule-firm); background: var(--surface); padding: 12px 13px; margin: 10px 0 0; }
   .fill-k {
@@ -475,7 +492,7 @@
     <p class="eyebrow">Setup runbook &middot; keep this window open</p>
     <h1>Cold Start</h1>
     <p class="standfirst">An email address and a laptop, to a first agent session that leaves a record behind it. Every step in order, the two prompts to paste, and the condition that tells you each one worked.</p>
-    <p class="pv">Version <b>0.1.20</b> &middot; 31 Aug 2026<span class="pv-born">First published 29 Aug 2026</span></p>
+    <p class="pv">Version <b>0.1.21</b> &middot; 31 Aug 2026<span class="pv-born">First published 29 Aug 2026</span></p>
   </header>
 
   <div class="method">
@@ -520,12 +537,43 @@
       </li>
       <li data-key="agent-account" data-id="1.2" data-open="0" data-done="0">
         <div class="srow">
-          <button class="head" type="button" aria-expanded="false" aria-controls="d-1.2"><span class="n">1.2</span>Get an agent account &mdash; and find out which kind it is</button>
+          <button class="head" type="button" aria-expanded="false" aria-controls="d-1.2"><span class="n">1.2</span>Get the expert on your side &mdash; and decide how much of your screen they get</button>
           <span class="badge">Incomplete</span>
         </div>
-          <p class="links"><a href="https://claude.com/pricing">Claude Code</a><a href="https://developers.openai.com/codex/pricing">OpenAI Codex</a><a href="https://github.com/google-gemini/gemini-cli">Gemini CLI</a><a href="https://github.com/features/copilot/plans">GitHub Copilot CLI</a><a href="https://cursor.com/pricing">Cursor</a><a href="https://lookedright.tonydefazio.com/what-it-costs">What It Costs</a></p>
+          <p class="links"><a href="https://claude.com/pricing">Claude Code</a><a href="https://developers.openai.com/codex/pricing">OpenAI Codex</a><a href="https://github.com/google-gemini/gemini-cli">Gemini CLI</a><a href="https://github.com/features/copilot/plans">GitHub Copilot CLI</a><a href="https://cursor.com/pricing">Cursor</a><a href="https://lookedright.tonydefazio.com/what-it-costs">What It Costs</a><a href="https://lookedright.tonydefazio.com/show-it-your-screen">Show It Your Screen</a></p>
         <div class="detail" id="d-1.2">
-            <p class="why">This is the step people treat as a formality, and it is the one that forks. A <b>personal plan</b> is an allowance: you hit a ceiling and stop, which is annoying and safe. An <b>institutional billing code</b> is usually uncapped: nothing stops, nothing warns, and the number surfaces when somebody else reads the monthly statement.</p>
+            <p class="why"><b>You are not buying a tool. You are recruiting somebody who already knows this, and then deciding how much they are allowed to see.</b> That second half is the part people skip, and it is the part that decides what everything else costs. An agent that cannot see your screen has to be told what is on it &mdash; and describing your own screen accurately is the hardest thing a beginner is asked to do, because you do not know which detail matters. That is why you are stuck.</p>
+
+            <p class="why"><b>Three places to stand.</b> Take the highest one you can reach today and no higher; you can move up later and nothing is wasted.</p>
+            <div class="tbl-wrap">
+            <table class="ladder">
+              <thead><tr><th></th><th>Where you are</th><th>What they can see</th><th>Money</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><b>Minimum</b></td>
+                  <td>Claude, or an equivalent, <b>in a browser</b></td>
+                  <td><b>Only what you paste.</b> They cannot open your files or check a result. You are their eyes.</td>
+                  <td><b>None.</b> The free tier does this, including the pages it writes for you.</td>
+                </tr>
+                <tr>
+                  <td><b>Middle</b></td>
+                  <td>The <b>desktop app</b>, in its code mode</td>
+                  <td><b>A folder you choose.</b> Real files, and every change arrives as a diff you approve before it lands.</td>
+                  <td>A paid plan.</td>
+                </tr>
+                <tr>
+                  <td><b>Best</b></td>
+                  <td><b>The agent inside your editor</b> &mdash; step 3.5</td>
+                  <td>The same folder, <b>in the editor you already work in</b>. You read the change where the file actually lives.</td>
+                  <td>The same paid plan &mdash; rung 3 costs no more money than rung 2, only more setup.</td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+            <p class="why"><b>The tell that you have outgrown the free rung is not that it refuses to do something.</b> The free tier is the same thing with less of it. The tell is <b>the copying</b> &mdash; once you are pasting files back and forth by hand, you are doing the work the next rung removes, and you are the part most likely to get it wrong. <b>Prices belong on the vendor&rsquo;s page, not this one</b>; the links above are the authority and <a href="https://lookedright.tonydefazio.com/what-it-costs">What It Costs</a> is the sheet.</p>
+            <p class="why"><b>None of this makes the expert a map.</b> They will tell you where a button is and be wrong, because the screens move; they will read a screenshot of that same screen and be right. That asymmetry, and what to do about it, is <a href="https://lookedright.tonydefazio.com/show-it-your-screen">Show It Your Screen</a>.</p>
+
+            <p class="why">This is also the step people treat as a formality, and it is the one that forks. A <b>personal plan</b> is an allowance: you hit a ceiling and stop, which is annoying and safe. An <b>institutional billing code</b> is usually uncapped: nothing stops, nothing warns, and the number surfaces when somebody else reads the monthly statement.</p>
             <p class="why">Institutional routes also tend to sit behind an employment check and an approval, which is days of somebody else&rsquo;s time. That is why this step is on day one.</p>
             <p class="why"><b>The others in this tier.</b> They all do the same job &mdash; a terminal agent that edits files on your disk &mdash; and they are all sold through a subscription rather than per-token. Pick one and learn it properly; the second one is easy once the first is understood.</p>
             <ul class="tier">
@@ -555,6 +603,7 @@
         </div>
         <ul class="checks">
             <li><button class="cb" data-key="sign-account-will-actually" type="button" aria-pressed="false" aria-labelledby="c-1-2-0">&#10003;</button><span class="cbt" id="c-1-2-0">I can sign in with the account I will actually use</span></li>
+            <li><button class="cb" data-key="which-rung-and-next" type="button" aria-pressed="false" aria-labelledby="c-1-2-4">&#10003;</button><span class="cbt" id="c-1-2-4">I can say which rung I am on, and what the next one would let it see</span></li>
             <li><button class="cb" data-key="say-happens-use-too" type="button" aria-pressed="false" aria-labelledby="c-1-2-1">&#10003;</button><span class="cbt" id="c-1-2-1">I can say what happens when I use too much &mdash; it stops, or it bills</span></li>
             <li><button class="cb" data-key="read-costs" type="button" aria-pressed="false" aria-labelledby="c-1-2-2">&#10003;</button><span class="cbt" id="c-1-2-2">I have read <a href="https://lookedright.tonydefazio.com/what-it-costs"><i>What It Costs</i></a></span></li>
         </ul>
