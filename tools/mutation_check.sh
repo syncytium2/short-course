@@ -78,6 +78,8 @@ tools/worktree.sh@@    [ -z "$(git -C "$path" status --porcelain 2>/dev/null)" ]
 .claude/hooks/push-goes-where-you-are.sh@@                     | grep -qx "branch refs/heads/$REFSPEC"; then@@                     | grep -qx "branch refs/heads/NEVER-MATCHES"; then@@a live branch in another worktree is refused again (N6)
 .claude/hooks/push-goes-where-you-are.sh@@if [ "$WT_COUNT" -gt 1 ]; then@@if false; then@@interlock 2 cries wolf in a worktree again (N6)
 .claude/hooks/push-goes-where-you-are.sh@@WT_COUNT=$(git worktree list --porcelain 2>/dev/null | grep -c '^worktree ')@@WT_COUNT=99@@interlock 2 is skipped in a single checkout, where it is the whole point
+tools/check_dated_ui.sh@@if (ui && !dt) print FN ":" id@@if (0) print FN ":" id@@undated button references are never reported
+tools/check_dated_ui.sh@@s = RSTART; l = RLENGTH@@s = RSTART; l = 1@@steps are swallowed because emit() clobbers RLENGTH
 TABLE
 )
 

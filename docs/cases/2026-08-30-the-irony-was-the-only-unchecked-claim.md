@@ -1,12 +1,28 @@
 <!-- Case study, imported 2026-08-30. Evidence: commits and a PR in syncytium2/bugarach (public). An outside reader can check all of it. -->
 
-> ## 📌 Audience: recommended for the course — Tony's call, not decided
+> ## ✅ Audience: ACCEPTED INTO THE COURSE — Tony's call, 2026-08-30
 >
-> **Recommended, not decided.** The payload is one sentence long and needs almost no
-> vocabulary: *an agent said the change had never landed, in the same message where it
-> correctly said the change would land by itself — and it landed four and a half minutes
-> later.* One extra idea is required and it is one clause: a change can be queued for
-> automatic approval.
+> **Decided, in his words:** *"yes add it. we can pare down as needed."* The argument against
+> it — fifth case about an agent's self-report, third item from one day — was put and did not
+> win. **"Pare down as needed" is the standing instruction on length**, not a request to cut
+> now: nothing below has been shortened for the room, and the section that survives a trim is
+> [§5](#5--the-register-is-the-finding), which is the finding.
+>
+> **Landed in [`points.md`](../../points.md) as an instance under C1**, where it inverts the
+> point C1 makes — plus a pointer at **G5c** for the PR-as-handoff surface in section G. The
+> general form is in the C1 entry, not here.
+>
+> **⚠ It also opened a discussion in "the philosophy section," reported by Tony and
+> not imported.** That discussion is not in this repo, this session never saw it, and nothing
+> below reflects it. Recorded rather than left out because a downstream effect that exists only
+> in the retelling is exactly the kind of thing this repo's chain
+> [says out loud](../chain/EXCLUDED.md) instead of smoothing over. **If it settled anything,
+> it settles it against the C1 entry, which is where the point now lives.**
+>
+> The payload is one sentence long and needs almost no vocabulary: *an agent said the change
+> had never landed, in the same message where it correctly said the change would land by
+> itself — and it landed four and a half minutes later.* One extra idea is required and it is
+> one clause: a change can be queued for automatic approval.
 >
 > **What it would cost the room:** about forty seconds. "A pull request is a change waiting
 > to be approved. Approval can be set to happen by itself once the tests pass." That is the
@@ -20,14 +36,18 @@
 > course teaches "check the claim." This case asks the harder question — *what in a report
 > even looks like a claim?* — and answers it badly for the reader, on purpose.
 >
-> **Argument against:** it is the third 2026-08-30 item and the fifth about an agent's
-> self-report. The folder is over-indexed on that genre and this file does not fix it.
-> It is also the *smallest* incident here: nothing was lost, nothing was rebuilt, and the
-> total cost is one wrong sentence that was obsolete before it was read.
+> **The argument against, kept because it was not answered — only overruled:** it is the third
+> 2026-08-30 item and the fifth about an agent's self-report. The folder is over-indexed on that
+> genre and this file does not fix it. It is also the *smallest* incident here: nothing was
+> lost, nothing was rebuilt, and the total cost is one wrong sentence that was obsolete before
+> it was read. **If the folder is ever culled, this is a candidate on volume grounds and not on
+> content grounds**, and the C1 entry survives the cull regardless.
 >
-> **Revisit if:** the course gains a section on **reading an agent's status report** — how
-> to tell which parts of it were produced by looking and which by composing. Nothing else
-> in the folder covers that, and §4's friction log assumes the log is accurate.
+> **Where it wants to sit:** a section on **reading an agent's status report** — how to tell
+> which parts of it were produced by looking and which by composing. No such section exists.
+> It is now half-covered by **C1**, which is about the report being unreadable, and
+> **§4's friction log assumes the log is accurate**, which this case is the counterexample to.
+> That gap is real and is not closed by accepting this file.
 
 > ## ⚠ Provenance: written by a non-participant, from the PR record, not from a transcript
 >

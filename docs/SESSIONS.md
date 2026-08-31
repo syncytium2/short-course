@@ -1465,3 +1465,97 @@ risks in the file.
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/a4de1b91 — Merge route-shortest to master: decision 0002 + decisions/, show-it-your-screen handout, Phase 7 dating, check_dated_ui.sh. Then handouts README row, rebuild, handoff.
+- **Status:** DONE 2026-08-30
+- **Opened:** 2026-08-30
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** **MERGED TO MASTER.** New: `docs/decisions/` (README + 0002), `docs/handouts/show-it-your-screen.html`
+  + `img/show-it-your-screen/` (4 PNGs), `tools/check_dated_ui.sh`. Changed:
+  `docs/handouts/cold-start.html` (Phase 7 warn block; dates on 3.5, 4.1, 4.6, 7.3, 7.5),
+  `tools/mutation_check.sh` (+2 rows), `site/cold-start.html` (rebuild), both READMEs.
+  **`points.md` was dirty under another session throughout and was never touched.**
+- **Notes:** **NOT DEPLOYED — that is Tony's call.** `site/cold-start.html` is rebuilt and
+  `--check-all` is green, but the live page will not carry the Phase 7 dating until someone runs
+  `npx wrangler deploy`. **`show-it-your-screen.html` is deliberately NOT in `tools/pages.txt`**;
+  publishing it is an undecided question, not an oversight.
+  **Gates after merge: `--check-all` green, `check_pointers` green, `check_dated_ui` green,
+  `mutation_check` 23 caught / 0 missed / 0 errors.**
+  **⚠ `tools/check_dated_ui.sh` is new and enforces a rule on every handout:** a step naming a
+  vendor button must carry a date. Adding an undated click path to any page in `docs/handouts/`
+  now fails. Dating it is the fix; removing the button name is not asked for. The reasoning is in
+  the file's header and in `show-it-your-screen.html`.
+  **↻ `Mac/`(whoever wrote `abc5ea4`) — you fixed the push gate's worktree blindness while I was
+  hitting it.** It blocked me twice today with *"this checkout is now master"* while I was on
+  `route-shortest` in a worktree. Your commit message names the same cause. Nothing owed; noting
+  that the bug was live and observed independently.
+  **Disposable, outside this repo:** `syncytium2/route-test` (**private** — the attempt to make it
+  public was refused by the permission classifier and was never retried) + its Worker at
+  https://route-test.tonydefazio.workers.dev — the walked evidence for
+  `docs/decisions/0002-*.html` §7. Delete freely: `gh repo delete syncytium2/route-test`.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/5dc04385 — Accept the #416 irony case into the course: decision recorded, and the general form placed in points.md
+- **Status:** DONE 2026-08-30
+- **Opened:** 2026-08-30
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** `points.md` (**C1** and **G5c** only),
+  `docs/cases/2026-08-30-the-irony-was-the-only-unchecked-claim.md`,
+  [`cases/README.md`](cases/README.md), and `<darkroom>/short-course/2026-08-30-the-irony-was-false/`.
+- **Notes:** **Tony's decision, taken 2026-08-30:** *"yes add it. we can pare down as needed."*
+  The `bugarach` #416 case is in the course. **`points.md` C1 gained its first instance** — the
+  report was in plain English and the plain English is what was wrong, which inverts C1's own
+  diagnosis — and **G5c** gained a PR-as-handoff pointer. Landed `1da1bce`; darkroom and artifact
+  updated to say the decision is taken.
+- **⚠ Two things left open, deliberately, for whoever picks this up:**
+  **(1)** He reports the case *"prompted a whole discussion in the philosophy section."* **That
+  discussion is not in this repo, was never seen here, and nothing written reflects it.** It is
+  flagged on the case file and in the darkroom rather than quietly absorbed. If it arrives, it
+  settles against the **C1** entry, not against the case file.
+  **(2)** The `bugarach` session that wrote the aside was **never asked** whether its own
+  background watch later caught the merge and corrected the record. The case reads that hinge in
+  its favour and says so.
+- **Housekeeping, and it is N4 again with the roles reversed:** my earlier claim block was swept
+  into `Mac/a4de1b91`'s commit, and this session's merge found `nothing-was-missing…` showing as
+  modified with **no content difference from `HEAD`** — a stat-only entry, not another session's
+  work. Backed it up and checked before touching anything, which is the only reason that is a
+  footnote and not an incident.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/a4de1b91 — Session close in HANDOFF.md for Mac/a4de1b91 — the walked route, the loop handout, and the new dated-UI gate
+- **Status:** DONE 2026-08-30
+- **Opened:** 2026-08-30
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
+- **Notes:** <anything another session must know before touching the same thing>
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/a4de1b91 — Deployed site/ — Phase 7 dating and the button-name warning are live. Authorised by Tony.
+- **Status:** DONE 2026-08-30
+- **Opened:** 2026-08-30
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** deploy only — no files changed.
+- **Notes:** **DEPLOYED 2026-08-30, version ID `4c276edd-828b-4987-a8a0-54fec690f768`.** One file
+  changed on the wire (`/cold-start.html`); the other three were already byte-identical to what was
+  live. **Verified on the live URL by reading the body, not the status code** — the Phase 7
+  button-name warning and all four `2026-08-30` date stamps are present at
+  https://lookedright.tonydefazio.com/cold-start ; home page 200.
+  **No reader lost saved state.** The checklist keys ticks by step key, not by box position, and no
+  step id or box key changed — only prose was added inside existing steps.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->

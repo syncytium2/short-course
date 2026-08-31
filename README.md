@@ -122,8 +122,10 @@ answered by not teaching. Three of the four (B2, B4, B5) rewrite one section, an
 route through them — emailing the Oxford, UW eScience and Southampton organisers — depends on
 other people replying, so it gets *more* urgent with a redesign starting, not less.
 
-**Where everything else lives.** The chain above is provenance — how the course was made. Four
-other folders carry the working material, and each has its own front door:
+**Where everything else lives.** The chain above is provenance — how the course was made. The
+folders below carry the working material, and each has its own front door. *(This sentence used
+to say "Four other folders" and was wrong within a minute of a fifth being added — the same defect
+as the step count that said 30 for a 34-step page. The table is the source; do not restate it.)*
 
 | folder | what is in it | front door |
 |---|---|---|
@@ -131,6 +133,7 @@ other folders carry the working material, and each has its own front door:
 | [`docs/reviews/`](docs/reviews/) | this repo's own work **attacked on purpose**, seven eleven-role runs | [index](docs/reviews/README.md) |
 | [`docs/handouts/`](docs/handouts/) | what a learner is actually handed | [index](docs/handouts/README.md) |
 | [`docs/doubt/`](docs/doubt/) | material nobody can vouch for, parked, **no decision owed** | [index](docs/doubt/README.md) |
+| [`docs/decisions/`](docs/decisions/) | one numbered file per choice, **superseded rather than edited** — the habit `search-to-shipped.html` §4 teaches and this repo did not practise until 2026-08-30 | [index](docs/decisions/README.md) |
 
 And two coordination files, because several Claude sessions share this one checkout:
 [`docs/SESSIONS.md`](docs/SESSIONS.md) says who is working on what **right now**

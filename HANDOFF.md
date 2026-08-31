@@ -1233,3 +1233,92 @@ lock, and the reasoning written into both files.
 public at the end of it, and `--check-all` could not see it: that gate compares a built page to a
 rebuild from its source, and both sides agreed on the same wrong sentence. A number copied out of
 a document is a second source, exactly like a hand-wrapped page, and it fails the same way.
+
+---
+
+## Session close, 2026-08-30 · the route was walked, and publishing is not the easy part
+
+**Session `Mac/a4de1b91`. Everything below is merged to `master` and pushed. Four gates green:
+`build_site.sh --check-all`, `check_pointers.sh`, the new `check_dated_ui.sh`, and
+`mutation_check.sh` at 23 caught / 0 missed / 0 errors.**
+
+### What was asked, and what it turned into
+
+Tony: *"let's build the shortest route to a website a user can edit in the claude app. first
+decision is whether or not a repo is necessary."* The answer went through three versions in one
+afternoon, and **the first two were wrong** — both are kept, because the wrongness is the evidence.
+
+- **v1 said a repo is required.** It quoted the Claude Code on the web docs accurately and read
+  them as a fact about the whole product. **Cowork connects a local folder with no repo and no
+  terminal**, so nothing forces a repository at all.
+- **v2 recommended the repo on a comparison that had never been run**, and partly on the author's
+  own working style. Tony: *"i don't use cowork so i'm reluctant to include it. my work is too
+  chaotic for the claude app alone. that should not propagate to all users."*
+- **v3 is [`docs/decisions/0002-route-to-a-learner-editable-site.html`](docs/decisions/0002-route-to-a-learner-editable-site.html).**
+  The repo is **bought, not required**; the price is one free account; the two things it buys are
+  named; and the recommendation is stated as **a default broken on asymmetry, not a result.**
+  Record 0001 is kept on the page, greyed and superseded, per §4's own rule.
+
+### The route was then actually walked, which nothing here had ever been
+
+`syncytium2/route-test` → a one-page site → Cloudflare Workers → **live and verified by fetching
+the body, not the status code.** The walk log is §7 of 0002: **3 of 7 checks confirmed, 1 came back
+NOT DONE, 3 unreachable.** The red one is *"run it and look"* — it was syntax-checked instead, and
+that is recorded as a skip rather than dressed up.
+
+**Search to Shipped budgets publishing at "20 min" and calls it the easy part. It was stopped seven
+times:** a Cloudflare outage their status page denied, a permission boundary, four wrong click
+paths, and a `wrangler.jsonc` that the pre-filled deploy command silently requires and nothing on
+screen asks for.
+
+### The finding, which is a number
+
+**Instructions written in advance: five. Wrong: five.** Every click path, every field name, and the
+settings table that had been called *"the stable part."* The same guide unstuck three of them
+**within a single exchange** once it could see a screenshot. **An agent is a poor map and a good
+guide.** That is
+[`docs/handouts/show-it-your-screen.html`](docs/handouts/show-it-your-screen.html) — the only page
+in this repo written from a walk rather than from reading, with four real screens, and §6 naming
+the **four of seven the loop did not solve.**
+
+### And the fix was already in the file
+
+Step 1.2 says of prices: *"Do not trust a price you read anywhere, including here… the number is
+whatever the page says on the day you look."* Exactly right, and never applied to buttons. **Phase 7
+now opens with the same warning for click paths**, and 3.5, 4.1, 4.6, 7.3 and 7.5 carry the date
+their controls were true. **Button names were not removed** — a date changes what the sentence
+claims, and the honest version becomes the easy one.
+
+**`tools/check_dated_ui.sh` enforces it, with two mutation rows.** Adding an undated click path to
+any handout now fails.
+
+**⚠ Its own selftest caught a real bug in it, which is the only reason the row is worth anything.**
+awk's `match()` sets the global `RSTART`/`RLENGTH`, and `emit()` calls `match()` twice — so reading
+them after `emit()` read the *body* match. **Two of six steps vanished from the fixture and the scan
+still exited 0.** The real run looked healthy throughout. Both that and an earlier draft's blindness
+to 7.3 are commented in the file and are now mutations.
+
+### Corrections I made to my own claims, on the record
+
+- **"Both runbooks are built almost entirely out of named buttons"** — said without counting. It is
+  **8 of 34 steps in one file and 1 of 50 in the other**, and every Cold Start step that names a
+  button already had a *"done when."* Corrected on the board the same session.
+- **"Another session holds that file, so I cannot touch it."** Tony: *"are you in a worktree?
+  doesn't that make this simple?"* It does. That caution is about a **shared checkout**, not an
+  isolated one. The real requirement is only to **rebase first** — I was 20 commits behind with 3 of
+  them on the same files.
+
+### Left undone, deliberately
+
+1. **NOT DEPLOYED.** `site/cold-start.html` is rebuilt and green, but the live page will not carry
+   the Phase 7 dating until someone runs `npx wrangler deploy`. **Tony's call.**
+2. **`show-it-your-screen.html` is not in `tools/pages.txt`.** Publishing it is undecided, not
+   forgotten.
+3. **The fifteen-minute Cowork test** in 0002 §8 — connect a folder, close the desktop app, try to
+   read it from a phone; then ask Cowork to push via the GitHub connector. **If the second works,
+   record 0002 is superseded and the no-repo route wins outright.** Nobody has tried it.
+4. **`syncytium2/route-test`** (still **private** — the attempt to make it public was refused by the
+   permission classifier) and its Worker at `route-test.tonydefazio.workers.dev` are the walked
+   evidence for §7. Disposable: `gh repo delete syncytium2/route-test`.
+5. **Cowork appears nowhere in Cold Start's 34 steps**, and the Desktop app has three tabs —
+   Chat / Cowork / Code — so they are not rival products a learner chooses between.
