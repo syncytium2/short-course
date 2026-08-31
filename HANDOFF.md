@@ -1331,7 +1331,7 @@ to 7.3 are commented in the file and are now mutations.
 3. **The fifteen-minute Cowork test** in 0002 §8 — connect a folder, close the desktop app, try to
    read it from a phone; then ask Cowork to push via the GitHub connector. **If the second works,
    record 0002 is superseded and the no-repo route wins outright.** Nobody has tried it.
-4. ~~**`syncytium2/route-test`** (still **private**…) and its Worker are the walked evidence for
+4. ~~**`syncytium2/route-test`** (recorded as private; it was **public** — Tony ran the visibility change himself after the classifier refused me) and its Worker are the walked evidence for
    §7.~~ **BOTH DELETED 2026-08-31**, on Tony's decision, because a public page naming a private
    repo is a leak with no upside and the repo's own description said *"delete freely."* The repo
    is gone and the Worker returns 404. **What that costs is stated on the page rather than
@@ -1462,3 +1462,80 @@ a redaction was built and reverted this session because the page's own provenanc
 they are *"otherwise unaltered — nothing cropped, annotated or reconstructed"*, and painting over
 six boxes while the prose named the repo eleven times would have been theatre. The repository was
 deleted instead.
+
+---
+
+## Session close, 2026-08-31 · the expert comes first, and the site gained a page
+
+**Session `Tonys-MacBook-Pro/a4de1b91`, continuing from the 2026-08-30 close above. All merged to
+`master`, pushed, and deployed — version `59d9e62d`. Five gates green: `build_site.sh --check-all`,
+`check_pointers.sh`, `check_dated_ui.sh`, `checklist_state.sh --selftest`, and `mutation_check.sh`
+at 33 caught / 0 missed / 0 errors.**
+
+### What changed, in the order Tony asked for it
+
+**1 · Decision 0002 was restructured around a first step it did not have.** It opened with four
+routes side by side, as if a learner's first act were choosing between products. It is not. §1 is
+now **Get the expert on your side**, a ladder rather than a menu, ordered on the axis the 2026-08-30
+walk showed matters — **how much of your screen they can see**: browser → desktop app code mode →
+the agent inside your editor. The four routes moved to §2, where they answer the narrower question
+they actually answer. **The §6 decision did not change and is therefore not superseded.**
+
+**2 · Two corrections from Tony, both of which had already reached the artifact.**
+
+- *"'buying' … to a human buying means paying cash for a github account."* Nine metaphorical uses
+  replaced. The word had put a price on the one part of this route that has none.
+- *"'nobody pays for github' is not acceptable in this repo."* My fix had overshot into exactly the
+  absolute this repo committed against. Paid GitHub tiers exist. The claim that survives is the
+  narrow one `what-it-costs.html` already makes: **nothing this route does needs a paid tier.**
+
+**3 · He asked to be corrected on the free tier, and should be.** He proposed step 0 be "$20 a month
+to get the tool in a usable window." Right for rungs 2 and 3, wrong for rung 1: **Free ($0) includes
+artifacts**, so the minimum rung genuinely works for nothing. Claude Code and Cowork are both above
+the free line, and **one Pro plan unlocks both upper rungs** — the step from 2 to 3 is setup, not
+spending. The tell for outgrowing rung 1 is not "it refuses" but **the copying**.
+
+**4 · `show-it-your-screen.html` is now public** at
+[lookedright.tonydefazio.com/show-it-your-screen](https://lookedright.tonydefazio.com/show-it-your-screen).
+It was student-facing and unpublished, so the one page written from a walk was the only one nobody
+could read. The site now builds **five** pages.
+
+**5 · The ladder moved into Cold Start 1.2**, then **1.1 and 1.2 were swapped** — *"noob needs the
+expert then the github."* The page had contradicted itself: GitHub's own argument is that
+*"everything you and the agent make lives in one folder on one laptop,"* a sentence assuming the
+agent already exists.
+
+### The renumber was proved, not argued
+
+Renumbering is the edit this page has been burned by twice. State keys on `li.dataset.key` and
+`b.dataset.key` and **never** on `data-id` — `dataset.id` has no hits in the file. Diffing the
+`{stepKey: [boxKeys]}` map against `origin/master`: **34/34 steps, step keys identical, no box keys
+changed, none added, none removed.** Every saved tick lands where it did.
+
+**If you renumber steps here, run that diff before committing.** The badge and progress bar are
+derived, so a broken renumber looks perfectly normal on screen; only a reader with saved ticks would
+ever find out.
+
+### Two corrections against myself, on the record
+
+**I told the board both runbooks were "almost entirely" named buttons, having counted nothing.** It
+is 8 of 34 steps in one file and 1 of 50 in the other, and every Cold Start step that names a button
+already carried a "done when". Corrected the same session.
+
+**I recorded `route-test` as private because the classifier refused *me* the visibility change.**
+Tony ran it himself; the repository was public. I then repeated that assumption twice more today.
+**A refusal I received is not evidence about what the human did next** — and a board read by other
+sessions cannot tell the difference. Both repository and Worker are now deleted, confirmed by an
+authenticated request that would have found the repo whatever its visibility.
+
+### Left undone
+
+1. **The fifteen-minute Cowork test**, still the top item in `0002` §8 and still untried. If Cowork
+   can push through the GitHub connector, **0002 is superseded and the no-repo route wins outright.**
+2. **`/show-it-your-screen` is 713 KB**, an order of magnitude larger than any other page, because
+   four screenshots are embedded as data URIs to keep the artifact self-contained. It serves fine.
+   Nobody has decided whether that matters.
+3. **`0002` is an opaque name.** Tony asked *"what's 0002?"* about a record he had been revising all
+   session. The number does no work; the README index does all of it. Filed, not fixed.
+4. **The push gate false-positives in worktrees** — it reads the shared checkout's branch. Another
+   session fixed one interlock (`abc5ea4`); it still fired wrongly on me twice today.
