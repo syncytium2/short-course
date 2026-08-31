@@ -1801,3 +1801,31 @@ risks in the file.
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Tonys-MacBook-Pro/a4de1b91 — Cold Start Phase 1: swap 1.1 and 1.2 so the expert comes before GitHub. Renumbering — checking tick preservation first.
+- **Status:** DONE 2026-08-31
+- **Opened:** 2026-08-31
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** `docs/handouts/cold-start.html`, `tools/check_dated_ui.sh`, `HANDOFF.md`, `site/`.
+  Merged to master and **deployed, version ID `59d9e62d-1d50-479f-9bd7-7e8696751eba`.**
+- **Notes:** **⚠ COLD START 1.1 AND 1.2 ARE SWAPPED. The expert is now 1.1, GitHub is 1.2.**
+  Anything you have written that cites either number by its old meaning is now wrong. Updated in
+  three files already: the phase note, 3.5's *"none of the alternatives in 1.1"*, Phase 7's *"the
+  same warning 1.1 gives about prices"*, two lines in `tools/check_dated_ui.sh`, two in
+  `HANDOFF.md`. **The `1.1`/`1.2` strings in `checklist_state.sh` and `build_site.sh` are their own
+  synthetic fixtures and were deliberately left alone.**
+  **⚠ THIS WAS A RENUMBER, THE EDIT THIS PAGE HAS BEEN BURNED BY, AND IT WAS PROVED NOT ARGUED.**
+  The page keys state on `li.dataset.key` and `b.dataset.key` and **never** on `data-id`
+  (`dataset.id` has no hits in the file), so display numbers, DOM ids and physical order may all
+  move provided each block carries its own `data-key`. Diffed the `{stepKey: [boxKeys]}` map
+  against `origin/master`: **34/34 steps, step keys identical, no step's box keys changed, none
+  added, none removed** — so every saved tick lands where it did. `checklist_state --selftest`
+  green, no duplicate DOM ids, mutation suite 33/0/0.
+  **If you renumber steps here, run that map diff before you commit.** The badge and the progress
+  bar are derived, so a broken renumber looks completely normal on screen and only a reader with
+  saved ticks would ever find out.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
