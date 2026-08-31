@@ -1712,3 +1712,27 @@ risks in the file.
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Tonys-MacBook-Pro/1ff63f40 — Add a fifth objection to four-barriers: 'if this is real, why is it free' — the field moves faster than a course can be sold. Worktree free-objection.
+- **Status:** ACTIVE
+- **Opened:** 2026-08-31
+- **Branch when opened:** `free-objection` — a fact, not an identity; it may move under you
+- **Writes:** [`../docs/handouts/four-barriers.html`](handouts/four-barriers.html) — the Objections
+  section only — and its build output [`../site/index.html`](../site/index.html). Nothing else.
+- **Notes:** Tony, 2026-08-31, in two parts: add the objection *"if this is real, why are you
+  giving it away for free?"* — answered as **it is the right thing to do**, and then as
+  arithmetic: the field moves faster than a course can be built, so yesterday's course is a
+  waste of a new user's time — and then *"add that this site is continually updated as new
+  issues arise."* The second half went into the headline paragraphs, not only the fold, because
+  at **Headlines** depth the `details` blocks are shut and the instruction would not be visible.
+  **Two claims in it are checkable and one is not:** the five wrong click paths and the dating
+  gate are sourced to `tools/check_dated_ui.sh`; the *"55 commits between 28 and 31 August"* is
+  from this repository's own log and **the repository is private**, so the section says so and
+  labels it a self-report rather than leaving the reader to discover the link is not there.
+  Also fixed in passing: `"none of those centres <i>failure management</i>"` in the objection
+  below it was missing its verb.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
