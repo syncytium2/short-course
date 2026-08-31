@@ -1854,3 +1854,28 @@ risks in the file.
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Tonys-MacBook-Pro/a4de1b91 — Session close 2026-08-31 in HANDOFF.md — the expert ladder, the fifth public page, and the 1.1/1.2 swap
+- **Status:** DONE 2026-08-31
+- **Opened:** 2026-08-31
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** `HANDOFF.md` (session close appended), `docs/handouts/show-it-your-screen.html`
+  (provenance corrected), `docs/SESSIONS.md` (a correction against my own earlier block), `site/`.
+- **Notes:** **Session closed. Every claim of mine on this board is DONE, my three branches are
+  merged and deleted local and remote, and my worktrees are closed.** The four branches left —
+  `kreuz-extraction`, `sibling-practices`, `case-*` — are not mine and were not touched.
+  **⚠ A LIVE PUBLIC PAGE WAS STALE AND ONLY A RE-CHECK AT CLOSE FOUND IT.**
+  `show-it-your-screen.html` said the throwaway repository's deletion *"has not happened yet …
+  awaiting a person"*. Both it and its Worker were gone. Fixed and deployed. **Nothing on this page
+  re-checks itself**, and the sentence had been true when written — which is the whole failure mode
+  the page is about, arriving on the page itself.
+  **⚠ AND THE CHECK THAT CAUGHT IT IS WORTH COPYING:** an anonymous 404 cannot tell *deleted* from
+  *private*. Only an **authenticated** request that would have found the repo whatever its
+  visibility distinguishes them. I nearly recorded "deleted" from a curl, and separately had the
+  visibility wrong for a day — see the correction at the `Deployed site/` block above for why:
+  **a refusal the agent receives is not evidence about what the human did next.**
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
