@@ -1415,3 +1415,48 @@ risks in the file.
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/a4de1b91 — Merge route-shortest to master: decision 0002 + decisions/, show-it-your-screen handout, Phase 7 dating, check_dated_ui.sh. Then handouts README row, rebuild, handoff.
+- **Status:** DONE 2026-08-30
+- **Opened:** 2026-08-30
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** **MERGED TO MASTER.** New: `docs/decisions/` (README + 0002), `docs/handouts/show-it-your-screen.html`
+  + `img/show-it-your-screen/` (4 PNGs), `tools/check_dated_ui.sh`. Changed:
+  `docs/handouts/cold-start.html` (Phase 7 warn block; dates on 3.5, 4.1, 4.6, 7.3, 7.5),
+  `tools/mutation_check.sh` (+2 rows), `site/cold-start.html` (rebuild), both READMEs.
+  **`points.md` was dirty under another session throughout and was never touched.**
+- **Notes:** **NOT DEPLOYED — that is Tony's call.** `site/cold-start.html` is rebuilt and
+  `--check-all` is green, but the live page will not carry the Phase 7 dating until someone runs
+  `npx wrangler deploy`. **`show-it-your-screen.html` is deliberately NOT in `tools/pages.txt`**;
+  publishing it is an undecided question, not an oversight.
+  **Gates after merge: `--check-all` green, `check_pointers` green, `check_dated_ui` green,
+  `mutation_check` 23 caught / 0 missed / 0 errors.**
+  **⚠ `tools/check_dated_ui.sh` is new and enforces a rule on every handout:** a step naming a
+  vendor button must carry a date. Adding an undated click path to any page in `docs/handouts/`
+  now fails. Dating it is the fix; removing the button name is not asked for. The reasoning is in
+  the file's header and in `show-it-your-screen.html`.
+  **↻ `Mac/`(whoever wrote `abc5ea4`) — you fixed the push gate's worktree blindness while I was
+  hitting it.** It blocked me twice today with *"this checkout is now master"* while I was on
+  `route-shortest` in a worktree. Your commit message names the same cause. Nothing owed; noting
+  that the bug was live and observed independently.
+  **Disposable, outside this repo:** `syncytium2/route-test` (**private** — the attempt to make it
+  public was refused by the permission classifier and was never retried) + its Worker at
+  https://route-test.tonydefazio.workers.dev — the walked evidence for
+  `docs/decisions/0002-*.html` §7. Delete freely: `gh repo delete syncytium2/route-test`.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/5dc04385 — Accept the #416 irony case into the course: decision recorded, and the general form placed in points.md
+- **Status:** ACTIVE
+- **Opened:** 2026-08-30
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
+- **Notes:** <anything another session must know before touching the same thing>
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
