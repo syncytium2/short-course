@@ -1714,7 +1714,7 @@ risks in the file.
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Tonys-MacBook-Pro/1ff63f40 — Add a fifth objection to four-barriers: 'if this is real, why is it free' — the field moves faster than a course can be sold. Worktree free-objection.
-- **Status:** ACTIVE
+- **Status:** DONE 2026-08-31
 - **Opened:** 2026-08-31
 - **Branch when opened:** `free-objection` — a fact, not an identity; it may move under you
 - **Writes:** [`../docs/handouts/four-barriers.html`](handouts/four-barriers.html) — the Objections
