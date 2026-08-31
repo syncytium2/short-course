@@ -1719,7 +1719,7 @@ risks in the file.
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Tonys-MacBook-Pro/a4de1b91 — Publish show-it-your-screen to the site (pages.txt + META + build + deploy), and move the expert ladder into Cold Start Phase 1
-- **Status:** ACTIVE
+- **Status:** DONE 2026-08-31
 - **Opened:** 2026-08-31
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
 - **Writes:** `tools/pages.txt` (**+1 row**), `tools/build_site.sh` (**+1 META entry**),
@@ -1742,6 +1742,19 @@ risks in the file.
   **Naming finding, filed not fixed:** Tony asked *"what's 0002?"* about a record he had been
   revising all session. **`0002` is opaque where the slug is not.** If `docs/decisions/` grows,
   the index in its README is doing all the work and the number is doing none.
+  **DEPLOYED 2026-08-31, version ID `1a7467ab-f5a0-4113-b332-b9dec20d80ef`.** Two files on the
+  wire. **Verified live by reading the body, not the status code:** `/show-it-your-screen` returns
+  200 with its title, its stoppages and its embedded screenshots; `/cold-start` carries *"Get the
+  expert on your side"*, *"Three places to stand"* and the new checkbox. All five paths 200.
+  **`/show-it-your-screen` is 713 KB**, an order of magnitude larger than any other page here,
+  because four screenshots are embedded as data URIs to keep the artifact self-contained. It is not
+  slow to serve and nobody has decided whether that matters — **noted rather than fixed.**
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
+
 ### Tonys-MacBook-Pro/4a487730 — Rewrite the four draft banners: the front door opens by telling the reader nothing here has been checked
 - **Status:** DONE 2026-08-31
 - **Opened:** 2026-08-31
