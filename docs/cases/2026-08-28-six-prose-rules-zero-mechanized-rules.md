@@ -1,4 +1,4 @@
-<!-- Case study, imported 2026-08-28. Internal use — links point at real commits and files in syncytium2/interface2 (GitLab). -->
+<!-- Case study, imported 2026-08-28. Evidence: commits and files in syncytium2/interface2, which is PRIVATE (GitLab). The SHAs cited here cannot be resolved by an outside reader — said again, visibly, in the banner below, because a limit stated only in a comment is not stated. -->
 
 # Six prose rules broken, zero mechanized rules broken — in one session
 
@@ -28,7 +28,22 @@
 > [`../chain/01-session-record.md`](../chain/01-session-record.md), so the same banner
 > applies.
 >
-> **Verifiable from artifacts, without trusting this account:**
+> **⚠ Verifiable by the author, and by nobody else — added 2026-08-30.** Every artifact in
+> the next list lives in `syncytium2/interface2`, which is **private**, on GitLab. If you are
+> reading this in a public repository, **you cannot resolve one of those SHAs**, and the list
+> below offers a check you are not in a position to run. This is the only case file here with
+> that weakness: every other one cites `syncytium2/bugarach` or `syncytium2/murderboard`, both
+> public, or this repository. The §2 tally does not depend on the account being trusted — but
+> from outside, you have only this file's word for the tally too.
+>
+> *Why this is stated rather than fixed.* The fix would be to reproduce a private repository's
+> commits and diffs here, which imports the material instead of citing it. Naming the limit is
+> the honest option, and it is the move [`EXCLUDED.md`](../chain/EXCLUDED.md) makes for the
+> chain: *could not verify* and *chose not to publish the source* are different facts, and a
+> record that renders them alike is lying by omission.
+>
+> **Verifiable from artifacts, without trusting this account** — by anyone holding
+> `interface2`, which today is the author alone:
 > - the two commits in §3 (`ccd65027`, `e46484f0`) and the diff/message contradiction
 >   between them;
 > - the board claim `b7db0f10` and its timestamp relative to the cluster job it claims;

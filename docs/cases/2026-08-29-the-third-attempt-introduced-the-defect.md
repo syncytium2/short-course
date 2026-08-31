@@ -1,4 +1,4 @@
-<!-- Case study, 2026-08-29. Internal use — links point at real commits and files in syncytium2/bugarach. -->
+<!-- Case study, 2026-08-29. Evidence: commits and files in syncytium2/bugarach (public). One supporting precedent is cited from syncytium2/foundations, which is PRIVATE — that SHA is not resolvable by an outside reader; the bugarach evidence carrying the case is. -->
 
 > ## 📌 Beginner-legible headline, advanced body
 >

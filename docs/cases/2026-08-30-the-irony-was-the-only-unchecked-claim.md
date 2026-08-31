@@ -1,4 +1,4 @@
-<!-- Case study, imported 2026-08-30. Internal use — links point at real commits and a real PR. -->
+<!-- Case study, imported 2026-08-30. Evidence: commits and a PR in syncytium2/bugarach (public). An outside reader can check all of it. -->
 
 > ## 📌 Audience: recommended for the course — Tony's call, not decided
 >

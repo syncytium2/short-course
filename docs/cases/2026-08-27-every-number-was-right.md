@@ -1,4 +1,4 @@
-<!-- Case study, written 2026-08-27 by the session under evaluation. Internal use — links point at real commits and files. -->
+<!-- Case study, written 2026-08-27 by the session under evaluation — see the provenance banner below. Evidence: commits and files in syncytium2/bugarach (public) and in this repo. An outside reader can check all of it. -->
 
 > ## 📌 Beginner-legible headline, advanced body
 >

@@ -565,7 +565,7 @@ need**, and what happens to the rest.
 
 ## turnstile has its own repo — 2026-08-28
 
-**[`syncytium2/turnstile`](https://github.com/syncytium2/turnstile), private.** Apache-2.0,
+**[`syncytium2/turnstile`](https://github.com/syncytium2/turnstile), public since 2026-08-30.** Apache-2.0,
 matching its sibling `murderboard`. Cloned to `~/Developer/turnstile`; **that is now the
 source of truth** and `tools/turnstile/` here is a vendored copy, stamped on line 2 in the
 estate's existing format.
@@ -587,10 +587,31 @@ all recorded at their sites:
 - `SELF_DIR` was hardcoded to the vendored path, so the tool **was broken in its own
   repository**. A tool that only works inside the consumer is not vendorable; it is a copy.
 
-**Publication is open, as it was for this repo.** It is private by default because its
-README quotes this estate's own hook failures by size and repo. Flipping it is one command
-(`gh repo edit syncytium2/turnstile --visibility public`) and it is a decision, not an
-oversight.
+**SETTLED 2026-08-30 — `syncytium2/turnstile` is PUBLIC**, Apache-2.0, on Tony's decision.
+All six links to it from this repo now resolve for an anonymous visitor, checked with `curl`
+rather than assumed — including the two deep links into `docs/reviews/README_2026-08-28.md`,
+which sit inside the vendored README's warning that four of its five guarantees are contested.
+Those were the ones that mattered: a reader was being handed five guarantees and a refutation
+they could not reach.
+
+**The stated reason for privacy did not survive being checked**, which is why it was decided
+rather than deferred. It read: *private by default because its README quotes this estate's own
+hook failures by size and repo.* Neither half holds.
+
+- **By repo:** the README names `murderboard` and `short-course`, and nothing else. Both public.
+- **By size:** the sizes it quotes — *39, 34, 27, 17, 11, 9 and 7 kilobytes* — have been public
+  on `lookedright.tonydefazio.com` since 29 August, three times across `index.html` and
+  `cold-start.html`. The disclosure being protected had already been published here.
+
+**One real increment, flagged rather than buried.** `docs/reviews/README_2026-08-28.md` line 185
+attributes the 39KB SessionStart hook to `interface2` **by name** — a private repo, plus a file
+size. The live site already names `syncytium2/foundations, private`, so the precedent exists, but
+this was not part of the reason the repo was private. Reversible: edit upstream, re-vendor.
+
+**Original text, kept because a status that quietly changes is not a record:** *Publication is
+open, as it was for this repo. It is private by default because its README quotes this estate's
+own hook failures by size and repo. Flipping it is one command and it is a decision, not an
+oversight.*
 
 ---
 

@@ -4,7 +4,15 @@
 
 *Edited after the review, same day: four numeric defects corrected — each in its own commit, titled after the defect. §10 added (what a run costs), which puts a second axis on §5, gives §0b a reason that isn't willpower, and prices the course's own worked example — a price nobody has looked up yet, and which is labelled rather than guessed.*
 
-> **Before sharing:** the positioning section names competitors candidly and the §0b teaching note is a personal admission. Both are useful and both were written as internal notes. Decide who gets the whole file.
+> **⚠ Read before sharing — and the first item is the one that matters, added 2026-08-30.**
+>
+> **1 · Line 125 is false, and this document cannot be corrected.** *"Nobody is teaching a non-programmer to do agentic work on their own machine and their own files."* Blocking finding **B2** in [`OPEN-FINDINGS.md`](OPEN-FINDINGS.md) refutes it and names three — Oxford's AI Competency Centre, UW eScience, Southampton RSG. Blocking finding **B5** goes further: the whole positioning section is *"a check that cannot fail"* — competitors named, saturation asserted, a gap declared, with no search recorded, no dates, no sources, and no statement of what was not looked at. **This file is node 3 of the chain, frozen 2026-08-27** as the exact bytes the murderboard reviewed, so the sentence stays where it is: editing it would delete the evidence that the review caught something. The public site already carries the refutation, at *"'Nobody is teaching non-programmers to do this.' That is simply false, and I can name three."* Anyone reading this file is reading a document that is known-wrong at line 125 and kept that way on purpose.
+>
+> **2 · The positioning section names competitors candidly**, and its vendor list is recorded in `OPEN-FINDINGS.md` residual 4 as *spot-checked, not verified*. What it says of them is market analysis — *saturated*, *near-identical*, *not our competition* — with no quality claim about any named company.
+>
+> **3 · The §0b teaching note is a personal admission.** It was written as an internal note and it is the strongest passage in the file.
+>
+> Items 2 and 3 are the whole of what this banner used to say. **They are the two lowest risks here**, and stating them alone left item 1 unmentioned for four days after the review had refuted it. Decide who gets the whole file — but decide about item 1 first.
 
 ---
 
