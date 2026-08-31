@@ -10,6 +10,19 @@ was made.
 | [`what-it-costs.html`](what-it-costs.html) | **What It Costs** — Cold Start's money half. The free floor and how far it goes, the three shapes a bill takes (ceiling / meter / somebody else's meter), dated figures with their caveats, what drives the number, and the equity problem stated plainly. **Filed separately on purpose** — cost material rots fastest and is tied to one institution and one moment, the same reasoning that puts it in `points.md` §F rather than through §A–E. | [artifact](https://claude.ai/code/artifact/f515ee18-33ae-43f1-b2fd-6969eedd95db) (private) |
 | [`search-to-shipped.html`](search-to-shipped.html) | **public: [lookedright.tonydefazio.com/search-to-shipped](https://lookedright.tonydefazio.com/search-to-shipped)** &mdash; published 2026-08-29 as the destination Cold Start Phase 7 hands off to. **Never murderboarded.** | One-page runbook, zero to a deployed web app, plus a second sheet on decision records | [artifact](https://claude.ai/code/artifact/38ccc999-1621-4a11-9936-e0a885d7a5ac) (private) |
 | [`four-barriers.html`](four-barriers.html) | **It Looked Right** — the walkthrough site. Four challenges, each with its worked incidents, plus step 0 and the record of how the material was made. Reading-depth control: headlines / + incidents / + sources | **public: [lookedright.tonydefazio.com](https://lookedright.tonydefazio.com/)** · [artifact](https://claude.ai/code/artifact/e72e2b76-5cff-4e46-a26f-985fa5c3d47e) (private) |
+| [`show-it-your-screen.html`](show-it-your-screen.html) | **Show It Your Screen** — the deployment loop, and **the only page here written from a walk rather than from reading**. On 2026-08-30 Cold Start's Phase 7 was taken end to end for the first time: publishing is budgeted there at *"20 min"* and called the easy part, and it was stopped **seven times**. The number the page exists for is that the guide wrote click paths in advance **five times and was wrong five times**, then unstuck three of them **within a single exchange** once it could see a screenshot — an agent is a poor map and a good guide. Four beats (try / notice / screenshot the whole window / do one thing), what to send with it, the seven stoppages with **four real screens**, what your guide will reliably get wrong so you can price it, and — §6 — the **four of seven the loop did not solve**, which is the honest half. **Never murderboarded.** | [artifact](https://claude.ai/code/artifact/4d4bfe02-ee70-4563-8a57-f0d0d2fe2f02) (private) |
+
+**`show-it-your-screen.html` is deliberately not in [`../../tools/pages.txt`](../../tools/pages.txt)
+and is not published.** Its four screenshots are kept beside it in `img/show-it-your-screen/`,
+resized and otherwise unaltered, and embedded in the page as data URIs so the artifact stays
+self-contained — the page can be rebuilt from its own evidence. **The screens are captioned as
+what a stuck moment looks like, never as what you will see**, because a dashboard screenshot rots
+at exactly the speed of the click paths it is arguing against. Whether this becomes a fifth public
+page is undecided.
+
+**The decision this page came out of is not a handout.** Which route a learner should take at all
+lives in [`../decisions/0002-route-to-a-learner-editable-site.html`](../decisions/0002-route-to-a-learner-editable-site.html),
+with the walk log in its §7 — see [`../decisions/`](../decisions/README.md).
 
 **These are artifact sources, not standalone pages.** Publishing wraps the file in
 `<!doctype html><head>…</head><body>`, so the committed file deliberately has no doctype
