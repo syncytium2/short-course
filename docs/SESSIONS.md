@@ -1596,3 +1596,45 @@ risks in the file.
   draft was checked against `origin/master` before landing and the false claim was dropped. Had
   it landed it would have been a confident, checkable, wrong statement in the findings file, on a
   gate, in the repo about exactly that.
+
+### Tonys-MacBook-Pro/a4de1b91 — Major revision to decision 0002: step 1 becomes 'get the expert on your side', with a three-tier ladder (web / desktop Code mode / VS Code + Claude window). Worktree expert-ladder.
+- **Status:** ACTIVE
+- **Opened:** 2026-08-31
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
+- **Notes:** <anything another session must know before touching the same thing>
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
+
+### Tonys-MacBook-Pro/a4de1b91 — Publish show-it-your-screen to the site (pages.txt + META + build + deploy), and move the expert ladder into Cold Start Phase 1
+- **Status:** ACTIVE
+- **Opened:** 2026-08-31
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** `tools/pages.txt` (**+1 row**), `tools/build_site.sh` (**+1 META entry**),
+  `docs/handouts/cold-start.html` (**1.2 rewritten**), `site/` (rebuild, now **five** pages),
+  `docs/decisions/0002-*.html`. Worktree `expert-ladder`.
+- **Notes:** **⚠ THE SITE HAS A FIFTH PAGE.** `docs/handouts/show-it-your-screen.html` is now in
+  `tools/pages.txt` and builds to `/show-it-your-screen`. Anything that assumed four pages —
+  prose, counts, a nav list — is now wrong; **`--check-all` covers five and does not know about
+  your prose.**
+  **⚠ `cold-start.html` 1.2 is rewritten and renamed** to *"Get the expert on your side — and
+  decide how much of your screen they get"*, carrying a three-rung ladder (browser / desktop code
+  mode / agent in your editor) ordered by **what the agent can see**. Written **vendor-neutral**,
+  because 1.2 lists five agents and this repo does not get to assume Claude. **No price is written
+  on the page** — Money says "None" / "a paid plan" and points at the vendor links, which is 1.2's
+  own rule about prices applied to itself.
+  **One new checkbox, `data-key="which-rung-and-next"`.** Existing keys untouched, so **no reader
+  loses a tick**; `checklist_state.sh --selftest` green and the step count is still **34**.
+  **Also added table CSS to `cold-start.html`**, which had none — an unstyled table would have
+  shipped.
+  **Naming finding, filed not fixed:** Tony asked *"what's 0002?"* about a record he had been
+  revising all session. **`0002` is opaque where the slug is not.** If `docs/decisions/` grows,
+  the index in its README is doing all the work and the number is doing none.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
