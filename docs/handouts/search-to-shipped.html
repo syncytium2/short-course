@@ -288,9 +288,42 @@
     .phase-time { margin-left: 0; width: 100%; }
     .phase-head { flex-wrap: wrap; }
   }
+
+  /* ---- draft stamp ---------------------------------------------------
+     NAMES WHAT IS UNVERIFIED, rather than saying "draft" and stopping.
+     Same block as the other three public pages; added here last, on
+     2026-08-31, because this was the only page on the site with no stamp
+     at all -- and it is the only one that never went through the
+     eleven-role adversarial review. The least-checked page was the one
+     making no statement about how far it had been checked.
+     -------------------------------------------------------------------- */
+  .draft {
+    border: 1px solid var(--caution);
+    background: var(--caution-soft);
+    border-radius: 4px;
+    padding: 11px 14px;
+    margin: 0 0 6px;
+  }
+  .draft-k {
+    display: block;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: var(--caution);
+    margin: 0 0 5px;
+  }
+  .draft p { margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--ink); }
+  .draft p + p { margin-top: 7px; }
+  @media print { .draft { break-inside: avoid; } }
 </style>
 
 <div class="page">
+
+  <div class="draft">
+    <b class="draft-k">The least-checked page here</b>
+    <p>The other three pages on this site were put through an eleven-role adversarial review and repaired against it. <b>This one never has been.</b> It is the oldest sheet here: every link on it was checked on <b>27 August 2026</b> and none has been checked since, and the vendors it sends you to rename and re-shape their products faster than this page moves.</p>
+  </div>
 
   <header class="mast">
     <p class="eyebrow">Runbook · one page</p>

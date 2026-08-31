@@ -1663,3 +1663,15 @@ risks in the file.
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Tonys-MacBook-Pro/47b9dcee — Settle draft-banner scope across all four public pages: the index's generic 'Draft' breaks the rule its own CSS states, and search-to-shipped (never murderboarded) carries no stamp at all
+- **Status:** ACTIVE
+- **Opened:** 2026-08-31
+- **Branch when opened:** `banner-scope` — a fact, not an identity; it may move under you
+- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
+- **Notes:** <anything another session must know before touching the same thing>
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
