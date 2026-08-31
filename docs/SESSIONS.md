@@ -1731,6 +1731,17 @@ risks in the file.
   labels it a self-report rather than leaving the reader to discover the link is not there.
   Also fixed in passing: `"none of those centres <i>failure management</i>"` in the objection
   below it was missing its verb.
+- **⚠ Near-miss worth the next session's attention: the darkroom copy was taken from the shared
+  checkout and was a version behind.** The work was done in a worktree, merged and pushed —
+  and then `cp` ran against `/Users/tonydefazio/Developer/short-course/site/index.html`, which
+  is the **shared** checkout and had not pulled. That file was three commits old and did not
+  contain the section it was being delivered to show; `grep -c "Why is it free"` returned **0**,
+  which is the only reason it was caught. It was replaced from `git show origin/master:` and
+  verified again. **Worktrees moved the collision rather than removing it:** once you work off
+  to one side, the shared checkout is no longer a copy of anything current, and every habit that
+  says "the file is at `~/Developer/short-course/...`" is now quietly wrong. Deliver from
+  `git show origin/master:<path>`, and grep the delivered file for a string that only the new
+  version has.
 
 <!-- RELEASE THIS
      tools/claim.sh --release
