@@ -1,17 +1,22 @@
 <!-- Case study, 2026-08-30. DRAFT — the upstream artifact is an open PR still being revised. Evidence: commits and files in syncytium2/bugarach (public) and in this repo. An outside reader can check all of it. -->
 
-> ## 🚧 Draft — first pass cleaned 2026-08-30, one thing still open
+> ## 🚧 Draft — second pass 2026-08-31, and the subject is stalled rather than moving
 >
 > Every claim below is about [`bugarach`](https://github.com/syncytium2/bugarach) **PR #415**.
-> **The defect in Point 3 has since been fixed** — the upstream session shipped
-> [`755fee1`] within the hour, and Point 3 now records the repair and what it added. Point 6's
-> bundling complaint is half-addressed: the ranking handoff was split out as **#416**.
+> **The Point 3 defect was fixed** in [`755fee1`]. **The PR then went red and stopped** — CI has
+> failed since 20:21 on 2026-08-30, nothing has touched it since, four later PRs merged past it,
+> and the session that built it has ended. **Point 7 is why it is red**, and it is now the
+> strongest thing in this file.
 >
-> **#415 is still open**, so the file it describes can still change. **Nothing here has been
-> reviewed by a panel.** Written at Tony's request — *"start drafting, we'll clean it when
-> they're done"* — and cleaned once against the landed revision. Every number carries the
-> command that produced it in the [appendix](#appendix--how-to-replay-every-number-here), so
-> the next pass can re-run them rather than trust them.
+> **Two corrections to this case's own earlier version are marked inline** — one to Point 3
+> (*"another session's branch"* was unevidenced; it was almost certainly the same worker's own
+> unlanded work) and one in Point 7 (this session reported the fix *"verified"* on a static check
+> while CI was already red). Both are kept visible rather than edited away.
+>
+> **Nothing here has been reviewed by a panel.** Written at Tony's request — *"start drafting,
+> we'll clean it when they're done."* Every number carries the command that produced it in the
+> [appendix](#appendix--how-to-replay-every-number-here); re-run them rather than trust them,
+> because two rounds of this file have now been wrong.
 
 > ## 📌 The folder rule, again
 >
@@ -148,7 +153,7 @@ transferable part:
 6. **A pointer that cannot resolve says so instead of linking.** One row points at a file that is
    owed and unwritten, and it is prose, not a dead link.
 
-## Point 3 — its first shipped defect was a row pointing into another session's branch, and the test was structurally unable to see it
+## Point 3 — its first shipped defect was a row pointing at an unlanded branch, and the test was structurally unable to see it
 
 The index ships with a guard, and the guard's own docstring makes the argument for itself:
 
@@ -160,15 +165,29 @@ under pressure — the row on hand-typed numbers cites
 `todo/2026-08-30-the-site-types-what-a-token-could-substitute.md`.
 
 **That file does not exist on `main`.** It exists only on `site-derives-from-data`, an open PR
-(#412) belonging to a different session. On main the nearest file is
+(#412, still open as of 2026-08-31). On main the nearest file is
 `docs/todo/2026-08-28-the-bakeoff-page-transcribes-what-a-token-could-substitute.md` — different
 date, different slug.
 
+> **⚠ Correction, 2026-08-31.** The first draft of this case, and the commit message this session
+> sent upstream, both called that *"another session's branch."* **There is no evidence for that
+> and the likely reading is the opposite.** Tony reports one session at a time in `bugarach`;
+> every commit on every branch there carries the same git author, so **authorship distinguishes
+> nothing**; and the branch timestamps are sequential and non-overlapping — `site-derives`
+> 13:08–13:09, `history-the-ai` 14:01–14:36, `the-index` 15:58–16:11. That is one worker moving
+> between branches across an afternoon, not a collision.
+>
+> **The correction makes the point stronger, which is why it is worth making.** If it were another
+> session, this would be a coordination failure and a board would be the answer. It is not. **A
+> single worker, alone, cited work it had done itself a few hours earlier and had not landed.** No
+> amount of session coordination touches that.
+
 **It is not a typo.** It is a citation of work that genuinely exists, written by an author who had
-seen it, pointing at a place the reader cannot reach. In a repo with fourteen worktrees and four
-open PRs, that is not an accident anyone can be careful out of: **an index indexes a checkout, and
-the project is not a checkout.** Every branch that lands changes what the index's rows mean, and
-nothing in the file's design notices.
+seen it, pointing at a place the reader cannot reach. The gap is not between two people. It is
+between **what has been done** and **what is on `main`** — and a project's working set (branches,
+open PRs, worktrees) is always larger than `main`. **An index indexes a checkout, and the project
+is not a checkout.** Every branch that lands changes what the index's rows mean, and nothing in
+the file's original design noticed.
 
 The suite went green over it, and the reason is the interesting half. The test resolves every
 markdown link:
@@ -296,6 +315,63 @@ wearing different clothes. Work that exists but cannot be reached is not availab
 queue is one more place a project can hold something a session cannot get to. The digest trim is
 still bundled in #415.
 
+## Point 7 — the announcement cost more than the channel had, and knocked a safety fact out of the briefing
+
+*Found 2026-08-31, and it corrects this case's own previous version.*
+
+An index nobody is pointed at is the failure it exists to fix, so the PR wires the announcement
+into the two files a session actually reads: `CLAUDE.md`, and the briefing the SessionStart hook
+prints. There is a test asserting it stays wired. That is the right instinct and it is the part
+of the design most worth copying.
+
+**The briefing has a byte budget — 9000B — and a degradation ladder for when it is exceeded.**
+The three lines announcing the index add **224 bytes**. That took the full briefing from 8856B to
+**9080B**, 80 over, and the ladder fired: the briefing dropped to its TERSE form.
+
+Read what that costs. Four tests go red, and one of them is not about size at all:
+
+```
+test_it_carries_the_ttx_fact
+    assert "min_rois" in out.stdout, "the consequence must travel with the fact"
+    AssertionError: the consequence must travel with the fact
+```
+
+TTX is a drug this lab's analysis must not treat as a silencing control; the briefing carries that
+fact and the operational consequence together, deliberately, in one breath. **In the degraded form
+the consequence is dropped and the fact travels alone.** A fourth test states the design intent
+outright — *"the ladder is a backstop, not the normal path"* — and it fails too.
+
+**So the paragraph that exists so a session can find things pushed the briefing into the mode
+where it stops telling that session things.** Not a metaphor: the same channel, the same run, one
+paragraph of cause.
+
+Three things it establishes, and the third is the general one:
+
+1. **An announcement is not free, and the index's own preamble does not say so.** The file has a
+   careful section on what it deliberately excludes — counts, weekly numbers — to keep itself
+   honest. It has nothing about what it costs the places that carry its address. Reach is where
+   the price is, and the price was paid in a different file.
+2. **The budget mechanism worked perfectly and that is why this is hard to see.** Nothing failed
+   open. The ladder fired as designed, the suite went red as designed, and the result is still a
+   briefing missing a safety consequence. **A graceful degradation path is a mechanism for
+   continuing to run while wrong**, and this repo's own material has no name for that yet.
+3. **The remedy for a retrieval problem consumes the scarcest resource the project has.** Point 1
+   says the binding constraint is retrieval; Point 7 says the channel you must spend to fix it is
+   the one already at its limit. That tension is the real content, and it is not resolved here.
+   Every future index-style fix in a context-bound project pays this.
+
+**Status:** `main` is green; **#415 is red and has been since 20:21 on 2026-08-30**, untouched
+since, while four PRs (#416–#419) merged past it. The session that built it has ended. **The index
+is the one thing in this story that has not landed** — which is Point 1 and Point 6 arriving
+together, in the artifact built to prevent them.
+
+> **⚠ This corrects a claim this session made.** After the repair I reported the fix
+> *"verified — 0 unresolved pointers."* That was true and it was not the same thing as *the fix is
+> good*: I resolved the pointers statically and never ran the suite, and CI had already been red
+> for hours at that moment. **A check I chose, passing, was allowed to stand in for the check the
+> project runs** — which is [`the-gate`](2026-08-30-the-gate-blocked-its-own-installation.md)
+> Point 1's shape exactly, in the hands of the session writing that case's sequel.
+
 ---
 
 ## Appendix — how to replay every number here
@@ -312,7 +388,12 @@ From a `bugarach` checkout with the branch fetched. Nothing below needs the DAND
 | …and where it does exist | `git log --all --oneline --diff-filter=A -- 'docs/todo/*site-types*'` → `8b4d654`, branch `site-derives-from-data` |
 | **50 pointers, 18 links, 32 spans** (at `d3d7baa`) | apply the test's own two regexes to `git show d3d7baa:docs/INDEX.md`; dedupe each, exempt `docs/decisions.md`. **Do not use `grep` for this** — the literal `](` sequence trips this repo's own `check_pointers.sh`, which it did once while this file was being written |
 | 14 spans were the only pointer to their target | same two sets; count unique spans whose basename matches no link target |
-| the repair is complete | apply the same regexes to `git show 755fee1:docs/INDEX.md` and resolve each against `git ls-tree -r --name-only 755fee1` → **0 unresolved** |
+| the pointers are all resolvable | apply the same regexes to `git show 755fee1:docs/INDEX.md` and resolve each against `git ls-tree -r --name-only 755fee1` → **0 unresolved**. ⚠ **This is not the same as "the fix is good"** — see Point 7 |
+| **#415 is red** | `gh pr view 415 --json state,statusCheckRollup` → OPEN, all three jobs `FAILURE`, completed 2026-08-30T20:21Z |
+| …and main is green | `gh run list --branch main --limit 3 --json conclusion` → three successes |
+| the briefing is 80B over its budget | in the failure log: `9080B full, over the 9000B budget` — `gh run view 33332931884 --log-failed` |
+| the announcement costs 224B | sum the three `+` lines in `git diff origin/main...origin/the-index -- tools/session_briefing.sh`, one byte per newline. 9080 − 224 = **8856**, under budget |
+| one session, not several | every commit on every branch carries one git author; branch times are sequential — `git log origin/site-derives-from-data -3 --format='%h %an %ad'` against the same for `the-index` |
 | the Cossart machinery is real | `ls tools/import_dandi.py docs/learned/assessment_cossart.json` · `grep -n cossart current_export.toml` · `grep -n score-spec tools/fair_bakeoff.py` |
 | the effort's footprint | `git log --all --oneline --since=2026-08-25 -i --grep='dandi\|cossart\|transfer'` |
 
