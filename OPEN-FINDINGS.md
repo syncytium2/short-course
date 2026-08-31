@@ -72,6 +72,20 @@ much harder thing to argue with.
 
 ## B2 · "Nobody is teaching a non-programmer…" is false
 
+> **✅ ANSWERED 2026-08-31, on the public page rather than here.**
+> [`site/index.html`](site/index.html) *"Others teaching this"* names all three programmes in
+> their own wording, with formats, dates and a **checked-on** date, then states the contrast:
+> *"What is different here is the subject, not the audience. Those three teach you to use the
+> tools. This page is about what to do when they are confidently wrong."* That is the contrast
+> claim this entry asked for, published where a reader meets it instead of settled in an
+> internal file.
+> **The primary source went further than the fix proposed below.** The vacancy sentence was
+> written by the **assistant**, in messages 7 and 9 of
+> [`docs/chain/01b-real-log-complete.md`](docs/chain/01b-real-log-complete.md), and carried into
+> the outline unchecked. Framing it as the author's claim put a sentence in his mouth that an
+> agent wrote, so the objection is withdrawn and the useful half — the list — is what survives.
+> **Nothing below is removed:** it is the evidence behind the section, not a to-do list.
+
 Refuted by one search:
 
 - **Oxford, AI Competency Centre** — *"Using coding agents for working with research data and
@@ -89,6 +103,15 @@ audience knows the difference.
 
 ## B4 · §8's positioning claim is false, and §8 is nominated as the closer
 
+> **✅ ANSWERED 2026-08-31, on the public page rather than here.** Same section of
+> [`site/index.html`](site/index.html), which names B2, B4 and B5 as its source. The distinction
+> that shipped is the one proposed below — the *subject*, not the audience — and the second half
+> of the finding lapsed rather than being answered: §8 is no longer nominated as the closer,
+> because the front door was rebuilt to open on the argument (`73629d8`, `679d957`).
+> **Not to be confused with `points.md` B4**, a different B4 about CLAUDE.md that is live and
+> was added to on 2026-08-30. See
+> [N5](#n5--b4-diagnoses-compliance-six-incidents-say-the-failure-is-retrieval).
+
 > "Market B skips it entirely because their reader just reads the hook."
 
 The verification-trust problem is actively and quantitatively worked — O'Reilly Radar (*AI Is
@@ -102,6 +125,16 @@ free supporting numbers (96% of developers do not fully trust AI-generated code;
 check it; 38% say reviewing it takes more effort than reviewing human code).
 
 ## B5 · The positioning section is a check that cannot fail
+
+> **✅ ANSWERED 2026-08-31, on the public page rather than here — and by the check, not by the
+> emails.** The section now carries all four things this entry said it lacked: a stated method,
+> a **checked 31 August 2026** date, the three programmes' own wording, and an instruction to go
+> to the source *"because course offerings move."* All three pages were re-verified as resolving
+> rather than trusted from the 26 August search.
+> **The three emails were never sent, and that is a residual, not a closure.** What a programme's
+> page says is not what its organiser would say about what failed. Per the review process,
+> *"nobody was asked"* stays recorded. What stops it being blocking is that the section can no
+> longer return only one answer — it can now be wrong, and a re-check would show it.
 
 It names competitors, asserts saturation and declares a gap, with no search recorded, no dates,
 no sources, and no statement of what was not looked at. Nothing in it could have returned "this

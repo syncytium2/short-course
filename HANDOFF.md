@@ -28,6 +28,11 @@ the order is not obvious:**
    not make it more so.
 4. **The course itself.** Lowest value per hour right now, and the only item that needs other people
    (the Oxford / UW eScience / Southampton emails behind B2, B4, B5). Do not start here.
+   > **Stale as of 2026-08-31.** B2, B4 and B5 were answered on the public page — `site/index.html`
+   > *"Others teaching this"*, which names them as its source — and no longer wait on anybody's
+   > reply. The emails survive as a **residual**, not a blocker: a programme's page is not its
+   > organiser saying what failed. This line is corrected rather than deleted because it is why
+   > the next session should not go looking for a blocker that is closed.
 
 **Publication is unblocked as of 2026-08-30, and that is a change.** The README's two stated
 gates were checked against the files and neither holds. The positioning section names Udemy,

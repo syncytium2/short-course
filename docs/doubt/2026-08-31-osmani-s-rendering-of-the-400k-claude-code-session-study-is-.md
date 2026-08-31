@@ -59,3 +59,11 @@ straight into the positioning. If the real finding is *non-engineers already suc
 the engineer rate*, then that sentence is a check that cannot fail pointed at a study that
 partly refutes it — [B5](../../OPEN-FINDINGS.md) with a citation stapled on, which is worse than
 B5, because a footnote makes it look checked.
+
+> **Correction, 2026-08-31, same day.** This file was written treating B5 as open. It is not:
+> B2, B4 and B5 were answered on 2026-08-31 in `site/index.html` *"Others teaching this"*, and
+> `OPEN-FINDINGS.md` had not been updated to say so — which is how the session that wrote this
+> came to cite a closed finding as live. The doubt itself is unaffected; the risk it names is
+> now **regression** rather than an open defect, and it is sharper for it. The published section
+> is currently a check that *can* fail — dated, methodful, re-verified. Pasting Osmani's
+> paraphrase into it would quietly undo that, and the citation would disguise the undoing.
