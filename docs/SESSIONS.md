@@ -1596,3 +1596,32 @@ risks in the file.
   draft was checked against `origin/master` before landing and the false claim was dropped. Had
   it landed it would have been a confident, checkable, wrong statement in the findings file, on a
   gate, in the repo about exactly that.
+
+### Tonys-MacBook-Pro/5dc04385 — Survey bugarach and interface2 for the mechanisms short-course is missing, and write the adoption list
+- **Status:** ACTIVE
+- **Opened:** 2026-08-31
+- **Branch when opened:** `sibling-practices` — my own worktree, so here the branch *is* the identity
+- **Writes:** `docs/from-the-siblings.md` (**a new file**), this block, and
+  `<darkroom>/short-course/2026-08-31-from-the-siblings/`. **No tool, hook or setting touched**
+  in this repo, and nothing at all in `bugarach` or `interface2` — both were read only.
+- **Notes:** Tony, 2026-08-31: *"we have built the tools for these issues in other repos.
+  bugarach and interface2 are probably the best places to examine best practices."* **Survey, not
+  implementation** — six things to copy, in a stated order, each with the sibling's own header
+  quoted as its evidence. Headline: **this repo has no `SessionStart` hook at all**, and the
+  estate's is explicitly written to be vendored unchanged (`bugarach`'s copy says *"do NOT edit
+  here"*). That is N3 with the most useful hook in the estate as the example rather than the
+  heredoc gate. **If you are about to copy any of these in, say so here first** — six new files
+  is the exact trap this board names.
+- **⚠ Found while doing this, and it affects this board:** the machine half of a session address
+  is **not stable**. `claim.sh` produced `Mac/5dc04385` this morning and
+  `Tonys-MacBook-Pro/5dc04385` an hour ago — same session, same machine, same day, because
+  [`session_identity.sh`](../tools/session_identity.sh) uses `hostname -s`, which is a *network*
+  name. **One session now sits on this board under two addresses**, and `--release` / `--mine`
+  cannot reach the earlier ones. `interface2` already documents this exact case and returns
+  **empty rather than guessing**. Not fixed here — every tool sources that file. Written up in
+  [`from-the-siblings.md`](from-the-siblings.md).
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
