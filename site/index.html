@@ -399,10 +399,18 @@
   body[data-depth="all"] .prov { display: block; }
   .prov b { color: var(--muted); font-weight: 500; }
 
-  /* The sequence blocks. The repository is private, so these are the commit log
-     brought TO the reader rather than a link they cannot follow — the same reason
-     paths on this page are named and not linked. Dates and subjects are verbatim
-     from `git log`; nothing is paraphrased. */
+  /* The sequence blocks: the commit log brought TO the reader rather than a link
+     they have to go and follow. Dates and subjects are verbatim from `git log`;
+     nothing is paraphrased.
+
+     THE REASON CHANGED ON 2026-08-31 AND THE BLOCKS DID NOT. They were built
+     because the repository was private and a link would have 404'd. It is public
+     now, so the paths on this page COULD be links. They still are not, and that is
+     a choice rather than an oversight: a reader deciding whether to believe this
+     page should not have to leave it to find out, and a log excerpted here is one
+     they can check afterwards against a repo that is now open to them. If that
+     stops being true — if the excerpts drift from the log — this comment is where
+     the wrong assumption is written down. */
   .seq { margin-top: 10px; }
   .seq > b { color: var(--muted); font-weight: 600; }
   ol.sq { list-style: none; margin: 6px 0 0; padding: 0; }
@@ -553,7 +561,7 @@
       <p class="eyebrow">It Looked Right &middot; for researchers</p>
       <h1>Using coding agents today and tomorrow</h1>
       <p class="standfirst"><b>Coding is no longer the barrier. Four challenges remain.</b> Each one below, with the incidents that produced it &mdash; every one real and traceable to a primary source, each labeled with who checked it &mdash; most are self-reports by the person they are about.</p>
-    <p class="pv">Version <b>0.1.53</b> &middot; 31 Aug 2026<span class="pv-born">First published 28 Aug 2026</span></p>
+    <p class="pv">Version <b>0.1.54</b> &middot; 31 Aug 2026<span class="pv-born">First published 28 Aug 2026</span></p>
     </div>
     <div class="depth">
       <span class="depth-label" id="depth-label">Reading depth</span>
@@ -1056,7 +1064,7 @@
             </tbody>
           </table>
         </div>
-        <p><b>Every name in that table is a link, and all four repositories are public.</b> The claims in the right-hand column are checkable in a browser, without cloning anything: the losing table, the lineage document, the tests, the workflow runs. The one repository that is private is the one behind <i>this page</i>, which is the objection&rsquo;s strongest remaining foothold and is stated again below.</p>
+        <p><b>Every name in that table is a link, and all four repositories are public.</b> The claims in the right-hand column are checkable in a browser, without cloning anything: the losing table, the lineage document, the tests, the workflow runs. <b>So is <a href="https://github.com/syncytium2/short-course">the repository behind this page</a></b> &mdash; private until 31 August 2026, and the objection&rsquo;s strongest foothold for as long as it was. Every path named on this page resolves there now, including the ones recording things that went wrong in the making of it.</p>
         <p><b>So the tell is not who typed the code.</b> It is whether anybody scored the result against something that could have said no, and then published the score when it came back unflattering. That is the whole of the distinction being drawn, and it is the same distinction this page draws about your own work.</p>
 
         <details class="more">
@@ -1065,7 +1073,7 @@
             <p><b>Nobody outside has used any of it.</b> Zero stars, zero forks, no outside contributors, no issues from strangers. Every figure above is a self-administered check, and a port validated against its own reference implementation is one person checking their own work with a good instrument &mdash; better than nothing, and not independent.</p>
             <p><b>The reviews are correlated.</b> The eleven-role review that caught the numerical defects in this material ran on one model in one context, and it was round one with no verification pass. Eleven seats buy coverage of angles, not independence &mdash; stated in full under <a href="#record" data-view="record">How this was made</a>.</p>
             <p><b>The course has never been taught to anybody.</b> No cohort, no feedback, no evidence that a day of it works on a real learner. What is here is material and a record, not a result.</p>
-            <p><b>The repository behind this page is private</b>, so the chain it advertises &mdash; idea, session log, drafts, review, what survived &mdash; cannot currently be inspected by the reader being asked to find it convincing. The paths named throughout are provenance, not links you can follow, and that is a real limit rather than a design flourish.</p>
+            <p><b>The repository behind this page was private until 31 August 2026</b>, and for as long as it was, the chain it advertises &mdash; idea, session log, drafts, review, what survived &mdash; could not be inspected by the reader being asked to find it convincing. <a href="https://github.com/syncytium2/short-course">It is open now</a>, which answers <i>can I see it</i> and answers nothing else: it is still the author&rsquo;s own record of the author&rsquo;s own work, published by the party it is about, and <b>opening a record does not make it independent</b>. What publishing buys is that the failures in it are now checkable by someone who did not write them &mdash; including the ones this page does not mention.</p>
             <div class="prov"><b>Source.</b> Repository figures read from the GitHub API on <b>2026-08-30</b>: creation dates, stars, forks, contributors, workflow conclusions and test-file counts. Sensitivity figures from <span class="path">no_peak/docs/validation-status.md</span>, dated 2026-08-12 and carrying its own corrections. Publication record: ORCID <b>0000-0001-7302-7528</b>, 57 works. <b>All of it is the author&rsquo;s own accounting of the author&rsquo;s own work</b>; none of it has been re-run by anyone else.</div>
           </div>
         </details>
@@ -1411,8 +1419,8 @@
         <p>Where an account is a self-report by the party being evaluated, it says so. Where a claim is unmeasured &mdash; the hundred-fold figure &mdash; it is labeled rather than taught.</p>
 
         <h3>Paths are named, not linked</h3>
-        <p>Filenames like <span class="path">points.md</span> appear throughout so a claim can be traced. <b>They are deliberately not hyperlinks.</b> They live in a private repository, and a link naming a file the reader does not have is a broken pointer &mdash; a claim that was true somewhere else. That is a defect this project has shipped and then had to fix, more than once, so it is not going to be shipped here.</p>
-        <p>Everything a reader needs is on this page. The paths are provenance, not navigation.</p>
+        <p>Filenames like <span class="path">points.md</span> appear throughout so a claim can be traced. <b>They are deliberately not hyperlinks.</b> Until 31 August 2026 the reason was that they lived in a private repository, and a link naming a file the reader does not have is a broken pointer &mdash; a defect this project has shipped and had to fix more than once. <b>The repository is <a href="https://github.com/syncytium2/short-course">public now, and the paths stayed as they are.</a></b> A reader deciding whether to believe a claim should not have to leave the page to do it, and a path they can resolve at their own pace afterwards is worth more than a link that takes them away mid-sentence.</p>
+        <p>Everything a reader needs is on this page. The paths are provenance, not navigation &mdash; and they now resolve.</p>
 
         <h3>What has been generalized</h3>
         <p>Project and repository names from the wider body of work have been replaced with descriptions of what they are. Institution-specific storage names, cluster names, billing arrangements and rates have been generalized, because they go stale and because they are not the point. The identifiable content that remains is mine and is here on purpose.</p>
