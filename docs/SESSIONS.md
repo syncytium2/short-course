@@ -1690,7 +1690,7 @@ risks in the file.
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Tonys-MacBook-Pro/4a487730 — Clean three things now readable on the public repo: gmail in the README, a private repo name in two screenshots, and home paths in two case files
-- **Status:** ACTIVE
+- **Status:** DONE 2026-08-31
 - **Opened:** 2026-08-31
 - **Branch when opened:** `clean-three-public-leaks` — a fact, not an identity; it may move under you
 - **Writes:** <files or folders you will change; "repo only" if nothing outside git>
