@@ -1509,6 +1509,21 @@ risks in the file.
   public was refused by the permission classifier and was never retried) + its Worker at
   https://route-test.tonydefazio.workers.dev — the walked evidence for
   `docs/decisions/0002-*.html` §7. Delete freely: `gh repo delete syncytium2/route-test`.
+- **↻ CORRECTION to the line above, 2026-08-31, and it corrects the same session that wrote it.**
+  Two things in it are false. **(1) "never retried" — Tony retried it himself.** The classifier
+  refused *me*; I handed him the two commands and he ran them, so **the repository was public**, not
+  private. I then repeated the private assumption twice more today, including out loud while
+  reasoning about whether a 404 proved anything, until he said *"repo not private"*. **The failure
+  is specific: I watched an action be blocked for me and recorded that as the action not having
+  happened.** A refusal I received is not evidence about what the human did next, and this board is
+  read by sessions who cannot tell the difference.
+  **(2) Both are gone as of 2026-08-31** — repository and Worker. Confirmed by an authenticated
+  request that would have found the repo whatever its visibility, which is the check that
+  distinguishes *deleted* from *private*; an anonymous 404 does not.
+  The earlier lines are left standing because they were accurate to what their author knew. That is
+  the point of not editing `DONE` blocks — but it means **a reader who stops before this correction
+  gets the wrong answer**, which is the cost of the convention and worth naming rather than
+  pretending it is free.
 
 <!-- RELEASE THIS
      tools/claim.sh --release
