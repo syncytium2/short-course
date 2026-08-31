@@ -38,7 +38,7 @@ because that is what the review made necessary. It is the opposite of the direct
 own README usually shows, which is why it is stated rather than left to be inferred from dates.
 
 **One node is missing on purpose.** A full session export exists and is deliberately not
-imported — it spans many unrelated projects, and this repo may go public. What that costs, and
+imported — it spans many unrelated projects, and this repo has since gone public. What that costs, and
 how to import a scoped extract safely, is in
 [`docs/chain/EXCLUDED.md`](docs/chain/EXCLUDED.md). *Could not obtain* and *chose not to
 include* are different facts and this chain does not render them alike.
@@ -161,9 +161,15 @@ and carries none of the 2026-08-27 material.
 
 **Not published as a course.** `course-outline.md` contains a positioning section that names
 competitors candidly and a teaching note that is a personal admission. Both are load-bearing
-for the author and neither was written for an audience. The repository has a **private**
-remote (`syncytium2/short-course`, 2026-08-27) for backup and cross-machine access — that
-settled the operational half of the question and deliberately left the publication half open.
+for the author and neither was written for an audience. The remote
+(`syncytium2/short-course`, 2026-08-27) was **private** for backup and cross-machine access —
+that settled the operational half of the question and deliberately left the publication half open.
+
+**The publication half was closed on 2026-08-31: this repository is public.** The occasion was
+mundane — the site was going on a résumé, and a page arguing that a record is what makes a claim
+checkable was pointing at a record nobody could open. Both passages named above are public now,
+and so is `points.md` **B2** below. Nothing was removed to make that true. What changed is that
+the two paragraphs after this one stopped being a forecast and became a fact.
 
 **That paragraph was the whole basis of the decision until 2026-08-30, and it was 261 commits
 out of date.** A publication review read every committed file and all of `git log --all`. The
@@ -197,11 +203,16 @@ priced before it was accepted, and the alternative was worse:
   rewrite its history the first time that rule is inconvenient. **The exposure is smaller than
   the precedent.**
 
-**The decision has a deadline attached, and it has passed by choice.** Rewriting was only ever
+**The decision had a deadline attached, and the deadline is spent.** Rewriting was only ever
 cheap while the remote was private and unforked. After publication it is not a harder job, it is
 an impossible one — forks, GitHub's dangling-object cache and archive crawlers all keep it. That
 asymmetry is why this was decided deliberately rather than deferred, and it is why the answer is
 written here in the front door rather than in a commit message nobody re-reads.
+
+**Publication happened on 2026-08-31 and this paragraph is what it cost.** The account id and the
+address in `ddc7594` are now public and permanently so, exactly as priced above, one day after the
+pricing. Neither is a credential. The point of writing the cost down first was that nobody would
+have to discover it afterwards, and nobody did.
 
 ---
 
