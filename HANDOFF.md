@@ -1621,3 +1621,57 @@ bought — a title and nothing behind it.
 - **Two source-then-output commits**, and both pages rebuild: `four-barriers.html` → `site/index.html`.
 - **Fill the two doubt files or delete them.** Leaving a titled placeholder next to a fixed defect
   is worse than either.
+
+---
+
+## Four instructions were typed into the wrong session, 2026-08-31
+
+Tony was reviewing the live page — `lookedright.tonydefazio.com`, version 0.1.58 — and typed his
+feedback into the **`tonydefazio.com`** session by mistake. That session read this tree, changed
+nothing, and wrote the feedback down where this repo cannot see it:
+
+`/private/tmp/claude-501/-Users-tonydefazio-Developer-tonydefazio-com/00b4fda7-2877-4887-8824-8a0497e457d6/scratchpad/lookedright-feedback-handoff.md`
+
+**A scratchpad in another project is not a record.** Copied here verbatim, with what has since
+happened to each, because two of the four had already been acted on by a different session that
+never knew where the instruction came from.
+
+### His words
+
+> 1. "back to the paragraph. hot link 'four challenges remain'."
+>
+> 2. "depending on what the user clicks, they see wildly different things. this is the view after
+>    clicking objections. i worry about how this is structured. the paragraph/heading persevere
+>    through clicks. looks funny depending on where you land"
+>
+> 3. "i wonder if that should be replaced with a nav bar/pipeline"
+>
+> 4. "step 0, cold start, and shortes route all do the same job. probably should be the same tab
+>    with three paths"
+
+(3) followed (2) directly and reads as a proposal for the same problem. The screenshot was the
+**Objections** view at Headlines depth.
+
+### Where each one stands
+
+| | status |
+|---|---|
+| **1 · hotlink** | **DONE and live.** `baceb0d` made it `<a data-view="communication">`; `3534990` rebuilt to 0.1.59. Target is challenge 1, not `#overview`, because the deck is visible *on* overview. |
+| **2 · the persisting deck** | **HALF DONE.** `baceb0d` cut sentence three — the provenance claim that was false on seven views. **Sentence two is still there and still false on those same seven:** *"Each is set out below with the incidents that produced it."* The commit body says so; this says so where it will be read. |
+| **3 · nav bar / pipeline** | **OPEN, and until now recorded nowhere in this repo.** This line is the only record. |
+| **4 · one tab, three paths** | **Researched, not started** — the spec is *"The unification job"* above, from `Mac/a4de1b91`, which found **four** overlapping accounts rather than three and a live phase-numbering conflict between two public pages. |
+
+### The provenance that section could not find
+
+*"The unification job"* opens with **"I could not find where he asked."** It searched this repo
+correctly and the repo genuinely did not hold it. **He asked in the `tonydefazio.com` session,
+point 4 above, on the same day.** The request was never missing; it was outside the tree the
+search could reach — which is the failure the whole chain is about, arriving again.
+
+### One fact for whoever takes 2 or 3
+
+`body[data-view]` is already set on every pane switch, so a view-aware masthead needs no new
+script — CSS alone can do it. And the rail **is** the nav, so a second nav bar duplicates it: the
+case for a strip is *where am I*, not *how do I navigate*. A standfirst that collapses on some
+views changes masthead height between views; a same-height strip does not, which is the strongest
+argument on the table for Tony's pipeline instinct. **No option was chosen. All of 2, 3 are open.**
