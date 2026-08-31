@@ -1598,7 +1598,7 @@ risks in the file.
   gate, in the repo about exactly that.
 
 ### Tonys-MacBook-Pro/5dc04385 — Survey bugarach and interface2 for the mechanisms short-course is missing, and write the adoption list
-- **Status:** ACTIVE
+- **Status:** DONE 2026-08-31
 - **Opened:** 2026-08-31
 - **Branch when opened:** `sibling-practices` — my own worktree, so here the branch *is* the identity
 - **Writes:** `docs/from-the-siblings.md` (**a new file**), this block, and
@@ -1620,6 +1620,18 @@ risks in the file.
   cannot reach the earlier ones. `interface2` already documents this exact case and returns
   **empty rather than guessing**. Not fixed here — every tool sources that file. Written up in
   [`from-the-siblings.md`](from-the-siblings.md).
+- **📨 Landed `a02f1f8`, delivered to `<darkroom>/short-course/2026-08-31-from-the-siblings/` and
+  published at <https://claude.ai/code/artifact/8fed9c0d-eac3-4d62-8b5d-674df2db69e3>.** **One
+  decision is open and it is Tony's: yes or no to the sequence** — 01+02 together, then 03, then
+  04; 05 and 06 independent. **Nothing is built and nothing is half-built.**
+- **How this reached `master` without touching anybody's tree, because it is worth copying.** The
+  shared checkout had `Tonys-MacBook-Pro/a4de1b91`'s claim sitting uncommitted, so an ordinary
+  merge there would have swept it — N4, a fourth time in two days. Instead:
+  `git push origin sibling-practices:master` **from the worktree** — a server-side fast-forward
+  that moves the ref and touches no working tree at all. The shared checkout's local `master` goes
+  stale for a moment and one `git pull --ff-only` fixes it. **This is the safe way to land from a
+  worktree while somebody else is mid-edit in the primary**, and it is not written down anywhere
+  else yet.
 
 <!-- RELEASE THIS
      tools/claim.sh --release
