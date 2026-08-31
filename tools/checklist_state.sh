@@ -60,7 +60,12 @@ for marker in ("V3_MAP", "oldState"):
 
 # the fixture: the real steps, in order, with their real keys
 steps = []
-starts = [x.start() for x in re.finditer(r'<li data-key="[^"]+" data-id="[\d.]+"', s)]
+# A step id is NOT necessarily numeric. It was [\d.]+ until the browser-tier
+# steps arrived as W1-W5, and a parser that finds only the numbered ones reports
+# a page that does not exist -- it went straight to "could not find keyed steps"
+# and took three migration mutation-tests down with it, none of which were about
+# numbering. What identifies a step is data-key on an <li>; the id is a label.
+starts = [x.start() for x in re.finditer(r'<li data-key="[^"]+" data-id="[^"]+"', s)]
 if len(starts) < 2:
     sys.stderr.write("ERROR: could not find keyed steps in %s\n" % src); raise SystemExit(1)
 ends = starts[1:] + [s.index("</ol>", starts[-1])]
@@ -68,7 +73,7 @@ for a, b in zip(starts, ends):
     blk = s[a:b]
     steps.append({
         "key":   re.search(r'<li data-key="([^"]+)"', blk).group(1),
-        "id":    re.search(r'data-id="([\d.]+)"', blk).group(1),
+        "id":    re.search(r'data-id="([^"]+)"', blk).group(1),
         "boxes": re.findall(r'<button class="cb" data-key="([^"]+)"', blk),
     })
 
