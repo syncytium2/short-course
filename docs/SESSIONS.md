@@ -1923,3 +1923,21 @@ risks in the file.
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/efaea827 — Unify the three routes onto Cold Start: a ceiling switch (minimal webapp / middle VS Code / max cluster), home page drops its duplicate phase list
+- **Status:** ACTIVE
+- **Opened:** 2026-08-31
+- **Branch when opened:** `unify-three-paths` — a fact, not an identity; it may move under you
+- **Writes:** `docs/handouts/cold-start.html` (path switch + new minimal-route steps),
+  `docs/handouts/four-barriers.html` (Step 0 section loses its phase list), their two `site/`
+  outputs, and the two `docs/doubt/` phase-numbering files.
+- **Notes:** **Three paths by ceiling, not by audience** — minimal ends at a web app in the
+  browser, middle at VS Code on a laptop, max at a cluster and other people. Tony, 2026-08-31.
+  **The home page stops carrying phase numbers at all** rather than being renumbered to match
+  Cold Start: two copies held in sync is what drifted in the first place. **No `data-key` is
+  touched and no step is renumbered**, so saved ticks survive; `V3_MAP` is frozen and stays so.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->

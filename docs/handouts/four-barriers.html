@@ -528,7 +528,7 @@
 
       <a class="ready" href="/cold-start">
         <span class="ready-k">Cold Start</span>
-        <span class="ready-t">Ready? Click here.</span>
+        <span class="ready-t">A web app in an evening, without installing anything &mdash; or the whole setup. You pick.</span>
         <span class="ready-go" aria-hidden="true">&rarr;</span>
       </a>
 
@@ -937,80 +937,51 @@
       <section class="view" id="step0" data-alt="view-step0" aria-labelledby="h-step0">
         <div class="view-head">
           <p class="eyebrow">What to do about it</p>
-          <h2 id="h-step0">Step 0 &mdash; the set-up, in dependency order</h2>
-          <p class="lede">Set-up and decisions that come before the first task. <b>The order is not arbitrary: each layer can only be verified once the one below it exists.</b></p>
+          <h2 id="h-step0">Step 0 &mdash; how far are you going?</h2>
+          <p class="lede">Everything before the first real task. <b>There are three ways through it, and the shortest ends with something published, in one evening, without installing anything.</b></p>
         </div>
 
-        <p>You cannot test a path helper before there is a filesystem to point it at, or a handoff before there are two machines. One thing runs the other way &mdash; <b>the items that take longest are the ones involving people who are not you</b>, so they start first and finish last.</p>
+        <p><b>Start with the shortest one unless you already know you need more.</b> It happens entirely in a browser: no terminal, no <span class="path">git init</span>, nothing installed on your machine. You say what you want in one sentence, connect a folder or make a repository from a web page, do one element and look at it yourself, then publish. It was walked end to end on <b>2026-08-30</b>, and the things that went wrong on that walk are written into the steps rather than tidied out of them.</p>
 
-        <p><b>Two of these are questions, not items:</b> one machine or several, and solo or with others. The answers change what the rest of this covers, which is why they are asked at the door rather than discovered in week three. <b>A solo researcher on one laptop drops phase 0, phase 6 and most of phase 3</b> &mdash; a much shorter list than the one below.</p>
+        <p><b>You can stop there and have a working, published thing.</b> Moving up later costs nothing you have already done.</p>
+
+        <div class="phase">
+          <p class="phase-k">A web app, in the browser &middot; one evening</p>
+          <ul>
+            <li><b>Nothing installed and no terminal.</b> An agent account, a repository made from a web page, and a plan you can say in one sentence.</li>
+            <li><b>One element at a time,</b> checked by looking at the thing rather than reading the report that says it worked.</li>
+            <li><b>Publishing that keeps happening without you</b> &mdash; which is the one part of this route that is not just something you did once.</li>
+          </ul>
+          <p style="color:var(--muted);margin-top:10px"><b>Ends when the URL loads on your phone, off your wifi.</b> Nothing above needs you to read code, and the review step &mdash; <i>what did it touch that I did not ask about?</i> &mdash; needs no programming at all.</p>
+        </div>
+
+        <div class="phase">
+          <p class="phase-k">VS&nbsp;Code, on your laptop &middot; the usual answer</p>
+          <ul>
+            <li><b>Where your data lives, decided before the first data file exists</b> &mdash; a data root, a review folder, and three sentences saying which class of storage holds what.</li>
+            <li><b>The machine itself:</b> a package manager, the editor and its agent extension, one language runtime, and stopping the machine sleeping through your own work.</li>
+            <li><b>The first repository:</b> initialised with its remote in the same sitting, data excluded by extension, line endings pinned, the instructions file, and the agent&rsquo;s permission settings &mdash; allow, ask, deny.</li>
+            <li><b>The habits,</b> and the guard layer that is built only from friction &mdash; never in advance.</li>
+          </ul>
+        </div>
 
         <div class="phase opt">
-          <p class="phase-k">Phase 0 &middot; conditional &middot; days to weeks</p>
-          <h4>Skip unless you need research storage or a computing cluster</h4>
-          <ol>
+          <p class="phase-k">A cluster, and other people &middot; mostly other people&rsquo;s time</p>
+          <ul>
             <li><b>A research storage volume</b> &mdash; usually sponsored by a lab or department, not requested individually.</li>
-            <li><b>A cluster account <i>and</i> an allocation</b> &mdash; two separate things, and only the second one lets you submit work.</li>
-          </ol>
-          <p style="color:var(--muted);margin-top:10px">Most people need neither. A laptop, synced storage and one repository covers the majority of research computing, and knowing which side of that line you are on <i>is</i> the storage decision. These take days to weeks because someone else has to approve them, so file them now and carry on with everything below while they pend.</p>
+            <li><b>A cluster account and an allocation</b> &mdash; two separate things, and only the second one lets you submit work.</li>
+            <li><b>A second machine, and sessions that are not only yours.</b> This is where &ldquo;one machine or several&rdquo; stops being a question and a remote turns from good practice into an operational requirement.</li>
+          </ul>
+          <p style="color:var(--muted);margin-top:10px"><b>File these first, on day one, and carry on with everything else while they pend.</b> They take days to weeks because somebody who is not you has to approve them &mdash; so on this route the slowest items start earliest, even though they finish last. Most people need none of this: a laptop, synced storage and one repository covers the majority of research computing, and knowing which side of that line you are on is itself the decision.</p>
         </div>
 
-        <div class="phase">
-          <p class="phase-k">Phase 1 &middot; identity, before any code exists</p>
-          <ol start="3">
-            <li>Version-control account, SSH key, command-line login.</li>
-            <li>Agent plan &mdash; also where the cost question stops being abstract.</li>
-            <li>Institutional basics: login, VPN client, synced-storage client.</li>
-          </ol>
-        </div>
+        <p><b>Inside each route the order is not arbitrary: each layer can only be verified once the one below it exists.</b> You cannot test a path helper before there is a filesystem to point it at, or a handoff before there are two machines.</p>
 
-        <div class="phase">
-          <p class="phase-k">Phase 2 &middot; machine baseline</p>
-          <ol start="6">
-            <li>A package manager, then the standard command-line tools.</li>
-            <li>The editor and its agent extension.</li>
-            <li>Language runtimes &mdash; only the ones you need. Most people need one.</li>
-            <li><b>Stop the machine sleeping through your own work.</b> A long run that outlasts your attention dies when the display sleeps or the lid closes, and it dies without a result. On macOS, <a href="https://apps.apple.com/us/app/amphetamine/id937984704?mt=12">Amphetamine</a> is free and handles closed-lid operation; <span class="path">caffeinate -dimsu</span> is built in and needs no install. Windows has PowerToys Awake; Linux has <span class="path">systemd-inhibit</span>.</li>
-          </ol>
-          <p style="color:var(--muted);margin-top:10px"><b>Item 9 is phase 0&rsquo;s cheap alternative and it belongs before the request, not after.</b> Phase 0 says ask for a cluster when a run would pin a workstation for hours. A good share of those people do not need a cluster &mdash; they need the machine to stay awake. One of those costs a minute; the other takes weeks. Try the minute first.</p>
-        </div>
+        <p><b>Two of these are questions rather than items:</b> one machine or several, and solo or with others. Answer <i>more than one</i> or <i>with other people</i> to either and you are on the third route whatever else you had in mind &mdash; which is why they are asked at the door rather than discovered in week three.</p>
 
-        <div class="phase">
-          <p class="phase-k">Phase 3 &middot; storage, before the first data file</p>
-          <ol start="10">
-            <li>Create the data root and the figure-review folder.</li>
-            <li><b>Write the path helper before any script hardcodes a path.</b> Cheap now, archaeology later.</li>
-            <li><b>Write the storage-tier rule down.</b> Three sentences. It prevents both failures: multi-gigabyte outputs strangling a sync client, and small shareable results stranded where the other machine cannot see them.</li>
-          </ol>
-        </div>
+        <p><b>The steps themselves are on <a href="/cold-start">Cold Start</a>,</b> which asks this same question at the top and then shows you only the steps your answer needs. <b>This page deliberately carries no step numbers</b> &mdash; there is one numbered list of these steps and it is on that page, because for two days there were two, and they disagreed.</p>
 
-        <div class="phase">
-          <p class="phase-k">Phase 4 &middot; the first repository</p>
-          <ol start="13">
-            <li>Initialise it <b>and add the remote in the same sitting.</b></li>
-            <li>Exclude data by file extension. Pin line endings on shell scripts &mdash; a stray carriage return in the first line of a script is a &ldquo;bad interpreter&rdquo; failure on a Linux cluster, and it is a genuinely awful thing to debug from a Windows checkout.</li>
-            <li>The project instructions file, and the agent&rsquo;s permission settings: allow, ask, deny.</li>
-            <li><b>A commit hook stamping agent authorship.</b> Cheap now, impossible retroactively &mdash; otherwise everything before the day you add one has to be labeled &ldquo;assume agent authorship unless stated.&rdquo;</li>
-          </ol>
-        </div>
-
-        <div class="phase">
-          <p class="phase-k">Phase 5 &middot; the guard layer</p>
-          <ol start="17">
-            <li><b>Nothing here is set up in advance, and that is the point.</b> Every guard worth having exists because something specific went wrong first. Building them up front is <a href="#asymptote" data-view="asymptote">challenge 4</a> with extra steps.</li>
-          </ol>
-        </div>
-
-        <div class="phase">
-          <p class="phase-k">Phase 6 &middot; second machine, then cluster</p>
-          <ol start="18">
-            <li><b>The second machine is where &ldquo;one machine or several&rdquo; stops being a question</b>, and where a remote turns from good practice into an operational requirement.</li>
-            <li>Cluster work, once the allocation lands. Portal before command line; VPN before the browser.</li>
-            <li>Publishing, if any &mdash; and note that a login flow of this kind is once per machine and cannot be scripted.</li>
-          </ol>
-        </div>
-
-        <div class="prov"><b>Section source.</b> <span class="path">points.md</span> &sect;D, ordered 2026-08-27, seven phases. Institution-specific storage and cluster names have been generalized here; the sourced originals, with rates and dates, are in <span class="path">points.md</span> &sect;F and are expected to go stale.</div>
+        <div class="prov"><b>Section source.</b> <span class="path">points.md</span> &sect;D, ordered 2026-08-27; the browser route from <span class="path">docs/decisions/0002</span> &sect;5, walked end to end on 2026-08-30. Institution-specific storage and cluster names have been generalized here; the sourced originals, with rates and dates, are in <span class="path">points.md</span> &sect;F and are expected to go stale.<br><b>This section used to carry its own numbered list of phases, and it was removed on 2026-08-31 rather than corrected.</b> It had numbered them against <span class="path">points.md</span> &sect;D while <a href="/cold-start">Cold Start</a> numbered the same work against itself, so <i>phase 2</i> meant storage on one of these two public pages and the machine on the other &mdash; on pages that link to each other, for two days, because each was edited without the other. Keeping both and syncing them would have left two copies to hold in step forever. There is now one numbered list of these steps and it is on that page.</div>
       </section>
 
       <!-- ============ STANDING RULE ============ -->
