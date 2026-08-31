@@ -184,11 +184,17 @@ findings were acted on the same day: a stranger's email addresses were redacted 
 ## What is in this history that a rewrite would remove
 
 **`.wrangler/cache/wrangler-account.json` is in `git log` and is staying there.** It carries a
-Cloudflare account id and the address `Tony.defazio@gmail.com`. It entered at `ddc7594` when a
+Cloudflare account id and the author's personal gmail address. It entered at `ddc7594` when a
 `git add -A` followed the first deploy, and was untracked half an hour later at `11e5e11` —
 whose message already says *"STILL IN HISTORY, and stated rather than quietly left."* Both
 commits are ancestors of `master`, so **every clone gets it.** Neither value is a credential and
 the account id is not secret in the way a token is.
+
+> *This paragraph used to spell the address out, and that was an own-goal by the session that
+> wrote it — accepting an exposure buried in a git object, then reprinting it in plain text on
+> the front page, where it is far easier to find and to scrape. Corrected 2026-08-31. The
+> address is still in the history and still findable; what changed is that this file stopped
+> doing the finding for you.*
 
 **Decided 2026-08-30: accepted, not rewritten, and this paragraph is the decision.** The cost was
 priced before it was accepted, and the alternative was worse:
