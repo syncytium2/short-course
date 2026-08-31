@@ -1598,11 +1598,66 @@ risks in the file.
   gate, in the repo about exactly that.
 
 ### Tonys-MacBook-Pro/4a487730 — Gate fix: interlock 1 refuses branch deletion, and fires on prose that merely mentions the command
-- **Status:** ACTIVE
+- **Status:** DONE 2026-08-31
 - **Opened:** 2026-08-31
-- **Branch when opened:** `delete-push-is-not-a-no-op` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Branch when opened:** `delete-push-is-not-a-no-op` — my own worktree, so here the branch *is* the identity
+- **Writes:** [`../.claude/hooks/push-goes-where-you-are.sh`](../.claude/hooks/push-goes-where-you-are.sh)
+  and [`../tools/mutation_check.sh`](../tools/mutation_check.sh), on that branch only. **Nothing
+  in the shared checkout.**
+- **Notes:** **Two false positives in the gate repaired an hour earlier, both found by using it.**
+  `git push origin --delete <branch>` was refused — the N6 repair asks *is this refspec checked
+  out in a worktree*, and a deletion names one checked out **nowhere by definition**, so it
+  blocked the tidy-up step of the workflow it exists to support. And the first attempt to post
+  **this claim** was refused, because the claim *text* contained the words `git push` and the
+  parser read the prose as a command. The hook's own header promises *"verbs, not names"* and
+  excluded only `grep` — which aims at one tool when the class is prose, and in a repo about git
+  hygiene every claim, commit message and case file is such a sentence.
+- **⚠ For anyone adding a row to [`../tools/mutation_check.sh`](../tools/mutation_check.sh):** a
+  row may contain **neither `;;` nor an unbalanced `)`**. Its table is a quoted heredoc inside
+  `$( )` and bash 3.2 scans that for the closing paren, so either one makes the **whole file** a
+  syntax error, naming the file rather than your row. A `case` arm therefore cannot be a mutation
+  anchor; give the code a flag line and target that. Now in the file's header.
+- **Four wrong turns while fixing it, every one caught by a test rather than by me** — including
+  `mutation_check` reporting the new colon-deletion guard as **dead code** (the pre-existing
+  `*:*` arm already allowed it, so breaking it changed nothing) and both new mention cases as
+  passing for the wrong reason, because they quoted `master`, which every checkout has out.
+  33 caught, 0 missed, 0 errors.
+
+### Tonys-MacBook-Pro/5dc04385 — Survey bugarach and interface2 for the mechanisms short-course is missing, and write the adoption list
+- **Status:** DONE 2026-08-31
+- **Opened:** 2026-08-31
+- **Branch when opened:** `sibling-practices` — my own worktree, so here the branch *is* the identity
+- **Writes:** `docs/from-the-siblings.md` (**a new file**), this block, and
+  `<darkroom>/short-course/2026-08-31-from-the-siblings/`. **No tool, hook or setting touched**
+  in this repo, and nothing at all in `bugarach` or `interface2` — both were read only.
+- **Notes:** Tony, 2026-08-31: *"we have built the tools for these issues in other repos.
+  bugarach and interface2 are probably the best places to examine best practices."* **Survey, not
+  implementation** — six things to copy, in a stated order, each with the sibling's own header
+  quoted as its evidence. Headline: **this repo has no `SessionStart` hook at all**, and the
+  estate's is explicitly written to be vendored unchanged (`bugarach`'s copy says *"do NOT edit
+  here"*). That is N3 with the most useful hook in the estate as the example rather than the
+  heredoc gate. **If you are about to copy any of these in, say so here first** — six new files
+  is the exact trap this board names.
+- **⚠ Found while doing this, and it affects this board:** the machine half of a session address
+  is **not stable**. `claim.sh` produced `Mac/5dc04385` this morning and
+  `Tonys-MacBook-Pro/5dc04385` an hour ago — same session, same machine, same day, because
+  [`session_identity.sh`](../tools/session_identity.sh) uses `hostname -s`, which is a *network*
+  name. **One session now sits on this board under two addresses**, and `--release` / `--mine`
+  cannot reach the earlier ones. `interface2` already documents this exact case and returns
+  **empty rather than guessing**. Not fixed here — every tool sources that file. Written up in
+  [`from-the-siblings.md`](from-the-siblings.md).
+- **📨 Landed `a02f1f8`, delivered to `<darkroom>/short-course/2026-08-31-from-the-siblings/` and
+  published at <https://claude.ai/code/artifact/8fed9c0d-eac3-4d62-8b5d-674df2db69e3>.** **One
+  decision is open and it is Tony's: yes or no to the sequence** — 01+02 together, then 03, then
+  04; 05 and 06 independent. **Nothing is built and nothing is half-built.**
+- **How this reached `master` without touching anybody's tree, because it is worth copying.** The
+  shared checkout had `Tonys-MacBook-Pro/a4de1b91`'s claim sitting uncommitted, so an ordinary
+  merge there would have swept it — N4, a fourth time in two days. Instead:
+  `git push origin sibling-practices:master` **from the worktree** — a server-side fast-forward
+  that moves the ref and touches no working tree at all. The shared checkout's local `master` goes
+  stale for a moment and one `git pull --ff-only` fixes it. **This is the safe way to land from a
+  worktree while somebody else is mid-edit in the primary**, and it is not written down anywhere
+  else yet.
 
 <!-- RELEASE THIS
      tools/claim.sh --release
