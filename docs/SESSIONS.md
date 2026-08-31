@@ -1925,7 +1925,7 @@ risks in the file.
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Mac/efaea827 — Unify the three routes onto Cold Start: a ceiling switch (minimal webapp / middle VS Code / max cluster), home page drops its duplicate phase list
-- **Status:** ACTIVE
+- **Status:** DONE 2026-08-31
 - **Opened:** 2026-08-31
 - **Branch when opened:** `unify-three-paths` — a fact, not an identity; it may move under you
 - **Writes:** `docs/handouts/cold-start.html` (path switch + new minimal-route steps),
