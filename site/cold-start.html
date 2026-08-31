@@ -492,7 +492,7 @@
     <p class="eyebrow">Setup runbook &middot; keep this window open</p>
     <h1>Cold Start</h1>
     <p class="standfirst">An email address and a laptop, to a first agent session that leaves a record behind it. Every step in order, the two prompts to paste, and the condition that tells you each one worked.</p>
-    <p class="pv">Version <b>0.1.22</b> &middot; 31 Aug 2026<span class="pv-born">First published 29 Aug 2026</span></p>
+    <p class="pv">Version <b>0.1.23</b> &middot; 31 Aug 2026<span class="pv-born">First published 29 Aug 2026</span></p>
   </header>
 
   <div class="method">
@@ -515,7 +515,7 @@
       <h2>Phase 1 &middot; Accounts</h2>
       <span class="phase-time">30 min, plus other people&rsquo;s time</span>
     </div>
-    <p class="phase-note">Start here on day one even if you will not touch a keyboard for a week. Everything in this phase depends on somebody who is not you. <b>1.1 and 1.2 are both required</b> &mdash; only 1.3 is conditional, and most people skip it. <b>The expert comes first on purpose:</b> 1.2 is the one step here you do not have to do alone, because by then there is somebody to ask.</p>
+    <p class="phase-note">Start here on day one even if you will not touch a keyboard for a week. Everything in this phase depends on somebody who is not you. <b>1.1 and 1.2 are both required</b> &mdash; 1.3 and 1.4 are conditional, and most people skip 1.3 entirely. <b>The expert comes first on purpose:</b> 1.2 is the one step here you do not have to do alone, because by then there is somebody to ask.</p>
     <ol class="steps">
       <li data-key="agent-account" data-id="1.1" data-open="0" data-done="0">
         <div class="srow">
@@ -625,17 +625,6 @@
             <li><button class="skipbtn" type="button">Not needed &mdash; no cluster, no terabytes</button></li>
         </ul>
       </li>
-    </ol>
-  </section>
-
-  <section class="phase">
-    <div class="phase-head">
-      <h2>Phase 2 &middot; Storage</h2>
-      <span class="phase-time">20 min</span>
-    </div>
-    <p class="phase-note"><b>Before an agent sees your data</b> &mdash; which is a different moment from when the data was made, and is almost certainly still ahead of you. You are not being asked to reorganize anything. You are being asked to be able to <i>say</i> where things live, before something else starts guessing. <b>If the project has no data</b> &mdash; a website, a document, a small tool &mdash; this phase is one box and 2.3 does not apply to you.</p>
-    <p class="phase-note"><b>This phase is the decision, not the construction.</b> Deciding where things live needs nothing installed, which is why it is here. The part that needs an editor and an agent &mdash; writing the path helper so nothing ever hardcodes a path &mdash; is step 3.7, after the machine exists.</p>
-    <ol class="steps">
       <li data-key="institutional-basics" data-id="1.4" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-1.4"><span class="n">1.4</span>Install the institutional basics &mdash; login, VPN, synced storage</button>
@@ -652,7 +641,17 @@
             <li><button class="cb" data-key="sync-client" type="button" aria-pressed="false" aria-labelledby="c-1-4-2">&#10003;</button><span class="cbt" id="c-1-4-2">The synced-storage client is installed and signed in</span></li>
         </ul>
       </li>
-      <li data-key="write-down-paths" data-id="2.1" data-open="0" data-done="0">
+    </ol>
+  </section>
+
+  <section class="phase">
+    <div class="phase-head">
+      <h2>Phase 2 &middot; Storage</h2>
+      <span class="phase-time">20 min</span>
+    </div>
+    <p class="phase-note"><b>Before an agent sees your data</b> &mdash; which is a different moment from when the data was made, and is almost certainly still ahead of you. You are not being asked to reorganize anything. You are being asked to be able to <i>say</i> where things live, before something else starts guessing. <b>If the project has no data</b> &mdash; a website, a document, a small tool &mdash; this phase is one box and 2.3 does not apply to you.</p>
+    <p class="phase-note"><b>This phase is the decision, not the construction.</b> Deciding where things live needs nothing installed, which is why it is here. The part that needs an editor and an agent &mdash; writing the path helper so nothing ever hardcodes a path &mdash; is step 3.7, after the machine exists.</p>
+    <ol class="steps">      <li data-key="write-down-paths" data-id="2.1" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-2.1"><span class="n">2.1</span>Write down where things live</button>
           <span class="badge">Incomplete</span>
@@ -822,16 +821,6 @@ claude</pre>
             <li><button class="cb" data-key="run-once-learning-moment" type="button" aria-pressed="false" aria-labelledby="c-3-6-1">&#10003;</button><span class="cbt" id="c-3-6-1">I have run it once, so I am not learning it at the moment I need it</span></li>
         </ul>
       </li>
-    </ol>
-  </section>
-
-  <section class="phase">
-    <div class="phase-head">
-      <h2>Phase 4 &middot; The first session</h2>
-      <span class="phase-time">40 min</span>
-    </div>
-    <p class="phase-note">Two prompts, and the reading you do between them. The reading is the part that is easy to skip and is the reason the rest works.</p>
-    <ol class="steps">
       <li data-key="path-helper" data-id="3.7" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-3.7"><span class="n">3.7</span>Write the path helper, before anything hardcodes a path</button>
@@ -859,7 +848,16 @@ computer.</pre>
             <li><button class="cb" data-key="second-machine-known" type="button" aria-pressed="false" aria-labelledby="c-3-7-2">&#10003;</button><span class="cbt" id="c-3-7-2">I know what would change on a second computer</span></li>
         </ul>
       </li>
-      <li data-key="project-folder" data-id="4.1" data-open="0" data-done="0">
+    </ol>
+  </section>
+
+  <section class="phase">
+    <div class="phase-head">
+      <h2>Phase 4 &middot; The first session</h2>
+      <span class="phase-time">40 min</span>
+    </div>
+    <p class="phase-note">Two prompts, and the reading you do between them. The reading is the part that is easy to skip and is the reason the rest works.</p>
+    <ol class="steps">      <li data-key="project-folder" data-id="4.1" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-4.1"><span class="n">4.1</span>Make the project folder and start a session inside it</button>
           <span class="badge">Incomplete</span>
@@ -1005,16 +1003,6 @@ one so I can look.
             <li><button class="cb" data-key="name-thing-session-cost" type="button" aria-pressed="false" aria-labelledby="c-4-6-2">&#10003;</button><span class="cbt" id="c-4-6-2">I can name the one thing in this session that cost the most</span></li>
         </ul>
       </li>
-    </ol>
-  </section>
-
-  <section class="phase">
-    <div class="phase-head">
-      <h2>Phase 5 &middot; The habits</h2>
-      <span class="phase-time">forever</span>
-    </div>
-    <p class="phase-note">This is the part that is not setup, and it is the part that decides whether any of the above was worth doing. Nothing here can be installed.</p>
-    <ol class="steps">
       <li data-key="cheap-now-impossible-later" data-id="4.7" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-4.7"><span class="n">4.7</span>Two settings that cannot be added afterwards</button>
@@ -1045,7 +1033,16 @@ one so I can look.
             <li><button class="cb" data-key="log-tells-who" type="button" aria-pressed="false" aria-labelledby="c-4-7-2">&#10003;</button><span class="cbt" id="c-4-7-2">I can tell from <code>git log</code> alone which commits are mine</span></li>
         </ul>
       </li>
-      <li data-key="one-thing" data-id="5.1" data-open="0" data-done="0">
+    </ol>
+  </section>
+
+  <section class="phase">
+    <div class="phase-head">
+      <h2>Phase 5 &middot; The habits</h2>
+      <span class="phase-time">forever</span>
+    </div>
+    <p class="phase-note">This is the part that is not setup, and it is the part that decides whether any of the above was worth doing. Nothing here can be installed.</p>
+    <ol class="steps">      <li data-key="one-thing" data-id="5.1" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-5.1"><span class="n">5.1</span>One thing at a time</button>
           <span class="badge">Incomplete</span>
