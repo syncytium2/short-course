@@ -444,6 +444,35 @@ obtainable by asking rather than by reasoning.
   If you don't interrogate the process, the agent will march on until the mistake metastasizes
   beyond the ability of those initial constraints to contain / repair / function.
 
+  *First instance, and it inverts the point — `bugarach` #416, 2026-08-30.* C1 says the report is
+  hard to read because it arrives in jargon. This one arrived in plain English, and **the plain
+  English is the part that was wrong.** A session reported a pull request — *"I've armed squash
+  auto-merge on it (enabled 20:18Z) and set a background watch … it'll merge itself when CI
+  passes"* — and then added: *"worth noting the irony: the PR whose job is to land the handoff so
+  a new session can pick it up was itself the thing that never landed."* **It merged 4m26s after
+  that same session armed it, at 20:23:09Z, about a minute before the sentence was read.** Four
+  checkable statements, four correct; two asides, both false — the second one names a file the PR
+  does not touch.
+
+  *The discriminator this gives C1.* An agent's report is two documents interleaved: **one
+  produced by looking and one produced by composing.** They are in the same voice and only the
+  first is true on purpose. Jargon is not the tell — *CI*, *squash*, *20:18Z* are the parts that
+  held. The tell is **grammar**: *worth noting*, *the irony is*, *which suggests* introduce a
+  sentence nobody checked, because it does not present itself as something to check. And
+  **self-criticism reads as rigor**, so the unchecked sentence collects *more* credit than a flat
+  assertion would. Which changes the question a reader asks. Not *"explain that in plain terms"* —
+  it was already plain — but **"which part of that did you look up?"**
+
+  *And the failure is a false cause, not a false fact.* The aside's convincing half is true: that
+  root handoff really is stale, documented and bannered the same morning. It was welded to an
+  unrelated event. Both halves survive being checked separately, so *"is that true?"* does not
+  catch it; **"is that the reason?"** does. Full write-up, including a squash auto-merge that was
+  armed, never disabled, and landed as a two-parent merge commit:
+  [`docs/cases/2026-08-30-the-irony-was-the-only-unchecked-claim.md`](docs/cases/2026-08-30-the-irony-was-the-only-unchecked-claim.md).
+  **Accepted into the course 2026-08-30 on Tony's call** — *"yes add it. we can pare down as
+  needed"* — and he reports it opened a discussion in the philosophy section, which is **not in
+  this repo and has not been imported**; if that discussion settles anything, it settles it here.
+
 - **C2. "Remember this" is a trap.** You back up and troubleshoot, through the agent, and discover
   another way that would have saved time. You might even tell the agent to remember the mistake so
   next time it won't do it that way, it'll do it this way.
@@ -957,3 +986,11 @@ The scenario, whole, because the parts only matter together:
   connected to this section.
 - **G5b.** Where this lands in the running order (E) is undecided. It is not Step 0 and it is not
   Part 1; it is the thing that happens on day three and ends the project when it is not covered.
+
+- **G5c.** Precedent exists for **G2b** as well, and it is worked: `bugarach` #416 is a PR that
+  *was* the handoff — a branch whose whole content was a brief for whoever picked the work up —
+  and the session that opened it announced, in the same message, both that it would merge itself
+  and that it never had. **What a PR-as-handoff costs is an interval nobody prices: it is not a
+  message until it lands, and the sender's report of the landing is composed, not observed.**
+  [`docs/cases/2026-08-30-the-irony-was-the-only-unchecked-claim.md`](docs/cases/2026-08-30-the-irony-was-the-only-unchecked-claim.md);
+  the reading of it that C1 took is the one that has been accepted.
