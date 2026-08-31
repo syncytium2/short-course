@@ -1596,3 +1596,15 @@ risks in the file.
   draft was checked against `origin/master` before landing and the false claim was dropped. Had
   it landed it would have been a confident, checkable, wrong statement in the findings file, on a
   gate, in the repo about exactly that.
+
+### Tonys-MacBook-Pro/4a487730 — Gate fix: interlock 1 refuses branch deletion, and fires on prose that merely mentions the command
+- **Status:** ACTIVE
+- **Opened:** 2026-08-31
+- **Branch when opened:** `delete-push-is-not-a-no-op` — a fact, not an identity; it may move under you
+- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
+- **Notes:** <anything another session must know before touching the same thing>
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
