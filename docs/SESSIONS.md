@@ -32,6 +32,25 @@ gallery.
 Those repos address a session **by its branch**, on the stated ground that one branch ↔
 one worktree ↔ one session is already the rule there.
 
+> **⚠ This premise is being retired, 2026-08-30 — Tony's call.** *"worktrees. new sessions will
+> have them."* [`OPEN-FINDINGS.md` **N6** decision 1](../OPEN-FINDINGS.md). **Everything below is
+> still live and still correct**, because it arrives in the middle: existing sessions stay in the
+> shared checkout, so the repo runs both models at once and this board has to hold in both.
+>
+> **What changes:** the sweep class goes away — no shared working tree, so a whole-file `git add`
+> can no longer commit another session's uncommitted edits (three of those happened on 2026-08-30
+> alone, in both directions, all recoverable by luck).
+>
+> **What does not:** ***the new-file trap below is untouched.*** Two worktrees, two branches, two
+> new files, git merges both without a conflict, and a human finds out by reading the folder — the
+> exact 2026-08-27 collision that produced this board. **Worktrees do not make a claim
+> unnecessary; they remove the failure a claim was never for.**
+>
+> **And do not switch the addressing to branch names.** With one worktree per session the
+> `branch ↔ session` rule holds again, the way it does in `bugarach` and `interface2` — but only
+> for sessions that have one, and the two models are running side by side. `<machine>/<session>`
+> is correct in both; a branch name is correct in one.
+
 **That rule does not hold here, and assuming it is what broke on 2026-08-27.** This repo
 is a single checkout that several sessions share. So:
 
@@ -1519,6 +1538,35 @@ risks in the file.
   https://lookedright.tonydefazio.com/cold-start ; home page 200.
   **No reader lost saved state.** The checklist keys ticks by step key, not by box position, and no
   step id or box key changed — only prose was added inside existing steps.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/5dc04385 — Record Tony's N6 decision 1: worktree-per-session for new sessions, and what it does and does not fix
+- **Status:** DONE 2026-08-30
+- **Opened:** 2026-08-30
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** [`../OPEN-FINDINGS.md`](../OPEN-FINDINGS.md) **N6 only**, and the banner on this
+  board's *"Why this repo's board differs"* section. Nothing else; no hook touched.
+- **Notes:** **Tony's decision, 2026-08-30, in one word:** *"worktrees. new sessions will have
+  them. i'm sorry that didn't carry over here."* That answers **N6 decision 1** — the root fix,
+  taken over patching the premise. Recorded, with what it closes (the N4 sweep class) and what it
+  does not (**the new-file trap in this board's own header, which is untouched** — two worktrees
+  merge two new files without a conflict).
+- **⚠ Read this before your first push from a worktree.** **N6 is unfixed** and decision 1 makes
+  it universal: the push gate resolves the repo from `$0`, which is the *shared* checkout, so from
+  a worktree it tells you *"this checkout is on: master"* — confidently, and falsely — and refuses
+  a correct push. Its suggestion, `git push origin HEAD`, works. The next push then trips the
+  moved-under-you latch, which for a worktree fires **by construction**, rewrites its state, and
+  succeeds on retry. **Do not learn from that that the alarm means nothing**; it is the same alarm
+  that would report a real branch switch.
+- **I did not fix the hook, deliberately.** It is a declared `gate` on a shared file every session
+  runs, a wrong fix locks all of them out, and **its selftest cannot see the failing path** — seven
+  green cases, all in the shared checkout, the one environment where the bug does not appear.
+  N6 decision 3 is now the precondition for decision 2, not a follow-up to it. **It wants a session
+  that is in a worktree**, which can watch the fix go green where it currently goes red.
 
 <!-- RELEASE THIS
      tools/claim.sh --release
