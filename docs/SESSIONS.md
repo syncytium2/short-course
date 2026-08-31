@@ -1665,11 +1665,24 @@ risks in the file.
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Tonys-MacBook-Pro/47b9dcee — Settle draft-banner scope across all four public pages: the index's generic 'Draft' breaks the rule its own CSS states, and search-to-shipped (never murderboarded) carries no stamp at all
-- **Status:** ACTIVE
+- **Status:** DONE 2026-08-31
 - **Opened:** 2026-08-31
 - **Branch when opened:** `banner-scope` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** all four `docs/handouts/*.html` — **the `.draft` block only**, keyword and paragraph
+  — plus the regenerated `site/`. No step text, no colour token, no JS touched.
+- **Notes:** **Triggered from outside the repo.** Tony is putting the site on a résumé; the session
+  handling those emails said the link opens on the word *"Draft"* and a hiring manager reads that
+  as unfinished rather than candid. **The fix is not audience management** — the stamp's own CSS
+  comment already said *"NAMES WHAT IS UNVERIFIED, rather than saying 'draft' and stopping"*, and
+  `four-barriers.html`, the page that **contains that comment**, was the one page ignoring it. So
+  the word came off all four keywords rather than just the front door's, and each one now names
+  its own defect. **`search-to-shipped.html` gained a stamp it never had** — it is the only page
+  never murderboarded (`HANDOFF.md`, "What is live"), so the least-checked page was also the
+  quietest about it.
+  **Not fixed here, and it is the bigger half of that feedback:** the repo behind the site is
+  private, so the chain the front page advertises cannot be inspected by the reader being asked
+  to find it convincing. The page already says so under Objections. Making it public is Tony's
+  call and needs a scrub first, not a session's decision.
 
 <!-- RELEASE THIS
      tools/claim.sh --release
