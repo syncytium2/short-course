@@ -1955,7 +1955,7 @@ risks in the file.
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Tonys-MacBook-Pro/ac6d1a1b — Land the instrument ledger on master, and put the 2026-09-01 agent-failure taxonomy into git
-- **Status:** ACTIVE
+- **Status:** DONE 2026-09-01
 - **Opened:** 2026-09-01
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
 - **Writes:** `docs/instruments.html` (fast-forward of `instrument-ledger`, not edited),
