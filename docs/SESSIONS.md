@@ -1953,3 +1953,49 @@ risks in the file.
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Tonys-MacBook-Pro/ac6d1a1b — Land the instrument ledger on master, and put the 2026-09-01 agent-failure taxonomy into git
+- **Status:** ACTIVE
+- **Opened:** 2026-09-01
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** `docs/instruments.html` (fast-forward of `instrument-ledger`, not edited),
+  `docs/agent-failure-taxonomy.md` (new, imported from the darkroom), `docs/SESSIONS.md`.
+  Nothing in `site/`, nothing in `tools/`, no existing file rewritten.
+- **Notes:** **Three sessions built against the same problem on 2026-09-01 inside thirty-five
+  minutes and none cited the others:** the taxonomy at 08:20 (darkroom, never in git),
+  `docs/instruments.html` at 08:25–08:34 (`instrument-ledger`, unmerged), and the `armory`
+  repo at 08:45 (306 tools collected). This claim only **lands the two that were stranded** —
+  no content is authored, edited or reconciled. The instruments-vs-tools definition question
+  (20 vs 306) is deliberately **not** settled here and is the next decision.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/efaea827 — Three routes onto Cold Start, a way home from every sheet, and the 2026-09-01 failure taxonomy
+- **Status:** DONE 2026-09-01
+- **Opened:** 2026-08-31
+- **Branch when opened:** `unify-three-paths`, then master directly for the second half — worked
+  under rapid live review. That is a deviation from one-session-one-worktree and is recorded as
+  one rather than tidied away.
+- **Writes:** all five `docs/handouts/*.html` and their `site/` outputs; `tools/checklist_state.sh`;
+  `tools/browser_check.js` (**new**); both phase-numbering files in `docs/doubt/`; `HANDOFF.md`.
+  Darkroom: `short-course/2026-09-01-agent-failure-taxonomy/`.
+- **Notes:** **Live at 0.1.62**, all five pages verified byte-identical to the build after deploy.
+  `/cold-start` now filters to one of three routes — browser 14, laptop 30, cluster 34, of 39
+  steps — and W1–W5 are new, written from `decisions/0002` §5. The home page's duplicate phase
+  list was **deleted rather than renumbered**; both doubt files that named the conflict are filled
+  and SETTLED.
+  **Verified in real Chromium:** `node tools/browser_check.js` — 19 checks, 0 failures, including
+  a tick surviving a tier round-trip and a reload, and the frozen `V3_MAP` v3→v4 migration landing
+  correctly against a 39-step page.
+  ⚠ **`docs/reviews/README.md` warns that `what-it-costs.html` has 14 unrepaired blocking
+  findings. That warning is dated 2026-08-30 and ten commits have touched the page since the
+  review**, several plainly repairing findings it named. Nothing joins a finding to its repair, so
+  the real status is **unknown**. Do not cite it as current; do not treat it as cleared.
+  ⚠ **The taxonomy is in the darkroom and `Tonys-MacBook-Pro/ac6d1a1b` has claimed importing it
+  to git.** Left to them, deliberately not duplicated.
+  **Still open, untouched:** the deck sentence *"Each is set out below with the incidents that
+  produced it"* — verified still live 2026-09-01, false on seven views; and Tony's nav-bar/pipeline
+  suggestion, recorded and unbuilt.
