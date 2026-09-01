@@ -2145,7 +2145,7 @@ risks in the file.
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Mac/3a789141 — Store two of Tony's website ideas in HANDOFF.md — snapshots/history browsing and a milestones page. Writing only, no build changes
-- **Status:** ACTIVE
+- **Status:** DONE 2026-09-01
 - **Opened:** 2026-09-01
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
 - **Writes:** <files or folders you will change; "repo only" if nothing outside git>
