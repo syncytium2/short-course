@@ -637,6 +637,56 @@ board so its author can decide. If the finding is used in the course, use the so
 
 ---
 
+### N7 · A session's board address changes when the laptop changes network, so it cannot release its own claim
+
+**Native, 2026-09-01, found while answering "ok to end session?" — which is the question
+[`bugarach`'s own todo](https://github.com/syncytium2/bugarach) says is not a durability check.
+Filed by the session it happened to.**
+
+A claim opened 2026-08-30 was written to the board as **`Mac/fb238a63`**. On 2026-09-01 the same
+session, same `$CLAUDE_CODE_SESSION_ID`, same checkout, resolved as
+**`Tonys-MacBook-Pro/fb238a63`**. So:
+
+- `tools/claim.sh --mine` printed **`(none)`** against a board holding that session's ACTIVE claim.
+- `tools/claim.sh --release` defaults its fragment to `$ADDR` ([`claim.sh:89`](tools/claim.sh)),
+  so the no-argument release — **the one B7 rule 3 prices to be cheap, and the one the board's own
+  `RELEASE THIS` comment tells you to run** — matches nothing and closes nothing.
+
+**Cause.** [`session_identity.sh:44`](tools/session_identity.sh) takes the machine from
+`hostname -s`. On macOS that is not stable: it follows the network, so it changes when the laptop
+joins a different one. The address is `<machine>/<session>` and half of it is mutable.
+
+**Why this is worse than an inconvenience.** The board is this repo's **only** attribution record
+— C3 establishes that `git` cannot attribute a commit to a session. A claim that its owner cannot
+release stays ACTIVE forever, and the next session reads a live claim on work that finished.
+**The failure mode is a board that over-reports, which `claim.sh`'s own header says is worse than
+no board at all** — *"a board that over-reports claims is worse than none; people route around
+it."*
+
+**And it lands exactly where [`points.md`](points.md) G4 is pointed.** G4 is *you close the
+laptop and bike home*. Closing the laptop and rejoining a network at home is the documented
+scenario that renames the machine. **G4 asks how the session is recovered; this says the session
+comes back unable to identify itself to the one record that knows what it was doing.**
+
+**Recoverable, and it was recovered.** `--release` takes an optional fragment, so
+`tools/claim.sh --release "Mac/fb238a63"` closed it correctly. That path is undocumented for this
+use — the header presents the fragment as a way to pick between *several* of your own claims, not
+as the escape hatch for an address that moved.
+
+**Decisions, none taken.**
+
+1. **Key the address on something that does not move.** The session id alone is already unique;
+   the machine name is what rots. Cheapest fix, and it changes every existing block's shape.
+2. **Or resolve `--mine` / `--release` by session-id suffix**, ignoring the machine half — smaller
+   blast radius, keeps the board readable, and makes the machine a fact rather than an identity,
+   which is what the board's own header already says branches are.
+3. **`--selftest` cannot catch this today.** It asserts the address matches
+   `$(hostname -s)/$(session-id)` at [`session_identity.sh:136`](tools/session_identity.sh) —
+   it re-derives the value from the same source, so it is green by construction and would stay
+   green across a rename. **Fourth could-not-fail check in this repo.**
+
+---
+
 ### N6 · The push gate reads the wrong checkout's branch, blocks a correct push, and its selftest passes
 
 **Native, 2026-08-30, and it happened to the session that filed it.** Working on branch

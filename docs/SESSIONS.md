@@ -1416,7 +1416,7 @@ risks in the file.
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Mac/fb238a63 — Draft the bugarach index case: retrieval at scale, and the tool for a project that outgrows a context window
-- **Status:** ACTIVE
+- **Status:** DONE 2026-09-01
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
 - **Writes:** `docs/cases/2026-08-30-nothing-was-missing-and-it-could-not-be-found.md`
