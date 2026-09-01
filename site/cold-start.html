@@ -538,7 +538,7 @@
     <p class="eyebrow"><a href="/" class="home">&larr;&nbsp;It Looked Right</a> &middot; Setup runbook &middot; keep this window open</p>
     <h1>Cold Start</h1>
     <p class="standfirst">An email address to a first agent session that leaves a record behind it. Pick one of three routes &mdash; nothing installed, your own laptop, or a cluster shared with other people &mdash; and get every step it needs in order, with the condition that tells you each one worked.</p>
-    <p class="pv">Version <b>0.1.33</b> &middot; 1 Sep 2026<span class="pv-born">First published 29 Aug 2026</span></p>
+    <p class="pv">Version <b>0.1.34</b> &middot; 1 Sep 2026<span class="pv-born">First published 29 Aug 2026</span></p>
   </header>
 
   <div class="method">
@@ -845,7 +845,7 @@
             <p class="why"><b>You are not checking whether the code is right.</b> You are checking whether it touched anything you did not ask for &mdash; a setting, a second file, something it decided to tidy. <b>That question needs no programming at all</b>, and it is the one that catches the expensive mistakes. If something on the list surprises you, ask why it is there before going on.</p>
             <p class="why"><b>Then go and look at the thing yourself.</b> Open the page. Use the new thing. Watch the recording appear. <b>A message saying it works is a report that it reached the end of its own instructions</b> &mdash; which is a different event from the thing working, and the two come apart more often than you would expect.</p>
             <div class="warn"><b>If it tells you to open something like <code>http://localhost:8000</code>, that is one machine talking to itself</b> &mdash; yours, or the one your agent is working on. The page is real and it works, but it exists only on that machine, only while that thing is running, and <b>only for whoever is sitting at it</b>. Send that address to a colleague and they get an error; close the window and it is gone. <b>This is normal and correct at this stage, and it is not publishing.</b> <i>Local</i> means <i>this machine, not the internet</i>. Putting it where other people can open it is a separate act, and it is W5. The word to watch for is <b>localhost</b>, or an address starting <code>127.0.0.1</code>: both mean here, not the internet.</div>
-            <p class="why"><b>When you are happy, tell it to save:</b> <i>&ldquo;commit and push this.&rdquo;</i> Those are the two words for saving, and they are worth knowing because the rest of this page uses them. A <b>commit</b> is one saved version with a short note attached saying what changed &mdash; the note is the point of it. <b>Push</b> sends that up to github.com, so the work exists somewhere other than where you are sitting. You can get back to this exact version later even if the next thing goes wrong.</p>
+            <p class="why"><b>When you are happy, tell it to save:</b> <i>&ldquo;commit and push this.&rdquo;</i> Those are the two words for saving, and they are worth knowing because the rest of this page uses them. A <b>commit</b> is one saved version with a short note attached saying what changed &mdash; the note is the point of it. <b>Push</b> sends that up to github.com, so the work exists somewhere other than where you are sitting. You can get back to this exact version later even if the next thing goes wrong. (<a href="https://lookedright.tonydefazio.com/enough-git"><i>Enough Git</i></a> defines these and the ten other words this page uses, in one page, and says what it leaves out.)</p>
         </div>
         <ul class="checks">
             <li><button class="cb" data-key="scope-not-correctness" type="button" aria-pressed="false" aria-labelledby="c-w4-0">&#10003;</button><span class="cbt" id="c-w4-0">I asked it to list every file it changed, and nothing on the list surprised me</span></li>
@@ -1159,7 +1159,7 @@ cd     "change directory" — moves you into it
           <button class="head" type="button" aria-expanded="false" aria-controls="d-4.4"><span class="n">4.4</span>Second prompt &mdash; git, and what it may do without asking</button>
           <span class="badge">Incomplete</span>
         </div>
-          <p class="links"><a href="https://code.claude.com/docs/en/settings">reference</a></p>
+          <p class="links"><a href="https://lookedright.tonydefazio.com/enough-git">Enough Git</a><a href="https://code.claude.com/docs/en/settings">reference</a></p>
         <div class="detail" id="d-4.4">
             <div class="prompt">
               <div class="prompt-head">
