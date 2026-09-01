@@ -172,13 +172,15 @@ which is the shape of the thing being registered. It reports; it gates nothing.
 
 Its first two outputs are both about this folder's subjects:
 
-**The estate holds 68 trap-shaped headings across 10 repositories, under about fifteen
+**The estate holds 65 trap-shaped headings across 8 repositories, under about fifteen
 different names** — *Known traps*, *Gotchas*, *Common Pitfalls*, *Traps already paid for — do
 not re-pay them*, *Traps that will cost you a day each*, *Three things that will bite you*.
 No two repos call it the same thing, so no session in one repo can discover what another
 already paid.
 
-**Two things went wrong in the writing, both caught by running rather than reading.**
+**Four things went wrong in the writing, all caught by running rather than reading.** They
+are listed because a case arguing that written-down knowledge fails should show what its own
+author's writing did in the four hours it took.
 
 1. The tool's `--estate` default was `dirname(repo)`. Run from a worktree that is
    `armory-worktrees`, so it scanned **one repository and called it the estate** — a clean
@@ -191,6 +193,28 @@ already paid.
    at tier 3. The direction the argument needs survives; *"no exceptions"* does not. **The
    stale figure was two files from being propagated by a document arguing that written-down
    knowledge goes stale.**
+3. **The backlog count shipped wrong, then its fix shipped wrong.** It first read **68
+   across 10**, silently counting `nvm` — nvm-sh/nvm, vendored on this machine — as an
+   estate repository and its *Common Gotchas* as our backlog. Restricting to the org then
+   reclassified **`interface2`** as third-party, because the estate is not one forge:
+   `bugarach` and `armory` are `github.com/syncytium2` while `interface2` — the repo
+   `bugarach` vendors its session protocol *from* — is `gitlab.com/defazio`. **Both wrong
+   versions printed a confident number**, which is the failure mode of every count in this
+   folder. Now three buckets, the third being *no origin, cannot tell*. True figure: **65
+   across 8**, plus 1 undecidable and 2 third-party, listed and excluded rather than dropped.
+4. **The register counted the document about the register.** Entries fell back to the
+   filename when a file had no `trap:` frontmatter, so adding `FINALIZING.md` made the
+   report lead with *"2 of 2 trap(s) have nothing that stops them"* — the register
+   inflating its own alarming number with a file about itself, in the commit that added
+   the file. **A count that can only go up reads as bad news and is therefore never
+   questioned**, which is why this one shipped. A trap now declares itself, and
+   `--selftest` carries the case.
+
+**What Points 3 and 4 have in common is the direction of the error.** Both made the
+headline number *worse* — more repos, more unstopped traps — and both survived review
+because a number that flatters nobody does not feel like it needs checking. Point 2's stale
+figure ran the same way. That is worth more than the individual mistakes: **self-critical
+numbers get the least scrutiny**, and three of the four here were self-critical.
 
 ---
 
@@ -241,9 +265,9 @@ Run from a `bugarach` clone at `origin/main`. Nothing needs the private repos.
 | corrected run: 1674 passed | `PYTHONPATH=$PWD/src python -m pytest -q` |
 | the PR text quoted in Point 3, and the correction | `gh pr view 438 --repo syncytium2/bugarach --comments` |
 | PR #438 merged 2026-09-01 16:47Z as `46a4e37` | `gh pr view 438 --repo syncytium2/bugarach --json mergedAt,mergeCommit` |
-| 68 headings / 10 repos; the propagation figures | `python3 tools/trap_ledger.py --backlog` in `armory` (private) |
+| 65 headings / 8 estate repos; the propagation figures | `python3 tools/trap_ledger.py --backlog` and `tools/instrument_ledger.py` in `armory` (private) |
 
-**Two numbers cannot be replayed by an outside reader** and are marked as such: the 68/10
+**Two numbers cannot be replayed by an outside reader** and are marked as such: the 65/8
 backlog count and the recomputed propagation figures come from `armory`, which is private
 because 26 collected files carry personal filesystem paths. Both are reproducible by anyone
 with the estate checked out, and neither is load-bearing for Points 1–4.
