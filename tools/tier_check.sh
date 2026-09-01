@@ -81,6 +81,10 @@ src, mode = os.environ["SRC"], os.environ["MODE"]
 s = io.open(src, encoding="utf-8").read()
 
 TIERS = ("min", "mid", "max")
+# The names the PAGE gives these, so a report and the document agree out loud. The tier
+# attribute values stay min/mid/max because they are handles, not prose -- renaming them
+# would move every data-tiers in the file for a cosmetic gain.
+NAMES = {"min": "browser route", "mid": "laptop route", "max": "cluster route"}
 
 # Steps are the <li> that carry data-key; a step runs to the next one or to </ol>.
 li_re = re.compile(r'<li\b[^>]*\bdata-key="[^"]*"[^>]*>')
@@ -185,7 +189,8 @@ if mode != "--check":
         shown = [st for st in steps if t in st["tiers"]]
         nb = sum(len([b for b in st["boxes"] if t in b["tiers"]]) for st in shown)
         skips = len([st for st in shown if st["skip"]])
-        print("  %-4s %2d steps  %3d boxes  %d skippable" % (t, len(shown), nb, skips))
+        print("  %-4s %-14s %2d steps  %3d boxes  %d skippable"
+              % (t, NAMES[t], len(shown), nb, skips))
     print()
     print("  %d steps total, %d boxes total" % (
         len(steps), sum(len(st["boxes"]) for st in steps)))
@@ -211,7 +216,7 @@ if not problems:
     sys.exit(0)
 
 for t, st, why in problems:
-    where = "route %s" % t if t else "any route"
+    where = ("the %s" % NAMES[t]) if t else "any route"
     print("  UNFINISHABLE  %s  step %s (%s): %s" % (where, st["id"], st["key"], why))
 print()
 print("  A step a route is shown and cannot complete does not read as the page being")

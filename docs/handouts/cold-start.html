@@ -494,7 +494,7 @@
   <header class="mast">
     <p class="eyebrow"><a href="/" class="home">&larr;&nbsp;It Looked Right</a> &middot; Setup runbook &middot; keep this window open</p>
     <h1>Cold Start</h1>
-    <p class="standfirst">An email address to a first agent session that leaves a record behind it &mdash; by browser, by laptop, or by cluster. Every step in order, and the condition that tells you each one worked.</p>
+    <p class="standfirst">An email address to a first agent session that leaves a record behind it. Pick one of three routes &mdash; nothing installed, your own laptop, or a cluster shared with other people &mdash; and get every step it needs in order, with the condition that tells you each one worked.</p>
   </header>
 
   <div class="method">
@@ -506,16 +506,26 @@
     <p class="door-head">One question, asked at the door: how far are you going?</p>
     <p class="door-lede">This decides which steps you are shown. <b>Pick the smallest one that gets you what you want</b> &mdash; you can move up at any time, the page keeps every box you have ticked, and moving up only ever adds steps.</p>
     <div class="tierpicks" role="group" aria-label="How far are you going">
+      <!-- THE THREE ROUTES ARE NAMED HERE AND NOWHERE ELSE, and the name is the head noun of
+           every later reference to them. Before this the buttons were DESCRIBED rather than
+           named -- "A web app, in the browser" -- so the prose had to point back with a bare
+           noun, and 1.1 ended up saying "you picked the browser at the top of this page".
+           To a beginner that reads as the thing they are viewing the page IN. Tony,
+           2026-09-01: "the browser to most people is what they're viewing the page on. in
+           this case you mean the path/track."
+           So: browser route / laptop route / cluster route, always carrying the word "route",
+           and the descriptive promise moves to the line underneath, where "browser" and
+           "browser tab" can only mean the application. -->
       <button class="tierpick" type="button" data-tier="min">
-        <b>A web app, in the browser</b>
-        <span>Nothing installed, no terminal. One evening to something published at a URL.</span>
+        <b>The browser route</b>
+        <span>Nothing installed and no terminal &mdash; every step happens on a website. One evening to a web app published at a URL.</span>
       </button>
       <button class="tierpick" type="button" data-tier="mid">
-        <b>VS&nbsp;Code, on my laptop</b>
-        <span>Your own editor, your own copy, work that outlives a browser tab. The usual answer.</span>
+        <b>The laptop route</b>
+        <span>VS&nbsp;Code and your own copy of the files, work that outlives a browser tab. The usual answer.</span>
       </button>
       <button class="tierpick" type="button" data-tier="max">
-        <b>A cluster, and other people</b>
+        <b>The cluster route</b>
         <span>Research storage, an allocation, a second machine, and sessions that are not only yours.</span>
       </button>
     </div>
@@ -572,7 +582,7 @@
                  of stuff the user decided they didn't need."
                  The IDEA survives for every route -- what the agent can see is what changes,
                  and it is the only thing that changes. The three-row table does not. -->
-            <p class="why" data-tiers="min"><b>You picked the browser at the top of this page, so this step is already half done.</b> What that costs you is the seeing: in a browser the agent has only what you paste, so it cannot open your files or check a result &mdash; you are its eyes, and W1 makes you prove it. The two rungs above buy exactly one thing, which is that it looks for itself. Both are the same paid plan and neither is needed tonight. <b>Move up whenever you like; every box you have ticked stays ticked.</b></p>
+            <p class="why" data-tiers="min"><b>You chose the browser route at the top of this page, so this step is already half done.</b> What that route costs you is the seeing: with no files on your own machine for it to open, the agent has only what you paste, so it cannot read a file or check a result for itself &mdash; you are its eyes, and W1 makes you prove it. The two rungs above buy exactly one thing, which is that it looks for itself. Both are the same paid plan and neither is needed tonight. <b>Move up whenever you like; every box you have ticked stays ticked.</b></p>
 
             <p class="why" data-tiers="mid max"><b>Three places to stand.</b> Take the highest one you can reach today and no higher; you can move up later and nothing is wasted.</p>
             <div class="tbl-wrap" data-tiers="mid max">
@@ -712,12 +722,12 @@
 
   <section class="phase">
     <div class="phase-head">
-      <h2>The short way &middot; a web app, in the browser</h2>
+      <h2>The short way &middot; the browser route, end to end</h2>
       <span class="phase-time">one evening</span>
     </div>
     <p class="phase-note"><b>Five steps, one evening, all of it in a browser.</b> Nothing to install, no terminal, and no <code>git init</code>. You finish with a working page at an address you can send to somebody. It was walked start to finish on <b>2026-08-30</b>, and the places it went wrong are written into the steps rather than tidied out of them.</p>
     <p class="phase-note"><b>The fifth step is not the end of anything. It is where the loop closes.</b> From then on you ask for the next item on your list, look at it, and it is live &mdash; and that round trip is now minutes rather than a project. <b>The reason to get published early is that everything after it gets cheaper</b>, not that you are done. Go back to the list you wrote in W2 and take the next one.</p>
-    <p class="phase-note"><b>None of what follows is a prerequisite for that.</b> You can keep building here indefinitely. The rest of this page is for when you want the machine underneath it &mdash; your own editor, your own copy of the files, work that outlives a browser tab, other people &mdash; and you can pick <i>VS&nbsp;Code, on my laptop</i> at the top on any day you like. Everything you have ticked here stays ticked.</p>
+    <p class="phase-note"><b>None of what follows is a prerequisite for that.</b> You can keep building here indefinitely. The rest of this page is for when you want the machine underneath it &mdash; your own editor, your own copy of the files, work that outlives a browser tab, other people &mdash; and you can switch to <i>the laptop route</i> at the top on any day you like. Everything you have ticked here stays ticked.</p>
     <ol class="steps">
       <li data-key="pick-a-rung" data-id="W1" data-tiers="min" data-open="0" data-done="0">
         <div class="srow">
@@ -1789,13 +1799,13 @@ or four A records:
   // anybody a box they had already earned.
   var TKEY = 'cold-start-tier-v1';
   var TIER_COPY = {
-    min: 'Showing the browser route. Nothing here needs anything installed. <b>The step numbers skip</b> — 1.2 to W1 to 5.1 to 7.1 — because they are the same numbers on all three routes, so the ones you are not shown keep their names.',
-    mid: 'Showing the laptop setup — your own editor, your own copy. <b>The step numbers skip</b> where a step belongs only to the cluster route; they stay stable across all three so a number always means the same step.',
-    max: 'Showing everything, including the parts that need somebody else to approve them. <b>Start the storage and allocation requests today</b> — they take days to weeks, and everything else here proceeds while they pend.'
+    min: 'Showing <b>the browser route</b>. Nothing on it needs anything installed. The step numbers skip — 1.2 to W1 to 5.1 to 7.1 — because they are the same numbers on all three routes, so the ones you are not shown keep their names.',
+    mid: 'Showing <b>the laptop route</b> — your own editor, your own copy of the files. The step numbers skip where a step belongs only to the cluster route; they stay stable across all three, so a number always means the same step.',
+    max: 'Showing <b>the cluster route</b>, which is all of it, including the parts somebody else has to approve. <b>Start the storage and allocation requests today</b> — they take days to weeks, and everything else here proceeds while they pend.'
   };
   // The unchosen state, said out loud rather than left to be inferred from a page
   // that is twice as long as any route through it.
-  var TIER_UNSET = 'No route picked, so this is <b>all three at once</b> — including two that contradict each other about whether you install anything. Pick one above and the page shows only the steps your answer needs.';
+  var TIER_UNSET = 'No route picked yet, so this is <b>all three at once</b> — including two that contradict each other about whether you install anything. Pick one above and the page shows only the steps that route needs.';
   var tierBtns = [].slice.call(document.querySelectorAll(".tierpick"));
   var tierNow = document.getElementById('tier-now');
   var phases = [].slice.call(document.querySelectorAll('section.phase'));
