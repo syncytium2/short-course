@@ -532,7 +532,7 @@
     <p class="eyebrow"><a href="/" class="home">&larr;&nbsp;It Looked Right</a> &middot; Setup runbook &middot; keep this window open</p>
     <h1>Cold Start</h1>
     <p class="standfirst">An email address to a first agent session that leaves a record behind it &mdash; by browser, by laptop, or by cluster. Every step in order, and the condition that tells you each one worked.</p>
-    <p class="pv">Version <b>0.1.30</b> &middot; 1 Sep 2026<span class="pv-born">First published 29 Aug 2026</span></p>
+    <p class="pv">Version <b>0.1.31</b> &middot; 1 Sep 2026<span class="pv-born">First published 29 Aug 2026</span></p>
   </header>
 
   <div class="method">
@@ -645,7 +645,21 @@
             <p class="why" data-tiers="mid max">Institutional routes also tend to sit behind an employment check and an approval, which is days of somebody else&rsquo;s time. That is why this step is on day one.</p>
             <!-- mid max: every one of these is a TERMINAL agent that edits files on your
                  disk. On the browser route there is no terminal and no disk in play, so this
-                 is five products a reader cannot use, listed under the first step they open. -->
+                 is five products a reader cannot use, listed under the first step they open.
+                 Two things above were repaired when this list stopped being universal, and
+                 they are recorded HERE rather than on the page: the price warning said "this
+                 row moves faster than anything else", pointing at this list, which the
+                 browser route can no longer see; and the What It Costs note said "read it
+                 before 1.1" from inside 1.1.
+                 WHY IN A COMMENT. Both corrections were first written into the body text, in
+                 parentheses, the way this repo's own README and HANDOFF record their
+                 corrections -- and Tony caught it: "why are there self-referential notes in
+                 the text". Those documents are a record of how the course was made and their
+                 readers want the history. This is a runbook somebody is following at a
+                 keyboard, and a note about what a sentence used to say is a sentence they
+                 have to read and discard. The rule "everything that did not survive stays in
+                 the history" means the history -- git log and this file's comments -- and not
+                 the page. -->
             <p class="why" data-tiers="mid max"><b>The others in this tier.</b> They all do the same job &mdash; a terminal agent that edits files on your disk &mdash; and they are all sold through a subscription rather than per-token. Pick one and learn it properly; the second one is easy once the first is understood.</p>
             <ul class="tier" data-tiers="mid max">
               <li>
@@ -669,8 +683,8 @@
                 <span class="t-w">The odd one out: an editor with the agent inside it rather than a terminal tool. Same tier of capability, different place to stand.</span>
               </li>
             </ul>
-            <div class="warn"><b>Do not trust a price you read anywhere, including here.</b> Prices move faster than anything else on this page &mdash; plans get renamed, split, metered differently, and re-priced. The links above are pointers to the vendors&rsquo; own pages; the number is whatever the page says on the day you look. <i>(This said &ldquo;this row&rdquo;, meaning the list of five tools &mdash; which the browser route is no longer shown, so it pointed at nothing.)</i></div>
-            <p class="why"><b>What this actually costs, before you commit to anything:</b> <a href="https://lookedright.tonydefazio.com/what-it-costs">What It Costs</a> &mdash; the free floor and how far it goes, the three shapes a bill can take and which one to refuse, real numbers with their caveats attached, and the equity problem, which is real and is usually left unsaid. <b>Read it before you commit to a plan, not after.</b> It is short. <i>(This said &ldquo;read it before 1.1&rdquo;, inside 1.1.)</i></p>
+            <div class="warn"><b>Do not trust a price you read anywhere, including here.</b> Prices move faster than anything else on this page &mdash; plans get renamed, split, metered differently, and re-priced. The links above are pointers to the vendors&rsquo; own pages; the number is whatever the page says on the day you look.</div>
+            <p class="why"><b>What this actually costs, before you commit to anything:</b> <a href="https://lookedright.tonydefazio.com/what-it-costs">What It Costs</a> &mdash; the free floor and how far it goes, the three shapes a bill can take and which one to refuse, real numbers with their caveats attached, and the equity problem, which is real and is usually left unsaid. <b>Read it before you commit to a plan, not after.</b> It is short.</p>
         </div>
         <ul class="checks">
             <li><button class="cb" data-key="sign-account-will-actually" type="button" aria-pressed="false" aria-labelledby="c-1-1-0">&#10003;</button><span class="cbt" id="c-1-1-0">I can sign in with the account I will actually use</span></li>
@@ -1525,8 +1539,8 @@ or four A records:
 
   <footer>
     <p>Companion to <a href="https://lookedright.tonydefazio.com/search-to-shipped"><i>Search to Shipped</i></a> and <a href="https://lookedright.tonydefazio.com/"><i>It Looked Right</i></a>. This sheet is the part that comes before both: it ends where a first project begins. <a href="https://lookedright.tonydefazio.com/what-it-costs">What It Costs</a> is its money half, filed separately so it can go out of date on its own.</p>
-    <p>Drawn from the course working notes. Every numbered item of the Step&nbsp;0 order is covered here; where this sheet and that order disagree about phase numbers, it is because storage is split &mdash; the decision early, the construction at 3.7 &mdash; and both halves are present. That coverage was true when it was checked and <b>nothing enforces it</b>: the order can gain an item and this sentence will go on claiming otherwise, which is what it did once already.</p>
-    <p><b>Two dates, because they are two different claims.</b> The vendor pages, the cost documentation and the DNS records in Phase&nbsp;7 were read on <b>29 August 2026</b>, and every outbound link was checked that day. The click paths, dashboards and button names in Phase&nbsp;7 and W1&ndash;W5 come from one walk on <b>30 August 2026</b> and describe that afternoon only. <b>Nothing re-checks either.</b> When a link rots or a dashboard moves, this page will not tell you &mdash; it will keep saying what was true. This paragraph used to give the earlier date for both.</p>
+    <p>Drawn from the course working notes. Every numbered item of the Step&nbsp;0 order is covered here; where this sheet and that order disagree about phase numbers, it is because storage is split &mdash; the decision early, the construction at 3.7 &mdash; and both halves are present. That coverage was true when it was checked and <b>nothing enforces it</b>: the order can gain an item and this sentence will go on claiming otherwise.</p>
+    <p><b>Two dates, because they are two different claims.</b> The vendor pages, the cost documentation and the DNS records in Phase&nbsp;7 were read on <b>29 August 2026</b>, and every outbound link was checked that day. The click paths, dashboards and button names in Phase&nbsp;7 and W1&ndash;W5 come from one walk on <b>30 August 2026</b> and describe that afternoon only. <b>Nothing re-checks either.</b> When a link rots or a dashboard moves, this page will not tell you &mdash; it will keep saying what was true.</p>
     <p><b>A step is complete when every box you are shown is ticked, and not before.</b> Boxes belonging to a route you did not pick are hidden and are not counted; they come back, still ticked, if you move up. Ticks are stored in this browser only and do not travel with the page.</p>
   </footer>
 
