@@ -1710,3 +1710,125 @@ script — CSS alone can do it. And the rail **is** the nav, so a second nav bar
 case for a strip is *where am I*, not *how do I navigate*. A standfirst that collapses on some
 views changes masthead height between views; a same-height strip does not, which is the strongest
 argument on the table for Tony's pipeline instinct. **No option was chosen. All of 2, 3 are open.**
+
+---
+
+## Session close — 2026-09-01 · `Mac/5dc04385`, later `Tonys-MacBook-Pro/5dc04385`
+
+**Two addresses, one session. That is finding 5 below and the reason this heading has both.**
+
+Three pieces of work landed and one question is unanswered. Everything here is on `master`;
+nothing is half-built and no tool, hook or setting was changed by this session.
+
+### What exists now that did not
+
+| | where | state |
+|---|---|---|
+| The `bugarach` #416 case | [`docs/cases/2026-08-30-the-irony-was-the-only-unchecked-claim.md`](docs/cases/2026-08-30-the-irony-was-the-only-unchecked-claim.md) | **Accepted into the course** on Tony's call |
+| Its general form | [`points.md`](points.md) **C1** (first instance) and **G5c** | Landed `1da1bce` |
+| N6 decision 1, recorded | [`OPEN-FINDINGS.md`](OPEN-FINDINGS.md) | Merged with the other session's account |
+| The sibling survey | [`docs/from-the-siblings.md`](docs/from-the-siblings.md) | Landed `a02f1f8`, **six items, none built** |
+
+### The thing to carry forward, if only one thing is
+
+**An agent's report is two documents interleaved: one produced by looking and one produced by
+writing. They are in the same voice and only the first is true on purpose.**
+
+That is `points.md` C1's new instance, and it inverts what C1 said. C1's diagnosis was that the
+report is hard to read *because it arrives in jargon*. In #416 the jargon held perfectly — `CI`,
+`squash`, `20:18Z` were all correct — and the plain English was what was false. **The tell is
+grammar, not vocabulary:** *worth noting*, *the irony is*, *which suggests* introduce a sentence
+nobody checked, because it does not present itself as something to check. The question that
+catches it is not *"explain that in plain terms"* but **"which part of that did you look up?"**
+
+And the failure was a **false cause**, not a false fact — both halves survived being checked
+separately. *"Is that true?"* misses it. *"Is that the reason?"* catches it.
+
+### Open, in the order they cost something
+
+1. **The sequence in `docs/from-the-siblings.md` has not been approved.** Six mechanisms the
+   siblings already built, each quoted from its own source header. **The ask is a yes to an
+   order, not to six items.** Recommended: **01+02 together**, then 03, then 04; 05 and 06
+   independent. The headline is an absence — **this repo has no `SessionStart` hook at all**,
+   and the estate's is written to be vendored unchanged (`bugarach`'s copy is stamped *"do NOT
+   edit here"*). That is **N3** with the most useful hook in the estate as the example.
+
+2. **Do not install 01, 02 or 04 while sessions are live, and this is not general caution.**
+   Asked on 2026-08-31 whether it was safe mid-flight; the answer given, unchanged:
+   - **Safe any time:** **03** (a `next_case.sh` that scans every ref) and **05**
+     (`merge_when_green.sh`). Standalone scripts nobody executes until called. A running session
+     cannot notice a new file in `tools/`.
+   - **Not while sessions run:** **01, 02, 04.** A `SessionStart` hook blocks session
+     initialization and the SDK aborts at 60 s blaming auth. Worse than dying:
+     `interface2 docs/postmortems/session-start-hook-timeout.md` records the hook timing out and
+     **latching safe mode** — *"Every session on this box from 2026-08-10 to 2026-08-12 opened in
+     SAFE MODE and ran ZERO guards."* Two days, while announcing it loudly. **It is not history:**
+     a Remote Control session named `TASK_session_start_hook_safe_mode_recurrence.md` is open in
+     the estate right now. **01 waits on that task's outcome regardless of session count.**
+   - **Not now, for a different reason:** **06**, splitting the root handoff. Not dangerous, a
+     conflict magnet — this file is where sessions write their closes, and it is now **1,712
+     lines**. Which this very section makes worse, and that is the argument for 06.
+   - **Winding down all sessions is not warranted.** The only item wanting a quiet repo is
+     01+02, and what it wants is *one fresh session*, not a shutdown — and it is blocked anyway.
+
+3. **The philosophy section is real, located, and still unimported.** Tony reported the #416 case
+   *"prompted a whole discussion in the philosophy section."* This session never saw it and said
+   so on the case file, in the darkroom, and in `points.md` C1. **It has since been located:**
+   the `kreuz-extraction` work — `docs/cases/2026-08-24-the-email-contained-no-new-information.md`
+   — *"proposes one line for the philosophy section, proposed not applied."* There is a
+   `kreuz-extraction` worktree in this repo. **If that discussion settles anything it settles it
+   against the C1 entry**, not against the case file, because that is where the point now lives.
+
+4. **The `bugarach` session that wrote the #416 aside was never asked** whether its own background
+   watch later reported the merge and corrected the record. If it did, this is a four-minute error
+   that self-healed; if not, the wrong sentence is its last word on the subject. The case reads
+   that hinge in its favour and says so. **One message would settle it.**
+
+5. **The machine half of a session address is not stable, and this board is the only attribution
+   record there is.** `claim.sh` produced `Mac/5dc04385` in the morning and
+   `Tonys-MacBook-Pro/5dc04385` in the afternoon — same machine, same session, same day, because
+   [`tools/session_identity.sh`](tools/session_identity.sh) uses `hostname -s`, a **network** name
+   that changes on a name conflict or a DHCP lease. **One session now sits on
+   [`docs/SESSIONS.md`](docs/SESSIONS.md) under two names** and `--release` / `--mine` cannot reach
+   the earlier blocks. `interface2` documents this exact case and returns **empty rather than
+   guessing**. **Not fixed here on purpose:** every tool sources that file. Fix it from a session
+   that can watch the selftest, and pin the machine half or degrade it loudly to `?` — do not let
+   it silently mint a second identity.
+
+6. **N6 decision 4 is the only thing left in N6** — does the push-gate incident earn a case file.
+   Untouched by this session.
+
+### Not mine, noticed in passing
+
+- **Two documents about this estate's tooling exist, written a day apart, and neither points at
+  the other.** [`docs/instruments.html`](docs/instruments.html) (`d6fac1e`, twenty instruments)
+  and [`docs/from-the-siblings.md`](docs/from-the-siblings.md) (six of them, with adoption
+  reasoning). They overlap on `worktree.sh`, `claim.sh`, `check_pointers`, `next_adr`, `next_sap`,
+  `merge_when_green` and the session-start hook. **Neither cites the other**, which is the failure
+  both documents are about, arriving while they were being written. Cross-linking them is one line
+  each and nobody has done it.
+- The darkroom README records three things owed a decision and not this session's:
+  **`points.md` B2 went public without anyone making the call**; **`OPEN-FINDINGS` B2 needs
+  correcting** (it cites Southampton as refuting the vacancy claim, and Southampton's own
+  prerequisites say it does not serve non-programmers); and **B5's three emails are still unsent.**
+
+### Two practices from this session worth keeping
+
+**Landing from a worktree while somebody is mid-edit in the shared checkout.** An ordinary merge
+in the primary would have swept an uncommitted claim — N4, a fourth time in two days. Instead:
+
+```sh
+git push origin <your-branch>:master     # from the worktree
+```
+
+A server-side fast-forward. It moves the ref and touches **no working tree at all**; the shared
+checkout's local `master` goes stale for a moment and one `git pull --ff-only` fixes it.
+
+**Check a claim about another session's work against `origin/master` before committing it.** This
+session drafted N6 saying the push gate was still unfixed and that fixing it was the blocker. It
+had been repaired while that was being written. Caught before landing. Had it shipped it would
+have been a confident, checkable, wrong statement in the findings file, about a gate, in the repo
+that is about exactly that.
+
+**And this section was appended by hand, which is still the defect `5da72f8` diagnosed** — and is
+now also the argument for item 06.

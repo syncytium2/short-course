@@ -1999,3 +1999,33 @@ risks in the file.
   **Still open, untouched:** the deck sentence *"Each is set out below with the incidents that
   produced it"* — verified still live 2026-09-01, false on seven views; and Tony's nav-bar/pipeline
   suggestion, recorded and unbuilt.
+
+### Tonys-MacBook-Pro/5dc04385 — Session close for Mac/5dc04385: every open thread from the #416 case, the worktree decision and the sibling survey, written as a handoff
+- **Status:** DONE 2026-09-01
+- **Opened:** 2026-09-01
+- **Branch when opened:** `handoff-2026-09-01` — my own worktree, so here the branch *is* the identity
+- **Status when released:** DONE — see below.
+- **Writes:** [`../HANDOFF.md`](../HANDOFF.md), **appended only** (one new `## Session close —
+  2026-09-01` section at EOF), and this block. Nothing else in the repo, nothing outside it.
+- **Notes:** Tony, 2026-09-01: *"write them all as a handoff for a new session."* **Six open
+  threads in one section**, ordered by what they cost. Landed via
+  `git push origin handoff-2026-09-01:master` — a server-side fast-forward, because the shared
+  checkout was dirty and an ordinary merge there would have swept it.
+- **⚠ Two of the six are things a new session must read before acting, not just know:**
+  **(1) Do not install the `SessionStart` hook** from
+  [`from-the-siblings.md`](from-the-siblings.md) item 01 while sessions are live. Its known
+  failure is not "it errors" — it **latches safe mode**, and `interface2`'s postmortem records
+  every session on a box running **zero guards for two days** while loudly saying so. A Remote
+  Control task named `TASK_session_start_hook_safe_mode_recurrence.md` is open in the estate
+  right now; 01 waits on it. Items **03** and **05** are standalone scripts and safe any time.
+  **(2) The machine half of a session address is not stable** — `hostname -s` gave `Mac` and
+  `Tonys-MacBook-Pro` for this session on the same day, so it appears on this board twice and
+  `--release` cannot reach its own earlier blocks. Unfixed; every tool sources that file.
+- **This file is now 1,834 lines**, and appending here is the defect `5da72f8` named. That is the
+  live argument for survey item **06**, splitting the root handoff into a signal and a record the
+  way `bugarach` does.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
