@@ -575,7 +575,7 @@
       <p class="eyebrow">It Looked Right &middot; for researchers</p>
       <h1>Using coding agents today and tomorrow</h1>
       <p class="standfirst"><b>Coding is no longer the barrier. <a href="#communication" data-view="communication">Four challenges remain.</a></b> Each is set out below with the incidents that produced it.</p>
-    <p class="pv">Version <b>0.1.62</b> &middot; 31 Aug 2026<span class="pv-born">First published 28 Aug 2026</span></p>
+    <p class="pv">Version <b>0.1.63</b> &middot; 31 Aug 2026<span class="pv-born">First published 28 Aug 2026</span></p>
     </div>
     <div class="depth">
       <span class="depth-label" id="depth-label">Reading depth</span>
@@ -652,6 +652,7 @@
         <a href="#repo" data-view="repo"><span class="k">&rsaquo;</span><span>The repo</span></a>
         <a href="#rule" data-view="rule"><span class="k">&rsaquo;</span><span>The standing rule</span></a>
         <a href="#fixes" data-view="fixes"><span class="k">&rsaquo;</span><span>Fixes that hold</span></a>
+        <a href="#scale" data-view="scale"><span class="k">&rsaquo;</span><span>Running several at once</span></a>
       </div>
       <div class="rail-group">
         <p class="rail-head">Evidence</p>
@@ -1334,6 +1335,82 @@
         </details>
 
         <div class="prov"><b>Section source.</b> <span class="path">points.md</span> B4 and B7; <span class="path">course-outline-external.md</span> &ldquo;Fixes that hold&rdquo;. The four-tier table is from <span class="path">docs/cases/2026-08-28-the-weakest-fix-is-the-most-available.md</span>.</div>
+      </section>
+
+      <section class="view" id="scale" data-alt="view-scale" aria-labelledby="h-scale">
+        <div class="view-head">
+          <p class="eyebrow">What to do about it</p>
+          <h2 id="h-scale">Running several at once</h2>
+          <p class="lede">One person, many sessions, one checkout. <b>The coordination problem arrives before you are ready for it</b>, and none of the vendor tools solve it.</p>
+        </div>
+
+        <p>Everything above is written as though you and one agent are working on one thing. That stops being true faster than expected, because an agent that finishes in four minutes leaves you waiting, and the obvious cure is to start a second one.</p>
+
+        <p><b>The change is datable, and it did not happen gradually.</b> One repository in this body of work spans it &mdash; twenty-six months of ordinary solo commits, then a break:</p>
+
+        <div class="tw">
+          <table>
+            <thead><tr><th>Period</th><th>Commits per month</th><th>Words per commit message</th></tr></thead>
+            <tbody>
+              <tr><td>2024-03 &ndash; 2026-04 &nbsp;<i>(26 months)</i></td><td>1&ndash;45</td><td>4.5</td></tr>
+              <tr><td><b>2026-05</b> &nbsp;<i>first agent commits</i></td><td><b>216</b></td><td><b>8.3</b></td></tr>
+              <tr><td>2026-06</td><td>23</td><td>7.9</td></tr>
+              <tr><td>2026-07</td><td>885</td><td>10.9</td></tr>
+              <tr><td>2026-08</td><td>1,042</td><td>12.9</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p><b>Read the June row, because it is the one that matters.</b> Volume collapsed back to the old baseline that month &mdash; 23 commits, indistinguishable from any month in the two years before. The commit messages did not. They stayed at nearly twice their old length and kept climbing. <b>Whatever changed in May was a habit, not an artifact of running more sessions</b>, because it survived a month of not running them.</p>
+
+        <p>The first <span class="path">.claude/</span> directory in that repository is committed <b>2026-05-06</b>, days before the first spike. The first <span class="path">tools/</span> directory follows on <b>2026-07-17</b>, two months later &mdash; which is the honest order: the volume arrived first, and the instruments were built after it hurt.</p>
+
+        <h3>What breaks first is not the code</h3>
+
+        <p><b>Every session starts from nothing.</b> It has no memory of yesterday, of the argument you settled last week, or of what the session in the next terminal is doing right now. That is not a defect to be fixed by a better model &mdash; it is the operating condition, and it means the failure at scale is <b>retrieval</b> rather than compliance. The instruction was written down. Nobody read it, because nothing put it where it would be read.</p>
+
+        <p>The instruments that follow were each built after a specific failure, and each does one job. They are small &mdash; a shell script and a text file apiece.</p>
+
+        <div class="tw">
+          <table>
+            <thead><tr><th>Instrument</th><th>The failure that produced it</th><th>What it costs to use</th></tr></thead>
+            <tbody>
+              <tr><td><b>A claim board</b><br><span class="path">claim.sh</span></td><td>Two sessions wrote a case file about the same incident four minutes apart. Neither could see the other.</td><td>One line before starting.</td></tr>
+              <tr><td><b>A handoff</b><br><span class="path">HANDOFF.md</span></td><td>Work resumed cold with no idea what the last session had decided or abandoned.</td><td>A paragraph at the end.</td></tr>
+              <tr><td><b>A doubt channel</b><br><span class="path">doubt.sh</span></td><td>Six claims in one afternoon that nobody could stand behind. All six were flagged correctly &mdash; in prose, in a different document.</td><td>About twenty seconds.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p><b>The twenty seconds is the whole design, not a detail.</b> Twenty years of design-rationale research failed on the same point: people will not stop and file the reasoning while they are doing the work. A channel that owes nobody a decision and costs twenty seconds gets used. One that asks for a form does not.</p>
+
+        <details class="more">
+          <summary>The board was empty, and it was not because nothing was happening <span class="cost">4 min</span></summary>
+          <div class="inner">
+            <p>The board was built, committed, documented, and then sat empty while several sessions worked. <b>Claiming is a habit, and a habit that nothing enforces is not a mechanism.</b></p>
+            <p>The repair was not a stricter instruction. It was a session-start hook that prints the board before any work begins &mdash; moving the prompt to the moment a session is deciding what to do, instead of leaving it in a file the session had no reason to open.</p>
+            <p>That is the same repair as every other one on this page: <b>put it where they already look.</b></p>
+            <div class="prov"><b>Source.</b> <span class="path">docs/cases/2026-08-29-the-board-was-empty-because-claiming-is-a-habit.md</span>. The hook is in this repository and can be read.</div>
+          </div>
+        </details>
+
+        <details class="more">
+          <summary>What this costs, measured rather than estimated <span class="cost">3 min</span></summary>
+          <div class="inner">
+            <p><b>Branches are abandoned.</b> Across four repositories in this body of work, unmerged local branches run from <b>14% to 88%</b> &mdash; one repository sits at 1 of 7, another at 33 of 112, a third at 7 of 8. Two currently have their working checkout parked on a feature branch rather than the trunk. Those are dropped sessions and they are visible in <span class="path">git branch --no-merged</span>.</p>
+            <p><b>Attribution is lost.</b> Every commit in this estate carries one author name, because there is one laptop and one checkout. Most of the commits were written by agent sessions; a co-authorship trailer records that on 60&ndash;100% of them depending on the repository, and the trailer is added by hand, so the gap is exactly the size of the forgetting.</p>
+            <p><b>Neither is presented here as solved.</b> The instruments above address retrieval. They do not address branch hygiene, and nothing in this estate does yet.</p>
+            <div class="prov"><b>Source.</b> Measured 2026-08-31 across five repositories with <span class="path">git rev-list</span>, <span class="path">git branch --no-merged</span> and <span class="path">git log --format=%b</span>. Method stated so the numbers can be recomputed; they will drift as work continues.</div>
+          </div>
+        </details>
+
+        <h3>This is not advice to run several</h3>
+
+        <p>Running one agent well is harder than it looks and is the whole of the rest of this page. <b>What is worth taking from this section is the order:</b> the coordination instruments were each built <i>after</i> the failure that made them necessary, out of a shell script and a text file, by the agents themselves. None of them was designed in advance, and none was bought.</p>
+
+        <p>The protocol was portable enough to move: one repository&rsquo;s commit on 2026-08-12 reads <i>&ldquo;Vendor the multi-session protocol: board, SessionStart hook, worktree discipline&rdquo;</i> &mdash; a set of habits carried into a second project because they had already been paid for once.</p>
+
+        <div class="prov"><b>Section source.</b> Commit counts, message lengths, branch states and trailer counts measured 2026-08-31 from the local repositories named in the notes above. The retrieval diagnosis is <span class="path">OPEN-FINDINGS.md</span> N5; the capture-cost argument is <span class="path">HANDOFF.md</span> and <span class="path">tools/doubt.sh</span>, whose header states the same case. <b>Unverified:</b> the design-rationale claim &mdash; that the field failed on capture cost &mdash; is stated here from the author&rsquo;s reading and <b>no literature search has been recorded for it</b>. It is the weakest sentence in this section and is marked rather than removed.</div>
       </section>
 
       <section class="view" id="record" data-alt="view-record" aria-labelledby="h-record">
