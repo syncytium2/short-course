@@ -359,7 +359,7 @@
   }
   .warn b { font-weight: 600; }
 
-  /* ---- the expert ladder (1.1) ---- */
+  /* ---- the agent ladder (1.1) ---- */
   .tbl-wrap { overflow-x: auto; margin: 10px 0 0; }
   table.ladder {
     border-collapse: collapse; width: 100%; font-size: 13.5px; min-width: 460px;
@@ -532,7 +532,7 @@
     <p class="eyebrow"><a href="/" class="home">&larr;&nbsp;It Looked Right</a> &middot; Setup runbook &middot; keep this window open</p>
     <h1>Cold Start</h1>
     <p class="standfirst">An email address to a first agent session that leaves a record behind it &mdash; by browser, by laptop, or by cluster. Every step in order, and the condition that tells you each one worked.</p>
-    <p class="pv">Version <b>0.1.29</b> &middot; 1 Sep 2026<span class="pv-born">First published 29 Aug 2026</span></p>
+    <p class="pv">Version <b>0.1.30</b> &middot; 1 Sep 2026<span class="pv-born">First published 29 Aug 2026</span></p>
   </header>
 
   <div class="method">
@@ -575,27 +575,52 @@
       <h2>Phase 1 &middot; Accounts</h2>
       <span class="phase-time">30 min<span data-tiers="max">, plus other people&rsquo;s time</span></span>
     </div>
-    <p class="phase-note"><span data-tiers="min">Two accounts, both free to create, and you need both.</span><span data-tiers="mid max">Two accounts of your own, both free to create and both required &mdash; then the institutional things somebody else controls.</span> <b>Get the expert first, on purpose:</b> the second step is the one people find fiddly, and doing it second means there is already somebody to ask.</p>
+    <p class="phase-note"><span data-tiers="min">Two accounts, both free to create, and you need both.</span><span data-tiers="mid max">Two accounts of your own, both free to create and both required &mdash; then the institutional things somebody else controls.</span> <b>Get the agent first, on purpose:</b> the second step is the one people find fiddly, and doing it second means there is already an agent to ask.</p>
     <p class="phase-note" data-tiers="max"><b>Start this on day one even if you will not touch a keyboard for a week.</b> One thing in this phase &mdash; storage and a cluster allocation &mdash; is not yours to grant: somebody else has to approve it, and that takes days to weeks. File it now and carry on with everything below while it pends.</p>
     <ol class="steps">
       <li data-key="agent-account" data-id="1.1" data-tiers="min mid max" data-open="0" data-done="0">
         <div class="srow">
-          <button class="head" type="button" aria-expanded="false" aria-controls="d-1.1"><span class="n">1.1</span>Get the expert on your side &mdash; and decide how much of your screen they get</button>
+          <button class="head" type="button" aria-expanded="false" aria-controls="d-1.1"><span class="n">1.1</span>Get an agent, and decide how much of your screen it gets</button>
           <span class="badge">Incomplete</span>
         </div>
-          <p class="links"><a href="https://claude.com/pricing">Claude Code</a><a href="https://developers.openai.com/codex/pricing">OpenAI Codex</a><a href="https://github.com/google-gemini/gemini-cli">Gemini CLI</a><a href="https://github.com/features/copilot/plans">GitHub Copilot CLI</a><a href="https://cursor.com/pricing">Cursor</a><a href="https://lookedright.tonydefazio.com/what-it-costs">What It Costs</a><a href="https://lookedright.tonydefazio.com/show-it-your-screen">Show It Your Screen</a></p>
+        <!-- THE ONLY STEP ON THE PAGE THAT CALLED THE AGENT "SOMEBODY".
+             This step opened "you are recruiting somebody who already knows this... how much
+             THEY are allowed to see", the ladder header read "What they can see", and 1.2
+             said "1.1 put somebody beside you who has done this a hundred times". The other
+             thirty-eight steps say "the agent" and "it" -- sixteen times -- so the first step
+             a beginner reads was the one that disagreed with the rest, and it disagreed in
+             the direction of implying a person is involved.
+             That is not a tone question for a reader who has never done this. It is the
+             difference between "a colleague will notice if this looks wrong" and "nothing
+             here will notice", and the whole page is an argument for the second. Fixed to
+             "the agent" / "it" throughout, which is what the page already said everywhere
+             else. Kept: every "somebody" that means a real human -- the person who approves
+             your storage, the person who reads the monthly statement, the colleague you send
+             the address to. Those are three of the five and they are load-bearing. -->
+          <p class="links" data-tiers="mid max"><a href="https://claude.com/pricing">Claude Code</a><a href="https://developers.openai.com/codex/pricing">OpenAI Codex</a><a href="https://github.com/google-gemini/gemini-cli">Gemini CLI</a><a href="https://github.com/features/copilot/plans">GitHub Copilot CLI</a><a href="https://cursor.com/pricing">Cursor</a><a href="https://lookedright.tonydefazio.com/what-it-costs">What It Costs</a><a href="https://lookedright.tonydefazio.com/show-it-your-screen">Show It Your Screen</a></p>
+          <p class="links" data-tiers="min"><a href="https://claude.com/pricing">Claude</a><a href="https://lookedright.tonydefazio.com/what-it-costs">What It Costs</a><a href="https://lookedright.tonydefazio.com/show-it-your-screen">Show It Your Screen</a></p>
         <div class="detail" id="d-1.1">
-            <p class="why"><b>You are not buying a tool. You are recruiting somebody who already knows this, and then deciding how much they are allowed to see.</b> That second half is the part people skip, and it is the part that decides what everything else costs. An agent that cannot see your screen has to be told what is on it &mdash; and describing your own screen accurately is the hardest thing a beginner is asked to do, because you do not know which detail matters. That is why you are stuck.</p>
+            <p class="why"><b>The agent already knows this work. What you are deciding is how much of your machine it is allowed to see</b> &mdash; and that second half is the one people skip, and the one that decides what everything else costs. An agent that cannot see your screen has to be told what is on it, and describing your own screen accurately is the hardest thing a beginner is asked to do, because you do not know which detail matters. That is why you are stuck.</p>
 
-            <p class="why"><b>Three places to stand.</b> Take the highest one you can reach today and no higher; you can move up later and nothing is wasted.</p>
-            <div class="tbl-wrap">
+            <!-- THE LADDER IS FOR READERS STILL CHOOSING. The tier picker at the top of the
+                 page asks the same question in bigger type and gets a real answer; showing
+                 someone the two rungs they have just declined, inside the first step they
+                 open, is the page arguing with a decision it asked them to make. Tony,
+                 2026-09-01, on the browser route: "unfolding the first opens a whole bunch
+                 of stuff the user decided they didn't need."
+                 The IDEA survives for every route -- what the agent can see is what changes,
+                 and it is the only thing that changes. The three-row table does not. -->
+            <p class="why" data-tiers="min"><b>You picked the browser at the top of this page, so this step is already half done.</b> What that costs you is the seeing: in a browser the agent has only what you paste, so it cannot open your files or check a result &mdash; you are its eyes, and W1 makes you prove it. The two rungs above buy exactly one thing, which is that it looks for itself. Both are the same paid plan and neither is needed tonight. <b>Move up whenever you like; every box you have ticked stays ticked.</b></p>
+
+            <p class="why" data-tiers="mid max"><b>Three places to stand.</b> Take the highest one you can reach today and no higher; you can move up later and nothing is wasted.</p>
+            <div class="tbl-wrap" data-tiers="mid max">
             <table class="ladder">
-              <thead><tr><th></th><th>Where you are</th><th>What they can see</th><th>Money</th></tr></thead>
+              <thead><tr><th></th><th>Where you are</th><th>What it can see</th><th>Money</th></tr></thead>
               <tbody>
                 <tr>
                   <td><b>Minimum</b></td>
                   <td>Claude, or an equivalent, <b>in a browser</b></td>
-                  <td><b>Only what you paste.</b> They cannot open your files or check a result. You are their eyes.</td>
+                  <td><b>Only what you paste.</b> It cannot open your files or check a result. You are its eyes.</td>
                   <td><b>None.</b> The free tier does this, including the pages it writes for you.</td>
                 </tr>
                 <tr>
@@ -614,12 +639,15 @@
             </table>
             </div>
             <p class="why"><b>The tell that you have outgrown the free rung is not that it refuses to do something.</b> The free tier is the same thing with less of it. The tell is <b>the copying</b> &mdash; once you are pasting files back and forth by hand, you are doing the work the next rung removes, and you are the part most likely to get it wrong. <b>Prices belong on the vendor&rsquo;s page, not this one</b>; the links above are the authority and <a href="https://lookedright.tonydefazio.com/what-it-costs">What It Costs</a> is the sheet.</p>
-            <p class="why"><b>None of this makes the expert a map.</b> They will tell you where a button is and be wrong, because the screens move; they will read a screenshot of that same screen and be right. That asymmetry, and what to do about it, is <a href="https://lookedright.tonydefazio.com/show-it-your-screen">Show It Your Screen</a>.</p>
+            <p class="why"><b>None of this makes the agent a map.</b> It will tell you where a button is and be wrong, because the screens move; it will read a screenshot of that same screen and be right. That asymmetry, and what to do about it, is <a href="https://lookedright.tonydefazio.com/show-it-your-screen">Show It Your Screen</a>.</p>
 
             <p class="why">This is also the step people treat as a formality, and it is the one that forks. A <b>personal plan</b> is an allowance: you hit a ceiling and stop, which is annoying and safe. An <b>institutional billing code</b> is usually uncapped: nothing stops, nothing warns, and the number surfaces when somebody else reads the monthly statement.</p>
-            <p class="why">Institutional routes also tend to sit behind an employment check and an approval, which is days of somebody else&rsquo;s time. That is why this step is on day one.</p>
-            <p class="why"><b>The others in this tier.</b> They all do the same job &mdash; a terminal agent that edits files on your disk &mdash; and they are all sold through a subscription rather than per-token. Pick one and learn it properly; the second one is easy once the first is understood.</p>
-            <ul class="tier">
+            <p class="why" data-tiers="mid max">Institutional routes also tend to sit behind an employment check and an approval, which is days of somebody else&rsquo;s time. That is why this step is on day one.</p>
+            <!-- mid max: every one of these is a TERMINAL agent that edits files on your
+                 disk. On the browser route there is no terminal and no disk in play, so this
+                 is five products a reader cannot use, listed under the first step they open. -->
+            <p class="why" data-tiers="mid max"><b>The others in this tier.</b> They all do the same job &mdash; a terminal agent that edits files on your disk &mdash; and they are all sold through a subscription rather than per-token. Pick one and learn it properly; the second one is easy once the first is understood.</p>
+            <ul class="tier" data-tiers="mid max">
               <li>
                 <span class="t-n"><a href="https://claude.com/pricing">Claude Code</a></span>
                 <span class="t-w">Anthropic. Subscription tiers; no free tier. This page&rsquo;s examples use it.</span>
@@ -641,12 +669,13 @@
                 <span class="t-w">The odd one out: an editor with the agent inside it rather than a terminal tool. Same tier of capability, different place to stand.</span>
               </li>
             </ul>
-            <div class="warn"><b>Do not trust a price you read anywhere, including here.</b> This row moves faster than anything else on the page &mdash; plans get renamed, split, metered differently, and re-priced. Those are pointers to the vendors&rsquo; own pages; the number is whatever the page says on the day you look.</div>
-            <p class="why"><b>What this actually costs, before you commit to anything:</b> <a href="https://lookedright.tonydefazio.com/what-it-costs">What It Costs</a> &mdash; the free floor and how far it goes, the three shapes a bill can take and which one to refuse, real numbers with their caveats attached, and the equity problem, which is real and is usually left unsaid. <b>Read it before 1.1, not after.</b> It is short.</p>
+            <div class="warn"><b>Do not trust a price you read anywhere, including here.</b> Prices move faster than anything else on this page &mdash; plans get renamed, split, metered differently, and re-priced. The links above are pointers to the vendors&rsquo; own pages; the number is whatever the page says on the day you look. <i>(This said &ldquo;this row&rdquo;, meaning the list of five tools &mdash; which the browser route is no longer shown, so it pointed at nothing.)</i></div>
+            <p class="why"><b>What this actually costs, before you commit to anything:</b> <a href="https://lookedright.tonydefazio.com/what-it-costs">What It Costs</a> &mdash; the free floor and how far it goes, the three shapes a bill can take and which one to refuse, real numbers with their caveats attached, and the equity problem, which is real and is usually left unsaid. <b>Read it before you commit to a plan, not after.</b> It is short. <i>(This said &ldquo;read it before 1.1&rdquo;, inside 1.1.)</i></p>
         </div>
         <ul class="checks">
             <li><button class="cb" data-key="sign-account-will-actually" type="button" aria-pressed="false" aria-labelledby="c-1-1-0">&#10003;</button><span class="cbt" id="c-1-1-0">I can sign in with the account I will actually use</span></li>
-            <li><button class="cb" data-key="which-rung-and-next" type="button" aria-pressed="false" aria-labelledby="c-1-1-4">&#10003;</button><span class="cbt" id="c-1-1-4">I can say which rung I am on, and what the next one would let it see</span></li>
+            <li data-tiers="mid max"><button class="cb" data-key="which-rung-and-next" type="button" aria-pressed="false" aria-labelledby="c-1-1-4">&#10003;</button><span class="cbt" id="c-1-1-4">I can say which rung I am on, and what the next one would let it see</span></li>
+            <li data-tiers="min"><button class="cb" data-key="browser-cannot-see" type="button" aria-pressed="false" aria-labelledby="c-1-1-5">&#10003;</button><span class="cbt" id="c-1-1-5">I can say what the browser route cannot do &mdash; open my files, check a result for itself &mdash; and what moving up would buy</span></li>
             <li><button class="cb" data-key="say-happens-use-too" type="button" aria-pressed="false" aria-labelledby="c-1-1-1">&#10003;</button><span class="cbt" id="c-1-1-1">I can say what happens when I use too much &mdash; it stops, or it bills</span></li>
             <li><button class="cb" data-key="read-costs" type="button" aria-pressed="false" aria-labelledby="c-1-1-2">&#10003;</button><span class="cbt" id="c-1-1-2">I have read <a href="https://lookedright.tonydefazio.com/what-it-costs"><i>What It Costs</i></a></span></li>
         </ul>
@@ -660,7 +689,7 @@
             <p class="why"><b>Two things to settle before you start, because both are annoying to undo.</b> <b>The username</b> is the one you will be known by, and it ends up inside every link anybody saves to your work &mdash; changing it later breaks those links for other people, not for you, so you never find out. Pick one you would be content to have on a paper. <b>Two-factor authentication</b> goes on during signup rather than afterwards; it is the same half-minute either way, and afterwards is when it quietly gets postponed.</p>
             <div class="warn"><b>And ask first if your work touches research data or human subjects.</b> Your university or employer may run its own host &mdash; usually a private GitLab &mdash; and may <i>require</i> you to use it. That is a governance question, not a preference, and it is much cheaper to ask now than to move a repository later.</div>
             <p class="why"><b>Why it is not optional, when it looks like it should be.</b> It reads as a step for people who publish software, and you are not publishing software. But it is what gives your project a <i>second place to exist</i>. Without it, everything you and the agent make lives in one folder on one laptop: it reaches no other machine, no collaborator, and no future session &mdash; and none of that announces itself. The day it matters, it is already too late to have done this.</p>
-            <p class="why"><b>You do not have to do this one alone, and that is why it comes second.</b> 1.1 put somebody beside you who has done this a hundred times. The signup is four minutes of forms, but the questions underneath it are real &mdash; whether your institution requires its own host instead, what username you are willing to keep, what to make private &mdash; and they are worth asking out loud rather than guessing at. <b>Show them the screen you are on and ask what the box is for.</b></p>
+            <p class="why"><b>You do not have to do this one alone, and that is why it comes second.</b> 1.1 got you an agent that has done this a hundred times, and this is the first step worth asking it about. The signup is four minutes of forms, but the questions underneath it are real &mdash; whether your institution requires its own host instead, what username you are willing to keep, what to make private &mdash; and they are worth asking out loud rather than guessing at. <b>Show them the screen you are on and ask what the box is for.</b></p>
             <p class="why">Three things follow from the account and from nothing else. <b>A record</b> of what changed, when, and why &mdash; which is the only account of the work that survives you, and the only way to answer &ldquo;when did this figure change?&rdquo; six months on. <b>A way off this machine</b>, whether that is a second computer, a collaborator, a cluster, or a laptop that has died. And <b>somewhere to put the work</b> if you ever do want a page, a DOI, or a link in a paper.</p>
             <p class="why">This is the step people skip because it seems premature, and it is the one whose absence is documented twice in this course&rsquo;s own material: eleven hours of finished work sitting where nothing else could see it, and a night&rsquo;s work that reached the next morning as nothing at all. It is free, and it takes four minutes.</p>
         </div>
