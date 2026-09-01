@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
+# instrument: concurrency
 # push-goes-where-you-are.sh — PreToolUse(Bash) gate.
 #
 # WHY THIS EXISTS. 2026-08-27, 23:13. A session had been working on `master` all evening.

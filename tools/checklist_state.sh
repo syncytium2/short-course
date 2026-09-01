@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
+# instrument: retrieval
 # checklist_state.sh — prove the runbook's saved ticks survive an edit to the runbook.
 #
 #   tools/checklist_state.sh --selftest

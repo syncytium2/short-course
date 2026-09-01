@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
+# instrument: concurrency
 # worktree.sh — one session, one branch, one worktree.
 #
 #   tools/worktree.sh <slug>          open a worktree and branch for what you are doing

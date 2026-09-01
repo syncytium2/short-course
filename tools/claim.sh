@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
+# instrument: concurrency
 # claim.sh — say what you are about to work on, so another session does not do it too.
 #
 #   tools/claim.sh "the thing you are doing"     open a claim

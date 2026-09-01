@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# instrument: verification
 """Audit ~/Developer ON THE MACHINE THIS RUNS ON: which hooks are installed, registered, able to fire.
 
 SCOPE, because the first write-up of this got it wrong: this sees one disk. It takes no host

@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
+# instrument: verification
 # mutation_check.sh — break each tool on purpose and require its selftest to go red.
 #
 #   tools/mutation_check.sh          run every mutation

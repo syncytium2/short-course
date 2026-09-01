@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
+# instrument: staleness
 # check_dated_ui.sh — a handout step that names a vendor's button must say when that was true.
 #
 #   tools/check_dated_ui.sh            check docs/handouts/

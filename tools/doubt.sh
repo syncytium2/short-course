@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
+# instrument: retrieval
 # doubt.sh — park something you are not confident in, in about twenty seconds.
 #
 #   tools/doubt.sh "the thing you doubt"    open a doubt file, print its path

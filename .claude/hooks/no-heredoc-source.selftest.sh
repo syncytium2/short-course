@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
+# instrument: verification
 # no-heredoc-source.selftest.sh — prove the heredoc gate can still fire.
 #
 #   sh .claude/hooks/no-heredoc-source.selftest.sh

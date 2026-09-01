@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
+# instrument: verification
 # check_pointers.sh — every repo-relative path named in a markdown file must exist.
 #
 #   tools/check_pointers.sh            check the working tree

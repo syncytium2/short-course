@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
+# instrument: concurrency
 # session_identity.sh — the ONE answer to "who am I?" in short-course.
 #
 # WHY THIS DIFFERS FROM interface2's VERSION, WHICH IT IS OTHERWISE MODELLED ON.

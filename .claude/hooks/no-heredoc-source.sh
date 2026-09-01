@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# instrument: retrieval
 # vendored from syncytium2/murderboard @ d4066da — do NOT edit here; fix upstream and re-copy.
 # CANONICAL SOURCE: syncytium2/murderboard .claude/hooks/no-heredoc-source.sh — edit HERE.
 #
