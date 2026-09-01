@@ -73,7 +73,7 @@ course.
 | The working point list | [`points.md`](points.md) — A/B/C/D/E, the author's own words, unmerged |
 | Access, cost, routes, rates | [`points.md`](points.md) **§F** — sourced and dated 2026-08-27, expected to go stale |
 | The circulatable outline | [`course-outline-external.md`](course-outline-external.md) — 434 words, four barriers |
-| **What a learner is handed** | [`docs/handouts/`](docs/handouts/) — three sheets now: `cold-start.html` (setup, 29 steps, **new 2026-08-29**), `what-it-costs.html` (**new 2026-08-29** — the money and the equity question, filed separately so it can rot alone), `search-to-shipped.html` (runbook + decision records), `four-barriers.html` (the public walkthrough) |
+| **What a learner is handed** | [`docs/handouts/`](docs/handouts/) — **five sheets**, and this row said "three sheets now" while listing four: `cold-start.html` (setup; **one document, three routes**, and the "29 steps" that stood here was wrong from the day after it was typed — `tools/tier_check.sh` prints the live counts), `what-it-costs.html` (the money and the equity question, filed separately so it can rot alone), `search-to-shipped.html` (runbook + decision records), `four-barriers.html` (the public walkthrough), `show-it-your-screen.html` (the deployment loop, unpublished). The index that is maintained is [`docs/handouts/README.md`](docs/handouts/README.md); this row is a pointer and keeps going stale because it restates one. |
 | **Hook safety / the decision tree** | [`tools/turnstile/`](tools/turnstile/) — vendored from [`syncytium2/turnstile`](https://github.com/syncytium2/turnstile); `turnstile decide`, `turnstile check` |
 | **Who else is working here** | [`docs/SESSIONS.md`](docs/SESSIONS.md) — claim before you write, `tools/claim.sh --list` |
 | **What has actually been delivered** | `<darkroom>/short-course/` — `search-to-shipped.html`, `cold-start.html` and `what-it-costs.html` as standalone pages, plus a folder README. Claimed and written 2026-08-27 and 2026-08-29; the repo copies are publisher source and do not open from Finder |
@@ -1694,7 +1694,7 @@ never knew where the instruction came from.
 | **1 · hotlink** | **DONE and live.** `baceb0d` made it `<a data-view="communication">`; `3534990` rebuilt to 0.1.59. Target is challenge 1, not `#overview`, because the deck is visible *on* overview. |
 | **2 · the persisting deck** | **HALF DONE.** `baceb0d` cut sentence three — the provenance claim that was false on seven views. **Sentence two is still there and still false on those same seven:** *"Each is set out below with the incidents that produced it."* The commit body says so; this says so where it will be read. |
 | **3 · nav bar / pipeline** | **OPEN, and until now recorded nowhere in this repo.** This line is the only record. |
-| **4 · one tab, three paths** | **DONE and live, 2026-08-31, version 0.1.60** — `Mac/efaea827`, branch `unify-three-paths`. `/cold-start` asks *how far are you going?* at the top and filters itself: **min** a web app in the browser (14 of 39 steps), **mid** VS Code on your laptop (30), **max** a cluster and other people (34). The browser route did not exist anywhere in that file — Cowork and `claude.ai/code` appeared **0 times** there and 32 times in `decisions/0002` — so **W1–W5 are new**, lifted from `0002` §5 and its 2026-08-30 walk. The home page's duplicate phase list was **deleted rather than renumbered**, which closes the numbering conflict by leaving one numbering in the world; it now leads with the browser route, per Tony the same day: *"the min route is the single most exciting thing when i talk to other humans."* Both doubt files filled and settled. |
+| **4 · one tab, three paths** | **DONE and live, 2026-08-31, version 0.1.26** — *(this said 0.1.60; the version is the number of commits touching the source and there were 26. Corrected 2026-09-01, along with the defects that shipped with this row — see the session close at the foot of this file.)* — `Mac/efaea827`, branch `unify-three-paths`. `/cold-start` asks *how far are you going?* at the top and filters itself: **min** a web app in the browser (14 of 39 steps), **mid** VS Code on your laptop (30), **max** a cluster and other people (34). The browser route did not exist anywhere in that file — Cowork and `claude.ai/code` appeared **0 times** there and 32 times in `decisions/0002` — so **W1–W5 are new**, lifted from `0002` §5 and its 2026-08-30 walk. The home page's duplicate phase list was **deleted rather than renumbered**, which closes the numbering conflict by leaving one numbering in the world; it now leads with the browser route, per Tony the same day: *"the min route is the single most exciting thing when i talk to other humans."* Both doubt files filled and settled. |
 
 ### The provenance that section could not find
 
@@ -1832,3 +1832,56 @@ that is about exactly that.
 
 **And this section was appended by hand, which is still the defect `5da72f8` diagnosed** — and is
 now also the argument for item 06.
+
+---
+
+## Session close, 2026-09-01 — `Tonys-MacBook-Pro/59c48a26`
+
+**Cold Start's tier filter landed on the steps and on almost nothing else.** Tony, reading the
+live page: *"it looks very broken to me."* It was. Branch `cold-start-tier-repair`, six commits,
+pushed. **NOT DEPLOYED — awaiting his review.**
+
+The whole shape in one line: on 2026-08-31 the page became three routes (`d5c0723`), and the
+filter was applied to `<li>` steps only. Prose, counts, cross-references, skip labels, the build
+script and five downstream sentences were never told. Six elements outside the steps carried
+`data-tiers` in a 59,000-character page.
+
+### What was live and wrong
+
+| | |
+|---|---|
+| **Skip labels** | `paint()` overwrote every skip button's authored text with one hardcoded pair, at construction, so the authored words never survived a frame. **Step 1.3, research storage and a cluster allocation, read *"Not needed — I chose Cloudflare"*** on the public page. So did 6.3. The right words — *"no cluster, no terabytes"* — were in the HTML the whole time. |
+| **7.3 could not be finished on the browser route** | It demanded *"I have signed the deploy tool in once on this machine"* — `wrangler`, from a terminal, on the route whose promise is that it never opens one — in a step with no skip button. 13 of 14, unless the reader ticked something untrue. The warning saying that road is *"not shorter, it is unavailable"* without a terminal was on the same step, tagged `mid max`, hidden from the only reader it was about. |
+| **The description** | Live: *"34 steps in eight phases."* The page has 39 steps and seven numbered phases. `data-id="[\d.]+"` cannot match `W1`–`W5`; `<section class="phase">` counted the unnumbered short-way section. **The number was derived, and the selftest called it correct**, because the fixture reproduced the old markup. |
+| **W1 duplicated 1.1** | Both shown on the browser route. W1 restated 1.1's rung ladder and asked, word for word, for 1.1's third box. |
+| **Single-route voice** | Phase 7 told a browser reader GitHub serves their pages, four lines after W5 had Cloudflare serving them. Phase 1 said "two accounts" to a four-step phase. 1.1 pointed at step 3.5, which two routes never see. The footer dated the whole page 29 August when Phase 7 and W1–W5 are from the walk on the 30th. |
+
+### The thing worth keeping
+
+**`tools/tier_check.sh`** — every route, its steps and boxes, and anything a route is shown and
+cannot finish. `--check` exits 1. `--selftest` passes.
+
+**Its first version would not have caught 7.3, and that is the useful part.** Reachability passes
+against the page as it shipped: old 7.3's boxes carried no `data-tiers`, so every route could
+*reach* them. The route that could not *honestly* tick the box was the browser one, and no
+structure said so. What is structural is the **disagreement** — route-aware prose over
+route-blind boxes. Run against the shipped page, that heuristic names 7.3 and nothing else.
+
+It also found two false positives in itself on the way in: counting a step's own `data-tiers` as
+prose fired on 23 of 39 steps, and an unbounded step segment swallowed each phase's closing notes.
+Both are recorded at the lines where they happened.
+
+### Carried forward — one decision, and it is Tony's
+
+**Step numbering is untouched, deliberately.** Filtered, the browser route reads 1.1, 1.2, W1–W5,
+5.1, 5.2, 7.1–7.5, and the phase headings jump 1 → unnumbered → 5 → 7. Numbering at render time
+would close it and would break every cross-reference in the prose — *"step 3.5"*, *"you wrote in
+W2"*, *"7.4 and 7.5 become Not needed"* — which are the page's connective tissue and are stable
+today precisely because the numbers are. The interim is one sentence in the tier banner saying the
+numbers are stable across routes so the gaps are expected. **Do not renumber without deciding what
+happens to the cross-references first.**
+
+**Not verified by anybody:** the browser route has been walked once, on 2026-08-30, before these
+edits. The laptop and cluster routes have still never been walked end to end — `Mac/7d93fc67`
+recorded that as the real blocker and it is still open. `tier_check.sh` proves a route can be
+*finished*, never that a step is *true*.
