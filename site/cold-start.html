@@ -532,7 +532,7 @@
     <p class="eyebrow"><a href="/" class="home">&larr;&nbsp;It Looked Right</a> &middot; Setup runbook &middot; keep this window open</p>
     <h1>Cold Start</h1>
     <p class="standfirst">An email address and a laptop, to a first agent session that leaves a record behind it. Every step in order, the two prompts to paste, and the condition that tells you each one worked.</p>
-    <p class="pv">Version <b>0.1.25</b> &middot; 31 Aug 2026<span class="pv-born">First published 29 Aug 2026</span></p>
+    <p class="pv">Version <b>0.1.26</b> &middot; 31 Aug 2026<span class="pv-born">First published 29 Aug 2026</span></p>
   </header>
 
   <div class="method">
@@ -711,7 +711,8 @@
       <span class="phase-time">one evening</span>
     </div>
     <p class="phase-note"><b>Five steps, one evening, all of it in a browser.</b> Nothing to install, no terminal, and no <code>git init</code>. You finish with a working page at an address you can send to somebody. It was walked start to finish on <b>2026-08-30</b>, and the places it went wrong are written into the steps rather than tidied out of them.</p>
-    <p class="phase-note"><b>When you have done all five, you are finished</b> &mdash; a working, published thing is a real place to stop, and most people should. If you later want the machine underneath it &mdash; your own editor, your own copy of the files, work that outlives a browser tab &mdash; choose <i>VS&nbsp;Code, on my laptop</i> at the top of this page and the rest of the setup appears. Everything you have ticked here stays ticked.</p>
+    <p class="phase-note"><b>The fifth step is not the end of anything. It is where the loop closes.</b> From then on you ask for the next item on your list, look at it, and it is live &mdash; and that round trip is now minutes rather than a project. <b>The reason to get published early is that everything after it gets cheaper</b>, not that you are done. Go back to the list you wrote in W2 and take the next one.</p>
+    <p class="phase-note"><b>None of what follows is a prerequisite for that.</b> You can keep building here indefinitely. The rest of this page is for when you want the machine underneath it &mdash; your own editor, your own copy of the files, work that outlives a browser tab, other people &mdash; and you can pick <i>VS&nbsp;Code, on my laptop</i> at the top on any day you like. Everything you have ticked here stays ticked.</p>
     <ol class="steps">
       <li data-key="pick-a-rung" data-id="W1" data-tiers="min" data-open="0" data-done="0">
         <div class="srow">
@@ -1374,10 +1375,11 @@ one so I can look.
           <span class="badge">Incomplete</span>
         </div>
         <div class="detail" id="d-7.3">
-            <p class="why"><b>This is the road most people should take, and it is three steps shorter.</b> Cloudflare publishes straight from a folder on your computer. There is no repository involved at all, so <i>your repo stays private</i> and it still costs nothing.</p>
-            <p class="why">In the Cloudflare dashboard the site you added at 7.2 can serve pages directly; the custom domain is one button, and the certificate is handled for you. From a terminal, the deploy tool is <code>wrangler</code>, and one command pushes a folder to the address you just wired up.</p>
+            <p class="why" data-tiers="min"><b>You already did this at W5, and there is nothing to choose.</b> Cloudflare is serving your site from your repository right now. This step is only about pointing the name you just bought at what is already there &mdash; the custom domain, and the certificate that comes with it. Keep going to 7.4 and 7.5 only if you decide to move to GitHub Pages instead, and read the next paragraph before you do.</p>
+            <p class="why" data-tiers="mid max"><b>This is the road most people should take, and it is three steps shorter.</b> Cloudflare publishes straight from a folder on your computer. There is no repository involved at all, so <i>your repo stays private</i> and it still costs nothing.</p>
+            <p class="why" data-tiers="mid max">In the Cloudflare dashboard the site you added at 7.2 can serve pages directly; the custom domain is one button, and the certificate is handled for you. From a terminal, the deploy tool is <code>wrangler</code>, and one command pushes a folder to the address you just wired up.</p>
             <div class="warn"><b>Walked on 2026-08-30, and the dashboard did not look like this.</b> Cloudflare had rebuilt it around Workers: the entry point read <i>Create a Worker</i>, &ldquo;Pages&rdquo; had become a small link at the foot of the card, and the deploy form arrived with a command pre-filled that <b>silently requires a config file in the repository</b> &mdash; nothing on the screen asks you to write one, and the failure does not say so. <b>&ldquo;Three steps shorter&rdquo; also assumes you have a terminal:</b> publishing from a folder needs <code>wrangler</code>, so for a reader who never opens a shell this road is not shorter, it is unavailable. Read the button names here as a description of one afternoon, not as a map.</div>
-            <div class="warn"><b>Why this matters more than convenience.</b> GitHub only serves free websites from <b>public</b> repositories &mdash; their own documentation says so plainly. Step 4.5 had you make your repository <b>private</b>, which is the right default for research. So on the free plan those two are incompatible, and Cloudflare is what resolves it. The other road is 7.4 and 7.5, and it needs either a public repository or a paid GitHub plan.</div>
+            <div class="warn"><b>Why this matters more than convenience.</b> GitHub only serves free websites from <b>public</b> repositories &mdash; their own documentation says so plainly. You were told to keep your repository <b>private</b> when you made it, which is the right default for research. So on the free plan those two are incompatible, and Cloudflare is what resolves it. The other road is 7.4 and 7.5, and it needs either a public repository or a paid GitHub plan.</div>
             <p class="why">One thing it costs: the deploy tool signs in through a browser the first time on each machine. That default can be replaced with an API token for automation, so it is a minute of setup rather than a permanent restriction.</p>
         </div>
         <ul class="checks">
