@@ -2100,3 +2100,15 @@ risks in the file.
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Tonys-MacBook-Pro/466a6ccf — Case: the index worked and the trap was not a question — N5 instance 8, sequel to nothing-was-missing. Touches docs/cases/2026-09-01-*.md (new) and docs/cases/README.md index row only.
+- **Status:** ACTIVE
+- **Opened:** 2026-09-01
+- **Branch when opened:** `traps-must-fire` — a fact, not an identity; it may move under you
+- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
+- **Notes:** <anything another session must know before touching the same thing>
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
