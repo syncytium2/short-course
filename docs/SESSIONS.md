@@ -2031,7 +2031,7 @@ risks in the file.
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Tonys-MacBook-Pro/59c48a26 — Cold Start tier-filter repair: skip-button labels overwritten at runtime, 7.3 uncompletable on the browser route, wrong derived step/phase counts, W1/1.1 duplication, untagged single-route prose
-- **Status:** ACTIVE
+- **Status:** DONE 2026-09-01
 - **Opened:** 2026-09-01
 - **Branch when opened:** `cold-start-tier-repair` — a fact, not an identity; it may move under you
 - **Writes:** `docs/handouts/cold-start.html`, `tools/build_site.sh`, `site/cold-start.html`,
