@@ -1,0 +1,598 @@
+<title>Mines Already Cleared</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap">
+
+<style>
+  /* Palette and type inherited from lookedright.tonydefazio.com so this document and
+     the page it describes read as one system. Light is the base; dark redefines tokens
+     only. One typeface (IBM Plex), hierarchy carried by weight and italic, not size. */
+  :root {
+    --ground:  #FAFBFC;
+    --surface: #FFFFFF;
+    --sunk:    #F2F5F8;
+    --ink:     #171C23;
+    --muted:   #5C6875;
+    --faint:   #6A7583;
+    --rule:    #E1E6EB;
+    --rule-firm: #C9D2DB;
+    --accent:  #15577D;
+    --accent-soft: #E7F0F6;
+    --caution: #8A5D0F;
+    --caution-soft: #FAF2E2;
+    --shadow: 0 1px 2px rgba(23,28,35,.05), 0 8px 24px -16px rgba(23,28,35,.28);
+
+    --sans: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    --t-head:  25px;
+    --t-body:  16px;
+    --t-label: 11px;
+    --t-mono:  calc(var(--t-body) * .875);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:  #0D1218;
+      --surface: #141A22;
+      --sunk:    #1A222B;
+      --ink:     #E3E8EE;
+      --muted:   #93A0AE;
+      --faint:   #7C8896;
+      --rule:    #232C36;
+      --rule-firm: #313D4A;
+      --accent:  #69B0DD;
+      --accent-soft: #16283A;
+      --caution: #D2A64E;
+      --caution-soft: #2A2213;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.7);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:  #0D1218;
+    --surface: #141A22;
+    --sunk:    #1A222B;
+    --ink:     #E3E8EE;
+    --muted:   #93A0AE;
+    --faint:   #7C8896;
+    --rule:    #232C36;
+    --rule-firm: #313D4A;
+    --accent:  #69B0DD;
+    --accent-soft: #16283A;
+    --caution: #D2A64E;
+    --caution-soft: #2A2213;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.7);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: var(--t-body);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 61rem; margin: 0 auto; padding: 3.5rem 1.5rem 6rem; }
+
+  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: var(--t-label);
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin: 0 0 .6rem;
+  }
+
+  h1 {
+    font-size: var(--t-head);
+    font-weight: 600;
+    letter-spacing: -.01em;
+    margin: 0 0 .7rem;
+    text-wrap: balance;
+  }
+
+  .standfirst { margin: 0; max-width: 42rem; color: var(--muted); }
+  .standfirst b { color: var(--ink); font-weight: 600; }
+
+  header.mast { border-bottom: 1px solid var(--rule-firm); padding-bottom: 1.6rem; margin-bottom: 2rem; }
+
+  /* ---- summary strip ---------------------------------------------------- */
+  .strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 2.5rem;
+  }
+  .stat { background: var(--surface); padding: .95rem 1.05rem; }
+  .stat .n {
+    font-family: var(--mono);
+    font-size: var(--t-head);
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    display: block;
+    line-height: 1.1;
+  }
+  .stat .k {
+    font-family: var(--mono);
+    font-size: var(--t-label);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--faint);
+    display: block;
+    margin-top: .35rem;
+  }
+
+  /* ---- the four classes, defined before they are used -------------------- */
+  .primer { margin: 0 0 3rem; }
+  .primer > h2 {
+    font-size: var(--t-body);
+    font-weight: 600;
+    margin: 0 0 .35rem;
+  }
+  .primer > .sub { margin: 0 0 1.3rem; color: var(--muted); max-width: 44rem; }
+
+  .defs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .def {
+    background: var(--surface);
+    padding: 1.1rem 1.15rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+  }
+  .def .term {
+    font-family: var(--mono);
+    font-size: var(--t-label);
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0;
+  }
+  .def h3 {
+    font-size: var(--t-body);
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.35;
+    text-wrap: balance;
+  }
+  .def p { margin: 0; color: var(--muted); }
+  .def .looks {
+    margin-top: auto;
+    padding-top: .55rem;
+    border-top: 1px dotted var(--rule-firm);
+    font-style: italic;
+    color: var(--faint);
+  }
+  .def a.jump {
+    font-family: var(--mono);
+    font-size: var(--t-label);
+    text-decoration: none;
+    color: var(--accent);
+  }
+  .def a.jump:hover { text-decoration: underline; }
+
+  /* ---- class sections --------------------------------------------------- */
+  section.cls { margin-bottom: 3rem; scroll-margin-top: 1.5rem; }
+
+  .cls-head { border-bottom: 1px solid var(--rule-firm); padding-bottom: .55rem; margin-bottom: 0; }
+  .cls-head h2 {
+    font-size: var(--t-body);
+    font-weight: 600;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: .6rem;
+  }
+  .cls-head .say {
+    font-weight: 400;
+    font-style: italic;
+    color: var(--muted);
+  }
+
+  .rows { display: flex; flex-direction: column; }
+
+  .row {
+    display: grid;
+    grid-template-columns: minmax(13rem, 15rem) 1fr minmax(7rem, 9rem);
+    gap: 1.25rem;
+    padding: 1.15rem 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: start;
+  }
+  @media (max-width: 46rem) {
+    .row { grid-template-columns: 1fr; gap: .55rem; }
+  }
+
+  .tool { min-width: 0; }
+  .tool code {
+    font-family: var(--mono);
+    font-size: var(--t-mono);
+    font-weight: 500;
+    color: var(--ink);
+    overflow-wrap: anywhere;
+  }
+  .tool .home {
+    display: block;
+    font-family: var(--mono);
+    font-size: var(--t-label);
+    color: var(--faint);
+    margin-top: .3rem;
+  }
+
+  .why { min-width: 0; }
+  .why .when {
+    font-family: var(--mono);
+    font-size: var(--t-mono);
+    font-variant-numeric: tabular-nums;
+    color: var(--caution);
+    margin-right: .45rem;
+  }
+  .why p { margin: 0; }
+  .why .cost {
+    display: block;
+    margin-top: .45rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* propagation ---------------------------------------------------------- */
+  .spread { text-align: left; }
+  .pips { display: flex; gap: 2px; margin-bottom: .3rem; }
+  .pip { width: 7px; height: 14px; border-radius: 1px; background: var(--rule-firm); }
+  .pip.on { background: var(--accent); }
+  .spread .lab {
+    font-family: var(--mono);
+    font-size: var(--t-label);
+    color: var(--faint);
+    font-variant-numeric: tabular-nums;
+  }
+  .row.ported .tool code { color: var(--accent); }
+
+  /* ---- notes ------------------------------------------------------------ */
+  .note {
+    background: var(--sunk);
+    border-left: 2px solid var(--rule-firm);
+    padding: 1rem 1.15rem;
+    margin: 2rem 0 0;
+    color: var(--muted);
+    border-radius: 0 3px 3px 0;
+  }
+  .note b { color: var(--ink); }
+  .note p { margin: 0 0 .7rem; }
+  .note p:last-child { margin-bottom: 0; }
+  .note code, .why code, .standfirst code { font-family: var(--mono); font-size: var(--t-mono); }
+
+  .caution { border-left-color: var(--caution); background: var(--caution-soft); }
+
+  .lede-cls { color: var(--muted); margin: .9rem 0 .2rem; max-width: 44rem; }
+</style>
+
+<div class="wrap">
+
+  <header class="mast">
+    <p class="eyebrow">Measured 2026-09-01 · 18 repositories</p>
+    <h1>Mines Already Cleared</h1>
+    <p class="standfirst">Twenty coordination and verification instruments across one person&rsquo;s working estate. <b>None was designed in advance.</b> Each one is a shell script or a hook written after a specific failure, and each carries the date of that failure in its own header &mdash; so this table is transcribed from the tools rather than reconstructed from memory. The name is borrowed from <code>sapper</code>, which describes its own job as sweeping for <i>known mines before they ship</i>.</p>
+  </header>
+
+  <div class="strip">
+    <div class="stat"><span class="n">20</span><span class="k">Instruments</span></div>
+    <div class="stat"><span class="n">4</span><span class="k">Failure classes</span></div>
+    <div class="stat"><span class="n">7</span><span class="k">Widest spread</span></div>
+    <div class="stat"><span class="n">30</span><span class="k">Days to build all 20</span></div>
+    <div class="stat"><span class="n">1</span><span class="k">Person</span></div>
+  </div>
+
+  <!-- ============ THE FOUR CLASSES, DEFINED FIRST ============ -->
+  <section class="primer">
+    <h2>Four ways this goes wrong</h2>
+    <p class="sub">Every instrument below was built after one of these happened. <b>None of them is a bug in the ordinary sense</b> &mdash; in each case the code ran, the tool worked, and nobody was careless. That is what makes them expensive to find.</p>
+
+    <div class="defs">
+
+      <div class="def">
+        <p class="term">Concurrency</p>
+        <h3>Nobody can see anybody else</h3>
+        <p>Several agent sessions work in one project at the same time. Each starts from nothing, and none can observe the others.</p>
+        <p class="looks">Two sessions solve the same problem twice. Or both pick &ldquo;the next free number&rdquo; and pick the same one.</p>
+        <a class="jump" href="#concurrency">7 instruments &rarr;</a>
+      </div>
+
+      <div class="def">
+        <p class="term">Retrieval</p>
+        <h3>The rule was written down and nobody read it</h3>
+        <p>The instruction existed, in the right file, and was correct. Nothing put it in front of the reader at the moment the decision was made.</p>
+        <p class="looks">A rule in the project instructions file is skipped &mdash; not defied, just never surfaced.</p>
+        <a class="jump" href="#retrieval">5 instruments &rarr;</a>
+      </div>
+
+      <div class="def">
+        <p class="term">Verification</p>
+        <h3>The check passed and meant nothing</h3>
+        <p>A test went green, a gate let something by, a review came back complete. None of them was looking at the thing that was actually wrong.</p>
+        <p class="looks">Everything reports success, and the work is still broken. The tool was never wrong &mdash; it answered a different question.</p>
+        <a class="jump" href="#verification">4 instruments &rarr;</a>
+      </div>
+
+      <div class="def">
+        <p class="term">Staleness</p>
+        <h3>The copy was out of date</h3>
+        <p>Something useful was borrowed into a second place. Then the original moved on, and nothing compared them again.</p>
+        <p class="looks">A rule is followed correctly &mdash; from a copy made before the rule changed.</p>
+        <a class="jump" href="#staleness">3 instruments &rarr;</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ CONCURRENCY ============ -->
+  <section class="cls" id="concurrency">
+    <div class="cls-head">
+      <h2>Concurrency <span class="say">&mdash; several sessions, one checkout, and none of them can see the others</span></h2>
+    </div>
+    <p class="lede-cls">Every session starts from nothing and cannot observe its siblings. These are the instruments that give it somewhere to look.</p>
+
+    <div class="rows">
+
+      <div class="row">
+        <div class="tool"><code>push-goes-where-you-are.sh</code><span class="home">short-course · hook</span></div>
+        <div class="why">
+          <p><span class="when">2026-08-27 23:13</span>One session had worked on <code>master</code> all evening. At 23:11 a different session, in the same checkout, created a branch and switched to it. The first session committed and ran <code>git push origin master</code> &mdash; which <b>succeeded, printed nothing wrong, and moved nothing.</b></p>
+          <span class="cost">Costs: a gate that fires on push.</span>
+        </div>
+        <div class="spread"><div class="pips"><span class="pip on"></span></div><span class="lab">1 repo</span></div>
+      </div>
+
+      <div class="row">
+        <div class="tool"><code>session_identity.sh</code><span class="home">interface2 · short-course</span></div>
+        <div class="why">
+          <p><span class="when">2026-08-27</span>Four sessions in one checkout on one branch. The sibling repo addresses a session by its branch, on the ground that one branch to one worktree to one session is already the rule. <b>That rule did not hold here</b>, and the difference is the whole reason the second version exists.</p>
+          <span class="cost">Costs: one call at session start.</span>
+        </div>
+        <div class="spread"><div class="pips"><span class="pip on"></span><span class="pip on"></span></div><span class="lab">2 repos</span></div>
+      </div>
+
+      <div class="row">
+        <div class="tool"><code>worktree.sh</code><span class="home">short-course</span></div>
+        <div class="why">
+          <p><span class="when">2026-08-30</span>Stated plainly by the author: <i>&ldquo;there are always many sessions in a repo.&rdquo;</i> One session, one branch, one worktree &mdash; made a command rather than a convention.</p>
+          <span class="cost">Costs: one command to open, one to close.</span>
+        </div>
+        <div class="spread"><div class="pips"><span class="pip on"></span></div><span class="lab">1 repo</span></div>
+      </div>
+
+      <div class="row">
+        <div class="tool"><code>next_adr.sh</code><span class="home">interface2</span></div>
+        <div class="why">
+          <p><span class="when">2026-08-02</span>The decision series had <b>eight numbers used by more than one unrelated record</b>, and 0009 by three. Every collision had the same cause: a session picked the next number after the highest one it could see, and what it could see was its own branch.</p>
+          <span class="cost">Costs: one call instead of counting.</span>
+        </div>
+        <div class="spread"><div class="pips"><span class="pip on"></span></div><span class="lab">1 repo</span></div>
+      </div>
+
+      <div class="row">
+        <div class="tool"><code>next_sap.sh</code><span class="home">interface2</span></div>
+        <div class="why">
+          <p><span class="when">2026-08-05</span>Two sessions independently designed, verified and wrote up a rule numbered SAP019 &mdash; two different rules. Neither could see the other, nothing arbitrated it, and the collision was found by accident.</p>
+          <span class="cost">Costs: one call instead of counting.</span>
+        </div>
+        <div class="spread"><div class="pips"><span class="pip on"></span></div><span class="lab">1 repo</span></div>
+      </div>
+
+      <div class="row">
+        <div class="tool"><code>claim.sh</code><span class="home">short-course</span></div>
+        <div class="why">
+          <p><span class="when">2026-08-27</span>Two sessions wrote a case file about the <b>same incident, four minutes apart.</b> Nothing was lost and nobody was careless &mdash; there was simply no place to look.</p>
+          <span class="cost">Costs: one line before starting.</span>
+        </div>
+        <div class="spread"><div class="pips"><span class="pip on"></span></div><span class="lab">1 repo</span></div>
+      </div>
+
+      <div class="row">
+        <div class="tool"><code>require-commit-before-message.sh</code><span class="home">bugarach · vendored</span></div>
+        <div class="why">
+          <p>Messages between sessions are socket traffic. Nothing persists them, nothing versions them, and when a session exits <b>its half of every conversation is gone.</b> Sessions had repeatedly worked out a real finding in conversation and lost it.</p>
+          <span class="cost">Costs: commit before you tell anyone.</span>
+        </div>
+        <div class="spread"><div class="pips"><span class="pip on"></span></div><span class="lab">1 repo</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ RETRIEVAL ============ -->
+  <section class="cls" id="retrieval">
+    <div class="cls-head">
+      <h2>Retrieval <span class="say">&mdash; the rule existed, was correct, and nobody read it</span></h2>
+    </div>
+    <p class="lede-cls">The largest class, and the one that looks least like a bug. Nothing here was ignored; it was never surfaced. The repair is always the same shape &mdash; move the rule to the moment of the decision.</p>
+
+    <div class="rows">
+
+      <div class="row ported">
+        <div class="tool"><code>session-start.sh</code><span class="home">7 repos · vendored from interface2</span></div>
+        <div class="why">
+          <p>A briefing injected into the session&rsquo;s context at every start and resume, deriving the repo name and sibling worktrees itself so a consumer copies it unchanged. <b>The most-ported instrument in the estate</b>, alongside the heredoc gate.</p>
+          <span class="cost">Costs: nothing. It fires without being remembered.</span>
+        </div>
+        <div class="spread"><div class="pips"><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span></div><span class="lab">7 repos</span></div>
+      </div>
+
+      <div class="row">
+        <div class="tool"><code>guard_branch.sh</code><span class="home">bugarach</span></div>
+        <div class="why">
+          <p><i>&ldquo;Never commit on main&rdquo;</i> was written as prose in the instructions file and again in the protocol document. <b>Prose in an instructions file does not reliably change behaviour</b> &mdash; it is long, it is read before there is anything to attach it to, and it gets skipped.</p>
+          <span class="cost">Costs: a refused commit.</span>
+        </div>
+        <div class="spread"><div class="pips"><span class="pip on"></span></div><span class="lab">1 repo</span></div>
+      </div>
+
+      <div class="row">
+        <div class="tool"><code>sapper</code><span class="home">interface2 (.sh) · bugarach (.py)</span></div>
+        <div class="why">
+          <p>The gotcha documents record traps that already cost real time. Prose does not stop them recurring, because <b>a session reads the rule at startup and writes the trap two hundred turns later.</b> The mechanizable ones move to a gate that fires at commit time.</p>
+          <span class="cost">Costs: a commit-time sweep.</span>
+        </div>
+        <div class="spread"><div class="pips"><span class="pip on"></span><span class="pip on"></span></div><span class="lab">2 repos</span></div>
+      </div>
+
+      <div class="row">
+        <div class="tool"><code>the-folder-is-the-input.sh</code><span class="home">bugarach · hook</span></div>
+        <div class="why">
+          <p>A session reaching for a data store is told which folder to read before the command runs. <b>It has two branches, and the second exists because the first was not enough:</b> one catches a session that has decided to read a store, the other catches one that is simply lost &mdash; the state that produces the first, and which nothing addressed until one day after the file shipped.</p>
+          <span class="cost">Costs: an intercepted command.</span>
+        </div>
+        <div class="spread"><div class="pips"><span class="pip on"></span></div><span class="lab">1 repo</span></div>
+      </div>
+
+      <div class="row">
+        <div class="tool"><code>doubt.sh</code><span class="home">short-course</span></div>
+        <div class="why">
+          <p><span class="when">2026-08-29</span>Six claims in one afternoon that nobody could stand behind &mdash; an unconfirmed cap, three token totals disagreeing eightfold, an attribution inferred from timestamps. <b>Every one was correctly flagged in prose, in a different document</b>, and prose flags do not survive being read once.</p>
+          <span class="cost">Costs: about twenty seconds, and owes nobody a decision.</span>
+        </div>
+        <div class="spread"><div class="pips"><span class="pip on"></span></div><span class="lab">1 repo</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ VERIFICATION ============ -->
+  <section class="cls" id="verification">
+    <div class="cls-head">
+      <h2>Verification <span class="say">&mdash; the check ran, passed, and proved nothing</span></h2>
+    </div>
+    <p class="lede-cls">The most expensive class to find, because everything looks green. In none of these was the tool wrong; each was answering a question nobody had checked was the right one.</p>
+
+    <div class="rows">
+
+      <div class="row">
+        <div class="tool"><code>mutation_check.sh</code><span class="home">short-course</span></div>
+        <div class="why">
+          <p><span class="when">2026-08-28</span>Three small tools had shipped the previous day, each with a selftest, all three green. Two were then mutated on purpose to prove the tests had teeth. <b>They did not.</b></p>
+          <span class="cost">Costs: break each tool deliberately and require its own test to go red.</span>
+        </div>
+        <div class="spread"><div class="pips"><span class="pip on"></span></div><span class="lab">1 repo</span></div>
+      </div>
+
+      <div class="row ported">
+        <div class="tool"><code>murderboard_roster.sh</code><span class="home">4 repos · vendored</span></div>
+        <div class="why">
+          <p>The review process says every role runs on every deliverable, and that a role with nothing to check must say so. Both sentences are prose addressed to the reviewer. Nothing read the finished report &mdash; so <b>a run that fired 7 of 11 roles and a run that fired all 11 produced reports indistinguishable to the reader.</b></p>
+          <span class="cost">Costs: the roster is derived from the process file, not typed.</span>
+        </div>
+        <div class="spread"><div class="pips"><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span></div><span class="lab">4 repos</span></div>
+      </div>
+
+      <div class="row">
+        <div class="tool"><code>merge_when_green.sh</code><span class="home">bugarach</span></div>
+        <div class="why">
+          <p><code>gh pr merge --auto</code> waits for <i>required</i> status checks. With no branch protection nothing is required, so auto-merge fires instantly and the pull request gates nothing. That was live for a whole session: <b>every PR merged about ninety seconds before its own CI finished. They all passed, so it looked fine.</b></p>
+          <span class="cost">Costs: a merge that waits for the answer.</span>
+        </div>
+        <div class="spread"><div class="pips"><span class="pip on"></span></div><span class="lab">1 repo</span></div>
+      </div>
+
+      <div class="row">
+        <div class="tool"><code>check_pointers.sh</code><span class="home">short-course</span></div>
+        <div class="why">
+          <p><span class="when">2026-08-28</span>Two broken repo-relative pointers appeared on the trunk <b>within two hours</b>, both written by sessions that were being careful. Every path named in a markdown file must resolve.</p>
+          <span class="cost">Costs: one sweep of the working tree.</span>
+        </div>
+        <div class="spread"><div class="pips"><span class="pip on"></span></div><span class="lab">1 repo</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ STALENESS ============ -->
+  <section class="cls" id="staleness">
+    <div class="cls-head">
+      <h2>Staleness <span class="say">&mdash; the copy was old, and nothing said so</span></h2>
+    </div>
+    <p class="lede-cls">Vendoring a working instrument into a second repository solves one problem and creates this one. Every repo that borrows a tool inherits the question of whether its copy still matches.</p>
+
+    <div class="rows">
+
+      <div class="row ported">
+        <div class="tool"><code>murderboard_freshness.sh</code><span class="home">6 repos · vendored</span></div>
+        <div class="why">
+          <p>Step 0 of the review process tells a reviewer to confirm the process is current before running it &mdash; prose, so it fires only if someone remembers. The one time nobody did, <b>a deck shipped a slide-overlap defect using a copy that predated the slide-overlap rule. The rule existed. The copy was old. Nothing said so.</b></p>
+          <span class="cost">Costs: one check against upstream.</span>
+        </div>
+        <div class="spread"><div class="pips"><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span></div><span class="lab">6 repos</span></div>
+      </div>
+
+      <div class="row">
+        <div class="tool"><code>check_dated_ui.sh</code><span class="home">short-course</span></div>
+        <div class="why">
+          <p><span class="when">2026-08-30</span>A published step that names a vendor&rsquo;s button must say when that was true. Found by walking a 34-step runbook end to end for the first time: the publishing phase was budgeted at twenty minutes and called the easy part, and <b>it was stopped seven times.</b></p>
+          <span class="cost">Costs: a date beside every button name.</span>
+        </div>
+        <div class="spread"><div class="pips"><span class="pip on"></span></div><span class="lab">1 repo</span></div>
+      </div>
+
+      <div class="row">
+        <div class="tool"><code>site_staleness.py</code><span class="home">bugarach</span></div>
+        <div class="why">
+          <p>How far behind the trunk is the page the public is actually reading? A live page and its source drift silently, and nothing else in the build notices.</p>
+          <span class="cost">Costs: one query.</span>
+        </div>
+        <div class="spread"><div class="pips"><span class="pip on"></span></div><span class="lab">1 repo</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ ONE OF A KIND ============ -->
+  <section class="cls">
+    <div class="cls-head">
+      <h2>A class of one <span class="say">&mdash; the tool itself corrupts the work, silently</span></h2>
+    </div>
+
+    <div class="rows">
+      <div class="row ported">
+        <div class="tool"><code>no-heredoc-source.sh</code><span class="home">7 repos · hook</span></div>
+        <div class="why">
+          <p>Shell heredocs mangle string escapes on the way to disk, and <b>the result still looks right in a diff.</b> Two MATLAB files in one session: <code>\r</code> read as a carriage return, <code>\n</code> became a literal newline that terminated a string early, the script stopped parsing, and every figure silently failed. The gate refuses to write source through a heredoc at all.</p>
+          <span class="cost">Costs: use the file tools instead.</span>
+        </div>
+        <div class="spread"><div class="pips"><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span></div><span class="lab">7 repos</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ NOTES ============ -->
+  <div class="note">
+    <p><b>What the spread column means, and why it is the interesting one.</b> An instrument in seven repositories was worth carrying six times. The four that travelled &mdash; a session briefing, a heredoc gate, a freshness check and a roster check &mdash; are not the clever ones; they are the ones that fire without being remembered. <b>Every instrument that stayed in one repository requires somebody to invoke it.</b> That is the whole finding of the table, and it was not designed in: it is what the counts came back saying.</p>
+  </div>
+
+  <div class="note">
+    <p><b>Method.</b> Counted 2026-09-01 across eighteen local repositories with <code>find</code>, <code>git rev-list</code> and <code>git branch --no-merged</code>. Origin failures are quoted or condensed from each tool&rsquo;s own header comment, which is where this estate records them; nothing here is reconstructed from memory. Duplicate hits from <code>-worktrees</code> checkouts are collapsed, so a count is repositories rather than working copies.</p>
+    <p><b>The thirty days is a first-appearance date, and that is not the same as an authorship date.</b> Every one of the twenty entered git between 2026-08-01 and 2026-08-30, measured with <code>git log --diff-filter=A</code>. For a vendored tool that date is when the copy <i>arrived in that repository</i>, so four of them are older upstream than they look here. The window is real; the attribution inside it is approximate, and this sentence is the correction that would otherwise have to be made later.</p>
+    <p><b>What was excluded, and the criterion.</b> One repository carries ninety files under <code>tools/</code>; most are analysis and figure scripts (<code>make_*_figure.py</code>, <code>probe_*.py</code>) and are not instruments in this sense. The line drawn here is: <b>does it check, gate, coordinate or retrieve?</b> Analysis code that produces a result is out; a script whose whole job is to notice something is in. That criterion is a judgement and a different one would change the count of twenty.</p>
+  </div>
+
+  <div class="note caution">
+    <p><b>Not verified.</b> These headers were read, not run. No selftest was executed for this table, and <code>mutation_check.sh</code> exists precisely because a green selftest has already turned out to prove nothing here. The dates are as each tool states them, and a tool that misdates its own origin would carry the error straight into this table uncorrected.</p>
+    <p><b>Also not shown:</b> what any of it failed to catch. Unmerged branches across these repositories run from 14% to 88%, and no instrument in this table addresses branch hygiene. A ledger of cleared mines is not a map of the field.</p>
+  </div>
+
+</div>
