@@ -266,17 +266,17 @@
 <div class="page">
   <div class="draft">
     <b class="draft-k">This is not a git tutorial and will not make you competent</b>
-    <p>It defines <b>the dozen words the other sheets use</b>, so that a sentence like &ldquo;commit and push this&rdquo; stops being an incantation. That is the whole of its ambition. It leaves out most of git on purpose, <b>the omissions are listed near the bottom rather than left for you to discover</b>, and the last section is where to go when you have outgrown this one &mdash; which will not take long.</p>
+    <p>It defines <b>the dozen words the other sheets use</b>, so that a sentence like &ldquo;commit and push this&rdquo; stops being an incantation, and it makes the case that the rest of this is a job to hand over. That is the whole of its ambition. It leaves out most of git on purpose, <b>the omissions are listed near the bottom rather than left for you to discover</b>, and the last section is where to go when you have outgrown this one &mdash; which will not take long.</p>
   </div>
 
   <header class="mast">
     <p class="eyebrow"><a href="/" class="home">&larr;&nbsp;It Looked Right</a> &middot; Companion sheet &middot; <a href="https://lookedright.tonydefazio.com/cold-start">Cold Start</a></p>
     <h1>Enough Git</h1>
-    <p class="standfirst">The words the other sheets use, in plain language &mdash; what git is for, the four things you will actually do, and what to read when this stops being enough.</p>
-    <p class="pv">Version <b>0.1.1</b> &middot; 1 Sep 2026<span class="pv-born">First published 1 Sep 2026</span></p>
+    <p class="standfirst">Enough to read what your agent tells you it did &mdash; what git is for, the dozen words, and why keeping a repository tidy is a job you can hand over rather than learn.</p>
+    <p class="pv">Version <b>0.1.2</b> &middot; 1 Sep 2026<span class="pv-born">First published 1 Sep 2026</span></p>
   </header>
 
-  <p class="lede"><b>You do not have to learn git to start.</b> An agent will run it for you, and on the browser route in <a href="https://lookedright.tonydefazio.com/cold-start"><i>Cold Start</i></a> you never type a command at all. But it will <i>report</i> what it did in these words, and a report you cannot read is not a report. This page is so you can read them.</p>
+  <p class="lede"><b>You do not have to learn git, and you are not going to be graded on it.</b> Running it is something a coding agent does well, and on the browser route in <a href="https://lookedright.tonydefazio.com/cold-start"><i>Cold Start</i></a> you never type a command at all. What you cannot hand over is <b>reading the report</b> &mdash; because it comes back in these words, and a report you cannot read is not a report. That is what this page is for, and it is a smaller job than learning git.</p>
 
   <h2>What it is for</h2>
 
@@ -288,6 +288,53 @@
     <p><b>The one thing worth understanding before any of the words.</b> Git is not a backup and it is not a sync service. Dropbox and its equivalents keep <i>the current state</i> of a folder and quietly overwrite what was there before. Git keeps <b>a chain of deliberate snapshots, each one labelled by a person</b>, and never overwrites an earlier one.</p>
     <p>That difference is the whole reason a research project wants it: <i>&ldquo;when did this figure change, and what else changed at the same time?&rdquo;</i> is answerable in one and not in the other.</p>
   </div>
+
+  <h2>You do not have to get good at this</h2>
+
+  <p><b>Keeping a repository tidy is one of the things a coding agent is genuinely good at</b> &mdash; better than most people are in their first year, and it is unglamorous work that it does not mind doing. Setting up the remote, writing commit notes that say what actually changed, a sensible <code>.gitignore</code>, noticing the file that should not be going up, splitting one sprawling change into commits that each make sense on their own, naming a branch after what it is for.</p>
+
+  <p><b>Once the credentials are in place, this is asked for in ordinary words.</b> There is no syntax to learn. Real requests, in the form you would actually type them:</p>
+
+  <ul class="plain">
+    <li><b>&ldquo;Commit this, and write the note so it says what changed and why.&rdquo;</b></li>
+    <li><b>&ldquo;Set up a <code>.gitignore</code> for this project. Tell me what you excluded and why.&rdquo;</b></li>
+    <li><b>&ldquo;Is anything staged that should not be public?&rdquo;</b>
+      <span class="sub">Worth asking before every push for the first few weeks.</span></li>
+    <li><b>&ldquo;Split what I just did into separate commits, one per thing.&rdquo;</b></li>
+    <li><b>&ldquo;What have I got that has not been pushed?&rdquo;</b></li>
+    <li><b>&ldquo;Summarise what changed in this project this week.&rdquo;</b>
+      <span class="sub">This is the one that makes a history worth keeping pay for itself.</span></li>
+  </ul>
+
+  <h3>What &ldquo;credentials&rdquo; means, per route</h3>
+
+  <p>The one prerequisite. Until it is done the agent can read and commit but cannot send anything up, and the failure is a permissions error that does not explain itself.</p>
+
+  <ul class="plain">
+    <li><b>Browser route</b> &mdash; you connected your GitHub account when you picked the repository. That is it; it is already done.
+      <span class="sub"><i>Cold Start</i> W3.</span></li>
+    <li><b>Laptop or cluster route</b> &mdash; signing in once per machine, usually with <code>gh auth login</code>, which opens a browser and hands the terminal a token.
+      <span class="sub"><i>Cold Start</i> 3.3. Once per machine, not once per project.</span></li>
+  </ul>
+
+  <div class="flag">
+    <p><b>Do not paste a token or a password into a chat to fix this.</b> If pushing fails for an authentication reason, the repair is to run the sign-in again, not to hand over a credential. A secret pasted into a session may end up in a log, in a commit, or in a file you did not know it wrote.</p>
+  </div>
+
+  <h3>What stays yours</h3>
+
+  <p>Delegating the mechanics is not the same as delegating the judgement, and this page would be arguing against the rest of the course if it pretended otherwise. Three things do not transfer:</p>
+
+  <ul class="plain">
+    <li><b>Reading the diff before it becomes a commit</b>
+      <span class="sub">The agent decides what to change; you decide whether that is what you wanted. A commit is where a change stops being easy to reverse.</span></li>
+    <li><b>Knowing whether the note is true</b>
+      <span class="sub">It will write a fluent note describing what it believes it did. That is a different thing from what it did, and you are the only one in a position to notice the gap.</span></li>
+    <li><b>Deciding what must never be committed</b>
+      <span class="sub">Participant data, a key, an unpublished result. The agent does not know which of your files those are unless you tell it &mdash; and once something is in the history, taking it out is a real job.</span></li>
+  </ul>
+
+  <p><b>So the reason to read the next section is not that you will be typing these commands.</b> It is that you will be reading them in a report, and approving them.</p>
 
   <h2>The words</h2>
 
@@ -383,7 +430,7 @@
 
   <ul class="plain">
     <li><b>Undoing things</b> &mdash; <code>revert</code>, <code>reset</code>, <code>restore</code>, and the difference between them, which is the single most common thing people search for
-      <span class="sub">The honest advice for your first month: ask the agent, and ask it to explain what the command will do before it runs it.</span></li>
+      <span class="sub">This is the clearest case for handing it over: describe the state you want to get back to, in words, and ask it to explain what the command will do <i>before</i> it runs. The commands are unforgiving and the explanations are cheap.</span></li>
     <li><b>Branching and merging as a way of working</b> &mdash; the whole topic, beyond the one-line definition above</li>
     <li><b>Pull requests, review, and working with other people&rsquo;s repositories</b> &mdash; forks, review comments, everything social</li>
     <li><b>Resolving a merge conflict</b> &mdash; what to actually do when you are in one</li>
