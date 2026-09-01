@@ -694,6 +694,15 @@ comes back unable to identify itself to the one record that knows what it was do
 use — the header presents the fragment as a way to pick between *several* of your own claims, not
 as the escape hatch for an address that moved.
 
+**Sent to `armory` 2026-09-01, with a blast radius this finding did not have.** Measured against
+armory's collection, four tools compose an identity or a board heading from `hostname`: both
+copies of `session_identity.sh` and two of `bugarach`'s board tools. **And the two identity
+variants fail differently on the same line for a reason that is not in either file** —
+`interface2` parses a fixed lab workstation's name, this repo runs on a laptop whose name follows
+the network. So the defect is live in one and dormant in the other, decided by the hardware
+rather than by the repo, which is a case armory's universal/configured/local split does not
+currently express. See armory's `HANDOFF.md`.
+
 **Decisions, none taken.**
 
 1. **Key the address on something that does not move.** The session id alone is already unique;

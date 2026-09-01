@@ -1944,3 +1944,21 @@ not maintained by hand.
 
 **Neither idea is claimed and neither is scheduled.** They are here so they survive the walk
 back to the computer.
+
+### A third idea, sent elsewhere the same day — a broadcast channel
+
+**Not stored here, because it does not belong here.** One human runs ~18 concurrent sessions and
+has no way to say one thing to all of them — *"I am offline for three hours, do not start
+anything that needs a decision from me."* Today that reaches whichever session he is typing in
+and no other.
+
+**It went to `armory` rather than being built here, and the reason is armory's own count:** of
+twenty coordination instruments in this estate, fourteen live in exactly one repo, and the six
+that travelled all **fire automatically**. A broadcast channel is a hook, so it is in the class
+that travels — and one built here, reaching only this repo's sessions, is a contradiction in
+terms. Sent 2026-09-01 with the N7 diagnosis; see armory's `HANDOFF.md`.
+
+**Flagged there, and worth repeating here: the broadcast channel is not the fix for N7.** An
+alarm needs the human to predict the event and remember to arm it, and the rename also happens
+on wake and on joining a different network without going anywhere. It is a tier-2 notice for
+something with a tier-4 fix already written down and untaken.
