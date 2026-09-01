@@ -54,6 +54,10 @@ META = {
         "browser, VS Code on your laptop, or a cluster and other people — and the page shows "
         "only the steps your answer needs, each a checklist that stays red until it is done.",
         "\U0001F9CA"),
+    "enough-git.html": (
+        "The dozen git words the other sheets use, in plain language — what git is for, the "
+        "four things you will actually do, and where to read properly when this stops being "
+        "enough. Deliberately not a tutorial.", "\U0001F5C3"),
     "search-to-shipped.html": (
         "Zero to a deployed web app for a researcher who has never written software \u2014 "
         "every step in order, with the condition that tells you it worked.", "\U0001F6A2"),
