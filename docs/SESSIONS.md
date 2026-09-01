@@ -2029,3 +2029,26 @@ risks in the file.
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Tonys-MacBook-Pro/59c48a26 — Cold Start tier-filter repair: skip-button labels overwritten at runtime, 7.3 uncompletable on the browser route, wrong derived step/phase counts, W1/1.1 duplication, untagged single-route prose
+- **Status:** ACTIVE
+- **Opened:** 2026-09-01
+- **Branch when opened:** `cold-start-tier-repair` — a fact, not an identity; it may move under you
+- **Writes:** `docs/handouts/cold-start.html`, `tools/build_site.sh`, `site/cold-start.html`,
+  `docs/handouts/README.md`, `HANDOFF.md`. Repo only — nothing in the darkroom.
+- **Notes:** The tier filter landed on the **steps** on 2026-08-31 (`d5c0723`) and on almost
+  nothing else, so the page is a three-route skeleton wearing a single-route skin. This claim is
+  the repair of that gap. Three things another session must know before touching the file:
+  **(1)** `paint()` used to overwrite every skip button's authored label with one hardcoded
+  Cloudflare/GitHub pair — so 1.3, *research storage*, offered *"Not needed — I chose
+  Cloudflare"* on the live page. The label is now authored: a `.skipbtn`'s own text and its
+  `data-undo` are load-bearing content, not decoration. **(2)** Box-level `data-tiers` is new.
+  `paint()` counts only boxes not inside a `[data-off="1"]`, and `applyTier` repaints before it
+  counts. A new box with no `data-tiers` belongs to all three routes; that is the default and it
+  is usually right. **(3)** `V3_MAP` is untouched and stays untouched — it describes a document
+  that no longer exists. **NOT DEPLOYED:** Tony reviews before `wrangler deploy`.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
