@@ -69,6 +69,32 @@ if [ "$MODE" = "--selftest" ]; then
     if grep -q 'ok-step' "$T/out"; then
         echo "  FAIL a healthy step was reported as broken"; echo FAIL; exit 1
     else echo "  ok   a healthy step is not reported"; fi
+
+    # A SECOND FIXTURE, because the dangling-reference check must be shown to fail on its
+    # own and not ride on the first one's exit code. Two steps, both completable, and one
+    # sentence naming a step that only the cluster route is shown.
+    printf '%s' '<section class="phase"><h2>Phase 1</h2>
+<p>Everything here is fine, but see step 6.1 for the rest.</p>
+<ol class="steps">
+<li data-key="a-step" data-id="1.1" data-tiers="min mid max">
+<ul class="checks"><li><button class="cb" data-key="a"></button></li></ul></li>
+</ol></section>
+<section class="phase"><h2>Phase 6</h2>
+<ol class="steps">
+<li data-key="far-step" data-id="6.1" data-tiers="max">
+<ul class="checks"><li><button class="cb" data-key="b"></button></li></ul></li>
+</ol></section>
+' > "$T/refs.html"
+    if SRC="$T/refs.html" sh "$0" --check >"$T/refout" 2>&1; then
+        echo "  FAIL a reference to a step the route never shows was passed"; echo FAIL; exit 1
+    else echo "  ok   a reference to a hidden step is caught"; fi
+    if grep -q 'browser route.*names step 6.1' "$T/refout" \
+       && ! grep -q 'cluster route.*names step 6.1' "$T/refout"; then
+        echo "  ok   caught on the routes that hide it, not on the one that shows it"
+    else
+        echo "  FAIL the dangling reference was misattributed across routes"
+        cat "$T/refout"; echo FAIL; exit 1
+    fi
     echo PASS; exit 0
 fi
 
@@ -95,7 +121,7 @@ def attr(tag, name):
     m = re.search(r'\b%s="([^"]*)"' % name, tag)
     return m.group(1) if m else None
 
-steps, unknown = [], []
+steps, unknown, seg_of = [], [], {}
 for i, m in enumerate(marks):
     tag = m.group(0)
     seg = s[bounds[i]:bounds[i + 1]]
@@ -139,6 +165,7 @@ for i, m in enumerate(marks):
         for t in b["tiers"]:
             if t not in TIERS:
                 unknown.append((st["id"], b["key"], t))
+    seg_of[st["key"]] = seg
     steps.append(st)
 
 problems = []
@@ -148,6 +175,64 @@ for t in TIERS:
         liveb = [b for b in st["boxes"] if t in b["tiers"]]
         if not liveb:
             problems.append((t, st, "no box this route can tick"))
+
+# ---------------------------------------------------------------------------------------
+# IT HAS TO HIDE THINGS THE WAY THE PAGE HIDES THEM, or it invents defects. The first
+# version stripped tier-hidden elements with a non-greedy `.*?</tag>`, which stops at the
+# first close tag of ANY depth, and it never elided a phase whose steps had all gone. It
+# reported seventeen problems against a page with none -- "Phase 2", "W5", "W1" -- every one
+# of them text the route in question cannot see. A check with a false-positive rate that
+# high is worse than no check: it teaches you to skip the output.
+def visible(tier):
+    """The HTML one route actually renders: applyTier's two rules, in order."""
+    out = re.sub(r"<!--.*?-->", "", s, flags=re.S)
+    out = re.sub(r"<(script|style)\b[^>]*>.*?</\1>", "", out, flags=re.S)
+    # rule 1: drop any element whose data-tiers excludes this route, matching tags by depth
+    while True:
+        m = re.search(r'<(\w+)([^>]*\bdata-tiers="([^"]*)"[^>]*)>', out)
+        if not m:
+            break
+        tag, tiers = m.group(1), m.group(3).split()
+        depth, pos = 1, m.end()
+        pat = re.compile(r"</?%s\b" % tag)
+        while depth and pos < len(out):
+            mm = pat.search(out, pos)
+            if not mm:
+                break
+            depth += -1 if out[mm.start():mm.start() + 2] == "</" else 1
+            pos = mm.end()
+        end = out.find(">", pos) + 1 if depth == 0 else len(out)
+        if tier in tiers:
+            keep = "<%s%s>" % (tag, re.sub(r'\s*data-tiers="[^"]*"', "", m.group(2)))
+            out = out[:m.start()] + keep + out[m.end():end] + out[end:]
+        else:
+            out = out[:m.start()] + out[end:]
+    # rule 2: a phase whose every step is gone is a heading over nothing, and goes too
+    parts, pos = [], 0
+    for m in re.finditer(r'<section class="phase">', out):
+        end = out.find("</section>", m.end())
+        if not re.search(r"<li[^>]*data-key=", out[m.end():end]):
+            parts.append(out[pos:m.start()])
+            pos = end + len("</section>")
+    parts.append(out[pos:])
+    return "".join(parts)
+
+for t in TIERS:
+    seen = visible(t)
+    shown_steps = set(re.findall(r'data-id="([0-9.]+)"', seen))
+    shown_w = set(re.findall(r'data-id="W([1-5])"', seen))
+    shown_phases = set(i.split(".")[0] for i in shown_steps)
+    flat = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", seen))
+    for rx, kind, ok in ((r"\b(?:step\s+)?([1-7]\.[1-9])\b", "step", shown_steps),
+                         (r"\bW([1-5])\b", "W", shown_w),
+                         (r"\bPhase(?:\s|&nbsp;)+([1-7])\b", "Phase", shown_phases)):
+        for m in re.finditer(rx, flat):
+            if m.group(1) in ok:
+                continue
+            ctx = flat[max(0, m.start() - 55): m.start() + 55].strip()
+            problems.append((t, {"id": "ref", "key": ctx},
+                             "names %s %s, which this route never shows"
+                             % (kind, m.group(1))))
 
 # ---------------------------------------------------------------------------------------
 # THE SMELL, AND WHY THE CHECK ABOVE IS NOT ENOUGH.
@@ -204,7 +289,7 @@ if smells and mode != "--check":
     for st in smells:
         print("    step %-4s (%s)" % (st["id"], st["key"]))
     print("    The explanation varies by route and the checklist does not. That is how")
-    print("    7.3 shipped: a warning saying the road was unavailable without a terminal,")
+    print("    7.3 shipped: a warning saying that way was unavailable without a terminal,")
     print("    above a box demanding one, with nothing marking the box as belonging to")
     print("    the routes that have one. A warning, not a verdict — a step may honestly")
     print("    explain itself three ways and ask the same thing of everybody.")
