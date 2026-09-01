@@ -3,9 +3,9 @@
 > ## 🚧 Draft — second pass 2026-08-31, and the subject is stalled rather than moving
 >
 > Every claim below is about [`bugarach`](https://github.com/syncytium2/bugarach) **PR #415**.
-> **The Point 3 defect was fixed** in [`755fee1`]. **The PR then went red and stopped** — CI has
-> failed since 20:21 on 2026-08-30, nothing has touched it since, four later PRs merged past it,
-> and the session that built it has ended. **Point 7 is why it is red**, and it is now the
+> **The Point 3 defect was fixed** in [`755fee1`]. **The PR then went red and stalled for a day** —
+> four later PRs merged past it and the session that built it ended without landing it — and
+> **merged 2026-08-31 at 10:41Z.** Point 7 is why it was red and how it resolved; it is the
 > strongest thing in this file.
 >
 > **Two corrections to this case's own earlier version are marked inline** — one to Point 3
@@ -415,10 +415,25 @@ Three things it establishes, and the third is the general one:
    the one already at its limit. That tension is the real content, and it is not resolved here.
    Every future index-style fix in a context-bound project pays this.
 
-**Status:** `main` is green; **#415 is red and has been since 20:21 on 2026-08-30**, untouched
-since, while four PRs (#416–#419) merged past it. The session that built it has ended. **The index
-is the one thing in this story that has not landed** — which is Point 1 and Point 6 arriving
-together, in the artifact built to prevent them.
+**Status, and it resolved well.** #415 was red from 20:21 on 2026-08-30 while four PRs (#416–#419)
+merged past it, and the session that built it ended without landing it. **It merged 2026-08-31 at
+10:41Z.** Two things fixed it, and the second is the one to teach:
+
+- **The budget was raised, not the content trimmed** — #418 re-ran the spill census as evidence
+  (66 refusals, smallest 10186B, safe ceiling 9186B) and moved 9000 → 9150. A later session's
+  note is the right reading of why: *a graceful degradation path is a mechanism for continuing to
+  run while wrong*, so the answer was to stop living in the degraded form, not to make the
+  content fit it.
+- **The announcement was cut to one line**, and to the right one:
+  `docs/INDEX.md FIRST — keywords.` **The address survived; the origin story went.** The
+  DANDI sentence explaining *why* the index exists was the ~90 bytes that bought the headroom —
+  which is Point 2's own rule (*nothing that changes weekly*) extended to reach: **a pointer
+  should cost what a pointer costs.**
+
+That left roughly two bytes of headroom before the cut, on a briefing whose cost varies by
+machine — a fresh clone prints more warnings and so costs ~270B more than a set-up one, meaning
+**the machine with the least context gets the largest briefing and loses content first.** Filed
+upstream as its own todo.
 
 > **⚠ This corrects a claim this session made.** After the repair I reported the fix
 > *"verified — 0 unresolved pointers."* That was true and it was not the same thing as *the fix is
