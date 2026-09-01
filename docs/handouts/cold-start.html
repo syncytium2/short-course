@@ -494,7 +494,7 @@
   <header class="mast">
     <p class="eyebrow"><a href="/" class="home">&larr;&nbsp;It Looked Right</a> &middot; Setup runbook &middot; keep this window open</p>
     <h1>Cold Start</h1>
-    <p class="standfirst">An email address and a laptop, to a first agent session that leaves a record behind it. Every step in order, the two prompts to paste, and the condition that tells you each one worked.</p>
+    <p class="standfirst">An email address to a first agent session that leaves a record behind it &mdash; by browser, by laptop, or by cluster. Every step in order, and the condition that tells you each one worked.</p>
   </header>
 
   <div class="method">
@@ -537,7 +537,7 @@
       <h2>Phase 1 &middot; Accounts</h2>
       <span class="phase-time">30 min<span data-tiers="max">, plus other people&rsquo;s time</span></span>
     </div>
-    <p class="phase-note">Two accounts, both free to create, and you need both. <b>Get the expert first, on purpose:</b> the second step is the one people find fiddly, and doing it second means there is already somebody to ask.</p>
+    <p class="phase-note"><span data-tiers="min">Two accounts, both free to create, and you need both.</span><span data-tiers="mid max">Two accounts of your own, both free to create and both required &mdash; then the institutional things somebody else controls.</span> <b>Get the expert first, on purpose:</b> the second step is the one people find fiddly, and doing it second means there is already somebody to ask.</p>
     <p class="phase-note" data-tiers="max"><b>Start this on day one even if you will not touch a keyboard for a week.</b> One thing in this phase &mdash; storage and a cluster allocation &mdash; is not yours to grant: somebody else has to approve it, and that takes days to weeks. File it now and carry on with everything below while it pends.</p>
     <ol class="steps">
       <li data-key="agent-account" data-id="1.1" data-tiers="min mid max" data-open="0" data-done="0">
@@ -568,7 +568,7 @@
                 </tr>
                 <tr>
                   <td><b>Best</b></td>
-                  <td><b>The agent inside your editor</b> &mdash; step 3.5</td>
+                  <td><b>The agent inside your editor</b><span data-tiers="mid max"> &mdash; step 3.5</span><span data-tiers="min"> &mdash; the laptop route sets this up; this one does not</span></td>
                   <td>The same folder, <b>in the editor you already work in</b>. You read the change where the file actually lives.</td>
                   <td>The same paid plan &mdash; rung 3 costs no more money than rung 2, only more setup.</td>
                 </tr>
@@ -678,19 +678,28 @@
     <ol class="steps">
       <li data-key="pick-a-rung" data-id="W1" data-tiers="min" data-open="0" data-done="0">
         <div class="srow">
-          <button class="head" type="button" aria-expanded="false" aria-controls="d-W1"><span class="n">W1</span>Pick how much of your screen the expert gets</button>
+          <button class="head" type="button" aria-expanded="false" aria-controls="d-W1"><span class="n">W1</span>Open the one you picked, and make it prove it can see you</button>
           <span class="badge">Incomplete</span>
         </div>
+        <!-- THIS STEP USED TO BE A SECOND COPY OF 1.1.
+             Both are shown on this route. W1 restated 1.1's three-rung ladder in prose and
+             then asked, word for word, for 1.1's third box: "I can say what happens when I
+             use too much: it stops, or it bills". A reader on the browser route was made to
+             answer the same question twice, four steps apart, and to tick it twice before
+             either step would go green.
+             The tier switch exists because "three pages would be three copies of one list".
+             Two steps on one page is the same defect at closer range, and it arrived in the
+             same commit as the fix. What survives here is the half 1.1 does not have: 1.1
+             asks which rung you chose, this asks whether you are sitting in it and whether
+             it can actually see what you think it can. -->
         <div class="detail" id="d-W1">
-            <p class="why"><b>Three places you can work, and which you choose changes what everything else here costs.</b> <b>Claude on the web</b> &mdash; a browser tab, nothing to install, you can start in five minutes. <b>The Claude desktop app</b> &mdash; one download, and it can see a folder on your own machine. <b>VS&nbsp;Code with the Claude window</b> &mdash; a real editor, and the most capable of the three, but you have to set the editor up first.</p>
-            <p class="why"><b>Take the most capable one you can actually start with today, and no further.</b> If setting up an editor is going to eat the evening, that is the wrong place to spend it &mdash; the first two need nothing but an account. You can move up later and nothing you have done is wasted.</p>
-            <p class="why">Rung 1 is free, and rungs 2 and 3 are the same paid plan &mdash; so one subscription unlocks both upper rungs at once, and the step between them is setup rather than spending. Check the plan page rather than any number written here.</p>
-            <p class="why"><b>Then find out which shape of bill you have agreed to, before you lean on it.</b> A personal plan is an allowance: you hit it and it stops, which is annoying and safe. An institutional billing code is usually uncapped &mdash; nothing stops, nothing warns, and the number surfaces when somebody else reads the statement. That distinction matters more than the amount, and it is the one nobody is told unprompted.</p>
+            <p class="why"><b>1.1 asked which of the three places you would work in. This is where you are actually sitting in one</b> &mdash; open, signed in, ready to be asked something. Deciding costs a minute; this costs the evening, which is why they are separate steps and why this one is here rather than there.</p>
+            <p class="why"><b>For this route a browser tab is enough.</b> Nothing to install and no terminal. If you already have the desktop app or the editor from 1.1 set up, use that instead &mdash; nothing in W2 to W5 changes.</p>
+            <p class="why"><b>Then get one piece of evidence that it can see what you think it can see, before you rely on it.</b> A tool that cannot open your files will answer questions about them anyway, fluently and in detail, and nothing in the reply looks different. So do not ask <i>can you see my files</i> &mdash; ask it to tell you something specific it could only know by looking, and check that it is right. That is the same move as every &ldquo;done when&rdquo; on this page, run once against your own setup.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="rung-picked-highest-reachable" type="button" aria-pressed="false" aria-labelledby="c-w1-0">&#10003;</button><span class="cbt" id="c-w1-0">I have decided where I am working &mdash; the Claude website, the Claude app, or VS&nbsp;Code &mdash; and I can start there today</span></li>
-            <li><button class="cb" data-key="named-something-back" type="button" aria-pressed="false" aria-labelledby="c-w1-1">&#10003;</button><span class="cbt" id="c-w1-1">Claude has told me something about my own files or my own screen that I never typed in, so I know it can actually see what I am working on</span></li>
-            <li><button class="cb" data-key="stops-or-bills" type="button" aria-pressed="false" aria-labelledby="c-w1-2">&#10003;</button><span class="cbt" id="c-w1-2">I can say what happens when I use too much: it stops, or it bills</span></li>
+            <li><button class="cb" data-key="rung-picked-highest-reachable" type="button" aria-pressed="false" aria-labelledby="c-w1-0">&#10003;</button><span class="cbt" id="c-w1-0">The place I chose at 1.1 is open in front of me and I can start in it now</span></li>
+            <li><button class="cb" data-key="named-something-back" type="button" aria-pressed="false" aria-labelledby="c-w1-1">&#10003;</button><span class="cbt" id="c-w1-1">It has told me something about my own files or my own screen that I never typed in, and I checked that it was right</span></li>
         </ul>
       </li>
       <li data-key="one-sentence" data-id="W2" data-tiers="min" data-open="0" data-done="0">
@@ -1295,7 +1304,8 @@ one so I can look.
       <h2>Phase 7 &middot; A name of your own</h2>
       <span class="phase-time">30 min, then a wait</span>
     </div>
-    <p class="phase-note">Only when you have something to put on it. Three companies, each doing one job: <b>Porkbun</b> sells you the name, <b>Cloudflare</b> answers questions about where it points, and <b>GitHub</b> serves the pages. Keeping those three jobs separate in your head is most of the difficulty.</p>
+    <p class="phase-note" data-tiers="min"><b>You already have something to put on it</b> &mdash; the page you published at W5. Two companies, each doing one job: <b>Porkbun</b> sells you the name, and <b>Cloudflare</b> answers questions about where it points, which it is already doing for the free address you have. Keeping those two jobs separate in your head is most of the difficulty. A third, GitHub serving the pages itself, is the other road and is 7.4 and 7.5.</p>
+    <p class="phase-note" data-tiers="mid max">Only when you have something to put on it. Three companies, each doing one job: <b>Porkbun</b> sells you the name, <b>Cloudflare</b> answers questions about where it points, and <b>GitHub</b> serves the pages. Keeping those three jobs separate in your head is most of the difficulty.</p>
     <div class="warn"><b>Do not trust a button name you read anywhere, including here.</b> Every named button, tab and menu path on this page <b>was true on 2026-08-30 and nowhere else</b>. That is the same warning 1.1 gives about prices, and it applies hardest wherever these steps send you into a vendor&rsquo;s dashboard &mdash; which is this phase, and W5 before it. On that date this material was walked end to end and <b>the click paths were wrong five times in one afternoon</b>: Cloudflare had rebuilt the dashboard around Workers, so &ldquo;Pages&rdquo; had become a footnote link and settings named here did not appear on the form at all.<br><br><b>The steps are written as outcomes and &ldquo;done when&rdquo; conditions, and those held.</b> Read them as what must become true, not as where to press. When the screen does not match this page &mdash; and it will not &mdash; that is the expected case, not your mistake: <b>screenshot the whole window and show it to your agent.</b> Every one of those five was unstuck in a single exchange that way. The companion sheet <a href="https://lookedright.tonydefazio.com/show-it-your-screen">Show It Your Screen</a> is that loop, and the evidence for it.</div>
     <ol class="steps">
       <li data-key="domain" data-id="7.1" data-tiers="min mid max" data-open="0" data-done="0">
@@ -1448,8 +1458,9 @@ or four A records:
 
   <footer>
     <p>Companion to <a href="https://lookedright.tonydefazio.com/search-to-shipped"><i>Search to Shipped</i></a> and <a href="https://lookedright.tonydefazio.com/"><i>It Looked Right</i></a>. This sheet is the part that comes before both: it ends where a first project begins. <a href="https://lookedright.tonydefazio.com/what-it-costs">What It Costs</a> is its money half, filed separately so it can go out of date on its own.</p>
-    <p>Drawn from the course working notes. Every numbered item of the Step&nbsp;0 order is covered here; where this sheet and that order disagree about phase numbers, it is because storage is split &mdash; the decision early, the construction at 3.7 &mdash; and both halves are present. The vendor pages, the cost documentation and the DNS records in Phase&nbsp;7 were read on 29 August 2026; every outbound link was checked the same day and <b>nothing re-checks them</b>. When one rots, this page will not tell you.</p>
-    <p>A step is complete when every box under it is ticked, and not before. Ticks are stored in this browser only; they do not travel with the page.</p>
+    <p>Drawn from the course working notes. Every numbered item of the Step&nbsp;0 order is covered here; where this sheet and that order disagree about phase numbers, it is because storage is split &mdash; the decision early, the construction at 3.7 &mdash; and both halves are present. That coverage was true when it was checked and <b>nothing enforces it</b>: the order can gain an item and this sentence will go on claiming otherwise, which is what it did once already.</p>
+    <p><b>Two dates, because they are two different claims.</b> The vendor pages, the cost documentation and the DNS records in Phase&nbsp;7 were read on <b>29 August 2026</b>, and every outbound link was checked that day. The click paths, dashboards and button names in Phase&nbsp;7 and W1&ndash;W5 come from one walk on <b>30 August 2026</b> and describe that afternoon only. <b>Nothing re-checks either.</b> When a link rots or a dashboard moves, this page will not tell you &mdash; it will keep saying what was true. This paragraph used to give the earlier date for both.</p>
+    <p><b>A step is complete when every box you are shown is ticked, and not before.</b> Boxes belonging to a route you did not pick are hidden and are not counted; they come back, still ticked, if you move up. Ticks are stored in this browser only and do not travel with the page.</p>
   </footer>
 
 </div>
