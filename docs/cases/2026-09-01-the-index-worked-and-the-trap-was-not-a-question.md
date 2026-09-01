@@ -124,7 +124,7 @@ typed underneath.
 
 ## Point 4 — The argument: *put it where they already look* is not enough, because retrieval is a query
 
-> **Proposal. Convinced nobody yet. Bears directly on [N5 decision 3](../../OPEN-FINDINGS.md#n5--b4-diagnoses-compliance-six-incidents-say-the-failure-is-retrieval).**
+> **Proposal. Convinced nobody yet. Bears directly on [N5 decision 3](../../OPEN-FINDINGS.md#n5--b4-diagnoses-compliance-the-incidents-say-the-failure-is-retrieval).**
 
 [N2](../../OPEN-FINDINGS.md)'s remedy, folded into B4, is *put it where they already look*.
 Here it was. The trap was in the mandatory file, in the mandatory-to-read-first document, in a

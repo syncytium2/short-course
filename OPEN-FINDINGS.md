@@ -110,7 +110,7 @@ audience knows the difference.
 > because the front door was rebuilt to open on the argument (`73629d8`, `679d957`).
 > **Not to be confused with `points.md` B4**, a different B4 about CLAUDE.md that is live and
 > was added to on 2026-08-30. See
-> [N5](#n5--b4-diagnoses-compliance-six-incidents-say-the-failure-is-retrieval).
+> [N5](#n5--b4-diagnoses-compliance-the-incidents-say-the-failure-is-retrieval).
 
 > "Market B skips it entirely because their reader just reads the hook."
 
@@ -255,7 +255,7 @@ the session.
 
 ### N2 · B4 says the mechanism fails and never says where to put the rule instead
 
-> **✅ DECIDED AND APPLIED 2026-08-30 — combined with [N5](#n5--b4-diagnoses-compliance-six-incidents-say-the-failure-is-retrieval), not taken separately.**
+> **✅ DECIDED AND APPLIED 2026-08-30 — combined with [N5](#n5--b4-diagnoses-compliance-the-incidents-say-the-failure-is-retrieval), not taken separately.**
 > Tony's decision: *"it seems like we need to preserve it all. if combining preserves everything
 > better, so be it."* N2's clause is now the second half of B4's refinement paragraph in
 > [`points.md`](points.md), seated on N5's diagnosis rather than bolted on beside it, and carrying
@@ -534,7 +534,7 @@ carelessness.
 
 ---
 
-### N5 · B4 diagnoses compliance. Six incidents say the failure is **retrieval**
+### N5 · B4 diagnoses compliance. The incidents say the failure is **retrieval**
 
 > **✅ DECIDED AND APPLIED 2026-08-30 — added to B4, combined with [N2](#n2--b4-says-the-mechanism-fails-and-never-says-where-to-put-the-rule-instead).**
 > Two decisions, in Tony's words: *"add to b4"* (so B4's existing sentence is kept, not replaced)
@@ -560,10 +560,15 @@ touched.
 > skipped."*
 
 **That is true, and it names the wrong faculty.** It reads as *the agent did not comply with what
-it read*. Six incidents say the agent read it, retained it, could recite it on request — and did
-not have it in hand at the moment of action. Those are different failures with different fixes.
+it read*. Every incident below says the agent read it, retained it, could recite it on request —
+and did not have it in hand at the moment of action. Those are different failures with different
+fixes.
 
-#### The six, with the sentence each produced
+#### The instances, with the sentence each produced
+
+**Eight as of 2026-09-01, across six days and three repos.** The count lives here and nowhere
+else — it was in the section heading until 2026-09-01, where it went stale twice before anyone
+noticed, which is this finding's own subject pointed at itself.
 
 | # | date | repo · source | what it says |
 |---|---|---|---|
@@ -573,6 +578,8 @@ not have it in hand at the moment of action. Those are different failures with d
 | 4 | 2026-08-30 | source repo · [`the-hedge`](docs/cases/2026-08-30-the-hedge-that-crossed-a-session-boundary.md) §5 | The agent had read the prior incident's record **that same session**, summarised it back unprompted, then broke it on the next ambiguous input. *"Knowledge that is available on request but not at the point of action is not a control; it is a post-hoc explanation generator."* |
 | 5 | 2026-08-30 | this repo · [`the-gate`](docs/cases/2026-08-30-the-gate-blocked-its-own-installation.md) Point 4 | A harness instruction re-delivered every turn (*use sed, heredocs*) beat `CLAUDE.md` (*use Write/Edit*). **Both are prose.** Proximity to the decision settled it, not force of wording. |
 | 6 | 2026-08-30 | this repo · [`the-gate`](docs/cases/2026-08-30-the-gate-blocked-its-own-installation.md) Point 6 | The author ran the pointer checker, it passed, and he pushed the broken pointer it exists to catch — **ninety seconds after writing up that exact failure mode.** |
+| 7 | 2026-08-30 | bugarach · [`nothing-was-missing`](docs/cases/2026-08-30-nothing-was-missing-and-it-could-not-be-found.md) | **The first instance where the thing not retrieved was not a rule.** 148 todos, 116 artifacts, 90 tools, all filed correctly and none of it addressable by anyone who did not already know it was there. That puts it outside B4's jurisdiction: you cannot make an importer fire. Remedy shipped as a keyword index (`81cc134`, 2026-08-31). |
+| 8 | 2026-09-01 | bugarach · [`the-index-worked`](docs/cases/2026-09-01-the-index-worked-and-the-trap-was-not-a-question.md) Point 4 | **The first instance where instance 7's remedy was in place and working at the moment of failure.** The session used the index successfully twice in one hour, then paid a trap in the first row of a table in that same file, thirty lines from a row it had just used. So *put it where they already look* was satisfied completely and did not work — **the unit of retrieval is the query, not the file**, and a trap is by definition what you need before you know to ask. Bears on decision 3 below. |
 
 #### The proposed replacement diagnosis
 
@@ -596,7 +603,7 @@ already opens. Taken separately they produce a B4 with two unrelated half-clause
 Taken together the shape is: *the failure is retrieval → therefore put it where they already
 look, or make it fire.* **Order matters, and one decision covers both.**
 
-#### Counter-evidence, because six agreeing instances is exactly when to look for the seventh
+#### Counter-evidence, because a pile of agreeing instances is exactly when to look for the one that disagrees
 
 - **Instance 5 rests on an unverifiable transcription.** The harness instruction exists in a
   context window and in no file. It is the sharpest instance and the least checkable.
@@ -607,9 +614,16 @@ look, or make it fire.* **Order matters, and one decision covers both.**
   and **refutes** any reading of B4 as "writing it down never works." If B4 is reworded, that
   case is the one that keeps the rewording honest.
 - **⚠ My own count was wrong when I first described this to Tony.** I said *"four instances,
-  three sessions, one day."* It is **six instances across four days and three repos**. Corrected
+  three sessions, one day."* It was **six instances across four days and three repos**. Corrected
   here rather than quietly; miscounting the evidence for a finding about miscounting is the
-  failure this repo files incidents about.
+  failure this repo files incidents about. **It stood at six for two more days while instances 7
+  and 8 sat in committed case files nobody carried back here** — added 2026-09-01. The count is
+  now kept above the table, not in the heading.
+- **⚠ The number 7 was claimed twice and both claims are kept.** The quote-drift artifact below
+  calls itself *"the seventh instance"*, and so does the `nothing-was-missing` case, which is
+  row 7 in the table. Neither is wrong about what it observed; they were written by different
+  sessions that could not see each other. **The table's numbering is the one to cite**, and the
+  artifact below is an instance without a row number rather than a competitor for that one.
 
 #### An artifact found while verifying, and it belongs to another session
 
@@ -632,7 +646,14 @@ board so its author can decide. If the finding is used in the course, use the so
 2. **N5 and N2 as one decision** — see above.
 3. **Does this earn a `points.md` entry of its own** rather than living inside B4? *Retrieval at
    the point of action* is arguably the estate's most-replicated finding and B4 is a container
-   for it, not the claim itself.
+   for it, not the claim itself. **New input 2026-09-01 — instance 8 argues the remedy already
+   shipped inside B4 has a known limit.** *Put it where they already look* was satisfied
+   completely and did not work, because a reader arrives at a document with a question and goes
+   to the section that question names. So the remedy reaches someone who already suspects they
+   need it, and the dangerous knowledge is the kind you need before you know to ask — for which
+   the fix is not a better document but **a check that fires inside the thing it protects**.
+   That is an argument, not a finding, and its author says so. It is filed here because it
+   changes what decision 3 is choosing between, not because it settles it.
 4. **The one-word quote drift** — the hedge case's author to decide, not me.
 
 ---
