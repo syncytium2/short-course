@@ -50,8 +50,10 @@ META = {
         "Four challenges in working with coding agents, for researchers \u2014 with the real "
         "incidents behind each one, readable at three depths.", "\U0001F9F1"),
     "cold-start.html": (
-        "Zero to a working coding-agent setup: {steps} steps in {phases} phases, each a checklist "
-        "that stays red until every box is checked.", "\U0001F9CA"),
+        "Zero to a working coding-agent setup. Say how far you are going — a web app in the "
+        "browser, VS Code on your laptop, or a cluster and other people — and the page shows "
+        "only the steps your answer needs, each a checklist that stays red until it is done.",
+        "\U0001F9CA"),
     "search-to-shipped.html": (
         "Zero to a deployed web app for a researcher who has never written software \u2014 "
         "every step in order, with the condition that tells you it worked.", "\U0001F6A2"),
@@ -61,6 +63,18 @@ META = {
     "show-it-your-screen.html": (
         "You do not need to be an expert at web deployment. Seven real stoppages from one "
         "afternoon, four real screens, and the loop that got past three of them.", "\U0001F5A5"),
+    # A TEST SEAM, NOT A PAGE -- same spirit as BS_PROVENANCE below. No row in
+    # tools/pages.txt builds it and no such file exists in docs/handouts/.
+    #
+    # It is here because the {steps}/{phases} machinery needs a page that states a count in
+    # order to be tested, and after 2026-09-01 no real page does. The selftest used to
+    # borrow cold-start.html for this, which is how the count regexes went two days without
+    # anybody noticing they had stopped matching the document: the assertions ran against a
+    # four-line fixture that still looked like the old markup, and passed, while the live
+    # page they were standing in for had moved. A fixture that impersonates a real page
+    # tests the fixture.
+    "selftest-counts.html": (
+        "Fixture: {steps} steps in {phases} phases.", "\U0001F9EA"),
 }
 key = os.path.basename(src)
 if key not in META:
@@ -80,8 +94,33 @@ desc, emoji = META[key]
 #
 # A description that uses neither placeholder is left exactly as written -- most pages have no
 # count to state, and format() on a string with no fields is a no-op.
-n_steps  = len(re.findall(r'data-id="[\d.]+"', s))
-n_phases = len(re.findall(r'<section class="phase">', s))
+#
+# ---------------------------------------------------------------------------------------
+# DERIVING A NUMBER DOES NOT MAKE IT TRUE. IT MAKES IT TRUE OF WHATEVER YOU COUNTED.
+#
+# The paragraph above was written on 2026-08-30 and was wrong the next day, in the live
+# <meta description>, for the same reason it says it has fixed. What broke it:
+#
+#   * `data-id="[\d.]+"` cannot match W1..W5. The browser route landed on 2026-08-31 and
+#     added five steps this regex excludes BY CONSTRUCTION, so it went on returning 34 --
+#     which had quietly stopped being the page's step count and become the count for one
+#     route out of three, published as if it were the page's.
+#   * `<section class="phase">` counted the unnumbered "The short way" section, so the
+#     description said EIGHT phases about a page whose headings stop at Phase 7. That
+#     number was never typed by anybody; the derivation invented it.
+#
+# So the count was stale AND the guard was green, which is worse than a typed number: a
+# typed number is visibly somebody's claim, and a derived one reads as measured. The
+# regexes are corrected below and cold-start.html no longer states a count at all --
+# because there is no single true one. It has three routes of 14, 30 and 34 steps, and any
+# one number is a promise the page keeps to a third of its readers.
+#
+# THE CHECK THAT WOULD HAVE CAUGHT THIS DOES NOT EXIST. --check-all proves the output
+# matches the source. Nothing proves a sentence about the source matches the source, and
+# that is the gap both this comment and its predecessor sit in.
+# ---------------------------------------------------------------------------------------
+n_steps  = len(re.findall(r'data-id="[^"]+"', s))
+n_phases = len(re.findall(r'<h2>Phase\b', s))
 if "{steps}" in desc or "{phases}" in desc:
     if not n_steps or not n_phases:
         sys.stderr.write("refusing: %s states a count but has %d steps and %d phases\n"
@@ -283,20 +322,49 @@ if [ "${1:-}" = "--selftest" ]; then
     # THE FIXTURES CARRY A STANDFIRST, because the version line is injected under it.
     # BS_PROVENANCE is the test seam: these live in a temp dir git has never heard of,
     # so without it the build would correctly refuse and nothing here could be tested.
+    # ---- FIRST, BECAUSE IT NEEDS NO FIXTURES AND MUST SURVIVE THEIR FAILURE ----
+    # cold-start.html states NO count, deliberately: it has three routes of 14, 30 and 34
+    # steps, and any single number is a promise it keeps to a third of its readers. If a
+    # placeholder is ever put back, this fails and the question gets asked again rather than
+    # answered in passing by whoever is editing.
+    #
+    # IT RUNS FIRST BECAUSE IT DID NOT SURVIVE BEING LAST. Sitting at the foot of the suite,
+    # the violation it guards against ALSO made an earlier bare `wrap` refuse, and `set -e`
+    # killed the run before this line was reached -- so putting a placeholder back produced a
+    # suite that stopped early and never printed this failure. A check downstream of the
+    # damage it detects is a check you cannot see fail.
+    #
+    # THE RANGE IS THE META BLOCK ONLY. The first version read
+    # `sed -n '/"cold-start.html": (/,/),/p' "$0"`, which restarted the range on THIS TEST'S
+    # OWN LINE -- the test names the same key -- ran to end of file, and found the
+    # placeholder inside its own grep pattern. It failed by reading itself. Recorded rather
+    # than quietly corrected: a check whose subject includes the checker is the same shape as
+    # a page that describes itself, which is most of what this repository is about.
+    if awk '/^META = \{/{i=1} i{print} i&&/^\}$/{exit}' "$0" \
+         | sed -n '/"cold-start.html": (/,/),$/p' \
+         | grep -qE '\{steps\}|\{phases\}'; then
+        printf '  FAIL cold-start.html states a step count again -- which route is it true of?\n'; fail=1
+    else printf '  ok   cold-start.html states no count, because it has three\n'; fi
+
     export BS_PROVENANCE='7|2026-08-01|2026-08-30'
     printf '%s' '<title>It Looked Right</title>
 <style>body{color:red}</style>
 <p class="standfirst">hello</p>
 ' > "$T/four-barriers.html"
-    # THE COLD START FIXTURE CARRIES REAL STEPS AND PHASES, because its description is the
-    # one that derives its counts. A fixture with none of either would only ever exercise the
-    # refusal path. Three steps in two phases -- deliberately NOT the live page's numbers, so
-    # an assertion cannot pass by coincidence if the derivation silently reads the wrong file.
+    # THE COLD START FIXTURE IS A GENERIC SECOND PAGE, and no longer the count fixture.
+    # It used to carry steps and phases because cold-start's description derived its counts;
+    # that description states no count now, so counting is exercised by selftest-counts.html
+    # below, whose whole reason to exist is that it belongs to no real page.
+    #
+    # WHAT THIS FIXTURE IS STILL FOR: a second page with its own title, favicon, canonical
+    # and description, so the per-page metadata assertions have something to be per-page
+    # about. It keeps the steps and phases anyway -- with the Phase headings the counter now
+    # actually looks for -- so that anything reading it stays valid if a count comes back.
     printf '%s' '<title>Cold Start</title>
 <style>body{color:blue}</style>
 <p class="standfirst">steps</p>
-<section class="phase"><li data-id="1.1"></li><li data-id="1.2"></li></section>
-<section class="phase"><li data-id="2.1"></li></section>
+<section class="phase"><h2>Phase 1 &middot; A</h2><li data-id="1.1"></li><li data-id="1.2"></li></section>
+<section class="phase"><h2>Phase 2 &middot; B</h2><li data-id="2.1"></li></section>
 ' > "$T/cold-start.html"
 
     if wrap "$T/four-barriers.html" "$T/out.html" "example.com" "" >/dev/null 2>&1; then
@@ -432,41 +500,60 @@ if [ "${1:-}" = "--selftest" ]; then
 
     export BS_PROVENANCE='7|2026-08-01|2026-08-30'
 
-    # RESTORE THE FIXTURE. The two refusal cases above overwrote it, and the count
-    # assertions below read it. Leaving it clobbered made those tests measure the
-    # wrong file and fail for a reason that had nothing to do with counting.
+    # RESTORE THE FIXTURE. The two refusal cases above overwrote it, and the assertions
+    # below read it. Leaving it clobbered made those tests measure the wrong file and fail
+    # for a reason that had nothing to do with what they were testing. Kept byte-identical
+    # to the one written at the top of the suite -- if these two ever disagree, whichever
+    # test runs second is measuring a document nobody meant to write.
     printf '%s' '<title>Cold Start</title>
 <style>body{color:blue}</style>
 <p class="standfirst">steps</p>
-<section class="phase"><li data-id="1.1"></li><li data-id="1.2"></li></section>
-<section class="phase"><li data-id="2.1"></li></section>
+<section class="phase"><h2>Phase 1 &middot; A</h2><li data-id="1.1"></li><li data-id="1.2"></li></section>
+<section class="phase"><h2>Phase 2 &middot; B</h2><li data-id="2.1"></li></section>
 ' > "$T/cold-start.html"
     wrap "$T/cold-start.html" "$T/cs.html" "example.com" "cold-start" >/dev/null 2>&1
 
     # ---------------------------------------------------------------- derived counts
     # The description said "29 steps", then "30", while the page had 34, and the wrong number
     # was LIVE. Nothing connected a sentence in this script to a document it never counted.
-    # Now it counts, and these are the assertions that say so.
-    if grep -q 'content="Zero to a working coding-agent setup: 3 steps in two phases' "$T/cs.html"; then
-        printf '  ok   the step and phase counts are COUNTED from the source\n'
-    else printf '  FAIL counts not derived: %s\n' "$(grep -o 'name="description" content="[^"]*"' "$T/cs.html")"; fail=1; fi
+    #
+    # Then the counting itself went wrong, silently, and these assertions passed throughout:
+    # `data-id="[\d.]+"` could not match the browser route's W1..W5, and
+    # `<section class="phase">` counted an unnumbered section, so the live description said
+    # "34 steps in eight phases" about a 39-step page with seven numbered phases. The old
+    # fixture reproduced the old markup, so it agreed with the regexes rather than with the
+    # document. The fixture below is built to disagree: it contains a W step and a phase
+    # section with no "Phase" heading, which are exactly the two shapes that broke.
+    printf '%s' '<title>Fixture</title>
+<style>body{color:blue}</style>
+<p class="standfirst">steps</p>
+<section class="phase"><h2>Phase 1 &middot; A</h2><li data-id="1.1"></li><li data-id="1.2"></li></section>
+<section class="phase"><h2>The short way</h2><li data-id="W1"></li></section>
+<section class="phase"><h2>Phase 2 &middot; B</h2><li data-id="2.1"></li></section>
+' > "$T/selftest-counts.html"
+    wrap "$T/selftest-counts.html" "$T/sc.html" "example.com" "fixture" >/dev/null 2>&1
 
-    if ! grep -q '{steps}\|{phases}' "$T/cs.html"; then
+    # 4 steps: 1.1, 1.2, W1, 2.1 -- the W is the regression.
+    # 2 phases: the unnumbered "short way" section is a section and is not a phase.
+    if grep -q 'content="Fixture: 4 steps in two phases."' "$T/sc.html"; then
+        printf '  ok   counts include a W step and exclude an unnumbered section\n'
+    else printf '  FAIL counts not derived: %s\n' "$(grep -o 'name="description" content="[^"]*"' "$T/sc.html")"; fail=1; fi
+
+    if ! grep -q '{steps}\|{phases}' "$T/sc.html"; then
         printf '  ok   no placeholder survives into the built page\n'
     else printf '  FAIL an unfilled placeholder shipped in the description\n'; fail=1; fi
 
     # ADDING A STEP MUST MOVE THE NUMBER. Without this the two checks above pass against a
-    # hardcoded 3 -- which is the exact defect being fixed, reintroduced in the test.
-    printf '<section class="phase"><li data-id="3.1"></li></section>\n' >> "$T/cold-start.html"
-    wrap "$T/cold-start.html" "$T/cs2.html" "example.com" "cold-start" >/dev/null 2>&1
-    if grep -q 'setup: 4 steps in three phases' "$T/cs2.html"; then
+    # hardcoded 4 -- which is the exact defect being fixed, reintroduced in the test.
+    printf '<section class="phase"><h2>Phase 3 &middot; C</h2><li data-id="3.1"></li></section>\n' >> "$T/selftest-counts.html"
+    wrap "$T/selftest-counts.html" "$T/sc2.html" "example.com" "fixture" >/dev/null 2>&1
+    if grep -q 'Fixture: 5 steps in three phases.' "$T/sc2.html"; then
         printf '  ok   adding a step and a phase moves both numbers\n'
-    else printf '  FAIL counts did not track an edit: %s\n' "$(grep -o 'content="Zero[^"]*"' "$T/cs2.html")"; fail=1; fi
+    else printf '  FAIL counts did not track an edit: %s\n' "$(grep -o 'content="Fixture[^"]*"' "$T/sc2.html")"; fail=1; fi
 
     # A page that STATES a count and has none is refused, not shipped with a zero.
-    printf '<title>Cold Start</title>\n<style>x{}</style>\n<p>no steps here</p>\n' > "$T/nosteps.html"
-    cp "$T/nosteps.html" "$T/cold-start.html"
-    if wrap "$T/cold-start.html" "$T/cs3.html" "example.com" "cold-start" >/dev/null 2>&1; then
+    printf '<title>Fixture</title>\n<style>x{}</style>\n<p class="standfirst">no steps here</p>\n' > "$T/selftest-counts.html"
+    if wrap "$T/selftest-counts.html" "$T/sc3.html" "example.com" "fixture" >/dev/null 2>&1; then
         printf '  FAIL a description stating a count was built from a source with no steps\n'; fail=1
     else printf '  ok   refuses to state a count it cannot derive\n'; fi
 
