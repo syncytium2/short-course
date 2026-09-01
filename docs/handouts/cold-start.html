@@ -1485,12 +1485,24 @@ or four A records:
   // from it -- rewording a box must leave its data-key alone, or this is v3 again with
   // extra steps.
   //
-  // THE MIGRATION BELOW IS LOSSLESS EXACTLY ONCE, AND THIS IS THAT MOMENT. It maps old
-  // index i to the key of the box currently at position i, which is correct only while
-  // no box has moved since the reader's ticks were saved. Nothing has moved yet. Once
-  // the path switch renumbers Phase 3, that correspondence is gone and the same
-  // migration would silently mis-assign. This is why the re-key lands before the branch
-  // and not after it.
+  // THE MIGRATION BELOW WAS LOSSLESS EXACTLY ONCE, AND THAT MOMENT HAS PASSED. It maps an
+  // old index i to a key by POSITION, which is correct only while nothing has moved since
+  // the reader's ticks were saved.
+  //
+  // This paragraph used to end "nothing has moved yet... this is why the re-key lands
+  // BEFORE the branch and not after it", in the future tense, about a branch that landed
+  // the next day in this same file. Things have moved since: 1.1 and 1.2 swapped, W1-W5
+  // arrived, 1.4 / 3.7 / 4.7 / 6.3 were appended, and 7.3's boxes were split by route. A
+  // comment that describes its own document in the future tense stops being true without
+  // ever becoming false-looking, which is the failure this page teaches.
+  //
+  // WHAT SAVES IT IS NOT THIS COMMENT, IT IS V3_MAP. The table below is frozen: it records
+  // what v3's display numbers and box positions pointed at ON THE DAY THE TICKS WERE SAVED,
+  // so the migration reads history rather than the live page and cannot be invalidated by
+  // anything done to the document afterwards. Verified against the current page on
+  // 2026-09-01 -- every box handle it names still exists, so no returning v3 reader loses a
+  // tick. That check is `tools/checklist_state.sh --selftest`, and it is the thing to run,
+  // not this paragraph to trust.
   var KEY  = 'cold-start-v4';
   var OLD  = 'cold-start-v3';
 
