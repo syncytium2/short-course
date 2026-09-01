@@ -1885,3 +1885,62 @@ happens to the cross-references first.**
 edits. The laptop and cluster routes have still never been walked end to end — `Mac/7d93fc67`
 recorded that as the real blocker and it is still open. `tier_check.sh` proves a route can be
 *finished*, never that a step is *true*.
+
+---
+
+## Two ideas from Tony, 2026-09-01 — stored, not specified, no decision owed
+
+**Dictated away from the computer. Written down here by `Mac/3a789141` because the ideas
+arrived and the person having them was not at a keyboard.** Nothing below has been costed,
+designed or agreed. They are recorded in his framing first, then with what the repo already
+has that bears on them — so that whoever picks one up does not start by re-deriving the
+state of the site.
+
+### Idea 1 — snapshots of the website, so a reader can go back through its history
+
+*"Website snapshots so user can go back in history to see how things change."*
+
+The reader-facing version of the rule the whole repository already runs on — from the
+[`README`](README.md): *everything that did not survive stays in the history.* Today that
+promise is kept for anyone who can read a git log, and for nobody else. A learner reading
+[`site/cold-start.html`](site/cold-start.html) cannot see that it used to say something
+different, or what, or when it changed.
+
+**What already exists, so nobody rebuilds it.** Every version of every page is already in
+git — the six rows in [`tools/pages.txt`](tools/pages.txt) are build *outputs*, regenerated
+from [`docs/handouts/`](docs/handouts/) by [`tools/build_site.sh`](tools/build_site.sh) and
+never hand-edited. So the history is complete and already committed; what is missing is a
+way to *serve* it. This is a publishing question, not an archiving one.
+
+**The open questions, none answered:** whether a snapshot is every commit or only the ones
+worth a reader's time (which collapses into idea 2); whether old pages are rebuilt at deploy
+time or frozen as bytes at the time they were live; and what happens to a page that was live
+and *wrong* — this repo's material argues loudly for keeping it, and the deploy history
+contains at least one page that shipped with a false step count.
+
+### Idea 2 — a milestones page, outlining the historical changes
+
+*"A milestones page outlining historical changes."*
+
+A page on the public site listing what changed and when. The obvious pairing with idea 1: the
+milestones page is the index and the snapshots are what its rows point at. Either works
+alone; together they are one feature, and it is worth deciding which one is being built
+before building half of both.
+
+**What already exists.** The raw material is written and is unusually good, because this
+repo's commit convention names the defect rather than the change — the git log is already a
+readable account of what went wrong and when. There is also [`docs/decisions/`](docs/decisions/)
+(one numbered record per real choice, never edited, superseded rather than rewritten) and
+[`docs/cases/`](docs/cases/), both of which are milestone material written for a reader
+rather than for a maintainer. **What does not exist is any curation**: nothing in the repo
+distinguishes a commit a learner should see from the several hundred they should not.
+
+**The one thing worth flagging before anyone starts.** A milestones page is a *dated* page,
+and this repo already owns [`tools/check_dated_ui.sh`](tools/check_dated_ui.sh) because dated
+claims on the public site go stale silently. A milestones page that stops being updated is
+worse than no milestones page — it asserts, by its own last row, that nothing has happened
+since. Whatever shape this takes should be generated from something that cannot be forgotten,
+not maintained by hand.
+
+**Neither idea is claimed and neither is scheduled.** They are here so they survive the walk
+back to the computer.
