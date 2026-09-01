@@ -1,12 +1,12 @@
-<title>Mines Already Cleared</title>
+<title>Twenty Instruments, Still Failing</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap">
 
 <style>
   /* Palette and type inherited from lookedright.tonydefazio.com so this document and
-     the page it describes read as one system. Light is the base; dark redefines tokens
-     only. One typeface (IBM Plex), hierarchy carried by weight and italic, not size. */
+     the pages it describes read as one system. Light is the base; dark redefines
+     tokens only. One typeface (IBM Plex); hierarchy by weight and italic, not size. */
   :root {
     --ground:  #FAFBFC;
     --surface: #FFFFFF;
@@ -20,7 +20,6 @@
     --accent-soft: #E7F0F6;
     --caution: #8A5D0F;
     --caution-soft: #FAF2E2;
-    --shadow: 0 1px 2px rgba(23,28,35,.05), 0 8px 24px -16px rgba(23,28,35,.28);
 
     --sans: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
     --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -31,35 +30,19 @@
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --ground:  #0D1218;
-      --surface: #141A22;
-      --sunk:    #1A222B;
-      --ink:     #E3E8EE;
-      --muted:   #93A0AE;
-      --faint:   #7C8896;
-      --rule:    #232C36;
-      --rule-firm: #313D4A;
-      --accent:  #69B0DD;
-      --accent-soft: #16283A;
-      --caution: #D2A64E;
-      --caution-soft: #2A2213;
-      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.7);
+      --ground:  #0D1218;  --surface: #141A22;  --sunk: #1A222B;
+      --ink:     #E3E8EE;  --muted:   #93A0AE;  --faint: #7C8896;
+      --rule:    #232C36;  --rule-firm: #313D4A;
+      --accent:  #69B0DD;  --accent-soft: #16283A;
+      --caution: #D2A64E;  --caution-soft: #2A2213;
     }
   }
   :root[data-theme="dark"] {
-    --ground:  #0D1218;
-    --surface: #141A22;
-    --sunk:    #1A222B;
-    --ink:     #E3E8EE;
-    --muted:   #93A0AE;
-    --faint:   #7C8896;
-    --rule:    #232C36;
-    --rule-firm: #313D4A;
-    --accent:  #69B0DD;
-    --accent-soft: #16283A;
-    --caution: #D2A64E;
-    --caution-soft: #2A2213;
-    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.7);
+    --ground:  #0D1218;  --surface: #141A22;  --sunk: #1A222B;
+    --ink:     #E3E8EE;  --muted:   #93A0AE;  --faint: #7C8896;
+    --rule:    #232C36;  --rule-firm: #313D4A;
+    --accent:  #69B0DD;  --accent-soft: #16283A;
+    --caution: #D2A64E;  --caution-soft: #2A2213;
   }
 
   *, *::before, *::after { box-sizing: border-box; }
@@ -74,271 +57,216 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  .wrap { max-width: 61rem; margin: 0 auto; padding: 3.5rem 1.5rem 6rem; }
+  .wrap { max-width: 64rem; margin: 0 auto; padding: 2.6rem 1.5rem 6rem; }
 
   a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
   a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
 
   .eyebrow {
-    font-family: var(--mono);
-    font-size: var(--t-label);
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    color: var(--faint);
-    margin: 0 0 .6rem;
+    font-family: var(--mono); font-size: var(--t-label);
+    letter-spacing: .1em; text-transform: uppercase;
+    color: var(--faint); margin: 0 0 .55rem;
   }
 
-  h1 {
-    font-size: var(--t-head);
-    font-weight: 600;
-    letter-spacing: -.01em;
-    margin: 0 0 .7rem;
-    text-wrap: balance;
-  }
+  h1 { font-size: var(--t-head); font-weight: 600; letter-spacing: -.01em; margin: 0; text-wrap: balance; }
 
-  .standfirst { margin: 0; max-width: 42rem; color: var(--muted); }
+  /* ---- THE FOUR CLASSES: first thing on the page, one row ---------------- */
+  .classes {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--rule-firm);
+    border: 1px solid var(--rule-firm);
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 0 0 1.5rem;
+  }
+  @media (max-width: 62rem) { .classes { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 24rem) { .classes { grid-template-columns: 1fr; } }
+
+  .cl {
+    background: var(--surface);
+    padding: 1rem 1.05rem 1.1rem;
+    display: flex; flex-direction: column; gap: .45rem;
+  }
+  .cl .term {
+    font-family: var(--mono); font-size: var(--t-label);
+    letter-spacing: .09em; text-transform: uppercase;
+    color: var(--accent); margin: 0;
+  }
+  .cl h2 { font-size: var(--t-body); font-weight: 600; margin: 0; line-height: 1.32; text-wrap: balance; }
+  .cl p { margin: 0; color: var(--muted); }
+  .cl .looks {
+    margin-top: auto; padding-top: .5rem;
+    border-top: 1px dotted var(--rule-firm);
+    font-style: italic; color: var(--faint);
+  }
+  .cl a.jump { font-family: var(--mono); font-size: var(--t-label); text-decoration: none; color: var(--accent); }
+  .cl a.jump:hover { text-decoration: underline; }
+
+  .classes-note { margin: 0 0 3rem; color: var(--muted); max-width: 46rem; }
+  .classes-note b { color: var(--ink); }
+
+  /* ---- masthead --------------------------------------------------------- */
+  header.mast { border-bottom: 1px solid var(--rule-firm); padding-bottom: 1.5rem; margin: 0 0 2rem; }
+  .standfirst { margin: .7rem 0 0; max-width: 44rem; color: var(--muted); }
   .standfirst b { color: var(--ink); font-weight: 600; }
 
-  header.mast { border-bottom: 1px solid var(--rule-firm); padding-bottom: 1.6rem; margin-bottom: 2rem; }
+  /* ---- the finding ------------------------------------------------------ */
+  .finding { margin: 0 0 3rem; }
+  .finding > h2 { font-size: var(--t-body); font-weight: 600; margin: 0 0 .4rem; }
+  .finding > .sub { margin: 0 0 1.3rem; color: var(--muted); max-width: 46rem; }
 
-  /* ---- summary strip ---------------------------------------------------- */
-  .strip {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
-    gap: 1px;
-    background: var(--rule);
-    border: 1px solid var(--rule);
-    border-radius: 3px;
-    overflow: hidden;
-    margin-bottom: 2.5rem;
-  }
-  .stat { background: var(--surface); padding: .95rem 1.05rem; }
-  .stat .n {
-    font-family: var(--mono);
-    font-size: var(--t-head);
-    font-weight: 500;
-    font-variant-numeric: tabular-nums;
-    display: block;
-    line-height: 1.1;
-  }
-  .stat .k {
-    font-family: var(--mono);
-    font-size: var(--t-label);
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    color: var(--faint);
-    display: block;
-    margin-top: .35rem;
-  }
-
-  /* ---- the four classes, defined before they are used -------------------- */
-  .primer { margin: 0 0 3rem; }
-  .primer > h2 {
-    font-size: var(--t-body);
-    font-weight: 600;
-    margin: 0 0 .35rem;
-  }
-  .primer > .sub { margin: 0 0 1.3rem; color: var(--muted); max-width: 44rem; }
-
-  .defs {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-    gap: 1px;
-    background: var(--rule);
-    border: 1px solid var(--rule);
-    border-radius: 3px;
-    overflow: hidden;
-  }
-  .def {
+  .facts { display: flex; flex-direction: column; gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  .fact {
     background: var(--surface);
-    padding: 1.1rem 1.15rem 1.2rem;
-    display: flex;
-    flex-direction: column;
-    gap: .5rem;
+    display: grid; grid-template-columns: 6.5rem 1fr; gap: 1.1rem;
+    padding: .95rem 1.1rem;
+    align-items: baseline;
   }
-  .def .term {
-    font-family: var(--mono);
-    font-size: var(--t-label);
-    letter-spacing: .09em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin: 0;
+  @media (max-width: 40rem) { .fact { grid-template-columns: 1fr; gap: .3rem; } }
+  .fact .n {
+    font-family: var(--mono); font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    color: var(--accent); font-size: var(--t-head); line-height: 1.1;
   }
-  .def h3 {
-    font-size: var(--t-body);
-    font-weight: 600;
-    margin: 0;
-    line-height: 1.35;
-    text-wrap: balance;
-  }
-  .def p { margin: 0; color: var(--muted); }
-  .def .looks {
-    margin-top: auto;
-    padding-top: .55rem;
-    border-top: 1px dotted var(--rule-firm);
-    font-style: italic;
-    color: var(--faint);
-  }
-  .def a.jump {
-    font-family: var(--mono);
-    font-size: var(--t-label);
-    text-decoration: none;
-    color: var(--accent);
-  }
-  .def a.jump:hover { text-decoration: underline; }
+  .fact p { margin: 0; }
+  .fact b { font-weight: 600; }
 
   /* ---- class sections --------------------------------------------------- */
-  section.cls { margin-bottom: 3rem; scroll-margin-top: 1.5rem; }
-
-  .cls-head { border-bottom: 1px solid var(--rule-firm); padding-bottom: .55rem; margin-bottom: 0; }
-  .cls-head h2 {
-    font-size: var(--t-body);
-    font-weight: 600;
-    margin: 0;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: .6rem;
-  }
-  .cls-head .say {
-    font-weight: 400;
-    font-style: italic;
-    color: var(--muted);
-  }
+  section.cls { margin-bottom: 3rem; scroll-margin-top: 1.2rem; }
+  .cls-head { border-bottom: 1px solid var(--rule-firm); padding-bottom: .5rem; }
+  .cls-head h2 { font-size: var(--t-body); font-weight: 600; margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: .55rem; }
+  .cls-head .say { font-weight: 400; font-style: italic; color: var(--muted); }
+  .lede-cls { color: var(--muted); margin: .9rem 0 .2rem; max-width: 46rem; }
 
   .rows { display: flex; flex-direction: column; }
-
   .row {
     display: grid;
-    grid-template-columns: minmax(13rem, 15rem) 1fr minmax(7rem, 9rem);
-    gap: 1.25rem;
-    padding: 1.15rem 0;
+    grid-template-columns: minmax(13rem, 15rem) 1fr minmax(7rem, 8.5rem);
+    gap: 1.25rem; padding: 1.1rem 0;
     border-bottom: 1px solid var(--rule);
     align-items: start;
   }
-  @media (max-width: 46rem) {
-    .row { grid-template-columns: 1fr; gap: .55rem; }
-  }
+  @media (max-width: 46rem) { .row { grid-template-columns: 1fr; gap: .5rem; } }
 
   .tool { min-width: 0; }
-  .tool code {
-    font-family: var(--mono);
-    font-size: var(--t-mono);
-    font-weight: 500;
-    color: var(--ink);
-    overflow-wrap: anywhere;
-  }
-  .tool .home {
-    display: block;
-    font-family: var(--mono);
-    font-size: var(--t-label);
-    color: var(--faint);
-    margin-top: .3rem;
-  }
+  .tool code { font-family: var(--mono); font-size: var(--t-mono); font-weight: 500; color: var(--ink); overflow-wrap: anywhere; }
+  .tool .home { display: block; font-family: var(--mono); font-size: var(--t-label); color: var(--faint); margin-top: .28rem; }
 
   .why { min-width: 0; }
-  .why .when {
-    font-family: var(--mono);
-    font-size: var(--t-mono);
-    font-variant-numeric: tabular-nums;
-    color: var(--caution);
-    margin-right: .45rem;
-  }
   .why p { margin: 0; }
-  .why .cost {
-    display: block;
-    margin-top: .45rem;
-    color: var(--muted);
-    font-style: italic;
+  .why .when {
+    font-family: var(--mono); font-size: var(--t-mono);
+    font-variant-numeric: tabular-nums; color: var(--caution); margin-right: .4rem;
   }
+  .why .cost { display: block; margin-top: .4rem; color: var(--muted); font-style: italic; }
 
-  /* propagation ---------------------------------------------------------- */
   .spread { text-align: left; }
-  .pips { display: flex; gap: 2px; margin-bottom: .3rem; }
+  .pips { display: flex; gap: 2px; margin-bottom: .28rem; }
   .pip { width: 7px; height: 14px; border-radius: 1px; background: var(--rule-firm); }
   .pip.on { background: var(--accent); }
-  .spread .lab {
-    font-family: var(--mono);
-    font-size: var(--t-label);
-    color: var(--faint);
-    font-variant-numeric: tabular-nums;
-  }
+  .spread .lab { font-family: var(--mono); font-size: var(--t-label); color: var(--faint); font-variant-numeric: tabular-nums; }
   .row.ported .tool code { color: var(--accent); }
+  .row.local .spread .lab { color: var(--caution); }
 
   /* ---- notes ------------------------------------------------------------ */
   .note {
-    background: var(--sunk);
-    border-left: 2px solid var(--rule-firm);
-    padding: 1rem 1.15rem;
-    margin: 2rem 0 0;
-    color: var(--muted);
-    border-radius: 0 3px 3px 0;
+    background: var(--sunk); border-left: 2px solid var(--rule-firm);
+    padding: 1rem 1.15rem; margin: 2rem 0 0; color: var(--muted); border-radius: 0 3px 3px 0;
   }
   .note b { color: var(--ink); }
   .note p { margin: 0 0 .7rem; }
   .note p:last-child { margin-bottom: 0; }
-  .note code, .why code, .standfirst code { font-family: var(--mono); font-size: var(--t-mono); }
-
+  .note ol { margin: .3rem 0 0; padding-left: 1.15rem; }
+  .note li { margin-bottom: .55rem; }
+  .note li:last-child { margin-bottom: 0; }
   .caution { border-left-color: var(--caution); background: var(--caution-soft); }
+  .ask { border-left-color: var(--accent); background: var(--accent-soft); }
 
-  .lede-cls { color: var(--muted); margin: .9rem 0 .2rem; max-width: 44rem; }
+  code { font-family: var(--mono); font-size: var(--t-mono); }
 </style>
 
 <div class="wrap">
 
-  <header class="mast">
-    <p class="eyebrow">Measured 2026-09-01 · 18 repositories</p>
-    <h1>Mines Already Cleared</h1>
-    <p class="standfirst">Twenty coordination and verification instruments across one person&rsquo;s working estate. <b>None was designed in advance.</b> Each one is a shell script or a hook written after a specific failure, and each carries the date of that failure in its own header &mdash; so this table is transcribed from the tools rather than reconstructed from memory. The name is borrowed from <code>sapper</code>, which describes its own job as sweeping for <i>known mines before they ship</i>.</p>
-  </header>
+  <!-- ============ THE FOUR CLASSES, FIRST THING ON THE PAGE ============ -->
+  <div class="classes">
 
-  <div class="strip">
-    <div class="stat"><span class="n">20</span><span class="k">Instruments</span></div>
-    <div class="stat"><span class="n">4</span><span class="k">Failure classes</span></div>
-    <div class="stat"><span class="n">7</span><span class="k">Widest spread</span></div>
-    <div class="stat"><span class="n">30</span><span class="k">Days to build all 20</span></div>
-    <div class="stat"><span class="n">1</span><span class="k">Person</span></div>
+    <div class="cl">
+      <p class="term">Concurrency</p>
+      <h2>Nobody can see anybody else</h2>
+      <p>Several agent sessions work in one project at once. Each starts from nothing; none can observe the others.</p>
+      <p class="looks">Two sessions do the same job twice &mdash; or both take &ldquo;the next free number&rdquo; and take the same one.</p>
+      <a class="jump" href="#concurrency">7 instruments &rarr;</a>
+    </div>
+
+    <div class="cl">
+      <p class="term">Retrieval</p>
+      <h2>The rule was written down and nobody read it</h2>
+      <p>The instruction existed, in the right file, and was correct. Nothing put it in front of the reader at the moment of the decision.</p>
+      <p class="looks">A rule is skipped &mdash; not defied, never surfaced.</p>
+      <a class="jump" href="#retrieval">5 instruments &rarr;</a>
+    </div>
+
+    <div class="cl">
+      <p class="term">Verification</p>
+      <h2>The check passed and meant nothing</h2>
+      <p>A test went green, a gate let it by, a review came back complete. None was looking at the thing that was wrong.</p>
+      <p class="looks">Everything reports success and the work is still broken.</p>
+      <a class="jump" href="#verification">4 instruments &rarr;</a>
+    </div>
+
+    <div class="cl">
+      <p class="term">Staleness</p>
+      <h2>The copy was out of date</h2>
+      <p>Something useful was borrowed into a second place. The original moved on, and nothing compared them again.</p>
+      <p class="looks">A rule followed correctly &mdash; from a copy made before the rule changed.</p>
+      <a class="jump" href="#staleness">3 instruments &rarr;</a>
+    </div>
+
   </div>
 
-  <!-- ============ THE FOUR CLASSES, DEFINED FIRST ============ -->
-  <section class="primer">
-    <h2>Four ways this goes wrong</h2>
-    <p class="sub">Every instrument below was built after one of these happened. <b>None of them is a bug in the ordinary sense</b> &mdash; in each case the code ran, the tool worked, and nobody was careless. That is what makes them expensive to find.</p>
+  <p class="classes-note"><b>None of these is a bug in the ordinary sense.</b> In every case below the code ran, the tool worked, and nobody was careless. That is what makes them expensive to find &mdash; and it is why an instrument, rather than more care, is the only thing that has ever stopped one.</p>
 
-    <div class="defs">
+  <!-- ============ MASTHEAD ============ -->
+  <header class="mast">
+    <p class="eyebrow">Measured 2026-09-01 &middot; 18 repositories &middot; one person</p>
+    <h1>Twenty Instruments, Still Failing</h1>
+    <p class="standfirst">Twenty gates, boards and checks were built against those four classes in thirty days, and the work has not got smoother. <b>This document exists to ask why, not to record that they were built.</b> The counts below are the beginning of an answer, and they point somewhere other than effort.</p>
+  </header>
 
-      <div class="def">
-        <p class="term">Concurrency</p>
-        <h3>Nobody can see anybody else</h3>
-        <p>Several agent sessions work in one project at the same time. Each starts from nothing, and none can observe the others.</p>
-        <p class="looks">Two sessions solve the same problem twice. Or both pick &ldquo;the next free number&rdquo; and pick the same one.</p>
-        <a class="jump" href="#concurrency">7 instruments &rarr;</a>
+  <!-- ============ THE FINDING ============ -->
+  <section class="finding">
+    <h2>What the counts say</h2>
+    <p class="sub">Four measurements, taken today across every local repository. Each one was a surprise, and together they explain a workload that feels like it is not converging &mdash; because it isn&rsquo;t.</p>
+
+    <div class="facts">
+
+      <div class="fact">
+        <span class="n">14/20</span>
+        <p><b>live in exactly one repository.</b> Only six instruments ever travelled to a second project. The estate is not accumulating a toolkit; individual repositories are.</p>
       </div>
 
-      <div class="def">
-        <p class="term">Retrieval</p>
-        <h3>The rule was written down and nobody read it</h3>
-        <p>The instruction existed, in the right file, and was correct. Nothing put it in front of the reader at the moment the decision was made.</p>
-        <p class="looks">A rule in the project instructions file is skipped &mdash; not defied, just never surfaced.</p>
-        <a class="jump" href="#retrieval">5 instruments &rarr;</a>
+      <div class="fact">
+        <span class="n">1</span>
+        <p><b>instrument inherited by the newest project.</b> This repository is six days old. It arrived with the heredoc gate and <b>built twelve more of its own</b> from its own failures &mdash; re-deriving, not inheriting.</p>
       </div>
 
-      <div class="def">
-        <p class="term">Verification</p>
-        <h3>The check passed and meant nothing</h3>
-        <p>A test went green, a gate let something by, a review came back complete. None of them was looking at the thing that was actually wrong.</p>
-        <p class="looks">Everything reports success, and the work is still broken. The tool was never wrong &mdash; it answered a different question.</p>
-        <a class="jump" href="#verification">4 instruments &rarr;</a>
+      <div class="fact">
+        <span class="n">20/20</span>
+        <p><b>gate a failure that had already happened.</b> Read the origins below: every one names a specific past incident and blocks exactly that. <b>None generalizes.</b> Known failures stop recurring; novel ones are not slowed at all.</p>
       </div>
 
-      <div class="def">
-        <p class="term">Staleness</p>
-        <h3>The copy was out of date</h3>
-        <p>Something useful was borrowed into a second place. Then the original moved on, and nothing compared them again.</p>
-        <p class="looks">A rule is followed correctly &mdash; from a copy made before the rule changed.</p>
-        <a class="jump" href="#staleness">3 instruments &rarr;</a>
+      <div class="fact">
+        <span class="n">25&times;</span>
+        <p><b>more commits per month since July 2026</b> in the repository that spans the change &mdash; 30&ndash;45 a month for two years, then 885, then 1,042. Twenty instruments against that is not convergence. It is running to stand still.</p>
       </div>
 
+    </div>
+
+    <div class="note">
+      <p><b>Put together, those four are a mechanism rather than four complaints.</b> Throughput rose twenty-five-fold. Each instrument retires exactly one known failure and does not travel. New projects start near zero and re-derive. So the rate of <i>novel</i> incidents tracks the volume of new work, and the volume of new work went up &mdash; which is precisely the experience of building tools all month and generating cases every day at the end of it.</p>
+      <p><b>What this does not say.</b> It does not say the instruments failed. Each one demonstrably retired its own failure, and the six that travelled retired it in up to seven places at once. The complaint is not that they do not work. It is that <b>working is not the same as compounding</b>, and nothing here compounds yet.</p>
     </div>
   </section>
 
@@ -347,29 +275,29 @@
     <div class="cls-head">
       <h2>Concurrency <span class="say">&mdash; several sessions, one checkout, and none of them can see the others</span></h2>
     </div>
-    <p class="lede-cls">Every session starts from nothing and cannot observe its siblings. These are the instruments that give it somewhere to look.</p>
+    <p class="lede-cls">Seven instruments, and <b>six of them live in one repository each.</b> This is the class where the estate re-derives the most, because each project&rsquo;s concurrency is shaped differently &mdash; branches in one, a shared checkout in another.</p>
 
     <div class="rows">
 
-      <div class="row">
-        <div class="tool"><code>push-goes-where-you-are.sh</code><span class="home">short-course · hook</span></div>
+      <div class="row local">
+        <div class="tool"><code>push-goes-where-you-are.sh</code><span class="home">short-course &middot; hook</span></div>
         <div class="why">
-          <p><span class="when">2026-08-27 23:13</span>One session had worked on <code>master</code> all evening. At 23:11 a different session, in the same checkout, created a branch and switched to it. The first session committed and ran <code>git push origin master</code> &mdash; which <b>succeeded, printed nothing wrong, and moved nothing.</b></p>
+          <p><span class="when">2026-08-27 23:13</span>One session had worked on <code>master</code> all evening. At 23:11 a different session, in the same checkout, created a branch and switched to it. The first committed and ran <code>git push origin master</code> &mdash; which <b>succeeded, printed nothing wrong, and moved nothing.</b></p>
           <span class="cost">Costs: a gate that fires on push.</span>
         </div>
         <div class="spread"><div class="pips"><span class="pip on"></span></div><span class="lab">1 repo</span></div>
       </div>
 
       <div class="row">
-        <div class="tool"><code>session_identity.sh</code><span class="home">interface2 · short-course</span></div>
+        <div class="tool"><code>session_identity.sh</code><span class="home">interface2 &middot; short-course</span></div>
         <div class="why">
-          <p><span class="when">2026-08-27</span>Four sessions in one checkout on one branch. The sibling repo addresses a session by its branch, on the ground that one branch to one worktree to one session is already the rule. <b>That rule did not hold here</b>, and the difference is the whole reason the second version exists.</p>
+          <p><span class="when">2026-08-27</span>Four sessions in one checkout on one branch. The sibling repo addresses a session by its branch, on the ground that one branch to one worktree to one session is already the rule. <b>That rule did not hold here</b> &mdash; which is the whole reason a second version exists rather than a copy.</p>
           <span class="cost">Costs: one call at session start.</span>
         </div>
         <div class="spread"><div class="pips"><span class="pip on"></span><span class="pip on"></span></div><span class="lab">2 repos</span></div>
       </div>
 
-      <div class="row">
+      <div class="row local">
         <div class="tool"><code>worktree.sh</code><span class="home">short-course</span></div>
         <div class="why">
           <p><span class="when">2026-08-30</span>Stated plainly by the author: <i>&ldquo;there are always many sessions in a repo.&rdquo;</i> One session, one branch, one worktree &mdash; made a command rather than a convention.</p>
@@ -378,16 +306,16 @@
         <div class="spread"><div class="pips"><span class="pip on"></span></div><span class="lab">1 repo</span></div>
       </div>
 
-      <div class="row">
+      <div class="row local">
         <div class="tool"><code>next_adr.sh</code><span class="home">interface2</span></div>
         <div class="why">
-          <p><span class="when">2026-08-02</span>The decision series had <b>eight numbers used by more than one unrelated record</b>, and 0009 by three. Every collision had the same cause: a session picked the next number after the highest one it could see, and what it could see was its own branch.</p>
+          <p><span class="when">2026-08-02</span>The decision series had <b>eight numbers used by more than one unrelated record</b>, and 0009 by three. Every collision had one cause: a session picked the next number after the highest it could see, and what it could see was its own branch.</p>
           <span class="cost">Costs: one call instead of counting.</span>
         </div>
         <div class="spread"><div class="pips"><span class="pip on"></span></div><span class="lab">1 repo</span></div>
       </div>
 
-      <div class="row">
+      <div class="row local">
         <div class="tool"><code>next_sap.sh</code><span class="home">interface2</span></div>
         <div class="why">
           <p><span class="when">2026-08-05</span>Two sessions independently designed, verified and wrote up a rule numbered SAP019 &mdash; two different rules. Neither could see the other, nothing arbitrated it, and the collision was found by accident.</p>
@@ -396,7 +324,7 @@
         <div class="spread"><div class="pips"><span class="pip on"></span></div><span class="lab">1 repo</span></div>
       </div>
 
-      <div class="row">
+      <div class="row local">
         <div class="tool"><code>claim.sh</code><span class="home">short-course</span></div>
         <div class="why">
           <p><span class="when">2026-08-27</span>Two sessions wrote a case file about the <b>same incident, four minutes apart.</b> Nothing was lost and nobody was careless &mdash; there was simply no place to look.</p>
@@ -405,8 +333,8 @@
         <div class="spread"><div class="pips"><span class="pip on"></span></div><span class="lab">1 repo</span></div>
       </div>
 
-      <div class="row">
-        <div class="tool"><code>require-commit-before-message.sh</code><span class="home">bugarach · vendored</span></div>
+      <div class="row local">
+        <div class="tool"><code>require-commit-before-message.sh</code><span class="home">bugarach &middot; vendored</span></div>
         <div class="why">
           <p>Messages between sessions are socket traffic. Nothing persists them, nothing versions them, and when a session exits <b>its half of every conversation is gone.</b> Sessions had repeatedly worked out a real finding in conversation and lost it.</p>
           <span class="cost">Costs: commit before you tell anyone.</span>
@@ -422,12 +350,12 @@
     <div class="cls-head">
       <h2>Retrieval <span class="say">&mdash; the rule existed, was correct, and nobody read it</span></h2>
     </div>
-    <p class="lede-cls">The largest class, and the one that looks least like a bug. Nothing here was ignored; it was never surfaced. The repair is always the same shape &mdash; move the rule to the moment of the decision.</p>
+    <p class="lede-cls">The class that travels best, and the reason is worth noting: <b>a retrieval instrument fires by itself.</b> The one that reached seven repositories is a briefing that runs at session start without being invoked.</p>
 
     <div class="rows">
 
       <div class="row ported">
-        <div class="tool"><code>session-start.sh</code><span class="home">7 repos · vendored from interface2</span></div>
+        <div class="tool"><code>session-start.sh</code><span class="home">7 repos &middot; vendored from interface2</span></div>
         <div class="why">
           <p>A briefing injected into the session&rsquo;s context at every start and resume, deriving the repo name and sibling worktrees itself so a consumer copies it unchanged. <b>The most-ported instrument in the estate</b>, alongside the heredoc gate.</p>
           <span class="cost">Costs: nothing. It fires without being remembered.</span>
@@ -435,7 +363,7 @@
         <div class="spread"><div class="pips"><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span></div><span class="lab">7 repos</span></div>
       </div>
 
-      <div class="row">
+      <div class="row local">
         <div class="tool"><code>guard_branch.sh</code><span class="home">bugarach</span></div>
         <div class="why">
           <p><i>&ldquo;Never commit on main&rdquo;</i> was written as prose in the instructions file and again in the protocol document. <b>Prose in an instructions file does not reliably change behaviour</b> &mdash; it is long, it is read before there is anything to attach it to, and it gets skipped.</p>
@@ -445,7 +373,7 @@
       </div>
 
       <div class="row">
-        <div class="tool"><code>sapper</code><span class="home">interface2 (.sh) · bugarach (.py)</span></div>
+        <div class="tool"><code>sapper</code><span class="home">interface2 (.sh) &middot; bugarach (.py)</span></div>
         <div class="why">
           <p>The gotcha documents record traps that already cost real time. Prose does not stop them recurring, because <b>a session reads the rule at startup and writes the trap two hundred turns later.</b> The mechanizable ones move to a gate that fires at commit time.</p>
           <span class="cost">Costs: a commit-time sweep.</span>
@@ -453,8 +381,8 @@
         <div class="spread"><div class="pips"><span class="pip on"></span><span class="pip on"></span></div><span class="lab">2 repos</span></div>
       </div>
 
-      <div class="row">
-        <div class="tool"><code>the-folder-is-the-input.sh</code><span class="home">bugarach · hook</span></div>
+      <div class="row local">
+        <div class="tool"><code>the-folder-is-the-input.sh</code><span class="home">bugarach &middot; hook</span></div>
         <div class="why">
           <p>A session reaching for a data store is told which folder to read before the command runs. <b>It has two branches, and the second exists because the first was not enough:</b> one catches a session that has decided to read a store, the other catches one that is simply lost &mdash; the state that produces the first, and which nothing addressed until one day after the file shipped.</p>
           <span class="cost">Costs: an intercepted command.</span>
@@ -462,7 +390,7 @@
         <div class="spread"><div class="pips"><span class="pip on"></span></div><span class="lab">1 repo</span></div>
       </div>
 
-      <div class="row">
+      <div class="row local">
         <div class="tool"><code>doubt.sh</code><span class="home">short-course</span></div>
         <div class="why">
           <p><span class="when">2026-08-29</span>Six claims in one afternoon that nobody could stand behind &mdash; an unconfirmed cap, three token totals disagreeing eightfold, an attribution inferred from timestamps. <b>Every one was correctly flagged in prose, in a different document</b>, and prose flags do not survive being read once.</p>
@@ -479,11 +407,11 @@
     <div class="cls-head">
       <h2>Verification <span class="say">&mdash; the check ran, passed, and proved nothing</span></h2>
     </div>
-    <p class="lede-cls">The most expensive class to find, because everything looks green. In none of these was the tool wrong; each was answering a question nobody had checked was the right one.</p>
+    <p class="lede-cls">The most expensive class to find, because everything looks green. In none of these was the tool wrong &mdash; each was answering a question nobody had checked was the right one.</p>
 
     <div class="rows">
 
-      <div class="row">
+      <div class="row local">
         <div class="tool"><code>mutation_check.sh</code><span class="home">short-course</span></div>
         <div class="why">
           <p><span class="when">2026-08-28</span>Three small tools had shipped the previous day, each with a selftest, all three green. Two were then mutated on purpose to prove the tests had teeth. <b>They did not.</b></p>
@@ -493,7 +421,7 @@
       </div>
 
       <div class="row ported">
-        <div class="tool"><code>murderboard_roster.sh</code><span class="home">4 repos · vendored</span></div>
+        <div class="tool"><code>murderboard_roster.sh</code><span class="home">4 repos &middot; vendored</span></div>
         <div class="why">
           <p>The review process says every role runs on every deliverable, and that a role with nothing to check must say so. Both sentences are prose addressed to the reviewer. Nothing read the finished report &mdash; so <b>a run that fired 7 of 11 roles and a run that fired all 11 produced reports indistinguishable to the reader.</b></p>
           <span class="cost">Costs: the roster is derived from the process file, not typed.</span>
@@ -501,7 +429,7 @@
         <div class="spread"><div class="pips"><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span></div><span class="lab">4 repos</span></div>
       </div>
 
-      <div class="row">
+      <div class="row local">
         <div class="tool"><code>merge_when_green.sh</code><span class="home">bugarach</span></div>
         <div class="why">
           <p><code>gh pr merge --auto</code> waits for <i>required</i> status checks. With no branch protection nothing is required, so auto-merge fires instantly and the pull request gates nothing. That was live for a whole session: <b>every PR merged about ninety seconds before its own CI finished. They all passed, so it looked fine.</b></p>
@@ -510,7 +438,7 @@
         <div class="spread"><div class="pips"><span class="pip on"></span></div><span class="lab">1 repo</span></div>
       </div>
 
-      <div class="row">
+      <div class="row local">
         <div class="tool"><code>check_pointers.sh</code><span class="home">short-course</span></div>
         <div class="why">
           <p><span class="when">2026-08-28</span>Two broken repo-relative pointers appeared on the trunk <b>within two hours</b>, both written by sessions that were being careful. Every path named in a markdown file must resolve.</p>
@@ -527,12 +455,12 @@
     <div class="cls-head">
       <h2>Staleness <span class="say">&mdash; the copy was old, and nothing said so</span></h2>
     </div>
-    <p class="lede-cls">Vendoring a working instrument into a second repository solves one problem and creates this one. Every repo that borrows a tool inherits the question of whether its copy still matches.</p>
+    <p class="lede-cls">This class is <b>created by the fix for the others.</b> Vendoring a working instrument into a second repository solves one problem and manufactures this one &mdash; every borrowed copy inherits the question of whether it still matches.</p>
 
     <div class="rows">
 
       <div class="row ported">
-        <div class="tool"><code>murderboard_freshness.sh</code><span class="home">6 repos · vendored</span></div>
+        <div class="tool"><code>murderboard_freshness.sh</code><span class="home">6 repos &middot; vendored</span></div>
         <div class="why">
           <p>Step 0 of the review process tells a reviewer to confirm the process is current before running it &mdash; prose, so it fires only if someone remembers. The one time nobody did, <b>a deck shipped a slide-overlap defect using a copy that predated the slide-overlap rule. The rule existed. The copy was old. Nothing said so.</b></p>
           <span class="cost">Costs: one check against upstream.</span>
@@ -540,7 +468,7 @@
         <div class="spread"><div class="pips"><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span></div><span class="lab">6 repos</span></div>
       </div>
 
-      <div class="row">
+      <div class="row local">
         <div class="tool"><code>check_dated_ui.sh</code><span class="home">short-course</span></div>
         <div class="why">
           <p><span class="when">2026-08-30</span>A published step that names a vendor&rsquo;s button must say when that was true. Found by walking a 34-step runbook end to end for the first time: the publishing phase was budgeted at twenty minutes and called the easy part, and <b>it was stopped seven times.</b></p>
@@ -549,7 +477,7 @@
         <div class="spread"><div class="pips"><span class="pip on"></span></div><span class="lab">1 repo</span></div>
       </div>
 
-      <div class="row">
+      <div class="row local">
         <div class="tool"><code>site_staleness.py</code><span class="home">bugarach</span></div>
         <div class="why">
           <p>How far behind the trunk is the page the public is actually reading? A live page and its source drift silently, and nothing else in the build notices.</p>
@@ -562,37 +490,45 @@
   </section>
 
   <!-- ============ ONE OF A KIND ============ -->
-  <section class="cls">
+  <section class="cls" id="tooling">
     <div class="cls-head">
       <h2>A class of one <span class="say">&mdash; the tool itself corrupts the work, silently</span></h2>
     </div>
+    <p class="lede-cls">It does not fit the four, and it is one of only two instruments that reached seven repositories. Both travelled for the same reason: <b>they fire without anyone choosing to run them.</b></p>
 
     <div class="rows">
       <div class="row ported">
-        <div class="tool"><code>no-heredoc-source.sh</code><span class="home">7 repos · hook</span></div>
+        <div class="tool"><code>no-heredoc-source.sh</code><span class="home">7 repos &middot; hook</span></div>
         <div class="why">
-          <p>Shell heredocs mangle string escapes on the way to disk, and <b>the result still looks right in a diff.</b> Two MATLAB files in one session: <code>\r</code> read as a carriage return, <code>\n</code> became a literal newline that terminated a string early, the script stopped parsing, and every figure silently failed. The gate refuses to write source through a heredoc at all.</p>
-          <span class="cost">Costs: use the file tools instead.</span>
+          <p>Shell heredocs mangle string escapes on the way to disk, and <b>the result still looks right in a diff.</b> Two MATLAB files in one session: <code>\r</code> read as a carriage return, <code>\n</code> became a literal newline that terminated a string early, the script stopped parsing, and every figure silently failed.</p>
+          <span class="cost">Costs: use the file tools instead. It blocked the writing of this page, twice.</span>
         </div>
         <div class="spread"><div class="pips"><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span></div><span class="lab">7 repos</span></div>
       </div>
     </div>
   </section>
 
-  <!-- ============ NOTES ============ -->
-  <div class="note">
-    <p><b>What the spread column means, and why it is the interesting one.</b> An instrument in seven repositories was worth carrying six times. The four that travelled &mdash; a session briefing, a heredoc gate, a freshness check and a roster check &mdash; are not the clever ones; they are the ones that fire without being remembered. <b>Every instrument that stayed in one repository requires somebody to invoke it.</b> That is the whole finding of the table, and it was not designed in: it is what the counts came back saying.</p>
+  <!-- ============ WHAT TO REVIEW ============ -->
+  <div class="note ask">
+    <p><b>What this document is for, and what would settle it.</b> Four questions, in the order the counts raise them. None is answered here, and the first two are the ones most worth an outside opinion.</p>
+    <ol>
+      <li><b>Why does the toolkit not travel?</b> Six of twenty spread; fourteen did not. The six that did all fire automatically. Is the barrier that the rest need invoking &mdash; or is it that vendoring is manual, with a registration step in two places and no package to install?</li>
+      <li><b>Should a new project inherit a baseline at all?</b> The newest repository arrived with one instrument and built twelve. If those twelve were genuinely project-specific, that is correct and there is nothing to fix. If half were re-derivations of instruments that already existed elsewhere, <b>that half is the whole complaint.</b> This document does not yet distinguish the two, and doing so is one afternoon&rsquo;s work.</li>
+      <li><b>Is a per-incident gate the right unit?</b> Every instrument here retires exactly one known failure. Nothing anticipates a class. Twenty specific gates against rising throughput may simply be the wrong shape of answer.</li>
+      <li><b>What is the actual incident rate, and is it falling?</b> Not answerable from this repository &mdash; it is six days old and its case files are dominated by one afternoon&rsquo;s batch. A longer-running project would answer it; this one cannot, and saying so is more useful than a trend drawn through six points.</li>
+    </ol>
   </div>
 
+  <!-- ============ METHOD ============ -->
   <div class="note">
-    <p><b>Method.</b> Counted 2026-09-01 across eighteen local repositories with <code>find</code>, <code>git rev-list</code> and <code>git branch --no-merged</code>. Origin failures are quoted or condensed from each tool&rsquo;s own header comment, which is where this estate records them; nothing here is reconstructed from memory. Duplicate hits from <code>-worktrees</code> checkouts are collapsed, so a count is repositories rather than working copies.</p>
-    <p><b>The thirty days is a first-appearance date, and that is not the same as an authorship date.</b> Every one of the twenty entered git between 2026-08-01 and 2026-08-30, measured with <code>git log --diff-filter=A</code>. For a vendored tool that date is when the copy <i>arrived in that repository</i>, so four of them are older upstream than they look here. The window is real; the attribution inside it is approximate, and this sentence is the correction that would otherwise have to be made later.</p>
-    <p><b>What was excluded, and the criterion.</b> One repository carries ninety files under <code>tools/</code>; most are analysis and figure scripts (<code>make_*_figure.py</code>, <code>probe_*.py</code>) and are not instruments in this sense. The line drawn here is: <b>does it check, gate, coordinate or retrieve?</b> Analysis code that produces a result is out; a script whose whole job is to notice something is in. That criterion is a judgement and a different one would change the count of twenty.</p>
+    <p><b>Method.</b> Counted 2026-09-01 across eighteen local repositories with <code>find</code>, <code>git rev-list</code>, <code>git log --diff-filter=A</code> and <code>git branch --no-merged</code>. Origin failures are quoted or condensed from each tool&rsquo;s own header comment, which is where this estate records them; nothing is reconstructed from memory. Duplicate hits from <code>-worktrees</code> checkouts are collapsed, so a count is repositories rather than working copies.</p>
+    <p><b>Dates are first-appearance, not authorship.</b> All twenty entered git between 2026-08-01 and 2026-08-30. For a vendored tool that is when the copy <i>arrived in that repository</i>, so several are older upstream than they look here.</p>
+    <p><b>What was excluded, and the criterion.</b> One repository carries ninety files under <code>tools/</code>; most are analysis and figure scripts and are not instruments in this sense. The line drawn is: <b>does it check, gate, coordinate or retrieve?</b> Analysis code that produces a result is out; a script whose whole job is to notice something is in. That is a judgement, and a different one would change the count of twenty.</p>
   </div>
 
   <div class="note caution">
-    <p><b>Not verified.</b> These headers were read, not run. No selftest was executed for this table, and <code>mutation_check.sh</code> exists precisely because a green selftest has already turned out to prove nothing here. The dates are as each tool states them, and a tool that misdates its own origin would carry the error straight into this table uncorrected.</p>
-    <p><b>Also not shown:</b> what any of it failed to catch. Unmerged branches across these repositories run from 14% to 88%, and no instrument in this table addresses branch hygiene. A ledger of cleared mines is not a map of the field.</p>
+    <p><b>Not verified.</b> These headers were read, not run. No selftest was executed for this table, and <code>mutation_check.sh</code> exists precisely because a green selftest has already turned out to prove nothing here. Dates are as each tool states them; a tool that misdates its own origin carries the error straight into this page.</p>
+    <p><b>Also not shown:</b> what any of it failed to catch. Unmerged branches across these repositories run from 14% to 88%, and <b>no instrument in this document addresses branch hygiene at all.</b></p>
   </div>
 
 </div>
