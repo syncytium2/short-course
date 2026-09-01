@@ -162,6 +162,56 @@
   }
   .standfirst { color: var(--muted); margin: 8px 0 0; max-width: 60ch; }
 
+  /* ---------------- the masthead inside a pane ----------------
+     The deck is a DOCUMENT-level element and the h1 is the document's title. On
+     overview that is the thing being read, so the masthead stands at full height and
+     does not follow. On the other twelve views the reader is inside one pane, the deck
+     has stopped describing what is under it, and two headers -- this one and the pane's
+     own .view-head -- end up stacked doing the same job at two scales.
+
+     But the masthead also holds the reading depth control, and THAT is not noise on any
+     view. It used to scroll away with the deck, so changing depth mid-pane meant
+     scrolling back up to a paragraph about something else. The page has two controls;
+     one of them followed you and one did not.
+
+     So on those twelve views the deck collapses to a one-line locator and the bar
+     sticks. The height change happens at the switch, which already re-scrolls, so the
+     jump lands underneath a scroll that was going to happen anyway. */
+  .mast-where {
+    display: none;
+    flex-wrap: wrap; align-items: baseline; gap: 8px; margin: 0;
+    font-family: var(--mono); font-size: var(--t-label);
+    letter-spacing: .13em; text-transform: uppercase;
+  }
+  /* The dot belongs to the segment after it, so an empty segment takes its own
+     separator with it rather than leaving two dots colliding. */
+  .mw-group:not(:empty)::before, .mw-title:not(:empty)::before {
+    content: "\00b7"; color: var(--faint); margin-right: 8px;
+  }
+  .mw-home { color: var(--muted); text-decoration: none; }
+  .mw-home:hover { color: var(--ink); }
+  .mw-group { color: var(--muted); }
+  .mw-title { color: var(--ink); font-weight: 600; letter-spacing: .08em; }
+
+  body[data-view]:not([data-view="overview"]) .mast {
+    position: sticky; top: 0; z-index: 20;
+    background: var(--ground);
+    padding: 12px 0; align-items: center;
+  }
+  body[data-view]:not([data-view="overview"]) .mast .eyebrow,
+  body[data-view]:not([data-view="overview"]) .mast h1,
+  body[data-view]:not([data-view="overview"]) .mast .standfirst { display: none; }
+  body[data-view]:not([data-view="overview"]) .mast-where { display: flex; }
+  /* The panes carry ids and the URL carries a #hash, so the BROWSER does its own
+     fragment scroll on load, after ours and ignoring it. It used to land the pane at
+     the very top of the viewport, which was right when nothing was up there. With a
+     sticky bar it lands the pane's heading underneath it. scroll-margin-top is the only
+     thing the native scroll listens to. */
+  .view { scroll-margin-top: calc(var(--mast-h, 0px) + 16px); }
+  /* The group name is already in the bar; repeating it 26px lower is the stack this
+     change exists to remove. The h2 and the lede stay -- they are the pane's content. */
+  body[data-view]:not([data-view="overview"]) .view-head .eyebrow { display: none; }
+
   /* ---------------- depth control ---------------- */
 
   .depth { display: flex; flex-direction: column; gap: 6px; }
@@ -190,7 +240,13 @@
 
   /* overflow-y:auto computes overflow-x:auto, which clipped the rail's focus rings
      into stray strokes. Inset the outline instead. */
-  .rail { position: sticky; top: 20px; align-self: start; max-height: calc(100vh - 40px); overflow-y: auto; }
+  /* --mast-h is written by the script: the height of the masthead when it is actually
+     sticking, 0 otherwise. Without it the rail slides under the bar, because both are
+     sticky and only one of them knows about the other. */
+  .rail {
+    position: sticky; top: calc(var(--mast-h, 0px) + 20px); align-self: start;
+    max-height: calc(100vh - var(--mast-h, 0px) - 40px); overflow-y: auto;
+  }
   .rail a:focus-visible { outline-offset: -2px; }
   .rail-group { margin-bottom: 20px; }
   .rail-head {
@@ -225,6 +281,12 @@
   @media print {
     .view { display: block !important; animation: none !important; }
     .rail, .depth { display: none; }
+    /* A print carries every view, so there is no current pane to locate. The document
+       gets its document-level deck back, and the bar must not repeat on every sheet. */
+    .mast { position: static !important; }
+    .mast .eyebrow, .mast h1, .mast .standfirst { display: block !important; }
+    .mast-where { display: none !important; }
+    .view-head .eyebrow { display: block !important; }
     .cols { display: block; }
     details.more { display: block; }
     details.more > summary { list-style: none; }
@@ -483,6 +545,10 @@
     }
     .rail-group { display: inline-block; vertical-align: top; margin-right: 26px; margin-bottom: 10px; }
     .mast { padding-top: 24px; }
+    /* No sticky bar on a phone. The rail is already a horizontal strip at this width,
+       so a bar above it would be the second thing eating a short viewport, and the
+       locator would sit directly on top of the nav that already says the same. */
+    body[data-view]:not([data-view="overview"]) .mast { position: static; padding: 24px 0 18px; }
   }
 
   /* ---- draft stamp ---------------------------------------------------
@@ -575,7 +641,10 @@
       <p class="eyebrow">It Looked Right &middot; for researchers</p>
       <h1>Using coding agents today and tomorrow</h1>
       <p class="standfirst"><b>Coding is no longer the barrier. <a href="#communication" data-view="communication">Four challenges remain.</a></b> Each is set out with the incidents that produced it.</p>
-    <p class="pv">Version <b>0.1.64</b> &middot; 1 Sep 2026<span class="pv-born">First published 28 Aug 2026</span></p>
+    <p class="pv">Version <b>0.1.65</b> &middot; 1 Sep 2026<span class="pv-born">First published 28 Aug 2026</span></p>
+      <!-- The locator that replaces the deck once you are inside a pane. Both segments are
+           written by show() from the page itself, never from a list kept alongside. -->
+      <p class="mast-where"><a class="mw-home" href="#overview" data-view="overview">It Looked Right</a><span class="mw-group"></span><span class="mw-title"></span></p>
     </div>
     <div class="depth">
       <span class="depth-label" id="depth-label">Reading depth</span>
@@ -1535,6 +1604,39 @@
   });
   var links = Array.prototype.slice.call(document.querySelectorAll(".rail a[data-view]"));
 
+  var mast = document.querySelector(".mast");
+  var mwGroup = document.querySelector(".mw-group");
+  var mwTitle = document.querySelector(".mw-title");
+
+  // BOTH SEGMENTS ARE READ OFF THE PAGE, not held in a list beside it. The group comes
+  // from the view's own eyebrow, the short name from the rail link that is about to be
+  // marked aria-current. A locator that can disagree with the nav directly under it is
+  // worse than no locator, and a hand-kept table of thirteen titles disagrees eventually
+  // -- this page has already shipped one pair of numbers that drifted apart that way.
+  function setWhere(name) {
+    var v = views[name];
+    var eb = v ? v.querySelector(".view-head .eyebrow") : null;
+    var a = links.filter(function (x) { return x.getAttribute("data-view") === name; })[0];
+    var label = a ? a.querySelectorAll("span")[1] : null;
+    if (mwGroup) { mwGroup.textContent = eb ? eb.textContent : ""; }
+    if (mwTitle) { mwTitle.textContent = label ? label.textContent : ""; }
+  }
+
+  // How far the sticky bar covers the top of the viewport, and 0 when it is not sticking
+  // -- on overview, and under 860px where the media query turns it off. Asking the
+  // computed style rather than re-deriving the conditions keeps one source: the CSS.
+  function mastOffset() {
+    if (!mast) { return 0; }
+    var pos = window.getComputedStyle(mast).position;
+    return pos === "sticky" ? mast.getBoundingClientRect().height : 0;
+  }
+
+  function syncMastHeight() {
+    var h = Math.round(mastOffset());
+    document.documentElement.style.setProperty("--mast-h", h + "px");
+    return h;
+  }
+
   function show(name, push) {
     if (!views[name]) { name = "overview"; }
     Object.keys(views).forEach(function (k) {
@@ -1548,6 +1650,10 @@
       else { a.removeAttribute("aria-current"); }
     });
     document.body.setAttribute("data-view", name);
+    setWhere(name);
+    // After data-view, because the bar's height depends on which state the CSS is in;
+    // before the scroll, because the scroll has to clear it.
+    var mastH = syncMastHeight();
     if (push && location.hash !== "#" + name) {
       history.pushState(null, "", "#" + name);
     }
@@ -1564,8 +1670,12 @@
     if (name === "overview") {
       window.scrollTo({ top: 0, behavior: "auto" });
     } else {
+      // The 16 is breathing room; mastH is the bar that is now covering the top of the
+      // viewport. Without it the switch lands the pane's own heading UNDER the bar, so
+      // the click reads as broken again -- the same failure the paragraph above records,
+      // reintroduced by the fix for it.
       var head = views[name].querySelector(".view-head") || views[name];
-      var y = head.getBoundingClientRect().top + (window.pageYOffset || 0) - 16;
+      var y = head.getBoundingClientRect().top + (window.pageYOffset || 0) - 16 - mastH;
       window.scrollTo({ top: y > 0 ? y : 0, behavior: "auto" });
     }
   }
@@ -1581,6 +1691,12 @@
   window.addEventListener("popstate", function () {
     show((location.hash || "#overview").slice(1), false);
   });
+
+  // The bar's height moves without a pane switch: crossing the 860px breakpoint turns
+  // sticky off, and a webfont arriving after first paint reflows the line. The rail's
+  // offset is derived from it, so a stale value parks the rail under the bar.
+  window.addEventListener("resize", syncMastHeight);
+  window.addEventListener("load", syncMastHeight);
 
   // ---- reading depth ----
   var depthButtons = Array.prototype.slice.call(document.querySelectorAll(".seg button"));
