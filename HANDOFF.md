@@ -1542,7 +1542,42 @@ authenticated request that would have found the repo whatever its visibility.
 
 ---
 
-## The unification job — researched 2026-08-31, NOT started
+## ⚠ The unification job below SHIPPED on 2026-08-31 — live at version 0.1.62
+
+**Read the section below as the spec it was, not as an open task.** `/cold-start` now asks *how
+far are you going?* and filters to one of three routes — a web app in the browser (14 of 39
+steps), VS Code on your laptop (30), a cluster and other people (34). The browser route did not
+exist in that file and was written new as W1–W5 from `decisions/0002` §5. The home page's
+duplicate phase list was **deleted rather than renumbered**, which is what closed the
+phase-numbering conflict; both `docs/doubt/` files that named it are filled and SETTLED.
+
+**Verified in a real browser** — `tools/browser_check.js`, 19 checks, 0 failures: tier counts,
+progress denominators, `aria-pressed`, tier-tagged prose, a tick surviving a tier round-trip and a
+reload, and the frozen `V3_MAP` v3→v4 migration still landing correctly against 39 steps.
+
+## 📄 The failure taxonomy — start here if you are working on the *process* rather than the course
+
+**`<darkroom>/short-course/2026-09-01-agent-failure-taxonomy/README.md`**, written 2026-09-01 at
+Tony's request to seed a new session and possibly a new repo. Nine categories of recurring agent
+failure — absence read as non-existence; priors outranking the project; work declared not to have
+happened; reaching for the tool known to fail; green for the wrong reason; capture cheap enough to
+skip the evidence; state that does not cross a boundary; the record outgrowing the artifact; output
+written from the author's view — each cited to incidents already in `docs/cases/`, `docs/reviews/`
+and `docs/doubt/`, plus a review of the eight mechanisms this repo has tried against them.
+
+**It is in the darkroom rather than here on purpose:** it is about the estate, not the course, and
+it should survive the decision about whether a new repo happens.
+
+**One thing in it is load-bearing for this repo.** `docs/reviews/README.md` warns that
+`what-it-costs.html` has 14 unrepaired blocking findings. That warning is dated 2026-08-30 and
+**ten commits have touched that page since the review**, several plainly repairing findings it
+named. The true status is *unknown*: nothing joins a finding to the commit that repaired it, and
+`OPEN-CORRECTIONS.md` has no entry for either handout run. Do not cite that warning as current
+without checking, and do not treat it as cleared either.
+
+---
+
+## The unification job — the spec, written 2026-08-31 before it was built
 
 **Tony: *"we need to unify shortest route, step 0, and cold start. all three on one page. i asked
 for this somewhere and i cannot find it executed. check the repo for overlap. then get it done."***
