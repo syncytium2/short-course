@@ -102,6 +102,8 @@
 
   /* ---- masthead ---- */
   .mast { border-bottom: 2px solid var(--ink); padding-bottom: 16px; margin-bottom: 22px; }
+  .eyebrow .home { color: inherit; text-decoration: none; border-bottom: 1px solid currentColor; }
+  .eyebrow .home:hover { color: var(--accent); }
   .eyebrow {
     font-family: var(--mono); font-size: 11px; letter-spacing: .13em;
     text-transform: uppercase; color: var(--muted); margin: 0 0 10px;
@@ -261,10 +263,10 @@
   </div>
   
   <header class="mast">
-    <p class="eyebrow">Companion sheet &middot; <a href="https://lookedright.tonydefazio.com/cold-start">Cold Start</a></p>
+    <p class="eyebrow"><a href="/" class="home">&larr;&nbsp;It Looked Right</a> &middot; Companion sheet &middot; <a href="https://lookedright.tonydefazio.com/cold-start">Cold Start</a></p>
     <h1>What It Costs</h1>
     <p class="standfirst">What a working setup actually costs, who ends up paying, and which part of it is genuinely free.</p>
-    <p class="pv">Version <b>0.1.12</b> &middot; 31 Aug 2026<span class="pv-born">First published 29 Aug 2026</span></p>
+    <p class="pv">Version <b>0.1.13</b> &middot; 31 Aug 2026<span class="pv-born">First published 29 Aug 2026</span></p>
   </header>
 
   <p class="lede"><b>Four things in <a href="https://lookedright.tonydefazio.com/cold-start"><i>Cold Start</i></a> can cost money</b>, and it is worth having them in front of you before you start rather than meeting them one at a time:</p>
@@ -276,14 +278,14 @@
     </li>
     <li>
       <b>Synced storage</b> &mdash; free up to a point, and the point is lower than people expect
-      <span class="sub">Dropbox&rsquo;s free tier is <b>2&nbsp;GB</b>; Google and Microsoft give more. The review folder in <i>Cold Start</i> 2.2 usually fits. Anything holding real data does not, which is the same reason 2.3 tells you to keep the data root out of the sync client &mdash; a rule that is about reliability and happens to also be the thing keeping this line cheap. Paid personal tiers start around <b>$10 a month</b> for terabytes.</span>
+      <span class="sub">Dropbox&rsquo;s free tier is <b>2&nbsp;GB</b>; Google and Microsoft give more. The review folder in <a href="https://lookedright.tonydefazio.com/cold-start"><i>Cold Start</i></a> 2.2 usually fits. Anything holding real data does not, which is the same reason 2.3 tells you to keep the data root out of the sync client &mdash; a rule that is about reliability and happens to also be the thing keeping this line cheap. Paid personal tiers start around <b>$10 a month</b> for terabytes.</span>
     </li>
     <li>
-      <b>A domain name</b>, if you want a web address of your own &mdash; <i>Cold Start</i> Phase 7
+      <b>A domain name</b>, if you want a web address of your own &mdash; <a href="https://lookedright.tonydefazio.com/cold-start"><i>Cold Start</i></a> Phase 7
       <span class="sub">Registrars charge per year: roughly <b>$10&ndash;15</b> for a common ending, and wildly more for a fashionable one. The renewal price is the number that matters, not the first year. Hosting the site is free; the name is not.</span>
     </li>
     <li>
-      <b>Research storage or a cluster</b>, and most people need neither &mdash; <i>Cold Start</i> 1.3
+      <b>Research storage or a cluster</b>, and most people need neither &mdash; <a href="https://lookedright.tonydefazio.com/cold-start"><i>Cold Start</i></a> 1.3
       <span class="sub">Usually sponsored by a lab or department rather than bought by a person, which makes it an access question more than a price one.</span>
     </li>
   </ul>
@@ -310,7 +312,7 @@
     </li>
     <li>
       <b>A <a href="https://github.com/pricing">GitHub account</a></b>
-      <span class="sub">Free, including unlimited repositories &mdash; public or private. Some collaboration features on private repositories sit on the paid tiers, so check the plan page before you build a group around one. Nothing in <i>Cold Start</i> needs a paid tier.</span>
+      <span class="sub">Free, including unlimited repositories &mdash; public or private. Some collaboration features on private repositories sit on the paid tiers, so check the plan page before you build a group around one. Nothing in <a href="https://lookedright.tonydefazio.com/cold-start"><i>Cold Start</i></a> needs a paid tier.</span>
     </li>
     <li>
       <b>An editor</b>
@@ -318,7 +320,7 @@
     </li>
     <li>
       <b>Hosting a website</b>
-      <span class="sub">Cloudflare&rsquo;s free tier serves a site for nothing, from a private repository or from no repository at all &mdash; which is why <i>Cold Start</i> 7.3 sends you there. GitHub Pages is also free, but only from a <b>public</b> repository; a private one needs a paid GitHub plan. <b>The name is the part that costs</b> &mdash; see above. Without one your site still works; it just lives at an address ending in <code>github.io</code>.</span>
+      <span class="sub">Cloudflare&rsquo;s free tier serves a site for nothing, from a private repository or from no repository at all &mdash; which is why <a href="https://lookedright.tonydefazio.com/cold-start"><i>Cold Start</i></a> 7.3 sends you there. GitHub Pages is also free, but only from a <b>public</b> repository; a private one needs a paid GitHub plan. <b>The name is the part that costs</b> &mdash; see above. Without one your site still works; it just lives at an address ending in <code>github.io</code>.</span>
     </li>
   </ul>
 
@@ -543,7 +545,7 @@
     </li>
   </ul>
 
-  <p><i>Cold Start</i> step 4.6 is where you go and look at your own numbers. The mechanism is documented in full under <a href="https://code.claude.com/docs/en/costs">Manage costs effectively</a>.</p>
+  <p><a href="https://lookedright.tonydefazio.com/cold-start"><i>Cold Start</i></a> step 4.6 is where you go and look at your own numbers. The mechanism is documented in full under <a href="https://code.claude.com/docs/en/costs">Manage costs effectively</a>.</p>
 
   <h2>The equity problem, stated plainly</h2>
 
@@ -600,12 +602,12 @@
     </li>
     <li>
       <b>Look at your own usage in the first week.</b>
-      <span class="sub">Not the third month. <i>Cold Start</i> 4.6.</span>
+      <span class="sub">Not the third month. <a href="https://lookedright.tonydefazio.com/cold-start"><i>Cold Start</i></a> 4.6.</span>
     </li>
   </ol>
 
   <footer>
-    <p>Companion to <i>Cold Start</i>, and the fourth sheet alongside <i>Search to Shipped</i> and <i>It Looked Right</i>.</p>
+    <p>Companion to <a href="https://lookedright.tonydefazio.com/cold-start"><i>Cold Start</i></a>, and the fourth sheet alongside <a href="https://lookedright.tonydefazio.com/search-to-shipped"><i>Search to Shipped</i></a> and <a href="https://lookedright.tonydefazio.com/"><i>It Looked Right</i></a>.</p>
     <p><b>Filed as its own page on purpose.</b> Cost material decays faster than anything else in this course and is tied to one institution and one moment, so it is kept where it can rot without taking the teaching material with it. When it next matters, go and touch the systems rather than editing around the dates.</p>
     <p>The five-run worked example is derived from a token log in <a href="https://github.com/syncytium2/murderboard">syncytium2/murderboard</a>, summed per run on 29 August 2026; the dollar figures are computed from those counts at list rates and are not invoices. <b>That log is not yet published</b> &mdash; a handoff asking for it has gone to that project, and until it lands the table is checkable only by someone with the file. Prices and plan shapes read from the vendors&rsquo; own pages on 29 August 2026. The heavy-use figures are from Anthropic&rsquo;s cost documentation, the same day. The institutional and student-credit facts were checked at one university on 27 August 2026 and are generalized here. The teaching-session figures are estimates and are labeled as such; the per-user monthly allocation they lean on is <b>$50 from secondary coverage, and the university&rsquo;s own page states no amount</b>. The two money columns in the five-run table are the same tokens priced at two different <b>models</b> &mdash; $5/$25 and $2/$10 per million, cached reading at a tenth of input &mdash; and not two subscription plans. Every outbound link was checked on 29 August 2026 and <b>nothing re-checks them</b>.</p>
   </footer>
