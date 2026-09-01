@@ -119,6 +119,8 @@
 
   /* ---- masthead ---- */
   .mast { border-bottom: 2px solid var(--ink); padding: 30px 0 16px; margin-bottom: 8px; }
+  .eyebrow .home { color: inherit; text-decoration: none; border-bottom: 1px solid currentColor; }
+  .eyebrow .home:hover { color: var(--accent); }
   .eyebrow {
     font-family: var(--mono); font-size: 11px; letter-spacing: .13em;
     text-transform: uppercase; color: var(--muted); margin: 0 0 10px;
@@ -185,7 +187,7 @@
      Greying it would leave the reader deciding, one step at a time, whether a
      faded thing applies to them -- which is the work the switch is supposed to
      have done once, at the door. */
-  ol.steps > li[data-off="1"], section.phase[data-off="1"] { display: none; }
+  [data-off="1"] { display: none; }
 
   /* ---- phases ---- */
   .phase { margin: 0 0 30px; }
@@ -490,7 +492,7 @@
   </div>
   
   <header class="mast">
-    <p class="eyebrow">Setup runbook &middot; keep this window open</p>
+    <p class="eyebrow"><a href="/" class="home">&larr;&nbsp;It Looked Right</a> &middot; Setup runbook &middot; keep this window open</p>
     <h1>Cold Start</h1>
     <p class="standfirst">An email address and a laptop, to a first agent session that leaves a record behind it. Every step in order, the two prompts to paste, and the condition that tells you each one worked.</p>
   </header>
@@ -533,9 +535,10 @@
   <section class="phase">
     <div class="phase-head">
       <h2>Phase 1 &middot; Accounts</h2>
-      <span class="phase-time">30 min, plus other people&rsquo;s time</span>
+      <span class="phase-time">30 min<span data-tiers="max">, plus other people&rsquo;s time</span></span>
     </div>
-    <p class="phase-note">Start here on day one even if you will not touch a keyboard for a week. Everything in this phase depends on somebody who is not you. <b>1.1 and 1.2 are both required on every tier.</b> Anything else in this phase is conditional, and appears only on the tiers that need it. <b>The expert comes first on purpose:</b> 1.2 is the one step here you do not have to do alone, because by then there is somebody to ask.</p>
+    <p class="phase-note">Two accounts, both free to create, and you need both. <b>Get the expert first, on purpose:</b> the second step is the one people find fiddly, and doing it second means there is already somebody to ask.</p>
+    <p class="phase-note" data-tiers="max"><b>Start this on day one even if you will not touch a keyboard for a week.</b> One thing in this phase &mdash; storage and a cluster allocation &mdash; is not yours to grant: somebody else has to approve it, and that takes days to weeks. File it now and carry on with everything below while it pends.</p>
     <ol class="steps">
       <li data-key="agent-account" data-id="1.1" data-tiers="min mid max" data-open="0" data-done="0">
         <div class="srow">
@@ -616,17 +619,17 @@
           <span class="badge">Incomplete</span>
         </div>
         <div class="detail" id="d-1.2">
+            <p class="why"><b>Two things to settle before you start, because both are annoying to undo.</b> <b>The username</b> is the one you will be known by, and it ends up inside every link anybody saves to your work &mdash; changing it later breaks those links for other people, not for you, so you never find out. Pick one you would be content to have on a paper. <b>Two-factor authentication</b> goes on during signup rather than afterwards; it is the same half-minute either way, and afterwards is when it quietly gets postponed.</p>
+            <div class="warn"><b>And ask first if your work touches research data or human subjects.</b> Your university or employer may run its own host &mdash; usually a private GitLab &mdash; and may <i>require</i> you to use it. That is a governance question, not a preference, and it is much cheaper to ask now than to move a repository later.</div>
             <p class="why"><b>Why it is not optional, when it looks like it should be.</b> It reads as a step for people who publish software, and you are not publishing software. But it is what gives your project a <i>second place to exist</i>. Without it, everything you and the agent make lives in one folder on one laptop: it reaches no other machine, no collaborator, and no future session &mdash; and none of that announces itself. The day it matters, it is already too late to have done this.</p>
             <p class="why"><b>You do not have to do this one alone, and that is why it comes second.</b> 1.1 put somebody beside you who has done this a hundred times. The signup is four minutes of forms, but the questions underneath it are real &mdash; whether your institution requires its own host instead, what username you are willing to keep, what to make private &mdash; and they are worth asking out loud rather than guessing at. <b>Show them the screen you are on and ask what the box is for.</b></p>
             <p class="why">Three things follow from the account and from nothing else. <b>A record</b> of what changed, when, and why &mdash; which is the only account of the work that survives you, and the only way to answer &ldquo;when did this figure change?&rdquo; six months on. <b>A way off this machine</b>, whether that is a second computer, a collaborator, a cluster, or a laptop that has died. And <b>somewhere to put the work</b> if you ever do want a page, a DOI, or a link in a paper.</p>
             <p class="why">This is the step people skip because it seems premature, and it is the one whose absence is documented twice in this course&rsquo;s own material: eleven hours of finished work sitting where nothing else could see it, and a night&rsquo;s work that reached the next morning as nothing at all. It is free, and it takes four minutes.</p>
-            <div class="warn"><b>Ask first if your work touches research data or human subjects.</b> Your university or employer may run its own host — usually a private GitLab — and may <i>require</i> you to use it. That is a governance question, not a preference, and it is much cheaper to ask now than to move a repository later.</div>
-            <p class="why">Pick the username you are willing to be known by later; changing it breaks links other people have already saved. Turn on two-factor authentication during signup, not afterwards.</p>
         </div>
         <ul class="checks">
+            <li><button class="cb" data-key="username-willing-keep" type="button" aria-pressed="false" aria-labelledby="c-1-2-2">&#10003;</button><span class="cbt" id="c-1-2-2">I chose the username on purpose, and I would be content to have it on a paper</span></li>
             <li><button class="cb" data-key="account-created-signed" type="button" aria-pressed="false" aria-labelledby="c-1-2-0">&#10003;</button><span class="cbt" id="c-1-2-0">Account created and I am signed in</span></li>
             <li><button class="cb" data-key="two-factor-authentication" type="button" aria-pressed="false" aria-labelledby="c-1-2-1">&#10003;</button><span class="cbt" id="c-1-2-1">Two-factor authentication is on</span></li>
-            <li><button class="cb" data-key="username-willing-keep" type="button" aria-pressed="false" aria-labelledby="c-1-2-2">&#10003;</button><span class="cbt" id="c-1-2-2">The username is one I am willing to keep</span></li>
         </ul>
       </li>
       <li data-key="research-storage" data-id="1.3" data-tiers="max" data-open="0" data-done="0" data-optional="1">
@@ -669,8 +672,8 @@
       <h2>The short way &middot; a web app, in the browser</h2>
       <span class="phase-time">one evening</span>
     </div>
-    <p class="phase-note"><b>This replaces phases 2 to 4, and it is the whole of the browser tier.</b> Nothing is installed, there is no terminal, and there is no <code>git init</code>. It was walked end to end on <b>2026-08-30</b>, and what went wrong on that walk is written into the steps below rather than tidied out of them.</p>
-    <p class="phase-note"><b>You can stop here and have a working, published thing.</b> If you later want the machine underneath it &mdash; your own editor, your own copy, work that outlives a browser tab &mdash; switch to <i>VS&nbsp;Code on my laptop</i> at the top and the phases you skipped appear. Nothing you have ticked here is lost.</p>
+    <p class="phase-note"><b>Five steps, one evening, all of it in a browser.</b> Nothing to install, no terminal, and no <code>git init</code>. You finish with a working page at an address you can send to somebody. It was walked start to finish on <b>2026-08-30</b>, and the places it went wrong are written into the steps rather than tidied out of them.</p>
+    <p class="phase-note"><b>When you have done all five, you are finished</b> &mdash; a working, published thing is a real place to stop, and most people should. If you later want the machine underneath it &mdash; your own editor, your own copy of the files, work that outlives a browser tab &mdash; choose <i>VS&nbsp;Code, on my laptop</i> at the top of this page and the rest of the setup appears. Everything you have ticked here stays ticked.</p>
     <ol class="steps">
       <li data-key="pick-a-rung" data-id="W1" data-tiers="min" data-open="0" data-done="0">
         <div class="srow">
@@ -678,13 +681,14 @@
           <span class="badge">Incomplete</span>
         </div>
         <div class="detail" id="d-W1">
-            <p class="why"><b>Three rungs, and this is the only step that changes what all the others cost.</b> Claude on the web if you want to start in the next five minutes; the Claude desktop app in Code mode if you can spare one download; VS&nbsp;Code with the Claude window if you are willing to do phase 3 of this page first. <b>Take the highest rung you can reach today and no higher.</b> You can move up later and nothing is wasted.</p>
+            <p class="why"><b>Three places you can work, and which you choose changes what everything else here costs.</b> <b>Claude on the web</b> &mdash; a browser tab, nothing to install, you can start in five minutes. <b>The Claude desktop app</b> &mdash; one download, and it can see a folder on your own machine. <b>VS&nbsp;Code with the Claude window</b> &mdash; a real editor, and the most capable of the three, but you have to set the editor up first.</p>
+            <p class="why"><b>Take the most capable one you can actually start with today, and no further.</b> If setting up an editor is going to eat the evening, that is the wrong place to spend it &mdash; the first two need nothing but an account. You can move up later and nothing you have done is wasted.</p>
             <p class="why">Rung 1 is free, and rungs 2 and 3 are the same paid plan &mdash; so one subscription unlocks both upper rungs at once, and the step between them is setup rather than spending. Check the plan page rather than any number written here.</p>
             <p class="why"><b>Then find out which shape of bill you have agreed to, before you lean on it.</b> A personal plan is an allowance: you hit it and it stops, which is annoying and safe. An institutional billing code is usually uncapped &mdash; nothing stops, nothing warns, and the number surfaces when somebody else reads the statement. That distinction matters more than the amount, and it is the one nobody is told unprompted.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="rung-picked-highest-reachable" type="button" aria-pressed="false" aria-labelledby="c-w1-0">&#10003;</button><span class="cbt" id="c-w1-0">I have picked a rung, and it is the highest one I can reach today</span></li>
-            <li><button class="cb" data-key="named-something-back" type="button" aria-pressed="false" aria-labelledby="c-w1-1">&#10003;</button><span class="cbt" id="c-w1-1">The expert has named something back to me that I did not tell it &mdash; the difference between having an account and having them on your side</span></li>
+            <li><button class="cb" data-key="rung-picked-highest-reachable" type="button" aria-pressed="false" aria-labelledby="c-w1-0">&#10003;</button><span class="cbt" id="c-w1-0">I have decided where I am working &mdash; the Claude website, the Claude app, or VS&nbsp;Code &mdash; and I can start there today</span></li>
+            <li><button class="cb" data-key="named-something-back" type="button" aria-pressed="false" aria-labelledby="c-w1-1">&#10003;</button><span class="cbt" id="c-w1-1">Claude has told me something about my own files or my own screen that I never typed in, so I know it can actually see what I am working on</span></li>
             <li><button class="cb" data-key="stops-or-bills" type="button" aria-pressed="false" aria-labelledby="c-w1-2">&#10003;</button><span class="cbt" id="c-w1-2">I can say what happens when I use too much: it stops, or it bills</span></li>
         </ul>
       </li>
@@ -694,28 +698,31 @@
           <span class="badge">Incomplete</span>
         </div>
         <div class="detail" id="d-W2">
-            <p class="why"><i>&ldquo;A web page that shows my recordings one at a time and lets me mark the bad ones.&rdquo;</i> <b>If you cannot say it in a sentence, you are not ready to ask for it.</b></p>
-            <p class="why">Then break it into parts, and plan to do one element, never two. This costs nothing, needs nothing installed, and is the same on every tier of this page.</p>
+            <p class="why"><b>Write down one sentence saying what you want to build.</b> Something like: <i>&ldquo;A web page that shows my recordings one at a time and lets me mark the bad ones.&rdquo;</i> Keep it where you can see it &mdash; a note, a scrap of paper, the top of a document. <b>You will paste this sentence to Claude in step W3</b>, so it is doing real work, not an exercise.</p>
+            <p class="why"><b>If you cannot say it in one sentence, you are not ready to ask for it yet</b> &mdash; and that is worth finding out now rather than four prompts in, when you have something half-built and cannot say whether it is right.</p>
+            <p class="why"><b>Then write the parts underneath it as a short list.</b> The recordings page above might be: <i>show one recording &middot; a way to mark it bad &middot; remember which ones I marked &middot; a page listing the bad ones.</i> You will build these one at a time, never two at once. If any single part looks like more than an afternoon, split it until it is not.</p>
+            <p class="why">This step costs nothing, installs nothing, and is the one people skip. It is also the one that decides whether the next three go well.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="sentence-written-down" type="button" aria-pressed="false" aria-labelledby="c-w2-0">&#10003;</button><span class="cbt" id="c-w2-0">The sentence is written down somewhere I can see it</span></li>
-            <li><button class="cb" data-key="outsider-understands" type="button" aria-pressed="false" aria-labelledby="c-w2-1">&#10003;</button><span class="cbt" id="c-w2-1">Someone outside my field understands what it does</span></li>
-            <li><button class="cb" data-key="each-item-one-afternoon" type="button" aria-pressed="false" aria-labelledby="c-w2-2">&#10003;</button><span class="cbt" id="c-w2-2">Every item on my list is one afternoon or less</span></li>
+            <li><button class="cb" data-key="sentence-written-down" type="button" aria-pressed="false" aria-labelledby="c-w2-0">&#10003;</button><span class="cbt" id="c-w2-0">I have written one sentence saying what I want to build, and it is somewhere I can see it</span></li>
+            <li><button class="cb" data-key="outsider-understands" type="button" aria-pressed="false" aria-labelledby="c-w2-1">&#10003;</button><span class="cbt" id="c-w2-1">I read that sentence to somebody outside my field and they understood what the thing does</span></li>
+            <li><button class="cb" data-key="each-item-one-afternoon" type="button" aria-pressed="false" aria-labelledby="c-w2-2">&#10003;</button><span class="cbt" id="c-w2-2">I have listed the parts underneath it, and none of them would take me more than an afternoon</span></li>
         </ul>
       </li>
       <li data-key="connect-or-repo" data-id="W3" data-tiers="min" data-open="0" data-done="0">
         <div class="srow">
-          <button class="head" type="button" aria-expanded="false" aria-controls="d-W3"><span class="n">W3</span>The fork: connect a folder, or make a repository</button>
+          <button class="head" type="button" aria-expanded="false" aria-controls="d-W3"><span class="n">W3</span>Make the repository, and point Claude at it</button>
           <span class="badge">Incomplete</span>
         </div>
         <div class="detail" id="d-W3">
-            <p class="why"><b>Route B &mdash; connect a folder.</b> In the Claude desktop app, make a project and connect a folder. Nothing is installed and nothing is created anywhere else. If a session later reports no connected folders, check <b>File &rarr; Settings &rarr; Cowork &rarr; &ldquo;Run new tasks in the cloud&rdquo;</b> &mdash; that path was there on <b>2026-08-30</b>, and with that setting on, tasks run in the cloud and cannot reach local files at all.</p>
-            <p class="why"><b>Route C &mdash; make a repository.</b> On github.com: <b>New repository &rarr; tick &ldquo;Add a README&rdquo; &rarr; Create</b>, as of <b>2026-08-30</b>. <b>That tick is the whole point:</b> it makes the repository one with something already in it, which is what a cloud session needs in order to clone it. Keep it private. Then connect the GitHub account at claude.ai/code and pick it. No <code>git init</code>, and no terminal.</p>
-            <p class="why"><b>Route C is worth the extra two minutes</b> for one reason that does not show up until W5: it is the route where publishing keeps happening without you.</p>
+            <p class="why"><b>A repository is just a folder that lives on github.com instead of on your laptop</b>, and keeps a record of every change made to it. You already have the account from step 1.2; this makes the folder. You will not type a single command.</p>
+            <p class="why"><b>On github.com: New repository &rarr; tick &ldquo;Add a README&rdquo; &rarr; Create.</b> That was the path on <b>2026-08-30</b>. <b>The tick is the part that matters:</b> it puts one file inside, and a completely empty repository is not something Claude can open. <b>Keep it private</b> &mdash; you can make it public later in one click, and the reverse is not true of anything anybody has already copied.</p>
+            <p class="why"><b>Then go to claude.ai/code, connect your GitHub account, and pick the repository you just made.</b> Paste the sentence you wrote in W2 and ask for the first item on your list.</p>
+            <p class="why"><b>Why a repository rather than just showing Claude a folder on your machine.</b> The desktop app can do that, and it works. But at W5 the repository is what makes publishing keep happening on its own &mdash; every later change goes up without you remembering to do anything. A folder on your laptop means dragging it somewhere by hand, every single time, forever. That is the whole reason step 1.2 was not optional.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="route-chosen-can-say" type="button" aria-pressed="false" aria-labelledby="c-w3-0">&#10003;</button><span class="cbt" id="c-w3-0">I have chosen route B or route C, and I can say which one I am on</span></li>
-            <li><button class="cb" data-key="named-file-or-repo-visible" type="button" aria-pressed="false" aria-labelledby="c-w3-1">&#10003;</button><span class="cbt" id="c-w3-1">Claude has named a file that is actually in my folder &mdash; or, on route C, the repository is visible on github.com and in the picker</span></li>
+            <li><button class="cb" data-key="route-chosen-can-say" type="button" aria-pressed="false" aria-labelledby="c-w3-0">&#10003;</button><span class="cbt" id="c-w3-0">The repository exists on github.com, it is private, and there is a README file in it</span></li>
+            <li><button class="cb" data-key="named-file-or-repo-visible" type="button" aria-pressed="false" aria-labelledby="c-w3-1">&#10003;</button><span class="cbt" id="c-w3-1">Claude is connected to it, and has named a file that is actually in there &mdash; not one I told it about</span></li>
         </ul>
       </li>
       <li data-key="one-element" data-id="W4" data-tiers="min" data-open="0" data-done="0">
@@ -724,30 +731,36 @@
           <span class="badge">Incomplete</span>
         </div>
         <div class="detail" id="d-W4">
-            <p class="why"><b>Review what changed for scope, not for correctness.</b> You are not checking whether the code is right &mdash; you are asking <i>what did it touch that I did not ask about?</i> That question needs no programming at all, and it is the one that catches the expensive mistakes.</p>
-            <p class="why">Then run it and look. List the files that now exist. Open the thing yourself. <b>None of those four checks requires you to read code</b>, and every one of them checks the world rather than the summary. On route C, let Claude commit and push once you are satisfied.</p>
+            <p class="why"><b>Ask for the first item on your list. Only that one.</b> Not the whole sentence from W2, and not two items because they seem related &mdash; one. You are about to check the result by hand, and that is only possible when you know what you asked for.</p>
+            <p class="why"><b>When it says it has finished, do not take its word for it. Type this:</b></p>
+            <p class="why" style="padding-left:14px"><i>&ldquo;List every file you changed, and say in one line why each one needed to change.&rdquo;</i></p>
+            <p class="why"><b>You are not checking whether the code is right.</b> You are checking whether it touched anything you did not ask for &mdash; a setting, a second file, something it decided to tidy. <b>That question needs no programming at all</b>, and it is the one that catches the expensive mistakes. If something on the list surprises you, ask why it is there before going on.</p>
+            <p class="why"><b>Then go and look at the thing yourself.</b> Open the page. Use the new thing. Watch the recording appear. <b>A message saying it works is a report that it reached the end of its own instructions</b> &mdash; which is a different event from the thing working, and the two come apart more often than you would expect.</p>
+            <div class="warn"><b>If it tells you to open something like <code>http://localhost:8000</code>, that is your own computer talking to itself.</b> The page is real and it works &mdash; but it exists only on your machine, only while that thing is running, and <b>only for you</b>. Send that address to a colleague and they get an error; close the window and it is gone. <b>This is normal and correct at this stage, and it is not publishing.</b> <i>Local</i> means your machine. Putting it where other people can open it is a separate act, and it is W5. The word to watch for is <b>localhost</b>, or an address starting <code>127.0.0.1</code>: both mean here, not the internet.</div>
+            <p class="why"><b>When you are happy, tell it to save:</b> <i>&ldquo;commit and push this.&rdquo;</i> The change is now on github.com, with a note of what it was, and you can get back to this version later even if the next thing goes wrong.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="scope-not-correctness" type="button" aria-pressed="false" aria-labelledby="c-w4-0">&#10003;</button><span class="cbt" id="c-w4-0">I can say what it touched that I did not ask about</span></li>
-            <li><button class="cb" data-key="seen-it-work-myself" type="button" aria-pressed="false" aria-labelledby="c-w4-1">&#10003;</button><span class="cbt" id="c-w4-1">I have seen the thing work, rather than read a message saying that it does</span></li>
-            <li><button class="cb" data-key="name-the-single-change" type="button" aria-pressed="false" aria-labelledby="c-w4-2">&#10003;</button><span class="cbt" id="c-w4-2">I can name in one line the single change that just happened</span></li>
+            <li><button class="cb" data-key="scope-not-correctness" type="button" aria-pressed="false" aria-labelledby="c-w4-0">&#10003;</button><span class="cbt" id="c-w4-0">I asked it to list every file it changed, and nothing on the list surprised me</span></li>
+            <li><button class="cb" data-key="seen-it-work-myself" type="button" aria-pressed="false" aria-labelledby="c-w4-1">&#10003;</button><span class="cbt" id="c-w4-1">I opened it myself and watched the new thing work &mdash; I did not just read a message saying it did</span></li>
+            <li><button class="cb" data-key="name-the-single-change" type="button" aria-pressed="false" aria-labelledby="c-w4-2">&#10003;</button><span class="cbt" id="c-w4-2">If somebody asked me what changed just now, I could tell them in one sentence</span></li>
         </ul>
       </li>
       <li data-key="publish-and-notice" data-id="W5" data-tiers="min" data-open="0" data-done="0">
         <div class="srow">
-          <button class="head" type="button" aria-expanded="false" aria-controls="d-W5"><span class="n">W5</span>Publish &mdash; and notice which kind of publishing you set up</button>
+          <button class="head" type="button" aria-expanded="false" aria-controls="d-W5"><span class="n">W5</span>Put it on the internet, once, so it stays there</button>
           <span class="badge">Incomplete</span>
         </div>
         <div class="detail" id="d-W5">
-            <p class="why"><b>Route B.</b> In the Cloudflare dashboard, <b>create a Pages project and drag the folder in</b> &mdash; that was the path on <b>2026-08-30</b>. Browser only, no repository. The limits are ample for a website: a zip or a single folder, 1,000 files, 25&nbsp;MiB each. <b>Every later change means dragging it in again,</b> and that is the thing to notice.</p>
-            <p class="why"><b>Route C.</b> In the Cloudflare dashboard, <b>connect the GitHub repository</b> &mdash; also <b>2026-08-30</b>, also entirely in the browser, and private repositories are supported. From then on every push redeploys and nobody has to remember anything. GitHub Pages is the alternative and is equally browser-only, but on the free plan it serves from <b>public</b> repositories only &mdash; and private is the right default for research. That trade is step 7.3 of this page, restated.</p>
-            <p class="why"><b>This step is the whole decision in one step.</b> Route C's automatic redeploy is the only part of this route that keeps working when you are not there. Everything else here is something you do; that is something that then happens.</p>
-            <p class="why"><b>Expect the click paths above to be wrong.</b> When this route was walked, the dashboard had been rebuilt between the instructions being written and the page being opened, and the guide was wrong five times in one afternoon &mdash; then unstuck three of those inside a single exchange, once it could see a screenshot. If a named button is not where this says it is, that is the expected case and not your mistake. Show the expert your screen.</p>
+            <p class="why"><b>In the Cloudflare dashboard, connect the repository you made in W3.</b> That was the path on <b>2026-08-30</b>: all of it in the browser, nothing installed, and private repositories work &mdash; you do not have to make your work public to put a page on the internet.</p>
+            <p class="why"><b>From then on it looks after itself.</b> Every change you tell Claude to save goes live on its own, with nobody remembering to do anything. <b>That is the only part of this whole route that keeps working when you are not there</b>, and it is why W3 made a repository instead of just showing Claude a folder. Everything else on this page is something you do; this is something that then happens.</p>
+            <p class="why"><b>You will also see GitHub Pages offered, and it is free too.</b> On the free plan it will only serve a <b>public</b> repository &mdash; so taking it means making your work public today, and private is the right default for research. Step 7.3 is the same trade in more detail if you want it.</p>
+            <p class="why"><b>If you skipped the repository</b> and are working from a folder on your own machine, you can still publish: create a Pages project and drag the folder in. It works, and it is the same five minutes. But <b>every single later change means dragging it in again, forever</b> &mdash; and that is the difference the repository was buying.</p>
+            <div class="warn"><b>Expect the buttons above to have moved, and do not read that as your mistake.</b> When this was walked on <b>2026-08-30</b>, the dashboard had been rebuilt between these instructions being written and the page being opened: the guide named the wrong thing <b>five times in one afternoon</b>. Three of those were unstuck inside a single exchange once Claude could see a screenshot. <b>So take a screenshot and show it.</b> That is the fastest move available to you here, and it is the one people do last.</div>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="url-loads-off-wifi" type="button" aria-pressed="false" aria-labelledby="c-w5-0">&#10003;</button><span class="cbt" id="c-w5-0">The URL loads on my phone, off my wifi</span></li>
-            <li><button class="cb" data-key="knows-if-redeploy-automatic" type="button" aria-pressed="false" aria-labelledby="c-w5-1">&#10003;</button><span class="cbt" id="c-w5-1">I can say whether my next change redeploys by itself, or needs me to drag a folder in again</span></li>
-            <li><button class="cb" data-key="loaded-again-after-change" type="button" aria-pressed="false" aria-labelledby="c-w5-2">&#10003;</button><span class="cbt" id="c-w5-2">I have loaded it again after making one change, and it was the new version</span></li>
+            <li><button class="cb" data-key="url-loads-off-wifi" type="button" aria-pressed="false" aria-labelledby="c-w5-0">&#10003;</button><span class="cbt" id="c-w5-0">I opened the address on my phone, with wifi turned off, and the page loaded</span></li>
+            <li><button class="cb" data-key="loaded-again-after-change" type="button" aria-pressed="false" aria-labelledby="c-w5-2">&#10003;</button><span class="cbt" id="c-w5-2">I changed one more thing, waited a minute, reloaded the address, and saw the change</span></li>
+            <li><button class="cb" data-key="knows-if-redeploy-automatic" type="button" aria-pressed="false" aria-labelledby="c-w5-1">&#10003;</button><span class="cbt" id="c-w5-1">I know which of the two I set up: changes go live on their own, or I have to put them there by hand each time</span></li>
         </ul>
       </li>
     </ol>
@@ -905,7 +918,7 @@ claude</pre>
             <p class="why"><b>Learn the route that does not depend on the icon, because it is the one that keeps working.</b> <b>Cmd+Shift+P</b> (<b>Ctrl+Shift+P</b>) opens the Command Palette; type <code>Claude Code</code> and pick <b>Open in New Tab</b>. That works with nothing open at all. <b>Cmd+Esc</b> (<b>Ctrl+Esc</b>) is the fast way in, but it needs a file focused &mdash; the same condition as the icon &mdash; so it is the second thing to learn, not the first.</p>
             <p class="why">The same palette has <b>Claude Code: Open Walkthrough</b>, a four-step tour from the people who wrote it.</p>
             <p class="why"><b>This step is written for one agent and says so.</b> None of the alternatives in 1.1 was checked for this page &mdash; not one of them was installed on the machine this was written on. Whether each has an editor extension at all, where its button lives, and whether it hides itself the same way, is unverified here.</p>
-            <p class="why"><b>The button positions above were true on 2026-08-30.</b> They are the perishable half of this step; the &ldquo;done when&rdquo; boxes are the durable half. If the spark is not where this says, you have not gone wrong &mdash; screenshot the window and ask your agent, which is the method in <b>Show It Your Screen</b>.</p>
+            <p class="why"><b>The button positions above were true on 2026-08-30.</b> They are the perishable half of this step; the &ldquo;done when&rdquo; boxes are the durable half. If the spark is not where this says, you have not gone wrong &mdash; screenshot the window and ask your agent, which is the method in <a href="https://lookedright.tonydefazio.com/show-it-your-screen"><b>Show It Your Screen</b></a>.</p>
         </div>
         <ul class="checks">
             <li><button class="cb" data-key="extension-listed-installed-extensions" type="button" aria-pressed="false" aria-labelledby="c-3-5-0">&#10003;</button><span class="cbt" id="c-3-5-0">The extension is listed as installed in the Extensions view</span></li>
@@ -1282,7 +1295,7 @@ one so I can look.
       <span class="phase-time">30 min, then a wait</span>
     </div>
     <p class="phase-note">Only when you have something to put on it. Three companies, each doing one job: <b>Porkbun</b> sells you the name, <b>Cloudflare</b> answers questions about where it points, and <b>GitHub</b> serves the pages. Keeping those three jobs separate in your head is most of the difficulty.</p>
-    <div class="warn"><b>Do not trust a button name you read anywhere, including here.</b> Every named button, tab and menu path in this phase <b>was true on 2026-08-30 and nowhere else</b>. That is the same warning 1.1 gives about prices, and it applies harder here: on that date this phase was walked end to end and <b>the click paths were wrong five times in one afternoon</b> &mdash; Cloudflare had rebuilt the dashboard around Workers, so &ldquo;Pages&rdquo; was a footnote link and the settings named below did not appear at all.<br><br><b>The steps are written as outcomes and &ldquo;done when&rdquo; conditions, and those held.</b> Read them as what must become true, not as where to press. When the screen does not match this page &mdash; and it will not &mdash; that is the expected case, not your mistake: <b>screenshot the whole window and show it to your agent.</b> Every one of those five was unstuck in a single exchange that way. The companion sheet <b>Show It Your Screen</b> is that loop and the evidence for it.</div>
+    <div class="warn"><b>Do not trust a button name you read anywhere, including here.</b> Every named button, tab and menu path on this page <b>was true on 2026-08-30 and nowhere else</b>. That is the same warning 1.1 gives about prices, and it applies hardest wherever these steps send you into a vendor&rsquo;s dashboard &mdash; which is this phase, and W5 before it. On that date this material was walked end to end and <b>the click paths were wrong five times in one afternoon</b>: Cloudflare had rebuilt the dashboard around Workers, so &ldquo;Pages&rdquo; had become a footnote link and settings named here did not appear on the form at all.<br><br><b>The steps are written as outcomes and &ldquo;done when&rdquo; conditions, and those held.</b> Read them as what must become true, not as where to press. When the screen does not match this page &mdash; and it will not &mdash; that is the expected case, not your mistake: <b>screenshot the whole window and show it to your agent.</b> Every one of those five was unstuck in a single exchange that way. The companion sheet <a href="https://lookedright.tonydefazio.com/show-it-your-screen">Show It Your Screen</a> is that loop, and the evidence for it.</div>
     <ol class="steps">
       <li data-key="domain" data-id="7.1" data-tiers="min mid max" data-open="0" data-done="0">
         <div class="srow">
@@ -1380,7 +1393,8 @@ or four A records:
         </ul>
       </li>
     </ol>
-    <p class="phase-note" style="margin-top:16px"><b>You now have an address, and nothing at it.</b> Building the thing that lives there is a separate job and a separate sheet: <a href="https://lookedright.tonydefazio.com/search-to-shipped">Search to Shipped</a> takes you from nothing to a deployed web app, and it picks up exactly where this phase stops.</p>
+    <p class="phase-note" style="margin-top:16px" data-tiers="mid max"><b>You now have an address, and nothing at it.</b> Building the thing that lives there is a separate job and a separate sheet: <a href="https://lookedright.tonydefazio.com/search-to-shipped">Search to Shipped</a> takes you from nothing to a deployed web app, and it picks up exactly where this phase stops.</p>
+    <p class="phase-note" style="margin-top:16px" data-tiers="min"><b>Your own name now points at the page you already published in W5</b> &mdash; same site, better address, and the free one keeps working too. If you want to build more onto it, <a href="https://lookedright.tonydefazio.com/search-to-shipped">Search to Shipped</a> goes further into making the thing itself.</p>
   </section>
 
   <section class="traps">
@@ -1413,7 +1427,7 @@ or four A records:
   </section>
 
   <footer>
-    <p>Companion to <i>Search to Shipped</i> and <i>It Looked Right</i>. This sheet is the part that comes before both: it ends where a first project begins. <a href="https://lookedright.tonydefazio.com/what-it-costs">What It Costs</a> is its money half, filed separately so it can go out of date on its own.</p>
+    <p>Companion to <a href="https://lookedright.tonydefazio.com/search-to-shipped"><i>Search to Shipped</i></a> and <a href="https://lookedright.tonydefazio.com/"><i>It Looked Right</i></a>. This sheet is the part that comes before both: it ends where a first project begins. <a href="https://lookedright.tonydefazio.com/what-it-costs">What It Costs</a> is its money half, filed separately so it can go out of date on its own.</p>
     <p>Drawn from the course working notes. Every numbered item of the Step&nbsp;0 order is covered here; where this sheet and that order disagree about phase numbers, it is because storage is split &mdash; the decision early, the construction at 3.7 &mdash; and both halves are present. The vendor pages, the cost documentation and the DNS records in Phase&nbsp;7 were read on 29 August 2026; every outbound link was checked the same day and <b>nothing re-checks them</b>. When one rots, this page will not tell you.</p>
     <p>A step is complete when every box under it is ticked, and not before. Ticks are stored in this browser only; they do not travel with the page.</p>
   </footer>
@@ -1655,6 +1669,9 @@ or four A records:
   var tierBtns = [].slice.call(document.querySelectorAll(".tierpick"));
   var tierNow = document.getElementById('tier-now');
   var phases = [].slice.call(document.querySelectorAll('section.phase'));
+  // Steps AND prose. The tier buttons carry data-tier (singular) and must not be
+  // filtered by the thing they control, or picking one would hide the others.
+  var tierEls = [].slice.call(document.querySelectorAll('[data-tiers]'));
 
   function readTier() {
     try { var t = localStorage.getItem(TKEY); return TIER_COPY[t] ? t : null; }
@@ -1665,9 +1682,18 @@ or four A records:
     // No choice made yet shows everything. A first-time reader must be able to
     // see what is on offer before being asked to narrow it; a page that starts
     // filtered is a page that hides its own scope.
-    steps.forEach(function (s) {
-      var tiers = (s.li.dataset.tiers || '').split(' ');
-      s.li.dataset.off = (t && tiers.indexOf(t) === -1) ? '1' : '0';
+    //
+    // ANY element may declare data-tiers, not only a step. Prose has tiers too:
+    // "start on day one, because other people are slow" is true of a cluster
+    // allocation and false of two sign-ups you do in five minutes, and Phase 7's
+    // "you now have an address and nothing at it" is false for a reader who
+    // published at W5. The first version of this filter moved only steps, which
+    // left every phase note asserting the widest tier's claims to all three. The
+    // alternative was to water the prose down until it was true everywhere, and
+    // prose that is true of everyone tells no one anything.
+    tierEls.forEach(function (el) {
+      var tiers = (el.dataset.tiers || '').split(' ');
+      el.dataset.off = (t && tiers.indexOf(t) === -1) ? '1' : '0';
     });
     // A phase whose every step belongs to other tiers is a heading over nothing.
     phases.forEach(function (sec) {

@@ -610,7 +610,7 @@
       </div>
       <div class="rail-group">
         <p class="rail-head">What to do about it</p>
-        <a href="#step0" data-view="step0"><span class="k">&rsaquo;</span><span>Step 0</span></a>
+        <a href="#step0" data-view="step0"><span class="k">&rsaquo;</span><span>Getting started</span></a>
         <a href="#repo" data-view="repo"><span class="k">&rsaquo;</span><span>The repo</span></a>
         <a href="#rule" data-view="rule"><span class="k">&rsaquo;</span><span>The standing rule</span></a>
         <a href="#fixes" data-view="fixes"><span class="k">&rsaquo;</span><span>Fixes that hold</span></a>
@@ -937,7 +937,7 @@
       <section class="view" id="step0" data-alt="view-step0" aria-labelledby="h-step0">
         <div class="view-head">
           <p class="eyebrow">What to do about it</p>
-          <h2 id="h-step0">Step 0 &mdash; how far are you going?</h2>
+          <h2 id="h-step0">Getting started &mdash; how far are you going?</h2>
           <p class="lede">Everything before the first real task. <b>There are three ways through it, and the shortest ends with something published, in one evening, without installing anything.</b></p>
         </div>
 
@@ -1048,7 +1048,7 @@
 
         <h3>&ldquo;Why are you so weird about this?&rdquo;</h3>
         <p class="quote">&ldquo;Why are you so weird about this? Just use permissions and a <span class="path">CLAUDE.md</span>. Give it roles. The tools already do all of that.&rdquo;</p>
-        <p><b>All three are used here, and the page tells you to use them.</b> The instructions file and the permission settings &mdash; allow, ask, deny &mdash; are on the setup list in <a href="#step0" data-view="step0">Step 0</a>, not as an afterthought. The eleven-role adversarial review that caught the numerical defects in this material <i>is</i> roles &mdash; eleven of them &mdash; and a run of the same kind on another document returned 31 blocking findings against a page whose numbers had all checked out. Nothing here is an argument against any of that.</p>
+        <p><b>All three are used here, and the page tells you to use them.</b> The instructions file and the permission settings &mdash; allow, ask, deny &mdash; are on the setup list under <a href="#step0" data-view="step0">Getting started</a>, not as an afterthought. The eleven-role adversarial review that caught the numerical defects in this material <i>is</i> roles &mdash; eleven of them &mdash; and a run of the same kind on another document returned 31 blocking findings against a page whose numbers had all checked out. Nothing here is an argument against any of that.</p>
         <p><b>The objection fails on one distinction, and it is the distinction this whole page is built on.</b> Permissions answer <i>may this command run.</i> They do not answer <i>is this claim true.</i> Every incident described on this page passed every permission check it met: the wrong dataset was read with permission, the four wrong numbers came out of commands that were allowed to run, and the two sessions that wrote the same document minutes apart were both fully authorised. <b>Not one of those failures is a permissions failure</b>, so no permission setting would have caught any of them.</p>
         <p><b>And an instructions file is a request, not a rule</b> &mdash; that is <a href="#fixes" data-view="fixes">Fixes that hold</a>, which is on this page because it is the mistake people make immediately. You write the lesson down, the file grows, and the second sentence still gets skipped. The proof is dated and it is embarrassing: <b>hours after this project documented that instructions are unenforceable, the agent proposed a <span class="path">CLAUDE.md</span> rule as the fix</b> for the very defect being discussed. The file was not ignored by a careless machine; it was written by the party that had just finished explaining why it would not work. A role prompt is the same class of thing &mdash; a request, performed well until it is not.</p>
         <p><b>So the weird half is small, and it is the half that refuses.</b> A build that will not run against an uncommitted source. A check that fails when a document names a file that does not exist. A hook that says no. <b>One of them refused this session, today</b>, while this very section was being written: an attempt to write a source file through a shell heredoc was blocked outright, by a gate that exists because that trick silently corrupted two files in one sitting and the diff still looked right. That rule had been written in prose, in more than one repository, and skipped anyway. As a gate, it does not rely on anyone remembering it &mdash; which is the entire difference between a habit and a mechanism.</p>
@@ -1401,7 +1401,7 @@
         <p>It is also not finished. See <b>what is damaged, missing, or unresolved</b> under <a href="#record" data-view="record">How this was made</a>.</p>
 
         <div class="foot">
-          <p><b>Companion page.</b> A one-page runbook, <i>Search to Shipped</i> &mdash; zero to a deployed web application for a researcher who has never written software, with the condition that tells you each step worked. Separate page, same system.</p>
+          <p><b>Companion page.</b> A one-page runbook, <a href="/search-to-shipped"><i>Search to Shipped</i></a> &mdash; zero to a deployed web application for a researcher who has never written software, with the condition that tells you each step worked. Separate page, same system.</p>
           <p>Outbound links were checked on the day this was written; nothing re-checks them, and when one rots this page will not tell you. <b>The revision date is under the title</b>, derived from this page&rsquo;s own history rather than typed here &mdash; this line said <i>&ldquo;Last revised 2026-08-28&rdquo;</i> for two days after that stopped being true.</p>
         </div>
       </section>

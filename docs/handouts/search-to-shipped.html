@@ -68,6 +68,8 @@
 
   /* ---- masthead ---- */
   .mast { border-bottom: 2px solid var(--ink); padding-bottom: 18px; margin-bottom: 8px; }
+  .eyebrow .home { color: inherit; text-decoration: none; border-bottom: 1px solid currentColor; }
+  .eyebrow .home:hover { color: var(--accent); }
   .eyebrow {
     font-family: var(--mono);
     font-size: 11px;
@@ -326,7 +328,7 @@
   </div>
 
   <header class="mast">
-    <p class="eyebrow">Runbook · one page</p>
+    <p class="eyebrow"><a href="/" class="home">&larr;&nbsp;It Looked Right</a> &middot; Runbook · one page</p>
     <h1>Search to Shipped</h1>
     <p class="standfirst">Zero to a deployed web app, for a researcher who has never written software. Every step, in order, with the condition that tells you it worked.</p>
   </header>
