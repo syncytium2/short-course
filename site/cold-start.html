@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Zero to a working coding-agent setup: 34 steps in eight phases, each a checklist that stays red until every box is checked.">
+<meta name="description" content="Zero to a working coding-agent setup. Say how far you are going — a web app in the browser, VS Code on your laptop, or a cluster and other people — and the page shows only the steps your answer needs, each a checklist that stays red until it is done.">
 <link rel="canonical" href="https://lookedright.tonydefazio.com/cold-start">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%8A%3C/text%3E%3C/svg%3E">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Cold Start">
-<meta property="og:description" content="Zero to a working coding-agent setup: 34 steps in eight phases, each a checklist that stays red until every box is checked.">
+<meta property="og:description" content="Zero to a working coding-agent setup. Say how far you are going — a web app in the browser, VS Code on your laptop, or a cluster and other people — and the page shows only the steps your answer needs, each a checklist that stays red until it is done.">
 <meta property="og:url" content="https://lookedright.tonydefazio.com/cold-start">
 <meta name="twitter:card" content="summary">
 <!-- GENERATED FILE - do not edit.
@@ -531,8 +531,8 @@
   <header class="mast">
     <p class="eyebrow"><a href="/" class="home">&larr;&nbsp;It Looked Right</a> &middot; Setup runbook &middot; keep this window open</p>
     <h1>Cold Start</h1>
-    <p class="standfirst">An email address and a laptop, to a first agent session that leaves a record behind it. Every step in order, the two prompts to paste, and the condition that tells you each one worked.</p>
-    <p class="pv">Version <b>0.1.26</b> &middot; 31 Aug 2026<span class="pv-born">First published 29 Aug 2026</span></p>
+    <p class="standfirst">An email address to a first agent session that leaves a record behind it &mdash; by browser, by laptop, or by cluster. Every step in order, and the condition that tells you each one worked.</p>
+    <p class="pv">Version <b>0.1.29</b> &middot; 1 Sep 2026<span class="pv-born">First published 29 Aug 2026</span></p>
   </header>
 
   <div class="method">
@@ -575,7 +575,7 @@
       <h2>Phase 1 &middot; Accounts</h2>
       <span class="phase-time">30 min<span data-tiers="max">, plus other people&rsquo;s time</span></span>
     </div>
-    <p class="phase-note">Two accounts, both free to create, and you need both. <b>Get the expert first, on purpose:</b> the second step is the one people find fiddly, and doing it second means there is already somebody to ask.</p>
+    <p class="phase-note"><span data-tiers="min">Two accounts, both free to create, and you need both.</span><span data-tiers="mid max">Two accounts of your own, both free to create and both required &mdash; then the institutional things somebody else controls.</span> <b>Get the expert first, on purpose:</b> the second step is the one people find fiddly, and doing it second means there is already somebody to ask.</p>
     <p class="phase-note" data-tiers="max"><b>Start this on day one even if you will not touch a keyboard for a week.</b> One thing in this phase &mdash; storage and a cluster allocation &mdash; is not yours to grant: somebody else has to approve it, and that takes days to weeks. File it now and carry on with everything below while it pends.</p>
     <ol class="steps">
       <li data-key="agent-account" data-id="1.1" data-tiers="min mid max" data-open="0" data-done="0">
@@ -606,7 +606,7 @@
                 </tr>
                 <tr>
                   <td><b>Best</b></td>
-                  <td><b>The agent inside your editor</b> &mdash; step 3.5</td>
+                  <td><b>The agent inside your editor</b><span data-tiers="mid max"> &mdash; step 3.5</span><span data-tiers="min"> &mdash; the laptop route sets this up; this one does not</span></td>
                   <td>The same folder, <b>in the editor you already work in</b>. You read the change where the file actually lives.</td>
                   <td>The same paid plan &mdash; rung 3 costs no more money than rung 2, only more setup.</td>
                 </tr>
@@ -683,7 +683,7 @@
             <li><button class="cb" data-key="decided-whether-need-these" type="button" aria-pressed="false" aria-labelledby="c-1-3-0">&#10003;</button><span class="cbt" id="c-1-3-0">I have decided whether I need these at all</span></li>
             <li><button class="cb" data-key="yes-storage-cluster-account" type="button" aria-pressed="false" aria-labelledby="c-1-3-1">&#10003;</button><span class="cbt" id="c-1-3-1">If yes: storage, cluster account and allocation are all requested</span></li>
             <li><button class="cb" data-key="carrying-rest-while-pend" type="button" aria-pressed="false" aria-labelledby="c-1-3-2">&#10003;</button><span class="cbt" id="c-1-3-2">I am carrying on with the rest while they pend</span></li>
-            <li><button class="skipbtn" type="button">Not needed &mdash; no cluster, no terabytes</button></li>
+            <li><button class="skipbtn" type="button" data-undo="Needed after all &mdash; I do have research storage">Not needed &mdash; no cluster, no terabytes</button></li>
         </ul>
       </li>
       <li data-key="institutional-basics" data-id="1.4" data-tiers="mid max" data-open="0" data-done="0">
@@ -716,19 +716,28 @@
     <ol class="steps">
       <li data-key="pick-a-rung" data-id="W1" data-tiers="min" data-open="0" data-done="0">
         <div class="srow">
-          <button class="head" type="button" aria-expanded="false" aria-controls="d-W1"><span class="n">W1</span>Pick how much of your screen the expert gets</button>
+          <button class="head" type="button" aria-expanded="false" aria-controls="d-W1"><span class="n">W1</span>Open the one you picked, and make it prove it can see you</button>
           <span class="badge">Incomplete</span>
         </div>
+        <!-- THIS STEP USED TO BE A SECOND COPY OF 1.1.
+             Both are shown on this route. W1 restated 1.1's three-rung ladder in prose and
+             then asked, word for word, for 1.1's third box: "I can say what happens when I
+             use too much: it stops, or it bills". A reader on the browser route was made to
+             answer the same question twice, four steps apart, and to tick it twice before
+             either step would go green.
+             The tier switch exists because "three pages would be three copies of one list".
+             Two steps on one page is the same defect at closer range, and it arrived in the
+             same commit as the fix. What survives here is the half 1.1 does not have: 1.1
+             asks which rung you chose, this asks whether you are sitting in it and whether
+             it can actually see what you think it can. -->
         <div class="detail" id="d-W1">
-            <p class="why"><b>Three places you can work, and which you choose changes what everything else here costs.</b> <b>Claude on the web</b> &mdash; a browser tab, nothing to install, you can start in five minutes. <b>The Claude desktop app</b> &mdash; one download, and it can see a folder on your own machine. <b>VS&nbsp;Code with the Claude window</b> &mdash; a real editor, and the most capable of the three, but you have to set the editor up first.</p>
-            <p class="why"><b>Take the most capable one you can actually start with today, and no further.</b> If setting up an editor is going to eat the evening, that is the wrong place to spend it &mdash; the first two need nothing but an account. You can move up later and nothing you have done is wasted.</p>
-            <p class="why">Rung 1 is free, and rungs 2 and 3 are the same paid plan &mdash; so one subscription unlocks both upper rungs at once, and the step between them is setup rather than spending. Check the plan page rather than any number written here.</p>
-            <p class="why"><b>Then find out which shape of bill you have agreed to, before you lean on it.</b> A personal plan is an allowance: you hit it and it stops, which is annoying and safe. An institutional billing code is usually uncapped &mdash; nothing stops, nothing warns, and the number surfaces when somebody else reads the statement. That distinction matters more than the amount, and it is the one nobody is told unprompted.</p>
+            <p class="why"><b>1.1 asked which of the three places you would work in. This is where you are actually sitting in one</b> &mdash; open, signed in, ready to be asked something. Deciding costs a minute; this costs the evening, which is why they are separate steps and why this one is here rather than there.</p>
+            <p class="why"><b>For this route a browser tab is enough.</b> Nothing to install and no terminal. If you already have the desktop app or the editor from 1.1 set up, use that instead &mdash; nothing in W2 to W5 changes.</p>
+            <p class="why"><b>Then get one piece of evidence that it can see what you think it can see, before you rely on it.</b> A tool that cannot open your files will answer questions about them anyway, fluently and in detail, and nothing in the reply looks different. So do not ask <i>can you see my files</i> &mdash; ask it to tell you something specific it could only know by looking, and check that it is right. That is the same move as every &ldquo;done when&rdquo; on this page, run once against your own setup.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="rung-picked-highest-reachable" type="button" aria-pressed="false" aria-labelledby="c-w1-0">&#10003;</button><span class="cbt" id="c-w1-0">I have decided where I am working &mdash; the Claude website, the Claude app, or VS&nbsp;Code &mdash; and I can start there today</span></li>
-            <li><button class="cb" data-key="named-something-back" type="button" aria-pressed="false" aria-labelledby="c-w1-1">&#10003;</button><span class="cbt" id="c-w1-1">Claude has told me something about my own files or my own screen that I never typed in, so I know it can actually see what I am working on</span></li>
-            <li><button class="cb" data-key="stops-or-bills" type="button" aria-pressed="false" aria-labelledby="c-w1-2">&#10003;</button><span class="cbt" id="c-w1-2">I can say what happens when I use too much: it stops, or it bills</span></li>
+            <li><button class="cb" data-key="rung-picked-highest-reachable" type="button" aria-pressed="false" aria-labelledby="c-w1-0">&#10003;</button><span class="cbt" id="c-w1-0">The place I chose at 1.1 is open in front of me and I can start in it now</span></li>
+            <li><button class="cb" data-key="named-something-back" type="button" aria-pressed="false" aria-labelledby="c-w1-1">&#10003;</button><span class="cbt" id="c-w1-1">It has told me something about my own files or my own screen that I never typed in, and I checked that it was right</span></li>
         </ul>
       </li>
       <li data-key="one-sentence" data-id="W2" data-tiers="min" data-open="0" data-done="0">
@@ -1322,7 +1331,7 @@ one so I can look.
             <li><button class="cb" data-key="portal-once" type="button" aria-pressed="false" aria-labelledby="c-6-3-0">&#10003;</button><span class="cbt" id="c-6-3-0">I have logged in through the portal once</span></li>
             <li><button class="cb" data-key="trivial-job" type="button" aria-pressed="false" aria-labelledby="c-6-3-1">&#10003;</button><span class="cbt" id="c-6-3-1">I have run one trivial job end to end</span></li>
             <li><button class="cb" data-key="cluster-path-in-helper" type="button" aria-pressed="false" aria-labelledby="c-6-3-2">&#10003;</button><span class="cbt" id="c-6-3-2">The cluster&rsquo;s data path is in the path helper, not typed into a script</span></li>
-            <li><button class="skipbtn" type="button">Not needed &mdash; no cluster</button></li>
+            <li><button class="skipbtn" type="button" data-undo="Needed after all &mdash; the allocation came through">Not needed &mdash; no cluster</button></li>
         </ul>
       </li>
     </ol>
@@ -1333,7 +1342,8 @@ one so I can look.
       <h2>Phase 7 &middot; A name of your own</h2>
       <span class="phase-time">30 min, then a wait</span>
     </div>
-    <p class="phase-note">Only when you have something to put on it. Three companies, each doing one job: <b>Porkbun</b> sells you the name, <b>Cloudflare</b> answers questions about where it points, and <b>GitHub</b> serves the pages. Keeping those three jobs separate in your head is most of the difficulty.</p>
+    <p class="phase-note" data-tiers="min"><b>You already have something to put on it</b> &mdash; the page you published at W5. Two companies, each doing one job: <b>Porkbun</b> sells you the name, and <b>Cloudflare</b> answers questions about where it points, which it is already doing for the free address you have. Keeping those two jobs separate in your head is most of the difficulty. A third, GitHub serving the pages itself, is the other road and is 7.4 and 7.5.</p>
+    <p class="phase-note" data-tiers="mid max">Only when you have something to put on it. Three companies, each doing one job: <b>Porkbun</b> sells you the name, <b>Cloudflare</b> answers questions about where it points, and <b>GitHub</b> serves the pages. Keeping those three jobs separate in your head is most of the difficulty.</p>
     <div class="warn"><b>Do not trust a button name you read anywhere, including here.</b> Every named button, tab and menu path on this page <b>was true on 2026-08-30 and nowhere else</b>. That is the same warning 1.1 gives about prices, and it applies hardest wherever these steps send you into a vendor&rsquo;s dashboard &mdash; which is this phase, and W5 before it. On that date this material was walked end to end and <b>the click paths were wrong five times in one afternoon</b>: Cloudflare had rebuilt the dashboard around Workers, so &ldquo;Pages&rdquo; had become a footnote link and settings named here did not appear on the form at all.<br><br><b>The steps are written as outcomes and &ldquo;done when&rdquo; conditions, and those held.</b> Read them as what must become true, not as where to press. When the screen does not match this page &mdash; and it will not &mdash; that is the expected case, not your mistake: <b>screenshot the whole window and show it to your agent.</b> Every one of those five was unstuck in a single exchange that way. The companion sheet <a href="https://lookedright.tonydefazio.com/show-it-your-screen">Show It Your Screen</a> is that loop, and the evidence for it.</div>
     <ol class="steps">
       <li data-key="domain" data-id="7.1" data-tiers="min mid max" data-open="0" data-done="0">
@@ -1375,17 +1385,35 @@ one so I can look.
           <span class="badge">Incomplete</span>
         </div>
         <div class="detail" id="d-7.3">
-            <p class="why" data-tiers="min"><b>You already did this at W5, and there is nothing to choose.</b> Cloudflare is serving your site from your repository right now. This step is only about pointing the name you just bought at what is already there &mdash; the custom domain, and the certificate that comes with it. Keep going to 7.4 and 7.5 only if you decide to move to GitHub Pages instead, and read the next paragraph before you do.</p>
+            <p class="why" data-tiers="min"><b>You already did this at W5, and there is nothing to choose.</b> Cloudflare is serving your site from your repository right now. This step is only about pointing the name you just bought at what is already there &mdash; the custom domain, and the certificate that comes with it. <b>Then mark 7.4 and 7.5 <i>Not needed</i>:</b> they are the other road, and you are not on it. Go there only if you decide to move to GitHub Pages instead, and read the box below before you do.</p>
             <p class="why" data-tiers="mid max"><b>This is the road most people should take, and it is three steps shorter.</b> Cloudflare publishes straight from a folder on your computer. There is no repository involved at all, so <i>your repo stays private</i> and it still costs nothing.</p>
             <p class="why" data-tiers="mid max">In the Cloudflare dashboard the site you added at 7.2 can serve pages directly; the custom domain is one button, and the certificate is handled for you. From a terminal, the deploy tool is <code>wrangler</code>, and one command pushes a folder to the address you just wired up.</p>
-            <div class="warn"><b>Walked on 2026-08-30, and the dashboard did not look like this.</b> Cloudflare had rebuilt it around Workers: the entry point read <i>Create a Worker</i>, &ldquo;Pages&rdquo; had become a small link at the foot of the card, and the deploy form arrived with a command pre-filled that <b>silently requires a config file in the repository</b> &mdash; nothing on the screen asks you to write one, and the failure does not say so. <b>&ldquo;Three steps shorter&rdquo; also assumes you have a terminal:</b> publishing from a folder needs <code>wrangler</code>, so for a reader who never opens a shell this road is not shorter, it is unavailable. Read the button names here as a description of one afternoon, not as a map.</div>
+            <div class="warn" data-tiers="mid max"><b>Walked on 2026-08-30, and the dashboard did not look like this.</b> Cloudflare had rebuilt it around Workers: the entry point read <i>Create a Worker</i>, &ldquo;Pages&rdquo; had become a small link at the foot of the card, and the deploy form arrived with a command pre-filled that <b>silently requires a config file in the repository</b> &mdash; nothing on the screen asks you to write one, and the failure does not say so. <b>&ldquo;Three steps shorter&rdquo; also assumes you have a terminal:</b> publishing from a folder needs <code>wrangler</code>, so for a reader who never opens a shell this road is not shorter, it is unavailable. Read the button names here as a description of one afternoon, not as a map.</div>
             <div class="warn"><b>Why this matters more than convenience.</b> GitHub only serves free websites from <b>public</b> repositories &mdash; their own documentation says so plainly. You were told to keep your repository <b>private</b> when you made it, which is the right default for research. So on the free plan those two are incompatible, and Cloudflare is what resolves it. The other road is 7.4 and 7.5, and it needs either a public repository or a paid GitHub plan.</div>
-            <p class="why">One thing it costs: the deploy tool signs in through a browser the first time on each machine. That default can be replaced with an API token for automation, so it is a minute of setup rather than a permanent restriction.</p>
+            <p class="why" data-tiers="mid max">One thing it costs: the deploy tool signs in through a browser the first time on each machine. That default can be replaced with an API token for automation, so it is a minute of setup rather than a permanent restriction.</p>
+            <p class="why" data-tiers="min">Nothing here needs a terminal. The project already exists &mdash; you made it at W5 &mdash; and adding a custom domain to it is a form in the same dashboard. If the form is not where this says, screenshot the whole window and ask; that is the move this phase was walked with.</p>
         </div>
+        <!-- BOX-LEVEL TIERS, AND THIS STEP IS WHY THEY EXIST.
+             The last three boxes used to apply to everybody, and the third of them is
+             "I have signed the deploy tool in once on this machine" -- wrangler, from a
+             terminal, demanded of the route whose entire promise is that it never opens
+             one. 7.3 has no skip button, so the browser route could not reach 100%
+             without ticking something untrue.
+             The prose knew. The paragraph above saying this road "is not shorter, it is
+             unavailable" without a terminal was already there -- untagged, so the browser
+             reader saw the warning and the box it invalidates on the same screen, and
+             only one of them was actionable. That is the shape of the whole defect this
+             page is about, committed by the page itself.
+             The two `min` boxes are the work that route actually does: the project exists
+             already, so this step points a name at it. Their handles are new and are not
+             in V3_MAP, which is correct -- V3_MAP describes a document from before any of
+             this and must never be regenerated. -->
         <ul class="checks">
-            <li><button class="cb" data-key="decided-serves-site-cloudflare" type="button" aria-pressed="false" aria-labelledby="c-7-3-0">&#10003;</button><span class="cbt" id="c-7-3-0">I have decided who serves the site: <b>Cloudflare</b> (7.4 and 7.5 become Not needed), or GitHub Pages</span></li>
-            <li><button class="cb" data-key="github-repository-public-paid" type="button" aria-pressed="false" aria-labelledby="c-7-3-1">&#10003;</button><span class="cbt" id="c-7-3-1">If GitHub: my repository is public, or I am on a paid plan</span></li>
-            <li><button class="cb" data-key="signed-deploy-tool-once" type="button" aria-pressed="false" aria-labelledby="c-7-3-2">&#10003;</button><span class="cbt" id="c-7-3-2">I have signed the deploy tool in once on this machine</span></li>
+            <li data-tiers="min"><button class="cb" data-key="custom-domain-on-w5-project" type="button" aria-pressed="false" aria-labelledby="c-7-3-3">&#10003;</button><span class="cbt" id="c-7-3-3">The name I bought at 7.1 is set as the custom domain on the Cloudflare project that has been serving my page since W5</span></li>
+            <li data-tiers="min"><button class="cb" data-key="https-works-on-own-name" type="button" aria-pressed="false" aria-labelledby="c-7-3-4">&#10003;</button><span class="cbt" id="c-7-3-4">I opened <code>https://</code> on my own name and the page loaded &mdash; and the free address from W5 still works too</span></li>
+            <li data-tiers="mid max"><button class="cb" data-key="decided-serves-site-cloudflare" type="button" aria-pressed="false" aria-labelledby="c-7-3-0">&#10003;</button><span class="cbt" id="c-7-3-0">I have decided who serves the site: <b>Cloudflare</b> (7.4 and 7.5 become Not needed), or GitHub Pages</span></li>
+            <li data-tiers="mid max"><button class="cb" data-key="github-repository-public-paid" type="button" aria-pressed="false" aria-labelledby="c-7-3-1">&#10003;</button><span class="cbt" id="c-7-3-1">If GitHub: my repository is public, or I am on a paid plan</span></li>
+            <li data-tiers="mid max"><button class="cb" data-key="signed-deploy-tool-once" type="button" aria-pressed="false" aria-labelledby="c-7-3-2">&#10003;</button><span class="cbt" id="c-7-3-2">I have signed the deploy tool in once on this machine</span></li>
         </ul>
       </li>
       <li data-key="github-pages" data-id="7.4" data-tiers="min mid max" data-open="0" data-done="0" data-optional="1">
@@ -1411,7 +1439,7 @@ or four A records:
             <li><button class="cb" data-key="www-cname-record-added" type="button" aria-pressed="false" aria-labelledby="c-7-4-1">&#10003;</button><span class="cbt" id="c-7-4-1"><code>www</code> CNAME record added</span></li>
             <li><button class="cb" data-key="bare-name-record-added" type="button" aria-pressed="false" aria-labelledby="c-7-4-2">&#10003;</button><span class="cbt" id="c-7-4-2">Bare-name record added &mdash; a CNAME at Cloudflare, otherwise the four A records</span></li>
             <li><button class="cb" data-key="name-loads-browser" type="button" aria-pressed="false" aria-labelledby="c-7-4-3">&#10003;</button><span class="cbt" id="c-7-4-3">The name loads in a browser</span></li>
-            <li><button class="skipbtn" type="button">Not needed &mdash; I chose Cloudflare</button></li>
+            <li><button class="skipbtn" type="button" data-undo="Needed after all &mdash; I chose GitHub Pages">Not needed &mdash; I chose Cloudflare</button></li>
         </ul>
       </li>
       <li data-key="gray-cloud" data-id="7.5" data-tiers="min mid max" data-open="0" data-done="0" data-optional="1">
@@ -1429,7 +1457,7 @@ or four A records:
             <li><button class="cb" data-key="record-pointed-github-set" type="button" aria-pressed="false" aria-labelledby="c-7-5-0">&#10003;</button><span class="cbt" id="c-7-5-0">Every record pointed at GitHub is set to <b>DNS only</b> &mdash; the gray cloud</span></li>
             <li><button class="cb" data-key="enforce-https-tickable-rather" type="button" aria-pressed="false" aria-labelledby="c-7-5-1">&#10003;</button><span class="cbt" id="c-7-5-1"><b>Enforce HTTPS</b> is tickable rather than greyed out</span></li>
             <li><button class="cb" data-key="checked-https-works" type="button" aria-pressed="false" aria-labelledby="c-7-5-2">&#10003;</button><span class="cbt" id="c-7-5-2">It is checked, and <code>https://</code> works</span></li>
-            <li><button class="skipbtn" type="button">Not needed &mdash; I chose Cloudflare</button></li>
+            <li><button class="skipbtn" type="button" data-undo="Needed after all &mdash; I chose GitHub Pages">Not needed &mdash; I chose Cloudflare</button></li>
         </ul>
       </li>
     </ol>
@@ -1468,8 +1496,9 @@ or four A records:
 
   <footer>
     <p>Companion to <a href="https://lookedright.tonydefazio.com/search-to-shipped"><i>Search to Shipped</i></a> and <a href="https://lookedright.tonydefazio.com/"><i>It Looked Right</i></a>. This sheet is the part that comes before both: it ends where a first project begins. <a href="https://lookedright.tonydefazio.com/what-it-costs">What It Costs</a> is its money half, filed separately so it can go out of date on its own.</p>
-    <p>Drawn from the course working notes. Every numbered item of the Step&nbsp;0 order is covered here; where this sheet and that order disagree about phase numbers, it is because storage is split &mdash; the decision early, the construction at 3.7 &mdash; and both halves are present. The vendor pages, the cost documentation and the DNS records in Phase&nbsp;7 were read on 29 August 2026; every outbound link was checked the same day and <b>nothing re-checks them</b>. When one rots, this page will not tell you.</p>
-    <p>A step is complete when every box under it is ticked, and not before. Ticks are stored in this browser only; they do not travel with the page.</p>
+    <p>Drawn from the course working notes. Every numbered item of the Step&nbsp;0 order is covered here; where this sheet and that order disagree about phase numbers, it is because storage is split &mdash; the decision early, the construction at 3.7 &mdash; and both halves are present. That coverage was true when it was checked and <b>nothing enforces it</b>: the order can gain an item and this sentence will go on claiming otherwise, which is what it did once already.</p>
+    <p><b>Two dates, because they are two different claims.</b> The vendor pages, the cost documentation and the DNS records in Phase&nbsp;7 were read on <b>29 August 2026</b>, and every outbound link was checked that day. The click paths, dashboards and button names in Phase&nbsp;7 and W1&ndash;W5 come from one walk on <b>30 August 2026</b> and describe that afternoon only. <b>Nothing re-checks either.</b> When a link rots or a dashboard moves, this page will not tell you &mdash; it will keep saying what was true. This paragraph used to give the earlier date for both.</p>
+    <p><b>A step is complete when every box you are shown is ticked, and not before.</b> Boxes belonging to a route you did not pick are hidden and are not counted; they come back, still ticked, if you move up. Ticks are stored in this browser only and do not travel with the page.</p>
   </footer>
 
 </div>
@@ -1494,12 +1523,24 @@ or four A records:
   // from it -- rewording a box must leave its data-key alone, or this is v3 again with
   // extra steps.
   //
-  // THE MIGRATION BELOW IS LOSSLESS EXACTLY ONCE, AND THIS IS THAT MOMENT. It maps old
-  // index i to the key of the box currently at position i, which is correct only while
-  // no box has moved since the reader's ticks were saved. Nothing has moved yet. Once
-  // the path switch renumbers Phase 3, that correspondence is gone and the same
-  // migration would silently mis-assign. This is why the re-key lands before the branch
-  // and not after it.
+  // THE MIGRATION BELOW WAS LOSSLESS EXACTLY ONCE, AND THAT MOMENT HAS PASSED. It maps an
+  // old index i to a key by POSITION, which is correct only while nothing has moved since
+  // the reader's ticks were saved.
+  //
+  // This paragraph used to end "nothing has moved yet... this is why the re-key lands
+  // BEFORE the branch and not after it", in the future tense, about a branch that landed
+  // the next day in this same file. Things have moved since: 1.1 and 1.2 swapped, W1-W5
+  // arrived, 1.4 / 3.7 / 4.7 / 6.3 were appended, and 7.3's boxes were split by route. A
+  // comment that describes its own document in the future tense stops being true without
+  // ever becoming false-looking, which is the failure this page teaches.
+  //
+  // WHAT SAVES IT IS NOT THIS COMMENT, IT IS V3_MAP. The table below is frozen: it records
+  // what v3's display numbers and box positions pointed at ON THE DAY THE TICKS WERE SAVED,
+  // so the migration reads history rather than the live page and cannot be invalidated by
+  // anything done to the document afterwards. Verified against the current page on
+  // 2026-09-01 -- every box handle it names still exists, so no returning v3 reader loses a
+  // tick. That check is `tools/checklist_state.sh --selftest`, and it is the thing to run,
+  // not this paragraph to trust.
   var KEY  = 'cold-start-v4';
   var OLD  = 'cold-start-v3';
 
@@ -1602,7 +1643,9 @@ or four A records:
   var dEl = document.getElementById('pc-d');
   var fill = document.getElementById('pc-fill');
 
-  dEl.textContent = items.length;
+  // No seed value here. This line set the denominator to every step in the document —
+  // 39 — and count() overwrote it a few hundred milliseconds later with the number for
+  // the reader's actual route. One paint of a number belonging to nobody.
 
   var steps = [].map.call(items, function (li) {
     var id = li.dataset.key;
@@ -1612,23 +1655,59 @@ or four A records:
 
     var skipbtn = li.querySelector('.skipbtn');
 
+    // THE SKIP LABEL IS AUTHORED PER STEP, AND paint() USED TO THROW IT AWAY. This line read
+    //
+    //     skipbtn.textContent = skip ? 'Needed after all \u2014 I chose GitHub'
+    //                                : 'Not needed \u2014 I chose Cloudflare';
+    //
+    // unconditionally, for every skip button on the page. paint() runs once at construction,
+    // so the authored text never survived a single frame. Step 1.3 is research storage and a
+    // cluster allocation; its button read "Not needed \u2014 I chose Cloudflare" on the live site,
+    // and so did 6.3's. The right words were in the HTML the whole time \u2014 "no cluster, no
+    // terabytes" \u2014 and one line of view code was overwriting all four.
+    //
+    // Both labels now come from the element: its own text is the offer, data-undo is the
+    // reversal. Read once here, before anything can overwrite them.
+    var skipOffer = skipbtn ? skipbtn.textContent : '';
+    var skipUndo  = skipbtn ? (skipbtn.dataset.undo || 'Needed after all') : '';
+
+    // WHICH BOXES COUNT: only the ones this reader's route can actually do.
+    //
+    // A box may carry data-tiers of its own, exactly as a step does, and 7.3 is why. On the
+    // browser route it demanded "I have signed the deploy tool in once on this machine" \u2014
+    // that is wrangler, a terminal tool the browser route never installs, and 7.3 has no skip
+    // button. So the browser route could not reach 100% without ticking something untrue, on
+    // a page whose closing line is "a step is complete when every box under it is ticked, and
+    // not before". A checklist with an unreachable box is worse than a missing step: it reads
+    // as the reader's failure.
+    //
+    // Recomputed on every paint rather than filtered once, because the tier moves under it.
+    // A tick on a box the current route hides stays in state and comes back on the way up \u2014
+    // same rule the tier switch follows for whole steps.
+    //
+    // If a VISIBLE step ever has no live boxes, it sits at Incomplete and the progress bar
+    // cannot fill. That is an authoring error \u2014 a step nobody on this route can finish \u2014 and
+    // it is left visible rather than quietly counted as done.
+    function live() {
+      return boxes.filter(function (b) { return !b.closest('[data-off="1"]'); });
+    }
+
     function paint() {
-      var n = 0;
+      var ls = live(), n = 0;
       boxes.forEach(function (b) {
         var on = !!(state[id] && state[id][b.dataset.key]);
         b.setAttribute('aria-pressed', on ? 'true' : 'false');
         b.parentNode.dataset.on = on ? '1' : '0';
-        if (on) n++;
       });
+      ls.forEach(function (b) { if (state[id] && state[id][b.dataset.key]) n++; });
       var skip = skipped[id] === 1;
       li.dataset.skip = skip ? '1' : '0';
-      var done = boxes.length > 0 && n === boxes.length;
+      var done = ls.length > 0 && n === ls.length;
       li.dataset.done = done ? '1' : '0';
       badge.textContent = skip ? 'Not needed'
                         : done ? 'Done'
-                        : (n ? n + ' of ' + boxes.length : 'Incomplete');
-      if (skipbtn) skipbtn.textContent = skip ? 'Needed after all \u2014 I chose GitHub'
-                                              : 'Not needed \u2014 I chose Cloudflare';
+                        : (n ? n + ' of ' + ls.length : 'Incomplete');
+      if (skipbtn) skipbtn.textContent = skip ? skipUndo : skipOffer;
       head.setAttribute('aria-expanded', li.dataset.open === '1' ? 'true' : 'false');
       return done;
     }
@@ -1683,11 +1762,14 @@ or four A records:
   // ---- the tier switch: how far are you going ----
   //
   // WHY THIS IS A FILTER AND NOT A SEPARATE PAGE. Three pages would be three
-  // copies of the same 34 steps, and this repo already knows what two copies of
-  // one list do to each other: the home page and this one numbered the same
-  // phases differently for two days, on two pages that link to each other,
-  // because each was edited without the other. One list, filtered, cannot drift
-  // from itself.
+  // copies of one list, and this repo already knows what two copies of one list
+  // do to each other: the home page and this one numbered the same phases
+  // differently for two days, on two pages that link to each other, because each
+  // was edited without the other. One list, filtered, cannot drift from itself.
+  //
+  // (This comment said "the same 34 steps". There are 39 — the browser route's
+  // W1–W5 were added the day after it was written, which is the sentence proving
+  // its own point. No count is stated here now; steps.length is one line away.)
   //
   // WHY IT DOES NOT TOUCH `skipped`. A reader's "not needed" decisions are
   // THEIRS and are keyed per step. Driving them from the tier would overwrite a
@@ -1702,10 +1784,13 @@ or four A records:
   // anybody a box they had already earned.
   var TKEY = 'cold-start-tier-v1';
   var TIER_COPY = {
-    min: 'Showing the browser route. Nothing here needs anything installed.',
-    mid: 'Showing the laptop setup — your own editor, your own copy.',
+    min: 'Showing the browser route. Nothing here needs anything installed. <b>The step numbers skip</b> — 1.2 to W1 to 5.1 to 7.1 — because they are the same numbers on all three routes, so the ones you are not shown keep their names.',
+    mid: 'Showing the laptop setup — your own editor, your own copy. <b>The step numbers skip</b> where a step belongs only to the cluster route; they stay stable across all three so a number always means the same step.',
     max: 'Showing everything, including the parts that need somebody else to approve them. <b>Start the storage and allocation requests today</b> — they take days to weeks, and everything else here proceeds while they pend.'
   };
+  // The unchosen state, said out loud rather than left to be inferred from a page
+  // that is twice as long as any route through it.
+  var TIER_UNSET = 'No route picked, so this is <b>all three at once</b> — including two that contradict each other about whether you install anything. Pick one above and the page shows only the steps your answer needs.';
   var tierBtns = [].slice.call(document.querySelectorAll(".tierpick"));
   var tierNow = document.getElementById('tier-now');
   var phases = [].slice.call(document.querySelectorAll('section.phase'));
@@ -1744,8 +1829,18 @@ or four A records:
     tierBtns.forEach(function (b) {
       b.setAttribute('aria-pressed', b.dataset.tier === t ? 'true' : 'false');
     });
-    if (t) { tierNow.innerHTML = TIER_COPY[t]; tierNow.hidden = false; }
-    else { tierNow.hidden = true; }
+    // REPAINT BEFORE COUNTING, and this order is the whole of the box-level filter.
+    // data-off has just moved on some boxes; a badge reading "2 of 3" against a step
+    // that now has two boxes is the same class of lie as a step count that is true of
+    // one route in three. paint() re-reads live() and the badge follows the tier.
+    steps.forEach(function (s) { s.paint(); });
+    // NOT CHOOSING IS A STATE, AND IT USED TO BE A SILENT ONE. The banner was simply
+    // hidden, so a first-time reader got all 39 steps with the browser route and the
+    // laptop route interleaved — W1 asking a question 1.1 had already asked, four
+    // steps back — and nothing on the page said that was what they were looking at.
+    // Showing everything is still the right default; not saying so was the defect.
+    tierNow.innerHTML = t ? TIER_COPY[t] : TIER_UNSET;
+    tierNow.hidden = false;
     count();
   }
 
@@ -1765,7 +1860,18 @@ or four A records:
     // number was typed once and the page grew past it, which is the same defect
     // 37e8b81 fixed in the build script's page description. A number about the
     // document belongs to the document.
-    if (!window.confirm('Clear all ' + steps.length + ' steps and the saved paths? This cannot be undone.')) return;
+    //
+    // COUNTING THE RIGHT DOCUMENT IS A SECOND QUESTION, and steps.length answered
+    // the wrong one: it is every step in the file, so a reader who had been shown
+    // 14 was asked to confirm clearing 39. Deriving a number does not make it
+    // true — it makes it true OF WHATEVER YOU COUNTED. The reset clears every
+    // route's ticks, including the ones this route never displayed, so it says
+    // both numbers when they differ rather than picking the flattering one.
+    var shown = steps.filter(function (s) { return s.li.dataset.off !== '1'; }).length;
+    var what  = shown === steps.length
+              ? 'all ' + steps.length + ' steps'
+              : 'all ' + shown + ' steps on this route, and the ' + (steps.length - shown) + ' on the others';
+    if (!window.confirm('Clear ' + what + ', and the saved paths? This cannot be undone.')) return;
     for (var k in state) delete state[k];
     save();
     for (var sk in skipped) delete skipped[sk];
