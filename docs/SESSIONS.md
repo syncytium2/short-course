@@ -2064,3 +2064,15 @@ risks in the file.
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Tonys-MacBook-Pro/59c48a26 — Cold Start beginner read: undefined jargon (remote, commit, push, nameserver, zone, WHOIS, certificate), route/road collision, forward references in the door, and three dangling cross-references my own tier edits created
+- **Status:** DONE 2026-09-01
+- **Opened:** 2026-09-01
+- **Branch when opened:** `cold-start-tier-repair` — a fact, not an identity; it may move under you
+- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
+- **Notes:** <anything another session must know before touching the same thing>
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
