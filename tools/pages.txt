@@ -5,6 +5,6 @@
 docs/handouts/four-barriers.html      site/index.html               
 docs/handouts/cold-start.html         site/cold-start.html          cold-start
 docs/handouts/what-it-costs.html      site/what-it-costs.html       what-it-costs
-docs/handouts/enough-git.html         site/enough-git.html          enough-git
+docs/handouts/just-enough-git.html    site/just-enough-git.html     just-enough-git
 docs/handouts/search-to-shipped.html  site/search-to-shipped.html   search-to-shipped
 docs/handouts/show-it-your-screen.html site/show-it-your-screen.html show-it-your-screen
