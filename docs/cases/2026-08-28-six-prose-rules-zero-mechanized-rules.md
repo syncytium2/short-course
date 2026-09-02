@@ -1,4 +1,4 @@
-<!-- Case study, imported 2026-08-28. Evidence: commits and files in syncytium2/interface2, which is PRIVATE (GitLab). The SHAs cited here cannot be resolved by an outside reader — said again, visibly, in the banner below, because a limit stated only in a comment is not stated. -->
+<!-- Case study, imported 2026-08-28. Evidence: commits and files in `interface2`, a PRIVATE repository on GitLab. Its namespace is deliberately not given here — this repo is public and the repo is invite-only. The SHAs cited here cannot be resolved by an outside reader — said again, visibly, in the banner below, because a limit stated only in a comment is not stated. -->
 
 # Six prose rules broken, zero mechanized rules broken — in one session
 
@@ -29,7 +29,7 @@
 > applies.
 >
 > **⚠ Verifiable by the author, and by nobody else — added 2026-08-30.** Every artifact in
-> the next list lives in `syncytium2/interface2`, which is **private**, on GitLab. If you are
+> the next list lives in `interface2`, which is **private**, on GitLab. If you are
 > reading this in a public repository, **you cannot resolve one of those SHAs**, and the list
 > below offers a check you are not in a position to run. This is the only case file here with
 > that weakness: every other one cites `syncytium2/bugarach` or `syncytium2/murderboard`, both

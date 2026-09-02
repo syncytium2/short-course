@@ -197,8 +197,9 @@ author's writing did in the four hours it took.
    across 10**, silently counting `nvm` — nvm-sh/nvm, vendored on this machine — as an
    estate repository and its *Common Gotchas* as our backlog. Restricting to the org then
    reclassified **`interface2`** as third-party, because the estate is not one forge:
-   `bugarach` and `armory` are `github.com/syncytium2` while `interface2` — the repo
-   `bugarach` vendors its session protocol *from* — is `gitlab.com/defazio`. **Both wrong
+   `bugarach` and `armory` are on `github.com/syncytium2` while `interface2` — the repo
+   `bugarach` vendors its session protocol *from* — is on a private GitLab namespace
+   deliberately not named here. **Both wrong
    versions printed a confident number**, which is the failure mode of every count in this
    folder. Now three buckets, the third being *no origin, cannot tell*. True figure: **65
    across 8**, plus 1 undecidable and 2 third-party, listed and excluded rather than dropped.
