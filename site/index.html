@@ -641,7 +641,7 @@
       <p class="eyebrow">It Looked Right &middot; for researchers</p>
       <h1>Using coding agents today and tomorrow</h1>
       <p class="standfirst"><b>Coding is no longer the barrier. <a href="#communication" data-view="communication">Four challenges remain.</a></b> Each is set out with the incidents that produced it.</p>
-    <p class="pv">Version <b>0.1.65</b> &middot; 1 Sep 2026<span class="pv-born">First published 28 Aug 2026</span></p>
+    <p class="pv">Version <b>0.1.67</b> &middot; 2 Sep 2026<span class="pv-born">First published 28 Aug 2026</span></p>
       <!-- The locator that replaces the deck once you are inside a pane. Both segments are
            written by show() from the page itself, never from a list kept alongside. -->
       <p class="mast-where"><a class="mw-home" href="#overview" data-view="overview">It Looked Right</a><span class="mw-group"></span><span class="mw-title"></span></p>
@@ -764,19 +764,12 @@
         <p><b>Use the depth control, top right.</b> <b>Headlines</b> is the top of every section &mdash; about fifteen minutes for the whole page, and one to three for any single section. <b>+ incidents</b> opens the expandable notes underneath them &mdash; most are worked failures, the rest the reasoning that came out of them and the objections raised against them. <b>+ sources</b> adds a provenance line to every section and every incident: where it came from, whether anyone independently checked it, and what is still unverified.</p>
         <p>That control exists because these incidents have very different explanation costs. One is a paragraph of setup; another needs twenty minutes before it makes sense. In a fixed-length talk that forces you to drop the expensive ones. Here it just changes which depth you are reading at.</p>
 
-        <details class="more">
-          <summary>Why people think AI is a waste of time <span class="cost">2 min</span></summary>
-          <div class="inner">
-            <p><b>Confusing the tiers is how people decide AI is a waste of time.</b> A researcher rebuilding a figure wanted its axis labels recomputed on a log scale. They put it to a web search, got nothing they could use, and came back with a verdict: <i>AI is stupid &mdash; it can&rsquo;t do this simple task.</i></p>
-            <p>They were right about what happened and wrong about what it meant. They had asked the tier that returns links to do arithmetic on their numbers. The third tier is the one that can <i>run</i> a calculation rather than describe one.</p>
-            <p>The third is a different kind of thing, with a different failure mode &mdash; and <b>a verdict of &ldquo;this is a waste of time&rdquo; is often a tier mismatch rather than a limit of technology.</b></p>
-          </div>
-        </details>
+        <p><b>If you have already tried this and concluded it was a waste of time</b>, that objection is answered where the others are, in <a href="#objections" data-view="objections">Objections</a> &mdash; including the part of it that is right.</p>
 
 
 
 
-        <div class="prov"><b>Source.</b> The axis anecdote is <b>loosely based on a real incident</b> &mdash; the person, the field and the figure are changed and the exchange is reconstructed. It is the one item on this page that is not a record. Every other incident is real and traceable; the named failures are the author&rsquo;s own. Thesis, escalation and the four challenges: <span class="path">course-outline-external.md</span> (514 words, written to be circulated) and <span class="path">points.md</span> &sect;A. The three panels are the <b>Expanding Brain</b> meme &mdash; originating on Reddit’s r/dankmemes, 31 January 2017; the underlying photographs are third-party stock whose copyright holders are not publicly identified, and it is used here unmodified as a meme template. <b>It is decorative and carries no information</b> &mdash; the argument is in the text under each panel. Four original replacements were drawn and rejected; the format is the joke, and the joke was the point. Escalation strip originates in the companion runbook, <span class="path">docs/handouts/search-to-shipped.html</span>, and was <b>expanded here on 2026-08-28</b> &mdash; each tier now carries its named examples, because &ldquo;search / chat / agent&rdquo; alone is too terse to land on a reader who suspects this is a waste of time. The runbook still carries the short form.</div>
+        <div class="prov"><b>Source.</b> The one item on this page that is not a record is the axis anecdote, which now sits in <a href="#objections" data-view="objections">Objections</a> and is labelled there. Every other incident is real and traceable; the named failures are the author&rsquo;s own. Thesis, escalation and the four challenges: <span class="path">course-outline-external.md</span> (514 words, written to be circulated) and <span class="path">points.md</span> &sect;A. The three panels are the <b>Expanding Brain</b> meme &mdash; originating on Reddit’s r/dankmemes, 31 January 2017; the underlying photographs are third-party stock whose copyright holders are not publicly identified, and it is used here unmodified as a meme template. <b>It is decorative and carries no information</b> &mdash; the argument is in the text under each panel. Four original replacements were drawn and rejected; the format is the joke, and the joke was the point. Escalation strip originates in the companion runbook, <span class="path">docs/handouts/search-to-shipped.html</span>, and was <b>expanded here on 2026-08-28</b> &mdash; each tier now carries its named examples, because &ldquo;search / chat / agent&rdquo; alone is too terse to land on a reader who suspects this is a waste of time. The runbook still carries the short form.</div>
       </section>
 
       <!-- ============ COMMUNICATION ============ -->
@@ -1103,6 +1096,22 @@
           <p class="lede">The things a sceptical reader says out loud, in the words they arrive in rather than in a polite paraphrase. <b>Several of them are right</b>, and one was right about a claim this material actually made and has now withdrawn.</p>
         </div>
 
+        <h3>&ldquo;I tried it, and it was a waste of time&rdquo;</h3>
+        <p class="quote">&ldquo;I asked it to do one simple thing and it couldn&rsquo;t. AI is stupid. Why would I give a day to a toy?&rdquo;</p>
+        <p><b>A great deal of that verdict is earned, and most of this page is a catalogue of how.</b> An agent reports success it did not have (<a href="#validation" data-view="validation">Validation</a>), explains itself fluently in a way that stops you checking (<a href="#communication" data-view="communication">Communication</a>), and will absorb every hour you give it improving something that already worked (<a href="#asymptote" data-view="asymptote">challenge 4</a>). Anyone who has lost an afternoon to one of those and concluded it was not worth it has counted correctly.</p>
+        <p><b>But that is not usually where the verdict comes from.</b> It normally arrives at the first attempt, against the wrong tool. The three things in the strip on the <a href="#overview" data-view="overview">landing view</a> are not grades of one product: a web search returns links, a chatbot returns text that <i>you</i> then have to carry somewhere and run, and only the third acts on your machine at all. Ask the first to do arithmetic on your numbers and it will fail, correctly, at something it was never able to do.</p>
+        <p><b>Both of those afternoons feel identical, and only one of them tells you what to do next.</b> &ldquo;This is a waste of time&rdquo; and &ldquo;I used the tier that cannot do this&rdquo; are not the same finding, and the second is cheap to rule out before you reach the first.</p>
+
+        <details class="more">
+          <summary>The verdict that was a tier mismatch <span class="cost">2 min</span></summary>
+          <div class="inner">
+            <p>A researcher rebuilding a figure wanted its axis labels recomputed on a log scale. They put it to a web search, got nothing they could use, and came back with a verdict: <i>AI is stupid &mdash; it can&rsquo;t do this simple task.</i></p>
+            <p>They were right about what happened and wrong about what it meant. They had asked the tier that returns links to do arithmetic on their numbers. The third tier is the one that can <i>run</i> a calculation rather than describe one.</p>
+            <p><b>The tell is the shape of the failure.</b> A tier mismatch fails immediately and completely, on something that sounded easy. The failures the four challenges are about look nothing like that &mdash; they arrive as finished work with a confident account of itself, and they cost you time precisely because they did not fail.</p>
+            <div class="prov"><b>Source.</b> The axis anecdote is <b>loosely based on a real incident</b> &mdash; the person, the field and the figure are changed and the exchange is reconstructed. <b>It is the one item on this page that is not a record.</b> It moved here from the landing view on <b>2026-09-02</b> and this line moved with it, because a section otherwise built from GitHub API reads, commit hashes and an ORCID is the worst place on the page to carry an unlabelled illustration. The three tiers and their named examples: the escalation strip on the <a href="#overview" data-view="overview">landing view</a>, which comes from <span class="path">docs/handouts/search-to-shipped.html</span>.</div>
+          </div>
+        </details>
+
         <h3>&ldquo;A vibe coder gone wild&rdquo;</h3>
         <p class="quote">&ldquo;Five sites, a home-made review process, a &lsquo;course&rsquo; nobody asked for &mdash; this is a vibe coder gone wild.&rdquo;</p>
         <p><b>Here is that objection made as strongly as it can be made, before any answer to it.</b> An easy version would be easy to knock down and would prove nothing. Every public repository behind those sites was created in the last ten weeks. All of them have zero stars, zero forks and no contributors outside the author&rsquo;s own two accounts and an agent. Most of the code and much of the prose was written by an agent, including this sentence&rsquo;s first draft. <b>And commit counts are not evidence</b> &mdash; a machine produces a thousand commits cheaply, so the four-figure number on one of those repositories proves activity and nothing else.</p>
@@ -1246,11 +1255,12 @@
 
         <p><b>Git is the program that does the recording.</b> It runs on your own machine, keeps the entire history there, and asks you for a one-line reason each time you save a checkpoint.</p>
 
-        <p><b>Three commands to start</b>, and it is worth knowing what each one is before you type it:</p>
+        <p><b>Commands to get started</b>, and it is worth knowing what each one is before you type it:</p>
         <ul>
           <li><span class="path">commit</span> &mdash; save a checkpoint, with your one-line reason attached.</li>
           <li><span class="path">diff</span> &mdash; show me exactly what changed: which lines, in which files. This is the one <a href="#validation" data-view="validation">Validation</a> asks you to read.</li>
           <li><span class="path">log</span> &mdash; show me every checkpoint so far, and why each one was made.</li>
+          <li><span class="path">push</span> &mdash; send the checkpoints to the copy that is not on this laptop. Until you run it, every commit you have made exists in exactly one place.</li>
         </ul>
 
         <h3>Where the copy lives</h3>
@@ -1486,17 +1496,17 @@
         <div class="view-head">
           <p class="eyebrow">Evidence</p>
           <h2 id="h-record">How this was made</h2>
-          <p class="lede">The material above claims a machine will be confidently wrong and the skill is knowing how to check. <b>Making it produced an unusually clean demonstration of exactly that</b> &mdash; in four layers, none of them staged.</p>
+          <p class="lede">The material above claims a machine will be confidently wrong and the skill is knowing how to check. <b>Making it produced an unusually clean demonstration of exactly that</b> &mdash; in four layers, none of them staged. <b>An AI coding agent wrote every one of the four</b>, including the layer whose whole job was catching the layer before it.</p>
         </div>
 
         <div class="tw">
           <table>
             <thead><tr><th>Layer</th><th>What happened</th></tr></thead>
             <tbody>
-              <tr><td class="num"><b>1</b></td><td>The working session made four unchecked numerical claims and got them wrong.</td></tr>
-              <tr><td class="num"><b>2</b></td><td>Its own scorecard counted those four, concluded they were all the same kind &mdash; <i>&ldquo;a plausible claim, stated confidently, that nobody had checked&rdquo;</i> &mdash; and in the act of counting made <b>four more of exactly that kind</b>, unnoticed.</td></tr>
-              <tr><td class="num"><b>3</b></td><td>The outline carried all of them forward, and separately wrote a competitive analysis in which <b>no claim could have failed</b> &mdash; three screens from a section arguing that suspicion without a method is just anxiety.</td></tr>
-              <tr><td class="num"><b>4</b></td><td>An eleven-role adversarial review caught them by recomputing every number against the repository.</td></tr>
+              <tr><td class="num"><b>1</b></td><td><b>An <a href="#overview" data-view="overview">AI coding agent</a>, in the working session that started this</b>, made four unchecked numerical claims and got them wrong.</td></tr>
+              <tr><td class="num"><b>2</b></td><td><b>The same agent then scored its own work.</b> It counted those four, concluded they were all the same kind &mdash; <i>&ldquo;a plausible claim, stated confidently, that nobody had checked&rdquo;</i> &mdash; and in the act of counting made <b>four more of exactly that kind</b>, unnoticed.</td></tr>
+              <tr><td class="num"><b>3</b></td><td><b>The outline, also written by an agent</b>, carried all of them forward, and separately made a competitive analysis in which <b>no claim could have failed</b> &mdash; three screens from a section arguing that suspicion without a method is just anxiety.</td></tr>
+              <tr><td class="num"><b>4</b></td><td><b>An adversarial review &mdash; agents again, not people &mdash;</b> caught them by recomputing every number against the repository. Eleven roles, a separate checklist each.</td></tr>
             </tbody>
           </table>
         </div>
