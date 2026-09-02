@@ -1973,3 +1973,71 @@ terms. Sent 2026-09-01 with the N7 diagnosis; see armory's `HANDOFF.md`.
 alarm needs the human to predict the event and remember to arm it, and the rename also happens
 on wake and on joining a different network without going anywhere. It is a tier-2 notice for
 something with a tier-4 fix already written down and untaken.
+
+---
+
+## Session close, 2026-09-02 — `Tonys-MacBook-Pro/59c48a26`
+
+**Everything below is merged to `master`, pushed, and deployed. `tools/site_staleness.sh`
+says every page matches the checkout.** Cold Start is 0.1.41. No claims of mine are open and
+no worktrees of mine are left.
+
+### What shipped
+
+| | |
+|---|---|
+| **Cold Start's tier filter was not hiding anything** | `[data-off="1"] { display: none }` is one class-level selector; `.links { display: flex }` beat it on source order and `ul.checks > li { display: flex }` on specificity. The browser route was showing the laptop route's link row **and all three of 7.3's laptop-route boxes, including the one demanding a terminal tool** — the defect 7.3 had been repaired for the day before. Every attribute-based check passed throughout: `data-off` was set correctly and the counts were right; the elements were simply still rendered. Now `!important`, and `browser_check` asserts computed style per route. |
+| **`why?` on all 115 boxes** | What goes wrong if the box is not true, never a restatement. 46 of them carry a pasteable **Ask it:** cue; the other 69 have none, because a form on a website has no prompt that helps. |
+| **The starter-project generator** | Was inside W2's fold, now above the five steps. 25 ideas, and **one draw in three is blue sky** — the pool is drawn first and the idea second, so the ratio holds however unevenly the lists are filled. |
+| **`Just Enough Git`** | New sixth sheet at `/just-enough-git`. Vocabulary chosen by counting the handouts (`repository` 80, `commit` 37, `remote` 13). Names the six things it leaves out and says outright that it never becomes enough. |
+| **CI** | `.github/workflows/ci.yml` and `site-staleness.yml`. See below. |
+
+### CI is the thing to know about
+
+There was none, and no commit had ever mentioned it — it was never decided against, it just
+never got made. The siblings had it: `bugarach` has both a `ci.yml` and a `site-staleness.yml`,
+and `murderboard` a `ci.yml`. **Read bugarach's before changing ours.**
+
+`ci.yml` runs every gate on push and PR, ~1–5 min. `hook_audit.py` is deliberately excluded:
+it reads `~/Developer` on the machine it runs on, so in a runner it reports an empty estate
+and calls it clean.
+
+**It found four real defects, three of them within minutes of existing:**
+
+1. A `mutation_check` mutation had been unable to apply for a day — my change to
+   `build_site.sh`'s step regex. It said ERROR, correctly, and nothing ran it.
+2. `check_pointers` was auditing playwright's README. `node_modules/` is gitignored and
+   absent from a laptop that borrows playwright from a sibling, so it walked a clean tree
+   for weeks.
+3. `session_identity.sh --selftest` could only pass **inside a Claude session** — it asserted
+   its resolver exits 0, and the resolver returns 1 on the no-session fallback. On a runner
+   the baseline was red, so both mutations aimed at that tool came back ERROR.
+4. The push interlock's **N6 case skipped when there was no second worktree**. This laptop
+   always has several; a runner checks out once, printed a skip, and the selftest said PASS
+   with the interlock defanged. It now builds its own worktree and treats being unable to
+   run as a failure.
+
+**CI does not deploy, and that is a decision, not an omission.** A Cloudflare token in a
+public repo's secrets is publish rights for anything that can run an Action. `site-staleness`
+reports the gap and never fails the build. It earned itself immediately: on the last merge it
+reported *"1 of 6 pages behind"* before the deploy — the gap that used to be invisible.
+
+### Carried forward
+
+- **Step numbering is still untouched, and it is still Tony's call.** Filtered, the browser
+  route reads 1.1, 1.2, W1–W5, 5.1, 5.2, 7.1–7.5, and the phase headings jump 1 → unnumbered
+  → 5 → 7. Numbering at render time closes it and breaks every cross-reference in the prose,
+  which are stable today *because* the numbers are. Do not renumber without deciding what
+  happens to those first.
+- **Nobody has walked the laptop or cluster routes.** The browser route was walked once, on
+  2026-08-30, before all of this. `tier_check` proves a route can be *finished*; it cannot
+  prove a step is *true*.
+- **`Just Enough Git` has never been murderboarded.**
+
+### One thing this session did not do, on purpose
+
+It did not claim before appending here, and did not touch `docs/SESSIONS.md`. Session
+`9bf3acb0` holds an active claim on `OPEN-FINDINGS.md` and has uncommitted edits to
+`SESSIONS.md` in the shared checkout. `claim.sh` writes to that same file, so claiming would
+have meant committing somebody else's in-flight work — the sweep this board warns about. Only
+`HANDOFF.md` is in this commit.
