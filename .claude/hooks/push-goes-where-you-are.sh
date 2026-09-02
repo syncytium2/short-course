@@ -130,13 +130,41 @@ if [ "${1:-}" = "--selftest" ]; then
     # place the old premise held, so seven-of-seven stayed green through the whole defect.
     OTHER_WT=$(git worktree list --porcelain 2>/dev/null \
                | sed -n 's/^branch refs\/heads\///p' | grep -vx "$B" | head -1)
+    # IT USED TO SKIP WHEN THE MACHINE HAD NO SECOND WORKTREE, AND THAT IS HOW IT WENT
+    # QUIET. On a laptop with worktrees open the case ran and this interlock was watched.
+    # On a CI runner, which checks out exactly once, it printed `skip` and the selftest
+    # still said PASS -- so mutation_check defanged this very interlock there and scored
+    # MISSED where it scores `caught` at home.
+    # A case that only runs where its author happens to be standing is the same shape as
+    # the N6 defect it was written for: every case ran in the shared checkout, the one
+    # place the old premise held, and seven-of-seven stayed green through the whole thing.
+    # So it now makes its own second worktree when there is not one, and takes it away
+    # again. Not being able to run is a failure, not a skip.
+    N6_TMP=""; N6_BRANCH=""
+    if [ -z "$OTHER_WT" ]; then
+        N6_TMP=$(mktemp -d) || N6_TMP=""
+        if [ -n "$N6_TMP" ]; then
+            N6_BRANCH="n6-selftest-$$"
+            if git worktree add -q -b "$N6_BRANCH" "$N6_TMP/wt" >/dev/null 2>&1; then
+                OTHER_WT="$N6_BRANCH"
+            else
+                rm -rf "$N6_TMP"; N6_TMP=""
+            fi
+        fi
+    fi
     if [ -n "$OTHER_WT" ]; then
         chk "a refspec checked out in ANOTHER worktree is allowed" \
             0 "$(run "{\"tool_input\":{\"command\":\"git push origin $OTHER_WT\"}}")"
     else
-        printf '  skip  no second worktree here, so the N6 case cannot be exercised\n'
-        printf '        (open one with tools/worktree.sh and re-run — this is the case\n'
-        printf '         whose absence let N6 ship)\n'
+        printf '  FAIL the N6 case could not be exercised, and it is not skippable\n'
+        printf '       (no second worktree, and none could be created — this is the case\n'
+        printf '        whose absence let N6 ship, so silence here is a failure)\n'
+        fail=1
+    fi
+    if [ -n "$N6_TMP" ]; then
+        git worktree remove --force "$N6_TMP/wt" >/dev/null 2>&1
+        [ -n "$N6_BRANCH" ] && git branch -D "$N6_BRANCH" >/dev/null 2>&1
+        rm -rf "$N6_TMP"
     fi
 
     # ---- interlock 2, in a scratch repo, because THIS repo has worktrees and the

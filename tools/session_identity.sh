@@ -111,7 +111,17 @@ if [ "${1:-}" = "--selftest" ]; then
     }
 
     v=$(sc_machine); t "machine resolves" 0 $? "$v"
-    v=$(sc_session_address); t "address resolves" 0 $? "$v"
+
+    # THE EXPECTED EXIT DEPENDS ON WHETHER THERE IS A SESSION, and this asserted 0 flat.
+    # sc_session_address returns 1 when it fell back to the placeholder -- its own contract,
+    # stated forty lines above -- so the assertion held only inside a Claude session. On a
+    # machine that always has one it is always green, which is how it survived until CI ran
+    # it on a runner that has none: both mutations aimed at this tool came back ERROR rather
+    # than caught, because the baseline was already red.
+    # A selftest that can only pass in the environment it was written in has not been shown
+    # to test anything. It has been shown to agree with one machine.
+    if [ -n "${CLAUDE_CODE_SESSION_ID:-}" ]; then want_rc=0; else want_rc=1; fi
+    v=$(sc_session_address); t "address resolves" "$want_rc" $? "$v"
 
     # the address must contain a slash and no spaces, or a board block cannot be
     # grepped for it
@@ -134,7 +144,13 @@ if [ "${1:-}" = "--selftest" ]; then
     # and a mutation on 2026-08-28 proved it: the address was replaced with XXX/XXX and
     # this selftest still said PASS. A shape assertion cannot fail in the direction the
     # function exists for.
-    want="$(hostname -s)/$(printf '%s' "${CLAUDE_CODE_SESSION_ID:-}" | cut -c1-8)"
+    # The independent derivation has to apply the SAME fallback the tool does, or off-session
+    # it computes "host/" against the tool's "host/no-session-id" and reports a mismatch that
+    # is the check's own arithmetic rather than a defect.
+    if [ -n "${CLAUDE_CODE_SESSION_ID:-}" ]
+      then want="$(hostname -s)/$(printf '%s' "$CLAUDE_CODE_SESSION_ID" | cut -c1-8)"
+      else want="$(hostname -s)/no-session-id"
+    fi
     got="$(sc_session_address)"
     if [ "$got" = "$want" ]; then printf '  ok   (0) address IS machine/session: %s\n' "$got"
     else printf '  FAIL address is "%s", independently derived is "%s"\n' "$got" "$want"; fail=1; fi
