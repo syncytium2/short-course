@@ -1771,13 +1771,24 @@ separately. *"Is that true?"* misses it. *"Is that the reason?"* catches it.
    - **Winding down all sessions is not warranted.** The only item wanting a quiet repo is
      01+02, and what it wants is *one fresh session*, not a shutdown — and it is blocked anyway.
 
-3. **The philosophy section is real, located, and still unimported.** Tony reported the #416 case
-   *"prompted a whole discussion in the philosophy section."* This session never saw it and said
-   so on the case file, in the darkroom, and in `points.md` C1. **It has since been located:**
-   the `kreuz-extraction` work — `docs/cases/2026-08-24-the-email-contained-no-new-information.md`
-   — *"proposes one line for the philosophy section, proposed not applied."* There is a
-   `kreuz-extraction` worktree in this repo. **If that discussion settles anything it settles it
-   against the C1 entry**, not against the case file, because that is where the point now lives.
+3. ~~**The philosophy section is real, located, and still unimported.**~~ **CLOSED 2026-09-02 —
+   and it was already closed when this item was written.** Tony had answered on 2026-08-31:
+   *"philosophy section is my own pandoras box. musings to relax the soul."* It is **his,
+   off-repo by design, and nothing here can be filed into it.** The two flags that read as
+   unfinished business — `points.md` C1 and the irony case — are **correct and permanent, not a
+   gap to close.** Do not import it, index it, or write toward it.
+
+   **Why it was reopened anyway, which is the reusable part.** The answer was sitting on the
+   `kreuz-extraction` branch, in a commit whose message said it had corrected `points.md` C1 and
+   the irony case. **It had touched neither** — only `docs/cases/README.md` and the case file.
+   So a session checking C1 on master saw the flag unqualified and reasonably concluded the
+   question was open. **A commit message is not a record of what changed**; the diff is, and the
+   two disagreed for 21 hours. The settlement now lives in
+   [`docs/cases/README.md`](docs/cases/README.md), on master, where the flags point.
+
+   **The `kreuz-extraction` branch and worktree are gone.** They held a third party's private
+   email verbatim and had been pushed to the **public** remote by omission. See the same
+   `docs/cases/README.md` section for the rule that replaced them.
 
 4. **The `bugarach` session that wrote the #416 aside was never asked** whether its own background
    watch later reported the merge and corrected the record. If it did, this is a four-minute error

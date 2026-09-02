@@ -30,6 +30,67 @@ for the room. Explanation cost is a real budget and the course has a fixed amoun
 so the audience call is recorded on the file rather than re-argued each time someone
 finds the case and thinks it is too good to leave out.
 
+## ⚠ The classification this folder does not have — `philosophy`
+
+**Tony, 2026-08-31, asking whether the cases are "clearly marked as philosophy":** *"that's how
+i think of it, a class of case."* **They are not marked, and there is no field to mark them
+in.** Recorded here rather than fixed, because the taxonomy is his and inventing one would be
+the same error as the charter question above.
+
+What a case actually carries today is a **provenance** line (an HTML comment: written-by,
+imported-or-native, whether an outside reader can check the evidence) and an **audience** note.
+The index's Audience column is doing four jobs at once — reading time, vocabulary needed, which
+`points.md` letter it lands under, and review status — and **none of those is a class.** No
+frontmatter, no tags, no `class:` field, in any of the sixteen files.
+
+Two things to settle before anything is marked:
+
+1. **What `philosophy` means as a class.** The working guess, unconfirmed: *the payload is a
+   claim about knowledge or judgment that survives deleting every mechanism in the case* — the
+   incident is the evidence, not the subject. On that reading the candidates are
+   [`the-weakest-fix-is-the-most-available`](2026-08-28-the-weakest-fix-is-the-most-available.md),
+   [`every-number-was-right`](2026-08-27-every-number-was-right.md),
+   [`the-irony-was-the-only-unchecked-claim`](2026-08-30-the-irony-was-the-only-unchecked-claim.md)
+   and [`nothing-was-missing-and-it-could-not-be-found`](2026-08-30-nothing-was-missing-and-it-could-not-be-found.md).
+   **Nobody has confirmed this list.** A fifth candidate is not in this folder and cannot be —
+   see the note below.
+2. ~~**Whether it is the same "philosophy" already in this repo.**~~ **ANSWERED by Tony,
+   2026-08-31:** *"philosophy section is my own pandoras box. musings to relax the soul."*
+
+   The word is flagged twice here — in [`points.md`](../../points.md) C1 and in the
+   [irony case](2026-08-30-the-irony-was-the-only-unchecked-claim.md) — as **"not in this repo
+   and has not been imported."** **Those flags are correct and permanent, not a gap anyone
+   should close.** The philosophy section is his, it is off-repo by design, and **no session
+   should try to import it, index it, or write toward it.** A future session finding those two
+   flags will read them as unfinished business; they are not. One already did, on 2026-09-01,
+   and wrote *"still unimported"* into the root handoff as an open thread — which is why this
+   paragraph is here rather than in a commit message.
+
+   So the class and the room are related but not the same, and the difference is the useful
+   part: `philosophy` on a case marks **how it reads** — worth sitting with rather than
+   teaching from — and **not where it goes.** Where a case goes is still `points.md`.
+
+### The case this section was written for is not in this folder
+
+The candidate that prompted all of the above — an imported case about a colleague's 209-word
+reply that produced ~1,000 lines of verified findings — **is held privately and is not indexed
+here.** It quotes a named third party's private correspondence in full, and on 2026-09-01 it
+was found pushed to this repository's **public** remote on a stale branch, by omission rather
+than by decision. The branch was deleted the same day.
+
+**The rule that came out of it, which is the part worth having:** our own work is public
+because a record nobody can open cannot make a claim checkable. That argument does not extend
+to other people's words. **Material quoting or naming someone who did not choose to be
+published does not enter this repository at all** — not on master, not on a branch — so there
+is no promotion step left to forget. It reaches the course only as a de-identified
+generalisation, by an explicit call.
+
+The generalisation in this instance needs no email and no name: **correspondence is a test, not
+context.** Give an agent the things that are *not* about your code — a reviewer's note, a
+colleague's description of their own method — and it reads them as background. They are
+specifications. It has **no home in [`points.md`](../../points.md) yet**, and writing one is the
+open work.
+
 ## Known-wrong content
 
 [`OPEN-CORRECTIONS.md`](OPEN-CORRECTIONS.md) lists statements in **committed** cases that are
