@@ -638,7 +638,7 @@
     <p class="eyebrow"><a href="/" class="home">&larr;&nbsp;It Looked Right</a> &middot; Setup runbook &middot; keep this window open</p>
     <h1>Cold Start</h1>
     <p class="standfirst">An email address to a first agent session that leaves a record behind it. Pick one of three routes &mdash; nothing installed, your own laptop, or a cluster shared with other people &mdash; and get every step it needs in order, with the condition that tells you each one worked.</p>
-    <p class="pv">Version <b>0.1.39</b> &middot; 2 Sep 2026<span class="pv-born">First published 29 Aug 2026</span></p>
+    <p class="pv">Version <b>0.1.40</b> &middot; 2 Sep 2026<span class="pv-born">First published 29 Aug 2026</span></p>
   </header>
 
   <div class="method">
@@ -1169,6 +1169,7 @@ claude</pre>
             <p class="why">Learning the command now costs a minute. Learning it at the moment you need it means you have already lost whatever was running.</p>
             <pre>caffeinate -dimsu     # macOS, built in, no install</pre>
             <p class="why"><a href="https://apps.apple.com/us/app/amphetamine/id937984704?mt=12">Amphetamine</a> is the free app version, and the one that keeps going with the lid shut. Windows: PowerToys Awake. Linux: <code>systemd-inhibit</code>.</p>
+            <div class="warn"><b>Closing the lid and carrying the laptop somewhere else are two different things, and the second one has a cost.</b> The work survives the move &mdash; that is what you installed this for. What does not survive is <b>your machine&rsquo;s name</b>. On macOS the short hostname follows the network, so joining the wi-fi at home renames the computer, and anything that wrote down which machine you were on before the move stops matching what it finds after.<br><br><b>It is not the session that changes, and getting this backwards is what makes it hard to spot.</b> The session and its id are exactly the same ones. The machine half of the pair is what moved, so a tool looking for <i>this session on this machine</i> finds nothing and truthfully reports nothing &mdash; not an error, not a warning, just an empty answer to a question you were sure had one. <b>You will read that as your own work having vanished.</b> It has not.<br><br><b>What to do:</b> after you change networks, re-check anything that identified your machine before you moved, rather than trusting an empty result. And if this starts costing you, the durable fix is giving the machine a fixed name of its own so it stops following the network &mdash; <b>which is not a step on this sheet and has not been walked here</b>, so treat it as a thing to look up rather than a thing to type.</div>
             <p class="why"><b>If you ever do have a run that takes hours</b>, this is also the thing to try before concluding you need a cluster. A good share of people asking for one need the machine to stay awake instead, and that is a minute of work against a requisition that takes weeks.</p>
         </div>
         <ul class="checks">
