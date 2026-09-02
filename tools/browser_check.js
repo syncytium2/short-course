@@ -79,6 +79,15 @@ function check(name, got, want) {
   ok ? pass++ : fail++;
 }
 
+// For claims of the form "there is some", where an exact count is a fact about the page on
+// the day the check was written and not about the behaviour being checked.
+function checkAtLeast(name, got, min) {
+  const ok = typeof got === 'number' && got >= min;
+  console.log(`  ${ok ? 'ok  ' : 'FAIL'} ${name}` +
+    (ok ? '' : `\n         got  ${JSON.stringify(got)}\n         want >= ${min}`));
+  ok ? pass++ : fail++;
+}
+
 // The expected visible-step counts are DERIVED from the source, never typed.
 // A typed number here would go stale the first time a step changes tiers, and
 // this file would then be asserting a fact about a document that no longer
@@ -130,11 +139,23 @@ const server = http.createServer((req, res) => {
   await page.click('.tierpick[data-tier="min"]');
   check('prose for other tiers is hidden, not only steps',
     await page.$$eval('[data-tiers="max"]', els => els.filter(e => e.offsetParent !== null).length), 0);
-  check('this tier\'s own prose is shown',
+  // AT LEAST ONE, not exactly one. This asserted `1` and was true of the page on the day
+  // it was written; the browser-route rewrite added min-only prose and it has read FAIL
+  // ever since, for a page that was behaving correctly. The claim in the name is that the
+  // chosen tier's prose survives the filter -- a count is not that claim, and pinning it to
+  // today's number just schedules the next false failure.
+  checkAtLeast('this tier\'s own prose is shown',
     await page.$$eval('p[data-tiers="min"]', els => els.filter(e => e.offsetParent !== null).length), 1);
 
-  const TICK = 'li[data-key="pick-a-rung"] .cb[data-key="stops-or-bills"]';
-  await page.click('li[data-key="pick-a-rung"] .head');
+  // Was .cb[data-key="stops-or-bills"], a checkbox the rewrite deleted. page.click on a
+  // selector that matches nothing does not fail fast -- it waits 30s and THROWS, which
+  // ended the run here and took the seven checks below it with it.
+  // ONE PLACE. The old key lived here AND again in the localStorage assertion below, and
+  // fixing the selector without the second copy just moves the failure four checks down.
+  const TICK_STEP = 'pick-a-rung';
+  const TICK_BOX = 'rung-picked-highest-reachable';
+  const TICK = `li[data-key="${TICK_STEP}"] .cb[data-key="${TICK_BOX}"]`;
+  await page.click(`li[data-key="${TICK_STEP}"] .head`);
   await page.click(TICK);
   const ticked = () => page.$eval(TICK, e => e.getAttribute('aria-pressed'));
   check('a tick registers', await ticked(), 'true');
@@ -151,7 +172,7 @@ const server = http.createServer((req, res) => {
   await page.click('.tierpick[data-tier="max"]');
   const stored = await page.evaluate(() => JSON.parse(localStorage.getItem('cold-start-v4') || '{}'));
   check('a tick earned on a now-hidden tier is still stored',
-    stored['pick-a-rung'] && stored['pick-a-rung']['stops-or-bills'], 1);
+    stored[TICK_STEP] && stored[TICK_STEP][TICK_BOX], 1);
 
   // V3_MAP is frozen: v3's "1.1" meant github-account, boxes addressed by position.
   await page.evaluate(() => {
