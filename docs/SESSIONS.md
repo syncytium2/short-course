@@ -2217,11 +2217,26 @@ risks in the file.
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Tonys-MacBook-Pro/9bf3acb0 — Land the philosophy settlement on master, adapted for the case file that is now private; correct HANDOFF item 3 which tells the next session to import it
-- **Status:** ACTIVE
+- **Status:** DONE 2026-09-02
 - **Opened:** 2026-09-02
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** [`docs/cases/README.md`](cases/README.md) (new `philosophy` section),
+  [`../HANDOFF.md`](../HANDOFF.md) (item 3 of the 2026-09-01 close, closed in place), this block.
+  **Outside git:** created the private repo `syncytium2/short-course-private`.
+- **Notes:** ⚠ **`kreuz-extraction` is deleted — branch, worktree and public remote ref.** It
+  carried a named third party's private email **verbatim** and had been pushed to the **public**
+  `origin` by omission, on a stale non-default branch (0 forks, 0 stars, almost certainly
+  unread). Do not recreate it. All five of its commits are preserved as patches in
+  `short-course-private/kreuz/branch-patches/`, and the case itself lives there.
+  **The rule now written into [`docs/cases/README.md`](cases/README.md):** material quoting or
+  naming someone who did not choose to be published does not enter this repo at all — not on
+  master, not on a branch — so there is no promotion step left to forget.
+  **Do not merge old branches blind.** `kreuz-extraction` was 20+ commits stale and a merge
+  would have silently deleted two 2026-09-01 case rows; the section was adapted by hand instead
+  (sixteen files not fifteen, two flags not three). `check_pointers.sh` passes.
+  **The transferable finding:** commit `5424e41` said it had corrected `points.md` C1 and the
+  irony case. It touched neither. A session trusting the message over the diff reopened a
+  settled question 21 hours later and wrote it into the handoff as live work.
 
 <!-- RELEASE THIS
      tools/claim.sh --release
