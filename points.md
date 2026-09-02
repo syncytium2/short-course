@@ -421,6 +421,44 @@ obtainable by asking rather than by reasoning.
   unrelated artifacts, which makes it a pattern rather than an anecdote and probably a point of
   its own rather than a footnote to B7.**
 
+  ---
+
+  **9 · A cure that lives in one project is not a cure yet, and you will not notice.** B7 says
+  build the long-lasting fix. It does not say the fix has to reach the next project, and that
+  omission is where most of them die. **The count, 2026-09-02, across one person's twelve
+  repositories: of twenty coordination and verification instruments, fourteen existed in
+  exactly one repo.** Only six had ever travelled — **and all six fire by themselves.** Every
+  instrument that had to be *remembered and typed* stayed home.
+
+  *The worked example is this repository, and it is unflattering.* Its running record grew to
+  **2,043 lines**. Three sibling projects had already solved that — split the file into a
+  short briefing and a long archive — and one of them sits at **219 lines** doing more work
+  and being older. Nobody was undisciplined. Every session close here noted the file was too
+  long, in the file, making it longer. **The fix existed, forty lines away in a folder on the
+  same disk, for a week.**
+
+  *What to do about it, and it is smaller than it sounds.*
+
+  - **Before you build a cure, spend two minutes asking whether you already built it.** Not
+    "does a tool exist for this" — *have I solved this, in another folder, and forgotten*. For
+    a scientist with three analysis projects this is the common case, not an edge case: the
+    same date parser, the same file-name sanity check, written three times.
+  - **Prefer the cure that fires without you.** A checklist you must remember is a cure with
+    a human single point of failure, and the count above is what that costs at scale. A hook,
+    a test, a CI step — those travel, because they run whether or not anyone recalls them.
+  - **When you find the earlier version, copy it rather than improve it, and write down where
+    it came from and what you changed.** Both deviations, not the flattering one.
+
+  *And copying is not free, which is the part a beginner should see.* When this project
+  carried in a sibling's milestone checker, the tool arrived **green upstream and immediately
+  red here** — four of its self-tests asserted the *original* project's folder layout rather
+  than the rule under test. Then breaking its central rule on purpose revealed a **fifth**
+  self-test that could never fail: it checked that a bad reference was rejected, but only with
+  a reference so malformed it died one step earlier, so the real rule was never exercised.
+  **The tool had been reviewed by eleven people upstream and already confessed to four rules
+  of exactly that shape.** Carrying it found the fifth — not by reading it, but by breaking it
+  and watching what failed to notice.
+
 - **B8.** DO NOT DO MORE THAN ONE THING AT A TIME IN THE BEGINNING.
 
   *Note.* The temptation is to fill the time between replies with another project. Some people are

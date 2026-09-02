@@ -2266,3 +2266,34 @@ risks in the file.
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Tonys-MacBook-Pro/9bf3acb0 — Add docs/MILESTONES.md with check_milestones.py vendored from bugarach, wire it into CI and the mutation gate, and add the course point about cures that do not travel
+- **Status:** DONE 2026-09-02
+- **Opened:** 2026-09-02
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** [`MILESTONES.md`](MILESTONES.md) (**new**), [`../tools/check_milestones.py`](../tools/check_milestones.py)
+  (**new**, vendored), [`../tools/mutation_check.sh`](../tools/mutation_check.sh) (added `verdict()`
+  plus three rows), [`../.github/workflows/ci.yml`](../.github/workflows/ci.yml) (two steps),
+  [`../points.md`](../points.md) (B7 rule 9), this block.
+  **Outside this repo:** one section appended to `armory`'s `HANDOFF.md` (`960ec35`).
+- **Notes:** **`MILESTONES.md` is the answer to "where are we?"** and did not exist until today.
+  Every row is pinned to an immutable commit and **`check_milestones.py` runs in CI** — a row
+  whose commit is not an ancestor of master, or whose path does not exist, fails the build. Add
+  a row **in the same change as the work it describes**, or it will not resolve.
+  ⚠ **Two rows are `⚠ evidence / open` on purpose** — the unrepaired-findings warning on a
+  published handout, and the passage that went public with no decision. Do not flip either to
+  `current` without the decision behind it; the checker refuses an `evidence` row that asserts
+  its own subject is settled.
+  **`mutation_check.sh` can now test python tools** — `verdict()` dispatches on extension and
+  judges `.py` by exit status. Vendored back from `armory`, whose copy carries the note *"THIS
+  BELONGS UPSTREAM … Send verdict() home."*
+  **Two defects found by carrying the tool, not by reading it:** four of its selftests asserted
+  `bugarach`'s own paths and went red here on first run (now derived from the tree), and the
+  mutation gate then exposed a **fifth rule that could never fire** — ancestry was asserted and
+  never exercised, because the only sha fixture died a step earlier at `cat-file`. Both fixes
+  are worth sending upstream; nobody has.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->

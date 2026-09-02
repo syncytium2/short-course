@@ -42,6 +42,36 @@
 set -u
 cd "$(dirname "$0")/.." || exit 1
 
+# verdict FILE -- run a tool's selftest and print PASS or FAIL, whatever language it is in.
+#
+# WHY THIS EXISTS. Until 2026-09-02 this script ran `sh "$TOOL" --selftest` unconditionally,
+# so a python tool could not be mutation-checked at all: `sh` on a .py file produces a syntax
+# error, the last line is not PASS, and the row reports ERROR baseline rather than covering
+# anything. The suite silently stopped at the language boundary -- which is the failure this
+# file's own header warns about, "we only mutate what is convenient to mutate is how a suite
+# quietly stops covering the part that matters."
+#
+# VENDORED BACK from `armory @ tools/mutation_check.sh`, whose copy carries the note "THIS
+# BELONGS UPSTREAM ... Send verdict() home and delete this note." This is that. One change on
+# the way home: python tools are judged by EXIT STATUS, not by parsing a last line. armory's
+# copy matches *FAIL* against the final line, and check_milestones.py ends its selftest with
+# "selftest: 18 cases, 0 failures" -- lowercase, and containing the word failures on a run
+# with none. A green test would have been read as red, which is the safe direction but is
+# still the check answering a question nobody asked.
+verdict() {
+    case "$1" in
+        *.py)
+            if python3 "$1" --selftest >/dev/null 2>&1; then printf 'PASS\n'; else printf 'FAIL\n'; fi ;;
+        *)
+            _o=$(sh "$1" --selftest 2>/dev/null | tail -1)
+            case "$_o" in
+                *RED*|*FAIL*) printf 'FAIL\n' ;;
+                *PASS*)       printf 'PASS\n' ;;
+                *)            printf '%s\n' "$_o" ;;
+            esac ;;
+    esac
+}
+
 # file @@ find @@ replace @@ what it breaks @@ [selftest to run, if not the file itself]
 #
 # ⚠ NO `;;` AND NO UNBALANCED `)` IN A ROW. Not a style rule — the file stops parsing.
@@ -103,6 +133,9 @@ tools/worktree.sh@@    [ -z "$(git -C "$path" status --porcelain 2>/dev/null)" ]
 .claude/hooks/push-goes-where-you-are.sh@@sed "s/${VERB}.*//"@@sed "s/git push.*//"@@the mention test reads a fixed verb and silently kills interlock 2
 tools/check_dated_ui.sh@@if (ui && !dt) print FN ":" id@@if (0) print FN ":" id@@undated button references are never reported
 tools/check_dated_ui.sh@@s = RSTART; l = RLENGTH@@s = RSTART; l = 1@@steps are swallowed because emit() clobbers RLENGTH
+tools/check_milestones.py@@elif git("merge-base", "--is-ancestor", sha, ref).returncode != 0:@@elif False:@@a row may cite a commit that is on no branch reaching master
+tools/check_milestones.py@@if not (REPO / p).exists():@@if False:@@a row may cite a file or directory that does not exist
+tools/check_milestones.py@@if strength and strength not in STRENGTHS:@@if False:@@a row may invent its own strength and skip the legend
 TABLE
 )
 
@@ -129,7 +162,7 @@ printf '%s\n' "$MUTATIONS" | while IFS='@' read -r FILE _ FROM _ TO _ LABEL _ TO
     # said PASS. Computed once per file and cached, because these run several mutations each.
     KEY=$(printf '%s' "$TOOL" | tr -c 'A-Za-z0-9' '_')
     if [ ! -f "$BAK/base.$KEY" ]; then
-        sh "$TOOL" --selftest 2>/dev/null | tail -1 > "$BAK/base.$KEY"
+        verdict "$TOOL" > "$BAK/base.$KEY"
     fi
     BASE=$(cat "$BAK/base.$KEY" 2>/dev/null)
     if [ "$BASE" != PASS ]; then
@@ -159,7 +192,7 @@ printf '%s\n' "$MUTATIONS" | while IFS='@' read -r FILE _ FROM _ TO _ LABEL _ TO
     fi
 
     cp "$BAK/mutated" "$FILE"
-    out=$(sh "$TOOL" --selftest 2>/dev/null | tail -1)
+    out=$(verdict "$TOOL")
     cp "$BAK/orig" "$FILE"
 
     if [ "$out" = "FAIL" ]; then printf 'caught\n'; echo C >> "$BAK/ok"

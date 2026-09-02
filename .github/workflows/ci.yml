@@ -78,7 +78,20 @@ jobs:
           sh tools/claim.sh           --selftest
           sh tools/worktree.sh        --selftest
           sh tools/check_dated_ui.sh  --selftest
+          python3 tools/check_milestones.py --selftest
           sh .claude/hooks/no-heredoc-source.selftest.sh
+
+      - name: Every milestone row resolves against the tree it describes
+        # docs/MILESTONES.md answers "where are we?" and its whole value is that it cannot
+        # rot. Vendored from bugarach with its fixtures made repo-relative — upstream's were
+        # hard-coded to bugarach's own paths, so four MUST-PASS cases went red the moment the
+        # file was carried here. A selftest asserting the origin repo's layout is not a
+        # selftest; that is the deviation, and it is stated in the file's header.
+        #
+        # Ancestry is judged against origin/master, which needs the full history the
+        # fetch-depth: 0 above already provides. On a shallow clone this reports INCONCLUSIVE
+        # rather than blaming the document for its environment.
+        run: python3 tools/check_milestones.py
 
       - name: The built site matches its sources
         # The gate the two-commit rule depends on: commit the source, build, commit the
