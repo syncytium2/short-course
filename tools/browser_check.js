@@ -287,6 +287,49 @@ const server = http.createServer((req, res) => {
     return lab && !lab.querySelector('.whyq');
   }), true);
 
+  // ---- tier hiding, as COMPUTED STYLE rather than as an attribute ------------------
+  // Everything else in this file checks the attribute, or a count derived from it, and
+  // that is not what a reader sees. `[data-off="1"] { display: none }` is a single
+  // class-level selector, so any LATER rule of equal specificity beats it --
+  // `.links { display: flex }` -- and `ul.checks > li { display: flex }` beats it outright
+  // on specificity. Both were true, both shipped, and every attribute-based check passed
+  // throughout: the counts were correct and the elements were on the screen anyway.
+  for (const tier of ['min', 'mid', 'max']) {
+    await page.evaluate(() => localStorage.clear());
+    await page.reload();
+    await page.click(`.tierpick[data-tier="${tier}"]`);
+    // Open every step, so nothing counts as hidden merely for being folded away.
+    await page.evaluate(() => document.querySelectorAll('ol.steps > li')
+      .forEach(li => { li.dataset.open = '1'; }));
+    const leaks = await page.evaluate((t) => {
+      const out = [];
+      document.querySelectorAll('[data-tiers]').forEach(el => {
+        if ((el.dataset.tiers || '').split(' ').indexOf(t) !== -1) return;
+        if (getComputedStyle(el).display !== 'none' && el.offsetParent !== null) {
+          out.push(el.tagName.toLowerCase() + '.' + (el.className || '?') + ' — ' +
+                   (el.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 55));
+        }
+      });
+      return out;
+    }, tier);
+    check(`${tier}: nothing from another route is left on the screen`, leaks, []);
+  }
+
+  // The cue lines live inside the answers, so they must be closed until the answer is.
+  await page.evaluate(() => localStorage.clear());
+  await page.reload();
+  await page.click('.tierpick[data-tier="min"]');
+  await openW2();
+  checkAtLeast('there are cue lines to paste',
+    await page.evaluate(() => document.querySelectorAll('.whya .ask').length), 20);
+  check('a cue is not visible until its answer is opened', await page.evaluate(() => {
+    const a = document.querySelector('[data-key="one-sentence"] .whya .ask');
+    return a ? a.offsetParent === null : 'no cue on that box';
+  }), true);
+  await page.click('[data-key="one-sentence"] .whyq');
+  check('and is visible once it is', await page.evaluate(() =>
+    document.querySelector('[data-key="one-sentence"] .whya .ask').offsetParent !== null), true);
+
   check('no uncaught JS errors', errors, []);
 
   await browser.close();
