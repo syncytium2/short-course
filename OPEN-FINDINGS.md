@@ -86,13 +86,30 @@ much harder thing to argue with.
 > agent wrote, so the objection is withdrawn and the useful half — the list — is what survives.
 > **Nothing below is removed:** it is the evidence behind the section, not a to-do list.
 
-Refuted by one search:
+Refuted by one search — **but not by all three, and this list said otherwise until 2026-09-02.**
+Corrected against the re-check of 2026-08-31 already published in
+[`site/index.html`](site/index.html), which had the qualifier this file lacked for two days:
 
 - **Oxford, AI Competency Centre** — *"Using coding agents for working with research data and
   managing the research process: Introduction to non-programmers."* Non-programmers, their own
   materials, existing research data, including reproducibility in AI-assisted research.
+  **Refutes the sentence on its own.**
 - **UW eScience Institute** — *"Coding with AI Agents: A Hands-On Workshop for Researchers."*
-- **Southampton RSG** — *"Advanced Research Software Development using AI."*
+  For researchers and research software engineers; **assumes no AI background but expects a
+  GitHub account.** Partial — a low bar, not a zero one.
+- **Southampton RSG** — *"Advanced Research Software Development using AI."* **Does not refute
+  it.** Aimed at code quality and productivity inside an IDE, and **not for non-programmers —
+  it lists Python, notebooks, VS Code and prior GitHub Copilot use as prerequisites.**
+
+**So the count was wrong, not the conclusion:** one clearly, one partially, one not at all.
+The vacancy sentence is still false — Oxford alone settles that — and *"refuted by one search"*
+naming three was itself a claim nobody re-read after the site got it right.
+
+**The instrument worth keeping.** Southampton was separated from the other two by its
+**prerequisites** — public, dated, and stating the opposite of what the programme's own framing
+implies. A course requiring prior Python does not serve non-programmers whatever anyone says
+about it. That is better evidence than asking an organiser, and it is why the emails proposed
+under [B5](#b5--the-positioning-section-is-a-check-that-cannot-fail) were not sent.
 
 The differentiator survives narrowed: none of them centres failure management. The sentence as
 written does not.
@@ -135,6 +152,30 @@ check it; 38% say reviewing it takes more effort than reviewing human code).
 > page says is not what its organiser would say about what failed. Per the review process,
 > *"nobody was asked"* stays recorded. What stops it being blocking is that the section can no
 > longer return only one answer — it can now be wrong, and a re-check would show it.
+>
+> **🚫 DECIDED AGAINST 2026-09-02 — the emails will not be sent, and the reason is a defect in
+> this entry, not a shortage of time.** Asked whether to send the three organiser emails
+> proposed below — to Oxford, UW eScience and Southampton, asking what their sessions cover and
+> what failed — Tony answered: *"i don't see why they would bother to reply."*
+>
+> **He is right, and the failure is worse than a low reply rate.** The email asks the one party
+> with an interest in a particular answer. An organiser asked *"does your programme serve
+> non-programmers?"* says yes. **This entry diagnosed a check that cannot fail and prescribed a
+> remedy that also cannot fail, one layer out** — and it passed review because the remedy
+> involved effort, and effort reads as rigor. The underlying ask is also unpayable: it invites
+> three competitors to help argue there is a gap they do not fill.
+>
+> **What replaced it, and it already worked.** Prerequisites — public, dated, and checkable
+> without anyone's cooperation. Southampton lists Python, notebooks, VS Code and prior Copilot
+> use, which is the opposite of what its inclusion in [B2](#b2--nobody-is-teaching-a-non-programmer-is-false)
+> implied; that correction landed 2026-09-02 and **came from a prerequisites page, not from a
+> reply.** A course requiring prior Python does not serve non-programmers whatever its organiser
+> would say, so the testimony this entry wanted is strictly worse evidence than the artifact
+> already on the web.
+>
+> **`"nobody was asked"` still stands as a residual** — this changes why it stands, not whether.
+> It is now a decision with a reason attached rather than an unstarted task, which is the
+> difference between a record and a backlog.
 
 It names competitors, asserts saturation and declares a gap, with no search recorded, no dates,
 no sources, and no statement of what was not looked at. Nothing in it could have returned "this

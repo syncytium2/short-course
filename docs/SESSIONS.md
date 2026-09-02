@@ -2254,3 +2254,15 @@ risks in the file.
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Tonys-MacBook-Pro/9bf3acb0 — Correct B2's evidence list (Southampton does not refute the vacancy claim) and close B5's three-email residual as decided-against
+- **Status:** DONE 2026-09-02
+- **Opened:** 2026-09-02
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
+- **Notes:** <anything another session must know before touching the same thing>
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
