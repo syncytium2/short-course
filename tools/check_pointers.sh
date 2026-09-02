@@ -46,7 +46,16 @@ scan() {  # scan <root-dir> -> prints "file:line:target" for each MISSING target
     # original eight points. A path inside a transcript is a record of what was said, not
     # a pointer this repo is offering. "Fixing" one would edit the evidence, which is the
     # single thing README.md promises never to do.
-    find "$1" -name '*.md' -not -path '*/.git/*' -not -path '*/docs/chain/*' -print | while read -r md; do
+    # AND NOTHING THIS REPO DID NOT WRITE. node_modules/ is gitignored, and absent from a
+    # laptop that borrows playwright from a sibling checkout -- so this walked a clean tree
+    # for weeks. CI installs playwright into the repo root, and the very first run reported
+    # two broken pointers inside playwright's own README: true, useless, and not ours.
+    # The claim this tool makes is "a path naming a file THIS BRANCH does not have", so it
+    # has no business reading files this branch does not ship. .wrangler/ goes with it for
+    # the same reason -- a build cache, also gitignored.
+    find "$1" -name '*.md' \
+        -not -path '*/.git/*' -not -path '*/docs/chain/*' \
+        -not -path '*/node_modules/*' -not -path '*/.wrangler/*' -print | while read -r md; do
         dir=$(dirname "$md")
         grep -oEn '\]\([^)]+\)' "$md" 2>/dev/null | sed 's/](/ /; s/)$//' \
         | while read -r ln target; do

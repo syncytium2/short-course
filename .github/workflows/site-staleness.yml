@@ -42,14 +42,14 @@ jobs:
   staleness:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           # The report names the commit the live page was built from by hashing the served
           # bytes against every committed version of that file. A shallow clone has nothing
           # to compare against, so every page would read "built from a commit not in the
           # last 80" forever — technically true and useless.
           fetch-depth: 0
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.13"
       - name: How far behind is the published site?
