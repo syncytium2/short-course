@@ -1,0 +1,58 @@
+# Report how far lookedright.tonydefazio.com is behind master. It does not deploy.
+#
+# WHY IT DOES NOT DEPLOY. Deploying from CI needs a Cloudflare API token in repository
+# secrets. This repo is public, and a token there is publish rights for anything that can
+# run an Action. That is Tony's call and the answer so far is no — so the page advances only
+# when a person runs `npx wrangler deploy`, which keeps publishing a deliberate act. What
+# that costs is that the gap between master and the live site is invisible, because a stale
+# page looks exactly like a current one. This job makes the gap say its own name.
+#
+# The same shape, and the same reasoning, as bugarach's site-staleness workflow. Read that
+# one before changing this one.
+#
+# **IT NEVER FAILS THE BUILD.** `--exit-zero`. A red tick for something no automation here
+# is permitted to fix teaches people that red means nothing, and then a real failure gets
+# waved through beside it. The verdict goes to the run summary and to a notice, where it is
+# read. Run the same tool locally without the flag and it exits 1, because there the signal
+# is one you can act on.
+name: Site staleness
+
+on:
+  schedule:
+    # 13:10 UTC — morning in the timezone this repo is worked in, and off the hour, where
+    # GitHub's scheduler queues are longest.
+    - cron: "10 13 * * *"
+  push:
+    branches: [master]
+    # Only when something that reaches the page moves. A handoff edit does not make the
+    # site stale, and a notice on every push is a notice nobody reads.
+    paths:
+      - "site/**"
+      - "docs/handouts/**"
+      - "tools/build_site.sh"
+      - "tools/pages.txt"
+      - "tools/site_staleness.sh"
+      - ".github/workflows/site-staleness.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  staleness:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # The report names the commit the live page was built from by hashing the served
+          # bytes against every committed version of that file. A shallow clone has nothing
+          # to compare against, so every page would read "built from a commit not in the
+          # last 80" forever — technically true and useless.
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: How far behind is the published site?
+        run: |
+          sh tools/site_staleness.sh --exit-zero --github | tee staleness.txt
+          echo "::notice title=Site staleness::$(tail -1 staleness.txt | sed 's/^ *//')"

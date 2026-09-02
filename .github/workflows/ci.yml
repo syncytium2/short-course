@@ -1,0 +1,105 @@
+# Run every gate this repo already has, on every push and pull request.
+#
+# WHY THIS EXISTS. The verification here is unusually thorough -- mutation_check.sh breaks
+# each tool on purpose and requires its selftest to go red -- and until 2026-09-02 none of
+# it ran unless a person typed the command. That is the repo's own argument about tiers of
+# fix, turned on itself: prose costs nothing to ignore, and a checklist costs nothing when
+# you are busy. Several sessions work here at once and every one of them was trusted to
+# remember.
+#
+# It had already gone wrong twice, quietly:
+#   * `9caa465` — the browser check was pinned to a checkbox the page no longer had, and
+#     took seven checks down with it. A broken check is invisible until somebody runs it.
+#   * On 2026-09-01 a change to build_site.sh's step-count regex left one of
+#     mutation_check.sh's mutations unable to apply. It reported ERROR rather than a miss,
+#     correctly, and nobody saw it for a day because nothing ran it.
+#
+# WHAT IS DELIBERATELY NOT HERE. `tools/hook_audit.py` reads ~/Developer on the machine it
+# runs on; in a runner that directory does not exist, so it would report an empty estate and
+# call it clean. A check that cannot fail is worse than no check. And nothing here deploys —
+# see site-staleness.yml for why that is a decision rather than an omission.
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+# Named rather than left to the default, so a reader can see what CI may do. It reads.
+permissions:
+  contents: read
+
+jobs:
+  gates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # build_site.sh derives every page's version and both of its dates from git
+          # history, and --check-all rebuilds to compare. A depth-1 checkout has no history,
+          # so every page would rebuild with a different version than the one committed and
+          # the whole job would go red for a reason that has nothing to do with the page.
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Give git an identity
+        # Three selftests build throwaway repositories and commit into them. They set a
+        # local identity themselves, which is why they pass on a laptop; a bare runner has
+        # no global one at all, and anything that commits without one fails with a message
+        # about who you are rather than about what broke.
+        run: |
+          git config --global user.email "ci@example.invalid"
+          git config --global user.name  "short-course CI"
+
+      - name: Install the browser the page checks drive
+        # PINNED. browser_check.js finds playwright by globbing ~/Developer/*/node_modules,
+        # which is a laptop with sibling checkouts and is nothing here — so without this
+        # step it exits 2 and says "This is NOT a pass", which is the right behaviour and
+        # not one to rely on. 1.61.0 is the version it is developed against.
+        run: |
+          npm install --no-save playwright@1.61.0
+          npx playwright install --with-deps chromium
+
+      - name: Tool selftests
+        # Every tool that has one. `worktree.sh --selftest` makes and removes worktrees, so
+        # it needs the real repository rather than a fixture, which the checkout is.
+        run: |
+          sh tools/build_site.sh      --selftest
+          sh tools/checklist_state.sh --selftest
+          sh tools/tier_check.sh      --selftest
+          sh tools/site_staleness.sh  --selftest
+          sh tools/claim.sh           --selftest
+          sh tools/worktree.sh        --selftest
+          sh tools/check_dated_ui.sh  --selftest
+          sh .claude/hooks/no-heredoc-source.selftest.sh
+
+      - name: The built site matches its sources
+        # The gate the two-commit rule depends on: commit the source, build, commit the
+        # output. This is what catches a source edited and never rebuilt — which on a repo
+        # where several sessions push is a live-page regression waiting for a deploy.
+        run: sh tools/build_site.sh --check-all
+
+      - name: Every route through the runbook can be finished
+        run: sh tools/tier_check.sh --check
+
+      - name: Pointers resolve, and dated UI says when it was true
+        run: |
+          sh tools/check_pointers.sh
+          sh tools/check_dated_ui.sh
+
+      - name: Drive the page in a real browser
+        # The only check here that presses anything. Everything else reads the markup, and
+        # markup cannot tell you that a listener is bound to a selector matching nothing.
+        run: node tools/browser_check.js
+
+      - name: The selftests still have teeth
+        # Runs last because it is the slowest, and because a red result here means the other
+        # steps' green ticks are worth less than they look.
+        run: sh tools/mutation_check.sh
