@@ -191,13 +191,18 @@ const server = http.createServer((req, res) => {
   // the reason this whole file exists.
   await page.evaluate(() => localStorage.clear());
   await page.reload();
-  await page.click('.tierpick[data-tier="min"]');   // W2 exists only on the browser route
-  // AND OPEN W2, because every step's detail is folded behind its heading. The first version
-  // of this check clicked the button straight away and timed out on "element is not visible"
-  // -- which was the harness being wrong, not the page: a reader gets there by opening the
-  // step, and so must this.
+  await page.click('.tierpick[data-tier="min"]');   // it lives on the browser route only
   const openW2 = () => page.click('[data-key="one-sentence"] .head');
-  await openW2();
+
+  // IT IS NOT IN THE FOLD ANY MORE, and that is the point of the move: the reader who has
+  // nothing to build should not have to open a step about writing a sentence to find out
+  // they need not supply the sentence. So the check no longer opens anything first -- if it
+  // had to, the move would not have happened.
+  check('the generator is reachable without opening a step',
+    await page.evaluate(() => {
+      const b = document.getElementById('idea-roll');
+      return !!b && b.offsetParent !== null;
+    }), true);
 
   const ideaBefore = await page.evaluate(() => document.getElementById('gen-idea').textContent);
   await page.click('#idea-roll');
@@ -218,14 +223,10 @@ const server = http.createServer((req, res) => {
   // WAS removed to test it, it passed. A statistical check on a property that is supposed to
   // be absolute is not a check.
   //
-  // Instead: feed Math.random a sequence that yields each value twice in a row. Without the
-  // retry loop that produces an immediate repeat every second press. With it, the duplicate
-  // is consumed and the next value used, which is exactly the behaviour being claimed.
-  await page.evaluate(() => {
-    const seq = [0.05, 0.05, 0.35, 0.35, 0.65, 0.65, 0.95, 0.95];
-    let k = 0;
-    Math.random = () => seq[k++ % seq.length];
-  });
+  // Now the draw removes the last pick from the candidates rather than re-rolling, so a
+  // CONSTANT random is the hardest possible case and also a legal one: every press asks for
+  // the same pool and the same position, and the answer still has to change.
+  await page.evaluate(() => { Math.random = () => 0.5; });
   let repeats = 0, prev = await page.evaluate(() => document.getElementById('gen-idea').textContent);
   for (let i = 0; i < 8; i++) {
     await page.click('#idea-roll');
@@ -233,7 +234,27 @@ const server = http.createServer((req, res) => {
     if (now === prev) repeats++;
     prev = now;
   }
-  check('a duplicate draw never reaches the reader as the same idea twice', repeats, 0);
+  check('the same idea never comes back twice running, even on a constant random', repeats, 0);
+
+  // ---- one draw in three is blue sky -------------------------------------------------
+  // Asserted through the MECHANISM, not by sampling. Drawing a few hundred and checking the
+  // proportion would be a test that fails occasionally for no reason and passes when the
+  // ratio is quietly wrong, which is the worst of both. The pool is chosen by its own draw,
+  // so pinning that draw pins the pool.
+  const kindFor = async (r) => {
+    await page.evaluate((v) => { Math.random = () => v; }, r);
+    await page.click('#idea-roll');
+    return page.evaluate(() => document.getElementById('idea-box').dataset.kind);
+  };
+  check('a low draw lands in the blue-sky pool', await kindFor(0.10), 'blue');
+  check('a high draw lands in the work pool',    await kindFor(0.90), 'lab');
+  check('the boundary belongs to the work pool', await kindFor(0.34), 'lab');
+  check('both pools are actually filled', await page.evaluate(() => {
+    // Reads the page's own list rather than a number typed here, which would go stale the
+    // first time anybody adds an idea.
+    const m = document.documentElement.innerHTML.match(/'(lab|blue)'\]/g) || [];
+    return m.some(x => x.includes('blue')) && m.some(x => x.includes('lab'));
+  }), true);
 
   const kept = await page.evaluate(() => document.getElementById('gen-idea').textContent);
   await page.reload();
@@ -241,7 +262,7 @@ const server = http.createServer((req, res) => {
     await page.evaluate(() => document.getElementById('gen-idea').textContent), kept);
 
   // A stored index from a longer list must not throw and take the checklist down with it.
-  await page.evaluate(() => localStorage.setItem('cold-start-idea-v1', '9999'));
+  await page.evaluate(() => localStorage.setItem('cold-start-idea-v2', '9999'));
   await page.reload();
   check('an out-of-range stored idea is ignored rather than thrown',
     await page.evaluate(() => document.getElementById('idea-box').classList.contains('empty')),

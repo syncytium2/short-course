@@ -344,6 +344,14 @@
     font-family: var(--sans); font-size: 10px; letter-spacing: .08em;
     text-transform: uppercase; color: var(--accent); margin-right: 5px;
   }
+  /* ---- the starter-project generator, in the page rather than inside a step ---- */
+  .starter {
+    border: 1px solid var(--rule-firm); background: var(--surface);
+    padding: 14px 15px; margin: 16px 0 4px;
+  }
+  .starter-lede { margin: 0; font-size: 14px; }
+  .starter-note { margin: 10px 0 0; font-size: 13px; color: var(--muted); }
+  .starter .gen { margin: 11px 0 0; }
   /* A ticked box needs its reason less, so it recedes rather than disappearing. */
   ul.checks > li[data-on="1"] .whyq { opacity: .4; }
   ul.checks > li[data-on="1"] .whyq:hover,
@@ -841,6 +849,26 @@
     <p class="phase-note"><b>Five steps, one evening, all of it in a browser.</b> Nothing to install, nothing to configure, and not one command to type. You finish with a working page at an address you can send to somebody. It was walked start to finish on <b>2026-08-30</b>, and the places it went wrong are written into the steps rather than tidied out of them.</p>
     <p class="phase-note"><b>The fifth step is not the end of anything. It is where the loop closes.</b> From then on you ask for the next item on your list, look at it, and it is live &mdash; and that round trip is now minutes rather than a project. <b>The reason to get published early is that everything after it gets cheaper</b>, not that you are done. Go back to the list you wrote in W2 and take the next one.</p>
     <p class="phase-note"><b>None of what follows is a prerequisite for that.</b> You can keep building here indefinitely. The rest of this page is for when you want the machine underneath it &mdash; your own editor, your own copy of the files, work that outlives a browser tab, other people &mdash; and you can switch to <i>the laptop route</i> at the top on any day you like. Everything you have ticked here stays ticked.</p>
+    <!-- OUT OF THE FOLD, DELIBERATELY. This began inside W2's detail, which meant the
+         reader who most needed it -- the one with nothing to build -- had to open a step
+         about writing a sentence in order to discover they did not have to supply the
+         sentence. Tony, 2026-09-02: "put the random website generator in the page rather
+         than hidden in the fold." It sits above the five steps because it answers the
+         question that stops people before step one, and W2 now points up at it rather
+         than carrying a second copy.
+         ONE DRAW IN THREE IS BLUE SKY. The list was all laboratory work, which quietly
+         says the only respectable reason to try this is your job. The first thing anybody
+         builds is the thing they find out on, and finding out goes better on something
+         nobody is waiting for. -->
+    <div class="starter" id="starter">
+      <p class="starter-lede"><b>No idea what to build?</b> That is a perfectly good reason to be here and a bad reason to stop. Press the button and you get one sentence with its parts underneath &mdash; the shape the five steps below expect. <b>About one in three has nothing to do with work</b>, on purpose.</p>
+      <div class="gen empty" id="idea-box">
+        <div class="gen-head"><span class="prompt-k">A starter project</span><button class="gen-alt" type="button" id="idea-roll">Give me one</button><button class="gen-hint" type="button">Copy</button></div>
+        <pre id="gen-idea">Press &ldquo;give me one&rdquo; and something appears here &mdash; a sentence, and the parts underneath it.</pre>
+      </div>
+      <p class="starter-note"><b>Swap any of it for your own words.</b> It is a starting shape, not an assignment. What matters is that you end up with one sentence, and parts you could each finish in an afternoon &mdash; which is what W2 asks, however you got there.</p>
+    </div>
+
     <ol class="steps">
       <li data-key="pick-a-rung" data-id="W1" data-tiers="min" data-open="0" data-done="0">
         <div class="srow">
@@ -879,21 +907,8 @@
             <p class="why"><b>Then write the parts underneath it as a short list.</b> The recordings page above might be: <i>show one recording &middot; a way to mark it bad &middot; remember which ones I marked &middot; a page listing the bad ones.</i> You will build these one at a time, never two at once. If any single part looks like more than an afternoon, split it until it is not.</p>
             <p class="why">This step costs nothing, installs nothing, and is the one people skip. It is also the one that decides whether the next three go well.</p>
 
-            <!-- FOR THE READER WHO HAS NO IDEA, WHICH THIS STEP DID NOT ALLOW FOR.
-                 W2 assumed you arrived wanting something. Plenty of people arrive wanting to
-                 find out what this is like, and telling them their first move is to have a
-                 project is a way of sending them away at step two of five.
-                 It hands over the SHAPE, not just a sentence: one line, then parts that are
-                 each an afternoon, because that shape is the whole lesson of the step and a
-                 bare idea would skip it. Everything in the list is buildable on this route --
-                 a page, published, no server -- and the few that remember anything do it in
-                 the browser, the same way this checklist remembers your ticks. -->
-            <p class="why"><b>No idea in mind? Take one of these instead.</b> Wanting to see what this is like is a perfectly good reason to be here, and it is a bad reason to be stuck at step two. These are small on purpose, all of them finish as a page you can send to somebody, and none is anybody&rsquo;s real research &mdash; the point is to run the loop once on something you do not mind getting wrong.</p>
-            <div class="gen empty" id="idea-box">
-              <div class="gen-head"><span class="prompt-k">A starter project</span><button class="gen-alt" type="button" id="idea-roll">Give me one</button><button class="gen-hint" type="button">Copy</button></div>
-              <pre id="gen-idea">Press &ldquo;give me one&rdquo; and something will appear here &mdash; a sentence, and the parts underneath it.</pre>
-            </div>
-            <p class="why"><b>Swap any of it for your own words.</b> A generated sentence is a starting shape, not an assignment: change the subject to something from your own work and it gets better immediately. What matters is that you end up with <i>one sentence</i> and <i>parts you could each do in an afternoon</i> &mdash; which is what the boxes below are asking, however you got there.</p>
+            <p class="why"><b>No idea in mind?</b> There is a <a href="#starter">starter project generator</a> above this list, outside the fold, because a reader with nothing to build should not have to open a step to find that out.</p>
+
         </div>
         <ul class="checks">
             <li><button class="cb" data-key="sentence-written-down" type="button" aria-pressed="false" aria-labelledby="c-w2-0">&#10003;</button><span class="cbt"><span id="c-w2-0">I have one sentence saying what I am building &mdash; mine, or one from the list &mdash; and it is somewhere I can see it</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w2-0">why?</button></span><p class="whya" id="w-c-w2-0" hidden>If you cannot say it in one sentence you cannot tell whether what comes back is right, and you find that out four prompts in with something half-built.<span class="ask"><b>Ask it:</b> &ldquo;Here is my sentence: <paste it>. Say it back in your own words, and tell me what you would need to know before building it.&rdquo;</span></p></li>
@@ -2042,7 +2057,8 @@ or four A records:
     // a cleared page back in front of you still holding a decision you made on it.
     try { localStorage.removeItem(IKEY); } catch (e) {}
     if (ideaOut) {
-      ideaOut.innerHTML = 'Press &ldquo;give me one&rdquo; and something will appear here &mdash; a sentence, and the parts underneath it.';
+      ideaOut.innerHTML = 'Press &ldquo;give me one&rdquo; and something appears here &mdash; a sentence, and the parts underneath it.';
+      delete ideaBox.dataset.kind;
       ideaBox.classList.add('empty');
       ideaRoll.textContent = 'Give me one';
     }
@@ -2088,38 +2104,71 @@ or four A records:
   // NONE OF THEM IS RESEARCH, deliberately. The first thing you build with a new tool is the
   // thing you find out on, and finding out on the analysis that matters is the failure this
   // whole course is about.
+  // Third element is the pool: 'lab' is work-shaped, 'blue' is not. The draw picks the
+  // pool first and the idea second, so the ratio holds however unevenly the two are
+  // filled -- counting entries to get one-in-three would drift the moment anybody adds
+  // one, and nothing would say so.
   var IDEAS = [
     ['A page that shows my group’s papers as a list I can filter by year.',
-     ['show the list', 'a box that filters by year', 'a link out to each one', 'newest first']],
+     ['show the list', 'a box that filters by year', 'a link out to each one', 'newest first'], 'lab'],
     ['A page that turns a table of numbers into a chart I can send to somebody.',
-     ['paste a table in', 'draw one chart from it', 'a title and axis labels I can edit', 'save it as a picture']],
+     ['paste a table in', 'draw one chart from it', 'a title and axis labels I can edit', 'save it as a picture'], 'lab'],
     ['A one-page profile of my work, at a link I can put in an email signature.',
-     ['a short bio', 'what I work on', 'links out', 'a photo']],
+     ['a short bio', 'what I work on', 'links out', 'a photo'], 'lab'],
     ['A flashcard page for the terms I keep forgetting.',
-     ['show one term', 'a button to flip it over', 'a button for the next one', 'remember which ones I got wrong']],
+     ['show one term', 'a button to flip it over', 'a button for the next one', 'remember which ones I got wrong'], 'lab'],
     ['A page that counts down to a deadline and lists what is left.',
-     ['a date I set', 'the days remaining, large', 'the list of what is left', 'cross one off']],
+     ['a date I set', 'the days remaining, large', 'the list of what is left', 'cross one off'], 'lab'],
     ['A page that shows one field photo a day, with the date and the place.',
-     ['a list of photos', 'pick today’s by date', 'a caption with the place', 'a way back to yesterday’s']],
+     ['a list of photos', 'pick today’s by date', 'a caption with the place', 'a way back to yesterday’s'], 'lab'],
     ['A converter for the units I always get wrong, with the formula shown.',
-     ['two boxes that convert as I type', 'pick which units', 'show the formula underneath', 'a note on which one caught me out']],
+     ['two boxes that convert as I type', 'pick which units', 'show the formula underneath', 'a note on which one caught me out'], 'lab'],
     ['A page listing the reading for my course, grouped by week.',
-     ['the weeks', 'the readings under each', 'a link for each', 'mark one as read']],
+     ['the weeks', 'the readings under each', 'a link for each', 'mark one as read'], 'lab'],
     ['A page saying what our equipment is and who to ask about it.',
-     ['a list of the items', 'who looks after each', 'how to book it', 'search the list']],
+     ['a list of the items', 'who looks after each', 'how to book it', 'search the list'], 'lab'],
     ['A page that shows a protocol as steps I can tick off at the bench.',
-     ['the steps', 'a tick for each', 'a timer for the waiting ones', 'reset it for the next run']],
+     ['the steps', 'a tick for each', 'a timer for the waiting ones', 'reset it for the next run'], 'lab'],
     ['A page comparing the three methods we keep arguing about, side by side.',
-     ['a column for each', 'the rows we actually care about', 'which one we chose', 'why']],
+     ['a column for each', 'the rows we actually care about', 'which one we chose', 'why'], 'lab'],
     ['A picker that assigns the lab jobs fairly and shows who did what last time.',
-     ['the people', 'the jobs', 'a button that assigns them', 'remember the last few rounds']],
-    ['A page that picks where we are going for lunch, so nobody has to decide.',
-     ['the list of places', 'a button that picks one', 'never the same one twice running', 'add a new place']],
+     ['the people', 'the jobs', 'a button that assigns them', 'remember the last few rounds'], 'lab'],
     ['A page that shows what happened in this project each week.',
-     ['a week at a time', 'what changed in it', 'the newest week first', 'a link to the thing that changed']]
+     ['a week at a time', 'what changed in it', 'the newest week first', 'a link to the thing that changed'], 'lab'],
+    ['A page that turns my messy reference list into something I can actually search.',
+     ['paste the list in', 'a search box', 'show what matched', 'copy one back out'], 'lab'],
+    ['A page that tells a visitor to the lab where things are and who to find.',
+     ['a plan of the room', 'what is in each place', 'who to ask about it', 'what to do if nobody is in'], 'lab'],
+
+    // ---- blue sky. Not research, not a chore, nobody waiting on it.
+    ['A page that picks where we are going for lunch, so nobody has to decide.',
+     ['the list of places', 'a button that picks one', 'never the same one twice running', 'add a new place'], 'blue'],
+    ['A page that turns any list into a knockout tournament and runs it.',
+     ['paste the list in', 'draw the first round', 'click the winner of each', 'show the champion'], 'blue'],
+    ['A page that tells me the phase of the moon tonight, and on my birthday.',
+     ['tonight’s phase, drawn', 'a date I can type in', 'the phase on that date', 'the next full moon'], 'blue'],
+    ['A page that draws a different pattern every day, the same one for everybody.',
+     ['a pattern from today’s date', 'it changes at midnight', 'a button to see another day', 'save it as a picture'], 'blue'],
+    ['A page that keeps score for the card game we made up.',
+     ['the players', 'add points to one', 'the rules down the side', 'start a new game'], 'blue'],
+    ['A page that says how many days I have been alive and what is coming up.',
+     ['a birthday I type in', 'the days so far', 'the next round number', 'how long until it'], 'blue'],
+    ['A page that names my plants and remembers when each was last watered.',
+     ['the list of plants', 'a button for watered today', 'how long since each', 'which one is overdue'], 'blue'],
+    ['A page that invents a plausible conference talk title on demand.',
+     ['a button that makes one', 'pieces it joins together', 'keep the ones that made me laugh', 'a link to the good ones'], 'blue'],
+    ['A page that settles arguments by flipping something more interesting than a coin.',
+     ['type in the options', 'an animation while it decides', 'the answer', 'what it decided last time'], 'blue'],
+    ['A page that shows every excuse I have used for missing seminar.',
+     ['the list', 'add a new one', 'mark which I have used this term', 'a button that suggests a fresh one'], 'blue']
   ];
 
-  var IKEY = 'cold-start-idea-v1';
+  // v2: the array gained a third field and grew, so a stored v1 index names a different
+  // idea now. Nothing is lost by dropping it -- a suggestion is not progress -- but putting
+  // a different project in front of somebody than the one they left on the screen is the
+  // small kind of lie this page cannot afford to tell.
+  var IKEY = 'cold-start-idea-v2';
+  var BLUE_EVERY = 3;   // one draw in three comes from the blue-sky pool
   var ideaBox  = document.getElementById('idea-box');
   var ideaOut  = document.getElementById('gen-idea');
   var ideaRoll = document.getElementById('idea-roll');
@@ -2136,24 +2185,41 @@ or four A records:
     if (!(i >= 0 && i < IDEAS.length)) return;
     ideaOut.textContent = ideaText(i);
     ideaBox.classList.remove('empty');
+    // Which pool it came from, on the element rather than only in a variable, so the
+    // browser check can assert the ratio mechanism instead of sampling and hoping.
+    ideaBox.dataset.kind = IDEAS[i][2];
     ideaRoll.textContent = 'Another';
     if (save) { try { localStorage.setItem(IKEY, String(i)); } catch (e) {} }
   }
 
   if (ideaRoll) {
-    // NEVER THE SAME ONE TWICE RUNNING. A shuffle that repeats reads as a broken button, and
-    // the reader's conclusion is about the page rather than about chance.
     var lastIdea = -1;
     try {
       var stored = parseInt(localStorage.getItem(IKEY), 10);
       if (!isNaN(stored)) { lastIdea = stored; showIdea(stored, false); }
     } catch (e) {}
 
+    // POOL FIRST, THEN IDEA. Picking the pool by a separate draw keeps one-in-three true
+    // however unevenly the two lists are filled; weighting by entry count would drift the
+    // moment somebody adds an idea, and nothing on the page would say so.
+    //
+    // NEVER THE SAME ONE TWICE RUNNING -- and this is done by REMOVING the last pick from
+    // the candidates, not by re-rolling until the number changes. A re-roll loop cannot
+    // terminate against a stubbed random that returns a constant, so the only way to test
+    // it was statistically, and a statistical test of an absolute property passes by luck:
+    // the first version of the check here did exactly that, and passed with the guard
+    // deleted. Excluding the candidate always terminates and is testable with any random
+    // at all, including a constant one.
     ideaRoll.addEventListener('click', function () {
-      var i = lastIdea;
-      if (IDEAS.length > 1) {
-        while (i === lastIdea) { i = Math.floor(Math.random() * IDEAS.length); }
-      } else { i = 0; }
+      var wantBlue = Math.floor(Math.random() * BLUE_EVERY) === 0;
+      var pool = [];
+      for (var n = 0; n < IDEAS.length; n++) {
+        if ((IDEAS[n][2] === 'blue') === wantBlue) pool.push(n);
+      }
+      if (!pool.length) { for (n = 0; n < IDEAS.length; n++) pool.push(n); }
+      var choices = pool.filter(function (n) { return n !== lastIdea; });
+      if (!choices.length) choices = pool;
+      var i = choices[Math.floor(Math.random() * choices.length)];
       lastIdea = i;
       showIdea(i, true);
     });
