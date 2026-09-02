@@ -413,6 +413,17 @@
   }
   .gen-hint:hover { background: var(--accent); color: var(--ground); }
   .gen.copied .gen-hint { background: var(--good); border-color: var(--good); color: var(--ground); }
+  /* A SECOND CONTROL IN THE SAME BAR. It takes the auto margin so the pair sits together at
+     the right; leaving both buttons with margin-left:auto splits the free space between them
+     and they drift apart. */
+  .gen-alt {
+    margin-left: auto; font-family: var(--mono); font-size: 10.5px;
+    letter-spacing: .08em; text-transform: uppercase; color: var(--accent);
+    border: 1px solid var(--accent); padding: 3px 8px; background: var(--surface); cursor: pointer;
+  }
+  .gen-alt:hover { background: var(--accent); color: var(--ground); }
+  .gen-head .gen-alt + .gen-hint { margin-left: 0; }
+  .gen.empty pre { color: var(--faint); }
   .gen pre {
     margin: 0; border: 0; background: var(--surface);
     white-space: pre-wrap; padding: 11px 12px;
@@ -796,9 +807,25 @@
             <p class="why"><b>If you cannot say it in one sentence, you are not ready to ask for it yet</b> &mdash; and that is worth finding out now rather than four prompts in, when you have something half-built and cannot say whether it is right.</p>
             <p class="why"><b>Then write the parts underneath it as a short list.</b> The recordings page above might be: <i>show one recording &middot; a way to mark it bad &middot; remember which ones I marked &middot; a page listing the bad ones.</i> You will build these one at a time, never two at once. If any single part looks like more than an afternoon, split it until it is not.</p>
             <p class="why">This step costs nothing, installs nothing, and is the one people skip. It is also the one that decides whether the next three go well.</p>
+
+            <!-- FOR THE READER WHO HAS NO IDEA, WHICH THIS STEP DID NOT ALLOW FOR.
+                 W2 assumed you arrived wanting something. Plenty of people arrive wanting to
+                 find out what this is like, and telling them their first move is to have a
+                 project is a way of sending them away at step two of five.
+                 It hands over the SHAPE, not just a sentence: one line, then parts that are
+                 each an afternoon, because that shape is the whole lesson of the step and a
+                 bare idea would skip it. Everything in the list is buildable on this route --
+                 a page, published, no server -- and the few that remember anything do it in
+                 the browser, the same way this checklist remembers your ticks. -->
+            <p class="why"><b>No idea in mind? Take one of these instead.</b> Wanting to see what this is like is a perfectly good reason to be here, and it is a bad reason to be stuck at step two. These are small on purpose, all of them finish as a page you can send to somebody, and none is anybody&rsquo;s real research &mdash; the point is to run the loop once on something you do not mind getting wrong.</p>
+            <div class="gen empty" id="idea-box">
+              <div class="gen-head"><span class="prompt-k">A starter project</span><button class="gen-alt" type="button" id="idea-roll">Give me one</button><button class="gen-hint" type="button">Copy</button></div>
+              <pre id="gen-idea">Press &ldquo;give me one&rdquo; and something will appear here &mdash; a sentence, and the parts underneath it.</pre>
+            </div>
+            <p class="why"><b>Swap any of it for your own words.</b> A generated sentence is a starting shape, not an assignment: change the subject to something from your own work and it gets better immediately. What matters is that you end up with <i>one sentence</i> and <i>parts you could each do in an afternoon</i> &mdash; which is what the boxes below are asking, however you got there.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="sentence-written-down" type="button" aria-pressed="false" aria-labelledby="c-w2-0">&#10003;</button><span class="cbt" id="c-w2-0">I have written one sentence saying what I want to build, and it is somewhere I can see it</span></li>
+            <li><button class="cb" data-key="sentence-written-down" type="button" aria-pressed="false" aria-labelledby="c-w2-0">&#10003;</button><span class="cbt" id="c-w2-0">I have one sentence saying what I am building &mdash; mine, or one from the list &mdash; and it is somewhere I can see it</span></li>
             <li><button class="cb" data-key="outsider-understands" type="button" aria-pressed="false" aria-labelledby="c-w2-1">&#10003;</button><span class="cbt" id="c-w2-1">I read that sentence to somebody outside my field and they understood what the thing does</span></li>
             <li><button class="cb" data-key="each-item-one-afternoon" type="button" aria-pressed="false" aria-labelledby="c-w2-2">&#10003;</button><span class="cbt" id="c-w2-2">I have listed the parts underneath it, and none of them would take me more than an afternoon</span></li>
         </ul>
@@ -1939,11 +1966,106 @@ or four A records:
     saveSkip();
     for (var pk in paths) delete paths[pk];
     try { localStorage.setItem(PKEY, JSON.stringify(paths)); } catch (e) {}
+    // The starter project is saved state too, and a reset that leaves it behind would put
+    // a cleared page back in front of you still holding a decision you made on it.
+    try { localStorage.removeItem(IKEY); } catch (e) {}
+    if (ideaOut) {
+      ideaOut.innerHTML = 'Press &ldquo;give me one&rdquo; and something will appear here &mdash; a sentence, and the parts underneath it.';
+      ideaBox.classList.add('empty');
+      ideaRoll.textContent = 'Give me one';
+    }
     [].forEach.call(document.querySelectorAll('.fill input'), function (i) { i.value = ''; });
     render();
     steps.forEach(function (s) { s.li.dataset.open = '0'; s.paint(); });
     count();
   });
+
+  // ---- W2's starter projects, for the reader who came to try rather than to build ----
+  //
+  // WHY IT HANDS OVER THE SHAPE AND NOT JUST AN IDEA. W2 teaches one thing: a sentence, then
+  // parts that are each an afternoon. Handing somebody a bare idea would let them skip the
+  // lesson while appearing to do the step. So every entry arrives already in that shape, and
+  // the sentence is always something a person outside the field would understand -- which is
+  // W2's second box, and the list would be lying if its own sentences failed it.
+  //
+  // EVERY ONE IS BUILDABLE ON THIS ROUTE. A page, published, no server anywhere. The four
+  // that remember something do it in the reader's own browser -- the same mechanism this
+  // checklist uses for your ticks, which is a fact worth them meeting early rather than a
+  // limitation. Nothing here needs an account, a key, or data the reader does not have.
+  //
+  // NONE OF THEM IS RESEARCH, deliberately. The first thing you build with a new tool is the
+  // thing you find out on, and finding out on the analysis that matters is the failure this
+  // whole course is about.
+  var IDEAS = [
+    ['A page that shows my group’s papers as a list I can filter by year.',
+     ['show the list', 'a box that filters by year', 'a link out to each one', 'newest first']],
+    ['A page that turns a table of numbers into a chart I can send to somebody.',
+     ['paste a table in', 'draw one chart from it', 'a title and axis labels I can edit', 'save it as a picture']],
+    ['A one-page profile of my work, at a link I can put in an email signature.',
+     ['a short bio', 'what I work on', 'links out', 'a photo']],
+    ['A flashcard page for the terms I keep forgetting.',
+     ['show one term', 'a button to flip it over', 'a button for the next one', 'remember which ones I got wrong']],
+    ['A page that counts down to a deadline and lists what is left.',
+     ['a date I set', 'the days remaining, large', 'the list of what is left', 'cross one off']],
+    ['A page that shows one field photo a day, with the date and the place.',
+     ['a list of photos', 'pick today’s by date', 'a caption with the place', 'a way back to yesterday’s']],
+    ['A converter for the units I always get wrong, with the formula shown.',
+     ['two boxes that convert as I type', 'pick which units', 'show the formula underneath', 'a note on which one caught me out']],
+    ['A page listing the reading for my course, grouped by week.',
+     ['the weeks', 'the readings under each', 'a link for each', 'mark one as read']],
+    ['A page saying what our equipment is and who to ask about it.',
+     ['a list of the items', 'who looks after each', 'how to book it', 'search the list']],
+    ['A page that shows a protocol as steps I can tick off at the bench.',
+     ['the steps', 'a tick for each', 'a timer for the waiting ones', 'reset it for the next run']],
+    ['A page comparing the three methods we keep arguing about, side by side.',
+     ['a column for each', 'the rows we actually care about', 'which one we chose', 'why']],
+    ['A picker that assigns the lab jobs fairly and shows who did what last time.',
+     ['the people', 'the jobs', 'a button that assigns them', 'remember the last few rounds']],
+    ['A page that picks where we are going for lunch, so nobody has to decide.',
+     ['the list of places', 'a button that picks one', 'never the same one twice running', 'add a new place']],
+    ['A page that shows what happened in this project each week.',
+     ['a week at a time', 'what changed in it', 'the newest week first', 'a link to the thing that changed']]
+  ];
+
+  var IKEY = 'cold-start-idea-v1';
+  var ideaBox  = document.getElementById('idea-box');
+  var ideaOut  = document.getElementById('gen-idea');
+  var ideaRoll = document.getElementById('idea-roll');
+
+  function ideaText(i) {
+    var it = IDEAS[i];
+    return it[0] + '\n\nThe parts, one at a time:\n' +
+           it[1].map(function (p) { return '  · ' + p; }).join('\n');
+  }
+
+  function showIdea(i, save) {
+    // Out of range means a stored index from a shorter or longer list -- ignore it rather
+    // than throwing, which would take the whole checklist down with it.
+    if (!(i >= 0 && i < IDEAS.length)) return;
+    ideaOut.textContent = ideaText(i);
+    ideaBox.classList.remove('empty');
+    ideaRoll.textContent = 'Another';
+    if (save) { try { localStorage.setItem(IKEY, String(i)); } catch (e) {} }
+  }
+
+  if (ideaRoll) {
+    // NEVER THE SAME ONE TWICE RUNNING. A shuffle that repeats reads as a broken button, and
+    // the reader's conclusion is about the page rather than about chance.
+    var lastIdea = -1;
+    try {
+      var stored = parseInt(localStorage.getItem(IKEY), 10);
+      if (!isNaN(stored)) { lastIdea = stored; showIdea(stored, false); }
+    } catch (e) {}
+
+    ideaRoll.addEventListener('click', function () {
+      var i = lastIdea;
+      if (IDEAS.length > 1) {
+        while (i === lastIdea) { i = Math.floor(Math.random() * IDEAS.length); }
+      } else { i = 0; }
+      lastIdea = i;
+      showIdea(i, true);
+    });
+  }
 
   // ---- the storage paths, filled in at 2.1 and used again at 4.2 ----
   var PKEY = 'cold-start-paths-v1';
