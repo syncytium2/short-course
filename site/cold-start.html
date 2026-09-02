@@ -359,6 +359,28 @@
   }
   .warn b { font-weight: 600; }
 
+  /* ---- ask block: the expert you already have ----
+     This sheet says twice that its own button names are perishable and were true
+     on one day in August. What it never said is that the thing being set up is
+     also the thing to ask when the screen does not match the paragraph. A reader
+     who does not already think of an agent as askable reads a wrong click path as
+     their own failure and stops.
+     ONE PER PHASE, AND EACH ONE DIFFERENT, because what the expert can see changes
+     as you go: a browser tab through Phase 2, something on your machine after 3.4,
+     and in Phase 6 a second computer that neither of you can see. A single repeated
+     banner would be skipped by the third phase and wrong by the sixth.
+     Accent rather than caution: this is help, not danger. */
+  .ask {
+    background: var(--accent-soft); border-left: 2px solid var(--accent);
+    padding: 10px 12px; margin: 10px 0 0; font-size: 13.5px;
+  }
+  .ask b { font-weight: 600; }
+  .ask-k {
+    display: block; font-family: var(--mono); font-size: 10.5px;
+    letter-spacing: .12em; text-transform: uppercase; color: var(--accent);
+    margin-bottom: 4px;
+  }
+
   /* ---- the agent ladder (1.1) ---- */
   .tbl-wrap { overflow-x: auto; margin: 10px 0 0; }
   table.ladder {
@@ -538,7 +560,7 @@
     <p class="eyebrow"><a href="/" class="home">&larr;&nbsp;It Looked Right</a> &middot; Setup runbook &middot; keep this window open</p>
     <h1>Cold Start</h1>
     <p class="standfirst">An email address to a first agent session that leaves a record behind it. Pick one of three routes &mdash; nothing installed, your own laptop, or a cluster shared with other people &mdash; and get every step it needs in order, with the condition that tells you each one worked.</p>
-    <p class="pv">Version <b>0.1.35</b> &middot; 1 Sep 2026<span class="pv-born">First published 29 Aug 2026</span></p>
+    <p class="pv">Version <b>0.1.36</b> &middot; 2 Sep 2026<span class="pv-born">First published 29 Aug 2026</span></p>
   </header>
 
   <div class="method">
@@ -591,6 +613,7 @@
       <h2>Phase 1 &middot; Accounts</h2>
       <span class="phase-time">30 min<span data-tiers="max">, plus other people&rsquo;s time</span></span>
     </div>
+    <div class="ask"><span class="ask-k">If this does not match your screen</span><b>From step 1.1 onward you have the expert, and it is a browser tab.</b> The account you are about to create <i>is</i> the thing to ask when a screen here is wrong &mdash; paste the error, or the page you got instead of the one described, and ask what it means. <b>It cannot see your screen unless you show it</b>, so paste or screenshot rather than describe; and it is not a map, so do not ask it where a button is &mdash; ask it what the button you found does. That distinction is <a href="https://lookedright.tonydefazio.com/show-it-your-screen"><i>Show It Your Screen</i></a>.</div>
     <p class="phase-note"><span data-tiers="min">Two accounts, both free to create, and you need both.</span><span data-tiers="mid max">Two accounts of your own, both free to create and both required &mdash; then the institutional things somebody else controls.</span> <b>Get the agent first, on purpose:</b> the second step is the one people find fiddly, and doing it second means there is already an agent to ask.</p>
     <p class="phase-note" data-tiers="max"><b>Start this on day one even if you will not touch a keyboard for a week.</b> One thing in this phase &mdash; storage and a cluster allocation &mdash; is not yours to grant: somebody else has to approve it, and that takes days to weeks. File it now and carry on with everything below while it pends.</p>
     <ol class="steps">
@@ -770,6 +793,7 @@
       <h2>The short way &middot; the browser route, end to end</h2>
       <span class="phase-time">one evening</span>
     </div>
+    <div class="ask"><span class="ask-k">If this does not match your screen</span><b>Everything that can go wrong in these five steps goes wrong inside the window you are already talking to.</b> You do not have to leave and look it up: if what came back is not what the step describes, say exactly that in the same conversation &mdash; <i>&ldquo;this is what I asked for, this is what I got, what happened?&rdquo;</i> &mdash; and keep going from its answer. <b>The one thing it cannot do is see the dashboard in your other tab</b>, so for anything you are looking at rather than typing, screenshot it in.</div>
     <p class="phase-note"><b>Five steps, one evening, all of it in a browser.</b> Nothing to install, nothing to configure, and not one command to type. You finish with a working page at an address you can send to somebody. It was walked start to finish on <b>2026-08-30</b>, and the places it went wrong are written into the steps rather than tidied out of them.</p>
     <p class="phase-note"><b>The fifth step is not the end of anything. It is where the loop closes.</b> From then on you ask for the next item on your list, look at it, and it is live &mdash; and that round trip is now minutes rather than a project. <b>The reason to get published early is that everything after it gets cheaper</b>, not that you are done. Go back to the list you wrote in W2 and take the next one.</p>
     <p class="phase-note"><b>None of what follows is a prerequisite for that.</b> You can keep building here indefinitely. The rest of this page is for when you want the machine underneath it &mdash; your own editor, your own copy of the files, work that outlives a browser tab, other people &mdash; and you can switch to <i>the laptop route</i> at the top on any day you like. Everything you have ticked here stays ticked.</p>
@@ -879,6 +903,7 @@
       <h2>Phase 2 &middot; Storage</h2>
       <span class="phase-time">20 min</span>
     </div>
+    <div class="ask"><span class="ask-k">If this does not match your setup</span><b>This phase is decisions, and a chat window is genuinely good at decisions.</b> Describe what you actually have &mdash; the drives, the sync client, where the data sits today &mdash; and ask it to argue the case for each arrangement, including the one this page recommends. It is worth more here than anywhere else on this sheet, because these steps are the ones that have to be adapted rather than followed. <b>It still cannot see your disk</b>, so paste the paths rather than describing them.</div>
     <p class="phase-note"><b>Before an agent sees your data</b> &mdash; which is a different moment from when the data was made, and is almost certainly still ahead of you. You are not being asked to reorganize anything. You are being asked to be able to <i>say</i> where things live, before something else starts guessing. <b>If the project has no data</b> &mdash; a website, a document, a small tool &mdash; this phase is one box and 2.3 does not apply to you.</p>
     <p class="phase-note"><b>This phase is the decision, not the construction.</b> Deciding where things live needs nothing installed, which is why it is here. The part that needs an editor and an agent &mdash; writing the path helper so nothing ever hardcodes a path &mdash; is step 3.7, after the machine exists.</p>
     <ol class="steps">
@@ -944,6 +969,7 @@
       <h2>Phase 3 &middot; The machine</h2>
       <span class="phase-time">55 min</span>
     </div>
+    <div class="ask"><span class="ask-k">If this does not match your screen</span><b>This is the phase where the expert moves from a tab to your machine, and step 3.4 is the moment it happens.</b> Before 3.4, an installer that fails is something you paste into the browser: the whole error, not your summary of it. <b>After 3.4 you stop pasting</b> &mdash; it can run the command itself, read what came back, and try the next thing. That is the difference this phase is buying, and installs going wrong is the first place you will see it. <b>Do not ask it where a menu item is</b>; the screens move faster than any description of them, including this one&rsquo;s.</div>
     <ol class="steps">
       <li data-key="editor" data-id="3.1" data-tiers="mid max" data-open="0" data-done="0">
         <div class="srow">
@@ -1087,6 +1113,7 @@ computer.</pre>
       <h2>Phase 4 &middot; The first session</h2>
       <span class="phase-time">40 min</span>
     </div>
+    <div class="ask"><span class="ask-k">If this does not match what you see</span><b>From here the expert is in the same window as the work, which is the whole point of the four phases before it.</b> If a prompt in this phase produces something the step does not describe, do not start over &mdash; tell it what you expected and ask it to show you what it actually did. <b>And note the one place that goes the other way:</b> when it reports success, that is precisely the moment 4.3 asks you to open the file yourself. Asking is how you get unstuck; it is not how you check.</div>
     <p class="phase-note">Two prompts, and the reading you do between them. The reading is the part that is easy to skip and is the reason the rest works.</p>
     <ol class="steps">
       <li data-key="project-folder" data-id="4.1" data-tiers="mid max" data-open="0" data-done="0">
@@ -1273,6 +1300,7 @@ one so I can look.
       <h2>Phase 5 &middot; The habits</h2>
       <span class="phase-time">forever</span>
     </div>
+    <div class="ask"><span class="ask-k">What to ask for here</span><b>Nothing in this phase can be installed, and that includes asking the agent to install it.</b> What it is good for here is the explaining: ask it what it just changed and why, ask it what would look different if this had gone wrong, ask it to talk you through a diff you cannot read. Those have short answers and a short answer can be checked. <b>What it cannot do is be the habit for you</b> &mdash; and it will agree enthusiastically that you should have one, which is not the same as you having one.</div>
     <p class="phase-note">This is the part that is not setup, and it is the part that decides whether any of the above was worth doing. Nothing here can be installed.</p>
     <ol class="steps">
       <li data-key="one-thing" data-id="5.1" data-tiers="min mid max" data-open="0" data-done="0">
@@ -1348,6 +1376,7 @@ one so I can look.
       <h2>Phase 6 &middot; Second machine, other people</h2>
       <span class="phase-time">conditional</span>
     </div>
+    <div class="ask"><span class="ask-k">If this does not match your screen</span><b>Here the expert on each machine can only see the machine it is on</b>, and this phase is about the one it cannot. Ask the agent on the second computer to check the second computer &mdash; have it run the command and read the output back &mdash; rather than asking either of them what the state of &ldquo;the project&rdquo; is, which is a question neither can answer alone. <b>For a person rather than a machine, the same rule holds:</b> what the other person has is something you have been told, not something either agent has seen.</div>
     <ol class="steps">
       <li data-key="second-machine" data-id="6.1" data-tiers="max" data-open="0" data-done="0">
         <div class="srow">
@@ -1402,6 +1431,7 @@ one so I can look.
       <h2>Phase 7 &middot; A name of your own</h2>
       <span class="phase-time">30 min, then a wait</span>
     </div>
+    <div class="ask"><span class="ask-k">If this does not match your screen &mdash; and it may not</span><b>This is the phase where asking is worth the most and describing is worth the least, and it is the one phase that already says so.</b> The block below is the reminder the other phases carry, written out in full because <i>this</i> is where the screens moved. Read it before you read the steps.</div>
     <p class="phase-note" data-tiers="min"><b>You already have something to put on it</b> &mdash; the page you published at W5. Two companies, each doing one job: <b>Porkbun</b> sells you the name, and <b>Cloudflare</b> answers questions about where it points, which it is already doing for the free address you have. Keeping those two jobs separate in your head is most of the difficulty. A third company, GitHub, can serve the pages instead of Cloudflare &mdash; that is the alternative, and it is steps 7.4 and 7.5.</p>
     <p class="phase-note" data-tiers="mid max">Only when you have something to put on it. Three companies, each doing one job: <b>Porkbun</b> sells you the name, <b>Cloudflare</b> answers questions about where it points, and <b>GitHub</b> serves the pages. Keeping those three jobs separate in your head is most of the difficulty.</p>
     <div class="warn"><b>Do not trust a button name you read anywhere, including here.</b> Every named button, tab and menu path on this page <b>was true on 2026-08-30 and nowhere else</b>. That is the same warning 1.1 gives about prices, and it applies hardest wherever these steps send you into a vendor&rsquo;s dashboard &mdash; which is this phase<span data-tiers="min">, and W5 before it</span>. On that date this material was walked end to end and <b>the click paths were wrong five times in one afternoon</b>: Cloudflare had rebuilt the dashboard around Workers, so &ldquo;Pages&rdquo; had become a footnote link and settings named here did not appear on the form at all.<br><br><b>The steps are written as outcomes and &ldquo;done when&rdquo; conditions, and those held.</b> Read them as what must become true, not as where to press. When the screen does not match this page &mdash; and it will not &mdash; that is the expected case, not your mistake: <b>screenshot the whole window and show it to your agent.</b> Every one of those five was unstuck in a single exchange that way. The companion sheet <a href="https://lookedright.tonydefazio.com/show-it-your-screen">Show It Your Screen</a> is that loop, and the evidence for it.</div>
