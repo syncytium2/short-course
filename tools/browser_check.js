@@ -185,6 +185,70 @@ const server = http.createServer((req, res) => {
     migrated['github-account'],
     { 'account-created-signed': 1, 'username-willing-keep': 1 });
 
+  // ---- W2's starter-project generator -------------------------------------------
+  // A button, which is the thing static analysis is worst at. `node --check` and a markup
+  // simulation both pass on a listener bound to a selector that matches nothing, which is
+  // the reason this whole file exists.
+  await page.evaluate(() => localStorage.clear());
+  await page.reload();
+  await page.click('.tierpick[data-tier="min"]');   // W2 exists only on the browser route
+  // AND OPEN W2, because every step's detail is folded behind its heading. The first version
+  // of this check clicked the button straight away and timed out on "element is not visible"
+  // -- which was the harness being wrong, not the page: a reader gets there by opening the
+  // step, and so must this.
+  const openW2 = () => page.click('[data-key="one-sentence"] .head');
+  await openW2();
+
+  const ideaBefore = await page.evaluate(() => document.getElementById('gen-idea').textContent);
+  await page.click('#idea-roll');
+  const ideaAfter = await page.evaluate(() => document.getElementById('gen-idea').textContent);
+  check('the generator button produces an idea', ideaAfter !== ideaBefore, true);
+  check("the idea arrives in W2's shape: a sentence, then parts",
+    /^.+\.\n\nThe parts, one at a time:\n( +· .+\n?)+$/.test(ideaAfter), true);
+  check('the placeholder styling clears once there is an idea',
+    await page.evaluate(() => document.getElementById('idea-box').classList.contains('empty')),
+    false);
+
+  // NEVER THE SAME ONE TWICE RUNNING. A shuffle that repeats reads as a dead button, and the
+  // reader concludes something about the page rather than about chance.
+  //
+  // THIS CHECK IS DETERMINISTIC, AND THE FIRST VERSION WAS NOT. It pressed twenty times and
+  // asserted no repeat, which for fourteen ideas passes by luck 22% of the time -- so it
+  // could not distinguish the guard working from the guard being absent, and when the guard
+  // WAS removed to test it, it passed. A statistical check on a property that is supposed to
+  // be absolute is not a check.
+  //
+  // Instead: feed Math.random a sequence that yields each value twice in a row. Without the
+  // retry loop that produces an immediate repeat every second press. With it, the duplicate
+  // is consumed and the next value used, which is exactly the behaviour being claimed.
+  await page.evaluate(() => {
+    const seq = [0.05, 0.05, 0.35, 0.35, 0.65, 0.65, 0.95, 0.95];
+    let k = 0;
+    Math.random = () => seq[k++ % seq.length];
+  });
+  let repeats = 0, prev = await page.evaluate(() => document.getElementById('gen-idea').textContent);
+  for (let i = 0; i < 8; i++) {
+    await page.click('#idea-roll');
+    const now = await page.evaluate(() => document.getElementById('gen-idea').textContent);
+    if (now === prev) repeats++;
+    prev = now;
+  }
+  check('a duplicate draw never reaches the reader as the same idea twice', repeats, 0);
+
+  const kept = await page.evaluate(() => document.getElementById('gen-idea').textContent);
+  await page.reload();
+  check('the chosen idea survives a reload',
+    await page.evaluate(() => document.getElementById('gen-idea').textContent), kept);
+
+  // A stored index from a longer list must not throw and take the checklist down with it.
+  await page.evaluate(() => localStorage.setItem('cold-start-idea-v1', '9999'));
+  await page.reload();
+  check('an out-of-range stored idea is ignored rather than thrown',
+    await page.evaluate(() => document.getElementById('idea-box').classList.contains('empty')),
+    true);
+  check('and the checklist still works after it',
+    await page.evaluate(() => !!document.querySelector('.cb')), true);
+
   check('no uncaught JS errors', errors, []);
 
   await browser.close();
