@@ -249,6 +249,44 @@ const server = http.createServer((req, res) => {
   check('and the checklist still works after it',
     await page.evaluate(() => !!document.querySelector('.cb')), true);
 
+  // ---- "why?" on every checkbox ---------------------------------------------------
+  // The failure that matters here is not the answer being wrong, it is the button being
+  // wired to the row and ticking the box you were asking about. That cannot be seen in
+  // the markup and it cannot be seen by reading the handler; it needs a press.
+  await page.evaluate(() => localStorage.clear());
+  await page.reload();
+  await page.click('.tierpick[data-tier="min"]');
+  await openW2();
+
+  const w2q = '[data-key="one-sentence"] .whyq';
+  check('every box on the page has a why', await page.evaluate(() =>
+    document.querySelectorAll('.cb').length === document.querySelectorAll('.whyq').length), true);
+  check('the answers start closed', await page.evaluate(() =>
+    [...document.querySelectorAll('.whya')].every(a => a.hidden)), true);
+
+  const tickedBefore = await page.evaluate(() =>
+    document.querySelector('[data-key="one-sentence"] .cb').getAttribute('aria-pressed'));
+  await page.click(w2q);
+  check('pressing why opens its answer', await page.evaluate(() =>
+    !document.querySelector('[data-key="one-sentence"] .whya').hidden), true);
+  check('and does not tick the box it belongs to', await page.evaluate(() =>
+    document.querySelector('[data-key="one-sentence"] .cb').getAttribute('aria-pressed')),
+    tickedBefore);
+  check('and does not fold the step shut', await page.evaluate(() =>
+    document.querySelector('[data-key="one-sentence"]').dataset.open), '1');
+
+  await page.click(w2q);
+  check('pressing it again closes the answer', await page.evaluate(() =>
+    document.querySelector('[data-key="one-sentence"] .whya').hidden), true);
+
+  // The checkbox's accessible name must be the box text and nothing else. Leaving the
+  // label id on the outer span would have every box read "... why?" to a screen reader.
+  check('the why button is outside the checkbox\'s accessible name', await page.evaluate(() => {
+    const cb = document.querySelector('[data-key="sentence-written-down"]');
+    const lab = document.getElementById(cb.getAttribute('aria-labelledby'));
+    return lab && !lab.querySelector('.whyq');
+  }), true);
+
   check('no uncaught JS errors', errors, []);
 
   await browser.close();

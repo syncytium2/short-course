@@ -286,7 +286,41 @@
   /* Only the box is clickable. The label is plain text, so a link inside it
      is an ordinary link rather than something nested in a control. */
   ul.checks { list-style: none; margin: 11px 0 0; padding: 0; }
-  ul.checks > li { margin: 0; display: flex; align-items: flex-start; gap: 9px; padding: 4px 0; }
+  /* flex-wrap so a "why?" answer can take a whole line of its own underneath the box it
+     belongs to, rather than being squeezed in beside the tick. */
+  ul.checks > li { margin: 0; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 9px; padding: 4px 0; }
+
+  /* ---- "why?" -------------------------------------------------------------------
+     EVERY BOX HAS ONE, and the reason is that a checklist states what to do and is
+     silent about what it costs to skip. The reader with the least context -- the one
+     the browser route exists for -- is the one being asked to take all of them on
+     trust, and "because the list said so" is the weakest tier of fix this page has.
+     A BUTTON AND NOT A TOOLTIP. Tooltips do not exist on a phone, do not survive
+     printing, and cannot be reached from a keyboard. Closed by default because the
+     answer is for the reader who wants it; 115 of them open at once is a wall.
+     ------------------------------------------------------------------------------- */
+  .whyq {
+    flex: none; font-family: var(--mono); font-size: 10px; letter-spacing: .06em;
+    text-transform: uppercase; color: var(--faint); background: none;
+    border: 1px solid var(--rule-firm); border-radius: 2px;
+    padding: 0 4px; margin-left: 2px; cursor: pointer;
+  }
+  .whyq:hover { color: var(--accent); border-color: var(--accent); }
+  .whyq[aria-expanded="true"] { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
+  .whya {
+    flex-basis: 100%; margin: 3px 0 5px 25px; font-size: 12.5px; line-height: 1.5;
+    color: var(--muted); border-left: 2px solid var(--rule-firm); padding-left: 10px;
+  }
+  /* A ticked box needs its reason less, so it recedes rather than disappearing. */
+  ul.checks > li[data-on="1"] .whyq { opacity: .4; }
+  ul.checks > li[data-on="1"] .whyq:hover,
+  ul.checks > li[data-on="1"] .whyq[aria-expanded="true"] { opacity: 1; }
+  /* Printed beside a terminal is one of the ways this sheet gets used, and paper cannot
+     be clicked -- so paper gets every answer rather than none of them. */
+  @media print {
+    .whyq { display: none; }
+    .whya { display: block !important; }
+  }
   .cb {
     flex: none; width: 16px; height: 16px; margin-top: 1px; padding: 0;
     border: 1px solid var(--muted); background: var(--surface); cursor: pointer;
@@ -699,11 +733,11 @@
             <p class="why"><b>What this actually costs, before you commit to anything:</b> <a href="https://lookedright.tonydefazio.com/what-it-costs">What It Costs</a> &mdash; the free floor and how far it goes, the three shapes a bill can take and which one to refuse, real numbers with their caveats attached, and the equity problem, which is real and is usually left unsaid. <b>Read it before you commit to a plan, not after.</b> It is short.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="sign-account-will-actually" type="button" aria-pressed="false" aria-labelledby="c-1-1-0">&#10003;</button><span class="cbt" id="c-1-1-0">I can sign in with the account I will actually use</span></li>
-            <li data-tiers="mid max"><button class="cb" data-key="which-rung-and-next" type="button" aria-pressed="false" aria-labelledby="c-1-1-4">&#10003;</button><span class="cbt" id="c-1-1-4">I can say which rung I am on, and what the next one would let it see</span></li>
-            <li data-tiers="min"><button class="cb" data-key="browser-cannot-see" type="button" aria-pressed="false" aria-labelledby="c-1-1-5">&#10003;</button><span class="cbt" id="c-1-1-5">I can say what the browser route cannot do &mdash; open my files, check a result for itself &mdash; and what moving up would buy</span></li>
-            <li><button class="cb" data-key="say-happens-use-too" type="button" aria-pressed="false" aria-labelledby="c-1-1-1">&#10003;</button><span class="cbt" id="c-1-1-1">I can say what happens when I use too much &mdash; it stops, or it bills</span></li>
-            <li><button class="cb" data-key="read-costs" type="button" aria-pressed="false" aria-labelledby="c-1-1-2">&#10003;</button><span class="cbt" id="c-1-1-2">I have read <a href="https://lookedright.tonydefazio.com/what-it-costs"><i>What It Costs</i></a></span></li>
+            <li><button class="cb" data-key="sign-account-will-actually" type="button" aria-pressed="false" aria-labelledby="c-1-1-0">&#10003;</button><span class="cbt"><span id="c-1-1-0">I can sign in with the account I will actually use</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-1-1-0">why?</button></span><p class="whya" id="w-c-1-1-0" hidden>A throwaway account you signed up with in a hurry becomes the one every piece of your work hangs off. Moving later means moving all of it.</p></li>
+            <li data-tiers="mid max"><button class="cb" data-key="which-rung-and-next" type="button" aria-pressed="false" aria-labelledby="c-1-1-4">&#10003;</button><span class="cbt"><span id="c-1-1-4">I can say which rung I am on, and what the next one would let it see</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-1-1-4">why?</button></span><p class="whya" id="w-c-1-1-4" hidden>The rung decides what the agent can see, and what it cannot see you have to describe by hand. That is the largest hidden cost in your first month.</p></li>
+            <li data-tiers="min"><button class="cb" data-key="browser-cannot-see" type="button" aria-pressed="false" aria-labelledby="c-1-1-5">&#10003;</button><span class="cbt"><span id="c-1-1-5">I can say what the browser route cannot do &mdash; open my files, check a result for itself &mdash; and what moving up would buy</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-1-1-5">why?</button></span><p class="whya" id="w-c-1-1-5" hidden>If you believe it can read your files and it cannot, it will still answer questions about them &mdash; from what you pasted, confidently, and you will not be able to tell.</p></li>
+            <li><button class="cb" data-key="say-happens-use-too" type="button" aria-pressed="false" aria-labelledby="c-1-1-1">&#10003;</button><span class="cbt"><span id="c-1-1-1">I can say what happens when I use too much &mdash; it stops, or it bills</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-1-1-1">why?</button></span><p class="whya" id="w-c-1-1-1" hidden>A personal plan stops when you hit the ceiling, which is annoying and safe. An institutional code does not stop, and somebody else reads the statement.</p></li>
+            <li><button class="cb" data-key="read-costs" type="button" aria-pressed="false" aria-labelledby="c-1-1-2">&#10003;</button><span class="cbt"><span id="c-1-1-2">I have read <a href="https://lookedright.tonydefazio.com/what-it-costs"><i>What It Costs</i></a></span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-1-1-2">why?</button></span><p class="whya" id="w-c-1-1-2" hidden>The free floor, the three shapes a bill takes, and the equity problem are all on that sheet. Meeting them one at a time, mid-project, is how people get stuck.</p></li>
         </ul>
       </li>
       <li data-key="github-account" data-id="1.2" data-tiers="min mid max" data-open="0" data-done="0">
@@ -720,9 +754,9 @@
             <p class="why">This is the step people skip because it seems premature, and it is the one whose absence is documented twice in this course&rsquo;s own material: eleven hours of finished work sitting where nothing else could see it, and a night&rsquo;s work that reached the next morning as nothing at all. It is free, and it takes four minutes.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="username-willing-keep" type="button" aria-pressed="false" aria-labelledby="c-1-2-2">&#10003;</button><span class="cbt" id="c-1-2-2">I chose the username on purpose, and I would be content to have it on a paper</span></li>
-            <li><button class="cb" data-key="account-created-signed" type="button" aria-pressed="false" aria-labelledby="c-1-2-0">&#10003;</button><span class="cbt" id="c-1-2-0">Account created and I am signed in</span></li>
-            <li><button class="cb" data-key="two-factor-authentication" type="button" aria-pressed="false" aria-labelledby="c-1-2-1">&#10003;</button><span class="cbt" id="c-1-2-1">Two-factor authentication is on</span></li>
+            <li><button class="cb" data-key="username-willing-keep" type="button" aria-pressed="false" aria-labelledby="c-1-2-2">&#10003;</button><span class="cbt"><span id="c-1-2-2">I chose the username on purpose, and I would be content to have it on a paper</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-1-2-2">why?</button></span><p class="whya" id="w-c-1-2-2" hidden>It ends up inside every link anybody saves to your work. Changing it later breaks their links and not yours, so you never find out it happened.</p></li>
+            <li><button class="cb" data-key="account-created-signed" type="button" aria-pressed="false" aria-labelledby="c-1-2-0">&#10003;</button><span class="cbt"><span id="c-1-2-0">Account created and I am signed in</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-1-2-0">why?</button></span><p class="whya" id="w-c-1-2-0" hidden>Everything later that puts your work anywhere but this one machine assumes it exists. Four minutes now, or a blocked evening at the point you needed it.</p></li>
+            <li><button class="cb" data-key="two-factor-authentication" type="button" aria-pressed="false" aria-labelledby="c-1-2-1">&#10003;</button><span class="cbt"><span id="c-1-2-1">Two-factor authentication is on</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-1-2-1">why?</button></span><p class="whya" id="w-c-1-2-1" hidden>During signup it is the same half-minute as afterwards, and afterwards is when it quietly gets postponed. The account will hold work you cannot re-create.</p></li>
         </ul>
       </li>
       <li data-key="research-storage" data-id="1.3" data-tiers="max" data-open="0" data-done="0" data-optional="1">
@@ -735,9 +769,9 @@
             <p class="why">If you do need them: a cluster <b>account</b> and an <b>allocation</b> are two separate requests, and only the second one lets you submit anything. Storage volumes are usually sponsored by a lab, not requested by an individual.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="decided-whether-need-these" type="button" aria-pressed="false" aria-labelledby="c-1-3-0">&#10003;</button><span class="cbt" id="c-1-3-0">I have decided whether I need these at all</span></li>
-            <li><button class="cb" data-key="yes-storage-cluster-account" type="button" aria-pressed="false" aria-labelledby="c-1-3-1">&#10003;</button><span class="cbt" id="c-1-3-1">If yes: storage, cluster account and allocation are all requested</span></li>
-            <li><button class="cb" data-key="carrying-rest-while-pend" type="button" aria-pressed="false" aria-labelledby="c-1-3-2">&#10003;</button><span class="cbt" id="c-1-3-2">I am carrying on with the rest while they pend</span></li>
+            <li><button class="cb" data-key="decided-whether-need-these" type="button" aria-pressed="false" aria-labelledby="c-1-3-0">&#10003;</button><span class="cbt"><span id="c-1-3-0">I have decided whether I need these at all</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-1-3-0">why?</button></span><p class="whya" id="w-c-1-3-0" hidden>Deciding you do not need them is a real answer and closes the question. Not deciding is what leaves you waiting on a request nobody filed.</p></li>
+            <li><button class="cb" data-key="yes-storage-cluster-account" type="button" aria-pressed="false" aria-labelledby="c-1-3-1">&#10003;</button><span class="cbt"><span id="c-1-3-1">If yes: storage, cluster account and allocation are all requested</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-1-3-1">why?</button></span><p class="whya" id="w-c-1-3-1" hidden>These are the only things on this page somebody else has to approve, and approval takes days to weeks. Filing late does not delay the request, it delays you.</p></li>
+            <li><button class="cb" data-key="carrying-rest-while-pend" type="button" aria-pressed="false" aria-labelledby="c-1-3-2">&#10003;</button><span class="cbt"><span id="c-1-3-2">I am carrying on with the rest while they pend</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-1-3-2">why?</button></span><p class="whya" id="w-c-1-3-2" hidden>Nothing below this step depends on the allocation. Waiting for it before starting anything is how a week disappears with nothing to show.</p></li>
             <li><button class="skipbtn" type="button" data-undo="Needed after all &mdash; I do have research storage">Not needed &mdash; no cluster, no terabytes</button></li>
         </ul>
       </li>
@@ -753,9 +787,9 @@
             <p class="why">The VPN matters in a particular order: anything living inside the institution&rsquo;s network wants it connected <i>before</i> you open the thing, not after a failure that looks like something else.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="institution-login" type="button" aria-pressed="false" aria-labelledby="c-1-4-0">&#10003;</button><span class="cbt" id="c-1-4-0">I can sign in to my institution&rsquo;s account</span></li>
-            <li><button class="cb" data-key="vpn-once" type="button" aria-pressed="false" aria-labelledby="c-1-4-1">&#10003;</button><span class="cbt" id="c-1-4-1">The VPN client is installed and I have connected through it at least once</span></li>
-            <li><button class="cb" data-key="sync-client" type="button" aria-pressed="false" aria-labelledby="c-1-4-2">&#10003;</button><span class="cbt" id="c-1-4-2">The synced-storage client is installed and signed in</span></li>
+            <li><button class="cb" data-key="institution-login" type="button" aria-pressed="false" aria-labelledby="c-1-4-0">&#10003;</button><span class="cbt"><span id="c-1-4-0">I can sign in to my institution&rsquo;s account</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-1-4-0">why?</button></span><p class="whya" id="w-c-1-4-0" hidden>Two later steps assume you have it, and when you do not the failure arrives disguised &mdash; a network error, a permissions error, something that looks unrelated.</p></li>
+            <li><button class="cb" data-key="vpn-once" type="button" aria-pressed="false" aria-labelledby="c-1-4-1">&#10003;</button><span class="cbt"><span id="c-1-4-1">The VPN client is installed and I have connected through it at least once</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-1-4-1">why?</button></span><p class="whya" id="w-c-1-4-1" hidden>Anything living inside the institution's network wants the VPN connected before you open the thing, not after a failure that looks like something else entirely.</p></li>
+            <li><button class="cb" data-key="sync-client" type="button" aria-pressed="false" aria-labelledby="c-1-4-2">&#10003;</button><span class="cbt"><span id="c-1-4-2">The synced-storage client is installed and signed in</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-1-4-2">why?</button></span><p class="whya" id="w-c-1-4-2" hidden>Step 2.3 asks you to exclude a folder from it, which quietly presumes it is installed and signed in. This is where that stops being an assumption.</p></li>
         </ul>
       </li>
     </ol>
@@ -793,8 +827,8 @@
             <p class="why"><b>Then get one piece of evidence that it can see what you think it can see, before you rely on it.</b> A tool that cannot open your files will answer questions about them anyway, fluently and in detail, and nothing in the reply looks different. So do not ask <i>can you see my files</i> &mdash; ask it to tell you something specific it could only know by looking, and check that it is right. That is the same move as every &ldquo;done when&rdquo; on this page, run once against your own setup.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="rung-picked-highest-reachable" type="button" aria-pressed="false" aria-labelledby="c-w1-0">&#10003;</button><span class="cbt" id="c-w1-0">The place I chose at 1.1 is open in front of me and I can start in it now</span></li>
-            <li><button class="cb" data-key="named-something-back" type="button" aria-pressed="false" aria-labelledby="c-w1-1">&#10003;</button><span class="cbt" id="c-w1-1">It has told me something about my own files or my own screen that I never typed in, and I checked that it was right</span></li>
+            <li><button class="cb" data-key="rung-picked-highest-reachable" type="button" aria-pressed="false" aria-labelledby="c-w1-0">&#10003;</button><span class="cbt"><span id="c-w1-0">The place I chose at 1.1 is open in front of me and I can start in it now</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w1-0">why?</button></span><p class="whya" id="w-c-w1-0" hidden>Choosing where to work costs a minute. Being sat in front of it, signed in and able to start, is what the next four steps actually assume.</p></li>
+            <li><button class="cb" data-key="named-something-back" type="button" aria-pressed="false" aria-labelledby="c-w1-1">&#10003;</button><span class="cbt"><span id="c-w1-1">It has told me something about my own files or my own screen that I never typed in, and I checked that it was right</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w1-1">why?</button></span><p class="whya" id="w-c-w1-1" hidden>A tool that cannot open your files will answer questions about them anyway &mdash; fluently, in detail, and with nothing in the reply to mark it as guesswork.</p></li>
         </ul>
       </li>
       <li data-key="one-sentence" data-id="W2" data-tiers="min" data-open="0" data-done="0">
@@ -825,9 +859,9 @@
             <p class="why"><b>Swap any of it for your own words.</b> A generated sentence is a starting shape, not an assignment: change the subject to something from your own work and it gets better immediately. What matters is that you end up with <i>one sentence</i> and <i>parts you could each do in an afternoon</i> &mdash; which is what the boxes below are asking, however you got there.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="sentence-written-down" type="button" aria-pressed="false" aria-labelledby="c-w2-0">&#10003;</button><span class="cbt" id="c-w2-0">I have one sentence saying what I am building &mdash; mine, or one from the list &mdash; and it is somewhere I can see it</span></li>
-            <li><button class="cb" data-key="outsider-understands" type="button" aria-pressed="false" aria-labelledby="c-w2-1">&#10003;</button><span class="cbt" id="c-w2-1">I read that sentence to somebody outside my field and they understood what the thing does</span></li>
-            <li><button class="cb" data-key="each-item-one-afternoon" type="button" aria-pressed="false" aria-labelledby="c-w2-2">&#10003;</button><span class="cbt" id="c-w2-2">I have listed the parts underneath it, and none of them would take me more than an afternoon</span></li>
+            <li><button class="cb" data-key="sentence-written-down" type="button" aria-pressed="false" aria-labelledby="c-w2-0">&#10003;</button><span class="cbt"><span id="c-w2-0">I have one sentence saying what I am building &mdash; mine, or one from the list &mdash; and it is somewhere I can see it</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w2-0">why?</button></span><p class="whya" id="w-c-w2-0" hidden>If you cannot say it in one sentence you cannot tell whether what comes back is right, and you find that out four prompts in with something half-built.</p></li>
+            <li><button class="cb" data-key="outsider-understands" type="button" aria-pressed="false" aria-labelledby="c-w2-1">&#10003;</button><span class="cbt"><span id="c-w2-1">I read that sentence to somebody outside my field and they understood what the thing does</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w2-1">why?</button></span><p class="whya" id="w-c-w2-1" hidden>Jargon hides vagueness from you as well as from them. If somebody outside your field understands it, it is specific enough to be checked.</p></li>
+            <li><button class="cb" data-key="each-item-one-afternoon" type="button" aria-pressed="false" aria-labelledby="c-w2-2">&#10003;</button><span class="cbt"><span id="c-w2-2">I have listed the parts underneath it, and none of them would take me more than an afternoon</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w2-2">why?</button></span><p class="whya" id="w-c-w2-2" hidden>Anything larger than an afternoon cannot be checked in one sitting, and work that is never checked in one sitting is where the expensive mistakes accumulate.</p></li>
         </ul>
       </li>
       <li data-key="connect-or-repo" data-id="W3" data-tiers="min" data-open="0" data-done="0">
@@ -842,8 +876,8 @@
             <p class="why"><b>Why a repository rather than just showing Claude a folder on your machine.</b> The desktop app can do that, and it works. But at W5 the repository is what makes publishing keep happening on its own &mdash; every later change goes up without you remembering to do anything. A folder on your laptop means dragging it somewhere by hand, every single time, forever. That is the whole reason step 1.2 was not optional.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="route-chosen-can-say" type="button" aria-pressed="false" aria-labelledby="c-w3-0">&#10003;</button><span class="cbt" id="c-w3-0">The repository exists on github.com, it is private, and there is a README file in it</span></li>
-            <li><button class="cb" data-key="named-file-or-repo-visible" type="button" aria-pressed="false" aria-labelledby="c-w3-1">&#10003;</button><span class="cbt" id="c-w3-1">Claude is connected to it, and has named a file that is actually in there &mdash; not one I told it about</span></li>
+            <li><button class="cb" data-key="route-chosen-can-say" type="button" aria-pressed="false" aria-labelledby="c-w3-0">&#10003;</button><span class="cbt"><span id="c-w3-0">The repository exists on github.com, it is private, and there is a README file in it</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w3-0">why?</button></span><p class="whya" id="w-c-w3-0" hidden>A completely empty repository is not something the agent can open, which is what the README tick is for. Private can be made public in one click; the reverse is not true of anything already copied.</p></li>
+            <li><button class="cb" data-key="named-file-or-repo-visible" type="button" aria-pressed="false" aria-labelledby="c-w3-1">&#10003;</button><span class="cbt"><span id="c-w3-1">Claude is connected to it, and has named a file that is actually in there &mdash; not one I told it about</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w3-1">why?</button></span><p class="whya" id="w-c-w3-1" hidden>Connected and appearing connected look identical from the reply. Naming a file it could only know by looking is the difference between the two.</p></li>
         </ul>
       </li>
       <li data-key="one-element" data-id="W4" data-tiers="min" data-open="0" data-done="0">
@@ -861,9 +895,9 @@
             <p class="why"><b>When you are happy, tell it to save:</b> <i>&ldquo;commit and push this.&rdquo;</i> Those are the two words for saving, and they are worth knowing because the rest of this page uses them. A <b>commit</b> is one saved version with a short note attached saying what changed &mdash; the note is the point of it. <b>Push</b> sends that up to github.com, so the work exists somewhere other than where you are sitting. You can get back to this exact version later even if the next thing goes wrong. (<a href="https://lookedright.tonydefazio.com/just-enough-git"><i>Just Enough Git</i></a> defines these and the ten other words this page uses, in one page, and says what it leaves out.)</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="scope-not-correctness" type="button" aria-pressed="false" aria-labelledby="c-w4-0">&#10003;</button><span class="cbt" id="c-w4-0">I asked it to list every file it changed, and nothing on the list surprised me</span></li>
-            <li><button class="cb" data-key="seen-it-work-myself" type="button" aria-pressed="false" aria-labelledby="c-w4-1">&#10003;</button><span class="cbt" id="c-w4-1">I opened it myself and watched the new thing work &mdash; I did not just read a message saying it did</span></li>
-            <li><button class="cb" data-key="name-the-single-change" type="button" aria-pressed="false" aria-labelledby="c-w4-2">&#10003;</button><span class="cbt" id="c-w4-2">If somebody asked me what changed just now, I could tell them in one sentence</span></li>
+            <li><button class="cb" data-key="scope-not-correctness" type="button" aria-pressed="false" aria-labelledby="c-w4-0">&#10003;</button><span class="cbt"><span id="c-w4-0">I asked it to list every file it changed, and nothing on the list surprised me</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w4-0">why?</button></span><p class="whya" id="w-c-w4-0" hidden>Doing more than you asked is one of the two failures that never announces itself. Asking what it touched needs no programming and catches the expensive ones.</p></li>
+            <li><button class="cb" data-key="seen-it-work-myself" type="button" aria-pressed="false" aria-labelledby="c-w4-1">&#10003;</button><span class="cbt"><span id="c-w4-1">I opened it myself and watched the new thing work &mdash; I did not just read a message saying it did</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w4-1">why?</button></span><p class="whya" id="w-c-w4-1" hidden>A message saying it works is a report that it reached the end of its own instructions. That is a different event from the thing working, and they come apart often.</p></li>
+            <li><button class="cb" data-key="name-the-single-change" type="button" aria-pressed="false" aria-labelledby="c-w4-2">&#10003;</button><span class="cbt"><span id="c-w4-2">If somebody asked me what changed just now, I could tell them in one sentence</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w4-2">why?</button></span><p class="whya" id="w-c-w4-2" hidden>If you cannot say what changed in one sentence, you asked for too much at once &mdash; and you now cannot check any of it properly.</p></li>
         </ul>
       </li>
       <li data-key="publish-and-notice" data-id="W5" data-tiers="min" data-open="0" data-done="0">
@@ -879,9 +913,9 @@
             <div class="warn"><b>Expect the buttons above to have moved, and do not read that as your mistake.</b> When this was walked on <b>2026-08-30</b>, the dashboard had been rebuilt between these instructions being written and the page being opened: the guide named the wrong thing <b>five times in one afternoon</b>. Three of those were unstuck inside a single exchange once Claude could see a screenshot. <b>So take a screenshot and show it.</b> That is the fastest move available to you here, and it is the one people do last.</div>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="url-loads-off-wifi" type="button" aria-pressed="false" aria-labelledby="c-w5-0">&#10003;</button><span class="cbt" id="c-w5-0">I opened the address on my phone, with wifi turned off, and the page loaded</span></li>
-            <li><button class="cb" data-key="loaded-again-after-change" type="button" aria-pressed="false" aria-labelledby="c-w5-2">&#10003;</button><span class="cbt" id="c-w5-2">I changed one more thing, waited a minute, reloaded the address, and saw the change</span></li>
-            <li><button class="cb" data-key="knows-if-redeploy-automatic" type="button" aria-pressed="false" aria-labelledby="c-w5-1">&#10003;</button><span class="cbt" id="c-w5-1">I know which of the two I set up: changes go live on their own, or I have to put them there by hand each time</span></li>
+            <li><button class="cb" data-key="url-loads-off-wifi" type="button" aria-pressed="false" aria-labelledby="c-w5-0">&#10003;</button><span class="cbt"><span id="c-w5-0">I opened the address on my phone, with wifi turned off, and the page loaded</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w5-0">why?</button></span><p class="whya" id="w-c-w5-0" hidden>Off your own network is the only way to tell the page is genuinely on the internet, rather than working only from where you happen to be sitting.</p></li>
+            <li><button class="cb" data-key="loaded-again-after-change" type="button" aria-pressed="false" aria-labelledby="c-w5-2">&#10003;</button><span class="cbt"><span id="c-w5-2">I changed one more thing, waited a minute, reloaded the address, and saw the change</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w5-2">why?</button></span><p class="whya" id="w-c-w5-2" hidden>This is the loop closing. Until you have watched a change appear without doing anything, you do not know publishing is actually automatic &mdash; you are hoping.</p></li>
+            <li><button class="cb" data-key="knows-if-redeploy-automatic" type="button" aria-pressed="false" aria-labelledby="c-w5-1">&#10003;</button><span class="cbt"><span id="c-w5-1">I know which of the two I set up: changes go live on their own, or I have to put them there by hand each time</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w5-1">why?</button></span><p class="whya" id="w-c-w5-1" hidden>One of them keeps working when you are not there. The other needs you to remember, every time, forever, and eventually you will not.</p></li>
         </ul>
       </li>
     </ol>
@@ -917,9 +951,9 @@
             <p class="why">That is the rule and it is also, as it stands, the first thing you will send an agent &mdash; step 4.2. Filling it in here means there is nothing left to edit when you get there.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="boxes-above-filled-deliberately" type="button" aria-pressed="false" aria-labelledby="c-2-1-0">&#10003;</button><span class="cbt" id="c-2-1-0">The boxes above are filled in, or deliberately left empty</span></li>
-            <li><button class="cb" data-key="say-biggest-thing-produce" type="button" aria-pressed="false" aria-labelledby="c-2-1-1">&#10003;</button><span class="cbt" id="c-2-1-1">I can say where the biggest thing I produce goes, without thinking</span></li>
-            <li><button class="cb" data-key="say-something-another-person" type="button" aria-pressed="false" aria-labelledby="c-2-1-2">&#10003;</button><span class="cbt" id="c-2-1-2">I can say where something another person needs to see goes</span></li>
+            <li><button class="cb" data-key="boxes-above-filled-deliberately" type="button" aria-pressed="false" aria-labelledby="c-2-1-0">&#10003;</button><span class="cbt"><span id="c-2-1-0">The boxes above are filled in, or deliberately left empty</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-2-1-0">why?</button></span><p class="whya" id="w-c-2-1-0" hidden>A box left empty on purpose is a decision. A box left empty by accident is a path the agent will pick for you, quietly, in your first hour.</p></li>
+            <li><button class="cb" data-key="say-biggest-thing-produce" type="button" aria-pressed="false" aria-labelledby="c-2-1-1">&#10003;</button><span class="cbt"><span id="c-2-1-1">I can say where the biggest thing I produce goes, without thinking</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-2-1-1">why?</button></span><p class="whya" id="w-c-2-1-1" hidden>If you cannot say it, the agent will choose somewhere reasonable, and you will find out where when you go looking for the output and it is not there.</p></li>
+            <li><button class="cb" data-key="say-something-another-person" type="button" aria-pressed="false" aria-labelledby="c-2-1-2">&#10003;</button><span class="cbt"><span id="c-2-1-2">I can say where something another person needs to see goes</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-2-1-2">why?</button></span><p class="whya" id="w-c-2-1-2" hidden>Work nobody else can reach may as well not exist. This is the folder that decides whether the answer is yes.</p></li>
         </ul>
       </li>
       <li data-key="two-roots" data-id="2.2" data-tiers="mid max" data-open="0" data-done="0">
@@ -932,9 +966,9 @@
             <p class="why">The failure this prevents is not losing files. It is producing a good result that the only person who needs it cannot reach.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="data-root-exists-decided" type="button" aria-pressed="false" aria-labelledby="c-2-2-0">&#10003;</button><span class="cbt" id="c-2-2-0">The data root exists, or I have decided I do not need one</span></li>
-            <li><button class="cb" data-key="review-folder-exists-inside" type="button" aria-pressed="false" aria-labelledby="c-2-2-1">&#10003;</button><span class="cbt" id="c-2-2-1">The review folder exists, inside synced storage</span></li>
-            <li><button class="cb" data-key="opened-review-folder-second" type="button" aria-pressed="false" aria-labelledby="c-2-2-2">&#10003;</button><span class="cbt" id="c-2-2-2">I have opened the review folder on a second device</span></li>
+            <li><button class="cb" data-key="data-root-exists-decided" type="button" aria-pressed="false" aria-labelledby="c-2-2-0">&#10003;</button><span class="cbt"><span id="c-2-2-0">The data root exists, or I have decided I do not need one</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-2-2-0">why?</button></span><p class="whya" id="w-c-2-2-0" hidden>Most of the trouble in this phase comes from data living somewhere nobody ever wrote down, and being discovered by an agent that guesses.</p></li>
+            <li><button class="cb" data-key="review-folder-exists-inside" type="button" aria-pressed="false" aria-labelledby="c-2-2-1">&#10003;</button><span class="cbt"><span id="c-2-2-1">The review folder exists, inside synced storage</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-2-2-1">why?</button></span><p class="whya" id="w-c-2-2-1" hidden>Figures and documents are the things other people need to open, which is exactly what synced storage is for. Raw data is not, which is 2.3.</p></li>
+            <li><button class="cb" data-key="opened-review-folder-second" type="button" aria-pressed="false" aria-labelledby="c-2-2-2">&#10003;</button><span class="cbt"><span id="c-2-2-2">I have opened the review folder on a second device</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-2-2-2">why?</button></span><p class="whya" id="w-c-2-2-2" hidden>Syncing you have never watched work is a belief rather than a backup, and it is the kind of belief that gets tested on a bad day.</p></li>
         </ul>
       </li>
       <li data-key="data-root-unsynced" data-id="2.3" data-tiers="mid max" data-open="0" data-done="0">
@@ -946,8 +980,8 @@
             <p class="why">Multi-gigabyte outputs will strangle a sync client, and a strangled sync client fails quietly in exactly the folder you were relying on.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="data-root-outside-synced" type="button" aria-pressed="false" aria-labelledby="c-2-3-0">&#10003;</button><span class="cbt" id="c-2-3-0">The data root is outside the synced folder, or excluded in the client &mdash; or there is no data root</span></li>
-            <li><button class="cb" data-key="sync-client-sitting-huge" type="button" aria-pressed="false" aria-labelledby="c-2-3-1">&#10003;</button><span class="cbt" id="c-2-3-1">The sync client is not sitting on a huge pending queue</span></li>
+            <li><button class="cb" data-key="data-root-outside-synced" type="button" aria-pressed="false" aria-labelledby="c-2-3-0">&#10003;</button><span class="cbt"><span id="c-2-3-0">The data root is outside the synced folder, or excluded in the client &mdash; or there is no data root</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-2-3-0">why?</button></span><p class="whya" id="w-c-2-3-0" hidden>A sync client pointed at raw data will try to upload all of it &mdash; your quota, your bandwidth and your battery &mdash; and it will not ask first.</p></li>
+            <li><button class="cb" data-key="sync-client-sitting-huge" type="button" aria-pressed="false" aria-labelledby="c-2-3-1">&#10003;</button><span class="cbt"><span id="c-2-3-1">The sync client is not sitting on a huge pending queue</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-2-3-1">why?</button></span><p class="whya" id="w-c-2-3-1" hidden>A queue that never empties means the sync you are relying on is not finishing, and the file you assume is safe elsewhere is not there yet.</p></li>
         </ul>
       </li>
     </ol>
@@ -972,10 +1006,10 @@
             <br><br>Answer no and the window opens in <b>Restricted Mode</b>, where <b>the agent&rsquo;s extension does not run at all</b> &mdash; it declares itself unsupported in an untrusted folder, so VS&nbsp;Code disables it and files it under <i>Disabled in Restricted Mode</i> in the Extensions view. What you see instead is an editor that looks normal and an agent that is simply not there. <b>Nothing on screen connects the missing agent to the question you answered.</b> The banner along the top says only <i>&ldquo;Restricted Mode: Some features are disabled because this folder is not trusted&rdquo;</i>, and it does not name any of them.</div>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="editor-installed" type="button" aria-pressed="false" aria-labelledby="c-3-1-0">&#10003;</button><span class="cbt" id="c-3-1-0">Editor installed</span></li>
-            <li><button class="cb" data-key="open-folder" type="button" aria-pressed="false" aria-labelledby="c-3-1-1">&#10003;</button><span class="cbt" id="c-3-1-1">I can open a folder in it</span></li>
-            <li><button class="cb" data-key="answered-yes-trust-question" type="button" aria-pressed="false" aria-labelledby="c-3-1-2">&#10003;</button><span class="cbt" id="c-3-1-2">I answered <b>yes</b> to the trust question &mdash; there is no <i>Restricted Mode</i> banner along the top</span></li>
-            <li><button class="cb" data-key="open-terminal-inside-same" type="button" aria-pressed="false" aria-labelledby="c-3-1-3">&#10003;</button><span class="cbt" id="c-3-1-3">I can open a terminal inside that same window</span></li>
+            <li><button class="cb" data-key="editor-installed" type="button" aria-pressed="false" aria-labelledby="c-3-1-0">&#10003;</button><span class="cbt"><span id="c-3-1-0">Editor installed</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-3-1-0">why?</button></span><p class="whya" id="w-c-3-1-0" hidden>Everything in Phase 3 and Phase 4 happens inside it, including the terminal.</p></li>
+            <li><button class="cb" data-key="open-folder" type="button" aria-pressed="false" aria-labelledby="c-3-1-1">&#10003;</button><span class="cbt"><span id="c-3-1-1">I can open a folder in it</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-3-1-1">why?</button></span><p class="whya" id="w-c-3-1-1" hidden>The agent can see the folder you opened and nothing outside it. Opening the wrong one is the most common mistake of the first hour.</p></li>
+            <li><button class="cb" data-key="answered-yes-trust-question" type="button" aria-pressed="false" aria-labelledby="c-3-1-2">&#10003;</button><span class="cbt"><span id="c-3-1-2">I answered <b>yes</b> to the trust question &mdash; there is no <i>Restricted Mode</i> banner along the top</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-3-1-2">why?</button></span><p class="whya" id="w-c-3-1-2" hidden>Restricted Mode silently disables the extension. Nothing on screen connects the banner to the thing that has stopped working.</p></li>
+            <li><button class="cb" data-key="open-terminal-inside-same" type="button" aria-pressed="false" aria-labelledby="c-3-1-3">&#10003;</button><span class="cbt"><span id="c-3-1-3">I can open a terminal inside that same window</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-3-1-3">why?</button></span><p class="whya" id="w-c-3-1-3" hidden>Almost everything after this happens in that terminal, and it has to be in the same folder as the editor or the two disagree about where you are.</p></li>
         </ul>
       </li>
       <li data-key="package-manager" data-id="3.2" data-tiers="mid max" data-open="0" data-done="0">
@@ -990,8 +1024,8 @@
             <p class="why">Language runtimes come later and only the ones you need. Most people need one.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="package-manager-installed" type="button" aria-pressed="false" aria-labelledby="c-3-2-0">&#10003;</button><span class="cbt" id="c-3-2-0">Package manager installed</span></li>
-            <li><button class="cb" data-key="git-gh-node-rg" type="button" aria-pressed="false" aria-labelledby="c-3-2-1">&#10003;</button><span class="cbt" id="c-3-2-1"><code>git</code>, <code>gh</code>, <code>node</code>, <code>rg</code> and <code>jq</code> each print a version</span></li>
+            <li><button class="cb" data-key="package-manager-installed" type="button" aria-pressed="false" aria-labelledby="c-3-2-0">&#10003;</button><span class="cbt"><span id="c-3-2-0">Package manager installed</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-3-2-0">why?</button></span><p class="whya" id="w-c-3-2-0" hidden>Every install after this one goes through it, so a failure here is a failure of everything downstream.</p></li>
+            <li><button class="cb" data-key="git-gh-node-rg" type="button" aria-pressed="false" aria-labelledby="c-3-2-1">&#10003;</button><span class="cbt"><span id="c-3-2-1"><code>git</code>, <code>gh</code>, <code>node</code>, <code>rg</code> and <code>jq</code> each print a version</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-3-2-1">why?</button></span><p class="whya" id="w-c-3-2-1" hidden>A printed version number proves the thing is both installed and findable. Anything less and the failure arrives later, out of context, looking like something else.</p></li>
         </ul>
       </li>
       <li data-key="git-identity" data-id="3.3" data-tiers="mid max" data-open="0" data-done="0">
@@ -1006,8 +1040,8 @@ gh auth login</pre>
             <p class="why">The name and email are stamped on every commit you ever make, and they are not retroactive.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="git-config-name-email" type="button" aria-pressed="false" aria-labelledby="c-3-3-0">&#10003;</button><span class="cbt" id="c-3-3-0"><code>git config</code> has my name and my email</span></li>
-            <li><button class="cb" data-key="gh-auth-status-names" type="button" aria-pressed="false" aria-labelledby="c-3-3-1">&#10003;</button><span class="cbt" id="c-3-3-1"><code>gh auth status</code> names my account</span></li>
+            <li><button class="cb" data-key="git-config-name-email" type="button" aria-pressed="false" aria-labelledby="c-3-3-0">&#10003;</button><span class="cbt"><span id="c-3-3-0"><code>git config</code> has my name and my email</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-3-3-0">why?</button></span><p class="whya" id="w-c-3-3-0" hidden>Without them every commit is attributed to nobody, and fixing that afterwards means rewriting history that other things already point at.</p></li>
+            <li><button class="cb" data-key="gh-auth-status-names" type="button" aria-pressed="false" aria-labelledby="c-3-3-1">&#10003;</button><span class="cbt"><span id="c-3-3-1"><code>gh auth status</code> names my account</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-3-3-1">why?</button></span><p class="whya" id="w-c-3-3-1" hidden>This is the credential that lets anything be pushed. Until it names your account, every commit you make stays on this machine only.</p></li>
         </ul>
       </li>
       <li data-key="agent-install" data-id="3.4" data-tiers="mid max" data-open="0" data-done="0">
@@ -1022,9 +1056,9 @@ claude</pre>
             <p class="why">Then <code>/login</code> inside the session. Platform notes and the alternative installers are in the <a href="https://code.claude.com/docs/en/setup">setup docs</a>.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="claude-version-prints-number" type="button" aria-pressed="false" aria-labelledby="c-3-4-0">&#10003;</button><span class="cbt" id="c-3-4-0"><code>claude --version</code> prints a number</span></li>
-            <li><button class="cb" data-key="signed-login" type="button" aria-pressed="false" aria-labelledby="c-3-4-1">&#10003;</button><span class="cbt" id="c-3-4-1">I have signed in with <code>/login</code></span></li>
-            <li><button class="cb" data-key="session-starts-folder-standing" type="button" aria-pressed="false" aria-labelledby="c-3-4-2">&#10003;</button><span class="cbt" id="c-3-4-2">A session starts in the folder I am standing in, not my home folder</span></li>
+            <li><button class="cb" data-key="claude-version-prints-number" type="button" aria-pressed="false" aria-labelledby="c-3-4-0">&#10003;</button><span class="cbt"><span id="c-3-4-0"><code>claude --version</code> prints a number</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-3-4-0">why?</button></span><p class="whya" id="w-c-3-4-0" hidden>Installed and reachable are different conditions, and only one of them prints a version number.</p></li>
+            <li><button class="cb" data-key="signed-login" type="button" aria-pressed="false" aria-labelledby="c-3-4-1">&#10003;</button><span class="cbt"><span id="c-3-4-1">I have signed in with <code>/login</code></span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-3-4-1">why?</button></span><p class="whya" id="w-c-3-4-1" hidden>An unsigned session fails at the first request, which is a confusing place to discover it.</p></li>
+            <li><button class="cb" data-key="session-starts-folder-standing" type="button" aria-pressed="false" aria-labelledby="c-3-4-2">&#10003;</button><span class="cbt"><span id="c-3-4-2">A session starts in the folder I am standing in, not my home folder</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-3-4-2">why?</button></span><p class="whya" id="w-c-3-4-2" hidden>It can see where it started and nowhere else. Starting it in your home folder points it at everything you own at once.</p></li>
         </ul>
       </li>
       <li data-key="agent-in-editor" data-id="3.5" data-tiers="mid max" data-open="0" data-done="0">
@@ -1044,9 +1078,9 @@ claude</pre>
             <p class="why"><b>The button positions above were true on 2026-08-30.</b> They are the perishable half of this step; the &ldquo;done when&rdquo; boxes are the durable half. If the spark is not where this says, you have not gone wrong &mdash; screenshot the window and ask your agent, which is the method in <a href="https://lookedright.tonydefazio.com/show-it-your-screen"><b>Show It Your Screen</b></a>.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="extension-listed-installed-extensions" type="button" aria-pressed="false" aria-labelledby="c-3-5-0">&#10003;</button><span class="cbt" id="c-3-5-0">The extension is listed as installed in the Extensions view</span></li>
-            <li><button class="cb" data-key="file-open-found-spark" type="button" aria-pressed="false" aria-labelledby="c-3-5-1">&#10003;</button><span class="cbt" id="c-3-5-1">With a file open, I have found the spark at the top right and clicked it</span></li>
-            <li><button class="cb" data-key="file-open-opened-command" type="button" aria-pressed="false" aria-labelledby="c-3-5-2">&#10003;</button><span class="cbt" id="c-3-5-2">With <i>no</i> file open, I have opened it from the Command Palette &mdash; so I am not relying on the icon</span></li>
+            <li><button class="cb" data-key="extension-listed-installed-extensions" type="button" aria-pressed="false" aria-labelledby="c-3-5-0">&#10003;</button><span class="cbt"><span id="c-3-5-0">The extension is listed as installed in the Extensions view</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-3-5-0">why?</button></span><p class="whya" id="w-c-3-5-0" hidden>Installed is checkable; assumed is not. This is the one that tells you the rest of the step is even possible.</p></li>
+            <li><button class="cb" data-key="file-open-found-spark" type="button" aria-pressed="false" aria-labelledby="c-3-5-1">&#10003;</button><span class="cbt"><span id="c-3-5-1">With a file open, I have found the spark at the top right and clicked it</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-3-5-1">why?</button></span><p class="whya" id="w-c-3-5-1" hidden>The button does not exist until a file is open. That single fact is what stops people at this step, and nothing on screen explains it.</p></li>
+            <li><button class="cb" data-key="file-open-opened-command" type="button" aria-pressed="false" aria-labelledby="c-3-5-2">&#10003;</button><span class="cbt"><span id="c-3-5-2">With <i>no</i> file open, I have opened it from the Command Palette &mdash; so I am not relying on the icon</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-3-5-2">why?</button></span><p class="whya" id="w-c-3-5-2" hidden>Icons move between versions; the Command Palette does not. Knowing that route is what keeps this step working a year from now.</p></li>
         </ul>
       </li>
       <li data-key="stay-awake" data-id="3.6" data-tiers="mid max" data-open="0" data-done="0">
@@ -1063,8 +1097,8 @@ claude</pre>
             <p class="why"><b>If you ever do have a run that takes hours</b>, this is also the thing to try before concluding you need a cluster. A good share of people asking for one need the machine to stay awake instead, and that is a minute of work against a requisition that takes weeks.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="know-command-app-platform" type="button" aria-pressed="false" aria-labelledby="c-3-6-0">&#10003;</button><span class="cbt" id="c-3-6-0">I know the command or the app for my platform</span></li>
-            <li><button class="cb" data-key="run-once-learning-moment" type="button" aria-pressed="false" aria-labelledby="c-3-6-1">&#10003;</button><span class="cbt" id="c-3-6-1">I have run it once, so I am not learning it at the moment I need it</span></li>
+            <li><button class="cb" data-key="know-command-app-platform" type="button" aria-pressed="false" aria-labelledby="c-3-6-0">&#10003;</button><span class="cbt"><span id="c-3-6-0">I know the command or the app for my platform</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-3-6-0">why?</button></span><p class="whya" id="w-c-3-6-0" hidden>A machine that sleeps mid-task leaves a half-finished job and no error that explains why it stopped.</p></li>
+            <li><button class="cb" data-key="run-once-learning-moment" type="button" aria-pressed="false" aria-labelledby="c-3-6-1">&#10003;</button><span class="cbt"><span id="c-3-6-1">I have run it once, so I am not learning it at the moment I need it</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-3-6-1">why?</button></span><p class="whya" id="w-c-3-6-1" hidden>Learning the command at the moment you need it means you needed it and did not have it.</p></li>
         </ul>
       </li>
       <li data-key="path-helper" data-id="3.7" data-tiers="mid max" data-open="0" data-done="0">
@@ -1089,9 +1123,9 @@ computer.</pre>
             <p class="why"><b>Cheap now and archaeology later.</b> Opening the project on a second computer is the test of this one<span data-tiers="max"> &mdash; step 6.1</span>: if it runs there without you editing a path, the helper did its job. If you have to edit one, that is your first friction-log entry.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="helper-exists" type="button" aria-pressed="false" aria-labelledby="c-3-7-0">&#10003;</button><span class="cbt" id="c-3-7-0">One file answers &ldquo;where does the data live on this machine&rdquo;</span></li>
-            <li><button class="cb" data-key="no-literal-paths" type="button" aria-pressed="false" aria-labelledby="c-3-7-1">&#10003;</button><span class="cbt" id="c-3-7-1">No script of mine contains a literal path to my data</span></li>
-            <li><button class="cb" data-key="second-machine-known" type="button" aria-pressed="false" aria-labelledby="c-3-7-2">&#10003;</button><span class="cbt" id="c-3-7-2">I know what would change on a second computer</span></li>
+            <li><button class="cb" data-key="helper-exists" type="button" aria-pressed="false" aria-labelledby="c-3-7-0">&#10003;</button><span class="cbt"><span id="c-3-7-0">One file answers &ldquo;where does the data live on this machine&rdquo;</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-3-7-0">why?</button></span><p class="whya" id="w-c-3-7-0" hidden>One file to change when a path moves, rather than every script you have written since. This is the cheap-now, archaeology-later one.</p></li>
+            <li><button class="cb" data-key="no-literal-paths" type="button" aria-pressed="false" aria-labelledby="c-3-7-1">&#10003;</button><span class="cbt"><span id="c-3-7-1">No script of mine contains a literal path to my data</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-3-7-1">why?</button></span><p class="whya" id="w-c-3-7-1" hidden>A literal path is a script that works on exactly one machine, and nothing marks which of your scripts those are until one fails somewhere else.</p></li>
+            <li><button class="cb" data-key="second-machine-known" type="button" aria-pressed="false" aria-labelledby="c-3-7-2">&#10003;</button><span class="cbt"><span id="c-3-7-2">I know what would change on a second computer</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-3-7-2">why?</button></span><p class="whya" id="w-c-3-7-2" hidden>If you cannot answer it now, with three scripts, you will not be able to answer it later with fifty.</p></li>
         </ul>
       </li>
     </ol>
@@ -1124,9 +1158,9 @@ cd     "change directory" — moves you into it
             <div class="warn"><b>The order of the last two lines is the whole point.</b> The agent can only see the folder you were standing in when you started it. <code>cd</code> moves you there; <code>claude</code> starts it there. Starting it in the wrong place is the most common way a first session goes wrong, and it does not announce itself &mdash; the agent simply looks around a folder you did not mean and reports confidently about what it found.</div>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="project-folder-made" type="button" aria-pressed="false" aria-labelledby="c-4-1-0">&#10003;</button><span class="cbt" id="c-4-1-0">Project folder made</span></li>
-            <li><button class="cb" data-key="session-started-inside" type="button" aria-pressed="false" aria-labelledby="c-4-1-1">&#10003;</button><span class="cbt" id="c-4-1-1">Session started from inside it</span></li>
-            <li><button class="cb" data-key="banner-shows-path-made" type="button" aria-pressed="false" aria-labelledby="c-4-1-2">&#10003;</button><span class="cbt" id="c-4-1-2">The banner shows the path I just made, not my home folder</span></li>
+            <li><button class="cb" data-key="project-folder-made" type="button" aria-pressed="false" aria-labelledby="c-4-1-0">&#10003;</button><span class="cbt"><span id="c-4-1-0">Project folder made</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-4-1-0">why?</button></span><p class="whya" id="w-c-4-1-0" hidden>A project needs a folder of its own before anything else can be true of it.</p></li>
+            <li><button class="cb" data-key="session-started-inside" type="button" aria-pressed="false" aria-labelledby="c-4-1-1">&#10003;</button><span class="cbt"><span id="c-4-1-1">Session started from inside it</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-4-1-1">why?</button></span><p class="whya" id="w-c-4-1-1" hidden>Where the session starts is the whole of what it can see. This is the step that decides that.</p></li>
+            <li><button class="cb" data-key="banner-shows-path-made" type="button" aria-pressed="false" aria-labelledby="c-4-1-2">&#10003;</button><span class="cbt"><span id="c-4-1-2">The banner shows the path I just made, not my home folder</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-4-1-2">why?</button></span><p class="whya" id="w-c-4-1-2" hidden>The banner is the only thing that tells you what it is looking at. Reading it once is cheaper than inferring it from a mistake.</p></li>
         </ul>
       </li>
       <li data-key="prompt-setup" data-id="4.2" data-tiers="mid max" data-open="0" data-done="0">
@@ -1143,10 +1177,10 @@ cd     "change directory" — moves you into it
             <p class="why">Send it, and then do not touch anything until you have done 4.3.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="prompt-real-paths-paste" type="button" aria-pressed="false" aria-labelledby="c-4-2-0">&#10003;</button><span class="cbt" id="c-4-2-0">The prompt has my real paths in it, not <i>paste the path</i></span></li>
-            <li><button class="cb" data-key="docs-setup-md-exists" type="button" aria-pressed="false" aria-labelledby="c-4-2-1">&#10003;</button><span class="cbt" id="c-4-2-1"><code>docs/SETUP.md</code> exists</span></li>
-            <li><button class="cb" data-key="claude-md-exists" type="button" aria-pressed="false" aria-labelledby="c-4-2-2">&#10003;</button><span class="cbt" id="c-4-2-2"><code>CLAUDE.md</code> exists</span></li>
-            <li><button class="cb" data-key="nothing-else-created-noticed" type="button" aria-pressed="false" aria-labelledby="c-4-2-3">&#10003;</button><span class="cbt" id="c-4-2-3">Nothing else was created &mdash; or I noticed what was</span></li>
+            <li><button class="cb" data-key="prompt-real-paths-paste" type="button" aria-pressed="false" aria-labelledby="c-4-2-0">&#10003;</button><span class="cbt"><span id="c-4-2-0">The prompt has my real paths in it, not <i>paste the path</i></span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-4-2-0">why?</button></span><p class="whya" id="w-c-4-2-0" hidden>A prompt with a placeholder still in it produces a SETUP.md with a placeholder still in it, and the result looks finished either way.</p></li>
+            <li><button class="cb" data-key="docs-setup-md-exists" type="button" aria-pressed="false" aria-labelledby="c-4-2-1">&#10003;</button><span class="cbt"><span id="c-4-2-1"><code>docs/SETUP.md</code> exists</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-4-2-1">why?</button></span><p class="whya" id="w-c-4-2-1" hidden>This is the file every future session reads first. If it does not exist, each session starts by guessing.</p></li>
+            <li><button class="cb" data-key="claude-md-exists" type="button" aria-pressed="false" aria-labelledby="c-4-2-2">&#10003;</button><span class="cbt"><span id="c-4-2-2"><code>CLAUDE.md</code> exists</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-4-2-2">why?</button></span><p class="whya" id="w-c-4-2-2" hidden>It is the one line that points a new session at the rules. Without it the rules exist and nothing reads them.</p></li>
+            <li><button class="cb" data-key="nothing-else-created-noticed" type="button" aria-pressed="false" aria-labelledby="c-4-2-3">&#10003;</button><span class="cbt"><span id="c-4-2-3">Nothing else was created &mdash; or I noticed what was</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-4-2-3">why?</button></span><p class="whya" id="w-c-4-2-3" hidden>Doing more than you asked is one of the two failures that never announces itself. Noticing is the only defence, and it takes ten seconds here.</p></li>
         </ul>
       </li>
       <li data-key="read-what-it-wrote" data-id="4.3" data-tiers="mid max" data-open="0" data-done="0">
@@ -1164,10 +1198,10 @@ cd     "change directory" — moves you into it
             <p class="why">Then say what is wrong and have it fix that one thing.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="opened-docs-setup-md" type="button" aria-pressed="false" aria-labelledby="c-4-3-0">&#10003;</button><span class="cbt" id="c-4-3-0">I opened <code>docs/SETUP.md</code> myself and read it</span></li>
-            <li><button class="cb" data-key="looked-folder-see-now" type="button" aria-pressed="false" aria-labelledby="c-4-3-1">&#10003;</button><span class="cbt" id="c-4-3-1">I looked at the folder to see what is now in it</span></li>
-            <li><button class="cb" data-key="path" type="button" aria-pressed="false" aria-labelledby="c-4-3-2">&#10003;</button><span class="cbt" id="c-4-3-2">Every path in it is one I have been to</span></li>
-            <li><button class="cb" data-key="had-fix-wrong-thing" type="button" aria-pressed="false" aria-labelledby="c-4-3-3">&#10003;</button><span class="cbt" id="c-4-3-3">I had it fix what was wrong, one thing at a time</span></li>
+            <li><button class="cb" data-key="opened-docs-setup-md" type="button" aria-pressed="false" aria-labelledby="c-4-3-0">&#10003;</button><span class="cbt"><span id="c-4-3-0">I opened <code>docs/SETUP.md</code> myself and read it</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-4-3-0">why?</button></span><p class="whya" id="w-c-4-3-0" hidden>Reading the reply is not reading the file. The file is what every later session will actually act on.</p></li>
+            <li><button class="cb" data-key="looked-folder-see-now" type="button" aria-pressed="false" aria-labelledby="c-4-3-1">&#10003;</button><span class="cbt"><span id="c-4-3-1">I looked at the folder to see what is now in it</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-4-3-1">why?</button></span><p class="whya" id="w-c-4-3-1" hidden>The folder is the result; the summary is a description of the result. They are not the same thing and this is the cheapest place to learn that.</p></li>
+            <li><button class="cb" data-key="path" type="button" aria-pressed="false" aria-labelledby="c-4-3-2">&#10003;</button><span class="cbt"><span id="c-4-3-2">Every path in it is one I have been to</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-4-3-2">why?</button></span><p class="whya" id="w-c-4-3-2" hidden>A path nobody has been to is a path nobody has checked, and it will be wrong in a way that surfaces much later.</p></li>
+            <li><button class="cb" data-key="had-fix-wrong-thing" type="button" aria-pressed="false" aria-labelledby="c-4-3-3">&#10003;</button><span class="cbt"><span id="c-4-3-3">I had it fix what was wrong, one thing at a time</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-4-3-3">why?</button></span><p class="whya" id="w-c-4-3-3" hidden>One at a time, so that when it works you know which change did it.</p></li>
         </ul>
       </li>
       <li data-key="prompt-git" data-id="4.4" data-tiers="mid max" data-open="0" data-done="0">
@@ -1206,10 +1240,10 @@ one so I can look.
             <p class="why">Inside a session you can see the settings yourself with <code>/permissions</code>; they live in <code>.claude/settings.json</code> (<a href="https://code.claude.com/docs/en/settings">reference</a>).</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="looked-part-1-letting" type="button" aria-pressed="false" aria-labelledby="c-4-4-0">&#10003;</button><span class="cbt" id="c-4-4-0">I looked at part 1 before letting it start part 2</span></li>
-            <li><button class="cb" data-key="git-log-shows-commit" type="button" aria-pressed="false" aria-labelledby="c-4-4-1">&#10003;</button><span class="cbt" id="c-4-4-1"><code>git log</code> shows one commit</span></li>
-            <li><button class="cb" data-key="git-status-clean" type="button" aria-pressed="false" aria-labelledby="c-4-4-2">&#10003;</button><span class="cbt" id="c-4-4-2"><code>git status</code> is clean</span></li>
-            <li><button class="cb" data-key="name-thing-agent-allowed" type="button" aria-pressed="false" aria-labelledby="c-4-4-3">&#10003;</button><span class="cbt" id="c-4-4-3">I can name one thing the agent is not allowed to do</span></li>
+            <li><button class="cb" data-key="looked-part-1-letting" type="button" aria-pressed="false" aria-labelledby="c-4-4-0">&#10003;</button><span class="cbt"><span id="c-4-4-0">I looked at part 1 before letting it start part 2</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-4-4-0">why?</button></span><p class="whya" id="w-c-4-4-0" hidden>Two changes at once cannot be told apart afterwards. It is the same rule as everywhere else on this page, on the step where breaking it costs most.</p></li>
+            <li><button class="cb" data-key="git-log-shows-commit" type="button" aria-pressed="false" aria-labelledby="c-4-4-1">&#10003;</button><span class="cbt"><span id="c-4-4-1"><code>git log</code> shows one commit</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-4-4-1">why?</button></span><p class="whya" id="w-c-4-4-1" hidden>A commit is the proof that the history actually started. Without one, there is nothing to go back to.</p></li>
+            <li><button class="cb" data-key="git-status-clean" type="button" aria-pressed="false" aria-labelledby="c-4-4-2">&#10003;</button><span class="cbt"><span id="c-4-4-2"><code>git status</code> is clean</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-4-4-2">why?</button></span><p class="whya" id="w-c-4-4-2" hidden>Clean means everything is saved. Anything else means some of your work exists in exactly one place and nothing is warning you.</p></li>
+            <li><button class="cb" data-key="name-thing-agent-allowed" type="button" aria-pressed="false" aria-labelledby="c-4-4-3">&#10003;</button><span class="cbt"><span id="c-4-4-3">I can name one thing the agent is not allowed to do</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-4-4-3">why?</button></span><p class="whya" id="w-c-4-4-3" hidden>If you cannot name a single thing it is not allowed to do, you have not set a limit &mdash; you have written a preference.</p></li>
         </ul>
       </li>
       <li data-key="remote" data-id="4.5" data-tiers="mid max" data-open="0" data-done="0">
@@ -1223,9 +1257,9 @@ one so I can look.
             <p class="why"><b>Private is the right default</b> and this leaves it private. One consequence to know now rather than in Phase&nbsp;7: GitHub only serves free websites from <b>public</b> repositories. If you want a website later you either make this one public, pay for a GitHub plan, or &mdash; the usual answer &mdash; serve the site from Cloudflare instead and leave the repository private. That is step 7.3.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="repository-visible-github-com" type="button" aria-pressed="false" aria-labelledby="c-4-5-0">&#10003;</button><span class="cbt" id="c-4-5-0">The repository is visible on github.com</span></li>
-            <li><button class="cb" data-key="private-public-because-meant" type="button" aria-pressed="false" aria-labelledby="c-4-5-1">&#10003;</button><span class="cbt" id="c-4-5-1">It is private, or public because I meant it to be</span></li>
-            <li><button class="cb" data-key="git-status-says-up" type="button" aria-pressed="false" aria-labelledby="c-4-5-2">&#10003;</button><span class="cbt" id="c-4-5-2"><code>git status</code> says up to date with <code>origin</code></span></li>
+            <li><button class="cb" data-key="repository-visible-github-com" type="button" aria-pressed="false" aria-labelledby="c-4-5-0">&#10003;</button><span class="cbt"><span id="c-4-5-0">The repository is visible on github.com</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-4-5-0">why?</button></span><p class="whya" id="w-c-4-5-0" hidden>Until you have seen it there, the second copy is a claim rather than a fact.</p></li>
+            <li><button class="cb" data-key="private-public-because-meant" type="button" aria-pressed="false" aria-labelledby="c-4-5-1">&#10003;</button><span class="cbt"><span id="c-4-5-1">It is private, or public because I meant it to be</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-4-5-1">why?</button></span><p class="whya" id="w-c-4-5-1" hidden>Public by accident cannot be undone for anything anybody has already copied. Private by default is the reversible choice.</p></li>
+            <li><button class="cb" data-key="git-status-says-up" type="button" aria-pressed="false" aria-labelledby="c-4-5-2">&#10003;</button><span class="cbt"><span id="c-4-5-2"><code>git status</code> says up to date with <code>origin</code></span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-4-5-2">why?</button></span><p class="whya" id="w-c-4-5-2" hidden>Committed and pushed are different events. Only one of them puts your work anywhere but this machine.</p></li>
         </ul>
       </li>
       <li data-key="usage-screen" data-id="4.6" data-tiers="mid max" data-open="0" data-done="0">
@@ -1246,9 +1280,9 @@ one so I can look.
             <p class="why">What the numbers mean in money, and what drives them: <a href="https://lookedright.tonydefazio.com/what-it-costs">What It Costs</a>.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="opened-usage-once" type="button" aria-pressed="false" aria-labelledby="c-4-6-0">&#10003;</button><span class="cbt" id="c-4-6-0">I have opened <code>/usage</code> at least once</span></li>
-            <li><button class="cb" data-key="know-how-switch-between" type="button" aria-pressed="false" aria-labelledby="c-4-6-1">&#10003;</button><span class="cbt" id="c-4-6-1">I know how to switch it between the day and the week</span></li>
-            <li><button class="cb" data-key="name-thing-session-cost" type="button" aria-pressed="false" aria-labelledby="c-4-6-2">&#10003;</button><span class="cbt" id="c-4-6-2">I can name the one thing in this session that cost the most</span></li>
+            <li><button class="cb" data-key="opened-usage-once" type="button" aria-pressed="false" aria-labelledby="c-4-6-0">&#10003;</button><span class="cbt"><span id="c-4-6-0">I have opened <code>/usage</code> at least once</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-4-6-0">why?</button></span><p class="whya" id="w-c-4-6-0" hidden>The first time you look at what it costs should not be the month somebody asks you about the bill.</p></li>
+            <li><button class="cb" data-key="know-how-switch-between" type="button" aria-pressed="false" aria-labelledby="c-4-6-1">&#10003;</button><span class="cbt"><span id="c-4-6-1">I know how to switch it between the day and the week</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-4-6-1">why?</button></span><p class="whya" id="w-c-4-6-1" hidden>A day that looks fine and a week that does not are the same number viewed differently, and only one of them predicts the invoice.</p></li>
+            <li><button class="cb" data-key="name-thing-session-cost" type="button" aria-pressed="false" aria-labelledby="c-4-6-2">&#10003;</button><span class="cbt"><span id="c-4-6-2">I can name the one thing in this session that cost the most</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-4-6-2">why?</button></span><p class="whya" id="w-c-4-6-2" hidden>Cost comes from a few expensive moves, not from everything equally. Knowing which is what makes the number controllable.</p></li>
         </ul>
       </li>
       <li data-key="cheap-now-impossible-later" data-id="4.7" data-tiers="mid max" data-open="0" data-done="0">
@@ -1276,9 +1310,9 @@ one so I can look.
             </div>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="gitattributes" type="button" aria-pressed="false" aria-labelledby="c-4-7-0">&#10003;</button><span class="cbt" id="c-4-7-0"><code>.gitattributes</code> exists and pins <code>eol=lf</code> on shell scripts</span></li>
-            <li><button class="cb" data-key="authorship-hook" type="button" aria-pressed="false" aria-labelledby="c-4-7-1">&#10003;</button><span class="cbt" id="c-4-7-1">A commit the agent made is marked as such</span></li>
-            <li><button class="cb" data-key="log-tells-who" type="button" aria-pressed="false" aria-labelledby="c-4-7-2">&#10003;</button><span class="cbt" id="c-4-7-2">I can tell from <code>git log</code> alone which commits are mine</span></li>
+            <li><button class="cb" data-key="gitattributes" type="button" aria-pressed="false" aria-labelledby="c-4-7-0">&#10003;</button><span class="cbt"><span id="c-4-7-0"><code>.gitattributes</code> exists and pins <code>eol=lf</code> on shell scripts</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-4-7-0">why?</button></span><p class="whya" id="w-c-4-7-0" hidden>A carriage return in the first line of a script is a <code>bad interpreter</code> failure on a Linux cluster, and nothing you can see in the file is wrong.</p></li>
+            <li><button class="cb" data-key="authorship-hook" type="button" aria-pressed="false" aria-labelledby="c-4-7-1">&#10003;</button><span class="cbt"><span id="c-4-7-1">A commit the agent made is marked as such</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-4-7-1">why?</button></span><p class="whya" id="w-c-4-7-1" hidden>Cheap now and impossible retroactively: without it, a history has to be declared agent-written wholesale, forever, because nothing distinguishes the commits.</p></li>
+            <li><button class="cb" data-key="log-tells-who" type="button" aria-pressed="false" aria-labelledby="c-4-7-2">&#10003;</button><span class="cbt"><span id="c-4-7-2">I can tell from <code>git log</code> alone which commits are mine</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-4-7-2">why?</button></span><p class="whya" id="w-c-4-7-2" hidden>This is the question you will be asked about work you did with an agent, and the log is the only thing that can answer it.</p></li>
         </ul>
       </li>
     </ol>
@@ -1301,8 +1335,8 @@ one so I can look.
             <p class="why">One change. Verify. Commit. Next. Do not fill the waiting with a second project &mdash; some people are good at that, and few are good at it in the first month.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="say-last-three-commits" type="button" aria-pressed="false" aria-labelledby="c-5-1-0">&#10003;</button><span class="cbt" id="c-5-1-0">I could say what each of my last three commits did, without opening them</span></li>
-            <li><button class="cb" data-key="verify-change-starting-next" type="button" aria-pressed="false" aria-labelledby="c-5-1-1">&#10003;</button><span class="cbt" id="c-5-1-1">I verify one change before starting the next</span></li>
+            <li><button class="cb" data-key="say-last-three-commits" type="button" aria-pressed="false" aria-labelledby="c-5-1-0">&#10003;</button><span class="cbt"><span id="c-5-1-0">I could say what each of my last three commits did, without opening them</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-5-1-0">why?</button></span><p class="whya" id="w-c-5-1-0" hidden>If you cannot, the history exists and is unreadable &mdash; which costs you at exactly the moment you needed it.</p></li>
+            <li><button class="cb" data-key="verify-change-starting-next" type="button" aria-pressed="false" aria-labelledby="c-5-1-1">&#10003;</button><span class="cbt"><span id="c-5-1-1">I verify one change before starting the next</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-5-1-1">why?</button></span><p class="whya" id="w-c-5-1-1" hidden>Two unverified changes cannot be told apart. Verifying between them is what keeps the number of suspects at one.</p></li>
         </ul>
       </li>
       <li data-key="define-done" data-id="5.2" data-tiers="min mid max" data-open="0" data-done="0">
@@ -1314,8 +1348,8 @@ one so I can look.
             <p class="why">Five ways a task fails: wrong output; right output in the wrong place; it silently did nothing; it did more than you asked; it reported a success it never achieved. The first three announce themselves. <b>The last two do not</b>, and no amount of reading the reply catches them.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="name-five-ways-task" type="button" aria-pressed="false" aria-labelledby="c-5-2-0">&#10003;</button><span class="cbt" id="c-5-2-0">I can name the five ways a task fails, or I know where to look them up</span></li>
-            <li><button class="cb" data-key="next-task-state-file" type="button" aria-pressed="false" aria-labelledby="c-5-2-1">&#10003;</button><span class="cbt" id="c-5-2-1">For my next task I can state the file, folder or number that proves it worked</span></li>
+            <li><button class="cb" data-key="name-five-ways-task" type="button" aria-pressed="false" aria-labelledby="c-5-2-0">&#10003;</button><span class="cbt"><span id="c-5-2-0">I can name the five ways a task fails, or I know where to look them up</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-5-2-0">why?</button></span><p class="whya" id="w-c-5-2-0" hidden>The last two &mdash; it did more than you asked, it reported a success it never achieved &mdash; do not announce themselves, so you have to be looking.</p></li>
+            <li><button class="cb" data-key="next-task-state-file" type="button" aria-pressed="false" aria-labelledby="c-5-2-1">&#10003;</button><span class="cbt"><span id="c-5-2-1">For my next task I can state the file, folder or number that proves it worked</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-5-2-1">why?</button></span><p class="whya" id="w-c-5-2-1" hidden>A task without a stated proof is a task you will judge by reading the reply, which is the habit this whole page exists to break.</p></li>
         </ul>
       </li>
       <li data-key="friction-log" data-id="5.3" data-tiers="mid max" data-open="0" data-done="0">
@@ -1327,8 +1361,8 @@ one so I can look.
             <p class="why">Every setup has quirks &mdash; which machine, which path, which folder things get lost between. The agent inherits them without asking and nothing crashes. <b>Repetition is the signal.</b> When the same thing bites twice, write down what happened.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="file-add-line-something" type="button" aria-pressed="false" aria-labelledby="c-5-3-0">&#10003;</button><span class="cbt" id="c-5-3-0">There is one file I add a line to when something goes wrong</span></li>
-            <li><button class="cb" data-key="more-line" type="button" aria-pressed="false" aria-labelledby="c-5-3-1">&#10003;</button><span class="cbt" id="c-5-3-1">It has more than one line in it</span></li>
+            <li><button class="cb" data-key="file-add-line-something" type="button" aria-pressed="false" aria-labelledby="c-5-3-0">&#10003;</button><span class="cbt"><span id="c-5-3-0">There is one file I add a line to when something goes wrong</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-5-3-0">why?</button></span><p class="whya" id="w-c-5-3-0" hidden>Friction you do not write down gets solved from memory, badly, every time it recurs. The file is what turns it into something you can fix once.</p></li>
+            <li><button class="cb" data-key="more-line" type="button" aria-pressed="false" aria-labelledby="c-5-3-1">&#10003;</button><span class="cbt"><span id="c-5-3-1">It has more than one line in it</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-5-3-1">why?</button></span><p class="whya" id="w-c-5-3-1" hidden>One line is a good intention. The second line is where it becomes a record, and the record is what tells you which guard is worth building.</p></li>
         </ul>
       </li>
       <li data-key="guards-after" data-id="5.4" data-tiers="mid max" data-open="0" data-done="0">
@@ -1340,8 +1374,8 @@ one so I can look.
             <p class="why">Not in advance. Guarding against failure is necessary and it is also an absorbing pursuit &mdash; a beautiful start-up script will not analyze your data. Cures come in three kinds and only one is a tool: <b>a tool, a change of habit, or a check you accept forever.</b></p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="guard-traces-back-something" type="button" aria-pressed="false" aria-labelledby="c-5-4-0">&#10003;</button><span class="cbt" id="c-5-4-0">Every guard I have traces back to something that actually went wrong</span></li>
-            <li><button class="cb" data-key="built-case" type="button" aria-pressed="false" aria-labelledby="c-5-4-1">&#10003;</button><span class="cbt" id="c-5-4-1">I have not built one just in case</span></li>
+            <li><button class="cb" data-key="guard-traces-back-something" type="button" aria-pressed="false" aria-labelledby="c-5-4-0">&#10003;</button><span class="cbt"><span id="c-5-4-0">Every guard I have traces back to something that actually went wrong</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-5-4-0">why?</button></span><p class="whya" id="w-c-5-4-0" hidden>A guard built before its failure is a guess, and guesses accumulate into a setup that costs more to maintain than the work it protects.</p></li>
+            <li><button class="cb" data-key="built-case" type="button" aria-pressed="false" aria-labelledby="c-5-4-1">&#10003;</button><span class="cbt"><span id="c-5-4-1">I have not built one just in case</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-5-4-1">why?</button></span><p class="whya" id="w-c-5-4-1" hidden>Guarding is absorbing and feels productive the entire time. This box is the one that stops the setup becoming the project.</p></li>
         </ul>
       </li>
       <li data-key="handoff-note" data-id="5.5" data-tiers="mid max" data-open="0" data-done="0">
@@ -1353,8 +1387,8 @@ one so I can look.
             <p class="why">Commit, push, and write three lines: what happened, what is unfinished, what to do next. A session that ran all night and delivered no handoff delivered nothing.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="last-session-ended-commit" type="button" aria-pressed="false" aria-labelledby="c-5-5-0">&#10003;</button><span class="cbt" id="c-5-5-0">My last session ended with a commit and a push</span></li>
-            <li><button class="cb" data-key="left-three-lines-happened" type="button" aria-pressed="false" aria-labelledby="c-5-5-1">&#10003;</button><span class="cbt" id="c-5-5-1">It left three lines: what happened, what is unfinished, what is next</span></li>
+            <li><button class="cb" data-key="last-session-ended-commit" type="button" aria-pressed="false" aria-labelledby="c-5-5-0">&#10003;</button><span class="cbt"><span id="c-5-5-0">My last session ended with a commit and a push</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-5-5-0">why?</button></span><p class="whya" id="w-c-5-5-0" hidden>A session that ran all night and left nothing committed delivered nothing, and nobody finds out until the next morning.</p></li>
+            <li><button class="cb" data-key="left-three-lines-happened" type="button" aria-pressed="false" aria-labelledby="c-5-5-1">&#10003;</button><span class="cbt"><span id="c-5-5-1">It left three lines: what happened, what is unfinished, what is next</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-5-5-1">why?</button></span><p class="whya" id="w-c-5-5-1" hidden>The next session &mdash; possibly you, on a different day &mdash; has no other way to know where things stopped and why.</p></li>
         </ul>
       </li>
     </ol>
@@ -1376,9 +1410,9 @@ one so I can look.
             <p class="why">The first thing to break is a path somebody hardcoded. This is the test of everything in Phase&nbsp;2, and it is the only test of it.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="cloned-second-machine" type="button" aria-pressed="false" aria-labelledby="c-6-1-0">&#10003;</button><span class="cbt" id="c-6-1-0">Cloned on the second machine</span></li>
-            <li><button class="cb" data-key="runs-without-editing-path" type="button" aria-pressed="false" aria-labelledby="c-6-1-1">&#10003;</button><span class="cbt" id="c-6-1-1">It runs there without editing a path</span></li>
-            <li><button class="cb" data-key="had-edit-friction-log" type="button" aria-pressed="false" aria-labelledby="c-6-1-2">&#10003;</button><span class="cbt" id="c-6-1-2">If I had to edit one, it is in the friction log</span></li>
+            <li><button class="cb" data-key="cloned-second-machine" type="button" aria-pressed="false" aria-labelledby="c-6-1-0">&#10003;</button><span class="cbt"><span id="c-6-1-0">Cloned on the second machine</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-6-1-0">why?</button></span><p class="whya" id="w-c-6-1-0" hidden>The second machine is the only real test of whether the work travels. Everything before this is a claim that it would.</p></li>
+            <li><button class="cb" data-key="runs-without-editing-path" type="button" aria-pressed="false" aria-labelledby="c-6-1-1">&#10003;</button><span class="cbt"><span id="c-6-1-1">It runs there without editing a path</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-6-1-1">why?</button></span><p class="whya" id="w-c-6-1-1" hidden>If it needs a path edited, it was never portable &mdash; and you have just found that out cheaply instead of on a cluster at a deadline.</p></li>
+            <li><button class="cb" data-key="had-edit-friction-log" type="button" aria-pressed="false" aria-labelledby="c-6-1-2">&#10003;</button><span class="cbt"><span id="c-6-1-2">If I had to edit one, it is in the friction log</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-6-1-2">why?</button></span><p class="whya" id="w-c-6-1-2" hidden>That edit is the exact friction 5.3 asks you to record, and 3.7 is the fix for it.</p></li>
         </ul>
       </li>
       <li data-key="claim-board" data-id="6.2" data-tiers="max" data-open="0" data-done="0">
@@ -1390,9 +1424,9 @@ one so I can look.
             <p class="why">Two sessions cannot conflict in git over a file that does not exist yet, so both get written and you find out when a human reads the folder. A shared file saying who is doing what, committed and pushed, is enough. It is a message, not a lock &mdash; and the point is that the second person finds out <b>before</b> doing the work rather than after.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="file-answers-anyone-else" type="button" aria-pressed="false" aria-labelledby="c-6-2-0">&#10003;</button><span class="cbt" id="c-6-2-0">There is one file that answers &ldquo;is anyone else in here?&rdquo;</span></li>
-            <li><button class="cb" data-key="opening-claim-takes-under" type="button" aria-pressed="false" aria-labelledby="c-6-2-1">&#10003;</button><span class="cbt" id="c-6-2-1">Opening a claim in it takes under a minute</span></li>
-            <li><button class="cb" data-key="claim-committed-pushed-unpushed" type="button" aria-pressed="false" aria-labelledby="c-6-2-2">&#10003;</button><span class="cbt" id="c-6-2-2">The claim is committed and pushed &mdash; an unpushed claim stays on one machine</span></li>
+            <li><button class="cb" data-key="file-answers-anyone-else" type="button" aria-pressed="false" aria-labelledby="c-6-2-0">&#10003;</button><span class="cbt"><span id="c-6-2-0">There is one file that answers &ldquo;is anyone else in here?&rdquo;</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-6-2-0">why?</button></span><p class="whya" id="w-c-6-2-0" hidden>Two sessions in the same material do not collide loudly. They collide silently, and both look fine until somebody reads the folder.</p></li>
+            <li><button class="cb" data-key="opening-claim-takes-under" type="button" aria-pressed="false" aria-labelledby="c-6-2-1">&#10003;</button><span class="cbt"><span id="c-6-2-1">Opening a claim in it takes under a minute</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-6-2-1">why?</button></span><p class="whya" id="w-c-6-2-1" hidden>Every board in this estate that died, died because claiming cost more than skipping it. Under a minute is what keeps it used.</p></li>
+            <li><button class="cb" data-key="claim-committed-pushed-unpushed" type="button" aria-pressed="false" aria-labelledby="c-6-2-2">&#10003;</button><span class="cbt"><span id="c-6-2-2">The claim is committed and pushed &mdash; an unpushed claim stays on one machine</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-6-2-2">why?</button></span><p class="whya" id="w-c-6-2-2" hidden>A claim that has not been pushed is a message nobody receives, which is worse than not claiming: you think you have told somebody.</p></li>
         </ul>
       </li>
       <li data-key="allocation-lands" data-id="6.3" data-tiers="max" data-open="0" data-done="0" data-optional="1">
@@ -1406,9 +1440,9 @@ one so I can look.
             <p class="why">And put the cluster&rsquo;s data path into the path helper from 3.7 rather than typing it into a script. A third machine is exactly the situation the helper was written for.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="portal-once" type="button" aria-pressed="false" aria-labelledby="c-6-3-0">&#10003;</button><span class="cbt" id="c-6-3-0">I have logged in through the portal once</span></li>
-            <li><button class="cb" data-key="trivial-job" type="button" aria-pressed="false" aria-labelledby="c-6-3-1">&#10003;</button><span class="cbt" id="c-6-3-1">I have run one trivial job end to end</span></li>
-            <li><button class="cb" data-key="cluster-path-in-helper" type="button" aria-pressed="false" aria-labelledby="c-6-3-2">&#10003;</button><span class="cbt" id="c-6-3-2">The cluster&rsquo;s data path is in the path helper, not typed into a script</span></li>
+            <li><button class="cb" data-key="portal-once" type="button" aria-pressed="false" aria-labelledby="c-6-3-0">&#10003;</button><span class="cbt"><span id="c-6-3-0">I have logged in through the portal once</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-6-3-0">why?</button></span><p class="whya" id="w-c-6-3-0" hidden>The portal confirms the account works at all. Debugging that through SSH means debugging two things at once.</p></li>
+            <li><button class="cb" data-key="trivial-job" type="button" aria-pressed="false" aria-labelledby="c-6-3-1">&#10003;</button><span class="cbt"><span id="c-6-3-1">I have run one trivial job end to end</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-6-3-1">why?</button></span><p class="whya" id="w-c-6-3-1" hidden>A trivial job that runs end to end proves the whole chain. The first real job proves nothing when it fails, because everything is suspect.</p></li>
+            <li><button class="cb" data-key="cluster-path-in-helper" type="button" aria-pressed="false" aria-labelledby="c-6-3-2">&#10003;</button><span class="cbt"><span id="c-6-3-2">The cluster&rsquo;s data path is in the path helper, not typed into a script</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-6-3-2">why?</button></span><p class="whya" id="w-c-6-3-2" hidden>A cluster path typed into a script is the same defect as any other hardcoded path, on the machine where it is hardest to find.</p></li>
             <li><button class="skipbtn" type="button" data-undo="Needed after all &mdash; the allocation came through">Not needed &mdash; no cluster</button></li>
         </ul>
       </li>
@@ -1436,9 +1470,9 @@ one so I can look.
             <p class="why">A name you will still want in five years beats a clever one. It goes on papers.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="domain-account" type="button" aria-pressed="false" aria-labelledby="c-7-1-0">&#10003;</button><span class="cbt" id="c-7-1-0">The domain is in my account</span></li>
-            <li><button class="cb" data-key="know-renewal-price-first" type="button" aria-pressed="false" aria-labelledby="c-7-1-1">&#10003;</button><span class="cbt" id="c-7-1-1">I know the renewal price, not just the first-year price</span></li>
-            <li><button class="cb" data-key="whois-privacy" type="button" aria-pressed="false" aria-labelledby="c-7-1-2">&#10003;</button><span class="cbt" id="c-7-1-2">WHOIS privacy is on</span></li>
+            <li><button class="cb" data-key="domain-account" type="button" aria-pressed="false" aria-labelledby="c-7-1-0">&#10003;</button><span class="cbt"><span id="c-7-1-0">The domain is in my account</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-7-1-0">why?</button></span><p class="whya" id="w-c-7-1-0" hidden>Until it is in your account it is available to somebody else.</p></li>
+            <li><button class="cb" data-key="know-renewal-price-first" type="button" aria-pressed="false" aria-labelledby="c-7-1-1">&#10003;</button><span class="cbt"><span id="c-7-1-1">I know the renewal price, not just the first-year price</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-7-1-1">why?</button></span><p class="whya" id="w-c-7-1-1" hidden>On some endings the renewal is ten times the first year, and the checkout does not put that in front of you.</p></li>
+            <li><button class="cb" data-key="whois-privacy" type="button" aria-pressed="false" aria-labelledby="c-7-1-2">&#10003;</button><span class="cbt"><span id="c-7-1-2">WHOIS privacy is on</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-7-1-2">why?</button></span><p class="whya" id="w-c-7-1-2" hidden>Every domain has a public ownership record. Without this, your name, address and phone number are in it for anybody to look up.</p></li>
         </ul>
       </li>
       <li data-key="dns" data-id="7.2" data-tiers="min mid max" data-open="0" data-done="0">
@@ -1453,9 +1487,9 @@ one so I can look.
             <p class="why">Cloudflare calls your domain a <b>zone</b>, and it says <b>Active</b> once the handover has gone through. Waiting for that is normal &mdash; usually minutes, occasionally hours, because the change has to spread between machines all over the internet. Nothing is broken while you wait; it is a queue, not an error. (<a href="https://developers.cloudflare.com/dns/zone-setups/full-setup/setup/">Cloudflare&rsquo;s own instructions</a>.)</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="cloudflare-site-given-two" type="button" aria-pressed="false" aria-labelledby="c-7-2-0">&#10003;</button><span class="cbt" id="c-7-2-0">Cloudflare has the site and has given me two nameservers</span></li>
-            <li><button class="cb" data-key="those-two-pasted-into" type="button" aria-pressed="false" aria-labelledby="c-7-2-1">&#10003;</button><span class="cbt" id="c-7-2-1">Those two are pasted into Porkbun, replacing what was there</span></li>
-            <li><button class="cb" data-key="cloudflare-s-dashboard-says" type="button" aria-pressed="false" aria-labelledby="c-7-2-2">&#10003;</button><span class="cbt" id="c-7-2-2">Cloudflare&rsquo;s dashboard says the zone is <b>Active</b></span></li>
+            <li><button class="cb" data-key="cloudflare-site-given-two" type="button" aria-pressed="false" aria-labelledby="c-7-2-0">&#10003;</button><span class="cbt"><span id="c-7-2-0">Cloudflare has the site and has given me two nameservers</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-7-2-0">why?</button></span><p class="whya" id="w-c-7-2-0" hidden>Those two nameservers are the whole handover. Nothing else in this step matters until they exist.</p></li>
+            <li><button class="cb" data-key="those-two-pasted-into" type="button" aria-pressed="false" aria-labelledby="c-7-2-1">&#10003;</button><span class="cbt"><span id="c-7-2-1">Those two are pasted into Porkbun, replacing what was there</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-7-2-1">why?</button></span><p class="whya" id="w-c-7-2-1" hidden>Until they replace what is there, the name still points at the shop you bought it from and none of the later steps can work.</p></li>
+            <li><button class="cb" data-key="cloudflare-s-dashboard-says" type="button" aria-pressed="false" aria-labelledby="c-7-2-2">&#10003;</button><span class="cbt"><span id="c-7-2-2">Cloudflare&rsquo;s dashboard says the zone is <b>Active</b></span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-7-2-2">why?</button></span><p class="whya" id="w-c-7-2-2" hidden>Active is the confirmation the handover finished. Before it, everything downstream will fail in ways that look like your mistake.</p></li>
         </ul>
       </li>
       <li data-key="who-serves" data-id="7.3" data-tiers="min mid max" data-open="0" data-done="0">
@@ -1488,11 +1522,11 @@ one so I can look.
              in V3_MAP, which is correct -- V3_MAP describes a document from before any of
              this and must never be regenerated. -->
         <ul class="checks">
-            <li data-tiers="min"><button class="cb" data-key="custom-domain-on-w5-project" type="button" aria-pressed="false" aria-labelledby="c-7-3-3">&#10003;</button><span class="cbt" id="c-7-3-3">The name I bought at 7.1 is set as the custom domain on the Cloudflare project that has been serving my page since W5</span></li>
-            <li data-tiers="min"><button class="cb" data-key="https-works-on-own-name" type="button" aria-pressed="false" aria-labelledby="c-7-3-4">&#10003;</button><span class="cbt" id="c-7-3-4">I opened <code>https://</code> on my own name and the page loaded &mdash; and the free address from W5 still works too</span></li>
-            <li data-tiers="mid max"><button class="cb" data-key="decided-serves-site-cloudflare" type="button" aria-pressed="false" aria-labelledby="c-7-3-0">&#10003;</button><span class="cbt" id="c-7-3-0">I have decided who serves the site: <b>Cloudflare</b> (7.4 and 7.5 become Not needed), or GitHub Pages</span></li>
-            <li data-tiers="mid max"><button class="cb" data-key="github-repository-public-paid" type="button" aria-pressed="false" aria-labelledby="c-7-3-1">&#10003;</button><span class="cbt" id="c-7-3-1">If GitHub: my repository is public, or I am on a paid plan</span></li>
-            <li data-tiers="mid max"><button class="cb" data-key="signed-deploy-tool-once" type="button" aria-pressed="false" aria-labelledby="c-7-3-2">&#10003;</button><span class="cbt" id="c-7-3-2">I have signed the deploy tool in once on this machine</span></li>
+            <li data-tiers="min"><button class="cb" data-key="custom-domain-on-w5-project" type="button" aria-pressed="false" aria-labelledby="c-7-3-3">&#10003;</button><span class="cbt"><span id="c-7-3-3">The name I bought at 7.1 is set as the custom domain on the Cloudflare project that has been serving my page since W5</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-7-3-3">why?</button></span><p class="whya" id="w-c-7-3-3" hidden>The site is already being served; this is only about pointing the new name at it. Without this step the name resolves to nothing.</p></li>
+            <li data-tiers="min"><button class="cb" data-key="https-works-on-own-name" type="button" aria-pressed="false" aria-labelledby="c-7-3-4">&#10003;</button><span class="cbt"><span id="c-7-3-4">I opened <code>https://</code> on my own name and the page loaded &mdash; and the free address from W5 still works too</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-7-3-4">why?</button></span><p class="whya" id="w-c-7-3-4" hidden>Loading it yourself is the check. The old address still working confirms you added a name rather than moved the site.</p></li>
+            <li data-tiers="mid max"><button class="cb" data-key="decided-serves-site-cloudflare" type="button" aria-pressed="false" aria-labelledby="c-7-3-0">&#10003;</button><span class="cbt"><span id="c-7-3-0">I have decided who serves the site: <b>Cloudflare</b> (7.4 and 7.5 become Not needed), or GitHub Pages</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-7-3-0">why?</button></span><p class="whya" id="w-c-7-3-0" hidden>These two cannot both be true, and deciding now is what makes 7.4 and 7.5 either necessary or skippable.</p></li>
+            <li data-tiers="mid max"><button class="cb" data-key="github-repository-public-paid" type="button" aria-pressed="false" aria-labelledby="c-7-3-1">&#10003;</button><span class="cbt"><span id="c-7-3-1">If GitHub: my repository is public, or I am on a paid plan</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-7-3-1">why?</button></span><p class="whya" id="w-c-7-3-1" hidden>GitHub only serves free sites from public repositories, and you were told to keep yours private. On the free plan those two are incompatible.</p></li>
+            <li data-tiers="mid max"><button class="cb" data-key="signed-deploy-tool-once" type="button" aria-pressed="false" aria-labelledby="c-7-3-2">&#10003;</button><span class="cbt"><span id="c-7-3-2">I have signed the deploy tool in once on this machine</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-7-3-2">why?</button></span><p class="whya" id="w-c-7-3-2" hidden>Once per machine, in a browser. Discovering it at the point of deploying is a stop in the middle of the one step you wanted to be quick.</p></li>
         </ul>
       </li>
       <li data-key="github-pages" data-id="7.4" data-tiers="min mid max" data-open="0" data-done="0" data-optional="1">
@@ -1514,10 +1548,10 @@ or four A records:
             <p class="why"><b>Cloudflare has no record type called ALIAS or ANAME.</b> Other registrars do, and GitHub’s own page names them; at Cloudflare you add an ordinary <b>CNAME on the bare name</b> and it flattens it for you automatically. Prefer that to the four literal addresses, which are four things that can change under you. (<a href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site">GitHub&rsquo;s record reference</a>; <a href="https://kb.porkbun.com/article/64-how-to-connect-your-domain-to-github-pages">Porkbun&rsquo;s version</a>, if you skip Cloudflare and keep DNS at Porkbun.)</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="custom-domain-set-repository" type="button" aria-pressed="false" aria-labelledby="c-7-4-0">&#10003;</button><span class="cbt" id="c-7-4-0">Custom domain set in the repository&rsquo;s Settings &rarr; Pages</span></li>
-            <li><button class="cb" data-key="www-cname-record-added" type="button" aria-pressed="false" aria-labelledby="c-7-4-1">&#10003;</button><span class="cbt" id="c-7-4-1"><code>www</code> CNAME record added</span></li>
-            <li><button class="cb" data-key="bare-name-record-added" type="button" aria-pressed="false" aria-labelledby="c-7-4-2">&#10003;</button><span class="cbt" id="c-7-4-2">Bare-name record added &mdash; a CNAME at Cloudflare, otherwise the four A records</span></li>
-            <li><button class="cb" data-key="name-loads-browser" type="button" aria-pressed="false" aria-labelledby="c-7-4-3">&#10003;</button><span class="cbt" id="c-7-4-3">The name loads in a browser</span></li>
+            <li><button class="cb" data-key="custom-domain-set-repository" type="button" aria-pressed="false" aria-labelledby="c-7-4-0">&#10003;</button><span class="cbt"><span id="c-7-4-0">Custom domain set in the repository&rsquo;s Settings &rarr; Pages</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-7-4-0">why?</button></span><p class="whya" id="w-c-7-4-0" hidden>This writes the CNAME file that tells the server the domain is yours. Without it the records point somewhere that will not answer for you.</p></li>
+            <li><button class="cb" data-key="www-cname-record-added" type="button" aria-pressed="false" aria-labelledby="c-7-4-1">&#10003;</button><span class="cbt"><span id="c-7-4-1"><code>www</code> CNAME record added</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-7-4-1">why?</button></span><p class="whya" id="w-c-7-4-1" hidden>Half the connection. With only one of the two records, the name works with www or without it, and you will test the one that works.</p></li>
+            <li><button class="cb" data-key="bare-name-record-added" type="button" aria-pressed="false" aria-labelledby="c-7-4-2">&#10003;</button><span class="cbt"><span id="c-7-4-2">Bare-name record added &mdash; a CNAME at Cloudflare, otherwise the four A records</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-7-4-2">why?</button></span><p class="whya" id="w-c-7-4-2" hidden>The other half. Prefer the CNAME: the four literal addresses are four things that can change under you without notice.</p></li>
+            <li><button class="cb" data-key="name-loads-browser" type="button" aria-pressed="false" aria-labelledby="c-7-4-3">&#10003;</button><span class="cbt"><span id="c-7-4-3">The name loads in a browser</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-7-4-3">why?</button></span><p class="whya" id="w-c-7-4-3" hidden>The only proof that both ends actually met. Everything up to here is configuration that looks correct either way.</p></li>
             <li><button class="skipbtn" type="button" data-undo="Needed after all &mdash; I chose GitHub Pages">Not needed &mdash; I chose Cloudflare</button></li>
         </ul>
       </li>
@@ -1533,9 +1567,9 @@ or four A records:
             <p class="why"><b>Those control names were current on 2026-08-30, and this step has still never been walked.</b> If <b>Enforce HTTPS</b> or the orange cloud is not where this says, the fact underneath it has not changed &mdash; a proxied record stops the certificate being issued &mdash; and the way through is to screenshot the whole screen and ask your agent.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="record-pointed-github-set" type="button" aria-pressed="false" aria-labelledby="c-7-5-0">&#10003;</button><span class="cbt" id="c-7-5-0">Every record pointed at GitHub is set to <b>DNS only</b> &mdash; the gray cloud</span></li>
-            <li><button class="cb" data-key="enforce-https-tickable-rather" type="button" aria-pressed="false" aria-labelledby="c-7-5-1">&#10003;</button><span class="cbt" id="c-7-5-1"><b>Enforce HTTPS</b> is tickable rather than greyed out</span></li>
-            <li><button class="cb" data-key="checked-https-works" type="button" aria-pressed="false" aria-labelledby="c-7-5-2">&#10003;</button><span class="cbt" id="c-7-5-2">It is checked, and <code>https://</code> works</span></li>
+            <li><button class="cb" data-key="record-pointed-github-set" type="button" aria-pressed="false" aria-labelledby="c-7-5-0">&#10003;</button><span class="cbt"><span id="c-7-5-0">Every record pointed at GitHub is set to <b>DNS only</b> &mdash; the gray cloud</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-7-5-0">why?</button></span><p class="whya" id="w-c-7-5-0" hidden>With the orange cloud on, the request proving you own the domain never reaches GitHub, so the certificate is never issued and nothing says why.</p></li>
+            <li><button class="cb" data-key="enforce-https-tickable-rather" type="button" aria-pressed="false" aria-labelledby="c-7-5-1">&#10003;</button><span class="cbt"><span id="c-7-5-1"><b>Enforce HTTPS</b> is tickable rather than greyed out</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-7-5-1">why?</button></span><p class="whya" id="w-c-7-5-1" hidden>Greyed out means the certificate has not been issued yet. It is the visible symptom of the invisible failure above.</p></li>
+            <li><button class="cb" data-key="checked-https-works" type="button" aria-pressed="false" aria-labelledby="c-7-5-2">&#10003;</button><span class="cbt"><span id="c-7-5-2">It is checked, and <code>https://</code> works</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-7-5-2">why?</button></span><p class="whya" id="w-c-7-5-2" hidden>Tickable and ticked are different. This is where the chain that fails silently is confirmed to have finished.</p></li>
             <li><button class="skipbtn" type="button" data-undo="Needed after all &mdash; I chose GitHub Pages">Not needed &mdash; I chose Cloudflare</button></li>
         </ul>
       </li>
@@ -1978,6 +2012,26 @@ or four A records:
     render();
     steps.forEach(function (s) { s.li.dataset.open = '0'; s.paint(); });
     count();
+  });
+
+  // ---- "why?" on every box ----
+  //
+  // DELEGATED, not one listener per button. There are 115 of them, and the tier switch
+  // hides and shows their steps without ever removing them from the DOM -- so a listener
+  // attached per element would still work, and 115 of them is 115 closures to keep for a
+  // page where at most one answer is open at a time.
+  //
+  // IT MUST NOT REACH THE BOX. The button sits inside the label span, and the box's own
+  // click handler is on the .cb element rather than the row, so a press here cannot tick
+  // anything. That is checked in the browser rather than assumed: tools/browser_check.js.
+  document.addEventListener('click', function (e) {
+    var q = e.target.closest && e.target.closest('.whyq');
+    if (!q) return;
+    var a = document.getElementById(q.getAttribute('aria-controls'));
+    if (!a) return;
+    var open = q.getAttribute('aria-expanded') === 'true';
+    q.setAttribute('aria-expanded', open ? 'false' : 'true');
+    a.hidden = open;
   });
 
   // ---- W2's starter projects, for the reader who came to try rather than to build ----
