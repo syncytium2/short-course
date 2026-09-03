@@ -638,15 +638,20 @@
          about a phase the filter had already removed for them. A caveat you cannot check
          against anything on your screen is worse than no caveat: it is the page telling a
          beginner they have missed something. The macOS half is the laptop and cluster
-         routes; the self-report half is true everywhere, and stays. -->
-    <p><span data-tiers="mid max">The steps that install things are written for one vendor on macOS, and say so. </span>Roughly a third of the boxes are things only you can confirm &mdash; <i>I know</i>, <i>I have decided</i>, <i>I can say</i> &mdash; so ticking them all is not evidence the setup works.</p>
+         routes; the self-report half is true everywhere, and stays.
+         AND THEN min WAS LEFT WITH NO VENDOR CAVEAT AT ALL, which is the opposite error and
+         took until 2026-09-02 to surface. The browser route is the MOST vendor-specific of
+         the three -- W1 to W5 name one company's website end to end -- and it is walked by
+         the reader least able to tell a wrong product from a wrong step. So min gets its own
+         sentence, about the thing min can actually check. -->
+    <p><span data-tiers="min">The five browser steps were walked on one vendor&rsquo;s website and name its screens throughout; a different assistant may not do this job at all, and the block above W1 is the one-minute test for that. </span><span data-tiers="mid max">The steps that install things are written for one vendor on macOS, and say so. </span>Roughly a third of the boxes are things only you can confirm &mdash; <i>I know</i>, <i>I have decided</i>, <i>I can say</i> &mdash; so ticking them all is not evidence the setup works.</p>
   </div>
   
   <header class="mast">
     <p class="eyebrow"><a href="/" class="home">&larr;&nbsp;It Looked Right</a> &middot; Setup runbook &middot; keep this window open</p>
     <h1>Cold Start</h1>
     <p class="standfirst">An email address to a first agent session that leaves a record behind it. Pick one of three routes &mdash; nothing installed, your own laptop, or a cluster shared with other people &mdash; and get every step it needs in order, with the condition that tells you each one worked.</p>
-    <p class="pv">Version <b>0.1.41</b> &middot; 2 Sep 2026<span class="pv-born">First published 29 Aug 2026</span></p>
+    <p class="pv">Version <b>0.1.42</b> &middot; 2 Sep 2026<span class="pv-born">First published 29 Aug 2026</span></p>
   </header>
 
   <div class="method">
@@ -885,6 +890,26 @@
     </div>
     <div class="ask"><span class="ask-k">If this does not match your screen</span><b>Everything that can go wrong in these five steps goes wrong inside the window you are already talking to.</b> You do not have to leave and look it up: if what came back is not what the step describes, say exactly that in the same conversation &mdash; <i>&ldquo;this is what I asked for, this is what I got, what happened?&rdquo;</i> &mdash; and keep going from its answer. <b>The one thing it cannot do is see the dashboard in your other tab</b>, so for anything you are looking at rather than typing, screenshot it in.</div>
     <p class="phase-note"><b>Five steps, one evening, all of it in a browser.</b> Nothing to install, nothing to configure, and not one command to type. You finish with a working page at an address you can send to somebody. It was walked start to finish on <b>2026-08-30</b>, and the places it went wrong are written into the steps rather than tidied out of them.</p>
+    <!-- THE WRONG-PRODUCT GATE. ADDED 2026-09-02, FROM THE FIRST WALK BY SOMEBODY OUTSIDE
+         THIS PROJECT, and it is the worst result this page has produced. She used the agent
+         her institution gave her -- a Copilot inside a Microsoft app suite -- and it did
+         exactly what it is built to do: it opened a low-code form builder and had her place
+         list boxes and type field names in by hand. Linking a Dropbox folder to it took the
+         better part of an hour. There was never a repository, so W4's "commit and push this"
+         had nothing to push, and the record of the session ended up pasted by hand into one
+         note. Roughly fifteen screenshots. At no point did this page tell her she was in a
+         different kind of product; it just kept almost working, which is the failure mode
+         this whole document is about, aimed at its own reader.
+         THE FIX IS A TEST, NOT A LIST OF PRODUCT NAMES. Naming which Copilot is which would
+         be wrong inside a month -- one company ships several things under that one word and
+         renames them -- and a name is not checkable from where the reader is sitting. What
+         does not move is what these five steps need the tool to DO: write a file and show it
+         back. So the gate is a prompt with an observable answer, which is what every other
+         step here already asks for.
+         IT SITS ABOVE THE STARTER GENERATOR ON PURPOSE. "What should I build" is the second
+         question. "Am I holding the right kind of thing" is the first, and it is the one
+         that cost an evening. -->
+    <div class="warn"><b>One minute before W1, because the word for these tools now covers several different products.</b> Everything below was walked on <code>claude.ai</code> and names that one company&rsquo;s screens throughout. Any chat agent that can hold a repository and write files for you does the same job under a different name. <b>What will not</b> is an assistant built into a document, a mailbox or a company&rsquo;s app suite &mdash; the sort that lives inside Word, Teams, Outlook or an intranet portal. Ask one of those to build something and it does what it <i>is</i> for: it hands you a form builder and has you place the boxes and type the field names yourself. Nothing has broken and you have not made a mistake &mdash; you are in a different product doing a different job, and it does not end at an address you can send to somebody.<br><br><b>The test, before you go any further:</b> <i>&ldquo;Make a file called hello.txt with the word hello in it, and show me the file.&rdquo;</i> <b>A file comes back</b> &rarr; right kind of tool, carry on. <b>Instructions for making one, a form to fill in, or a new app to click through</b> &rarr; wrong kind, and these five steps will keep <i>almost</i> working, which is worse than failing. Go back to <b>1.1</b> and start one of the tools linked there instead. If the one you have is the only agent you are permitted, <b>this route is not open to you today</b> &mdash; that is a real answer and it is cheaper than an evening.<br><br><b>This is not hypothetical.</b> The first person outside this project to walk these five steps did it on 2 September 2026 with the assistant her institution had given her. About fifteen screenshots, most of an hour lost connecting a cloud folder, no repository at the end of it, and the record of the session copied by hand into a note.</div>
     <p class="phase-note"><b>The fifth step is not the end of anything. It is where the loop closes.</b> From then on you ask for the next item on your list, look at it, and it is live &mdash; and that round trip is now minutes rather than a project. <b>The reason to get published early is that everything after it gets cheaper</b>, not that you are done. Go back to the list you wrote in W2 and take the next one.</p>
     <p class="phase-note"><b>None of what follows is a prerequisite for that.</b> You can keep building here indefinitely. The rest of this page is for when you want the machine underneath it &mdash; your own editor, your own copy of the files, work that outlives a browser tab, other people &mdash; and you can switch to <i>the laptop route</i> at the top on any day you like. Everything you have ticked here stays ticked.</p>
     <!-- OUT OF THE FOLD, DELIBERATELY. This began inside W2's detail, which meant the
@@ -926,11 +951,18 @@
              it can actually see what you think it can. -->
         <div class="detail" id="d-W1">
             <p class="why"><b>1.1 got you the account. This is where you sit down in front of it</b> &mdash; open, signed in, ready to be asked something. Signing up costs a minute; this costs the evening, which is why they are two steps and not one.</p>
-            <p class="why"><b>A browser tab is enough for everything that follows.</b> Nothing to install and no terminal: open <code>claude.ai</code> and sign in with the account from 1.1. If you happen to have the desktop app or VS&nbsp;Code set up already, use those instead &mdash; nothing in W2 to W5 changes.</p>
+            <p class="why"><b>A browser tab is enough for everything that follows.</b> Nothing to install and no terminal: open <code>claude.ai</code> and sign in with the account from 1.1. If you happen to have the desktop app or VS&nbsp;Code set up already, use those instead &mdash; nothing in W2 to W5 changes. <b>A different agent is fine and a workplace assistant is not</b>, and the difference is not something you can settle by its name; the box below settles it in one prompt, and the block above these five steps says what goes wrong when it is skipped.</p>
             <p class="why"><b>Then get one piece of evidence that it can see what you think it can see, before you rely on it.</b> A tool that cannot open your files will answer questions about them anyway, fluently and in detail, and nothing in the reply looks different. So do not ask <i>can you see my files</i> &mdash; ask it to tell you something specific it could only know by looking, and check that it is right. That is the same move as every &ldquo;done when&rdquo; on this page, run once against your own setup.</p>
         </div>
         <ul class="checks">
             <li><button class="cb" data-key="rung-picked-highest-reachable" type="button" aria-pressed="false" aria-labelledby="c-w1-0">&#10003;</button><span class="cbt"><span id="c-w1-0">The place I chose at 1.1 is open in front of me and I can start in it now</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w1-0">why?</button></span><p class="whya" id="w-c-w1-0" hidden>Choosing where to work costs a minute. Being sat in front of it, signed in and able to start, is what the next four steps actually assume.</p></li>
+            <!-- THE WRONG-PRODUCT BOX, 2026-09-02. The prose gate above the five steps
+                 explains it; this is where it becomes a tick, because prose costs nothing to
+                 skip and this page's own closing traps say so. Deliberately not "I am using
+                 a coding agent" -- that is a self-report about a category the reader cannot
+                 be expected to know the boundary of, and she could have ticked it honestly
+                 while sitting in a form builder. A file, or not a file. -->
+            <li><button class="cb" data-key="made-me-a-file-not-instructions" type="button" aria-pressed="false" aria-labelledby="c-w1-0b">&#10003;</button><span class="cbt"><span id="c-w1-0b">I asked it for a file and it made the file &mdash; it did not tell me how to make one, or open an app for me to fill in</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w1-0b">why?</button></span><p class="whya" id="w-c-w1-0b" hidden>An assistant built into an office suite will answer this by handing you a form builder and having you place the boxes yourself. That is it working correctly at a different job, and the next four steps quietly stop being possible.<span class="ask"><b>Ask it:</b> &ldquo;Make a file called hello.txt with the word hello in it, and show me the file.&rdquo;</span></p></li>
             <li><button class="cb" data-key="named-something-back" type="button" aria-pressed="false" aria-labelledby="c-w1-1">&#10003;</button><span class="cbt"><span id="c-w1-1">It has told me something about my own files or my own screen that I never typed in, and I checked that it was right</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w1-1">why?</button></span><p class="whya" id="w-c-w1-1" hidden>A tool that cannot open your files will answer questions about them anyway &mdash; fluently, in detail, and with nothing in the reply to mark it as guesswork.<span class="ask"><b>Ask it:</b> &ldquo;Without me telling you anything about it, name three files you can see and say what is in one of them. If you can see my machine, tell me how much free disk space I have.&rdquo;</span></p></li>
         </ul>
       </li>
@@ -968,6 +1000,14 @@
         <ul class="checks">
             <li><button class="cb" data-key="route-chosen-can-say" type="button" aria-pressed="false" aria-labelledby="c-w3-0">&#10003;</button><span class="cbt"><span id="c-w3-0">The repository exists on github.com, it is private, and there is a README file in it</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w3-0">why?</button></span><p class="whya" id="w-c-w3-0" hidden>A completely empty repository is not something the agent can open, which is what the README tick is for. Private can be made public in one click; the reverse is not true of anything already copied.</p></li>
             <li><button class="cb" data-key="named-file-or-repo-visible" type="button" aria-pressed="false" aria-labelledby="c-w3-1">&#10003;</button><span class="cbt"><span id="c-w3-1">Claude is connected to it, and has named a file that is actually in there &mdash; not one I told it about</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w3-1">why?</button></span><p class="whya" id="w-c-w3-1" hidden>Connected and appearing connected look identical from the reply. Naming a file it could only know by looking is the difference between the two.<span class="ask"><b>Ask it:</b> &ldquo;Name a file in this repository and tell me what is in it. Do not ask me first.&rdquo;</span></p></li>
+            <!-- READING AND WRITING ARE TWO CONNECTIONS AND THIS STEP ONLY EVER PROVED ONE.
+                 A tool that can name a file in the repository has proved it can read. W4 then
+                 assumes it can write -- "commit and push this" -- and W5 assumes those pushes
+                 are what get published. On 2026-09-02 that assumption failed silently for a
+                 reader with no repository connection at all: the work stayed in the chat and
+                 the record of the session was pasted by hand into a note. Cheapest possible
+                 write, on a file nothing depends on, before any of tonight's work rests on it. -->
+            <li><button class="cb" data-key="write-landed-on-github" type="button" aria-pressed="false" aria-labelledby="c-w3-2">&#10003;</button><span class="cbt"><span id="c-w3-2">I had it add one line to the README, then I reloaded the repository on github.com myself and the line was there</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w3-2">why?</button></span><p class="whya" id="w-c-w3-2" hidden>Reading and writing are two separate connections, and the reply looks the same either way. W4 and W5 both assume the writing one, so it is worth two minutes on a file nothing depends on rather than finding out with an evening&rsquo;s work in the chat window.<span class="ask"><b>Ask it:</b> &ldquo;Add a line to the README saying what this project is for, and save it to the repository.&rdquo; Then reload the repository page yourself.</span></p></li>
         </ul>
       </li>
       <li data-key="one-element" data-id="W4" data-tiers="min" data-open="0" data-done="0">
@@ -988,6 +1028,13 @@
             <li><button class="cb" data-key="scope-not-correctness" type="button" aria-pressed="false" aria-labelledby="c-w4-0">&#10003;</button><span class="cbt"><span id="c-w4-0">I asked it to list every file it changed, and nothing on the list surprised me</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w4-0">why?</button></span><p class="whya" id="w-c-w4-0" hidden>Doing more than you asked is one of the two failures that never announces itself. Asking what it touched needs no programming and catches the expensive ones.<span class="ask"><b>Ask it:</b> &ldquo;List every file you changed, and say in one line why each one needed to change.&rdquo;</span></p></li>
             <li><button class="cb" data-key="seen-it-work-myself" type="button" aria-pressed="false" aria-labelledby="c-w4-1">&#10003;</button><span class="cbt"><span id="c-w4-1">I opened it myself and watched the new thing work &mdash; I did not just read a message saying it did</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w4-1">why?</button></span><p class="whya" id="w-c-w4-1" hidden>A message saying it works is a report that it reached the end of its own instructions. That is a different event from the thing working, and they come apart often.</p></li>
             <li><button class="cb" data-key="name-the-single-change" type="button" aria-pressed="false" aria-labelledby="c-w4-2">&#10003;</button><span class="cbt"><span id="c-w4-2">If somebody asked me what changed just now, I could tell them in one sentence</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w4-2">why?</button></span><p class="whya" id="w-c-w4-2" hidden>If you cannot say what changed in one sentence, you asked for too much at once &mdash; and you now cannot check any of it properly.<span class="ask"><b>Ask it:</b> &ldquo;In one sentence a non-programmer would understand, what did we just change?&rdquo;</span></p></li>
+            <!-- THE STEP ENDED ON "commit and push this" AND NEVER ASKED WHETHER IT LANDED.
+                 The whole page opens by promising "a first agent session that leaves a record
+                 behind it", and until 2026-09-02 nothing on this route ever checked that the
+                 record existed anywhere but the chat. It did not, for the first outside reader:
+                 she saved the session by copying it by hand into a note. That is the promise of
+                 this document failing, in the one step that could have caught it. -->
+            <li><button class="cb" data-key="commit-visible-on-github" type="button" aria-pressed="false" aria-labelledby="c-w4-3">&#10003;</button><span class="cbt"><span id="c-w4-3">I opened the repository on github.com and saw tonight&rsquo;s change there, with its note &mdash; the record is not only in the chat window</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w4-3">why?</button></span><p class="whya" id="w-c-w4-3" hidden>&ldquo;Saved&rdquo; in the reply means it reached the end of its own instructions. If nothing landed on github.com then the only record of the evening is a conversation, and saving that means copying it somewhere by hand &mdash; which is the thing this route exists to stop.<span class="ask"><b>Ask it:</b> &ldquo;Give me the link to the commit you just pushed.&rdquo; Then open the link.</span></p></li>
         </ul>
       </li>
       <li data-key="publish-and-notice" data-id="W5" data-tiers="min" data-open="0" data-done="0">
