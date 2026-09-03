@@ -128,6 +128,49 @@ written *afterwards, because of this*. That correction was made at the near-miss
 own request, and it matters because *"a session read the file dates"* cannot be relied on
 twice.
 
+## Finding 5 — added by the receiving repo: checking finding 4 reproduced finding 2, in the reviewer
+
+*Findings 1–3 are the author's; finding 4 is in the appendix, where the file's own structure
+exposed it. This one was produced by the review and is written by the reviewer, in the first
+person, because the subject is the reviewer.*
+
+The case arrived claiming **five session boards across the estate, roughly 550 KB, none in
+version control**. Verifying that is the whole job of a review, so I ran the obvious search: for
+every repo in the estate, find `SESSIONS.md` and ask `git ls-files` whether it is tracked.
+
+Four boards, **all four tracked** — `short-course`, `bugarach`, `interface2`, and a `CLAIMS.md`
+in `draughtsman`. 364 KB. **I had a reply half-written telling the author the finding was false.**
+
+It was not false. The five boards it names sit at the **top level of the `*-worktrees`
+directories** — `armory-worktrees/SESSIONS.md`, `bugarach-worktrees/`, and three more — and
+those directories are not repositories at all. `git rev-parse --show-toplevel` returns nothing
+for any of them. 560 KB combined.
+
+**Why the easy search was wrong, and it is the same shape as finding 2.** `git ls-files` inside
+a repo answers *"is this repo's board tracked?"*. The claim was *"do unversioned boards exist?"*.
+Those are adjacent questions with different answers, and the search that was easy to run
+answered the adjacent one. A correct method, applied to the wrong domain, returning a clean
+result — which is exactly the comment-above-four-broken-cases from finding 2, with a search
+instead of a comment.
+
+**Two things make this a worse instance than the author's three, which is why it is here.**
+
+1. **The output was going to be a correction of someone else.** Not a passing claim in prose — a
+   published verdict on another session's work, in the register where confidence is highest and
+   nobody downstream re-checks. A wrong check is cheap; a wrong check about to be used to
+   overrule someone is not.
+2. **It was caught by arithmetic, not by reasoning.** Nothing about my method looked wrong to me.
+   What stopped me was that the author had written **five** and **550 KB**, and I had **four** and
+   **364 KB**. The numbers did not line up, so I looked again. **The author's specificity is what
+   saved the review** — had the claim read *"most boards are not versioned"* it would have matched
+   my four-of-four result closely enough to wave through, and the false correction would have
+   shipped.
+
+**The transferable rule, and it is not "search harder".** *A claim stated as a count can be
+audited; a claim stated as a tendency cannot.* Write findings with numbers in them, not because
+numbers are rigorous, but because a number is the thing that fails to match when the reader has
+checked something else by mistake.
+
 ## Why this is a course case and not just an incident
 
 Every finding here is the same shape as the ones this course already teaches, one level up.
@@ -185,6 +228,25 @@ second example, after a single-session one has established what a check that can
 
 **Do not teach finding 1 as a coordination-tools problem.** It is a naming problem: the board
 recorded *claims* and the collision was about *ownership*, and those are two different facts.
+
+**⚠ Finding 3 is the exception to "do not open with this case", and it was buried third because
+it happened to the author.** *Amended by the receiving repo, 2026-09-02, at the author's
+invitation.* It needs **no premise and no vocabulary**: an assistant was told *"commit and push
+as needed"*, found 90 changed files it had not made, and stopped — because the timestamps looked
+a minute old. Nothing required the check. No gate ran. **It stopped on a hunch, and a hunch does
+not work twice.**
+
+That is a complete lesson in three sentences, it needs no worktrees, no CI and no second
+session, and it is the most beginner-legible thing in the folder on the subject of *a control
+that is not a control*. **Usable as an opener on its own**, lifted out of this case, while the
+case as a whole stays the second example. The rest of the file — findings 1, 2 and 5 — keeps the
+placement above.
+
+**And the free half of finding 3 is the part to say out loud:** the first draft of the board
+recorded this near-miss as **evidence the board's rule worked**. The rule was written afterwards,
+*because of this*. A record crediting a mechanism for catching what actually prompted it is the
+same defect as everything else here, and it was corrected only because the session it happened
+to asked for the correction.
 
 ## Appendix — what the artifacts settle, and what exists only in my retelling
 

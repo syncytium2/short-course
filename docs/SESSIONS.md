@@ -2309,3 +2309,15 @@ risks in the file.
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Tonys-MacBook-Pro/9bf3acb0 — Add the reviewer's near-miss as finding 4 of the four-sessions case, promote its finding 3 in the audience note, and record where the check_milestones fixes are routed
+- **Status:** DONE 2026-09-03
+- **Opened:** 2026-09-03
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
+- **Notes:** <anything another session must know before touching the same thing>
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->

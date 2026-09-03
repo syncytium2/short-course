@@ -41,6 +41,27 @@ TWO DEVIATIONS FROM UPSTREAM, both stated rather than silent:
   * the base-ref failure message names the wider list, for the same reason.
 Nothing else is changed. When upstream moves, diff against it rather than re-deriving --
 `dragnet.py TERM` in `armory` finds every variant in the estate, including the ones off-trunk.
+
+TWO FIXES THIS COPY OWES UPSTREAM, and where they were routed. Both are defects in bugarach's
+copy, not deviations of ours, so upstream should have them:
+
+  1. the ancestry rule has never been tested. `0000000` dies at `cat-file -e` and never reaches
+     the branch below it, proved by `elif False:` leaving the selftest green. That is a FIFTH
+     rule of exactly the shape this header confesses to four of. Fixed here with a commit built
+     by `commit-tree` that exists and is not an ancestor.
+  2. the fixtures assert bugarach's own layout (`docs/INDEX.md`, `docs/site/`) rather than the
+     rules under test, so four MUST-PASS cases go red the moment the file is carried anywhere.
+     Fixed here by deriving both from the tree.
+
+Routed 2026-09-02 by an `armory` session to the bugarach session `bugarach-2b`, as a diff rather
+than a port -- it is bugarach's file, they hold the 1672-test suite, and handing the owner a
+patch instead of a second implementation is the whole content of finding 1 in
+`docs/cases/2026-09-02-four-sessions-one-checkout.md`.
+
+⚠ **ONLY ONE SESSION WAS REACHED.** A second (`bugarach-40`) was already gone. So the routing has
+a single point of failure and this comment is the backup copy of the fact -- if the fix never
+appears in bugarach, it was not rejected, it was dropped. **`base_ref()` must NOT go home as our
+reordering**; only in the both-orders form above, because trunk naming is repo-shaped.
 """
 from __future__ import annotations
 
