@@ -888,3 +888,55 @@ record, once at a cost of **859,010 tokens and $11.06**.
    statement, a guard defending its own expired premise, a test that never saw an input that
    could fail it, and an alarm that trains you to retry through it. It also has the cleanest
    possible provenance — the gate refused the commit that filed the finding about the gate, twice.
+
+---
+
+### N8 · "Screenshot it and ask your agent" has no stated limit, and the limit is where it hurts
+
+**Native, 2026-09-02. The immediate defect is fixed; this is the part that is not.** Full
+account: [`docs/cases/2026-09-02-fifteen-screenshots-into-a-form-builder.md`](docs/cases/2026-09-02-fifteen-screenshots-into-a-form-builder.md).
+⚠ **Weak provenance — no transcript, no screenshots, no repository. Four sentences relayed
+twice, in the present tense, while it was happening.** The mechanism below is checkable in this
+tree; the fifteen and the hour are retelling.
+
+A beginner outside this project walked [`cold-start.html`](docs/handouts/cold-start.html)'s
+browser route with the assistant her institution provides — a Copilot inside a Microsoft app
+suite. It opened a low-code form builder and had her place list boxes and type field names in
+by hand. No repository existed at the end, so the session was saved by pasting it into a note.
+**The page never told her she was in a different kind of product.** That much is repaired:
+`1f42e0f` / `71323d4` add a product-neutral gate above W1 (*ask it for a file; see whether you
+get a file*), a box for it, and write-proofs at W3 and W4.
+
+**What is not repaired is the remedy.** Every phase of that page ends in the same instruction —
+*screenshot the whole window and show it to your agent* — and there is a whole handout,
+[`show-it-your-screen.html`](docs/handouts/show-it-your-screen.html), arguing for it. She
+followed it, roughly fifteen times, **and it worked every time.** A capable assistant asked
+*what do I do now* always has an answer, and each correct answer took her one screen further
+into the wrong product.
+
+**The shape is new to this repo's collection.** Our recurring failures are things that look
+like success (`B7`, `C1`) or rules that lose to better-positioned prose (`B4`, `N5`). This is
+neither: **the remedy did not fail, and it did not go unread. It ran, correctly, and made the
+situation worse — because it cannot detect that it is the wrong remedy.** Nothing in the
+material says when to stop asking and leave, and *ask the thing in front of you* is the one
+piece of advice that cannot diagnose the thing in front of you.
+
+**Decisions, none taken.**
+
+1. **Does `show-it-your-screen.html` get a stated limit?** It currently has none. The candidate
+   sentence is roughly *if three exchanges have not moved you toward what the step says must
+   become true, the problem is upstream of the screenshot* — but a stopping rule that is itself
+   prose is tier 1, in the repo whose best-known finding is that prose loses.
+2. **Audit the other five sheets for the same shape.** `cold-start` was the one that got caught
+   because it was the one being walked. `search-to-shipped.html` and `show-it-your-screen.html`
+   were both written against the same vendor and neither says so. **Nothing in this repo asks
+   whether a handout names which product it means.** That is a `check_pointers`-shaped job and
+   nobody has scoped it.
+3. **Is route-blind prose over route-split boxes checkable?** `tier_check.sh` warns about the
+   mirror image — route-aware prose over route-blind boxes, currently naming 1.4 and 3.7 — and
+   is silent on this arrangement, which is why 1.1 looked healthy. Whether the inverse is
+   detectable without a reader is genuinely unclear; a heuristic that fires on every step with
+   split boxes would be noise.
+4. **The route has still been walked to completion exactly once**, on 2026-08-30, by the people
+   who wrote it. This walk did not finish. The *"not yet walked from a clean machine"* banner
+   stays until someone outside this project gets to W5.
