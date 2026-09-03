@@ -192,7 +192,23 @@ const server = http.createServer((req, res) => {
   await page.evaluate(() => localStorage.clear());
   await page.reload();
   await page.click('.tierpick[data-tier="min"]');   // it lives on the browser route only
-  const openW2 = () => page.click('[data-key="one-sentence"] .head');
+  // W2 IS BEHIND A GATE AS OF 2026-09-02, so opening it is now two acts, and every check
+  // below that reads W2's insides has to pass the gate first. That is not scaffolding to
+  // work around -- it is the check: if this helper ever stops being necessary, the gate has
+  // stopped holding and roughly a dozen assertions below will go green while it is broken.
+  const GATE1 = 'li[data-key="pick-a-rung"] .cb[data-gate="tool-makes-things"]';
+  const unlockRoute = async () => {
+    if (await page.$eval('[data-key="pick-a-rung"]', e => e.dataset.open) !== '1') {
+      await page.click('[data-key="pick-a-rung"] .head');
+    }
+    if (await page.$eval(GATE1, e => e.getAttribute('aria-pressed')) !== 'true') {
+      await page.click(GATE1);
+    }
+  };
+  const openW2 = async () => {
+    await unlockRoute();
+    await page.click('[data-key="one-sentence"] .head');
+  };
 
   // IT IS NOT IN THE FOLD ANY MORE, and that is the point of the move: the reader who has
   // nothing to build should not have to open a step about writing a sentence to find out
@@ -269,6 +285,66 @@ const server = http.createServer((req, res) => {
     true);
   check('and the checklist still works after it',
     await page.evaluate(() => !!document.querySelector('.cb')), true);
+
+  // ---- the route gates ------------------------------------------------------------
+  // WHAT THESE ARE FOR. On 2026-09-02 a beginner walked the browser route with an office
+  // assistant, which opened a blank template and had her type the title in herself. The
+  // repair was to shut W2-W5 until the tool has been shown to make a file, and W4-W5 until
+  // a write has been shown to land. A gate that can be clicked past is decorative, and a
+  // gate whose lock never lifts is a page that has eaten itself -- so both directions are
+  // asserted here, in a browser, because neither is visible in the markup.
+  await page.evaluate(() => localStorage.clear());
+  await page.reload();
+  await page.click('.tierpick[data-tier="min"]');
+
+  const lockedOf = k => page.$eval(`[data-key="${k}"]`, e => e.dataset.locked);
+  const GATED = { 'one-sentence': 'W2', 'connect-or-repo': 'W3', 'one-element': 'W4', 'publish-and-notice': 'W5' };
+
+  for (const [k, name] of Object.entries(GATED)) {
+    check(`${name} starts shut on a page nothing has been proved to`, await lockedOf(k), '1');
+  }
+  check('a shut step removes its boxes rather than dimming them',
+    await page.$$eval('[data-key="one-sentence"] .cb', els => els.filter(e => e.offsetParent !== null).length), 0);
+  check('and says so in its own authored words, not a generated string',
+    await page.$eval('[data-key="one-sentence"] .lockmsg',
+      e => e.offsetParent !== null && /laptop route/.test(e.textContent)), true);
+  check('a shut step will not open when its heading is pressed', await (async () => {
+    await page.click('[data-key="one-sentence"] .head');
+    return page.$eval('[data-key="one-sentence"]', e => e.dataset.open);
+  })(), '0');
+
+  await unlockRoute();
+  check('the file test opens W2 and W3', await lockedOf('one-sentence') + await lockedOf('connect-or-repo'), '00');
+  check('and leaves W4 shut, because the second test has not been passed',
+    await lockedOf('one-element'), '1');
+
+  const GATE2 = 'li[data-key="connect-or-repo"] .cb[data-gate="repo-takes-writes"]';
+  await page.click('[data-key="connect-or-repo"] .head');
+  await page.click(GATE2);
+  check('the write test opens W4 and W5', await lockedOf('one-element') + await lockedOf('publish-and-notice'), '00');
+
+  await page.click(GATE1);
+  check('untick the file test and the route shuts again', await lockedOf('one-sentence'), '1');
+  await page.click(GATE1);
+
+  check('the gates survive a reload', await (async () => {
+    await page.reload();
+    return await lockedOf('one-element');
+  })(), '0');
+
+  // A READER MID-ROUTE WHEN THIS SHIPPED HAS TICKS AND NO GATE BOX. Locking their finished
+  // steps would take away work they really did, to enforce a test nobody asked them for.
+  await page.evaluate(() => {
+    localStorage.clear();
+    localStorage.setItem('cold-start-v4', JSON.stringify({
+      'one-sentence': { 'sentence-written-down': 1, 'outsider-understands': 1, 'each-item-one-afternoon': 1 }
+    }));
+  });
+  await page.reload();
+  await page.click('.tierpick[data-tier="min"]');
+  check('a step already finished is never shut behind a gate that came later',
+    await lockedOf('one-sentence'), '0');
+  check('and its unfinished neighbour still is', await lockedOf('one-element'), '1');
 
   // ---- "why?" on every checkbox ---------------------------------------------------
   // The failure that matters here is not the answer being wrong, it is the button being

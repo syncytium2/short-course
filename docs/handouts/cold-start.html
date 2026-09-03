@@ -263,6 +263,29 @@
   li[data-skip="1"] .badge { color: var(--faint); background: var(--sunk); border-color: var(--rule-firm); }
   li[data-skip="1"] .head, li[data-skip="1"] .head .n { color: var(--faint); font-weight: 400; }
   li[data-skip="1"] .checks, li[data-skip="1"] .links { opacity: .5; }
+
+  /* ---- a fourth state: shut until something upstream has been shown to work ----
+     NOT A DISABLED STEP AND NOT A FAILED ONE. The distinction this styling has to carry is
+     the one tier_check.sh's header names as the worst thing this page can do: "It does not
+     look like the page being wrong. It looks like the reader failing the last step." So a
+     locked step is not greyed into the background like a skipped one -- it keeps a live
+     border and states, in its own authored sentence, what would open it and where to go if
+     that will never happen here. Muted enough to read as not-yet, loud enough to read.
+     THE DETAIL AND THE BOXES ARE REMOVED, NOT DIMMED. A dimmed checkbox is still a checkbox
+     and a reader in a hurry ticks it; then the gate is advisory, which is tier 1, which is
+     the tier this repo's own worked example says does not hold. */
+  li[data-locked="1"] .badge { color: var(--muted); background: var(--sunk); border-color: var(--rule-firm); }
+  li[data-locked="1"] .head { cursor: default; }
+  li[data-locked="1"] .head, li[data-locked="1"] .head .n { color: var(--muted); }
+  li[data-locked="1"] .head::after { display: none; }
+  li[data-locked="1"] > .detail, li[data-locked="1"] > .checks, li[data-locked="1"] .skipbtn { display: none; }
+  .lockmsg { display: none; }
+  li[data-locked="1"] > .lockmsg {
+    display: block; margin: 8px 0 0; padding: 9px 11px;
+    font-size: 13.5px; line-height: 1.5; color: var(--muted);
+    background: var(--sunk); border-left: 2px solid var(--rule-firm);
+  }
+  li[data-locked="1"] > .lockmsg b { color: var(--ink); }
   .only {
     font-family: var(--mono); font-size: 9.5px; letter-spacing: .11em;
     text-transform: uppercase; color: var(--caution);
@@ -637,7 +660,7 @@
            "browser tab" can only mean the application. -->
       <button class="tierpick" type="button" data-tier="min">
         <b>The browser route</b>
-        <span>Nothing installed, and no terminal &mdash; the black window you type commands into. Every step happens on a website. One evening to a web app published at a URL.</span>
+        <span>Nothing installed, and no terminal &mdash; the black window you type commands into. Every step happens on a website. One evening to a web app published at a URL. <b>Conditional on your tool:</b> two one-minute tests decide whether it opens, and a workplace assistant will not pass them.</span>
       </button>
       <button class="tierpick" type="button" data-tier="mid">
         <b>The laptop route</b>
@@ -851,7 +874,7 @@
       <span class="phase-time">one evening</span>
     </div>
     <div class="ask"><span class="ask-k">If this does not match your screen</span><b>Everything that can go wrong in these five steps goes wrong inside the window you are already talking to.</b> You do not have to leave and look it up: if what came back is not what the step describes, say exactly that in the same conversation &mdash; <i>&ldquo;this is what I asked for, this is what I got, what happened?&rdquo;</i> &mdash; and keep going from its answer. <b>The one thing it cannot do is see the dashboard in your other tab</b>, so for anything you are looking at rather than typing, screenshot it in.</div>
-    <p class="phase-note"><b>Five steps, one evening, all of it in a browser.</b> Nothing to install, nothing to configure, and not one command to type. You finish with a working page at an address you can send to somebody. It was walked start to finish on <b>2026-08-30</b>, and the places it went wrong are written into the steps rather than tidied out of them.</p>
+    <p class="phase-note"><b>Five steps, one evening, all of it in a browser.</b> Nothing to install, nothing to configure, and not one command to type. You finish with a working page at an address you can send to somebody. It was walked start to finish on <b>2026-08-30</b>, and the places it went wrong are written into the steps rather than tidied out of them. <b>What it needs from you is one thing:</b> a tool that makes the thing rather than helping you make it. The two boxes below decide that, and until they are ticked the steps after them stay shut.</p>
     <!-- THE WRONG-PRODUCT GATE. ADDED 2026-09-02, FROM THE FIRST WALK BY SOMEBODY OUTSIDE
          THIS PROJECT, and it is the worst result this page has produced. She used the agent
          her institution gave her -- a Copilot inside a Microsoft app suite -- and it did
@@ -871,7 +894,7 @@
          IT SITS ABOVE THE STARTER GENERATOR ON PURPOSE. "What should I build" is the second
          question. "Am I holding the right kind of thing" is the first, and it is the one
          that cost an evening. -->
-    <div class="warn"><b>One minute before W1, because the word for these tools now covers several different products.</b> Everything below was walked on <code>claude.ai</code> and names that one company&rsquo;s screens throughout. Any chat agent that can hold a repository and write files for you does the same job under a different name. <b>What will not</b> is an assistant built into a document, a mailbox or a company&rsquo;s app suite &mdash; the sort that lives inside Word, Teams, Outlook or an intranet portal. Ask one of those to build something and it does what it <i>is</i> for: it hands you a form builder and has you place the boxes and type the field names yourself. Nothing has broken and you have not made a mistake &mdash; you are in a different product doing a different job, and it does not end at an address you can send to somebody.<br><br><b>The test, before you go any further:</b> <i>&ldquo;Make a file called hello.txt with the word hello in it, and show me the file.&rdquo;</i> <b>A file comes back</b> &rarr; right kind of tool, carry on. <b>Instructions for making one, a form to fill in, or a new app to click through</b> &rarr; wrong kind, and these five steps will keep <i>almost</i> working, which is worse than failing. Go back to <b>1.1</b> and start one of the tools linked there instead. If the one you have is the only agent you are permitted, <b>this route is not open to you today</b> &mdash; that is a real answer and it is cheaper than an evening.<br><br><b>This is not hypothetical.</b> The first person outside this project to walk these five steps did it on 2 September 2026 with the assistant her institution had given her. About fifteen screenshots, most of an hour lost connecting a cloud folder, no repository at the end of it, and the record of the session copied by hand into a note.</div>
+    <div class="warn"><b>W2 to W5 are shut until you have shown that your tool does the work.</b> Two boxes open them &mdash; one in W1, one in W3 &mdash; and both take about a minute. This is the only place on this page that holds a step closed, and it is here because of what happened the one time somebody outside this project walked these five steps.<br><br><b>The test that matters is who is doing the typing.</b> Everything below was walked on <code>claude.ai</code> and names that one company&rsquo;s screens throughout; any chat agent that can hold a repository and write files does the same job under another name. <b>What will not</b> is an assistant built into a document, a mailbox or a company&rsquo;s app suite &mdash; the sort that lives in Word, Teams, Outlook or an intranet portal. Ask one of those to build something and it does what it <i>is</i> for: it opens a blank template and has you type the title and place the boxes. Every screen is correct, nothing is broken, nobody has made a mistake &mdash; <b>and you are the one making the thing</b>, which is the opposite of what the rest of this page is about. There is nothing to check when you already know what it says.<br><br><b>So, before anything else:</b> <i>&ldquo;Make a file called hello.txt with the word hello in it, and show me the file.&rdquo;</i> <b>A file comes back</b> &rarr; tick it in W1 and everything opens. <b>Instructions for making one, a template to fill in, or a new app to click through</b> &rarr; wrong kind of tool, and these five steps would keep <i>almost</i> working, which is worse than failing outright. Try one of the tools linked at <b>1.1</b> instead; and if the one you have is the only agent you are permitted, <b>this route is not open to you today</b> &mdash; take <i>the laptop route</i> at the top, where the agent works on your own files. That is a real answer and it costs a minute instead of an evening.<br><br><b>This is not hypothetical.</b> On 2 September 2026 a beginner walked these steps with the assistant her institution had given her. It put her in a form builder, typing a title onto a blank template. About fifteen screenshots, most of an hour lost connecting a cloud folder, no repository at the end of it, and the record of the session copied by hand into a note. <b>Nothing on this page told her she was in the wrong kind of product</b>, and every answer she got was helpful and correct.</div>
     <p class="phase-note"><b>The fifth step is not the end of anything. It is where the loop closes.</b> From then on you ask for the next item on your list, look at it, and it is live &mdash; and that round trip is now minutes rather than a project. <b>The reason to get published early is that everything after it gets cheaper</b>, not that you are done. Go back to the list you wrote in W2 and take the next one.</p>
     <p class="phase-note"><b>None of what follows is a prerequisite for that.</b> You can keep building here indefinitely. The rest of this page is for when you want the machine underneath it &mdash; your own editor, your own copy of the files, work that outlives a browser tab, other people &mdash; and you can switch to <i>the laptop route</i> at the top on any day you like. Everything you have ticked here stays ticked.</p>
     <!-- OUT OF THE FOLD, DELIBERATELY. This began inside W2's detail, which meant the
@@ -924,15 +947,24 @@
                  a coding agent" -- that is a self-report about a category the reader cannot
                  be expected to know the boundary of, and she could have ticked it honestly
                  while sitting in a form builder. A file, or not a file. -->
-            <li><button class="cb" data-key="made-me-a-file-not-instructions" type="button" aria-pressed="false" aria-labelledby="c-w1-0b">&#10003;</button><span class="cbt"><span id="c-w1-0b">I asked it for a file and it made the file &mdash; it did not tell me how to make one, or open an app for me to fill in</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w1-0b">why?</button></span><p class="whya" id="w-c-w1-0b" hidden>An assistant built into an office suite will answer this by handing you a form builder and having you place the boxes yourself. That is it working correctly at a different job, and the next four steps quietly stop being possible.<span class="ask"><b>Ask it:</b> &ldquo;Make a file called hello.txt with the word hello in it, and show me the file.&rdquo;</span></p></li>
+            <li><button class="cb" data-gate="tool-makes-things" data-key="made-me-a-file-not-instructions" type="button" aria-pressed="false" aria-labelledby="c-w1-0b">&#10003;</button><span class="cbt"><span id="c-w1-0b">I asked it for a file and it made the file &mdash; it did not tell me how to make one, or hand me a blank template to fill in myself</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w1-0b">why?</button></span><p class="whya" id="w-c-w1-0b" hidden>An assistant built into an office suite answers this by opening a blank template and having you type the title and place the boxes. <b>You are the one typing, and that is the tell</b> &mdash; nothing was made for you to check, because you already know what it says. <b>The four steps below are shut until this box is ticked.</b><span class="ask"><b>Ask it:</b> &ldquo;Make a file called hello.txt with the word hello in it, and show me the file.&rdquo;</span></p></li>
             <li><button class="cb" data-key="named-something-back" type="button" aria-pressed="false" aria-labelledby="c-w1-1">&#10003;</button><span class="cbt"><span id="c-w1-1">It has told me something about my own files or my own screen that I never typed in, and I checked that it was right</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w1-1">why?</button></span><p class="whya" id="w-c-w1-1" hidden>A tool that cannot open your files will answer questions about them anyway &mdash; fluently, in detail, and with nothing in the reply to mark it as guesswork.<span class="ask"><b>Ask it:</b> &ldquo;Without me telling you anything about it, name three files you can see and say what is in one of them. If you can see my machine, tell me how much free disk space I have.&rdquo;</span></p></li>
         </ul>
       </li>
-      <li data-key="one-sentence" data-id="W2" data-tiers="min" data-open="0" data-done="0">
+      <li data-key="one-sentence" data-id="W2" data-tiers="min" data-needs="tool-makes-things" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-W2"><span class="n">W2</span>Say the whole thing in one sentence</button>
           <span class="badge">Incomplete</span>
         </div>
+        <!-- THE LOCK MESSAGE IS AUTHORED HERE, NOT COMPOSED IN THE VIEW, and that is the
+             skip-label lesson from further down this file: paint() once overwrote four
+             authored skip labels with one generic string and shipped "I chose Cloudflare"
+             onto a step about cluster storage. Every locked step says its own sentence.
+             W2 IS LOCKED AND IT IS THE ONE THAT LOOKS PUNITIVE -- writing a sentence needs
+             no tool at all. It is locked because the sentence exists to be handed to
+             something that will build it, and sixty seconds spent finding out that nothing
+             here will is cheaper than an evening. -->
+        <p class="lockmsg"><b>Not open yet, and this is the page holding it rather than you failing anything.</b> W1&rsquo;s file test has not been ticked. Ask your tool for <code>hello.txt</code>; if a file comes back, tick that box and everything here opens. <b>If it hands you a template to fill in yourself, this route is not open to you today</b> &mdash; take <i>the laptop route</i> at the top of the page, where the agent works on your own files, and every box you have already ticked comes with you.</p>
         <div class="detail" id="d-W2">
             <p class="why"><b>Write down one sentence saying what you want to build.</b> Something like: <i>&ldquo;A web page that shows my recordings one at a time and lets me mark the bad ones.&rdquo;</i> Keep it where you can see it &mdash; a note, a scrap of paper, the top of a document. <b>You will paste this sentence to Claude in step W3</b>, so it is doing real work, not an exercise.</p>
             <p class="why"><b>If you cannot say it in one sentence, you are not ready to ask for it yet</b> &mdash; and that is worth finding out now rather than four prompts in, when you have something half-built and cannot say whether it is right.</p>
@@ -948,11 +980,12 @@
             <li><button class="cb" data-key="each-item-one-afternoon" type="button" aria-pressed="false" aria-labelledby="c-w2-2">&#10003;</button><span class="cbt"><span id="c-w2-2">I have listed the parts underneath it, and none of them would take me more than an afternoon</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w2-2">why?</button></span><p class="whya" id="w-c-w2-2" hidden>Anything larger than an afternoon cannot be checked in one sitting, and work that is never checked in one sitting is where the expensive mistakes accumulate.<span class="ask"><b>Ask it:</b> &ldquo;Here are the parts: <paste your list>. Which of these is bigger than an afternoon, and how would you split that one?&rdquo;</span></p></li>
         </ul>
       </li>
-      <li data-key="connect-or-repo" data-id="W3" data-tiers="min" data-open="0" data-done="0">
+      <li data-key="connect-or-repo" data-id="W3" data-tiers="min" data-needs="tool-makes-things" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-W3"><span class="n">W3</span>Make the repository, and point Claude at it</button>
           <span class="badge">Incomplete</span>
         </div>
+        <p class="lockmsg"><b>Not open yet.</b> W1&rsquo;s file test has not been ticked, and this step is where you hand a tool your whole project &mdash; worth sixty seconds of proof first. Ask it for <code>hello.txt</code>, tick the box in W1, and this opens.</p>
         <div class="detail" id="d-W3">
             <p class="why"><b>A repository is just a folder that lives on github.com instead of on your laptop</b>, and keeps a record of every change made to it. You already have the account from step 1.2; this makes the folder. You will not type a single command.</p>
             <p class="why"><b>On github.com: New repository &rarr; tick &ldquo;Add a README&rdquo; &rarr; Create.</b> (A README is just a plain text file describing what the thing is; every repository is expected to have one, and GitHub shows it on the front page.) That was the path on <b>2026-08-30</b>. <b>The tick is the part that matters:</b> it puts one file inside, and a completely empty repository is not something Claude can open. <b>Keep it private</b> &mdash; you can make it public later in one click, and the reverse is not true of anything anybody has already copied.</p>
@@ -969,14 +1002,20 @@
                  reader with no repository connection at all: the work stayed in the chat and
                  the record of the session was pasted by hand into a note. Cheapest possible
                  write, on a file nothing depends on, before any of tonight's work rests on it. -->
-            <li><button class="cb" data-key="write-landed-on-github" type="button" aria-pressed="false" aria-labelledby="c-w3-2">&#10003;</button><span class="cbt"><span id="c-w3-2">I had it add one line to the README, then I reloaded the repository on github.com myself and the line was there</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w3-2">why?</button></span><p class="whya" id="w-c-w3-2" hidden>Reading and writing are two separate connections, and the reply looks the same either way. W4 and W5 both assume the writing one, so it is worth two minutes on a file nothing depends on rather than finding out with an evening&rsquo;s work in the chat window.<span class="ask"><b>Ask it:</b> &ldquo;Add a line to the README saying what this project is for, and save it to the repository.&rdquo; Then reload the repository page yourself.</span></p></li>
+            <li><button class="cb" data-gate="repo-takes-writes" data-key="write-landed-on-github" type="button" aria-pressed="false" aria-labelledby="c-w3-2">&#10003;</button><span class="cbt"><span id="c-w3-2">I had it add one line to the README, then I reloaded the repository on github.com myself and the line was there</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w3-2">why?</button></span><p class="whya" id="w-c-w3-2" hidden>Reading and writing are two separate connections, and the reply looks the same either way. W4 and W5 both assume the writing one, so it is worth two minutes on a file nothing depends on rather than finding out with an evening&rsquo;s work in the chat window.<span class="ask"><b>Ask it:</b> &ldquo;Add a line to the README saying what this project is for, and save it to the repository.&rdquo; Then reload the repository page yourself.</span></p></li>
         </ul>
       </li>
-      <li data-key="one-element" data-id="W4" data-tiers="min" data-open="0" data-done="0">
+      <li data-key="one-element" data-id="W4" data-tiers="min" data-needs="tool-makes-things repo-takes-writes" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-W4"><span class="n">W4</span>Do one element, then look at it yourself</button>
           <span class="badge">Incomplete</span>
         </div>
+        <!-- THIS IS THE EXPENSIVE STEP AND SO IT CARRIES BOTH GATES. W4 is where the evening
+             goes. The first outside walk of this route lost its evening upstream of here and
+             never arrived; the record of it was pasted into a note, because nothing had ever
+             established that a write could land anywhere. Both tests are cheap, both are
+             upstream, and neither existed until 2026-09-02. -->
+        <p class="lockmsg"><b>Not open yet, and this is the one worth waiting for.</b> This is where the evening goes, so it needs both cheap tests passed first: <b>W1</b> &mdash; your tool made you a file rather than handing you a template &mdash; and <b>W3</b> &mdash; something it wrote actually landed on github.com and you saw it there. Until the second one holds, work done here lives in a chat window and saving it means copying it out by hand.</p>
         <div class="detail" id="d-W4">
             <p class="why"><b>Ask for the first item on your list. Only that one.</b> Not the whole sentence from W2, and not two items because they seem related &mdash; one. You are about to check the result by hand, and that is only possible when you know what you asked for.</p>
             <p class="why"><b>When it says it has finished, do not take its word for it. Type this:</b></p>
@@ -999,11 +1038,12 @@
             <li><button class="cb" data-key="commit-visible-on-github" type="button" aria-pressed="false" aria-labelledby="c-w4-3">&#10003;</button><span class="cbt"><span id="c-w4-3">I opened the repository on github.com and saw tonight&rsquo;s change there, with its note &mdash; the record is not only in the chat window</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w4-3">why?</button></span><p class="whya" id="w-c-w4-3" hidden>&ldquo;Saved&rdquo; in the reply means it reached the end of its own instructions. If nothing landed on github.com then the only record of the evening is a conversation, and saving that means copying it somewhere by hand &mdash; which is the thing this route exists to stop.<span class="ask"><b>Ask it:</b> &ldquo;Give me the link to the commit you just pushed.&rdquo; Then open the link.</span></p></li>
         </ul>
       </li>
-      <li data-key="publish-and-notice" data-id="W5" data-tiers="min" data-open="0" data-done="0">
+      <li data-key="publish-and-notice" data-id="W5" data-tiers="min" data-needs="tool-makes-things repo-takes-writes" data-open="0" data-done="0">
         <div class="srow">
           <button class="head" type="button" aria-expanded="false" aria-controls="d-W5"><span class="n">W5</span>Put it on the internet, once, so it stays there</button>
           <span class="badge">Incomplete</span>
         </div>
+        <p class="lockmsg"><b>Not open yet.</b> Publishing here works by watching the repository for changes, so it cannot be set up before something has been shown to reach the repository. Pass <b>W1</b>&rsquo;s file test and <b>W3</b>&rsquo;s write test, and this opens.</p>
         <div class="detail" id="d-W5">
             <p class="why"><b>In the Cloudflare dashboard, connect the repository you made in W3.</b> That was the path on <b>2026-08-30</b>: all of it in the browser, nothing installed, and private repositories work &mdash; you do not have to make your work public to put a page on the internet.</p>
             <p class="why"><b>From then on it looks after itself.</b> Every change you tell Claude to save goes live on its own, with nobody remembering to do anything. <b>That is the only part of this whole route that keeps working when you are not there</b>, and it is why W3 made a repository instead of just showing Claude a folder. Everything else on this page is something you do; this is something that then happens.</p>
@@ -1926,8 +1966,12 @@ or four A records:
       li.dataset.skip = skip ? '1' : '0';
       var done = ls.length > 0 && n === ls.length;
       li.dataset.done = done ? '1' : '0';
+      // LOCKED IS READ HERE, NEVER WRITTEN HERE. applyGates() owns it, and it runs after
+      // every paint that could change a gate box. Painting must not decide it, because a
+      // step's own boxes are not what opens it -- a box in another step is.
       badge.textContent = skip ? 'Not needed'
                         : done ? 'Done'
+                        : li.dataset.locked === '1' ? 'Not open yet'
                         : (n ? n + ' of ' + ls.length : 'Incomplete');
       if (skipbtn) skipbtn.textContent = skip ? skipUndo : skipOffer;
       head.setAttribute('aria-expanded', li.dataset.open === '1' ? 'true' : 'false');
@@ -1936,10 +1980,16 @@ or four A records:
 
     function open(v) { li.dataset.open = v ? '1' : '0'; paint(); }
 
-    head.addEventListener('click', function () { open(li.dataset.open !== '1'); });
+    head.addEventListener('click', function () {
+      if (li.dataset.locked === '1') return;
+      open(li.dataset.open !== '1');
+    });
 
     boxes.forEach(function (b) {
       b.addEventListener('click', function () {
+        // A LOCKED STEP'S BOXES ARE REMOVED FROM THE PAGE, so this guard is belt and braces
+        // for a keyboard or a script reaching one anyway. Without it the gate is advisory.
+        if (li.dataset.locked === '1') return;
         var bk = b.dataset.key;
         if (!state[id]) state[id] = {};
         if (state[id][bk]) delete state[id][bk]; else state[id][bk] = 1;
@@ -1950,6 +2000,9 @@ or four A records:
         var now = paint();
         if (now && !was) open(false);
         else if (!now && was) open(true);
+        // A GATE BOX CHANGES OTHER STEPS, so this cannot stop at repainting its own.
+        // Ticking W1's file test opens four steps further down the page.
+        if (b.dataset.gate) applyGates();
         count();
       });
     });
@@ -1966,6 +2019,65 @@ or four A records:
     paint();
     return { li: li, paint: paint };
   });
+
+  // ---- THE ROUTE GATES ----
+  //
+  // WHY THIS EXISTS. Tony, 2026-09-02, having watched the first beginner outside this
+  // project walk the browser route: "we have to pull the browser route. it is a complete
+  // shitshow without having agents working the files directly", and then the sentence that
+  // named it -- "this is not ai assisted development". She had an assistant built into an
+  // office suite. It opened a blank template and had her type the title and place the list
+  // boxes. Every screen she was shown was correct and she was the one doing the making,
+  // which is the opposite of the thing this page is for. About fifteen screenshots.
+  //
+  // The route was not pulled. It was shut, and it now opens on evidence rather than on the
+  // reader's choice at the door. Two tests, each cheap and each placed where it can actually
+  // be run:
+  //
+  //   tool-makes-things  (W1) -- ask for a file, get a file. Opens W2, W3, W4, W5.
+  //   repo-takes-writes  (W3) -- something it wrote landed on github.com. Opens W4, W5.
+  //
+  // WHY W2 IS BEHIND THE FIRST GATE, when writing a sentence needs no tool at all. Because
+  // the sentence exists to be handed to something that will build it. Sixty seconds spent
+  // finding out that nothing here will is the cheapest minute on the page, and it is the
+  // minute she never got offered.
+  //
+  // A DONE STEP IS NEVER LOCKED. Readers who were mid-route when this shipped have ticks in
+  // localStorage and no gate box -- it did not exist yesterday. Locking their finished steps
+  // would take away work they really did, to enforce a test that was not asked of them, and
+  // a page that removes progress teaches people not to trust the page. They keep everything;
+  // the gates apply to what is still ahead of them.
+  //
+  // THE LOCK IS STRUCTURAL, NOT A WARNING. The detail and the boxes leave the DOM. This
+  // repo's own worked example is the four-tier table -- prose, checklist, test, structure --
+  // and its finding is that the first two cost nothing to skip when you are busy. A dimmed
+  // checkbox is still a checkbox.
+  var gateBoxes = [].slice.call(document.querySelectorAll('.cb[data-gate]'));
+
+  function gatePassed(name) {
+    return gateBoxes.some(function (b) {
+      if (b.dataset.gate !== name) return false;
+      var owner = b.closest('ol.steps > li');
+      if (!owner) return false;
+      var st = state[owner.dataset.key];
+      return !!(st && st[b.dataset.key]);
+    });
+  }
+
+  function applyGates() {
+    steps.forEach(function (s) {
+      var needs = (s.li.dataset.needs || '').split(/\s+/).filter(Boolean);
+      if (!needs.length) return;
+      var unmet = needs.some(function (g) { return !gatePassed(g); });
+      var lock = unmet && s.li.dataset.done !== '1';
+      var was = s.li.dataset.locked === '1';
+      s.li.dataset.locked = lock ? '1' : '0';
+      if (lock) s.li.dataset.open = '0';
+      // Repaint for the badge only. paint() reads dataset.locked and never writes it, so
+      // this cannot recurse.
+      if (lock !== was || !was) s.paint();
+    });
+  }
 
   function count() {
     var n = 0, d = 0;
@@ -2056,6 +2168,10 @@ or four A records:
     // that now has two boxes is the same class of lie as a step count that is true of
     // one route in three. paint() re-reads live() and the badge follows the tier.
     steps.forEach(function (s) { s.paint(); });
+    // AND THEN THE GATES, because data-off has just moved. A gated step that belongs to
+    // another route must not sit locked while it is off-screen: it comes back on the way
+    // up, and it comes back in whatever state its gates are in then.
+    applyGates();
     // NOT CHOOSING IS A STATE, AND IT USED TO BE A SILENT ONE. The banner was simply
     // hidden, so a first-time reader got all 39 steps with the browser route and the
     // laptop route interleaved — W1 asking a question 1.1 had already asked, four
@@ -2112,6 +2228,9 @@ or four A records:
     [].forEach.call(document.querySelectorAll('.fill input'), function (i) { i.value = ''; });
     render();
     steps.forEach(function (s) { s.li.dataset.open = '0'; s.paint(); });
+    // Reset clears the gate boxes with everything else, so the route shuts again. That is
+    // correct: a cleared page is a page nothing has been proved to.
+    applyGates();
     count();
   });
 

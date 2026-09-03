@@ -95,6 +95,45 @@ if [ "$MODE" = "--selftest" ]; then
         echo "  FAIL the dangling reference was misattributed across routes"
         cat "$T/refout"; echo FAIL; exit 1
     fi
+
+    # A THIRD FIXTURE: THE GATES. `data-needs` shuts a step until a `data-gate` box is
+    # ticked, so a gate box tagged for other routes -- or a gate name with a typo in it --
+    # is a step that route can never open. That is 7.3 again with a new way to happen, and
+    # the reachability check above passes it happily: the gated step has three perfectly
+    # good boxes, behind a door with no handle on this side.
+    #
+    # Three steps. `opener` carries the gate box and is tagged mid max, so the browser
+    # route cannot reach it. `shut-step` needs that gate and IS shown to min -- the defect.
+    # `fine-step` needs a gate whose box its own route can reach, and must stay quiet.
+    printf '%s' '<ol class="steps">
+<li data-key="opener" data-id="1.1" data-tiers="mid max">
+<ul class="checks">
+<li><button class="cb" data-gate="proved-it" data-key="g"></button></li>
+</ul></li>
+<li data-key="everyone-opener" data-id="1.2" data-tiers="min mid max">
+<ul class="checks">
+<li><button class="cb" data-gate="proved-it-here" data-key="h"></button></li>
+</ul></li>
+<li data-key="shut-step" data-id="2.1" data-tiers="min mid max" data-needs="proved-it">
+<ul class="checks"><li><button class="cb" data-key="a"></button></li></ul></li>
+<li data-key="fine-step" data-id="2.2" data-tiers="min mid max" data-needs="proved-it-here">
+<ul class="checks"><li><button class="cb" data-key="b"></button></li></ul></li>
+</ol>
+' > "$T/gates.html"
+    if SRC="$T/gates.html" sh "$0" --check >"$T/gateout" 2>&1; then
+        echo "  FAIL a step gated behind a box its own route cannot reach was passed"
+        echo FAIL; exit 1
+    else echo "  ok   a step gated behind an unreachable box is caught"; fi
+    if grep -q 'browser route.*shut-step' "$T/gateout" \
+       && ! grep -q 'laptop route.*shut-step' "$T/gateout"; then
+        echo "  ok   caught on the route that cannot reach the gate, not on the ones that can"
+    else
+        echo "  FAIL the gate failure was misattributed across routes"
+        cat "$T/gateout"; echo FAIL; exit 1
+    fi
+    if grep -q 'fine-step' "$T/gateout"; then
+        echo "  FAIL a step whose gate its own route can reach was reported"; echo FAIL; exit 1
+    else echo "  ok   a gate every route can reach is not reported"; fi
     echo PASS; exit 0
 fi
 
@@ -175,6 +214,39 @@ for t in TIERS:
         liveb = [b for b in st["boxes"] if t in b["tiers"]]
         if not liveb:
             problems.append((t, st, "no box this route can tick"))
+
+# ---------------------------------------------------------------------------------------
+# THE GATES, ADDED 2026-09-02. `data-needs` on a step names one or more `data-gate` boxes
+# that must be ticked before the page will open it. That is 7.3's failure with a new way
+# to happen: a step gated behind a box the reader's own route never renders is a step that
+# route can never open, and it will look exactly like the reader having missed something
+# rather than like the page being wrong. The reachability check above cannot see it -- the
+# gated step has plenty of tickable boxes, they are just unreachable behind a shut door.
+#
+# Two ways it goes wrong and both are silent: a gate name with no box carrying it (a typo,
+# or a box deleted from under it), and a gate whose box exists but is tagged for other
+# routes. Neither shows up in a diff and neither shows up in a browser unless you happen to
+# be testing on the route that lost.
+gate_tiers = {}
+for st in steps:
+    for bm in re.finditer(r'<li\b([^>]*)>\s*<button[^>]*\bcb\b[^>]*\bdata-gate="([^"]*)"', seg_of[st["key"]]):
+        wrap_t = re.search(r'data-tiers="([^"]*)"', bm.group(1))
+        btiers = set(wrap_t.group(1).split()) if wrap_t else set(st["tiers"])
+        # A gate box is only reachable on a route that sees BOTH the box and its step.
+        gate_tiers.setdefault(bm.group(2), set()).update(btiers & set(st["tiers"]))
+
+for i, m in enumerate(marks):
+    tag = m.group(0)
+    needs = (attr(tag, "data-needs") or "").split()
+    if not needs:
+        continue
+    st = steps[i]
+    for g in needs:
+        openers = gate_tiers.get(g, set())
+        for t in st["tiers"]:
+            if t not in openers:
+                problems.append((t, st,
+                    "needs gate '%s', and no box this route can reach carries it" % g))
 
 # ---------------------------------------------------------------------------------------
 # IT HAS TO HIDE THINGS THE WAY THE PAGE HIDES THEM, or it invents defects. The first
