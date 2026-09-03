@@ -142,10 +142,36 @@ Every finding here is the same shape as the ones this course already teaches, on
 - And the fix for the visible failure created an invisible one. Working in separate copies is
   correct, and it moved contention from a place the status command shows to a place it cannot.
 
-**It continues [`2026-08-29-the-board-was-empty-because-claiming-is-a-habit.md`](2026-08-29-the-board-was-empty-because-claiming-is-a-habit.md)**, and it is the more useful half of the
-pair: that case is a board nobody wrote on, this one is a board written on correctly that could
-not see the collision anyway. A reader who takes only the first will conclude the answer is
-discipline. It is not sufficient.
+**It continues [`2026-08-29-the-board-was-empty-because-claiming-is-a-habit.md`](2026-08-29-the-board-was-empty-because-claiming-is-a-habit.md).**
+
+> ⚠ **Corrected on landing, 2026-09-02, by the receiving repo.** The paragraph here originally
+> read *"that case is a board nobody wrote on, this one is a board written on correctly that
+> could not see the collision anyway. A reader who takes only the first will conclude the answer
+> is discipline."* **That is wrong about the predecessor, and it is the defect this folder
+> collects.** In the 2026-08-29 case the board *was* written on, correctly: a claim was filed at
+> 13:54 and **released at 14:03 because releasing early is what the tool asks for in writing**.
+> Its Point 1 opens *"Nobody was careless."* Its Point 1a is sharper still — the session went
+> back at 14:24 and **amended its own block to record the file it was editing**, and
+> `claim.sh --list` could not see it, because the reader skips any block marked `DONE`. So the
+> board contained the sentence *"I am writing this file"* and the tool reported an empty board.
+>
+> **The predecessor already makes the "discipline is not sufficient" argument, in a stronger
+> form than this file does** — there the mechanism was used correctly and the *reader* was
+> blind; here it was used correctly and the *schema* was blind. That is a real distinction and
+> it is why both cases earn their place. What does not survive is the ranking: neither is the
+> more useful half, and no reader of the first concludes that discipline is the answer, because
+> that case's own title is *"and it was right to be"*.
+>
+> The characterisation was written without re-reading the file it characterised — which is the
+> same failure as finding 2 above, where a correct comment sat above four cases breaking it and
+> anyone checking would read the comment and stop. Left in place rather than deleted, because
+> the file arriving with this defect is the most useful thing about it.
+
+**The pair, stated accurately.** Both are boards used as designed that failed anyway, and the
+blindness sits in a different place in each: in 2026-08-29 the *reader* could not see a record
+that existed; here the *schema* had nowhere to put the fact that mattered, because it records
+claims and the collision was about ownership. A reader who takes only one of them gets half of
+why a working mechanism is not the same as a covered risk.
 
 ## Audience note
 
