@@ -10,7 +10,7 @@ something the commit behind it called open -- is not caught by prose review. The
 version of this file was reviewed by eleven roles and **four of its rules were broken in
 ways that all reported success**:
 
-  * the path rule required a file extension, so `src/bugarach/detectors/` and `{d_ok}`
+  * the path rule required a file extension, so `src/bugarach/detectors/` and `docs/site/`
     were never looked at while the summary printed "29 paths" -- coverage reported over a
     set that silently excluded its own members;
   * a directory branch existed and could never execute, because no path the regex matched
@@ -247,11 +247,25 @@ def selftest():
     good = (git("merge-base", "HEAD", ref).stdout.strip()
             or git("rev-parse", "HEAD").stdout.strip())[:7]
     # DEVIATION FROM UPSTREAM, and the reason this file is worth vendoring carefully.
-    # Upstream hard-codes `{f_ok}` and `{d_ok}` in the fixtures below. Both are
+    # Upstream hard-codes `docs/INDEX.md` and `docs/site/` in the fixtures below. Both are
     # bugarach paths. Carried into a repo that has neither, four MUST-PASS cases went red on
     # first run here -- a selftest asserting the ORIGIN repo's layout rather than its own
     # rules, which is the same shape as the four unfireable rules this file's header already
     # confesses to. Derive both from the tree so the fixtures travel with the file.
+    #
+    # ⚠ THIS COMMENT AND LINE 13 WERE THEMSELVES BROKEN BY THE FIX THEY DESCRIBE, 2026-09-02,
+    # and repaired 2026-09-03 on a report from bugarach. The retargeting was done as a blanket
+    # find-and-replace of `docs/INDEX.md` and `docs/site/`, which rewrote every MENTION of those
+    # paths as well as every USE -- and the mentions are the historical account of why the fix
+    # was needed. So this comment read "upstream hard-codes {f_ok} and {d_ok}", naming the
+    # placeholders that replaced upstream's hardcoding: a sentence that cannot be true. Line 13,
+    # the eleven-role review's own record of the path-extension defect, lost `docs/site/` the
+    # same way.
+    #
+    # THE SHAPE, because it is the third instance this estate has logged: an edit that fixes a
+    # defect can erase the record of the defect, and NO CHECK CAN SEE IT -- selftest, mutation
+    # gate and CI all stayed green, because prose is not executed. When retargeting fixtures,
+    # replace inside the fixture block only, never file-wide.
     f_ok = next((p for p in ("docs/SESSIONS.md", "README.md", "docs/cases/README.md")
                  if (REPO / p).is_file()), "README.md")
     d_ok = next((p for p in ("docs/", "tools/", "docs/cases/")
