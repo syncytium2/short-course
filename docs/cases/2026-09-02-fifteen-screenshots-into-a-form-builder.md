@@ -146,8 +146,16 @@ half caught the mechanized failure, and the prose half had nothing standing unde
 
 ## What was changed
 
-Two commits, `1f42e0f` (source) and `71323d4` (build). Four changes, and the constraint on all
-of them was **observable rather than self-reported**:
+**In two passes, an hour apart, and the second one is the interesting half.** The first
+repair (`1f42e0f`, `71323d4`) was prose and boxes. Tony read it and said the route should be
+pulled: *"it is a complete shitshow without having agents working the files directly"*, and
+then the sentence that named the whole thing — ***"this is not ai assisted development."***
+It was not pulled. It was **shut** (`de24991`, `85ddea6`), and it now opens on evidence
+instead of on the reader's choice at the door.
+
+### The four content changes
+
+The constraint on all of them was **observable rather than self-reported**:
 
 1. **`min` gets its own masthead sentence**, about the thing `min` can check — that the five
    browser steps name one vendor's screens, and where the test for that is.
@@ -164,14 +172,45 @@ of them was **observable rather than self-reported**:
 
 `min`: 39 boxes → 42.
 
+### And then the lock, which is what makes it a fix rather than a warning
+
+The four changes above are **tier 1 and 2** — prose, and a checklist. This repo's own
+best-known case is that both cost nothing to skip when you are busy. So the two boxes became
+**gates**, and the steps behind them are shut until they are ticked:
+
+| gate | the test | opens |
+|---|---|---|
+| `tool-makes-things` | W1 — ask for a file, get a file | W2, W3, W4, W5 |
+| `repo-takes-writes` | W3 — a write landed on github.com and you saw it | W4, W5 |
+
+**The detail and the boxes leave the DOM.** A dimmed checkbox is still a checkbox, and a
+reader in a hurry ticks it. Each shut step carries **its own authored sentence** — not one
+composed in the view, which is the skip-label defect this same file already paid for once —
+saying what opens it, and where to go if it never will: *the laptop route, where the agent
+works on your own files, and every box you have ticked comes with you.*
+
+**W2 is behind the first gate even though writing a sentence needs no tool at all.** That
+looks punitive and is the point: the sentence exists to be handed to something that will build
+it, and sixty seconds spent finding out that nothing here will is the cheapest minute on the
+page. It is the minute she was never offered.
+
+**A step already finished is never shut.** Readers who were mid-route when this shipped have
+ticks and no gate box — it did not exist yesterday. Taking away work they really did, to
+enforce a test nobody asked them for, is how a page teaches people not to trust it.
+
+**`tier_check.sh` learned about gates in the same commit**, because a gate is 7.3 with a new
+way to happen: a step gated behind a box its own route never renders can never be opened, and
+plain reachability passes it happily — the step has three good boxes, behind a door with no
+handle on this side. Both silent variants are caught (a mis-tiered gate box, a typo'd gate
+name), each verified by breaking the real page on purpose and watching it go red, and each
+carries a `mutation_check.sh` row so it stays watched rather than trusted. `browser_check.js`
+went 44 → 58 assertions, and **caught a real half-applied edit while being written**: W3 had
+the lock message and not the attribute that locks it.
+
 ---
 
 ## What is not fixed
 
-- **The gate is prose with one box under it.** Tier 1 and a bit of tier 2, in a repo whose
-  best-known case is that prose loses. Nothing mechanical can tell a reader which product they
-  are in, and I do not think anything can — but it should be said out loud that the repair is
-  on the weak tier, rather than left to look like a fix.
 - **Nothing checks the other five handouts** for the same shape. `search-to-shipped.html` and
   `show-it-your-screen.html` almost certainly assume the same vendor throughout, and no gate
   in this repo asks whether a sheet says which product it means.

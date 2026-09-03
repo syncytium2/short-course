@@ -903,9 +903,13 @@ A beginner outside this project walked [`cold-start.html`](docs/handouts/cold-st
 browser route with the assistant her institution provides — a Copilot inside a Microsoft app
 suite. It opened a low-code form builder and had her place list boxes and type field names in
 by hand. No repository existed at the end, so the session was saved by pasting it into a note.
-**The page never told her she was in a different kind of product.** That much is repaired:
-`1f42e0f` / `71323d4` add a product-neutral gate above W1 (*ask it for a file; see whether you
-get a file*), a box for it, and write-proofs at W3 and W4.
+**The page never told her she was in a different kind of product.** That much is repaired, in
+two passes: `1f42e0f` / `71323d4` added a product-neutral gate above W1 (*ask it for a file;
+see whether you get a file*), a box for it, and write-proofs at W3 and W4 — then `de24991` /
+`85ddea6` made those two boxes **structural**, shutting W2–W5 until the tool has been shown to
+make a file and W4–W5 until a write has been shown to land. Tony's call, on reading the first
+pass: the route was to be pulled, and was shut instead. `tier_check.sh` learned about gates in
+the same commit, with mutation rows, because a gate is 7.3 with a new way to happen.
 
 **What is not repaired is the remedy.** Every phase of that page ends in the same instruction —
 *screenshot the whole window and show it to your agent* — and there is a whole handout,
