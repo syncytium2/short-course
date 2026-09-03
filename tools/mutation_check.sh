@@ -121,6 +121,8 @@ tools/build_site.sh@@    if _git("status", "--porcelain", "--", src):@@    if Fa
 docs/handouts/cold-start.html@@state[stepKey][bk] = 1;@@state[stepKey][i] = 1;@@checklist ticks migrate by position again@@tools/checklist_state.sh
 docs/handouts/cold-start.html@@var bk = boxKeys[+i];@@var bk = boxKeys[0];@@every migrated tick lands on the first box of its step@@tools/checklist_state.sh
 docs/handouts/cold-start.html@@if (localStorage.getItem(KEY) !== null) return;@@if (false) return;@@migration re-runs over a reader already on v4@@tools/checklist_state.sh
+tools/tier_check.sh@@        gate_tiers.setdefault(bm.group(2), set()).update(btiers & set(st["tiers"]))@@        gate_tiers.setdefault(bm.group(2), set()).update(TIERS)@@a gate box is treated as reachable from every route
+tools/tier_check.sh@@            if t not in openers:@@            if False:@@a step gated behind an unreachable box is passed
 tools/worktree.sh@@git -C "$REPO" worktree add -q "$path" -b "$slug" "$base" || die@@true || die@@open creates no worktree at all
 tools/worktree.sh@@[ -e "$path" ] && die "worktree.sh: $path already exists.@@[ -e "/nonexistent-xyz" ] && die "worktree.sh: $path already exists.@@the same slug can be opened twice
 tools/worktree.sh@@wt_slug_ok "$slug" || die "worktree.sh: \"$slug\" is not usable@@wt_slug_ok "$slug" ; true || die "worktree.sh: \"$slug\" is not usable@@a malformed slug reaches git
