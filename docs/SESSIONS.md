@@ -2321,3 +2321,19 @@ risks in the file.
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Tonys-MacBook-Pro/2a83f57c — write up the true-report-wrong-object pattern as a case study — docs/cases/2026-09-04-*
+- **Status:** ACTIVE
+- **Opened:** 2026-09-04
+- **Branch when opened:** `case-true-report-wrong-object` — a fact, not an identity; it may move under you
+- **Writes:** `docs/cases/2026-09-04-a-true-report-about-the-wrong-object.md` — one new file.
+  No existing file edited, nothing outside `docs/cases/`.
+- **Notes:** Imported incident, not native: it happened in `syncytium2/murderboard` tonight,
+  and **the session writing it up is the one that caused it** — same provenance problem the
+  2026-08-28 tests-were-defending-the-bug case carries, and stated in the file. If you are
+  also filing a case dated 2026-09-04, check the slug before you write.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
