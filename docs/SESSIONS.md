@@ -2323,7 +2323,7 @@ risks in the file.
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Tonys-MacBook-Pro/4a03c5d5 — Build the starter template repo (starter/) and an onboarding handout for it
-- **Status:** ACTIVE
+- **Status:** DONE 2026-09-04
 - **Opened:** 2026-09-04
 - **Branch when opened:** `starter-template` — a fact, not an identity; it may move under you
 - **Writes:** <files or folders you will change; "repo only" if nothing outside git>
