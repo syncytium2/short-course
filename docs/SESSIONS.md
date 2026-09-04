@@ -2335,7 +2335,7 @@ risks in the file.
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Tonys-MacBook-Pro/e8b745b6 — Case: two draughtsman turns ended with an inventory and no next step; the human supplied it in two windows 67s apart
-- **Status:** ACTIVE
+- **Status:** DONE 2026-09-04
 - **Opened:** 2026-09-04
 - **Branch when opened:** `the-turn-ended-with-an-inventory` — a fact, not an identity; it may move under you
 - **Writes:** <files or folders you will change; "repo only" if nothing outside git>
