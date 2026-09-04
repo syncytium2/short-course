@@ -283,8 +283,23 @@ selftest() {
     check "unpinned line endings are caught" yes "FAILED  .gitattributes pins eol=lf"
     cp "$t/attr.bak" "$t/.gitattributes"
 
-    # And back to green, so the mutations above are shown to be the cause.
-    check "restoring everything clears the failures" no "FAILED"
+    # And back to green -- but green in the four places the mutations touched, NOT green
+    # everywhere.
+    #
+    # THIS CHECK USED TO READ `no "FAILED"`, asserting that the whole run came back clean,
+    # and it passed on the laptop it was written on and failed the first time CI ran it.
+    # The runner has `gh` installed and not signed in, so "gh signed in to GitHub" failed
+    # correctly -- a true report about the machine, which this fixture has no business
+    # having an opinion on. A selftest that requires the host to be fully set up is a
+    # selftest that fails for reasons that are not the tool's, and the usual repair for
+    # that is to stop running it.
+    #
+    # So it asserts the absence of the four labels it mutated and nothing else. Each is
+    # named, so a mutation that stops being restored fails on its own name rather than
+    # inside a general "something is red".
+    for label in "core.hooksPath" "the hook actually fires" "the four refusals" ".gitattributes pins eol=lf"; do
+        check "restored: $label is no longer failing" no "FAILED  $label"
+    done
 
     if [ "$fails" -eq 0 ]; then echo "check_setup.sh selftest: all checks passed"; return 0; fi
     echo "check_setup.sh selftest: $fails FAILED"
