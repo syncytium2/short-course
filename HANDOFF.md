@@ -2080,3 +2080,71 @@ It did not claim before appending here, and did not touch `docs/SESSIONS.md`. Se
 `SESSIONS.md` in the shared checkout. `claim.sh` writes to that same file, so claiming would
 have meant committing somebody else's in-flight work — the sweep this board warns about. Only
 `HANDOFF.md` is in this commit.
+
+---
+
+## Parked, 2026-09-04 — a faculty-onboarding strategy, drafted and not taken up
+
+**Tony asked for it, reviewed nothing, and parked it the same turn: *"park this as a todo,
+don't have bandwidth."*** No decision is owed. It is recorded here because the draft exists
+and the reasoning behind it would otherwise have to be re-derived.
+
+The artefact:
+[`docs/drafts/faculty-onboarding-strategy.html`](docs/drafts/faculty-onboarding-strategy.html),
+published for review at
+<https://claude.ai/code/artifact/80878b75-d69c-4fe1-9d69-5cbe2cac586d>. It is **not a website
+page** — no row in [`tools/pages.txt`](tools/pages.txt), no META entry, so the build ignores it.
+It is publisher source and deliberately not standalone; the header comment says so.
+
+### What it is
+
+Eighteen steps in six phases, ordered by dependency rather than topic, for bringing a new
+faculty member onto agentic work. Built from [`points.md`](points.md) §D–§F, so it inherits
+the running order and the access research rather than restating them.
+
+**Its one original claim** — the thing that is not already in `points.md` — is that a new
+faculty member is the only person for whom Step 0 is free, because the window between a start
+date and a first data file is the only time these decisions are cheap rather than
+archaeological. Two of the eighteen are *impossible* late rather than merely expensive: the
+agent-authorship commit hook, and a derived born-on date. Both cite defects this estate has
+already paid for.
+
+**Phase F is a numbered step that says to build nothing**, on purpose, because an empty
+section reads as an oversight and this one is the argument.
+
+### Why it is worth picking back up
+
+It is the first thing in this repo written for the audience the 2026-09-02 U-M research
+identified: the institution ships Claude Code and Codex CLI to faculty and staff and teaches
+only the chat box. A new hire lands in that population on day one. If the vacancy claim is
+being replaced by a contrast claim, this draft is what the contrast is *for*.
+
+### What it is missing, and this is not a short list
+
+- **Zero runs.** Nobody has been onboarded this way. The order is derived from what our own
+  retrofits cost us — evidence about what went wrong, not evidence that this sequence
+  prevents it.
+- **The access table was checked 2026-08-27** and §F's own instruction is to go touch the
+  systems rather than edit around the dates. Not done.
+- **The no-Shortcode precedent is still single-source**, as §F already flags. It is the most
+  decision-relevant line in the draft and the least verified.
+- **No cost figure applies.** The $5–15/student estimate describes a *capped* student
+  account. The draft's own caution block is about the uncapped Shortcode case, which nobody
+  has measured, and which `points.md` §10 does not cover.
+- **No darkroom copy**, so it exists as repo bytes and an artefact URL and nothing Tony can
+  open from Finder. That is the delivery failure this estate keeps repeating; it is recorded
+  rather than fixed because he parked it before review.
+
+### Also parked the same day, unrelated to the above
+
+- **Machine-readable provenance output.** Checking the tonydefazio.com session's born-date
+  audit turned up a real gap: [`tools/build_site.sh`](tools/build_site.sh) emits the stamp as
+  prose only — no data attributes, no `<time>` — so a consumer must scrape the sentence. That
+  session is about to become that consumer for five sites, and bugarach is the only repo in
+  the estate emitting a readable contract. **Tony's call, not made.**
+- **The ordering check we do not have.** The selftest proves born renders and does not move on
+  a commit (`build_site.sh` ~427, ~494). Nothing asserts revised is not *earlier* than born.
+  Murderboard has that check; we do not. Cheap, and it belongs in any vendored page-stamp tool.
+- **Which `HANDOFF.md` he meant on 2026-09-02** — he pointed at one in `draughtsman`'s
+  scratchpad, not this file. Never resolved, and that scratchpad is session-scoped and may
+  already be gone.
