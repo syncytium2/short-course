@@ -131,10 +131,35 @@ rendering — precisely the thing those four columns exist to record.** Verdicts
 that change are comparable *because* the view is stamped on them, not because the view does not
 matter. The reassurance inverts the page's own doctrine to make a reassurance available.
 
+**The advice is at least followable, and that was worth establishing rather than assuming.** The
+session that owns the page asked whether the export is reachable mid-review or only at the end —
+because if it were end-only, *"download before reloading"* is something a person cannot act on, and
+the repair would be urgent rather than merely owed. **It is reachable.** `recordVerdict()` calls
+`paintAgreement()` after every verdict; that function rebuilds the button with a live count; and
+`#anOut` sits **outside** the hidden `#anStage`, so it is on screen from the first verdict onward.
+Checked on `aebd23d` and again on `25eb544`, the commit that landed the lane. **The loss is
+recoverable by a click nobody was told to make**, which is the difference between an expensive turn
+and an unrecoverable one — and it is settled by the code rather than by anyone's recollection of it.
+
 **The two errors are one error.** A sentence written to keep the human moving was composed rather
 than checked, and both halves of it — the agent's state and the durability of the human's work —
 went out unverified in the same breath. The concurrency claim cost nothing in the end because he
 asked. The verdicts claim had no four-word question that would catch it.
+
+**And the session that made it supplied the sharpest statement of what it shares with the bug it had
+just fixed, unprompted:**
+
+> The seam bug and this one are the same shape … Both halves tested, the join not. And my error was
+> the same species — I asserted a property of the join (verdicts survive the transition) from
+> knowledge of the halves.
+
+**That is the whole file in one sentence, and it upgrades the finding.** `aebd23d` is a defect in a
+join between two working halves, invisible to a suite that exercised both. *"The verdicts carry
+over"* is a claim about a join between two working halves — the verdict record and the new rendering
+— asserted from certain knowledge of each. **The reasoning that produces the false reassurance is
+the same reasoning that produces the untested seam**, which is why the fix for one is not a rule
+against the other: a person who has just learned that joins go untested can still assert a property
+of one in the next paragraph.
 
 ---
 
@@ -210,6 +235,31 @@ it.
 
 ---
 
+## What happened after, because it is part of the specimen
+
+This file was written while its subject was still working, and the Point 3 finding was sent to that
+session rather than only recorded. **It verified both halves in its own worktree before acting**,
+agreed, and said it would lead its next message to Tony with the export instruction. On the second
+half it wrote:
+
+> Your second point is the one I'd have defended and shouldn't have … *"Recorded against candidate
+> identity, not the UI that showed them"* was me reaching for a reassurance the file explicitly
+> refuses to make.
+
+**Two things follow that are worth more than the agreement.** It was the session that asked whether
+the export is reachable mid-review — the question that decides whether the advice is actionable, and
+the one this file could not have thought to ask from outside the page. And it declined to decide the
+sequencing alone: the lane shipped first as `25eb544` because Tony was blocked and asked for it
+directly, and **persistence goes to him as a question rather than being taken**, on the ground that a
+reload-survivable review changes what the view stamp means across a session.
+
+⚠ **Note what this does not license.** A peer catching a peer is not a mechanism — it worked because
+one session happened to be reading another's output an hour later, which is not a property anyone can
+rely on. It is the same standing this folder gives every other lucky catch: evidence that the defect
+is real, not evidence that anything is watching for it.
+
+---
+
 ## What this does not show
 
 - **Not that the turn was bad work.** The seam diagnosis, the red-first tests and the honoured
@@ -274,6 +324,13 @@ git show aebd23d:docs/site/raster_viewer.html | grep -n -B3 'downloadAnnotations
 # the view columns, and the comment saying the file refuses a verdict without them
 git show aebd23d:docs/site/raster_viewer.html | grep -n -B4 'ANNOT_COLUMNS = '
 
+# the export is reachable mid-review, not only at the end -- on both commits
+for C in aebd23d 25eb544; do
+  git show $C:docs/site/raster_viewer.html | grep -n 'id="anStage"\|id="anOut"\|paintAgreement()'
+done
+#   -> #anStage is hidden and CLOSES before #anOut, which carries no hidden attribute
+#   -> recordVerdict() calls paintAgreement(), which rebuilds the button, after every verdict
+
 # the constraint the turn held
 grep -rn 'SAP009' CLAUDE.md tools/sapper.py docs/history.md
 ```
@@ -287,8 +344,7 @@ grep -rn 'SAP009' CLAUDE.md tools/sapper.py docs/history.md
 | verdicts do not persist across a reload | the three greps above; no store, no write, one click-driven CSV |
 | verdict rows carry both identity and view | `ANNOT_COLUMNS` and `annotationsCsv()` |
 | "the file refuses one whose view is missing" | the comment immediately above `ANNOT_COLUMNS` |
+| the export is reachable from the first verdict | `#anOut` closes outside the hidden `#anStage`; `recordVerdict()` → `paintAgreement()` → the button. Same on `aebd23d` and `25eb544` |
+| the lane landed as `25eb544`, before persistence | `git log --oneline -2 mahice-judging-loop` |
 | the turn's wording | **Tony's paste. Not settled by any artifact.** |
-
-**One thing this session did rather than only recorded:** the finding in Point 3 was sent to the
-session that owns that worktree at the time of writing, since it was mid-edit on
-`docs/site/raster_viewer.html` and the reassurance was still standing.
+| what the owning session said in reply | **a cross-session message to the author, quoted above. Not a public artifact** |
