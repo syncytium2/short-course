@@ -2333,3 +2333,15 @@ risks in the file.
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Tonys-MacBook-Pro/e8b745b6 — Case: two draughtsman turns ended with an inventory and no next step; the human supplied it in two windows 67s apart
+- **Status:** ACTIVE
+- **Opened:** 2026-09-04
+- **Branch when opened:** `the-turn-ended-with-an-inventory` — a fact, not an identity; it may move under you
+- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
+- **Notes:** <anything another session must know before touching the same thing>
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
