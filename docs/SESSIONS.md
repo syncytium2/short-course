@@ -2323,7 +2323,7 @@ risks in the file.
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Tonys-MacBook-Pro/2a83f57c — write up the true-report-wrong-object pattern as a case study — docs/cases/2026-09-04-*
-- **Status:** ACTIVE
+- **Status:** DONE 2026-09-04
 - **Opened:** 2026-09-04
 - **Branch when opened:** `case-true-report-wrong-object` — a fact, not an identity; it may move under you
 - **Writes:** `docs/cases/2026-09-04-a-true-report-about-the-wrong-object.md` — one new file.
