@@ -2347,7 +2347,7 @@ risks in the file.
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Tonys-MacBook-Pro/41a56768 — Park the faculty-onboarding strategy draft as a todo — HANDOFF.md and docs/drafts/
-- **Status:** ACTIVE
+- **Status:** DONE 2026-09-04
 - **Opened:** 2026-09-04
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
 - **Writes:** <files or folders you will change; "repo only" if nothing outside git>
