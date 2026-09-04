@@ -7,6 +7,45 @@ is for murderboard development only; see [Boundary](#boundary) below.
 
 ## If you are coming back to this cold
 
+**2026-09-04. Two things are open and neither is started. Read this before picking either up.**
+
+**1 · The Windows route is decided, and it is not the one you would guess.** Tony, relaying
+Chris, a HITS expert: **VS Code on native Windows. No WSL.** That is institutional guidance
+about what these researchers are allowed to install, not a preference — do not design a WSL
+route. It is recorded here because nothing in this tree implies it: every handout is written
+for macOS and says so, and the Windows half of the audience is unaddressed.
+
+> **The consequence nobody has worked through, and it is upstream of every command.** VS Code's
+> integrated terminal on Windows defaults to **PowerShell**. Everything in
+> [`starter/`](starter/) is POSIX sh — [`bootstrap.sh`](starter/bootstrap.sh),
+> [`tools/paths.sh`](starter/tools/paths.sh),
+> [`tools/check_setup.sh`](starter/tools/check_setup.sh), and the
+> [commit hook](starter/.githooks/prepare-commit-msg). The two honest options are telling the
+> reader to switch VS Code's default terminal to Git Bash, or a second PowerShell entry point
+> — which is a second source, and two sources drift. **Settle the shell before writing a line
+> of Windows documentation.**
+
+**What does NOT need duplicating, established while building the template:** `.gitattributes`,
+the commit hook, the deny list, `paths.sh` and `check_setup.sh` are platform-identical, and
+`.gitattributes` matters more to a Windows reader than to anyone else. Only the installer
+commands and the interruption list genuinely differ. **One template, not two.**
+
+**2 · Nobody has walked any of this from a clean machine**, which is the stamp on both
+[`cold-start.html`](docs/handouts/cold-start.html) and
+[`already-set-up.html`](docs/handouts/already-set-up.html). The plan, unbuilt: one
+`tools/walk_clean.sh` that runs identically on a stripped local environment and on a GitHub
+`macos-latest` runner — free here, because this repo is public — printing every time it passes
+the things it could **not** do, so a green run never reads as a completed walk. It would not
+finish the job: the three sign-ins, Homebrew's password prompt, Apple's developer-tools dialog
+and the editor's trust prompt exist *because* a person has to be there, and no runner reaches
+them. It would move the stamp from *none of this has been observed* to *everything except the
+six human steps ran on a fresh machine on this date*.
+
+**Neither was started. Tony, 2026-09-04: "i don't have the focus to do this now."** Nothing is
+half-built and nothing is waiting on a decision — both are simply not begun.
+
+---
+
 **2026-08-30. Parked, deliberately, and nothing is decaying.** Everything is committed and pushed
 to the private remote. There is no clock on any of it. The course was already postponed on
 2026-08-27 and the postponement removed the deadline, not the findings — that is still true and
