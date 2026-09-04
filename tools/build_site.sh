@@ -67,7 +67,7 @@ META = {
     "show-it-your-screen.html": (
         "You do not need to be an expert at web deployment. Seven real stoppages from one "
         "afternoon, four real screens, and the loop that got past three of them.", "\U0001F5A5"),
-    "the-short-way-in.html": (
+    "already-set-up.html": (
         "Cold Start with the half that has one right answer already built — what arrives "
         "prebuilt, what is deliberately left blank, six interruptions rather than three, and "
         "what taking the short route costs you.", "\U0001F9F0"),
