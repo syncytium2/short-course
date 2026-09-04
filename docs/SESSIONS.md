@@ -2335,7 +2335,7 @@ risks in the file.
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Tonys-MacBook-Pro/8a7d03c0 — File the mahice turn as a case: a turn that ended claiming to be working, sent Tony to judge in parallel, and attached an unchecked promise that his verdicts carry over
-- **Status:** ACTIVE
+- **Status:** DONE 2026-09-04
 - **Opened:** 2026-09-04
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
 - **Writes:** <files or folders you will change; "repo only" if nothing outside git>
