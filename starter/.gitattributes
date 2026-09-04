@@ -1,0 +1,39 @@
+# Cold Start step 4.7. One of the two things on that page that cannot be applied
+# afterwards, which is why it ships in the template rather than being a task.
+#
+# WHAT IT PREVENTS. A carriage return at the end of a script's first line makes the
+# kernel look for an interpreter called "sh\r", which does not exist. The error is
+# "bad interpreter: no such file or directory" and it names the interpreter, so it
+# reads as a missing shell rather than as a broken file. Nothing you can see in the
+# file is wrong. It costs an afternoon the first time, and it happens the moment a
+# script written on Windows reaches a Linux machine or a cluster.
+#
+# Retroactively this is a pain: files already committed with CRLF keep it, and
+# fixing them is a renormalise commit that touches everything and hides real changes
+# in the diff. Set on day one it costs nothing at all.
+
+# Let git decide what is text, then store it with LF in the repository.
+* text=auto eol=lf
+
+# The ones where it is not a preference.
+*.sh   text eol=lf
+*.bash text eol=lf
+*.py   text eol=lf
+*.R    text eol=lf
+
+# Windows tooling that genuinely wants CRLF.
+*.bat  text eol=crlf
+*.cmd  text eol=crlf
+
+# Never touched, because "text=auto" guessing wrong on a binary corrupts it.
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.pdf  binary
+*.zip  binary
+*.gz   binary
+*.mat  binary
+*.npy  binary
+*.h5   binary
+*.nc   binary

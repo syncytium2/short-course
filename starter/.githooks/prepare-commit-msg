@@ -1,0 +1,66 @@
+#!/usr/bin/env sh
+# prepare-commit-msg — mark the commits the agent made, so the log can tell them
+# from yours.
+#
+# Cold Start step 4.7. It is here rather than in a checklist because it is one of
+# two things on that page that cannot be applied afterwards: add it today and every
+# commit from today is attributable; add it in a year and the honest answer for
+# everything before then is "assume the agent unless a commit says otherwise".
+#
+# HOW IT KNOWS. Claude Code sets CLAUDE_CODE_SESSION_ID in the environment of every
+# command it runs. A commit made from inside a session has it; a commit you type in
+# your own terminal does not. That is the whole detector, and it is worth knowing
+# its limit: it marks WHERE THE COMMIT WAS TYPED, not who wrote the lines. A commit
+# you make yourself, in a terminal the agent happens to be driving, is marked as the
+# agent's. The error runs in the safe direction — it over-attributes to the agent,
+# never under-attributes — which is the direction you want when the question is ever
+# asked seriously.
+#
+# IT CANNOT BLOCK A COMMIT. Every path exits 0. A commit hook that can fail is a
+# commit hook that gets removed the first evening it is in the way, and then the
+# thing it was protecting is gone silently. See tools/check_setup.sh, which is what
+# notices it has been removed.
+#
+# IT IS NOT WIRED BY BEING HERE. Git looks in .git/hooks, which is not committed and
+# not this directory. Something has to run:
+#
+#     git config core.hooksPath .githooks
+#
+# bootstrap.sh does that; check_setup.sh checks it held. A hook on disk and
+# registered nowhere is the most common way a guard in this estate has been found
+# dead, so the check matters more than the file.
+
+set -u
+
+MSG_FILE="${1-}"
+[ -n "$MSG_FILE" ] || exit 0
+[ -f "$MSG_FILE" ] || exit 0
+
+# A human commit. Nothing to add.
+[ -n "${CLAUDE_CODE_SESSION_ID-}" ] || exit 0
+
+TRAILER="Co-Authored-By: Claude Code <noreply@anthropic.com>"
+
+# Already marked -- by an earlier run of this hook, or by the agent itself, which
+# adds its own trailer. Appending a second one would put two co-authors on one
+# commit and make `git log --grep` double-count.
+if grep -qi '^Co-Authored-By:.*Claude' "$MSG_FILE"; then
+    exit 0
+fi
+
+# `--amend`, `--squash` and merge commits arrive with a source argument. Marking an
+# amend is right (the amended commit is still being made from here); marking a merge
+# is noise, because a merge authors no lines.
+case "${2-}" in
+    merge) exit 0 ;;
+esac
+
+# Trailers go at the end, after one blank line, and only if the file does not
+# already end in one. printf rather than echo: echo's handling of a message ending
+# in a backslash differs between shells.
+if [ -s "$MSG_FILE" ] && [ -n "$(tail -c 1 "$MSG_FILE")" ]; then
+    printf '\n' >>"$MSG_FILE"
+fi
+printf '\n%s\n' "$TRAILER" >>"$MSG_FILE"
+
+exit 0
