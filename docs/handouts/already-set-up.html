@@ -158,31 +158,35 @@
   }
   ol.acts .sub { display: block; color: var(--muted); font-size: 13.5px; margin-top: 2px; }
 
-  /* ---- the interruption table ----
-     A table rather than a list because the third column is the point: who
-     can do this one. Reading down that column is the whole argument for why
-     "three screens" was the wrong promise, and a list buries it in prose. */
-  .tw { overflow-x: auto; margin: 16px 0 0; }
-  table.grid { border-collapse: collapse; width: 100%; font-size: 13.5px; }
-  table.grid th, table.grid td {
-    text-align: left; vertical-align: top; padding: 9px 10px 9px 0;
-    border-bottom: 1px solid var(--rule);
+  /* ---- the interruptions ----
+     THIS WAS A THREE-COLUMN TABLE AND THE TABLE WAS THE BUG. The third column
+     said who can get past each one, and reading down it -- you, you, you, you,
+     you, you -- is the entire argument. At 600px the second column's detail
+     lines made the table wider than the page, so `overflow-x: auto` did its job
+     and pushed that column off the right edge, where nobody scrolls to find it.
+     The page-level overflow check passed the whole time, because the scroll was
+     inside the wrapper and not on the body: a true report about the wrong object.
+     Caught by looking at a screenshot.
+
+     So it is a list, and the "who" rides at the end of each line where it cannot
+     be scrolled away from. The repetition still reads down the left of it. */
+  ol.stops { margin: 16px 0 0; padding: 0; list-style: none; counter-reset: s; }
+  ol.stops > li {
+    padding: 11px 0 11px 26px; border-bottom: 1px solid var(--rule);
+    position: relative; counter-increment: s; font-size: 14px;
   }
-  table.grid th {
-    font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em;
-    text-transform: uppercase; color: var(--faint); font-weight: 500;
-    border-bottom: 1px solid var(--rule-firm);
+  ol.stops > li:first-child { border-top: 1px solid var(--rule-firm); }
+  ol.stops > li::before {
+    content: counter(s); position: absolute; left: 0; top: 12px;
+    font-family: var(--mono); font-size: 12px; color: var(--accent);
   }
-  table.grid td:first-child {
-    font-family: var(--mono); font-size: 12px; color: var(--accent); white-space: nowrap;
-    padding-right: 14px;
+  ol.stops .sub { display: block; color: var(--muted); font-size: 13px; margin-top: 3px; }
+  ol.stops .you {
+    display: block; margin-top: 5px;
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--caution);
   }
-  table.grid .who { color: var(--muted); }
-  table.grid .you { color: var(--caution); font-weight: 600; }
-  table.grid caption {
-    caption-side: bottom; text-align: left; color: var(--faint);
-    font-size: 12.5px; padding-top: 10px; line-height: 1.5;
-  }
+  p.after-stops { color: var(--faint); font-size: 12.5px; line-height: 1.5; margin-top: 12px; }
 
   /* ---- the ledger ----
      Two columns that mean opposite things, and the rule between them is the
@@ -285,49 +289,28 @@
 
   <p><b>&ldquo;Three auth screens and you are done&rdquo; is the version of this that gets people to start, and it is wrong in a way that shows up nine minutes in.</b> Here is the real count, on a Mac with nothing installed and no accounts yet.</p>
 
-  <div class="tw">
-    <table class="grid">
-      <thead>
-        <tr><th>#</th><th>What stops</th><th>Who can get past it</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td><b>GitHub</b> &mdash; sign up, verify the email, turn on two-factor<span class="sub" style="display:block;color:var(--muted);margin-top:2px">Both of the questions underneath this are annoying to undo, and Cold Start 1.2 is ten minutes well spent.</span></td>
-          <td class="you">you, with your phone</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td><b>Claude</b> &mdash; sign up, and choose a plan<span class="sub" style="display:block;color:var(--muted);margin-top:2px">The browser is free and is a complete route. Reading your files needs a paid plan.</span></td>
-          <td class="you">you, with a card</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td><b>Dropbox</b> &mdash; sign up, open the app, sign in, wait for the first sync<span class="sub" style="display:block;color:var(--muted);margin-top:2px">A desktop app, not a web page. It cannot be driven from a script and OneDrive or Drive do just as well.</span></td>
-          <td class="you">you, then a wait</td>
-        </tr>
-        <tr>
-          <td>4</td>
-          <td><b>Your Mac password</b>, asked for by Homebrew&rsquo;s installer</td>
-          <td class="you">you, typing</td>
-        </tr>
-        <tr>
-          <td>5</td>
-          <td><b>Apple&rsquo;s developer-tools dialog</b>, which git arrives inside</td>
-          <td class="you">you, clicking</td>
-        </tr>
-        <tr>
-          <td>6</td>
-          <td><b>&ldquo;Do you trust the authors of the files in this folder?&rdquo;</b>, the first time an editor opens it<span class="sub" style="display:block;color:var(--muted);margin-top:2px">For a folder you made yourself, on your own machine, the answer is yes.</span></td>
-          <td class="you">you, clicking</td>
-        </tr>
-        <tr>
-          <td colspan="3" style="padding-top:14px"><span class="who">Everything else &mdash; installing the tools, wiring the hook, starting the history, writing the ignore rules, checking that any of it worked &mdash; runs without you.</span></td>
-        </tr>
-      </tbody>
-      <caption><b>Numbers 4, 5 and 6 are the ones nobody mentions</b>, and they are the reason to say all six in advance. A password prompt appearing in a script that promised three screens is the moment a first-time user decides the whole thing is lying to them &mdash; and they are not wrong to think so, which is the problem. Read on the day the tools published these steps: 4 September 2026.</caption>
-    </table>
-  </div>
+  <ol class="stops">
+    <li><b>GitHub</b> &mdash; sign up, verify the email, turn on two-factor
+      <span class="sub">Both of the questions underneath this are annoying to undo, and Cold Start 1.2 is ten minutes well spent.</span>
+      <span class="you">you, with your phone</span></li>
+    <li><b>Claude</b> &mdash; sign up, and choose a plan
+      <span class="sub">The browser is free and is a complete route. Reading your own files needs a paid plan.</span>
+      <span class="you">you, with a card</span></li>
+    <li><b>Dropbox</b> &mdash; sign up, open the app, sign in, wait for the first sync
+      <span class="sub">A desktop app rather than a web page, so it cannot be driven from a script. OneDrive or Drive do just as well.</span>
+      <span class="you">you, then a wait</span></li>
+    <li><b>Your Mac password</b>, asked for by Homebrew&rsquo;s installer
+      <span class="you">you, typing</span></li>
+    <li><b>Apple&rsquo;s developer-tools dialog</b>, which git arrives inside
+      <span class="you">you, clicking</span></li>
+    <li><b>&ldquo;Do you trust the authors of the files in this folder?&rdquo;</b>, the first time an editor opens it
+      <span class="sub">For a folder you made yourself, on your own machine, the answer is yes.</span>
+      <span class="you">you, clicking</span></li>
+  </ol>
+
+  <p><b>Everything else runs without you</b> &mdash; installing the tools, wiring the hook, starting the history, writing the ignore rules, and checking that any of it actually worked.</p>
+
+  <p class="after-stops"><b>Numbers 4, 5 and 6 are the ones nobody mentions</b>, and they are the reason to say all six in advance. A password prompt appearing in a script that promised three screens is the moment a first-time user decides the whole thing is lying to them &mdash; and they are not wrong to think so, which is the problem. Read from the tools&rsquo; own published steps on 4 September 2026.</p>
 
   <p><b>If you already have the three accounts, it really is close to the short version:</b> two browser handoffs, a password, and about ten minutes of downloading. The long list above is the cost of starting from nothing, and it is worth knowing which of the two you are.</p>
 
