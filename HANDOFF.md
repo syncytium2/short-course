@@ -2232,22 +2232,49 @@ Shortcode-plus-MCommunity-group requirement are unchanged.
 quota before you set one, and the actual per-token rates. Those two decide whether point 1 is
 a footnote or a real hazard, and neither has been opened.
 
-### ⚠ I swept another session's in-flight file, 2026-09-05 — `abd75a7`
+### ⚠ I swept an unattributed in-flight file, 2026-09-05 — `abd75a7`
 
 **`git add -A` in commit `abd75a7` picked up `tools/presentation_check.js`**, 279 lines, a new
-file belonging to another session working in this shared checkout. It is now on `master` and
-pushed, carrying a commit message about the U-M page verification that has nothing to do with
-it. The file was still showing as modified afterwards, so that session is mid-flight and my
-commit captured an intermediate state of its work under someone else's heading.
+file belonging to *some other session* working in this shared checkout. It is now on `master`
+and pushed, carrying a commit message about the U-M page verification that has nothing to do
+with it.
 
-**This is the exact failure the 2026-09-01 board entry warns about**, three sections above,
-which I read before starting. I used `git add -A` anyway, twice.
+**⚠ THE OWNER IS UNIDENTIFIED.** An earlier version of this entry said the file belonged to
+`short-course-3d` and I messaged that session accordingly. **It is not theirs** — they have only
+read in this repo today, and their work landed in `~/bin`, `~/Library/LaunchAgents` and
+`coding-diary-tools`. The inference that produced the name is worth recording because it will
+recur: *the file is in the shared tree, it is not mine, therefore it belongs to the session I am
+talking to.* With around eighteen sessions live on one machine and git authorship identical
+across all of them, **"not mine" does not narrow to "yours" — it narrows to "one of
+seventeen."** What exists is an unattributed file, which is a residual, not an identification.
 
-**Not unpicked.** Rewriting pushed history with three sessions live on the repo would be worse
-than the misattribution. The remedy is this record plus a message to the owning session.
+Not filing a fix-up commit naming an author, either. That would replace *"these lines sit under
+an unrelated message"* with *"these lines belong to session X"* — stated confidently, and wrong.
+Misplacement is recoverable; misattribution written into the log is the shape this repo keeps
+a case file about.
+
+**What is known, and reproduces:** the file is modified in the working tree as of 2026-09-05,
+**47 insertions and 16 deletions** on top of `abd75a7`, so somebody is actively editing it. It
+appears in **no workflow and no tool** — `grep -rl presentation_check` hits only itself and this
+file — so nothing runs it and nothing would report on it. And `git log --diff-filter=A` names
+`abd75a7` as the commit that added it, which means **my sweep is the file's entire recorded
+provenance.** Whoever owns it will find their work's origin story is a commit about something
+else.
+
+**Not unpicked.** Rewriting pushed history with multiple sessions live would be worse than the
+misattribution. `short-course-3d` independently reached the same judgement.
 
 **The rule, for whoever is next:** in this checkout, stage explicit paths. `git add -A` and
 `git commit -a` are unsafe here by default, not by accident.
+
+**And record the mechanism honestly, because "be more careful" is not a cure.** The 2026-09-01
+board entry three sections above warns about precisely this sweep. I read it before starting and
+used `git add -A` twice anyway. That is **a written rule failing in the ordinary way** — the
+same failure `points.md` §B names when it says a request is not a rule — not an attention lapse
+to be resolved by resolving harder. The cure, if one is wanted, is tool-shaped or it is nothing:
+this repo has `turnstile` hooks that already blocked a heredoc in this same session, and a
+pre-commit gate refusing `add -A` in a checkout with unrelated modifications is the same
+instrument.
 
 ---
 
