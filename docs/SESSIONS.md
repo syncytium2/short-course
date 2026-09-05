@@ -2365,7 +2365,7 @@ risks in the file.
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Mac/41a56768 — Rewrite the onboarding draft for beginners generally, not new faculty — docs/drafts/ and HANDOFF.md
-- **Status:** ACTIVE
+- **Status:** DONE 2026-09-05
 - **Opened:** 2026-09-05
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
 - **Writes:** <files or folders you will change; "repo only" if nothing outside git>
