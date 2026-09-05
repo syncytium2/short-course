@@ -368,6 +368,21 @@ const server = http.createServer((req, res) => {
     'ol.steps > li[data-key="agent-account"]', e => e.dataset.open), '1');
 
   // The one thing the page cannot derive is asked for, and reaches the word list.
+  //
+  // WALKED THE WAY A READER WALKS IT, and the first version of this check did not. It
+  // filled the field directly and passed -- but the field lives inside 1.1's detail, which
+  // is FOLDED by default, so the only way a reader reaches it is by clicking the word. The
+  // check passed because an earlier assertion in this file had already opened 1.1, which
+  // means it would have gone on passing with the jump completely broken. Found by driving
+  // the deployed page, where nothing had opened anything first.
+  await page.evaluate(() => localStorage.clear());
+  await page.reload();
+  await page.click('.tierpick[data-tier="min"]');
+  check('the agent field is behind 1.1\'s fold, as every field on this page is',
+    await page.$eval('.fill-one input[data-k="agent"]', e => e.offsetParent !== null), false);
+  await page.click('.terms dt[data-jump="agent-account"]');
+  check('and clicking the word is what puts it in front of the reader',
+    await page.$eval('.fill-one input[data-k="agent"]', e => e.offsetParent !== null), true);
   await page.fill('.fill-one input[data-k="agent"]', 'Gemini CLI');
   check('naming your agent at 1.1 reaches the word list', await chip('agent'), 'yours: Gemini CLI');
   await page.reload();
