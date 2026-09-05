@@ -67,6 +67,24 @@ jobs:
           npm install --no-save playwright@1.61.0
           npx playwright install --with-deps chromium
 
+      - name: The starter template's own checks
+        # THE TEMPLATE IS SHIPPED TO STRANGERS, so its checks matter more than this repo's
+        # and not less: a reader who takes it does not have this repository, does not read
+        # these workflows, and has no way to find out that a guard in it stopped working.
+        #
+        # It is also the one thing here that will be COPIED rather than read, which is the
+        # failure this repo measured as N3 — every guard in this estate propagates by
+        # somebody remembering to copy it, and fourteen of twenty instruments live in
+        # exactly one repository as a result. A template that has drifted broken is that
+        # finding with a wider blast radius.
+        #
+        # docs/handouts/already-set-up.html tells its reader these checks run here. This
+        # step is what makes that sentence true rather than a claim about intent.
+        run: |
+          sh starter/tools/paths.sh       --selftest
+          sh starter/tools/check_setup.sh --selftest
+          sh starter/bootstrap.sh         --selftest
+
       - name: Tool selftests
         # Every tool that has one. `worktree.sh --selftest` makes and removes worktrees, so
         # it needs the real repository rather than a fixture, which the checkout is.
@@ -74,6 +92,7 @@ jobs:
           sh tools/build_site.sh      --selftest
           sh tools/checklist_state.sh --selftest
           sh tools/tier_check.sh      --selftest
+          sh tools/terms_check.sh     --selftest
           sh tools/site_staleness.sh  --selftest
           sh tools/claim.sh           --selftest
           sh tools/worktree.sh        --selftest
@@ -101,6 +120,11 @@ jobs:
 
       - name: Every route through the runbook can be finished
         run: sh tools/tier_check.sh --check
+
+      - name: One word per thing, in the prose a learner reads
+        # Every handout, by glob rather than by list, so one added tomorrow is covered the
+        # day it lands. Anything not yet through the pass is printed with its count.
+        run: sh tools/terms_check.sh --check
 
       - name: Pointers resolve, and dated UI says when it was true
         run: |

@@ -1,0 +1,411 @@
+<title>Already Set Up</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+  /* ---------------------------------------------------------------
+     Seventh sheet in the same system as cold-start.html,
+     just-enough-git, what-it-costs, search-to-shipped, four-barriers
+     and show-it-your-screen. Same tokens, same two weights of one
+     family, same 600px column. Everything below the tokens is either
+     lifted from just-enough-git or is the one component this page
+     needs and that one does not: the two-column ledger.
+
+     WHY THIS PAGE EXISTS. Cold Start is thirty steps and roughly half
+     of them have exactly one right answer -- a .gitattributes line, a
+     deny list, a commit hook, a path helper. Those are not teaching,
+     they are typing, and the reader who most needs the other half is
+     the one least likely to still be reading by the time they arrive.
+     So the typing ships prebuilt and this page is about the trade.
+
+     IT MUST NOT READ AS THE EASY VERSION OF COLD START. The half it
+     removes is the half where the understanding was, and a reader who
+     takes this route because it is shorter and never goes back has
+     been sold something. That argument is the second section rather
+     than the last, and the box above the masthead makes the limit the
+     first thing on the page instead of the last.
+     --------------------------------------------------------------- */
+  :root {
+    --ground:  #FAFBFC;
+    --surface: #FFFFFF;
+    --sunk:    #F2F5F8;
+    --ink:     #171C23;
+    --muted:   #5C6875;
+    --faint:   #6A7583;
+    --rule:    #E1E6EB;
+    --rule-firm:#C9D2DB;
+    --accent:  #15577D;
+    --accent-soft: #E7F0F6;
+    --caution: #8A5D0F;
+    --caution-soft: #FAF2E2;
+    --good:    #2E6A4F;
+    --good-soft: #E6F1EB;
+    --bad:     #A02A24;
+
+    --sans: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:  #0D1218;
+      --surface: #141A22;
+      --sunk:    #1A222B;
+      --ink:     #E3E8EE;
+      --muted:   #93A0AE;
+      --faint:   #7C8896;
+      --rule:    #232C36;
+      --rule-firm:#313D4A;
+      --accent:  #69B0DD;
+      --accent-soft: #16283A;
+      --caution: #D2A64E;
+      --caution-soft: #2A2213;
+      --good:    #74C39B;
+      --good-soft: #14261E;
+      --bad:     #F0857C;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground:  #0D1218;
+    --surface: #141A22;
+    --sunk:    #1A222B;
+    --ink:     #E3E8EE;
+    --muted:   #93A0AE;
+    --faint:   #7C8896;
+    --rule:    #232C36;
+    --rule-firm:#313D4A;
+    --accent:  #69B0DD;
+    --accent-soft: #16283A;
+    --caution: #D2A64E;
+    --caution-soft: #2A2213;
+    --good:    #74C39B;
+    --good-soft: #14261E;
+    --bad:     #F0857C;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0;
+    padding: 36px 20px 96px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page { max-width: 600px; margin: 0 auto; }
+
+  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+
+  /* ---- masthead ---- */
+  .mast { border-bottom: 2px solid var(--ink); padding-bottom: 16px; margin-bottom: 22px; }
+  .eyebrow .home { color: inherit; text-decoration: none; border-bottom: 1px solid currentColor; }
+  .eyebrow .home:hover { color: var(--accent); }
+  .eyebrow {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .13em;
+    text-transform: uppercase; color: var(--muted); margin: 0 0 10px;
+  }
+  h1 { font-size: 27px; font-weight: 600; letter-spacing: -.015em; margin: 0 0 10px; text-wrap: balance; }
+  .standfirst { color: var(--muted); margin: 0; }
+
+  h2 {
+    font-size: 17px; font-weight: 600; margin: 40px 0 0; letter-spacing: -.01em;
+    border-bottom: 1px solid var(--ink); padding-bottom: 7px; text-wrap: balance;
+  }
+  h3 {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .11em; text-transform: uppercase;
+    color: var(--accent); font-weight: 500; margin: 24px 0 6px;
+  }
+  p { margin: 12px 0; }
+  b { font-weight: 600; }
+  .lede { font-size: 15.5px; }
+
+  .note {
+    background: var(--accent-soft); border-left: 2px solid var(--accent);
+    padding: 12px 14px; margin: 18px 0; font-size: 14px;
+  }
+  .note p { margin: 0 0 8px; }
+  .note p:last-child { margin: 0; }
+
+  .flag {
+    background: var(--sunk); border-left: 2px solid var(--rule-firm);
+    padding: 11px 13px; margin: 16px 0; font-size: 13.5px; color: var(--muted);
+  }
+  .flag b { color: var(--ink); }
+  .flag p { margin: 0 0 7px; }
+  .flag p:last-child { margin: 0; }
+
+  ul.plain { margin: 12px 0; padding: 0; list-style: none; }
+  ul.plain > li { padding: 9px 0; border-bottom: 1px solid var(--rule); }
+  ul.plain > li:first-child { border-top: 1px solid var(--rule); }
+  ul.plain b { font-weight: 600; }
+  ul.plain .sub { display: block; color: var(--muted); font-size: 13.5px; margin-top: 2px; }
+
+  ol.acts { margin: 12px 0 0; padding: 0; list-style: none; counter-reset: a; }
+  ol.acts > li {
+    padding: 11px 0 11px 30px; border-bottom: 1px solid var(--rule);
+    position: relative; counter-increment: a;
+  }
+  ol.acts > li::before {
+    content: counter(a); position: absolute; left: 0; top: 11px;
+    font-family: var(--mono); font-size: 12px; color: var(--accent);
+  }
+  ol.acts .sub { display: block; color: var(--muted); font-size: 13.5px; margin-top: 2px; }
+
+  /* ---- the interruptions ----
+     THIS WAS A THREE-COLUMN TABLE AND THE TABLE WAS THE BUG. The third column
+     said who can get past each one, and reading down it -- you, you, you, you,
+     you, you -- is the entire argument. At 600px the second column's detail
+     lines made the table wider than the page, so `overflow-x: auto` did its job
+     and pushed that column off the right edge, where nobody scrolls to find it.
+     The page-level overflow check passed the whole time, because the scroll was
+     inside the wrapper and not on the body: a true report about the wrong object.
+     Caught by looking at a screenshot.
+
+     So it is a list, and the "who" rides at the end of each line where it cannot
+     be scrolled away from. The repetition still reads down the left of it. */
+  ol.stops { margin: 16px 0 0; padding: 0; list-style: none; counter-reset: s; }
+  ol.stops > li {
+    padding: 11px 0 11px 26px; border-bottom: 1px solid var(--rule);
+    position: relative; counter-increment: s; font-size: 14px;
+  }
+  ol.stops > li:first-child { border-top: 1px solid var(--rule-firm); }
+  ol.stops > li::before {
+    content: counter(s); position: absolute; left: 0; top: 12px;
+    font-family: var(--mono); font-size: 12px; color: var(--accent);
+  }
+  ol.stops .sub { display: block; color: var(--muted); font-size: 13px; margin-top: 3px; }
+  ol.stops .you {
+    display: block; margin-top: 5px;
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--caution);
+  }
+  p.after-stops { color: var(--faint); font-size: 12.5px; line-height: 1.5; margin-top: 12px; }
+
+  /* ---- the ledger ----
+     Two columns that mean opposite things, and the rule between them is the
+     one design decision on this page: prebuilt on the left, blank on the
+     right, and nothing appears in both. */
+  .ledger { display: grid; grid-template-columns: 1fr 1fr; gap: 0 22px; margin: 18px 0 0; }
+  .ledger > div { min-width: 0; }
+  .ledger h4 {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em;
+    text-transform: uppercase; font-weight: 500; margin: 0 0 4px; padding-bottom: 6px;
+    border-bottom: 1px solid var(--rule-firm);
+  }
+  .ledger .built h4 { color: var(--good); }
+  .ledger .blank h4 { color: var(--caution); }
+  .ledger ul { margin: 0; padding: 0; list-style: none; }
+  .ledger li { padding: 8px 0; border-bottom: 1px solid var(--rule); font-size: 13.5px; }
+  .ledger code { font-size: .88em; }
+  .ledger .sub { display: block; color: var(--muted); font-size: 12.5px; margin-top: 2px; }
+  @media (max-width: 520px) {
+    .ledger { grid-template-columns: 1fr; gap: 0; }
+    .ledger .blank { margin-top: 26px; }
+  }
+
+  code { font-family: var(--mono); font-size: .92em; background: var(--sunk); padding: 1px 5px; border: 1px solid var(--rule); }
+  pre {
+    font-family: var(--mono); font-size: 12.5px; line-height: 1.65;
+    background: var(--sunk); border: 1px solid var(--rule);
+    padding: 12px 14px; margin: 14px 0; overflow-x: auto;
+  }
+  pre code { background: none; border: none; padding: 0; font-size: inherit; }
+  pre .c { color: var(--faint); }
+
+  footer {
+    margin-top: 44px; padding-top: 14px; border-top: 1px solid var(--rule);
+    color: var(--faint); font-size: 12.5px;
+  }
+  footer p { margin: 0 0 6px; }
+  footer a { color: var(--faint); }
+
+  @media (max-width: 460px) {
+    body { padding: 26px 14px 72px; font-size: 14.5px; }
+  }
+
+  /* ---- draft stamp ----
+     Carries the same thing Cold Start's does, for the same reason: nobody
+     has walked this from a clean machine either, and the reader who would
+     be hurt by that is the one this page is for. */
+  .draft {
+    border: 1px solid var(--caution);
+    background: var(--caution-soft);
+    border-radius: 4px;
+    padding: 11px 14px;
+    margin: 18px 0 6px;
+  }
+  .draft-k {
+    display: block;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: var(--caution);
+    margin: 0 0 5px;
+  }
+  .draft p { margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--ink); }
+  .draft p + p { margin-top: 7px; }
+  @media print { .draft { break-inside: avoid; } }
+</style>
+
+<div class="page">
+  <div class="draft">
+    <b class="draft-k">Not yet walked from a clean machine</b>
+    <p>The template&rsquo;s own checks run and pass &mdash; including one that makes a throwaway repository, commits into it, and reads the message back to prove the commit hook fires rather than merely exists. <b>What has not happened is a person with three fresh accounts running this end to end on a computer with nothing on it.</b> Until that has been done, the ordering, the timings and the install commands here are reasoned rather than observed.</p>
+    <p>The consequence to hold on to: <b>a step that is wrong has no way of announcing itself</b>, and the reader least able to tell the difference between a broken instruction and their own mistake is the one this page is written for.</p>
+  </div>
+
+  <header class="mast">
+    <p class="eyebrow"><a href="/" class="home">&larr;&nbsp;It Looked Right</a> &middot; Companion sheet &middot; <a href="https://lookedright.tonydefazio.com/cold-start">Cold Start</a></p>
+    <h1>Already Set Up</h1>
+    <p class="standfirst">The same setup as <i>Cold Start</i>, with the half that has one right answer already built &mdash; so your first evening goes on the decisions instead of on the typing. What that trade costs you is the second section, not a footnote.</p>
+  </header>
+
+  <p class="lede"><b>You clone a folder that is already set up, sign in to three things, and run two commands.</b> The line endings are pinned, the commit hook that marks the agent&rsquo;s work is written, the deny list naming what the agent may never do is in place, and one file answers &ldquo;where does the data live on this machine&rdquo; so no script of yours ever contains a path.</p>
+
+  <p>None of that is the interesting part. The interesting part is what is deliberately left empty, and why.</p>
+
+  <h2>What you are trading, said before you decide</h2>
+
+  <p><b>Cold Start makes you build each of these yourself, and that is not padding.</b> The reader who writes their own deny list has had to think about what the agent should not be allowed to do, which is a different mental event from reading a list somebody else wrote. By the time they have done it four times they can look at an unfamiliar project and see what is missing. That is the actual product of the long route.</p>
+
+  <p><b>This route gives you the artefacts without the event.</b> You get a machine that works tonight. You do not get the hour where you found out why any of it is there, and nothing in the files will supply it, because reading a good explanation and having made the decision are not the same and only one of them survives contact with a new project.</p>
+
+  <div class="note">
+    <p><b>So take this route if you have work to do this week and the setup is in the way.</b> That is a real situation and it deserves a real answer rather than a lecture about doing it properly.</p>
+    <p><b>Take the long route if you expect to set up more than one project</b>, or if anybody is going to ask you what your agent is allowed to do. It costs an evening and it is the evening that makes the second project cheap.</p>
+  </div>
+
+  <p class="flag"><b>The files argue with you, on purpose.</b> Every file in the template opens by saying why it exists and what happens if you delete it &mdash; and several of them name the incident that caused them. It is the cheapest available substitute for having built the thing yourself. It is a substitute.</p>
+
+  <h2>Six interruptions, and only three of them are sign-ins</h2>
+
+  <p><b>&ldquo;Three auth screens and you are done&rdquo; is the version of this that gets people to start, and it is wrong in a way that shows up nine minutes in.</b> Here is the real count, on a Mac with nothing installed and no accounts yet.</p>
+
+  <ol class="stops">
+    <li><b>GitHub</b> &mdash; sign up, verify the email, turn on two-factor
+      <span class="sub">Both of the questions underneath this are annoying to undo, and Cold Start 1.2 is ten minutes well spent.</span>
+      <span class="you">you, with your phone</span></li>
+    <li><b>Claude</b> &mdash; sign up, and choose a plan
+      <span class="sub">The browser is free and is a complete route. Reading your own files needs a paid plan.</span>
+      <span class="you">you, with a card</span></li>
+    <li><b>Dropbox</b> &mdash; sign up, open the app, sign in, wait for the first sync
+      <span class="sub">A desktop app rather than a web page, so it cannot be driven from a script. OneDrive or Drive do just as well.</span>
+      <span class="you">you, then a wait</span></li>
+    <li><b>Your Mac password</b>, asked for by Homebrew&rsquo;s installer
+      <span class="you">you, typing</span></li>
+    <li><b>Apple&rsquo;s developer-tools dialog</b>, which git arrives inside
+      <span class="you">you, clicking</span></li>
+    <li><b>&ldquo;Do you trust the authors of the files in this folder?&rdquo;</b>, the first time an editor opens it
+      <span class="sub">For a folder you made yourself, on your own machine, the answer is yes.</span>
+      <span class="you">you, clicking</span></li>
+  </ol>
+
+  <p><b>Everything else runs without you</b> &mdash; installing the programs, wiring the hook, starting the history, writing the ignore rules, and checking that any of it actually worked.</p>
+
+  <p class="after-stops"><b>Numbers 4, 5 and 6 are the ones nobody mentions</b>, and they are the reason to say all six in advance. A password prompt appearing in a script that promised three screens is the moment a first-time user decides the whole thing is lying to them &mdash; and they are not wrong to think so, which is the problem. Read from each program&rsquo;s own published steps on 4 September 2026.</p>
+
+  <p><b>If you already have the three accounts, it really is close to the short version:</b> two browser handoffs, a password, and about ten minutes of downloading. The long list above is the cost of starting from nothing, and it is worth knowing which of the two you are.</p>
+
+  <h2>What arrives built, and what arrives blank</h2>
+
+  <p><b>One rule decides which side a thing lands on. Prebuild what has a single right answer; leave blank what contains a decision.</b> Nothing appears on both sides, and where the rule was hard to apply the file says so.</p>
+
+  <div class="ledger">
+    <div class="built">
+      <h4>Built &mdash; typing, not teaching</h4>
+      <ul>
+        <li><code>.gitattributes</code><span class="sub">Pins line endings. Without it a script written here fails on a Linux cluster with an error that names the wrong thing.</span></li>
+        <li><code>.githooks/prepare-commit-msg</code><span class="sub">Marks the commits the agent made. Impossible to apply retroactively, which is the whole reason it ships.</span></li>
+        <li><code>.claude/settings.json</code><span class="sub">Four outright refusals and a list of things that must ask first.</span></li>
+        <li><code>tools/paths.sh</code><span class="sub">One file answers where the data is, so no script of yours contains a path.</span></li>
+        <li><code>tools/check_setup.sh</code><span class="sub">Goes and looks at the machine. This is the file to believe.</span></li>
+        <li><code>.gitignore</code><span class="sub">Data by extension and by folder. A dataset committed once is in the history for good.</span></li>
+      </ul>
+    </div>
+    <div class="blank">
+      <h4>Blank &mdash; yours, and it shows</h4>
+      <ul>
+        <li><code>docs/SETUP.md</code><span class="sub">Three paths: data, work, review. The one about where your data lives is the only line here that protects anything absolutely.</span></li>
+        <li><code>CLAUDE.md</code><span class="sub">One sentence on what this project is. The agent reads it every session and guesses the rest from it.</span></li>
+        <li><code>FRICTION.md</code><span class="sub">What went wrong. Empty is correct today; the second entry is where it becomes a record.</span></li>
+        <li><code>HANDOFF.md</code><span class="sub">Three lines at the end of a session. Empty is correct today.</span></li>
+        <li><span style="font-weight:600">The deny list, read once</span><span class="sub">It is written, and reading it is not. If you cannot name one thing the agent may not do, you have a preference rather than a limit.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="note">
+    <p><b>A blank is a real answer and the checks treat it as one.</b> <code>tools/check_setup.sh</code> reports an unset path as <i>not set</i> rather than failing, and nothing here will guess one for you.</p>
+    <p>That is not politeness. Two failures in this project came from something reading a path that had never been set and inheriting a plausible default; both were found days later, in the wrong folder, with every intervening report saying the work had succeeded.</p>
+  </div>
+
+  <h2>The two commands</h2>
+
+  <ol class="acts">
+    <li><b><code>./bootstrap.sh</code></b> &mdash; prints the plan and changes nothing at all.
+      <span class="sub">Every step it would take, the exact command, and what is already done. Safe to run on any machine, including one you are not sure about. Its own selftest proves this mode is inert by copying the tree, running it, and comparing every file afterwards.</span></li>
+    <li><b><code>./bootstrap.sh --install</code></b> &mdash; does it, one step at a time, asking before each.
+      <span class="sub">It prints the command, waits, and runs it only if you say yes. Answering no is a real answer; the checks at the end say what it cost.</span></li>
+  </ol>
+
+  <p>Then, whenever something later stops working:</p>
+
+  <pre><code>sh tools/check_setup.sh
+<span class="c"># 16 checked: 12 ok, 3 warn, 1 failed</span>
+<span class="c"># A failed line names its fix.</span></code></pre>
+
+  <h2>Why the installer is not allowed to tell you it worked</h2>
+
+  <p><b>An installer that finishes and reports success is summarising its own instructions.</b> It is saying that each command it ran returned zero, which is a fact about the commands and not about your machine. The gap between those two is what the rest of this course is about, and it would be a poor joke to get it wrong in the file that introduces it.</p>
+
+  <p>So the installing and the checking are two separate programs. <code>bootstrap.sh</code> ends by handing over to <code>tools/check_setup.sh</code>, which knows nothing about what just happened and goes and looks instead. If they disagree, the second one is right.</p>
+
+  <p><b>The clearest example is the commit hook.</b> Checking that the file exists would pass on a machine where the hook has never once run &mdash; and that is not a hypothetical, it is the commonest way a guard in this project has been found dead: present in every listing, registered nowhere, running never. So the check builds a throwaway repository in a temporary folder, wires the hook into it, makes a commit, and reads the message back to see whether the mark landed.</p>
+
+  <div class="flag">
+    <p><b>And the check is itself checked.</b> Its selftest breaks the hook four ways &mdash; unregisters it, replaces it with a script that does nothing, deletes a refusal from the deny list, unpins the line endings &mdash; and requires the check to go red each time, then green again when everything is restored.</p>
+    <p>A green check that has never been shown to fail is not evidence. It is a check that has not been read.</p>
+  </div>
+
+  <h2>Who should not take this route</h2>
+
+  <ul class="plain">
+    <li><b>Anybody who has not made the three accounts yet.</b><span class="sub">Make them first, with <a href="https://lookedright.tonydefazio.com/cold-start">Cold Start</a> Phase 1 open beside you. Two of the questions asked during signup are expensive to change later and this page cannot ask them for you.</span></li>
+    <li><b>Anybody whose institution runs its own host.</b><span class="sub">Some universities require a private GitLab rather than GitHub, and that is a governance question rather than a preference. It is much cheaper to ask now than to move the work across later.</span></li>
+    <li><b>Anybody working on a cluster, or with other people.</b><span class="sub">This template is one person on one machine. Storage allocations, shared sessions and second machines are Cold Start Phases 1, 6 and their approvals, which take days of somebody else&rsquo;s time and have to be started early.</span></li>
+    <li><b>Anybody who wants to understand it.</b><span class="sub">Said again here because it is the one that gets waved away. The long route is an evening and it is the evening that makes the second project cheap.</span></li>
+  </ul>
+
+  <h2>What is still yours after this</h2>
+
+  <p><b>Nothing on this page decides any of the following, and the template will not pretend otherwise.</b> Each is a step in <a href="https://lookedright.tonydefazio.com/cold-start">Cold Start</a> and is worth reading there.</p>
+
+  <ul class="plain">
+    <li><b>How much of your screen the agent gets</b><span class="sub">A browser tab sees only what you paste; an editor sees the folder. Both are legitimate and they cost different amounts. Cold Start 1.1.</span></li>
+    <li><b>What it costs, and whether the bill can stop</b><span class="sub">A personal plan hits a ceiling and stops, which is annoying and safe. An institutional billing code usually does not, and somebody else reads the statement. <a href="https://lookedright.tonydefazio.com/what-it-costs">What It Costs</a>.</span></li>
+    <li><b>Where your data lives, and what never goes near the agent</b><span class="sub">The deny list is a wall around the agent and a wall has to be right every time. Keeping the original out of the room has to be right once. Cold Start 2.2 and 2.3.</span></li>
+    <li><b>Whether you read what it wrote</b><span class="sub">This is the habit the whole course rests on and no file can hold it for you. When the agent reports success, that is the moment to open the thing yourself. Cold Start 4.3.</span></li>
+  </ul>
+
+  <h2>Where to go next</h2>
+
+  <ul class="plain">
+    <li><b><a href="https://lookedright.tonydefazio.com/cold-start">Cold Start</a></b><span class="sub">The long route, and the reasons behind every file in the template. Each file names the step it came from, so you can read them one at a time as you meet them rather than all at once.</span></li>
+    <li><b><a href="https://lookedright.tonydefazio.com/just-enough-git">Just Enough Git</a></b><span class="sub">The dozen words the template&rsquo;s files use. Read this first if &ldquo;commit and push&rdquo; is currently an incantation.</span></li>
+    <li><b><a href="https://lookedright.tonydefazio.com/show-it-your-screen">Show It Your Screen</a></b><span class="sub">For when a step here does not match what is in front of you, which will happen. Screens move faster than any description of them, including this one&rsquo;s.</span></li>
+    <li><b><a href="https://lookedright.tonydefazio.com/what-it-costs">What It Costs</a></b><span class="sub">Before you choose a plan rather than after. It is short.</span></li>
+  </ul>
+
+  <footer>
+    <p>Part of <a href="/">It Looked Right</a> &mdash; a short course on working with coding agents.</p>
+    <p>The template is a folder in this course&rsquo;s own repository, and its checks run in the same continuous integration as the rest of the course. When one of them goes red, it goes red here too.</p>
+  </footer>
+</div>

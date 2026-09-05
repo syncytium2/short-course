@@ -2323,9 +2323,39 @@ risks in the file.
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Tonys-MacBook-Pro/95e2fb16 — Write up the bugarach 15:38-15:46 turn as a case: the status report went to a peer agent and the human got an aside
-- **Status:** ACTIVE
+- **Status:** DONE 2026-09-05
 - **Opened:** 2026-09-03
 - **Branch when opened:** `the-status-report-went-to-another-agent` — a fact, not an identity; it may move under you
+- **Closed by:** `Tonys-MacBook-Pro/e8b745b6` on 2026-09-05, landing this branch as PR #5. The opening session never released it; the block is kept whole rather than deleted.
+
+### Tonys-MacBook-Pro/4a03c5d5 — Build the starter template repo (starter/) and an onboarding handout for it
+- **Status:** DONE 2026-09-04
+- **Opened:** 2026-09-04
+- **Branch when opened:** `starter-template` — a fact, not an identity; it may move under you
+- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
+- **Notes:** <anything another session must know before touching the same thing>
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
+
+### Tonys-MacBook-Pro/8a7d03c0 — File the mahice turn as a case: a turn that ended claiming to be working, sent Tony to judge in parallel, and attached an unchecked promise that his verdicts carry over
+- **Status:** DONE 2026-09-04
+- **Opened:** 2026-09-04
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
+- **Notes:** <anything another session must know before touching the same thing>
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
+
+### Tonys-MacBook-Pro/41a56768 — Park the faculty-onboarding strategy draft as a todo — HANDOFF.md and docs/drafts/
+- **Status:** DONE 2026-09-04
+- **Opened:** 2026-09-04
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
 - **Writes:** <files or folders you will change; "repo only" if nothing outside git>
 - **Notes:** <anything another session must know before touching the same thing>
 

@@ -1,0 +1,87 @@
+# What never goes into the repository.
+#
+# Cold Start step 4.4. Two different jobs are mixed in here on purpose and it is
+# worth knowing which is which:
+#
+#   * the machine's litter (caches, editor state) — nobody minds if this leaks,
+#     it is just noise in every diff;
+#   * YOUR DATA — where a mistake is not noise. A dataset committed once is in the
+#     history for good, and removing it means rewriting every commit after it. If
+#     the repository is public by then, it has already been cloned.
+#
+# The second job is why the last section exists and why it is yours to fill in.
+# `git check-ignore -v <path>` tells you which line here is responsible for a file
+# being ignored, and is the fastest way to find out why something is not showing up.
+
+# ---- the machine's litter ----
+.DS_Store
+Thumbs.db
+desktop.ini
+*~
+*.swp
+.idea/
+.vscode/*
+!.vscode/settings.json
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.Rhistory
+.Rproj.user/
+node_modules/
+.venv/
+venv/
+env/
+.env
+*.log
+
+# ---- credentials, which are never a mistake worth making twice ----
+*.pem
+*.key
+.env.*
+!.env.example
+secrets.*
+credentials.*
+
+# ---- data, by extension ----
+# Broad on purpose. It is far cheaper to force-add one file you meant to commit
+# (`git add -f small-example.csv`) than to discover a 4 GB file in your history.
+*.csv
+*.tsv
+*.parquet
+*.h5
+*.hdf5
+*.nc
+*.mat
+*.npy
+*.npz
+*.sav
+*.dta
+*.rds
+*.RData
+*.dcm
+*.nii
+*.nii.gz
+*.tif
+*.tiff
+*.bam
+*.fastq
+*.fastq.gz
+
+# ---- data, by location ----
+# Whole folders, so a file type nobody anticipated is still covered. The names are
+# guesses at what yours are called; the real one is whatever `data` says in
+# docs/SETUP.md, and if that folder lives inside this project it belongs here too.
+data/
+raw/
+raw_data/
+scratch/
+tmp/
+output/
+outputs/
+results/
+figures/
+
+# ---- yours ----
+# Add the folder `data` names in docs/SETUP.md if it is inside this project, and
+# anything else this list has not anticipated. When you add a line, say why in a
+# comment — a bare pattern in six months is a thing nobody dares delete.
