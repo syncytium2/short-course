@@ -8,10 +8,12 @@
      NOT a website page. Deliberately absent from tools/pages.txt with no META entry in
      tools/build_site.sh, so --all and --check-all ignore it.
 
-     THE SERVICE TABLE AND THE "NEVER NAMES AN AGENT" CLAIM COME FROM AN ARCHIVED COPY
-     of https://its.umich.edu/computing/ai/getting-started taken 2026-02-06. The live
-     site refuses automated fetches (Cloudflare interstitial, HTTP 403 to both WebFetch
-     and curl). Verify against the live page before quoting any of it. -->
+     SOURCES. its.umich.edu refuses automated requests (Cloudflare interstitial, 403 to
+     WebFetch and to curl). The service facts here were read from two live pages pasted
+     in by Tony on 2026-09-05: ITS AI Services "Getting Started" and "U-M GPT Toolkit In
+     Depth". Correct as of that date, and they move -- the Getting Started page changed
+     twice in the preceding seven months, once in a way that changed this file's advice.
+     Re-read both before quoting any of it. -->
 <title>The Cheap Window</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -340,24 +342,41 @@
           </tr>
           <tr>
             <td>U-M GPT Toolkit</td>
-            <td>billing code required, by submitted request, billed per token</td>
-            <td class="yes">The gateway an agent runs through</td>
+            <td>eligible faculty and staff, billing code required, self-service portal, billed per token</td>
+            <td class="yes">The gateway — this is where agent keys are issued</td>
           </tr>
         </tbody>
       </table>
     </div>
 
     <p><strong>The most useful fact here is not logistical.</strong> The institution gives
-      everybody a chat box for free and puts everything past it behind a billing code and a
-      request form. The escalation the first exercise demonstrates is one the university has
-      already built into its own sign-up flow.</p>
+      everybody a chat box for free and puts everything past it behind a billing code. The
+      escalation the first exercise demonstrates is one the university has already built
+      into its own sign-up flow.</p>
 
-    <p><strong>And its own beginner's page stops at the chat box.</strong> The Getting
-      Started page walks a newcomer through three services in order and never names an
-      agent — the closest it comes is describing the Toolkit as being for people who
-      "require full control over their AI environments and models." Someone who follows the
-      official on-ramp end to end arrives at a chat window, having been told that is what
-      this is.</p>
+    <h3>The beginner's page never names an agent</h3>
+
+    <p>The Getting Started page walks a newcomer through three services in order — chat box,
+      chat box over your own documents, gateway — and does not name a single agent. The
+      closest it comes is calling the Toolkit suitable for those who "require full control
+      over their AI environments and models." Someone who follows the official on-ramp end
+      to end arrives at a chat window, having been told that is what this is.</p>
+
+    <p>One link away, the Toolkit's own page names them: <strong>Claude Code, Codex, and
+      Codex for the Classroom</strong>, as keys you generate in the portal. And in the same
+      breath it says who it thinks you are:</p>
+
+    <div class="thesis">
+      <p>"U-M GPT Toolkit is intended to provide Developers with access to our AI Services
+        API gateway… it is assumed that Developers who are granted access to the API gateway
+        <strong>already have API experience and technical expertise</strong>."</p>
+    </div>
+
+    <p><strong>That sentence is the gap, written by the institution.</strong> The agent is
+      not hidden and it is not hard to get — it is one self-service form behind a door
+      labelled <em>for developers, and we assume you already know this</em>. Everyone who
+      does not recognise themselves in that description stops at the chat box, which is
+      exactly where the on-ramp left them.</p>
   </section>
 
   <section>
@@ -400,16 +419,19 @@
           <span class="n">1</span>
           <span class="what"><strong>Pick a route, and find out whether it has a ceiling.</strong></span>
           <span class="why">A personal plan is bought in minutes and the plan is the ceiling.
-            An institutional route usually needs a departmental billing code and a submitted
-            request, and takes days to weeks because somebody else approves it. Everything in
-            phases B and C proceeds while that pends.</span>
+            An institutional route usually needs a departmental billing code, and getting one
+            takes days to weeks because somebody else approves it. Issuing the key afterwards
+            is self-service and quick. Everything in phases B and C proceeds while the code
+            pends.</span>
         </li>
         <li>
           <span class="n">2</span>
-          <span class="what"><strong>If the institutional route needs a billing code, ask early — and ask what caps it.</strong></span>
-          <span class="why">For most people this is an unasked question rather than an
-            ineligibility. The second half of the question is the one nobody asks and the one
-            that matters.</span>
+          <span class="what"><strong>Set the spending quota at the moment you create the key.</strong></span>
+          <span class="why">Not later, not after the first statement. The portal offers the
+            field and nothing prompts you to use it; a ceiling you have to remember to build
+            is the one you will not have. Whether a billing code is available to you at all
+            is usually an unasked question rather than an ineligibility — ask early, because
+            that part is the slow part.</span>
         </li>
       </ol>
     </div>
@@ -569,15 +591,20 @@
       out immediately. That is crude, and it is the case most written material assumes.</p>
 
     <div class="caution">
-      <span class="lbl">The uncapped case</span>
-      <p><strong>An institutional billing code is not a ceiling.</strong> Usage is billed at
-        per-token rates against a department or project, and nothing stops, nothing warns,
-        and the number surfaces when somebody else reads the monthly statement.</p>
-      <p>In this course's own terms: a ceiling is a crude mechanism, but it <em>is</em> a
-        mechanism. A billing code is a <em>request</em> that the spender be sensible — and
-        this whole course is about what happens to requests.</p>
-      <p>Anyone on the institutional route is handed the uncapped case on day one, usually
-        without being told that is what happened.</p>
+      <span class="lbl">The opt-in ceiling</span>
+      <p><strong>An institutional billing code is a ceiling you have to build yourself.</strong>
+        Usage is billed at per-token rates against a department or project. The portal that
+        issues the key <em>does</em> let you set a monthly quota — so a mechanism exists. It
+        is simply not the default state of anything, and nothing in the sign-up path tells
+        you to go and set it.</p>
+      <p>In this course's own terms: a ceiling you must remember to build is a
+        <em>request</em> that the spender be sensible, and this whole course is about what
+        happens to requests. The fix is one field in a form, which is precisely why it gets
+        skipped.</p>
+      <p><strong>Set the quota when you create the key, not after the first statement.</strong>
+        It is the cheapest guard in this entire document and the only one exempt from the
+        build-nothing-in-advance rule — because it is not a guard you wrote, it is a switch
+        the vendor already shipped.</p>
     </div>
 
     <p>The free tier has a third shape worth naming, because it is neither: a rate limit.
@@ -615,19 +642,23 @@
       from what this estate's own retrofits cost it — evidence about what went wrong, not
       evidence that this sequence prevents it.</p>
 
-    <p><strong>The service table was not read from the live pages.</strong> Every attempt to
-      fetch them was refused by the site's bot protection. The eligibility rules, the
-      75-prompts-an-hour cap, the billing-code requirements and the wording about "full
-      control over their AI environments and models" all come from an archived copy of the
-      Getting Started page taken <strong>6 February 2026</strong> — seven months before this
-      draft. The claim that the official on-ramp never names an agent is true of that
-      snapshot and has not been checked against the page as it stands today, which is exactly
-      the kind of decayed-but-plausible fact this material warns about. Go and touch the
-      systems before quoting any of it.</p>
+    <p><strong>The service facts are now first-hand, but not fetched.</strong> The site
+      refuses automated requests, so both pages were read as text pasted in by a human on
+      <strong>5 September 2026</strong>. Everything in the service table, the two quoted
+      sentences, the 75-prompts-an-hour cap and the list of agent keys comes from that. It is
+      current as of that date and will decay like anything else — the pages moved twice in
+      the seven months before it, once in a way that changed this document's advice.</p>
 
-    <p><strong>The per-token and eligibility details for the agent-capable services</strong>
-      — the ones that make the escalation argument land — come from search summaries rather
-      than pages read directly, for the same reason.</p>
+    <p><strong>An earlier draft of this page said the institutional route was uncapped,
+      and that was wrong.</strong> It was written from an archived February snapshot plus
+      search summaries, and neither showed the quota field. The portal has offered it all
+      along. The claim was plausible, it survived a read, and it was corrected only because
+      somebody opened the actual page — which is the failure this course is about, committed
+      by the document describing it.</p>
+
+    <p><strong>Two things behind these pages remain unread.</strong> Whether a newly issued
+      key has any default quota before you set one, and what the per-token rates actually
+      are. Both sit one link further on, and neither has been opened.</p>
 
     <p><strong>No cost figure applies to a beginner doing daily work.</strong> The one
       concrete number in our material describes a capped account in a single 90-minute
@@ -642,7 +673,8 @@
     <p>Draft for review, 5 September 2026. Not published to the site.</p>
     <p>Revised from a version written for new faculty specifically; the institution-specific
       material is quarantined in two sections so it can go stale without taking the sequence
-      with it.</p>
+      with it. Service facts read from the live pages on 5 September 2026 and correct as of
+      that date only.</p>
   </div>
 
 </div>

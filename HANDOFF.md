@@ -2188,6 +2188,50 @@ What the snapshot did add, and it is worth having:
 **The cheapest check that would settle it: open that URL in a browser.** A human is not
 blocked by the interstitial. Nobody has done it.
 
+### It was done, the same day — and one of the findings was wrong
+
+**Tony pasted both live pages within the hour: ITS AI Services "Getting Started" and "U-M GPT
+Toolkit In Depth", 2026-09-05.** The draft's service facts are now first-hand rather than
+archived. Three results, in descending order of how much they matter.
+
+**1. ⚠ THE UNCAPPED CLAIM WAS FALSE, and it had already been published twice.** Both the
+09-04 and 09-05 drafts said an institutional billing code has no ceiling — *"nothing stops,
+nothing warns."* The Toolkit portal lets you **set monthly quotas**, and always has. The claim
+came from a February snapshot plus search summaries, neither of which showed the field; it was
+plausible, it read as true, and it survived a rewrite. It was corrected only because somebody
+opened the page.
+
+*The corrected version is better than the original, which is the annoying part.* A quota you
+must remember to set is, in this course's own vocabulary, a **request** that the spender be
+sensible rather than a mechanism — and the course is about what happens to requests. The draft
+now says to set it at key creation, and marks it the one guard exempt from build-nothing-in-
+advance, because it is not a guard you wrote: it is a switch the vendor already shipped.
+
+**2. The "never names an agent" finding holds, and got sharper.** The live Getting Started
+page still walks a beginner through U-M GPT → Maizey → Toolkit without naming a single agent.
+One link away, `U-M GPT Toolkit In Depth` names **Claude Code, Codex, and Codex for the
+Classroom** as keys you generate in the self-service portal — and in the same paragraph says:
+
+> *"it is assumed that Developers who are granted access to the API gateway already have API
+> experience and technical expertise."*
+
+**That sentence is the gap in the institution's own words**, and it is a better citation than
+anything derived. The agent is not hidden and not hard to get; it is one self-service form
+behind a door labelled *for developers, and we assume you already know this*. Everyone who does
+not recognise themselves in that description stops at the chat box.
+
+**3. The page moved between February and September, in the direction that makes the finding
+worse.** Toolkit access went from *"you must submit a request"* to *"eligible faculty and staff
+can access… via the self-service portal"* — friction removed, signposting not added. Also
+changed: *Duo two-factor* → *multi-factor authentication* (cf. B2's stale-MFA line on the Great
+Lakes page, same failure mode), and the service owner is now Don Lambert with Ben Andries as
+manager, where February had Bob Jones and Don Lambert. The 75-prompts-per-hour cap and Maizey's
+Shortcode-plus-MCommunity-group requirement are unchanged.
+
+**Still unread, both one link further on:** whether a newly issued key carries any default
+quota before you set one, and the actual per-token rates. Those two decide whether point 1 is
+a footnote or a real hazard, and neither has been opened.
+
 ### Also parked the same day, unrelated to the above
 
 - **Machine-readable provenance output.** Checking the tonydefazio.com session's born-date
