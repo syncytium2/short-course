@@ -286,6 +286,29 @@ const server = http.createServer((req, res) => {
   check('and the checklist still works after it',
     await page.evaluate(() => !!document.querySelector('.cb')), true);
 
+  // ---- the words, reachable from wherever you landed ------------------------------
+  // Added 2026-09-05 with the terminology pass. terms_check.sh proves the page uses one
+  // word per thing; it cannot prove a reader can FIND the definitions, and the whole
+  // complaint was about landing on one step with no context. That is a link and an anchor,
+  // which is exactly the class of thing that looks right in the markup and does nothing.
+  await page.evaluate(() => localStorage.clear());
+  await page.reload();
+  check('the definitions are reachable from the fixed bar', await page.evaluate(() => {
+    const a = document.querySelector('.bar-terms');
+    return !!a && a.offsetParent !== null && a.getAttribute('href') === '#the-words';
+  }), true);
+  check('and the anchor it names exists', await page.evaluate(() =>
+    !!document.getElementById('the-words')), true);
+  check('the definitions are not behind a fold', await page.evaluate(() => {
+    const t = document.getElementById('the-words');
+    return !!t && t.offsetParent !== null && t.querySelectorAll('dt').length === 6;
+  }), true);
+  for (const tier of ['min', 'mid', 'max']) {
+    await page.click(`.tierpick[data-tier="${tier}"]`);
+    check(`${tier}: every definition survives the route filter`, await page.evaluate(() =>
+      [...document.querySelectorAll('#the-words dt')].filter(d => d.offsetParent !== null).length), 6);
+  }
+
   // ---- the route gates ------------------------------------------------------------
   // WHAT THESE ARE FOR. On 2026-09-02 a beginner walked the browser route with an office
   // assistant, which opened a blank template and had her type the title in herself. The
