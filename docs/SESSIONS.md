@@ -2340,6 +2340,11 @@ risks in the file.
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
 
+### Tonys-MacBook-Pro/e8b745b6 — Case: two draughtsman turns ended with an inventory and no next step; the human supplied it in two windows 67s apart
+- **Status:** DONE 2026-09-04
+- **Opened:** 2026-09-04
+- **Branch when opened:** `the-turn-ended-with-an-inventory` — a fact, not an identity; it may move under you
+
 ### Tonys-MacBook-Pro/8a7d03c0 — File the mahice turn as a case: a turn that ended claiming to be working, sent Tony to judge in parallel, and attached an unchecked promise that his verdicts carry over
 - **Status:** DONE 2026-09-04
 - **Opened:** 2026-09-04
