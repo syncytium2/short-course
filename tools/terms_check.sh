@@ -35,9 +35,11 @@
 # place, by a human opening the page cold. The mechanical half is the half that regresses
 # silently, and that is the half this holds.
 #
-# SCOPE IS DELIBERATELY NARROW AND SAYS SO. Only the files in COVERED have been through the
-# terminology pass. Every run prints the handouts that have NOT, with their counts, because a
-# check that quietly covers one file out of seven teaches you the other six are clean.
+# SCOPE IS EVERY HANDOUT, and it says so by globbing rather than by listing. For one day it
+# was cold-start alone, and the report named the other six with their counts so the gap could
+# not be mistaken for cleanliness -- a check that quietly covers one file out of seven
+# teaches you the other six are clean. That machinery is still here and still prints, for
+# whatever lands next that has not been through the pass.
 #
 # Exit 0 = every covered page uses one word per thing. Exit 1 = a banned sense is back.
 
@@ -45,7 +47,13 @@ set -u
 cd "$(dirname "$0")/.." || exit 1
 
 MODE="${1:-}"
-COVERED="${TC_COVERED:-docs/handouts/cold-start.html}"
+# EVERY SHEET, as of 2026-09-05. It was one file for a day, and the report printed the
+# other six with their counts so the gap could not be mistaken for cleanliness. They are
+# all through the pass now, so the default is a glob rather than a list: a handout added
+# tomorrow is covered the moment it lands, instead of waiting for somebody to remember to
+# add it here. A named list would have been a second place to keep in step, which is the
+# defect this repo has paid for more than any other.
+COVERED="${TC_COVERED:-$(ls docs/handouts/*.html 2>/dev/null)}"
 ALL="${TC_ALL:-docs/handouts}"
 
 if [ "$MODE" = "--selftest" ]; then
@@ -59,6 +67,7 @@ if [ "$MODE" = "--selftest" ]; then
     printf '%s' '<p>Open the one you picked and ask your tool for a file.</p>
 <!-- the expert used to live here, and "tier" is right for data-tiers -->
 <p>Instead: ask what tier your fix is on.</p>
+<p>Run <code>tools/check_setup.sh</code>, then the developer-tools dialog.</p>
 <p>The agent is open and I am signed in.</p>
 ' > "$T/dirty.html"
     if TC_COVERED="$T/dirty.html" sh "$0" --check >"$T/out" 2>&1; then
@@ -74,6 +83,10 @@ if [ "$MODE" = "--selftest" ]; then
     if grep -q 'what tier your fix is on' "$T/out"; then
         echo "  FAIL an allowlisted phrase was reported"; cat "$T/out"; echo FAIL; exit 1
     else echo "  ok   the allowlist holds for the one surviving sense of \"tier\""; fi
+    if grep -qE 'check_setup|developer-tools' "$T/out"; then
+        echo "  FAIL a repo path or a hyphenated proper name was read as loose language"
+        cat "$T/out"; echo FAIL; exit 1
+    else echo "  ok   tools/<path> and developer-tools are not the loose sense"; fi
 
     printf '%s' '<p>The agent I chose at 1.1 is open and I am signed in.</p>
 ' > "$T/clean.html"
@@ -93,15 +106,37 @@ alldir  = os.environ["ALL"]
 # ONE WORD PER THING. The left column is what a reader must never meet; the right is what
 # the page says instead, and it is printed with the failure so the fix needs no lookup.
 BANNED = [
-    (r'\btools?\b',                 'the agent (for the AI), the deploy command / `wrangler`, or "program"'),
-    (r'\bassistants?\b',            'the agent'),
+    # NOT A BARE BAN ON THE WORD, AND THE REASON IS FOUR BARRIERS. That page uses "tool"
+    # about fifty times and roughly half are a PROGRAM SOMEBODY BUILT -- bugarach, a safety
+    # gate, a spell checker -- which is unambiguous English once the AI is always called
+    # the agent, and rewriting it all would damage good prose to satisfy a rule.
+    #
+    # What actually tripped a reader was never the word. It was the DEICTIC form: "your
+    # tool", "the tool", "the same tool" -- a reference whose antecedent is somewhere else
+    # on the page, or nowhere. So the rule is: never say "the tool", say what it is. A
+    # named or described one ("a safety tool", "research tools", "bugarach, a general tool
+    # for...") carries its own antecedent and stays.
+    #
+    # Also skipped: a repo path a reader is told to run (`tools/check_setup.sh`) and a
+    # hyphenated proper name (Apple's "developer-tools" dialog).
+    (r'\b(?:your|the|this|that|same|a)\s+tools?\b(?!/)',
+                                    'the agent (for the AI), or name the program'),
+    (r'\bchat tools?\b',            'an agent that will not write files'),
+    (r'\btools?\s+that\s+(?:says?|cannot|can|refuses?)\b',
+                                    'the agent (for the AI), or name the program'),
+    # "research assistant" and "teaching assistant" are job titles held by people, and
+    # what-it-costs turns on exactly that distinction: a graduate student employed as one
+    # can often be sponsored for an agent, and a student on a taught course cannot.
+    (r'(?<!research )(?<!teaching )\bassistants?\b', 'the agent'),
     (r'\bthe expert\b',             'the agent'),
     (r'\bplaces? to stand\b',       'rung'),
     (r'\bthe place I chose\b',      'name the thing: "the agent I chose at 1.1"'),
     (r'\bthe one you picked\b',     'name the thing: "your agent", "your route"'),
-    (r'\bthe free tier\b',          'the free plan'),
-    (r'\bsubscription tiers\b',     'subscription plans'),
-    (r'\btiers? of capability\b',   'rung'),
+    # BARE "tier", with the fix-strength sense allowlisted below. It was the worst of the
+    # three collisions: cold-start meant the route, the 1.1 ladder AND the vendor's price
+    # plan by it, and what-it-costs meant the price plan by it twenty times over. Money is
+    # a plan; how much the agent can see is a rung; which steps you are shown is a route.
+    (r'\btiers?\b',                 'plan (money), rung (what the agent can see), or route (which steps)'),
 ]
 
 # THE ONLY SURVIVING SENSE OF "tier" ON THESE PAGES is the four-tier table of how strongly a
@@ -113,6 +148,33 @@ ALLOW = [
     'the four tiers',
     'weakest tier of fix',
     'never &ldquo;the tool&rdquo;, never &ldquo;the assistant&rdquo;',
+    # The API price table quotes the VENDORS' word for a class of model, and the caption
+    # already says the collision out loud: '"Tier" here means the model, not the plan --
+    # the plans in the table above are a different thing that unfortunately shares the
+    # word.' Renaming somebody else's column would be worse than keeping it and naming the
+    # trap, which is what the caption does.
+    '&ldquo;Tier&rdquo; here means the model, not the plan',
+
+    # ---- four-barriers: quotations, and one surviving sense of "tier" ----
+    #
+    # OTHER PEOPLE'S WORDS ARE NOT OURS TO TIDY. Rewriting a quotation to satisfy a house
+    # style makes the page assert that somebody said something they did not, which is a
+    # worse defect than the one this check exists for.
+    'a poor fit is not a tool failure',                 # colonel_kernel's own methods page
+    'The tools already do all of that.',                # the objection this section answers
+    'Agents and assistants inside an IDE',              # Southampton's description of its own course
+    #
+    # THE FOUR-TIER ENFORCEMENT TABLE is the one surviving sense of "tier" in this course --
+    # prose, checklist, test, structure -- and it is defined in place wherever it appears.
+    # It is why "tier" was worth freeing up rather than banning outright.
+    'Four tiers of enforcement',
+    'The four-tier table',
+    '<th>Tier</th>',
+    #
+    # THE PAGE'S THESIS LINE, appearing twice by design (once as the lede). "the tools to
+    # check for them" carries its antecedent in the same clause -- nobody reads it as the
+    # AI -- and it is the sentence the whole page is built around.
+    'develop the tools to check for them',
 ]
 
 def prose(src):
@@ -133,6 +195,13 @@ def prose(src):
     blank = lambda m: re.sub(r'[^\n]', ' ', m.group(0))
     out = re.sub(r'<!--.*?-->', blank, src, flags=re.S)
     out = re.sub(r'<(script|style)\b[^>]*>.*?</\1>', blank, out, flags=re.S | re.I)
+    # THE ALLOWLIST IS APPLIED BEFORE TAGS ARE BLANKED, and the first version did it after,
+    # which quietly made every markup-anchored entry dead. `<th>Tier</th>` can never match
+    # text that has already had its tags removed, so the four-tier table's own column
+    # heading kept being reported however it was allowlisted. Blanked to equal-length
+    # spaces rather than deleted, so reported line and column still point at the file.
+    for a in ALLOW:
+        out = out.replace(a, ' ' * len(a))
     out = re.sub(r'<[^>]+>', blank, out)
     return out
 
@@ -142,8 +211,6 @@ for f in covered:
         print("no such file: %s" % f, file=sys.stderr); sys.exit(2)
     for i, line in enumerate(prose(io.open(f, encoding='utf-8').read()).split('\n'), 1):
         keep = line
-        for a in ALLOW:
-            keep = keep.replace(a, ' ')
         for pat, instead in BANNED:
             for m in re.finditer(pat, keep, flags=re.I):
                 ctx = re.sub(r'\s+', ' ', keep[max(0, m.start() - 45): m.start() + 45]).strip()
@@ -168,6 +235,9 @@ if rest:
     print("  NOT COVERED -- these have not had the terminology pass:")
     for f in rest:
         p = prose(io.open(f, encoding='utf-8').read())
+        # prose() has already removed the allowlisted phrases, so this count and the verdict
+        # above it cannot disagree -- which they did once, reporting cold-start as carrying
+        # four banned senses on the same run where cold-start passed.
         n = sum(len(re.findall(pat, p, flags=re.I)) for pat, _ in BANNED)
         print("    %-44s %3d banned sense%s" % (os.path.basename(f), n, "" if n == 1 else "s"))
     print("  Counted, not fixed. This check covers what it says it covers.")

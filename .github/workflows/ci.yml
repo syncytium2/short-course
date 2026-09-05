@@ -122,9 +122,8 @@ jobs:
         run: sh tools/tier_check.sh --check
 
       - name: One word per thing, in the prose a learner reads
-        # Covers cold-start.html only, and prints the sheets it does not cover with their
-        # counts on every run. Scope stated out loud beats a green tick that means less
-        # than it looks.
+        # Every handout, by glob rather than by list, so one added tomorrow is covered the
+        # day it lands. Anything not yet through the pass is printed with its count.
         run: sh tools/terms_check.sh --check
 
       - name: Pointers resolve, and dated UI says when it was true
