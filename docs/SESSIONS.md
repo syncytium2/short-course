@@ -2322,6 +2322,12 @@ risks in the file.
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
 
+### Tonys-MacBook-Pro/95e2fb16 — Write up the bugarach 15:38-15:46 turn as a case: the status report went to a peer agent and the human got an aside
+- **Status:** DONE 2026-09-05
+- **Opened:** 2026-09-03
+- **Branch when opened:** `the-status-report-went-to-another-agent` — a fact, not an identity; it may move under you
+- **Closed by:** `Tonys-MacBook-Pro/e8b745b6` on 2026-09-05, landing this branch as PR #5. The opening session never released it; the block is kept whole rather than deleted.
+
 ### Tonys-MacBook-Pro/4a03c5d5 — Build the starter template repo (starter/) and an onboarding handout for it
 - **Status:** DONE 2026-09-04
 - **Opened:** 2026-09-04
