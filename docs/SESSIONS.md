@@ -2369,6 +2369,11 @@ risks in the file.
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
 
+### Tonys-MacBook-Pro/e8b745b6 — Record which cases the site cites and why — the criterion behind the curation, plus what should join it
+- **Status:** DONE 2026-09-04
+- **Opened:** 2026-09-04
+- **Branch when opened:** `site-evidence-selection` — a fact, not an identity; it may move under you
+
 ### Mac/41a56768 — Rewrite the onboarding draft for beginners generally, not new faculty — docs/drafts/ and HANDOFF.md
 - **Status:** DONE 2026-09-05
 - **Opened:** 2026-09-05
