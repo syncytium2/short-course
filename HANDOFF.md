@@ -2264,6 +2264,20 @@ else.
 **Not unpicked.** Rewriting pushed history with multiple sessions live would be worse than the
 misattribution. `short-course-3d` independently reached the same judgement.
 
+**Why the board could not answer this, which is the part worth fixing.** `claim.sh --list`
+returns **no active claims** — the session rewriting seven handout files and `presentation_check.js`
+never opened one. `ListAgents` shows **seven** live sessions named `short-course` plus this one,
+so the name space does not narrow it either. The board is this repo's attribution mechanism and
+it was not used by the party doing the work, which is precisely when it is needed. That is a
+second instance of the same shape as the sweep: a written convention that holds only while
+everybody follows it.
+
+**The one lead that does not require guessing** is in the file's own header: it says it exists
+because *"Tony, 2026-09-05, sending a screenshot of the live runbook in a fresh Firefox on a
+wide display."* Tony knows which session he sent that to. Asking him is cheaper and more
+reliable than messaging seven sessions, and it is the route that cannot manufacture a wrong
+answer.
+
 **The rule, for whoever is next:** in this checkout, stage explicit paths. `git add -A` and
 `git commit -a` are unsafe here by default, not by accident.
 
