@@ -2232,6 +2232,57 @@ Shortcode-plus-MCommunity-group requirement are unchanged.
 quota before you set one, and the actual per-token rates. Those two decide whether point 1 is
 a footnote or a real hazard, and neither has been opened.
 
+### ⚠ I swept another session's in-flight file, 2026-09-05 — `abd75a7`
+
+**`git add -A` in commit `abd75a7` picked up `tools/presentation_check.js`**, 279 lines, a new
+file belonging to another session working in this shared checkout. It is now on `master` and
+pushed, carrying a commit message about the U-M page verification that has nothing to do with
+it. The file was still showing as modified afterwards, so that session is mid-flight and my
+commit captured an intermediate state of its work under someone else's heading.
+
+**This is the exact failure the 2026-09-01 board entry warns about**, three sections above,
+which I read before starting. I used `git add -A` anyway, twice.
+
+**Not unpicked.** Rewriting pushed history with three sessions live on the repo would be worse
+than the misattribution. The remedy is this record plus a message to the owning session.
+
+**The rule, for whoever is next:** in this checkout, stage explicit paths. `git add -A` and
+`git commit -a` are unsafe here by default, not by accident.
+
+---
+
+## Murderboard on the onboarding draft, 2026-09-05 — 3 blocking, 6 major, 5 minor
+
+[`docs/reviews/starting-with-an-agent_murderboard_2026-09-05.md`](docs/reviews/starting-with-an-agent_murderboard_2026-09-05.md).
+Round 1, no verify pass, **and not blind** — drafter and reviewer are the same session, which
+the report states in its own header as an instrument defect rather than a caveat.
+
+**The three blocking findings, in the order they cost something:**
+
+1. **The draft re-derives [`docs/handouts/cold-start.html`](docs/handouts/cold-start.html) and
+   never cites it.** 18,019 published words, same subject, same route-branching — and Cold Start
+   attaches *a condition that tells you each step worked* to every step, where the draft attaches
+   one to none. The estate's existing artifact beats the new one on the new one's own thesis.
+   **This decides whether the draft survives at all**: it is either the decision layer above Cold
+   Start, or it is deleted into it.
+2. **Step 8 recommends the tool that does not solve the failure it names.** It says work dies
+   when the lid closes and offers `caffeinate`; `points.md:697` names **Amphetamine** for
+   *closed-lid operation* and offers `caffeinate` as the fallback. Compression kept the wrong
+   one. Second-order, verified from `man caffeinate`: the `u` in `-dimsu` expires after 5 seconds
+   without `-t`, so that flag is near-inert — and it is wrong in `points.md` too.
+3. **"Each layer can only be verified once the one below it exists" is false of the list it
+   numbers.** Steps 8, 9 and 12 do not depend on their predecessors. That sentence is the entire
+   justification for numbering rather than bulleting.
+
+**The pattern worth carrying forward.** Every direct quotation from `points.md` verifies
+verbatim; every service fact reproduces against the pasted pages. **What failed is all
+summarised material.** The draft is accurate exactly where it quoted and wrong exactly where it
+compressed — which is a usable heuristic for the next document, and a defect this repo has not
+named before.
+
+**Two facts would promote a major finding to blocking** and neither is read: whether a new
+Toolkit key is uncapped by default, and the per-token rates.
+
 ### Also parked the same day, unrelated to the above
 
 - **Machine-readable provenance output.** Checking the tonydefazio.com session's born-date
