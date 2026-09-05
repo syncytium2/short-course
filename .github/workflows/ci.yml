@@ -92,6 +92,7 @@ jobs:
           sh tools/build_site.sh      --selftest
           sh tools/checklist_state.sh --selftest
           sh tools/tier_check.sh      --selftest
+          sh tools/terms_check.sh     --selftest
           sh tools/site_staleness.sh  --selftest
           sh tools/claim.sh           --selftest
           sh tools/worktree.sh        --selftest
@@ -119,6 +120,11 @@ jobs:
 
       - name: Every route through the runbook can be finished
         run: sh tools/tier_check.sh --check
+
+      - name: One word per thing, in the prose a learner reads
+        # Every handout, by glob rather than by list, so one added tomorrow is covered the
+        # day it lands. Anything not yet through the pass is printed with its count.
+        run: sh tools/terms_check.sh --check
 
       - name: Pointers resolve, and dated UI says when it was true
         run: |

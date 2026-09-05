@@ -1,0 +1,648 @@
+<!-- PUBLISHER SOURCE, not a standalone page. No doctype, html, head or body tags:
+     the Artifact publisher supplies them at publish time. Do not "fix" that — the
+     standalone version is the darkroom copy, which does not exist yet.
+
+     Published draft: https://claude.ai/code/artifact/80878b75-d69c-4fe1-9d69-5cbe2cac586d
+     Republish by passing that URL, or this path from the session that published it.
+
+     NOT a website page. Deliberately absent from tools/pages.txt with no META entry in
+     tools/build_site.sh, so --all and --check-all ignore it.
+
+     THE SERVICE TABLE AND THE "NEVER NAMES AN AGENT" CLAIM COME FROM AN ARCHIVED COPY
+     of https://its.umich.edu/computing/ai/getting-started taken 2026-02-06. The live
+     site refuses automated fetches (Cloudflare interstitial, HTTP 403 to both WebFetch
+     and curl). Verify against the live page before quoting any of it. -->
+<title>The Cheap Window</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<style>
+  /* House tokens, lifted from site/index.html so this reads as part of the estate
+     rather than a new identity. One superfamily; hierarchy from weight and italic;
+     three declared sizes. Mono is reserved for micro-labels and literal paths. */
+  :root {
+    --ground:  #FAFBFC;
+    --surface: #FFFFFF;
+    --sunk:    #F2F5F8;
+    --ink:     #171C23;
+    --muted:   #5C6875;
+    --faint:   #6A7583;
+    --rule:    #E1E6EB;
+    --rule-firm:#C9D2DB;
+    --accent:  #15577D;
+    --accent-soft: #E7F0F6;
+    --caution: #8A5D0F;
+    --caution-soft: #FAF2E2;
+
+    --sans: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+    --t-head:  26px;
+    --t-body:  16px;
+    --t-label: 11px;
+    --t-mono:  calc(var(--t-body) * .875);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:  #0D1218;
+      --surface: #141A22;
+      --sunk:    #1A222B;
+      --ink:     #E3E8EE;
+      --muted:   #93A0AE;
+      --faint:   #7C8896;
+      --rule:    #232C36;
+      --rule-firm:#313D4A;
+      --accent:  #69B0DD;
+      --accent-soft: #16283A;
+      --caution: #D2A64E;
+      --caution-soft: #2A2213;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground:  #0D1218;
+    --surface: #141A22;
+    --sunk:    #1A222B;
+    --ink:     #E3E8EE;
+    --muted:   #93A0AE;
+    --faint:   #7C8896;
+    --rule:    #232C36;
+    --rule-firm:#313D4A;
+    --accent:  #69B0DD;
+    --accent-soft: #16283A;
+    --caution: #D2A64E;
+    --caution-soft: #2A2213;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    font-family: var(--sans);
+    font-size: var(--t-body);
+    line-height: 1.6;
+    color: var(--ink);
+    background: var(--ground);
+    margin: 0;
+    padding: 3.5rem 1.5rem 6rem;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .doc { max-width: 47rem; margin: 0 auto; }
+
+  /* ---------------------------------------------------------------- masthead */
+  .eyebrow {
+    font-family: var(--mono); font-size: var(--t-label);
+    letter-spacing: .13em; text-transform: uppercase;
+    color: var(--faint); margin: 0 0 .9rem;
+  }
+  h1 {
+    font-size: var(--t-head); font-weight: 600; letter-spacing: -.02em;
+    line-height: 1.25; text-wrap: balance; margin: 0 0 .75rem;
+  }
+  .standfirst { color: var(--muted); margin: 0; max-width: 38rem; }
+  .masthead {
+    border-bottom: 1px solid var(--rule-firm);
+    padding-bottom: 1.75rem; margin-bottom: 2.5rem;
+  }
+
+  /* ------------------------------------------------------------------ blocks */
+  section { margin-bottom: 3rem; }
+
+  h2 {
+    font-size: var(--t-body); font-weight: 700; letter-spacing: -.005em;
+    margin: 0 0 1rem; padding-bottom: .5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  h3 { font-size: var(--t-body); font-weight: 600; margin: 2rem 0 .6rem; }
+  p { margin: 0 0 1rem; }
+  p:last-child { margin-bottom: 0; }
+  .path { font-family: var(--mono); font-size: var(--t-mono); background: var(--sunk);
+          padding: .1em .35em; border-radius: 2px; }
+
+  .thesis {
+    background: var(--accent-soft);
+    border-left: 2px solid var(--accent);
+    padding: 1.25rem 1.4rem; margin: 0 0 1.5rem;
+  }
+  .thesis p { margin: 0; }
+  .thesis p + p { margin-top: .8rem; }
+
+  .caution {
+    background: var(--caution-soft);
+    border-left: 2px solid var(--caution);
+    padding: 1.1rem 1.3rem; margin: 1.5rem 0;
+  }
+  .caution p { margin: 0; }
+  .caution p + p { margin-top: .7rem; }
+  .caution .lbl {
+    display: block; font-family: var(--mono); font-size: var(--t-label);
+    letter-spacing: .12em; text-transform: uppercase;
+    color: var(--caution); margin-bottom: .5rem;
+  }
+
+  /* ------------------------------------------------------------ door questions */
+  /* Lettered, not numbered: they are answered in any order, and they gate the
+     numbered sequence rather than belonging to it. */
+  .doors { list-style: none; margin: 0; padding: 0;
+           display: flex; flex-direction: column; gap: 1.1rem; }
+  .doors > li { display: grid; grid-template-columns: 1.6rem 1fr; }
+  .doors .k {
+    font-family: var(--mono); font-size: var(--t-mono);
+    color: var(--accent); font-weight: 500; padding-top: .1em;
+  }
+  .doors .q { font-weight: 600; }
+  .doors .a { grid-column: 2; color: var(--muted); margin-top: .25rem; }
+
+  /* ------------------------------------------------------------- rules list */
+  /* Unnumbered on purpose: simultaneous constraints, not a sequence. */
+  .rules { list-style: none; margin: 0; padding: 0;
+           display: flex; flex-direction: column; gap: .9rem; }
+  .rules li { padding-left: 1.1rem; border-left: 1px solid var(--rule-firm); }
+  .rules b { font-weight: 600; }
+  .rules span { color: var(--muted); }
+
+  /* --------------------------------------------------------------- sequence */
+  /* Numbered because the order is load-bearing: each layer can only be verified
+     once the one below it exists. The numbers encode dependency, not decoration. */
+  .phase { margin-bottom: 2.25rem; }
+  .phase-head {
+    display: flex; align-items: baseline; gap: .75rem; flex-wrap: wrap;
+    padding-bottom: .5rem; margin-bottom: 1rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .phase-key {
+    font-family: var(--mono); font-size: var(--t-label);
+    letter-spacing: .12em; text-transform: uppercase;
+    color: var(--accent); font-weight: 500; flex: none;
+  }
+  .phase-name { font-weight: 600; }
+  .phase-gate { color: var(--faint); font-style: italic; margin-left: auto;
+                font-size: var(--t-mono); }
+  .cond {
+    font-family: var(--mono); font-size: var(--t-label);
+    letter-spacing: .1em; text-transform: uppercase;
+    color: var(--caution); border: 1px solid var(--caution);
+    padding: .05rem .4rem; flex: none;
+  }
+
+  .steps { list-style: none; margin: 0; padding: 0;
+           display: flex; flex-direction: column; gap: 1.1rem; }
+  .steps > li { display: grid; grid-template-columns: 1.9rem 1fr; gap: .2rem 0; }
+  .steps .n {
+    font-family: var(--mono); font-size: var(--t-mono);
+    color: var(--faint); font-variant-numeric: tabular-nums; padding-top: .1em;
+  }
+  .steps .what { grid-column: 2; }
+  .steps .why { grid-column: 2; color: var(--muted); margin-top: .25rem; }
+
+  /* ----------------------------------------------------------------- table */
+  .tw { overflow-x: auto; margin: 1.25rem 0; }
+  table { border-collapse: collapse; width: 100%; min-width: 32rem; }
+  th, td {
+    text-align: left; padding: .6rem .8rem .6rem 0;
+    border-bottom: 1px solid var(--rule); vertical-align: top;
+  }
+  th {
+    font-family: var(--mono); font-size: var(--t-label);
+    letter-spacing: .12em; text-transform: uppercase;
+    color: var(--faint); font-weight: 500;
+    border-bottom: 1px solid var(--rule-firm);
+  }
+  td.no { color: var(--caution); font-weight: 600; }
+  td.yes { color: var(--accent); font-weight: 600; }
+
+  /* --------------------------------------------------------------- signals */
+  .signals { list-style: none; margin: 0; padding: 0;
+             display: flex; flex-direction: column; gap: .75rem; }
+  .signals li { padding-left: 1.4rem; position: relative; }
+  .signals li::before {
+    content: ""; position: absolute; left: 0; top: .62em;
+    width: .5rem; height: .5rem; border: 1px solid var(--rule-firm);
+  }
+  .signals li.bad::before { background: var(--caution); border-color: var(--caution); }
+  .signals li.good::before { background: var(--accent); border-color: var(--accent); }
+
+  /* ---------------------------------------------------------------- footer */
+  .colophon {
+    margin-top: 4rem; padding-top: 1.5rem;
+    border-top: 1px solid var(--rule-firm);
+    color: var(--faint); font-size: var(--t-mono); line-height: 1.55;
+  }
+  .colophon p { margin: 0 0 .7rem; }
+
+  a { color: var(--accent); text-decoration: underline;
+      text-underline-offset: .15em; text-decoration-thickness: 1px; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  @media (max-width: 34rem) {
+    body { padding: 2.5rem 1.15rem 4rem; }
+    .phase-gate { margin-left: 0; flex-basis: 100%; }
+  }
+</style>
+
+<div class="doc">
+
+  <header class="masthead">
+    <p class="eyebrow">Onboarding strategy &middot; draft for review</p>
+    <h1>The Cheap Window</h1>
+    <p class="standfirst">Starting someone on coding agents — sequenced by dependency
+      rather than by topic, branching on four questions asked at the door, and deferring
+      every guard until something has gone wrong to justify it.</p>
+  </header>
+
+  <section>
+    <h2>The window, and what closes it</h2>
+
+    <div class="thesis">
+      <p><strong>There is a short period, once, when all of this is free.</strong> It runs
+        from the moment you decide to work this way to the moment you have a real project
+        with real files in it. After that you are retrofitting — writing a path helper
+        around scripts that already hardcode paths, adding a remote to a repo with ninety
+        commits in it, deciding which storage holds what after the disk has filled.</p>
+      <p>Nothing announces its closing, and everybody gets exactly one.</p>
+    </div>
+
+    <p>Most of what follows is cheap now and merely expensive later. <strong>Two items are
+      different: they are impossible late.</strong></p>
+
+    <p>A commit stamp recording that an agent wrote something cannot be applied backwards.
+      Add it on day sixty and every earlier commit is permanently ambiguous about who wrote
+      it — a repo in this estate has to say <em>assume agent authorship unless a commit says
+      otherwise</em> for everything before the day it added one. A version or first-published
+      date works the same way: it is derived once from the record, or it is typed by hand
+      forever after, and a typed date is a second source that goes stale silently.</p>
+
+    <p>That asymmetry is the whole argument for doing this at the start rather than when
+      it hurts.</p>
+  </section>
+
+  <section>
+    <h2>Four questions at the door</h2>
+
+    <p>Asked first, because the answers decide how much of the sequence applies. Answering
+      them in week three means discovering them, which costs more.</p>
+
+    <ul class="doors">
+      <li>
+        <span class="k">A</span>
+        <span class="q">One machine, or more than one?</span>
+        <span class="a">One machine drops most of the storage and continuity work below. Two
+          or more, and a shared remote stops being optional — machines share a repo through
+          a remote or they do not share it at all.</span>
+      </li>
+      <li>
+        <span class="k">B</span>
+        <span class="q">Alone, or with other people?</span>
+        <span class="a">Working alone, a repo is a record for your future self. With others,
+          it is also a message, and branches, pull requests and review enter the picture.</span>
+      </li>
+      <li>
+        <span class="k">C</span>
+        <span class="q">Who pays — and is there a ceiling?</span>
+        <span class="a">This is the question people skip and it is the one that bites. See
+          the money section below; the answer changes what can go wrong, not just what it
+          costs.</span>
+      </li>
+      <li>
+        <span class="k">D</span>
+        <span class="q">Do you need large storage or a cluster at all?</span>
+        <span class="a">Most people need neither. A laptop, synced storage and one repo
+          covers the majority of this work. Knowing which side of that line you are on
+          <em>is</em> the decision — and if you do need them, start asking now, because
+          other people have to approve it.</span>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Chat is not an agent</h2>
+
+    <p>The distinction this course exists to teach is one that institutions already enforce
+      at the level of who gets an account — which makes it free evidence, and evidence that
+      cannot be accused of being staged.</p>
+
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Service</th><th>Who, and what it costs</th><th>An agent?</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>U-M GPT</td>
+            <td>all active students, faculty and staff, three campuses and Michigan Medicine — free, capped at 75 prompts an hour</td>
+            <td class="no">No — a chat box</td>
+          </tr>
+          <tr>
+            <td>U-M Maizey</td>
+            <td>same population, but requires a billing code <em>and</em> ownership of a group</td>
+            <td class="no">No — a chat box over your own documents</td>
+          </tr>
+          <tr>
+            <td>U-M GPT Toolkit</td>
+            <td>billing code required, by submitted request, billed per token</td>
+            <td class="yes">The gateway an agent runs through</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong>The most useful fact here is not logistical.</strong> The institution gives
+      everybody a chat box for free and puts everything past it behind a billing code and a
+      request form. The escalation the first exercise demonstrates is one the university has
+      already built into its own sign-up flow.</p>
+
+    <p><strong>And its own beginner's page stops at the chat box.</strong> The Getting
+      Started page walks a newcomer through three services in order and never names an
+      agent — the closest it comes is describing the Toolkit as being for people who
+      "require full control over their AI environments and models." Someone who follows the
+      official on-ramp end to end arrives at a chat window, having been told that is what
+      this is.</p>
+  </section>
+
+  <section>
+    <h2>The rules this runs on</h2>
+
+    <p>Stated first, so the sequence reads as consequences rather than as tips. These are
+      simultaneous constraints, not stages.</p>
+
+    <ul class="rules">
+      <li><b>One thing at a time.</b> <span>One change, verify, commit, next. You cannot
+        tell what broke if you changed four things.</span></li>
+      <li><b>Spec, validate, re-spec — and re-spec is the normal case.</b>
+        <span>Not the exception, not a sign of a bad prompt. Someone who never re-specs is
+        accepting first output.</span></li>
+      <li><b>Guards are built only from friction.</b> <span>Every guard worth having exists
+        because something specific went wrong first. Building them up front is the asymptote
+        with extra steps.</span></li>
+      <li><b>A request is not a rule.</b> <span>An instructions file is not enforceable. Use
+        all the bad words you like; the second sentence is still skipped.</span></li>
+      <li><b>The repo is a record, not undo.</b> <span>What happened and why — including
+        what did not work, which stays in the history rather than being edited away.</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>The sequence</h2>
+
+    <p>Ordered by dependency: each layer can only be verified once the one below it exists.
+      One thing runs the other way — anything involving people who are not you takes longest,
+      so it starts first and finishes last.</p>
+
+    <div class="phase">
+      <div class="phase-head">
+        <span class="phase-key">A</span>
+        <span class="phase-name">Access</span>
+        <span class="phase-gate">minutes, or weeks — depending on question C</span>
+      </div>
+      <ol class="steps">
+        <li>
+          <span class="n">1</span>
+          <span class="what"><strong>Pick a route, and find out whether it has a ceiling.</strong></span>
+          <span class="why">A personal plan is bought in minutes and the plan is the ceiling.
+            An institutional route usually needs a departmental billing code and a submitted
+            request, and takes days to weeks because somebody else approves it. Everything in
+            phases B and C proceeds while that pends.</span>
+        </li>
+        <li>
+          <span class="n">2</span>
+          <span class="what"><strong>If the institutional route needs a billing code, ask early — and ask what caps it.</strong></span>
+          <span class="why">For most people this is an unasked question rather than an
+            ineligibility. The second half of the question is the one nobody asks and the one
+            that matters.</span>
+        </li>
+      </ol>
+    </div>
+
+    <div class="phase">
+      <div class="phase-head">
+        <span class="phase-key">B</span>
+        <span class="phase-name">Identity, before any code exists</span>
+        <span class="phase-gate">hours</span>
+      </div>
+      <ol class="steps">
+        <li>
+          <span class="n">3</span>
+          <span class="what"><strong>A code-hosting account, an SSH key, and a logged-in command line tool.</strong></span>
+          <span class="why">Doing this now is what makes step 10 a single sitting instead of
+            a migration.</span>
+        </li>
+        <li>
+          <span class="n">4</span>
+          <span class="what"><strong>Whatever else your institution requires: login, VPN, synced-storage client.</strong></span>
+        </li>
+      </ol>
+    </div>
+
+    <div class="phase">
+      <div class="phase-head">
+        <span class="phase-key">C</span>
+        <span class="phase-name">Machine baseline</span>
+        <span class="phase-gate">one sitting</span>
+      </div>
+      <ol class="steps">
+        <li>
+          <span class="n">5</span>
+          <span class="what"><strong>A package manager, then the handful of tools everything else assumes.</strong></span>
+          <span class="why">Version control, the hosting CLI, a JavaScript runtime, a fast
+            search tool, a JSON reader. Agents reach for these constantly and fail oddly when
+            they are missing.</span>
+        </li>
+        <li>
+          <span class="n">6</span>
+          <span class="what"><strong>An editor and the agent itself.</strong></span>
+        </li>
+        <li>
+          <span class="n">7</span>
+          <span class="what"><strong>One language runtime.</strong></span>
+          <span class="why">Only the ones you need. Most people need one.</span>
+        </li>
+        <li>
+          <span class="n">8</span>
+          <span class="what"><strong>Stop the machine sleeping through its own work.</strong></span>
+          <span class="why">A session or an analysis run that outlasts your attention dies
+            when the lid closes, and it dies without a result. On a Mac
+            <span class="path">caffeinate -dimsu</span> is built in and needs no install;
+            Windows has PowerToys Awake, Linux has <span class="path">systemd-inhibit</span>.
+            A good share of the people who think they need a cluster need this instead — try
+            it before filing a request that takes weeks.</span>
+        </li>
+      </ol>
+    </div>
+
+    <div class="phase">
+      <div class="phase-head">
+        <span class="phase-key">D</span>
+        <span class="phase-name">Decisions that are free now</span>
+        <span class="phase-gate">before the first real project</span>
+      </div>
+      <ol class="steps">
+        <li>
+          <span class="n">9</span>
+          <span class="what"><strong>Write down which storage holds what. Three sentences.</strong></span>
+          <span class="why">It prevents both failures at once: large outputs strangling a
+            sync client, and small shareable results stranded where the other machine cannot
+            see them. Write it before the first data file exists, not when a disk fills.</span>
+        </li>
+        <li>
+          <span class="n">10</span>
+          <span class="what"><strong>Write the path helper before anything hardcodes a path.</strong></span>
+          <span class="why">Cheap now, archaeology later. A sibling project carries a stale
+            path island it describes in its own words as rooted somewhere nothing else uses —
+            flagged for cleanup, still not fixed.</span>
+        </li>
+        <li>
+          <span class="n">11</span>
+          <span class="what"><strong>Start the repo and add its remote in the same sitting.</strong></span>
+        </li>
+        <li>
+          <span class="n">12</span>
+          <span class="what"><strong>Ignore data by extension; pin line endings on shell scripts.</strong></span>
+          <span class="why">A carriage return in the first line of a script is a
+            <span class="path">bad interpreter</span> failure on a Linux machine, and it is a
+            genuinely awful thing to debug from a Windows checkout.</span>
+        </li>
+        <li>
+          <span class="n">13</span>
+          <span class="what"><strong>Stamp agent authorship on commits, automatically.</strong></span>
+          <span class="why">One of the two items that is <em>impossible</em> late rather than
+            expensive. Everything committed before the stamp exists is permanently ambiguous
+            about who wrote it.</span>
+        </li>
+      </ol>
+    </div>
+
+    <div class="phase">
+      <div class="phase-head">
+        <span class="phase-key">E</span>
+        <span class="phase-name">First contact, which contains a deliberate failure</span>
+        <span class="phase-gate">first week of real work</span>
+      </div>
+      <ol class="steps">
+        <li>
+          <span class="n">14</span>
+          <span class="what"><strong>The bake-off: the same request to a search engine, to a chat box, and to the agent.</strong></span>
+          <span class="why">Shows the escalation instead of asserting it. Search returns
+            links and you do the work; chat returns text and you decide what to do with it;
+            the agent acts on your filesystem. It starts from the one tool everybody has
+            already used, and it opens with the machine being wrong rather than with
+            reassurance. Failure is the first move, not the caveat.</span>
+        </li>
+        <li>
+          <span class="n">15</span>
+          <span class="what"><strong>One real task from your own work, small, with the check named before it runs.</strong></span>
+          <span class="why">Four checks that need no code: read the diff for scope rather
+            than correctness, run it and look, list the files that now exist, open the
+            artifact yourself. Name which one applies <em>in advance</em>, or it will not
+            happen — everything can look right and be totally wrong.</span>
+        </li>
+      </ol>
+    </div>
+
+    <div class="phase">
+      <div class="phase-head">
+        <span class="phase-key">F</span>
+        <span class="phase-name">The guard layer</span>
+        <span class="phase-gate">deliberately empty</span>
+      </div>
+      <ol class="steps">
+        <li>
+          <span class="n">16</span>
+          <span class="what"><strong>Nothing. On purpose.</strong></span>
+          <span class="why">No hooks, no session-start briefing, no checks configured in
+            advance. Every guard gets built later, from a specific thing that went wrong, on
+            a date. The evidence sits in this estate's own history: a session-start briefing
+            grew until it killed sessions outright, and the fix was architectural rather than
+            tuning. Building the guard layer during onboarding is the most legible way to
+            fail this course while appearing to take it seriously.</span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section>
+    <h2>The money, and why the comfortable answer is the dangerous one</h2>
+
+    <p>Question C at the door has two answers and they fail in opposite directions.</p>
+
+    <p><strong>A personal plan is a ceiling.</strong> You hit it, work stops, and you find
+      out immediately. That is crude, and it is the case most written material assumes.</p>
+
+    <div class="caution">
+      <span class="lbl">The uncapped case</span>
+      <p><strong>An institutional billing code is not a ceiling.</strong> Usage is billed at
+        per-token rates against a department or project, and nothing stops, nothing warns,
+        and the number surfaces when somebody else reads the monthly statement.</p>
+      <p>In this course's own terms: a ceiling is a crude mechanism, but it <em>is</em> a
+        mechanism. A billing code is a <em>request</em> that the spender be sensible — and
+        this whole course is about what happens to requests.</p>
+      <p>Anyone on the institutional route is handed the uncapped case on day one, usually
+        without being told that is what happened.</p>
+    </div>
+
+    <p>The free tier has a third shape worth naming, because it is neither: a rate limit.
+      Seventy-five prompts an hour is not a budget, and running into it teaches nothing about
+      what the work costs.</p>
+  </section>
+
+  <section>
+    <h2>How you would know it worked</h2>
+
+    <p>Confidence is not the measure. Someone confident after week one has usually skipped
+      the validation. These are observable in the repo.</p>
+
+    <ul class="signals">
+      <li class="good">They have re-specced at least once without being prompted to.</li>
+      <li class="good">They can say what the agent did without reading the code — by scope of
+        diff, by files that now exist, by opening the artifact.</li>
+      <li class="good">The repo contains at least one commit recording something that did
+        <em>not</em> work.</li>
+      <li class="good">Their first guard, whenever it appears, points at a specific dated
+        failure.</li>
+      <li class="bad">A polished session-start script exists by week two. That is the
+        asymptote, arrived early.</li>
+      <li class="bad">The instructions file has grown past a page and is being edited in
+        place of changing the workflow. That is a request being mistaken for a rule.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>What is unverified here</h2>
+
+    <p>This would fail its own course if it presented itself as finished, so:</p>
+
+    <p><strong>Nobody has been onboarded this way.</strong> Zero runs. The order is derived
+      from what this estate's own retrofits cost it — evidence about what went wrong, not
+      evidence that this sequence prevents it.</p>
+
+    <p><strong>The service table was not read from the live pages.</strong> Every attempt to
+      fetch them was refused by the site's bot protection. The eligibility rules, the
+      75-prompts-an-hour cap, the billing-code requirements and the wording about "full
+      control over their AI environments and models" all come from an archived copy of the
+      Getting Started page taken <strong>6 February 2026</strong> — seven months before this
+      draft. The claim that the official on-ramp never names an agent is true of that
+      snapshot and has not been checked against the page as it stands today, which is exactly
+      the kind of decayed-but-plausible fact this material warns about. Go and touch the
+      systems before quoting any of it.</p>
+
+    <p><strong>The per-token and eligibility details for the agent-capable services</strong>
+      — the ones that make the escalation argument land — come from search summaries rather
+      than pages read directly, for the same reason.</p>
+
+    <p><strong>No cost figure applies to a beginner doing daily work.</strong> The one
+      concrete number in our material describes a capped account in a single 90-minute
+      session, and it was an estimate rather than a measurement. The uncapped case in the
+      caution above has never been measured by anyone here.</p>
+
+    <p><strong>The phase labels are dependencies, not durations.</strong> "First week" means
+      after the thing below it exists. Nobody has timed any of this.</p>
+  </section>
+
+  <div class="colophon">
+    <p>Draft for review, 5 September 2026. Not published to the site.</p>
+    <p>Revised from a version written for new faculty specifically; the institution-specific
+      material is quarantined in two sections so it can go stale without taking the sequence
+      with it.</p>
+  </div>
+
+</div>

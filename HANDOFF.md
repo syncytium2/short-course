@@ -7,6 +7,45 @@ is for murderboard development only; see [Boundary](#boundary) below.
 
 ## If you are coming back to this cold
 
+**2026-09-04. Two things are open and neither is started. Read this before picking either up.**
+
+**1 · The Windows route is decided, and it is not the one you would guess.** Tony, relaying
+Chris, a HITS expert: **VS Code on native Windows. No WSL.** That is institutional guidance
+about what these researchers are allowed to install, not a preference — do not design a WSL
+route. It is recorded here because nothing in this tree implies it: every handout is written
+for macOS and says so, and the Windows half of the audience is unaddressed.
+
+> **The consequence nobody has worked through, and it is upstream of every command.** VS Code's
+> integrated terminal on Windows defaults to **PowerShell**. Everything in
+> [`starter/`](starter/) is POSIX sh — [`bootstrap.sh`](starter/bootstrap.sh),
+> [`tools/paths.sh`](starter/tools/paths.sh),
+> [`tools/check_setup.sh`](starter/tools/check_setup.sh), and the
+> [commit hook](starter/.githooks/prepare-commit-msg). The two honest options are telling the
+> reader to switch VS Code's default terminal to Git Bash, or a second PowerShell entry point
+> — which is a second source, and two sources drift. **Settle the shell before writing a line
+> of Windows documentation.**
+
+**What does NOT need duplicating, established while building the template:** `.gitattributes`,
+the commit hook, the deny list, `paths.sh` and `check_setup.sh` are platform-identical, and
+`.gitattributes` matters more to a Windows reader than to anyone else. Only the installer
+commands and the interruption list genuinely differ. **One template, not two.**
+
+**2 · Nobody has walked any of this from a clean machine**, which is the stamp on both
+[`cold-start.html`](docs/handouts/cold-start.html) and
+[`already-set-up.html`](docs/handouts/already-set-up.html). The plan, unbuilt: one
+`tools/walk_clean.sh` that runs identically on a stripped local environment and on a GitHub
+`macos-latest` runner — free here, because this repo is public — printing every time it passes
+the things it could **not** do, so a green run never reads as a completed walk. It would not
+finish the job: the three sign-ins, Homebrew's password prompt, Apple's developer-tools dialog
+and the editor's trust prompt exist *because* a person has to be there, and no runner reaches
+them. It would move the stamp from *none of this has been observed* to *everything except the
+six human steps ran on a fresh machine on this date*.
+
+**Neither was started. Tony, 2026-09-04: "i don't have the focus to do this now."** Nothing is
+half-built and nothing is waiting on a decision — both are simply not begun.
+
+---
+
 **2026-08-30. Parked, deliberately, and nothing is decaying.** Everything is committed and pushed
 to the private remote. There is no clock on any of it. The course was already postponed on
 2026-08-27 and the postponement removed the deadline, not the findings — that is still true and
@@ -2041,3 +2080,124 @@ It did not claim before appending here, and did not touch `docs/SESSIONS.md`. Se
 `SESSIONS.md` in the shared checkout. `claim.sh` writes to that same file, so claiming would
 have meant committing somebody else's in-flight work — the sweep this board warns about. Only
 `HANDOFF.md` is in this commit.
+
+---
+
+## Parked, 2026-09-04 — an onboarding strategy, drafted and not taken up
+
+> **Unparked and rewritten 2026-09-05.** Tony: *"this should be written for people new to
+> using coding agents, not just new faculty."* The draft below was reframed accordingly and
+> renamed; the audience is now anyone starting out, with the institution-specific material
+> quarantined. **It went straight back to parked — still unreviewed, still no decision owed.**
+> The 09-05 session's additions are at the end of this section under *What the rewrite
+> changed*.
+
+**Tony asked for it, reviewed nothing, and parked it the same turn: *"park this as a todo,
+don't have bandwidth."*** No decision is owed. It is recorded here because the draft exists
+and the reasoning behind it would otherwise have to be re-derived.
+
+The artefact:
+[`docs/drafts/starting-with-an-agent.html`](docs/drafts/starting-with-an-agent.html),
+published for review at
+<https://claude.ai/code/artifact/80878b75-d69c-4fe1-9d69-5cbe2cac586d>. It is **not a website
+page** — no row in [`tools/pages.txt`](tools/pages.txt), no META entry, so the build ignores it.
+It is publisher source and deliberately not standalone; the header comment says so.
+
+### What it was, as drafted 2026-09-04 — superseded by the rewrite below, kept because it is what got parked
+
+Eighteen steps in six phases, ordered by dependency rather than topic, for bringing a new
+faculty member onto agentic work. Built from [`points.md`](points.md) §D–§F, so it inherits
+the running order and the access research rather than restating them.
+
+**Its one original claim** — the thing that is not already in `points.md` — is that a new
+faculty member is the only person for whom Step 0 is free, because the window between a start
+date and a first data file is the only time these decisions are cheap rather than
+archaeological. Two of the eighteen are *impossible* late rather than merely expensive: the
+agent-authorship commit hook, and a derived born-on date. Both cite defects this estate has
+already paid for.
+
+**Phase F is a numbered step that says to build nothing**, on purpose, because an empty
+section reads as an oversight and this one is the argument.
+
+### Why it is worth picking back up
+
+It is the first thing in this repo written for the audience the 2026-09-02 U-M research
+identified: the institution ships Claude Code and Codex CLI to faculty and staff and teaches
+only the chat box. A new hire lands in that population on day one. If the vacancy claim is
+being replaced by a contrast claim, this draft is what the contrast is *for*.
+
+### What it is missing, and this is not a short list
+
+- **Zero runs.** Nobody has been onboarded this way. The order is derived from what our own
+  retrofits cost us — evidence about what went wrong, not evidence that this sequence
+  prevents it.
+- **The access table was checked 2026-08-27** and §F's own instruction is to go touch the
+  systems rather than edit around the dates. Not done.
+- **The no-Shortcode precedent is still single-source**, as §F already flags. It is the most
+  decision-relevant line in the draft and the least verified.
+- **No cost figure applies.** The $5–15/student estimate describes a *capped* student
+  account. The draft's own caution block is about the uncapped Shortcode case, which nobody
+  has measured, and which `points.md` §10 does not cover.
+- **No darkroom copy**, so it exists as repo bytes and an artefact URL and nothing Tony can
+  open from Finder. That is the delivery failure this estate keeps repeating; it is recorded
+  rather than fixed because he parked it before review.
+
+### What the rewrite changed, 2026-09-05
+
+Sixteen steps in six phases, plus **four lettered questions asked at the door** — one machine
+or several, alone or with others, who pays and is there a ceiling, and do you need large
+storage or a cluster at all. The questions gate the sequence rather than belonging to it, which
+is why they are lettered and the steps are numbered.
+
+**The thesis generalised without weakening.** The window is no longer "between a start date and
+the first data file" but "between deciding to work this way and having a real project" —
+everybody gets exactly one, and the two impossible-late items (agent-authorship stamping, a
+derived rather than typed provenance date) are unchanged because they were never faculty-specific.
+
+**The institution-specific material is now quarantined in two sections** rather than woven
+through, on the same reasoning `points.md` §F gives for its own placement: it can rot without
+taking the sequence with it. The money section is now generalised to capped-versus-uncapped,
+with the U-M case as the worked example of uncapped.
+
+### ⚠ The source problem this rewrite exposed, and it is the important part
+
+**Tony's prompt said *"you have reviewed https://its.umich.edu/computing/ai/getting-started."*
+This session had not.** Nor had the 09-02 session that produced the U-M research: every
+`its.umich.edu` fetch it attempted returned HTTP 403, and all of it came from search-result
+summaries. That was stated at the time and had not been carried anywhere durable until now.
+
+The live site is unreachable to automation — a Cloudflare interstitial, 403 to both `WebFetch`
+and `curl` with a browser user-agent. **What the rewrite actually used is an Internet Archive
+snapshot dated 2026-02-06**, seven months stale, and every fact drawn from it is labelled as
+such in the draft's own unverified section.
+
+What the snapshot did add, and it is worth having:
+
+- **U-M GPT is capped at 75 prompts per hour.** A rate limit, not a budget — a third shape
+  alongside "capped plan" and "uncapped billing code," and running into it teaches nothing
+  about what work costs.
+- **Maizey needs a billing code *and* ownership of an MCommunity group.** A prerequisite §F
+  does not record.
+- **The Getting Started page walks a beginner through three services and never names an
+  agent.** The closest it comes is calling the Toolkit suitable for those who "require full
+  control over their AI environments and models." Someone following the official on-ramp end
+  to end arrives at a chat window having been told that is what this is. **That is the
+  sharpest single piece of evidence found for the contrast claim** — and it is true of a
+  February snapshot, not of today's page, which nobody here has seen.
+
+**The cheapest check that would settle it: open that URL in a browser.** A human is not
+blocked by the interstitial. Nobody has done it.
+
+### Also parked the same day, unrelated to the above
+
+- **Machine-readable provenance output.** Checking the tonydefazio.com session's born-date
+  audit turned up a real gap: [`tools/build_site.sh`](tools/build_site.sh) emits the stamp as
+  prose only — no data attributes, no `<time>` — so a consumer must scrape the sentence. That
+  session is about to become that consumer for five sites, and bugarach is the only repo in
+  the estate emitting a readable contract. **Tony's call, not made.**
+- **The ordering check we do not have.** The selftest proves born renders and does not move on
+  a commit (`build_site.sh` ~427, ~494). Nothing asserts revised is not *earlier* than born.
+  Murderboard has that check; we do not. Cheap, and it belongs in any vendored page-stamp tool.
+- **Which `HANDOFF.md` he meant on 2026-09-02** — he pointed at one in `draughtsman`'s
+  scratchpad, not this file. Never resolved, and that scratchpad is session-scoped and may
+  already be gone.

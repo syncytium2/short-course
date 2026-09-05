@@ -132,6 +132,15 @@
     background: none; border: 0; padding: 3px 2px; cursor: pointer;
   }
   .bar-reset:hover { color: var(--ink); }
+  /* Same weight as Reset deliberately: it is a utility, not an invitation. What it must be
+     is PRESENT -- a reader who does not know they are missing a word will not go looking,
+     and the one who does should not have to scroll to the top to find out. */
+  .bar-terms {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--faint);
+    text-decoration: none; padding: 3px 2px; margin-right: 2px;
+  }
+  .bar-terms:hover { color: var(--accent); }
 
   /* ---- masthead ---- */
   .mast { border-bottom: 2px solid var(--ink); padding: 30px 0 16px; margin-bottom: 8px; }
@@ -622,6 +631,69 @@
   .draft p + p { margin-top: 7px; }
   @media print { .draft { break-inside: avoid; } }
 
+  /* ---- the six words, pinned above the door ----
+     NOT FOLDED. Every other block of explanation on this page hides behind its heading,
+     because the page is long and a reader in a hurry should be able to skim the steps. The
+     definitions are the exception: a reader who does not already know they are missing a
+     word will never open a fold labelled "the words this page uses", and that reader is
+     exactly who this block is for. It is six lines and it stays open. */
+  .terms {
+    border: 1px solid var(--rule-firm);
+    background: var(--sunk);
+    border-radius: 4px;
+    padding: 11px 14px;
+    margin: 16px 0 6px;
+    /* The bar is fixed, so an anchor jump would otherwise land the heading underneath it
+       and the reader would arrive looking at the second definition. */
+    scroll-margin-top: 56px;
+  }
+  .terms-k {
+    display: block; font-family: var(--mono); font-size: 11.5px;
+    letter-spacing: .07em; text-transform: uppercase; color: var(--muted);
+    margin: 0 0 8px;
+  }
+  .terms dl { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 5px 14px; }
+  @media (max-width: 560px) { .terms dl { grid-template-columns: 1fr; gap: 2px; }
+                              .terms dd { margin-bottom: 7px; } }
+  .terms dt {
+    font-weight: 600; font-size: 13.5px; color: var(--accent);
+    font-variant-numeric: tabular-nums; white-space: nowrap;
+  }
+  .terms dd { margin: 0; font-size: 13.5px; line-height: 1.5; color: var(--ink); }
+  /* The word is the jump. It looks like a link because it is one, and it keeps the accent
+     colour it already had -- a second affordance beside it would be two things to explain. */
+  .terms dt[data-jump] { cursor: pointer; text-decoration: underline; text-underline-offset: 3px;
+                         text-decoration-thickness: 1px; text-decoration-color: var(--rule-firm); }
+  .terms dt[data-jump]:hover { text-decoration-color: var(--accent); }
+  .terms dt[data-off-route="1"] { cursor: default; color: var(--faint); text-decoration: none; }
+  /* WHAT YOU CHOSE, not what the word means. Set apart from the definition so the two are
+     never read as one sentence: the definition is fixed and the chip is yours. */
+  .t-you {
+    display: inline-block; margin-top: 3px;
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .04em;
+    padding: 1px 6px; border-radius: 3px;
+    background: var(--good-soft); color: var(--good); border: 1px solid var(--good);
+  }
+  .t-you[data-known="0"] { background: var(--sunk); color: var(--muted); border-color: var(--rule-firm); }
+  .t-you:empty { display: none; }
+  /* A one-field version of the Phase 2 block. Same handler, same storage, no heading. */
+  .fill-one { margin: 10px 0 12px; }
+  @media print { .terms { break-inside: avoid; } }
+
+  /* The step a word sends you to, marked for a moment so the jump lands somewhere visible.
+     Without it the page simply scrolls and the reader has to work out which of the steps on
+     screen was the answer -- which is the problem the jump was built to solve. */
+  ol.steps > li.jumped, section.door.jumped {
+    animation: flashstep 1.6s ease-out 1;
+  }
+  @keyframes flashstep {
+    0%, 30% { background: var(--caution-soft); box-shadow: 0 0 0 6px var(--caution-soft); }
+    100%    { background: transparent; box-shadow: 0 0 0 6px transparent; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    ol.steps > li.jumped, section.door.jumped { animation: none; outline: 2px solid var(--caution); outline-offset: 4px; }
+  }
+
   /* Version line under the masthead. Derived at build time by tools/build_site.sh
      from the source's git history -- there is nothing here to edit or to forget. */
   .pv {
@@ -648,6 +720,13 @@
   <div class="bar-in">
     <span class="bar-count"><b id="pc-n">0</b> / <span id="pc-d">0</span> steps complete</span>
     <span class="bar-track"><span class="bar-fill" id="pc-fill"></span></span>
+    <!-- THE GLOSSARY HAS TO BE REACHABLE FROM WHEREVER YOU LANDED. Defining the words at
+         the top only serves a reader who started at the top, and this page is built to be
+         landed on: the steps fold, the routes filter, and people arrive on a deep link from
+         another sheet. The bar is the only element on screen at every scroll position, so
+         the definitions hang off it. An anchor, not a fold -- one click, and the browser's
+         back button returns them to the step they were reading. -->
+    <a class="bar-terms" href="#the-words">Words</a>
     <button class="bar-reset" id="pc-reset" type="button">Reset</button>
   </div>
 </div>
@@ -667,22 +746,73 @@
          the three -- W1 to W5 name one company's website end to end -- and it is walked by
          the reader least able to tell a wrong product from a wrong step. So min gets its own
          sentence, about the thing min can actually check. -->
-    <p><span data-tiers="min">The five browser steps were walked on one vendor&rsquo;s website and name its screens throughout; a different assistant may not do this job at all, and the block above W1 is the one-minute test for that. </span><span data-tiers="mid max">The steps that install things are written for one vendor on macOS, and say so. </span>Roughly a third of the boxes are things only you can confirm &mdash; <i>I know</i>, <i>I have decided</i>, <i>I can say</i> &mdash; so ticking them all is not evidence the setup works.</p>
+    <p><span data-tiers="min">The five browser steps were walked on one vendor&rsquo;s website and name its screens throughout; a different agent may not do this job at all, and the block above W1 is the one-minute test for that. </span><span data-tiers="mid max">The steps that install things are written for one vendor on macOS, and say so. </span>Roughly a third of the boxes are things only you can confirm &mdash; <i>I know</i>, <i>I have decided</i>, <i>I can say</i> &mdash; so ticking them all is not evidence the setup works.</p>
   </div>
   
   <header class="mast">
     <p class="eyebrow"><a href="/" class="home">&larr;&nbsp;It Looked Right</a> &middot; Setup runbook &middot; keep this window open</p>
     <h1>Cold Start</h1>
     <p class="standfirst">An email address to a first agent session that leaves a record behind it. Pick one of three routes &mdash; nothing installed, your own laptop, or a cluster shared with other people &mdash; and get every step it needs in order, with the condition that tells you each one worked.</p>
-    <p class="pv">Version <b>0.1.45</b> &middot; 4 Sep 2026<span class="pv-born">First published 29 Aug 2026</span></p>
+    <p class="pv">Version <b>0.1.47</b> &middot; 5 Sep 2026<span class="pv-born">First published 29 Aug 2026</span></p>
   </header>
 
   <div class="method">
     <p><b>None of this is coding, and none of it is optional polish.</b> Every item is a decision the agent will otherwise make for you, silently, in your first hour &mdash; where your data lives, what it may run without asking, whether tonight&rsquo;s work reaches tomorrow&rsquo;s machine.</p>
     <p><b>Every step ends with a &ldquo;done when&rdquo;.</b> An action and its report are two different events. Something that says it worked is telling you it reached the end of its own instructions, not that anything happened. Checking the world instead of the summary is the whole skill; these steps are just where you start practising it.</p>
+
+    <!-- THE WORDS, PINNED. Tony, 2026-09-05, reading the page cold after a break: "we are
+         using a lot of loose language that will trip up people... a user should be able to
+         open any part of the page and understand what that step refers to without searching
+         for context."
+         He was right and the audit was worse than the complaint. THREE WORDS EACH CARRIED
+         THREE MEANINGS:
+           "tier" -- the route you picked, the ladder in 1.1, AND the vendor's price plan
+           "tool" -- the agent, `wrangler`, and software in general
+           "place" -- the route ("three places to stand") and the ladder rung
+         and the agent alone was called agent, tool, assistant, "the expert", "the one you
+         picked" and "the place I chose at 1.1". A reader who lands on one step cannot
+         resolve any of those, and this page is explicitly built to be landed on: the steps
+         fold, the routes filter, and nobody reads it top to bottom twice.
+         WHY A DEFINITION AND NOT A STYLE NOTE. This page's own closing trap says it: an
+         instruction competes with what the reader already believes and loses, while a
+         definition read before they reason is the belief they start from. So the words are
+         fixed here, and `tools/terms_check.sh` fails the build if the banned senses come
+         back. That is tier 4 on this page's own four-tier table, and prose was tier 1. -->
+    <div class="terms" id="the-words">
+      <b class="terms-k">The six words this page uses, and it uses no others for these things</b>
+      <!-- EACH WORD JUMPS TO THE STEP THAT SETTLES IT, AND SAYS WHAT YOU SETTLED. Tony,
+           2026-09-05: "can we hot link each of these to take the user back to the choice
+           that set their meaning? or enable hover to show what they chose?"
+           BOTH, AND NOT BY HOVER. A definition tells a reader what the word means in
+           general; what they actually need mid-page is what it means FOR THEM, and hover
+           does not exist on the iPad this page is half-written for. So the answer lives on
+           the page permanently, in `.t-you`, and hover is not the mechanism.
+           WHERE THE ANSWERS COME FROM IS THE PART WORTH GUARDING. Four of the six are
+           DERIVED FROM WHAT THE READER HAS ALREADY TICKED -- the route from the door, the
+           rung from whether 3.4 and 3.5 are done, the repository and the editor from their
+           own steps. That is this page's whole argument turned on itself: state read off
+           evidence rather than off a self-report. The agent is the one thing the page
+           cannot derive, so 1.1 asks for it in one optional field; and `plan` is the one
+           thing it deliberately refuses to hold, because prices belong on the vendor's page
+           and What It Costs is the sheet. It says so rather than guessing. -->
+      <dl>
+        <dt data-jump="agent-account">agent</dt>
+        <dd><b>The AI you type at.</b> Claude, Codex, Gemini CLI, Copilot, Cursor. Whether it lives in a browser tab, a terminal or your editor, it is <i>the agent</i> on every step here &mdash; never &ldquo;the tool&rdquo;, never &ldquo;the assistant&rdquo;. You get one at <b>step 1.1</b>. <span class="t-you" data-you="agent"></span></dd>
+        <dt data-jump="#door">route</dt>
+        <dd><b>Which of the three sets of steps you are being shown</b> &mdash; the <i>browser route</i>, the <i>laptop route</i>, the <i>cluster route</i>. You pick one immediately below this, and you can change it at any time. <span class="t-you" data-you="route"></span></dd>
+        <dt data-jump="agent-account">rung</dt>
+        <dd><b>How much of your machine the agent can see</b>, on a ladder of three. It is a different question from your route and from your plan, and it is the one that decides how much you have to describe by hand. <b>Step 1.1</b> has the ladder. <span class="t-you" data-you="rung"></span></dd>
+        <dt data-jump="agent-account">plan</dt>
+        <dd><b>What you pay the company that makes the agent</b> &mdash; a free plan or a paid plan. Money only. It is not the route and not the rung; a free plan and a paid plan can sit on the same rung. <span class="t-you" data-you="plan"></span></dd>
+        <dt data-jump="repo-step">repository</dt>
+        <dd><b>A folder that lives on <code>github.com</code> instead of on your laptop</b>, keeping a record of every change made to it. Often shortened to <i>repo</i> by other people; this page always writes it in full. You make one at <span data-tiers="min"><b>W3</b>.</span><span data-tiers="mid max"><b>step 4.5</b>.</span> <span class="t-you" data-you="repository"></span></dd>
+        <dt data-jump="editor">the editor</dt>
+        <dd><b>The program you open your files in</b> &mdash; VS&nbsp;Code, on this page. Distinct from <b>the terminal</b>, the window you type commands into, and from the agent, which can sit inside either. <span class="t-you" data-you="editor"></span></dd>
+      </dl>
+    </div>
   </div>
 
-  <section class="door">
+  <section class="door" id="door">
     <p class="door-head">One question, asked at the door: how far are you going?</p>
     <p class="door-lede">This decides which steps you are shown. <b>Pick the smallest one that gets you what you want</b> &mdash; you can move up at any time, the page keeps every box you have ticked, and moving up only ever adds steps.</p>
     <div class="tierpicks" role="group" aria-label="How far are you going">
@@ -698,7 +828,7 @@
            "browser tab" can only mean the application. -->
       <button class="tierpick" type="button" data-tier="min">
         <b>The browser route</b>
-        <span>Nothing installed, and no terminal &mdash; the black window you type commands into. Every step happens on a website. One evening to a web app published at a URL. <b>Conditional on your tool:</b> two one-minute tests decide whether it opens, and a workplace assistant will not pass them.</span>
+        <span>Nothing installed, and no terminal &mdash; the black window you type commands into. Every step happens on a website. One evening to a web app published at a URL. <b>Conditional on your agent:</b> two one-minute tests decide whether it opens, and an agent built into an office suite will not pass them.</span>
       </button>
       <button class="tierpick" type="button" data-tier="mid">
         <b>The laptop route</b>
@@ -739,7 +869,7 @@
       <h2>Phase 1 &middot; Accounts</h2>
       <span class="phase-time">30 min<span data-tiers="max">, plus other people&rsquo;s time</span></span>
     </div>
-    <div class="ask"><span class="ask-k">If this does not match your screen</span><b>From step 1.1 onward you have the expert, and it is a browser tab.</b> The account you are about to create <i>is</i> the thing to ask when a screen here is wrong &mdash; paste the error, or the page you got instead of the one described, and ask what it means. <b>It cannot see your screen unless you show it</b>, so paste or screenshot rather than describe; and it is not a map, so do not ask it where a button is &mdash; ask it what the button you found does. That distinction is <a href="https://lookedright.tonydefazio.com/show-it-your-screen"><i>Show It Your Screen</i></a>.</div>
+    <div class="ask"><span class="ask-k">If this does not match your screen</span><b>From step 1.1 onward you have the agent, and it is a browser tab.</b> The account you are about to create <i>is</i> the thing to ask when a screen here is wrong &mdash; paste the error, or the page you got instead of the one described, and ask what it means. <b>It cannot see your screen unless you show it</b>, so paste or screenshot rather than describe; and it is not a map, so do not ask it where a button is &mdash; ask it what the button you found does. That distinction is <a href="https://lookedright.tonydefazio.com/show-it-your-screen"><i>Show It Your Screen</i></a>.</div>
     <p class="phase-note"><span data-tiers="min">Two accounts, both free to create, and you need both.</span><span data-tiers="mid max">Two accounts of your own, both free to create and both required &mdash; then the institutional things somebody else controls.</span> <b>Get the agent first, on purpose:</b> the second step is the one people find fiddly, and doing it second means there is already an agent to ask.</p>
     <p class="phase-note" data-tiers="max"><b>Start this on day one even if you will not touch a keyboard for a week.</b> One thing in this phase &mdash; storage and a cluster allocation &mdash; is not yours to grant: somebody else has to approve it, and that takes days to weeks. File it now and carry on with everything below while it pends.</p>
     <ol class="steps">
@@ -769,6 +899,18 @@
                data-tiers works on any element, so the four that differ carry their own. -->
           <p class="links"><a data-tiers="min" href="https://claude.com/pricing">Claude</a><a data-tiers="mid max" href="https://claude.com/pricing">Claude Code</a><a data-tiers="mid max" href="https://developers.openai.com/codex/pricing">OpenAI Codex</a><a data-tiers="mid max" href="https://github.com/google-gemini/gemini-cli">Gemini CLI</a><a data-tiers="mid max" href="https://github.com/features/copilot/plans">GitHub Copilot CLI</a><a data-tiers="mid max" href="https://cursor.com/pricing">Cursor</a><a href="https://lookedright.tonydefazio.com/what-it-costs">What It Costs</a><a href="https://lookedright.tonydefazio.com/show-it-your-screen">Show It Your Screen</a></p>
         <div class="detail" id="d-1.1">
+            <!-- THE ONE THING THE PAGE CANNOT DERIVE. Route, rung, repository and editor are
+                 all readable off what the reader has ticked. Which agent they actually chose
+                 is not written anywhere, and it is the single most useful thing to know
+                 about them -- it is what the 2026-09-02 walk turned on. So it is asked, once,
+                 in one optional field, and it feeds the word list at the top of the page.
+                 IT IS NOT A CHECKBOX AND IT GATES NOTHING. Naming your agent is not evidence
+                 of anything; W1's file test is. This is a label for the reader's own benefit,
+                 and an empty field says "not said yet" rather than failing them. -->
+            <div class="fill fill-one">
+              <label><span>Which agent did you pick?</span><input type="text" data-k="agent" spellcheck="false" placeholder="Claude, Codex, Gemini CLI, Copilot, Cursor&hellip;"></label>
+              <p class="fill-note">Optional, and it stays in this browser. It only fills in your own name for it at the top of this page, so a step three phases down says <i>your</i> agent rather than <i>an</i> agent.</p>
+            </div>
             <p class="why"><b>The agent already knows this work. What you are deciding is how much of your machine it is allowed to see</b> &mdash; and that second half is the one people skip, and the one that decides what everything else costs. An agent that cannot see your screen has to be told what is on it, and describing your own screen accurately is the hardest thing a beginner is asked to do, because you do not know which detail matters. That is why you are stuck.</p>
 
             <!-- THE LADDER IS FOR READERS STILL CHOOSING. The tier picker at the top of the
@@ -781,7 +923,7 @@
                  and it is the only thing that changes. The three-row table does not. -->
             <p class="why" data-tiers="min"><b>You chose the browser route at the top of this page, so this step is already half done.</b> What that route costs you is the seeing: with no files on your own machine for it to open, the agent has only what you paste, so it cannot read a file or check a result for itself &mdash; you are its eyes, and W1 makes you prove it. The other two routes buy exactly one thing with all that setup, and it is this: the agent looks for itself instead of asking you. Both are the same paid plan and neither is needed tonight. <b>Move up whenever you like; every box you have ticked stays ticked.</b></p>
 
-            <p class="why" data-tiers="mid max"><b>Three places to stand.</b> Take the highest one you can reach today and no higher; you can move up later and nothing is wasted.</p>
+            <p class="why" data-tiers="mid max"><b>Three rungs &mdash; how much of your machine the agent can see.</b> Take the highest one you can reach today and no higher; you can move up later and nothing is wasted.</p>
             <div class="tbl-wrap" data-tiers="mid max">
             <table class="ladder">
               <thead><tr><th></th><th>Where you are</th><th>What it can see</th><th>Money</th></tr></thead>
@@ -790,7 +932,7 @@
                   <td><b>Minimum</b></td>
                   <td>Claude, or an equivalent, <b>in a browser</b></td>
                   <td><b>Only what you paste.</b> It cannot open your files or check a result. You are its eyes.</td>
-                  <td><b>None.</b> The free tier does this, including the pages it writes for you.</td>
+                  <td><b>None.</b> The free plan does this, including the pages it writes for you.</td>
                 </tr>
                 <tr>
                   <td><b>Middle</b></td>
@@ -807,7 +949,7 @@
               </tbody>
             </table>
             </div>
-            <p class="why"><b>The tell that you have outgrown the free rung is not that it refuses to do something.</b> The free tier is the same thing with less of it. The tell is <b>the copying</b> &mdash; once you are pasting files back and forth by hand, you are doing the work the next rung removes, and you are the part most likely to get it wrong. <b>Prices belong on the vendor&rsquo;s page, not this one</b>; the links above are the authority and <a href="https://lookedright.tonydefazio.com/what-it-costs">What It Costs</a> is the sheet.</p>
+            <p class="why"><b>The tell that you have outgrown the free rung is not that it refuses to do something.</b> The free plan is the same thing with less of it. The tell is <b>the copying</b> &mdash; once you are pasting files back and forth by hand, you are doing the work the next rung removes, and you are the part most likely to get it wrong. <b>Prices belong on the vendor&rsquo;s page, not this one</b>; the links above are the authority and <a href="https://lookedright.tonydefazio.com/what-it-costs">What It Costs</a> is the sheet.</p>
             <p class="why"><b>None of this makes the agent a map.</b> It will tell you where a button is and be wrong, because the screens move; it will read a screenshot of that same screen and be right. That asymmetry, and what to do about it, is <a href="https://lookedright.tonydefazio.com/show-it-your-screen">Show It Your Screen</a>.</p>
 
             <p class="why">This is also the step people treat as a formality, and it is the one that forks. A <b>personal plan</b> is an allowance: you hit a ceiling and stop, which is annoying and safe. An <b>institutional billing code</b> is usually uncapped: nothing stops, nothing warns, and the number surfaces when somebody else reads the monthly statement.</p>
@@ -829,11 +971,11 @@
                  have to read and discard. The rule "everything that did not survive stays in
                  the history" means the history -- git log and this file's comments -- and not
                  the page. -->
-            <p class="why" data-tiers="mid max"><b>The others in this tier.</b> They all do the same job &mdash; a terminal agent that edits files on your disk &mdash; and they are all sold through a subscription rather than per-token. Pick one and learn it properly; the second one is easy once the first is understood.</p>
+            <p class="why" data-tiers="mid max"><b>The others on this rung.</b> They all do the same job &mdash; a terminal agent that edits files on your disk &mdash; and they are all sold through a subscription rather than per-token. Pick one and learn it properly; the second one is easy once the first is understood.</p>
             <ul class="tier" data-tiers="mid max">
               <li>
                 <span class="t-n"><a href="https://claude.com/pricing">Claude Code</a></span>
-                <span class="t-w">Anthropic. Subscription tiers; no free tier. This page&rsquo;s examples use it.</span>
+                <span class="t-w">Anthropic. Subscription plans; no free plan. This page&rsquo;s examples use it.</span>
               </li>
               <li>
                 <span class="t-n"><a href="https://developers.openai.com/codex/pricing">OpenAI Codex</a></span>
@@ -841,7 +983,7 @@
               </li>
               <li>
                 <span class="t-n"><a href="https://github.com/google-gemini/gemini-cli">Gemini CLI</a></span>
-                <span class="t-w">Google. Open source, and the free tier is the most generous of the four.</span>
+                <span class="t-w">Google. Open source, and the free plan is the most generous of the four.</span>
               </li>
               <li>
                 <span class="t-n"><a href="https://github.com/features/copilot/plans">GitHub Copilot CLI</a></span>
@@ -849,7 +991,7 @@
               </li>
               <li>
                 <span class="t-n"><a href="https://cursor.com/pricing">Cursor</a></span>
-                <span class="t-w">The odd one out: an editor with the agent inside it rather than a terminal tool. Same tier of capability, different place to stand.</span>
+                <span class="t-w">The odd one out: the agent lives inside an editor rather than in a terminal. Same rung, different window.</span>
               </li>
             </ul>
             <div class="warn"><b>Do not trust a price you read anywhere, including here.</b> Prices move faster than anything else on this page &mdash; plans get renamed, split, metered differently, and re-priced. The links above are pointers to the vendors&rsquo; own pages; the number is whatever the page says on the day you look.</div>
@@ -858,7 +1000,7 @@
         <ul class="checks">
             <li><button class="cb" data-key="sign-account-will-actually" type="button" aria-pressed="false" aria-labelledby="c-1-1-0">&#10003;</button><span class="cbt"><span id="c-1-1-0">I can sign in with the account I will actually use</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-1-1-0">why?</button></span><p class="whya" id="w-c-1-1-0" hidden>A throwaway account you signed up with in a hurry becomes the one every piece of your work hangs off. Moving later means moving all of it.</p></li>
             <li data-tiers="mid max"><button class="cb" data-key="which-rung-and-next" type="button" aria-pressed="false" aria-labelledby="c-1-1-4">&#10003;</button><span class="cbt"><span id="c-1-1-4">I can say which rung I am on, and what the next one would let it see</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-1-1-4">why?</button></span><p class="whya" id="w-c-1-1-4" hidden>The rung decides what the agent can see, and what it cannot see you have to describe by hand. That is the largest hidden cost in your first month.<span class="ask"><b>Ask it:</b> &ldquo;Which of the three places am I working in right now, and what would the next one up be able to see that you cannot see today?&rdquo;</span></p></li>
-            <li data-tiers="min"><button class="cb" data-key="browser-cannot-see" type="button" aria-pressed="false" aria-labelledby="c-1-1-5">&#10003;</button><span class="cbt"><span id="c-1-1-5">I can say what the browser route cannot do &mdash; open my files, check a result for itself &mdash; and what moving up would buy</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-1-1-5">why?</button></span><p class="whya" id="w-c-1-1-5" hidden>If you believe it can read your files and it cannot, it will still answer questions about them &mdash; from what you pasted, confidently, and you will not be able to tell.<span class="ask"><b>Ask it:</b> &ldquo;What can you actually see of my setup right now, and what can you not? Be specific about files.&rdquo;</span></p></li>
+            <li data-tiers="min"><button class="cb" data-key="browser-cannot-see" type="button" aria-pressed="false" aria-labelledby="c-1-1-5">&#10003;</button><span class="cbt"><span id="c-1-1-5">I can say what the browser route cannot do &mdash; open my files, check a result for itself &mdash; and what moving to the laptop route would buy</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-1-1-5">why?</button></span><p class="whya" id="w-c-1-1-5" hidden>If you believe it can read your files and it cannot, it will still answer questions about them &mdash; from what you pasted, confidently, and you will not be able to tell.<span class="ask"><b>Ask it:</b> &ldquo;What can you actually see of my setup right now, and what can you not? Be specific about files.&rdquo;</span></p></li>
             <li><button class="cb" data-key="say-happens-use-too" type="button" aria-pressed="false" aria-labelledby="c-1-1-1">&#10003;</button><span class="cbt"><span id="c-1-1-1">I can say what happens when I use too much &mdash; it stops, or it bills</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-1-1-1">why?</button></span><p class="whya" id="w-c-1-1-1" hidden>A personal plan stops when you hit the ceiling, which is annoying and safe. An institutional code does not stop, and somebody else reads the statement.<span class="ask"><b>Ask it:</b> &ldquo;Explain the difference between a plan that stops when I run out and a billing code that keeps going, and tell me how to find out which one I am on.&rdquo;</span></p></li>
             <li><button class="cb" data-key="read-costs" type="button" aria-pressed="false" aria-labelledby="c-1-1-2">&#10003;</button><span class="cbt"><span id="c-1-1-2">I have read <a href="https://lookedright.tonydefazio.com/what-it-costs"><i>What It Costs</i></a></span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-1-1-2">why?</button></span><p class="whya" id="w-c-1-1-2" hidden>The free floor, the three shapes a bill takes, and the equity problem are all on that sheet. Meeting them one at a time, mid-project, is how people get stuck.</p></li>
         </ul>
@@ -924,7 +1066,7 @@
       <span class="phase-time">one evening</span>
     </div>
     <div class="ask"><span class="ask-k">If this does not match your screen</span><b>Everything that can go wrong in these five steps goes wrong inside the window you are already talking to.</b> You do not have to leave and look it up: if what came back is not what the step describes, say exactly that in the same conversation &mdash; <i>&ldquo;this is what I asked for, this is what I got, what happened?&rdquo;</i> &mdash; and keep going from its answer. <b>The one thing it cannot do is see the dashboard in your other tab</b>, so for anything you are looking at rather than typing, screenshot it in.</div>
-    <p class="phase-note"><b>Five steps, one evening, all of it in a browser.</b> Nothing to install, nothing to configure, and not one command to type. You finish with a working page at an address you can send to somebody. It was walked start to finish on <b>2026-08-30</b>, and the places it went wrong are written into the steps rather than tidied out of them. <b>What it needs from you is one thing:</b> a tool that makes the thing rather than helping you make it. The two boxes below decide that, and until they are ticked the steps after them stay shut.</p>
+    <p class="phase-note"><b>Five steps, one evening, all of it in a browser.</b> Nothing to install, nothing to configure, and not one command to type. You finish with a working page at an address you can send to somebody. It was walked start to finish on <b>2026-08-30</b>, and the places it went wrong are written into the steps rather than tidied out of them. <b>What it needs from you is one thing:</b> an agent that makes the thing rather than helping you make it. The two boxes below decide that, and until they are ticked the steps after them stay shut.</p>
     <!-- THE WRONG-PRODUCT GATE. ADDED 2026-09-02, FROM THE FIRST WALK BY SOMEBODY OUTSIDE
          THIS PROJECT, and it is the worst result this page has produced. She used the agent
          her institution gave her -- a Copilot inside a Microsoft app suite -- and it did
@@ -944,7 +1086,7 @@
          IT SITS ABOVE THE STARTER GENERATOR ON PURPOSE. "What should I build" is the second
          question. "Am I holding the right kind of thing" is the first, and it is the one
          that cost an evening. -->
-    <div class="warn"><b>W2 to W5 are shut until you have shown that your tool does the work.</b> Two boxes open them &mdash; one in W1, one in W3 &mdash; and both take about a minute. This is the only place on this page that holds a step closed, and it is here because of what happened the one time somebody outside this project walked these five steps.<br><br><b>The test that matters is who is doing the typing.</b> Everything below was walked on <code>claude.ai</code> and names that one company&rsquo;s screens throughout; any chat agent that can hold a repository and write files does the same job under another name. <b>What will not</b> is an assistant built into a document, a mailbox or a company&rsquo;s app suite &mdash; the sort that lives in Word, Teams, Outlook or an intranet portal. Ask one of those to build something and it does what it <i>is</i> for: it opens a blank template and has you type the title and place the boxes. Every screen is correct, nothing is broken, nobody has made a mistake &mdash; <b>and you are the one making the thing</b>, which is the opposite of what the rest of this page is about. There is nothing to check when you already know what it says.<br><br><b>So, before anything else:</b> <i>&ldquo;Make a file called hello.txt with the word hello in it, and show me the file.&rdquo;</i> <b>A file comes back</b> &rarr; tick it in W1 and everything opens. <b>Instructions for making one, a template to fill in, or a new app to click through</b> &rarr; wrong kind of tool, and these five steps would keep <i>almost</i> working, which is worse than failing outright. Try one of the tools linked at <b>1.1</b> instead; and if the one you have is the only agent you are permitted, <b>this route is not open to you today</b> &mdash; take <i>the laptop route</i> at the top, where the agent works on your own files. That is a real answer and it costs a minute instead of an evening.<br><br><b>This is not hypothetical.</b> On 2 September 2026 a beginner walked these steps with the assistant her institution had given her. It put her in a form builder, typing a title onto a blank template. About fifteen screenshots, most of an hour lost connecting a cloud folder, no repository at the end of it, and the record of the session copied by hand into a note. <b>Nothing on this page told her she was in the wrong kind of product</b>, and every answer she got was helpful and correct.</div>
+    <div class="warn"><b>W2 to W5 are shut until you have shown that your agent does the work.</b> Two boxes open them &mdash; one in W1, one in W3 &mdash; and both take about a minute. This is the only place on this page that holds a step closed, and it is here because of what happened the one time somebody outside this project walked these five steps.<br><br><b>The test that matters is who is doing the typing.</b> Everything below was walked on <code>claude.ai</code> and names that one company&rsquo;s screens throughout; any chat agent that can hold a repository and write files does the same job under another name. <b>What will not</b> is an agent built into a document, a mailbox or a company&rsquo;s app suite &mdash; the sort that lives in Word, Teams, Outlook or an intranet portal. Ask one of those to build something and it does what it <i>is</i> for: it opens a blank template and has you type the title and place the boxes. Every screen is correct, nothing is broken, nobody has made a mistake &mdash; <b>and you are the one making the thing</b>, which is the opposite of what the rest of this page is about. There is nothing to check when you already know what it says.<br><br><b>So, before anything else:</b> <i>&ldquo;Make a file called hello.txt with the word hello in it, and show me the file.&rdquo;</i> <b>A file comes back</b> &rarr; tick it in W1 and everything opens. <b>Instructions for making one, a template to fill in, or a new app to click through</b> &rarr; wrong kind of agent, and these five steps would keep <i>almost</i> working, which is worse than failing outright. Try one of the agents linked at <b>1.1</b> instead; and if that one is the only agent you are permitted, <b>this route is not open to you today</b> &mdash; take <i>the laptop route</i> at the top, where the agent works on your own files. That is a real answer and it costs a minute instead of an evening.<br><br><b>This is not hypothetical.</b> On 2 September 2026 a beginner walked these steps with the agent her institution had given her. It put her in a form builder, typing a title onto a blank template. About fifteen screenshots, most of an hour lost connecting a cloud folder, no repository at the end of it, and the record of the session copied by hand into a note. <b>Nothing on this page told her she was in the wrong kind of product</b>, and every answer she got was helpful and correct.</div>
     <p class="phase-note"><b>The fifth step is not the end of anything. It is where the loop closes.</b> From then on you ask for the next item on your list, look at it, and it is live &mdash; and that round trip is now minutes rather than a project. <b>The reason to get published early is that everything after it gets cheaper</b>, not that you are done. Go back to the list you wrote in W2 and take the next one.</p>
     <p class="phase-note"><b>None of what follows is a prerequisite for that.</b> You can keep building here indefinitely. The rest of this page is for when you want the machine underneath it &mdash; your own editor, your own copy of the files, work that outlives a browser tab, other people &mdash; and you can switch to <i>the laptop route</i> at the top on any day you like. Everything you have ticked here stays ticked.</p>
     <!-- OUT OF THE FOLD, DELIBERATELY. This began inside W2's detail, which meant the
@@ -970,7 +1112,7 @@
     <ol class="steps">
       <li data-key="pick-a-rung" data-id="W1" data-tiers="min" data-open="0" data-done="0">
         <div class="srow">
-          <button class="head" type="button" aria-expanded="false" aria-controls="d-W1"><span class="n">W1</span>Open the one you picked, and make it prove it can see you</button>
+          <button class="head" type="button" aria-expanded="false" aria-controls="d-W1"><span class="n">W1</span>Open your agent, and make it prove what it can see</button>
           <span class="badge">Incomplete</span>
         </div>
         <!-- THIS STEP USED TO BE A SECOND COPY OF 1.1.
@@ -985,20 +1127,20 @@
              asks which rung you chose, this asks whether you are sitting in it and whether
              it can actually see what you think it can. -->
         <div class="detail" id="d-W1">
-            <p class="why"><b>1.1 got you the account. This is where you sit down in front of it</b> &mdash; open, signed in, ready to be asked something. Signing up costs a minute; this costs the evening, which is why they are two steps and not one.</p>
-            <p class="why"><b>A browser tab is enough for everything that follows.</b> Nothing to install and no terminal: open <code>claude.ai</code> and sign in with the account from 1.1. If you happen to have the desktop app or VS&nbsp;Code set up already, use those instead &mdash; nothing in W2 to W5 changes. <b>A different agent is fine and a workplace assistant is not</b>, and the difference is not something you can settle by its name; the box below settles it in one prompt, and the block above these five steps says what goes wrong when it is skipped.</p>
-            <p class="why"><b>Then get one piece of evidence that it can see what you think it can see, before you rely on it.</b> A tool that cannot open your files will answer questions about them anyway, fluently and in detail, and nothing in the reply looks different. So do not ask <i>can you see my files</i> &mdash; ask it to tell you something specific it could only know by looking, and check that it is right. That is the same move as every &ldquo;done when&rdquo; on this page, run once against your own setup.</p>
+            <p class="why"><b>1.1 got you the account. This is where you sit down in front of the agent</b> &mdash; open, signed in, ready to be asked something. Signing up costs a minute; this costs the evening, which is why they are two steps and not one.</p>
+            <p class="why"><b>A browser tab is enough for everything that follows.</b> Nothing to install and no terminal: open <code>claude.ai</code> and sign in with the account from 1.1. If you happen to have the desktop app or VS&nbsp;Code set up already, use those instead &mdash; nothing in W2 to W5 changes. <b>A different agent is fine and an agent built into an office suite is not</b>, and the difference is not something you can settle by its name; the box below settles it in one prompt, and the block above these five steps says what goes wrong when it is skipped.</p>
+            <p class="why"><b>Then get one piece of evidence that it can see what you think it can see, before you rely on it.</b> An agent that cannot open your files will answer questions about them anyway, fluently and in detail, and nothing in the reply looks different. So do not ask <i>can you see my files</i> &mdash; ask it to tell you something specific it could only know by looking, and check that it is right. That is the same move as every &ldquo;done when&rdquo; on this page, run once against your own setup.</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="rung-picked-highest-reachable" type="button" aria-pressed="false" aria-labelledby="c-w1-0">&#10003;</button><span class="cbt"><span id="c-w1-0">The place I chose at 1.1 is open in front of me and I can start in it now</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w1-0">why?</button></span><p class="whya" id="w-c-w1-0" hidden>Choosing where to work costs a minute. Being sat in front of it, signed in and able to start, is what the next four steps actually assume.</p></li>
+            <li><button class="cb" data-key="rung-picked-highest-reachable" type="button" aria-pressed="false" aria-labelledby="c-w1-0">&#10003;</button><span class="cbt"><span id="c-w1-0">The agent I chose at 1.1 is open, I am signed in, and I can type at it now</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w1-0">why?</button></span><p class="whya" id="w-c-w1-0" hidden>Choosing an agent costs a minute. Having it open and signed in, ready to be asked something, is what the next four steps assume.</p></li>
             <!-- THE WRONG-PRODUCT BOX, 2026-09-02. The prose gate above the five steps
                  explains it; this is where it becomes a tick, because prose costs nothing to
                  skip and this page's own closing traps say so. Deliberately not "I am using
                  a coding agent" -- that is a self-report about a category the reader cannot
                  be expected to know the boundary of, and she could have ticked it honestly
                  while sitting in a form builder. A file, or not a file. -->
-            <li><button class="cb" data-gate="tool-makes-things" data-key="made-me-a-file-not-instructions" type="button" aria-pressed="false" aria-labelledby="c-w1-0b">&#10003;</button><span class="cbt"><span id="c-w1-0b">I asked it for a file and it made the file &mdash; it did not tell me how to make one, or hand me a blank template to fill in myself</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w1-0b">why?</button></span><p class="whya" id="w-c-w1-0b" hidden>An assistant built into an office suite answers this by opening a blank template and having you type the title and place the boxes. <b>You are the one typing, and that is the tell</b> &mdash; nothing was made for you to check, because you already know what it says. <b>The four steps below are shut until this box is ticked.</b><span class="ask"><b>Ask it:</b> &ldquo;Make a file called hello.txt with the word hello in it, and show me the file.&rdquo;</span></p></li>
-            <li><button class="cb" data-key="named-something-back" type="button" aria-pressed="false" aria-labelledby="c-w1-1">&#10003;</button><span class="cbt"><span id="c-w1-1">It has told me something about my own files or my own screen that I never typed in, and I checked that it was right</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w1-1">why?</button></span><p class="whya" id="w-c-w1-1" hidden>A tool that cannot open your files will answer questions about them anyway &mdash; fluently, in detail, and with nothing in the reply to mark it as guesswork.<span class="ask"><b>Ask it:</b> &ldquo;Without me telling you anything about it, name three files you can see and say what is in one of them. If you can see my machine, tell me how much free disk space I have.&rdquo;</span></p></li>
+            <li><button class="cb" data-gate="tool-makes-things" data-key="made-me-a-file-not-instructions" type="button" aria-pressed="false" aria-labelledby="c-w1-0b">&#10003;</button><span class="cbt"><span id="c-w1-0b">I asked it for a file and it made the file &mdash; it did not tell me how to make one, or hand me a blank template to fill in myself</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w1-0b">why?</button></span><p class="whya" id="w-c-w1-0b" hidden>An agent built into an office suite answers this by opening a blank template and having you type the title and place the boxes. <b>You are the one typing, and that is the tell</b> &mdash; nothing was made for you to check, because you already know what it says. <b>The four steps below are shut until this box is ticked.</b><span class="ask"><b>Ask it:</b> &ldquo;Make a file called hello.txt with the word hello in it, and show me the file.&rdquo;</span></p></li>
+            <li><button class="cb" data-key="named-something-back" type="button" aria-pressed="false" aria-labelledby="c-w1-1">&#10003;</button><span class="cbt"><span id="c-w1-1">The agent has told me something about my own files or my own screen that I never typed in, and I checked that it was right</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w1-1">why?</button></span><p class="whya" id="w-c-w1-1" hidden>An agent that cannot open your files will answer questions about them anyway &mdash; fluently, in detail, and with nothing in the reply to mark it as guesswork.<span class="ask"><b>Ask it:</b> &ldquo;Without me telling you anything about it, name three files you can see and say what is in one of them. If you can see my machine, tell me how much free disk space I have.&rdquo;</span></p></li>
         </ul>
       </li>
       <li data-key="one-sentence" data-id="W2" data-tiers="min" data-needs="tool-makes-things" data-open="0" data-done="0">
@@ -1014,9 +1156,9 @@
              no tool at all. It is locked because the sentence exists to be handed to
              something that will build it, and sixty seconds spent finding out that nothing
              here will is cheaper than an evening. -->
-        <p class="lockmsg"><b>Not open yet, and this is the page holding it rather than you failing anything.</b> W1&rsquo;s file test has not been ticked. Ask your tool for <code>hello.txt</code>; if a file comes back, tick that box and everything here opens. <b>If it hands you a template to fill in yourself, this route is not open to you today</b> &mdash; take <i>the laptop route</i> at the top of the page, where the agent works on your own files, and every box you have already ticked comes with you.</p>
+        <p class="lockmsg"><b>Not open yet, and this is the page holding it rather than you failing anything.</b> W1&rsquo;s file test has not been ticked. Ask your agent for <code>hello.txt</code>; if a file comes back, tick that box and everything here opens. <b>If it hands you a template to fill in yourself, this route is not open to you today</b> &mdash; take <i>the laptop route</i> at the top of the page, where the agent works on your own files, and every box you have already ticked comes with you.</p>
         <div class="detail" id="d-W2">
-            <p class="why"><b>Write down one sentence saying what you want to build.</b> Something like: <i>&ldquo;A web page that shows my recordings one at a time and lets me mark the bad ones.&rdquo;</i> Keep it where you can see it &mdash; a note, a scrap of paper, the top of a document. <b>You will paste this sentence to Claude in step W3</b>, so it is doing real work, not an exercise.</p>
+            <p class="why"><b>Write down one sentence saying what you want to build.</b> Something like: <i>&ldquo;A web page that shows my recordings one at a time and lets me mark the bad ones.&rdquo;</i> Keep it where you can see it &mdash; a note, a scrap of paper, the top of a document. <b>You will paste this sentence to your agent in step W3</b>, so it is doing real work, not an exercise.</p>
             <p class="why"><b>If you cannot say it in one sentence, you are not ready to ask for it yet</b> &mdash; and that is worth finding out now rather than four prompts in, when you have something half-built and cannot say whether it is right.</p>
             <p class="why"><b>Then write the parts underneath it as a short list.</b> The recordings page above might be: <i>show one recording &middot; a way to mark it bad &middot; remember which ones I marked &middot; a page listing the bad ones.</i> You will build these one at a time, never two at once. If any single part looks like more than an afternoon, split it until it is not.</p>
             <p class="why">This step costs nothing, installs nothing, and is the one people skip. It is also the one that decides whether the next three go well.</p>
@@ -1038,25 +1180,25 @@
         </div>
         <ul class="checks">
             <li><button class="cb" data-key="sentence-written-down" type="button" aria-pressed="false" aria-labelledby="c-w2-0">&#10003;</button><span class="cbt"><span id="c-w2-0">I have one sentence saying what I am building &mdash; mine, or one from the list &mdash; and it is somewhere I can see it</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w2-0">why?</button></span><p class="whya" id="w-c-w2-0" hidden>If you cannot say it in one sentence you cannot tell whether what comes back is right, and you find that out four prompts in with something half-built.<span class="ask"><b>Ask it:</b> &ldquo;Here is my sentence: <paste it>. Say it back in your own words, and tell me what you would need to know before building it.&rdquo;</span></p></li>
-            <li><button class="cb" data-key="outsider-understands" type="button" aria-pressed="false" aria-labelledby="c-w2-1">&#10003;</button><span class="cbt"><span id="c-w2-1">I read that sentence to somebody outside my field and they understood what the thing does</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w2-1">why?</button></span><p class="whya" id="w-c-w2-1" hidden>Jargon hides vagueness from you as well as from them. If somebody outside your field understands it, it is specific enough to be checked.<span class="ask"><b>Ask it:</b> &ldquo;Rewrite my sentence so somebody outside my field would understand it, and tell me which words were the problem.&rdquo;</span></p></li>
+            <li><button class="cb" data-key="outsider-understands" type="button" aria-pressed="false" aria-labelledby="c-w2-1">&#10003;</button><span class="cbt"><span id="c-w2-1">I read that sentence to somebody outside my field and they understood what I am building</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w2-1">why?</button></span><p class="whya" id="w-c-w2-1" hidden>Jargon hides vagueness from you as well as from them. If somebody outside your field understands it, it is specific enough to be checked.<span class="ask"><b>Ask it:</b> &ldquo;Rewrite my sentence so somebody outside my field would understand it, and tell me which words were the problem.&rdquo;</span></p></li>
             <li><button class="cb" data-key="each-item-one-afternoon" type="button" aria-pressed="false" aria-labelledby="c-w2-2">&#10003;</button><span class="cbt"><span id="c-w2-2">I have listed the parts underneath it, and none of them would take me more than an afternoon</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w2-2">why?</button></span><p class="whya" id="w-c-w2-2" hidden>Anything larger than an afternoon cannot be checked in one sitting, and work that is never checked in one sitting is where the expensive mistakes accumulate.<span class="ask"><b>Ask it:</b> &ldquo;Here are the parts: <paste your list>. Which of these is bigger than an afternoon, and how would you split that one?&rdquo;</span></p></li>
         </ul>
       </li>
       <li data-key="connect-or-repo" data-id="W3" data-tiers="min" data-needs="tool-makes-things" data-open="0" data-done="0">
         <div class="srow">
-          <button class="head" type="button" aria-expanded="false" aria-controls="d-W3"><span class="n">W3</span>Make the repository, and point Claude at it</button>
+          <button class="head" type="button" aria-expanded="false" aria-controls="d-W3"><span class="n">W3</span>Make the repository, and connect your agent to it</button>
           <span class="badge">Incomplete</span>
         </div>
-        <p class="lockmsg"><b>Not open yet.</b> W1&rsquo;s file test has not been ticked, and this step is where you hand a tool your whole project &mdash; worth sixty seconds of proof first. Ask it for <code>hello.txt</code>, tick the box in W1, and this opens.</p>
+        <p class="lockmsg"><b>Not open yet.</b> W1&rsquo;s file test has not been ticked, and this step is where you hand your agent your whole project &mdash; worth sixty seconds of proof first. Ask it for <code>hello.txt</code>, tick the box in W1, and this opens.</p>
         <div class="detail" id="d-W3">
             <p class="why"><b>A repository is just a folder that lives on github.com instead of on your laptop</b>, and keeps a record of every change made to it. You already have the account from step 1.2; this makes the folder. You will not type a single command.</p>
-            <p class="why"><b>On github.com: New repository &rarr; tick &ldquo;Add a README&rdquo; &rarr; Create.</b> (A README is just a plain text file describing what the thing is; every repository is expected to have one, and GitHub shows it on the front page.) That was the path on <b>2026-08-30</b>. <b>The tick is the part that matters:</b> it puts one file inside, and a completely empty repository is not something Claude can open. <b>Keep it private</b> &mdash; you can make it public later in one click, and the reverse is not true of anything anybody has already copied.</p>
+            <p class="why"><b>On github.com: New repository &rarr; tick &ldquo;Add a README&rdquo; &rarr; Create.</b> (A README is just a plain text file describing what the thing is; every repository is expected to have one, and GitHub shows it on the front page.) That was the path on <b>2026-08-30</b>. <b>The tick is the part that matters:</b> it puts one file inside, and a completely empty repository is not something an agent can open. <b>Keep it private</b> &mdash; you can make it public later in one click, and the reverse is not true of anything anybody has already copied.</p>
             <p class="why"><b>Then go to claude.ai/code, connect your GitHub account, and pick the repository you just made.</b> Paste the sentence you wrote in W2 and ask for the first item on your list.</p>
-            <p class="why"><b>Why a repository rather than just showing Claude a folder on your machine.</b> The desktop app can do that, and it works. But at W5 the repository is what makes publishing keep happening on its own &mdash; every later change goes up without you remembering to do anything. A folder on your laptop means dragging it somewhere by hand, every single time, forever. That is the whole reason step 1.2 was not optional.</p>
+            <p class="why"><b>Why a repository rather than just showing your agent a folder on your machine.</b> The desktop app can do that, and it works. But at W5 the repository is what makes publishing keep happening on its own &mdash; every later change goes up without you remembering to do anything. A folder on your laptop means dragging it somewhere by hand, every single time, forever. That is the whole reason step 1.2 was not optional.</p>
         </div>
         <ul class="checks">
             <li><button class="cb" data-key="route-chosen-can-say" type="button" aria-pressed="false" aria-labelledby="c-w3-0">&#10003;</button><span class="cbt"><span id="c-w3-0">The repository exists on github.com, it is private, and there is a README file in it</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w3-0">why?</button></span><p class="whya" id="w-c-w3-0" hidden>A completely empty repository is not something the agent can open, which is what the README tick is for. Private can be made public in one click; the reverse is not true of anything already copied.</p></li>
-            <li><button class="cb" data-key="named-file-or-repo-visible" type="button" aria-pressed="false" aria-labelledby="c-w3-1">&#10003;</button><span class="cbt"><span id="c-w3-1">Claude is connected to it, and has named a file that is actually in there &mdash; not one I told it about</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w3-1">why?</button></span><p class="whya" id="w-c-w3-1" hidden>Connected and appearing connected look identical from the reply. Naming a file it could only know by looking is the difference between the two.<span class="ask"><b>Ask it:</b> &ldquo;Name a file in this repository and tell me what is in it. Do not ask me first.&rdquo;</span></p></li>
+            <li><button class="cb" data-key="named-file-or-repo-visible" type="button" aria-pressed="false" aria-labelledby="c-w3-1">&#10003;</button><span class="cbt"><span id="c-w3-1">My agent is connected to the repository, and has named a file that is actually in there &mdash; not one I told it about</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w3-1">why?</button></span><p class="whya" id="w-c-w3-1" hidden>Connected and appearing connected look identical from the reply. Naming a file it could only know by looking is the difference between the two.<span class="ask"><b>Ask it:</b> &ldquo;Name a file in this repository and tell me what is in it. Do not ask me first.&rdquo;</span></p></li>
             <!-- READING AND WRITING ARE TWO CONNECTIONS AND THIS STEP ONLY EVER PROVED ONE.
                  A tool that can name a file in the repository has proved it can read. W4 then
                  assumes it can write -- "commit and push this" -- and W5 assumes those pushes
@@ -1064,7 +1206,7 @@
                  reader with no repository connection at all: the work stayed in the chat and
                  the record of the session was pasted by hand into a note. Cheapest possible
                  write, on a file nothing depends on, before any of tonight's work rests on it. -->
-            <li><button class="cb" data-gate="repo-takes-writes" data-key="write-landed-on-github" type="button" aria-pressed="false" aria-labelledby="c-w3-2">&#10003;</button><span class="cbt"><span id="c-w3-2">I had it add one line to the README, then I reloaded the repository on github.com myself and the line was there</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w3-2">why?</button></span><p class="whya" id="w-c-w3-2" hidden>Reading and writing are two separate connections, and the reply looks the same either way. W4 and W5 both assume the writing one, so it is worth two minutes on a file nothing depends on rather than finding out with an evening&rsquo;s work in the chat window.<span class="ask"><b>Ask it:</b> &ldquo;Add a line to the README saying what this project is for, and save it to the repository.&rdquo; Then reload the repository page yourself.</span></p></li>
+            <li><button class="cb" data-gate="repo-takes-writes" data-key="write-landed-on-github" type="button" aria-pressed="false" aria-labelledby="c-w3-2">&#10003;</button><span class="cbt"><span id="c-w3-2">I had the agent add one line to the README, then I reloaded the repository on github.com myself and the line was there</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w3-2">why?</button></span><p class="whya" id="w-c-w3-2" hidden>Reading and writing are two separate connections, and the reply looks the same either way. W4 and W5 both assume the writing one, so it is worth two minutes on a file nothing depends on rather than finding out with an evening&rsquo;s work in the chat window.<span class="ask"><b>Ask it:</b> &ldquo;Add a line to the README saying what this project is for, and save it to the repository.&rdquo; Then reload the repository page yourself.</span></p></li>
         </ul>
       </li>
       <li data-key="one-element" data-id="W4" data-tiers="min" data-needs="tool-makes-things repo-takes-writes" data-open="0" data-done="0">
@@ -1077,7 +1219,7 @@
              never arrived; the record of it was pasted into a note, because nothing had ever
              established that a write could land anywhere. Both tests are cheap, both are
              upstream, and neither existed until 2026-09-02. -->
-        <p class="lockmsg"><b>Not open yet, and this is the one worth waiting for.</b> This is where the evening goes, so it needs both cheap tests passed first: <b>W1</b> &mdash; your tool made you a file rather than handing you a template &mdash; and <b>W3</b> &mdash; something it wrote actually landed on github.com and you saw it there. Until the second one holds, work done here lives in a chat window and saving it means copying it out by hand.</p>
+        <p class="lockmsg"><b>Not open yet, and this is the one worth waiting for.</b> This is where the evening goes, so it needs both cheap tests passed first: <b>W1</b> &mdash; your agent made you a file rather than handing you a template &mdash; and <b>W3</b> &mdash; something it wrote actually landed on github.com and you saw it there. Until the second one holds, work done here lives in a chat window and saving it means copying it out by hand.</p>
         <div class="detail" id="d-W4">
             <p class="why"><b>Ask for the first item on your list. Only that one.</b> Not the whole sentence from W2, and not two items because they seem related &mdash; one. You are about to check the result by hand, and that is only possible when you know what you asked for.</p>
             <p class="why"><b>When it says it has finished, do not take its word for it. Type this:</b></p>
@@ -1088,8 +1230,8 @@
             <p class="why"><b>When you are happy, tell it to save:</b> <i>&ldquo;commit and push this.&rdquo;</i> Those are the two words for saving, and they are worth knowing because the rest of this page uses them. A <b>commit</b> is one saved version with a short note attached saying what changed &mdash; the note is the point of it. <b>Push</b> sends that up to github.com, so the work exists somewhere other than where you are sitting. You can get back to this exact version later even if the next thing goes wrong. (<a href="https://lookedright.tonydefazio.com/just-enough-git"><i>Just Enough Git</i></a> defines these and the ten other words this page uses, in one page, and says what it leaves out.)</p>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="scope-not-correctness" type="button" aria-pressed="false" aria-labelledby="c-w4-0">&#10003;</button><span class="cbt"><span id="c-w4-0">I asked it to list every file it changed, and nothing on the list surprised me</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w4-0">why?</button></span><p class="whya" id="w-c-w4-0" hidden>Doing more than you asked is one of the two failures that never announces itself. Asking what it touched needs no programming and catches the expensive ones.<span class="ask"><b>Ask it:</b> &ldquo;List every file you changed, and say in one line why each one needed to change.&rdquo;</span></p></li>
-            <li><button class="cb" data-key="seen-it-work-myself" type="button" aria-pressed="false" aria-labelledby="c-w4-1">&#10003;</button><span class="cbt"><span id="c-w4-1">I opened it myself and watched the new thing work &mdash; I did not just read a message saying it did</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w4-1">why?</button></span><p class="whya" id="w-c-w4-1" hidden>A message saying it works is a report that it reached the end of its own instructions. That is a different event from the thing working, and they come apart often.</p></li>
+            <li><button class="cb" data-key="scope-not-correctness" type="button" aria-pressed="false" aria-labelledby="c-w4-0">&#10003;</button><span class="cbt"><span id="c-w4-0">I asked the agent to list every file it changed, and nothing on the list surprised me</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w4-0">why?</button></span><p class="whya" id="w-c-w4-0" hidden>Doing more than you asked is one of the two failures that never announces itself. Asking what it touched needs no programming and catches the expensive ones.<span class="ask"><b>Ask it:</b> &ldquo;List every file you changed, and say in one line why each one needed to change.&rdquo;</span></p></li>
+            <li><button class="cb" data-key="seen-it-work-myself" type="button" aria-pressed="false" aria-labelledby="c-w4-1">&#10003;</button><span class="cbt"><span id="c-w4-1">I opened what we built myself and watched the new part work &mdash; I did not just read a message saying it did</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w4-1">why?</button></span><p class="whya" id="w-c-w4-1" hidden>A message saying it works is a report that it reached the end of its own instructions. That is a different event from the thing working, and they come apart often.</p></li>
             <li><button class="cb" data-key="name-the-single-change" type="button" aria-pressed="false" aria-labelledby="c-w4-2">&#10003;</button><span class="cbt"><span id="c-w4-2">If somebody asked me what changed just now, I could tell them in one sentence</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w4-2">why?</button></span><p class="whya" id="w-c-w4-2" hidden>If you cannot say what changed in one sentence, you asked for too much at once &mdash; and you now cannot check any of it properly.<span class="ask"><b>Ask it:</b> &ldquo;In one sentence a non-programmer would understand, what did we just change?&rdquo;</span></p></li>
             <!-- THE STEP ENDED ON "commit and push this" AND NEVER ASKED WHETHER IT LANDED.
                  The whole page opens by promising "a first agent session that leaves a record
@@ -1108,15 +1250,15 @@
         <p class="lockmsg"><b>Not open yet.</b> Publishing here works by watching the repository for changes, so it cannot be set up before something has been shown to reach the repository. Pass <b>W1</b>&rsquo;s file test and <b>W3</b>&rsquo;s write test, and this opens.</p>
         <div class="detail" id="d-W5">
             <p class="why"><b>In the Cloudflare dashboard, connect the repository you made in W3.</b> That was the path on <b>2026-08-30</b>: all of it in the browser, nothing installed, and private repositories work &mdash; you do not have to make your work public to put a page on the internet.</p>
-            <p class="why"><b>From then on it looks after itself.</b> Every change you tell Claude to save goes live on its own, with nobody remembering to do anything. <b>That is the only part of this whole route that keeps working when you are not there</b>, and it is why W3 made a repository instead of just showing Claude a folder. Everything else on this page is something you do; this is something that then happens.</p>
+            <p class="why"><b>From then on it looks after itself.</b> Every change you tell your agent to save goes live on its own, with nobody remembering to do anything. <b>That is the only part of this whole route that keeps working when you are not there</b>, and it is why W3 made a repository instead of just showing your agent a folder. Everything else on this page is something you do; this is something that then happens.</p>
             <p class="why"><b>You will also see GitHub Pages offered, and it is free too.</b> On the free plan it will only serve a <b>public</b> repository &mdash; so taking it means making your work public today, and private is the right default for research. Step 7.3 is the same trade in more detail if you want it.</p>
             <p class="why"><b>If you skipped the repository</b> and are working from a folder on your own machine, you can still publish: create a Pages project and drag the folder in. It works, and it is the same five minutes. But <b>every single later change means dragging it in again, forever</b> &mdash; and that is the difference the repository was buying.</p>
             <div class="warn"><b>Expect the buttons above to have moved, and do not read that as your mistake.</b> When this was walked on <b>2026-08-30</b>, the dashboard had been rebuilt between these instructions being written and the page being opened: the guide named the wrong thing <b>five times in one afternoon</b>. Three of those were unstuck inside a single exchange once Claude could see a screenshot. <b>So take a screenshot and show it.</b> That is the fastest move available to you here, and it is the one people do last.</div>
         </div>
         <ul class="checks">
-            <li><button class="cb" data-key="url-loads-off-wifi" type="button" aria-pressed="false" aria-labelledby="c-w5-0">&#10003;</button><span class="cbt"><span id="c-w5-0">I opened the address on my phone, with wifi turned off, and the page loaded</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w5-0">why?</button></span><p class="whya" id="w-c-w5-0" hidden>Off your own network is the only way to tell the page is genuinely on the internet, rather than working only from where you happen to be sitting.</p></li>
-            <li><button class="cb" data-key="loaded-again-after-change" type="button" aria-pressed="false" aria-labelledby="c-w5-2">&#10003;</button><span class="cbt"><span id="c-w5-2">I changed one more thing, waited a minute, reloaded the address, and saw the change</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w5-2">why?</button></span><p class="whya" id="w-c-w5-2" hidden>This is the loop closing. Until you have watched a change appear without doing anything, you do not know publishing is actually automatic &mdash; you are hoping.</p></li>
-            <li><button class="cb" data-key="knows-if-redeploy-automatic" type="button" aria-pressed="false" aria-labelledby="c-w5-1">&#10003;</button><span class="cbt"><span id="c-w5-1">I know which of the two I set up: changes go live on their own, or I have to put them there by hand each time</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w5-1">why?</button></span><p class="whya" id="w-c-w5-1" hidden>One of them keeps working when you are not there. The other needs you to remember, every time, forever, and eventually you will not.<span class="ask"><b>Ask it:</b> &ldquo;When I ask you to save a change, does it go live on its own or do I have to do something? Tell me which one is set up here, and how you know.&rdquo;</span></p></li>
+            <li><button class="cb" data-key="url-loads-off-wifi" type="button" aria-pressed="false" aria-labelledby="c-w5-0">&#10003;</button><span class="cbt"><span id="c-w5-0">I opened my page&rsquo;s public address on my phone, with wifi turned off, and the page loaded</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w5-0">why?</button></span><p class="whya" id="w-c-w5-0" hidden>Off your own network is the only way to tell the page is genuinely on the internet, rather than working only from where you happen to be sitting.</p></li>
+            <li><button class="cb" data-key="loaded-again-after-change" type="button" aria-pressed="false" aria-labelledby="c-w5-2">&#10003;</button><span class="cbt"><span id="c-w5-2">I changed one more thing, waited a minute, reloaded that same address, and saw the change</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w5-2">why?</button></span><p class="whya" id="w-c-w5-2" hidden>This is the loop closing. Until you have watched a change appear without doing anything, you do not know publishing is actually automatic &mdash; you are hoping.</p></li>
+            <li><button class="cb" data-key="knows-if-redeploy-automatic" type="button" aria-pressed="false" aria-labelledby="c-w5-1">&#10003;</button><span class="cbt"><span id="c-w5-1">I know which of the two publishing setups I have: changes go live on their own, or I put them there by hand every time</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-w5-1">why?</button></span><p class="whya" id="w-c-w5-1" hidden>One of them keeps working when you are not there. The other needs you to remember, every time, forever, and eventually you will not.<span class="ask"><b>Ask it:</b> &ldquo;When I ask you to save a change, does it go live on its own or do I have to do something? Tell me which one is set up here, and how you know.&rdquo;</span></p></li>
         </ul>
       </li>
     </ol>
@@ -1128,7 +1270,7 @@
       <span class="phase-time">20 min</span>
     </div>
     <div class="ask"><span class="ask-k">If this does not match your setup</span><b>This phase is decisions, and a chat window is genuinely good at decisions.</b> Describe what you actually have &mdash; the drives, the sync client, where the data sits today &mdash; and ask it to argue the case for each arrangement, including the one this page recommends. It is worth more here than anywhere else on this sheet, because these steps are the ones that have to be adapted rather than followed. <b>It still cannot see your disk</b>, so paste the paths rather than describing them.</div>
-    <p class="phase-note"><b>Before an agent sees your data</b> &mdash; which is a different moment from when the data was made, and is almost certainly still ahead of you. You are not being asked to reorganize anything. You are being asked to be able to <i>say</i> where things live, before something else starts guessing. <b>If the project has no data</b> &mdash; a website, a document, a small tool &mdash; this phase is one box and 2.3 does not apply to you.</p>
+    <p class="phase-note"><b>Before an agent sees your data</b> &mdash; which is a different moment from when the data was made, and is almost certainly still ahead of you. You are not being asked to reorganize anything. You are being asked to be able to <i>say</i> where things live, before something else starts guessing. <b>If the project has no data</b> &mdash; a website, a document, a small program &mdash; this phase is one box and 2.3 does not apply to you.</p>
     <p class="phase-note"><b>This phase is the decision, not the construction.</b> Deciding where things live needs nothing installed, which is why it is here. The part that needs an editor and an agent &mdash; writing the path helper so nothing ever hardcodes a path &mdash; is step 3.7, after the machine exists.</p>
     <ol class="steps">
       <li data-key="write-down-paths" data-id="2.1" data-tiers="mid max" data-open="0" data-done="0">
@@ -1143,7 +1285,7 @@
               <label><span>Raw data lives at</span><input type="text" data-k="raw" spellcheck="false" placeholder="paste the path &mdash; or leave empty"></label>
               <label><span>Working data the agent may write</span><input type="text" data-k="work" spellcheck="false" placeholder="paste the path &mdash; or leave empty"></label>
               <label><span>Figures and documents for review</span><input type="text" data-k="review" spellcheck="false" placeholder="paste the path"></label>
-              <p class="fill-note"><b>No data at all?</b> If the project is a website, a document or a small tool, leave the first two empty. The third is the only one that matters, and it is where anything you want to look at later comes out.</p>
+              <p class="fill-note"><b>No data at all?</b> If the project is a website, a document or a small program, leave the first two empty. The third is the only one that matters, and it is where anything you want to look at later comes out.</p>
             </div>
             <div class="gen">
               <div class="gen-head"><span class="prompt-k">Your first prompt</span><button class="gen-hint" type="button">Copy</button></div>
@@ -1193,7 +1335,7 @@
       <h2>Phase 3 &middot; The machine</h2>
       <span class="phase-time">55 min</span>
     </div>
-    <div class="ask"><span class="ask-k">If this does not match your screen</span><b>This is the phase where the expert moves from a tab to your machine, and step 3.4 is the moment it happens.</b> Before 3.4, an installer that fails is something you paste into the browser: the whole error, not your summary of it. <b>After 3.4 you stop pasting</b> &mdash; it can run the command itself, read what came back, and try the next thing. That is the difference this phase is buying, and installs going wrong is the first place you will see it. <b>Do not ask it where a menu item is</b>; the screens move faster than any description of them, including this one&rsquo;s.</div>
+    <div class="ask"><span class="ask-k">If this does not match your screen</span><b>This is the phase where the agent moves from a browser tab to your machine, and step 3.4 is the moment it happens.</b> Before 3.4, an installer that fails is something you paste into the browser: the whole error, not your summary of it. <b>After 3.4 you stop pasting</b> &mdash; it can run the command itself, read what came back, and try the next thing. That is the difference this phase is buying, and installs going wrong is the first place you will see it. <b>Do not ask it where a menu item is</b>; the screens move faster than any description of them, including this one&rsquo;s.</div>
     <ol class="steps">
       <li data-key="editor" data-id="3.1" data-tiers="mid max" data-open="0" data-done="0">
         <div class="srow">
@@ -1215,7 +1357,7 @@
       </li>
       <li data-key="package-manager" data-id="3.2" data-tiers="mid max" data-open="0" data-done="0">
         <div class="srow">
-          <button class="head" type="button" aria-expanded="false" aria-controls="d-3.2"><span class="n">3.2</span>Install a package manager, then five tools</button>
+          <button class="head" type="button" aria-expanded="false" aria-controls="d-3.2"><span class="n">3.2</span>Install a package manager, then five programs</button>
           <span class="badge">Incomplete</span>
         </div>
           <p class="links"><a href="https://brew.sh/">Homebrew</a></p>
@@ -1295,7 +1437,7 @@ claude</pre>
             <p class="why">Learning the command now costs a minute. Learning it at the moment you need it means you have already lost whatever was running.</p>
             <pre>caffeinate -dimsu     # macOS, built in, no install</pre>
             <p class="why"><a href="https://apps.apple.com/us/app/amphetamine/id937984704?mt=12">Amphetamine</a> is the free app version, and the one that keeps going with the lid shut. Windows: PowerToys Awake. Linux: <code>systemd-inhibit</code>.</p>
-            <div class="warn"><b>Closing the lid and carrying the laptop somewhere else are two different things, and the second one has a cost.</b> The work survives the move &mdash; that is what you installed this for. What does not survive is <b>your machine&rsquo;s name</b>. On macOS the short hostname follows the network, so joining the wi-fi at home renames the computer, and anything that wrote down which machine you were on before the move stops matching what it finds after.<br><br><b>It is not the session that changes, and getting this backwards is what makes it hard to spot.</b> The session and its id are exactly the same ones. The machine half of the pair is what moved, so a tool looking for <i>this session on this machine</i> finds nothing and truthfully reports nothing &mdash; not an error, not a warning, just an empty answer to a question you were sure had one. <b>You will read that as your own work having vanished.</b> It has not.<br><br><b>What to do:</b> after you change networks, re-check anything that identified your machine before you moved, rather than trusting an empty result. And if this starts costing you, the durable fix is giving the machine a fixed name of its own so it stops following the network &mdash; <b>which is not a step on this sheet and has not been walked here</b>, so treat it as a thing to look up rather than a thing to type.</div>
+            <div class="warn"><b>Closing the lid and carrying the laptop somewhere else are two different things, and the second one has a cost.</b> The work survives the move &mdash; that is what you installed this for. What does not survive is <b>your machine&rsquo;s name</b>. On macOS the short hostname follows the network, so joining the wi-fi at home renames the computer, and anything that wrote down which machine you were on before the move stops matching what it finds after.<br><br><b>It is not the session that changes, and getting this backwards is what makes it hard to spot.</b> The session and its id are exactly the same ones. The machine half of the pair is what moved, so anything looking for <i>this session on this machine</i> finds nothing and truthfully reports nothing &mdash; not an error, not a warning, just an empty answer to a question you were sure had one. <b>You will read that as your own work having vanished.</b> It has not.<br><br><b>What to do:</b> after you change networks, re-check anything that identified your machine before you moved, rather than trusting an empty result. And if this starts costing you, the durable fix is giving the machine a fixed name of its own so it stops following the network &mdash; <b>which is not a step on this sheet and has not been walked here</b>, so treat it as a thing to look up rather than a thing to type.</div>
             <p class="why"><b>If you ever do have a run that takes hours</b>, this is also the thing to try before concluding you need a cluster. A good share of people asking for one need the machine to stay awake instead, and that is a minute of work against a requisition that takes weeks.</p>
         </div>
         <ul class="checks">
@@ -1338,7 +1480,7 @@ computer.</pre>
       <h2>Phase 4 &middot; The first session</h2>
       <span class="phase-time">40 min</span>
     </div>
-    <div class="ask"><span class="ask-k">If this does not match what you see</span><b>From here the expert is in the same window as the work, which is the whole point of the four phases before it.</b> If a prompt in this phase produces something the step does not describe, do not start over &mdash; tell it what you expected and ask it to show you what it actually did. <b>And note the one place that goes the other way:</b> when it reports success, that is precisely the moment 4.3 asks you to open the file yourself. Asking is how you get unstuck; it is not how you check.</div>
+    <div class="ask"><span class="ask-k">If this does not match what you see</span><b>From here the agent is in the same window as the work, which is the whole point of the four phases before it.</b> If a prompt in this phase produces something the step does not describe, do not start over &mdash; tell it what you expected and ask it to show you what it actually did. <b>And note the one place that goes the other way:</b> when it reports success, that is precisely the moment 4.3 asks you to open the file yourself. Asking is how you get unstuck; it is not how you check.</div>
     <p class="phase-note">Two prompts, and the reading you do between them. The reading is the part that is easy to skip and is the reason the rest works.</p>
     <!-- THE min ROUTE GETS THIS AT W2 AND THIS PHASE IS mid max, so a laptop-route reader
          would otherwise never meet it. Deliberately the SHORT form: the browser route's
@@ -1482,7 +1624,7 @@ one so I can look.
             <pre>/usage     what you have spent, and against what limit
 /context   what is filling the window right now
 /insights  a report on how you actually work</pre>
-            <p class="why">In <code>/usage</code>, press <code>d</code> and <code>w</code> to switch between the last day and the last week &mdash; those keys were current on 2026-08-30. It breaks the spend down by what caused it &mdash; subagents, skills, individual tools &mdash; and flags any behavior accounting for more than a tenth of it. Codex has the same three ideas under <code>/status</code>, <code>/usage</code> and <code>/statusline</code>.</p>
+            <p class="why">In <code>/usage</code>, press <code>d</code> and <code>w</code> to switch between the last day and the last week &mdash; those keys were current on 2026-08-30. It breaks the spend down by what caused it &mdash; subagents, skills, and the individual actions it takes &mdash; and flags any behavior accounting for more than a tenth of it. Codex has the same three ideas under <code>/status</code>, <code>/usage</code> and <code>/statusline</code>.</p>
             <p class="why"><b>The thing that surprises everyone.</b> Your whole conversation is re-sent on every single request &mdash; re-read at about a tenth of the input price, because of caching, but the <i>whole</i> thing, every time. A one-line question in a session you have had open all day still carries the whole day with it, and coming back after a break longer than an hour misses the cache and re-processes the lot at full price. Which makes <code>/clear</code> between unrelated tasks the largest single lever you have, and it costs nothing.</p>
             <p class="why">The mechanism is written down: <a href="https://code.claude.com/docs/en/costs">Manage costs effectively</a>, and its section <i>Why usage climbs in a long session</i> in particular.</p>
             <div class="warn"><b>&ldquo;Tokenmaxxing&rdquo; is the failure mode this step exists to prevent.</b> Spend is visible and measurable; work done is neither. So people start reading the number as if it were the work &mdash; and teams have gone as far as ranking engineers by it, which rewards whoever burns the most rather than whoever finishes. Read the usage screen to find your <i>waste</i>, not to score yourself. And do not conclude a limit changed because it felt different: in January 2026 a wave of developers reported their allowance had been cut, and the actual cause was a holiday bonus expiring (<a href="https://theregister.com/2026/01/05/claude_devs_usage_limits/">The Register, 5 Jan 2026</a> &mdash; journalism, not documentation).</div>
@@ -1580,7 +1722,7 @@ one so I can look.
           <span class="badge">Incomplete</span>
         </div>
         <div class="detail" id="d-5.4">
-            <p class="why">Not in advance. Guarding against failure is necessary and it is also an absorbing pursuit &mdash; a beautiful start-up script will not analyze your data. Cures come in three kinds and only one is a tool: <b>a tool, a change of habit, or a check you accept forever.</b></p>
+            <p class="why">Not in advance. Guarding against failure is necessary and it is also an absorbing pursuit &mdash; a beautiful start-up script will not analyze your data. Cures come in three kinds and only one of them is something you build: <b>a program, a change of habit, or a check you accept forever.</b></p>
         </div>
         <ul class="checks">
             <li><button class="cb" data-key="guard-traces-back-something" type="button" aria-pressed="false" aria-labelledby="c-5-4-0">&#10003;</button><span class="cbt"><span id="c-5-4-0">Every guard I have traces back to something that actually went wrong</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-5-4-0">why?</button></span><p class="whya" id="w-c-5-4-0" hidden>A guard built before its failure is a guess, and guesses accumulate into a setup that costs more to maintain than the work it protects.<span class="ask"><b>Ask it:</b> &ldquo;List every automatic check in this project and tell me what actually went wrong to cause each one.&rdquo;</span></p></li>
@@ -1608,7 +1750,7 @@ one so I can look.
       <h2>Phase 6 &middot; Second machine, other people</h2>
       <span class="phase-time">conditional</span>
     </div>
-    <div class="ask"><span class="ask-k">If this does not match your screen</span><b>Here the expert on each machine can only see the machine it is on</b>, and this phase is about the one it cannot. Ask the agent on the second computer to check the second computer &mdash; have it run the command and read the output back &mdash; rather than asking either of them what the state of &ldquo;the project&rdquo; is, which is a question neither can answer alone. <b>For a person rather than a machine, the same rule holds:</b> what the other person has is something you have been told, not something either agent has seen.</div>
+    <div class="ask"><span class="ask-k">If this does not match your screen</span><b>Here the agent on each machine can only see the machine it is on</b>, and this phase is about the one it cannot. Ask the agent on the second computer to check the second computer &mdash; have it run the command and read the output back &mdash; rather than asking either of them what the state of &ldquo;the project&rdquo; is, which is a question neither can answer alone. <b>For a person rather than a machine, the same rule holds:</b> what the other person has is something you have been told, not something either agent has seen.</div>
     <ol class="steps">
       <li data-key="second-machine" data-id="6.1" data-tiers="max" data-open="0" data-done="0">
         <div class="srow">
@@ -1709,10 +1851,10 @@ one so I can look.
         <div class="detail" id="d-7.3">
             <p class="why" data-tiers="min"><b>You already did this at W5, and there is nothing to choose.</b> Cloudflare is serving your site from your repository right now. This step is only about pointing the name you just bought at what is already there. Two things to find: the <b>custom domain</b> setting, where you type your new name; and a <b>certificate</b>, which is what makes the address work with <code>https://</code> and no browser warning. Cloudflare issues it for you and it can take a few minutes. <b>Then mark 7.4 and 7.5 <i>Not needed</i>:</b> they are the alternative, and you are not taking it. Go there only if you decide to move to GitHub Pages instead, and read the box below before you do.</p>
             <p class="why" data-tiers="mid max"><b>This is the one most people should take, and it is three steps shorter.</b> Cloudflare publishes straight from a folder on your computer. There is no repository involved at all, so <i>your repo stays private</i> and it still costs nothing.</p>
-            <p class="why" data-tiers="mid max">In the Cloudflare dashboard the site you added at 7.2 can serve pages directly; the custom domain is one button, and the certificate is handled for you. From a terminal, the deploy tool is <code>wrangler</code>, and one command pushes a folder to the address you just wired up.</p>
+            <p class="why" data-tiers="mid max">In the Cloudflare dashboard the site you added at 7.2 can serve pages directly; the custom domain is one button, and the certificate is handled for you. From a terminal, the deploy command is <code>wrangler</code>, and one command pushes a folder to the address you just wired up.</p>
             <div class="warn" data-tiers="mid max"><b>Walked on 2026-08-30, and the dashboard did not look like this.</b> Cloudflare had rebuilt it around Workers: the entry point read <i>Create a Worker</i>, &ldquo;Pages&rdquo; had become a small link at the foot of the card, and the deploy form arrived with a command pre-filled that <b>silently requires a config file in the repository</b> &mdash; nothing on the screen asks you to write one, and the failure does not say so. <b>&ldquo;Three steps shorter&rdquo; also assumes you have a terminal:</b> publishing from a folder needs <code>wrangler</code>, so for a reader who never opens a shell this is not shorter, it is unavailable. Read the button names here as a description of one afternoon, not as a map.</div>
             <div class="warn"><b>Why this matters more than convenience.</b> GitHub only serves free websites from <b>public</b> repositories &mdash; their own documentation says so plainly. You were told to keep your repository <b>private</b> when you made it, which is the right default for research. So on the free plan those two are incompatible, and Cloudflare is what resolves it. The alternative is 7.4 and 7.5, and it needs either a public repository or a paid GitHub plan.</div>
-            <p class="why" data-tiers="mid max">One thing it costs: the deploy tool signs in through a browser the first time on each machine. That default can be replaced with an API token for automation, so it is a minute of setup rather than a permanent restriction.</p>
+            <p class="why" data-tiers="mid max">One thing it costs: the deploy command signs in through a browser the first time on each machine. That default can be replaced with an API token for automation, so it is a minute of setup rather than a permanent restriction.</p>
             <p class="why" data-tiers="min">Nothing here needs a terminal. The project already exists &mdash; you made it at W5 &mdash; and adding a custom domain to it is a form in the same dashboard. If the form is not where this says, screenshot the whole window and ask; that is the move this phase was walked with.</p>
         </div>
         <!-- BOX-LEVEL TIERS, AND THIS STEP IS WHY THEY EXIST.
@@ -1735,7 +1877,7 @@ one so I can look.
             <li data-tiers="min"><button class="cb" data-key="https-works-on-own-name" type="button" aria-pressed="false" aria-labelledby="c-7-3-4">&#10003;</button><span class="cbt"><span id="c-7-3-4">I opened <code>https://</code> on my own name and the page loaded &mdash; and the free address from W5 still works too</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-7-3-4">why?</button></span><p class="whya" id="w-c-7-3-4" hidden>Loading it yourself is the check. The old address still working confirms you added a name rather than moved the site.</p></li>
             <li data-tiers="mid max"><button class="cb" data-key="decided-serves-site-cloudflare" type="button" aria-pressed="false" aria-labelledby="c-7-3-0">&#10003;</button><span class="cbt"><span id="c-7-3-0">I have decided who serves the site: <b>Cloudflare</b> (7.4 and 7.5 become Not needed), or GitHub Pages</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-7-3-0">why?</button></span><p class="whya" id="w-c-7-3-0" hidden>These two cannot both be true, and deciding now is what makes 7.4 and 7.5 either necessary or skippable.</p></li>
             <li data-tiers="mid max"><button class="cb" data-key="github-repository-public-paid" type="button" aria-pressed="false" aria-labelledby="c-7-3-1">&#10003;</button><span class="cbt"><span id="c-7-3-1">If GitHub: my repository is public, or I am on a paid plan</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-7-3-1">why?</button></span><p class="whya" id="w-c-7-3-1" hidden>GitHub only serves free sites from public repositories, and you were told to keep yours private. On the free plan those two are incompatible.</p></li>
-            <li data-tiers="mid max"><button class="cb" data-key="signed-deploy-tool-once" type="button" aria-pressed="false" aria-labelledby="c-7-3-2">&#10003;</button><span class="cbt"><span id="c-7-3-2">I have signed the deploy tool in once on this machine</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-7-3-2">why?</button></span><p class="whya" id="w-c-7-3-2" hidden>Once per machine, in a browser. Discovering it at the point of deploying is a stop in the middle of the one step you wanted to be quick.<span class="ask"><b>Ask it:</b> &ldquo;Sign the deploy tool in on this machine, and tell me what it did and what it stored.&rdquo;</span></p></li>
+            <li data-tiers="mid max"><button class="cb" data-key="signed-deploy-tool-once" type="button" aria-pressed="false" aria-labelledby="c-7-3-2">&#10003;</button><span class="cbt"><span id="c-7-3-2">I have signed the deploy command (<code>wrangler</code>) in once on this machine</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-7-3-2">why?</button></span><p class="whya" id="w-c-7-3-2" hidden>Once per machine, in a browser. Discovering it at the point of deploying is a stop in the middle of the one step you wanted to be quick.<span class="ask"><b>Ask it:</b> &ldquo;Sign the deploy command <code>wrangler</code> in on this machine, and tell me what it did and what it stored.&rdquo;</span></p></li>
         </ul>
       </li>
       <li data-key="github-pages" data-id="7.4" data-tiers="min mid max" data-open="0" data-done="0" data-optional="1">
@@ -1809,7 +1951,7 @@ or four A records:
       <li>
         <span class="trap-k">Reading the reply instead of the result<span class="wrong">Wrong</span></span>
         <p>The explanation will sound right. It is written to sound right, and it is your only evidence of how you were understood &mdash; which is not evidence that anything happened. A green check is evidence about the check, not about the work.</p>
-        <p class="incident"><b>What actually happened.</b> A complaint came in about a job. Jobs have numbers. The person answering meant to type <i>the below job number</i>, and typed <i>the blow job number</i> instead. Spell check passed it: &ldquo;blow&rdquo; is a word. Grammar check passed it: the sentence parses. Both tools did exactly what they are built to do, and neither was built to ask whether this is the word you meant. It was caught by the recipient.</p>
+        <p class="incident"><b>What actually happened.</b> A complaint came in about a job. Jobs have numbers. The person answering meant to type <i>the below job number</i>, and typed <i>the blow job number</i> instead. Spell check passed it: &ldquo;blow&rdquo; is a word. Grammar check passed it: the sentence parses. Both checks did exactly what they are built to do, and neither was built to ask whether this is the word you meant. It was caught by the recipient.</p>
         <p><b>Instead:</b> open the artifact yourself, and when you rely on an automatic check, break it on purpose once and confirm it notices. A check you have not seen fail has not been shown to work &mdash; it has been shown to pass.</p>
         <p class="src"><a href="https://lookedright.tonydefazio.com/#validation">The full incident, and the errors worth naming &mdash; <i>It Looked Right</i>, challenge 3</a></p>
       </li>
@@ -2072,6 +2214,7 @@ or four A records:
         // A GATE BOX CHANGES OTHER STEPS, so this cannot stop at repainting its own.
         // Ticking W1's file test opens four steps further down the page.
         if (b.dataset.gate) applyGates();
+        termsPaint();
         count();
       });
     });
@@ -2121,6 +2264,13 @@ or four A records:
   // repo's own worked example is the four-tier table -- prose, checklist, test, structure --
   // and its finding is that the first two cost nothing to skip when you are busy. A dimmed
   // checkbox is still a checkbox.
+  // A HOOK, BECAUSE OF DECLARATION ORDER AND NOTHING ELSE. The word list reads `paths` for
+  // the agent's name, and `paths` is built near the bottom of this file with the Phase 2
+  // fields. applyTier() runs long before that, at load. So this starts as a no-op, every
+  // caller calls it unconditionally, and the real one is installed once `paths` exists.
+  // The alternative -- moving `paths` up -- separates it from the three inputs it serves.
+  var termsPaint = function () {};
+
   var gateBoxes = [].slice.call(document.querySelectorAll('.cb[data-gate]'));
 
   function gatePassed(name) {
@@ -2241,6 +2391,7 @@ or four A records:
     // another route must not sit locked while it is off-screen: it comes back on the way
     // up, and it comes back in whatever state its gates are in then.
     applyGates();
+    termsPaint();
     // NOT CHOOSING IS A STATE, AND IT USED TO BE A SILENT ONE. The banner was simply
     // hidden, so a first-time reader got all 39 steps with the browser route and the
     // laptop route interleaved — W1 asking a question 1.1 had already asked, four
@@ -2300,6 +2451,7 @@ or four A records:
     // Reset clears the gate boxes with everything else, so the route shuts again. That is
     // correct: a cleared page is a page nothing has been proved to.
     applyGates();
+    termsPaint();
     count();
   });
 
@@ -2516,9 +2668,153 @@ or four A records:
       if (!inp.value.trim()) delete paths[k];
       try { localStorage.setItem(PKEY, JSON.stringify(paths)); } catch (e) {}
       render();
+      termsPaint();
     });
   });
   render();
+
+  // ---- the word list: jump to the choice, and say what you chose --------------------
+  //
+  // Tony, 2026-09-05: "can we hot link each of these to take the user back to the choice
+  // that set their meaning? or enable hover to show what they chose?"
+  //
+  // BOTH, AND DELIBERATELY NOT BY HOVER. Hover does not exist on the iPad half this page is
+  // written for, and a thing you must discover by pointing at it is a thing most readers
+  // never find. The answer is printed and stays printed.
+  //
+  // FOUR OF THE SIX ARE DERIVED FROM TICKS, NOT ASKED. That is this page's own argument
+  // pointed at itself: it reports what the reader has actually done, not what they would
+  // say about themselves if asked. The rung is the good example -- 3.4 done means the agent
+  // is on your machine, 3.5 done means it is inside your editor, and neither is a question
+  // anybody has to answer twice.
+  //
+  // TWO ARE NOT DERIVABLE AND SAY SO RATHER THAN GUESSING. The agent is asked for once at
+  // 1.1, optionally. `plan` is refused outright: this page's standing rule is that prices
+  // and plans belong on the vendor's page, and inventing a chip that said "free" would be
+  // the page asserting something about somebody's billing it has no way to know.
+  var STEP_RUNG_TERMINAL = 'agent-install';    // 3.4
+  var STEP_RUNG_EDITOR   = 'agent-in-editor';  // 3.5
+
+  // THE ROUTE NAMES ARE READ OFF THE BUTTONS, NOT RETYPED. The door names the three routes
+  // and the comment above it says they are named there "and nowhere else"; a second copy
+  // here would be a second source, and the two would drift the first time one is reworded.
+  var TIER_NAME = (function () {
+    var m = {};
+    tierBtns.forEach(function (b) {
+      var n = b.querySelector('b');
+      m[b.dataset.tier] = n ? n.textContent.trim().replace(/^The\s+/, '') : b.dataset.tier;
+    });
+    return m;
+  })();
+
+  var stepByKey = (function () {
+    var m = {};
+    steps.forEach(function (s) { m[s.li.dataset.key] = s; });
+    return m;
+  })();
+
+  function stepDone(key) {
+    var li = document.querySelector('ol.steps > li[data-key="' + key + '"]');
+    return !!li && li.dataset.done === '1';
+  }
+  function stepOnRoute(key) {
+    var li = document.querySelector('ol.steps > li[data-key="' + key + '"]');
+    return !!li && li.dataset.off !== '1';
+  }
+
+  // The repository is made at a different step depending on the route, so the word points
+  // at whichever of the two this reader is actually shown.
+  function repoStep() { return stepOnRoute('connect-or-repo') ? 'connect-or-repo' : 'remote'; }
+
+  function chip(el, text, known) {
+    el.textContent = text;
+    el.dataset.known = known ? '1' : '0';
+  }
+
+  termsPaint = function () {
+    var t = readTier();
+    [].forEach.call(document.querySelectorAll('.t-you'), function (el) {
+      var w = el.dataset.you;
+      if (w === 'route') {
+        chip(el, t ? 'you: ' + TIER_NAME[t] : 'not picked yet — all three shown', !!t);
+
+      } else if (w === 'agent') {
+        var a = (paths.agent || '').trim();
+        chip(el, a ? 'yours: ' + a : 'not said yet — 1.1 asks', !!a);
+
+      } else if (w === 'rung') {
+        // READ OFF THE STEPS, NOT OFF A CLAIM. The browser route has no ladder and no way
+        // up without changing route, so it is stated flatly rather than left as "so far".
+        if (t === 'min') {
+          chip(el, 'yours: rung 1 — a browser tab', true);
+        } else if (stepDone(STEP_RUNG_EDITOR)) {
+          chip(el, 'yours: rung 3 — inside your editor', true);
+        } else if (stepDone(STEP_RUNG_TERMINAL)) {
+          chip(el, 'yours: rung 2 — in your terminal', true);
+        } else {
+          chip(el, 'rung 1 so far — 3.4 and 3.5 move you up', false);
+        }
+
+      } else if (w === 'plan') {
+        chip(el, 'this page never asks — see What It Costs', false);
+
+      } else if (w === 'repository') {
+        var rs = repoStep();
+        chip(el, stepDone(rs) ? 'yours: made' : 'not made yet', stepDone(rs));
+
+      } else if (w === 'editor') {
+        if (!stepOnRoute('editor')) {
+          chip(el, 'not on the browser route', false);
+        } else {
+          chip(el, stepDone('editor') ? 'yours: set up at 3.1' : 'not set up yet — 3.1', stepDone('editor'));
+        }
+      }
+    });
+
+    // A WORD WHOSE STEP THIS ROUTE NEVER SHOWS MUST NOT PRETEND TO BE A LINK. "the editor"
+    // on the browser route is the live case, and a jump that scrolls nowhere is the exact
+    // failure tier_check.sh exists to catch, rebuilt in a click handler.
+    [].forEach.call(document.querySelectorAll('.terms dt[data-jump]'), function (dt) {
+      var target = dt.dataset.jump;
+      if (target === 'repo-step') target = repoStep();
+      var live = target.charAt(0) === '#' ? !!document.querySelector(target) : stepOnRoute(target);
+      dt.dataset.offRoute = live ? '0' : '1';
+      dt.setAttribute('role', live ? 'link' : 'presentation');
+      if (live) { dt.setAttribute('tabindex', '0'); }
+      else      { dt.removeAttribute('tabindex'); }
+    });
+  };
+
+  function jumpTo(dt) {
+    if (dt.dataset.offRoute === '1') return;
+    var target = dt.dataset.jump;
+    if (target === 'repo-step') target = repoStep();
+    var el = target.charAt(0) === '#'
+      ? document.querySelector(target)
+      : document.querySelector('ol.steps > li[data-key="' + target + '"]');
+    if (!el) return;
+    // A LOCKED STEP IS SCROLLED TO AND NOT OPENED. Forcing it open would show boxes the
+    // gate has deliberately removed; its own lock message is the right thing to arrive at.
+    if (el.tagName === 'LI' && el.dataset.locked !== '1' && el.dataset.open !== '1') {
+      el.dataset.open = '1';
+      var s = stepByKey[el.dataset.key];
+      if (s) s.paint();
+    }
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    el.classList.remove('jumped');
+    void el.offsetWidth;               // restart the animation if the same word is clicked twice
+    el.classList.add('jumped');
+    setTimeout(function () { el.classList.remove('jumped'); }, 1800);
+  }
+
+  [].forEach.call(document.querySelectorAll('.terms dt[data-jump]'), function (dt) {
+    dt.addEventListener('click', function () { jumpTo(dt); });
+    dt.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); jumpTo(dt); }
+    });
+  });
+
+  termsPaint();
 
   [].forEach.call(document.querySelectorAll('.gen'), function (box) {
     var hint = box.querySelector('.gen-hint');

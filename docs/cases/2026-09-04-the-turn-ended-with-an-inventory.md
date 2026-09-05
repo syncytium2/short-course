@@ -11,10 +11,9 @@
 
 > ## 📌 The same complaint has now been filed three times, and this is the first file whose subject it is
 >
-> Tony handed over `2026-09-03-the-report-went-to-the-other-agent.md` on 2026-09-03 as *"a direct
-> example of claude code ending without a 'push' to the user on what's next."* **That file is not
-> linked here because it is not on `master`** — it is finished, and waiting in open PR #5, which is
-> this file's own Point 4 arriving early. That case is good and its finding — the orientation existed and was addressed to a socket —
+> Tony handed over [`the-report-went-to-the-other-agent`](2026-09-03-the-report-went-to-the-other-agent.md)
+> on 2026-09-03 as *"a direct example of claude code ending without a 'push' to the user on what's
+> next."* That case is good and its finding — the orientation existed and was addressed to a socket —
 > is true and independent. **It also declined the complaint as stated**, on the correct ground that
 > the turn had not ended: it was parked in a foreground sleep, eight seconds from writing more prose.
 > The defect it lands on is that *ending and not-ending look the same from outside*.
@@ -157,18 +156,20 @@ and a human typing the sentence himself, and that trace is in his day, not in an
 
 ## Point 4 · The cost is measurable inside this folder, right now
 
-Two case files were finished by 2026-09-04 and neither is on `master`.
+**Two case files were finished by 2026-09-04 and neither was on `master` when this was written.**
 
-- `2026-09-03-the-report-went-to-the-other-agent.md` is complete at `ab630a2` and sitting in **open
-  PR #5**, unmerged. **It is named here rather than linked**, because a markdown link to it would
-  break `tools/check_pointers.sh` — the gate that exists because docs get stranded on branches.
-- **`case-true-report-wrong-object` is complete at `efb3f3a` and has no PR at all** — because its
+- [`the-report-went-to-the-other-agent`](2026-09-03-the-report-went-to-the-other-agent.md) was
+  complete at `ab630a2` and sitting in **open PR #5** for two days. **The paragraph above originally
+  named it without a link**, because a markdown link to a branch-stranded file breaks
+  `tools/check_pointers.sh` — the gate that exists precisely because docs get stranded on branches.
+  It landed on 2026-09-05 and the link is now live; the detour is recorded rather than erased.
+- **`case-true-report-wrong-object` was complete at `efb3f3a` and had no PR at all** — because its
   session ended with *"No PR opened — that's short-course's call, and six sessions live there."*
 
-**That reason is sound and the outcome is still that a finished case is invisible to every session
-that would use it.** A reader of `docs/cases/` today gets neither file. The failure mode this case
-describes is, at the moment of writing, keeping two descriptions of adjacent failure modes out of the
-folder they were written for — and forcing this file to refer to one of them without a link.
+**That reason is sound and the outcome was still that a finished case was invisible to every session
+that would use it.** A reader of `docs/cases/` got neither file. The failure mode this case describes
+kept two descriptions of adjacent failure modes out of the folder they were written for, and forced
+this file to refer to one of them without a link until somebody merged it by hand.
 
 ---
 
