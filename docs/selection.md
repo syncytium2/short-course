@@ -4,12 +4,16 @@
 dump, this would be a conscious selection."* Those are two different jobs and they were being done by
 one folder, silently — so this file states the second one.
 
-**The state that prompted it, measured 2026-09-04.** There are **19 case files**. The site cites
+**The state that prompted it, measured 2026-09-05.** There are **23 case files**. The site cites
 **8** of them — seven inside [`handouts/four-barriers.html`](handouts/four-barriers.html) and one
-inside [`handouts/cold-start.html`](handouts/cold-start.html). **Eleven are cited nowhere, and
+inside [`handouts/cold-start.html`](handouts/cold-start.html). **Fifteen are cited nowhere, and
 nothing in this repository records why.** The eight are not an accident: they are a good selection.
-They are also frozen — every citation in `four-barriers.html` is from 27–29 August, and ten case
+They are also frozen — every citation in `four-barriers.html` is from 27–29 August, and fifteen case
 files have landed since.
+
+*(Written 2026-09-04 against 19 files and 11 uncited. Four more landed the next morning when the open
+PR queue was merged, so the gap widened while the file describing it was itself waiting to merge.
+Counts re-derived rather than restated — run the commands below.)*
 
 **So this is not a proposal to publish `cases/`.** The folder's own charter says most of its files
 are written by the party being evaluated and reviewed by nobody, and two of them state on their faces
@@ -117,18 +121,27 @@ is what stops the site's evidence reading as one person's bad week. **Cost:** th
 of anything here — calcium imaging, MATLAB, a specific pipeline — so it needs rewriting for the page
 rather than citing, and test 3 is the one it has to earn.
 
-**4 · `2026-09-04-the-turn-ended-with-an-inventory`, when it has landed and been read by somebody.**
+**4 · The ownership pair: `2026-09-04-the-turn-ended-with-an-inventory` and
+`2026-09-04-the-turn-said-it-was-working`, once somebody who did not write either has read them.**
 Four sessions, 1,704 words, no error in any of them, and the human oriented four windows himself in
-nine minutes and eighteen seconds. It is the most legible case in the folder to a reader who has
-never opened a terminal, and it belongs under *Running several at once*. **Cost:** it is same-day,
-unreviewed, and at the time of writing sits in open PR #6. **Nothing goes on a page the day it is
-written** — that rule is why the eight live citations have held up.
+nine minutes and eighteen seconds — the most legible material in the folder to a reader who has never
+opened a terminal, and it belongs under *Running several at once*. **Take them together or not at
+all:** the second falsifies the repair the first proposes, and the first alone teaches a rule that
+does not hold. **Cost:** both are same-day and unreviewed, written by sessions describing sessions.
+**Nothing goes on a page the day it is written** — that rule is why the eight live citations have
+held up, and it is the reason this entry says *once somebody has read them* rather than *now*.
 
 **Not ranked, and deliberately so.** `the-claim-that-gained-a-source`,
 `the-third-attempt-introduced-the-defect`, `the-irony-was-the-only-unchecked-claim`,
 `two-sessions-three-minutes-apart` and `the-hedge-that-crossed-a-session-boundary` are all good and
 none of them fills a gap the site currently has. They stay in the dump, which is what the dump is
 for.
+
+**Excluded by its own author, and worth recording as precedent.**
+`2026-09-04-the-warning-was-row-26-of-25` ends its index row with *"Not proposed for the website."*
+That is the first case to make the call on its own face, and it is the right pattern: **the session
+that knows what the evidence will not bear is the session writing it up.** A file that says so saves
+every later reader the re-read this document exists to prevent.
 
 ---
 

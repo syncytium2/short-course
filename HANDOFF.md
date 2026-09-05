@@ -2083,20 +2083,27 @@ have meant committing somebody else's in-flight work — the sweep this board wa
 
 ---
 
-## Parked, 2026-09-04 — a faculty-onboarding strategy, drafted and not taken up
+## Parked, 2026-09-04 — an onboarding strategy, drafted and not taken up
+
+> **Unparked and rewritten 2026-09-05.** Tony: *"this should be written for people new to
+> using coding agents, not just new faculty."* The draft below was reframed accordingly and
+> renamed; the audience is now anyone starting out, with the institution-specific material
+> quarantined. **It went straight back to parked — still unreviewed, still no decision owed.**
+> The 09-05 session's additions are at the end of this section under *What the rewrite
+> changed*.
 
 **Tony asked for it, reviewed nothing, and parked it the same turn: *"park this as a todo,
 don't have bandwidth."*** No decision is owed. It is recorded here because the draft exists
 and the reasoning behind it would otherwise have to be re-derived.
 
 The artefact:
-[`docs/drafts/faculty-onboarding-strategy.html`](docs/drafts/faculty-onboarding-strategy.html),
+[`docs/drafts/starting-with-an-agent.html`](docs/drafts/starting-with-an-agent.html),
 published for review at
 <https://claude.ai/code/artifact/80878b75-d69c-4fe1-9d69-5cbe2cac586d>. It is **not a website
 page** — no row in [`tools/pages.txt`](tools/pages.txt), no META entry, so the build ignores it.
 It is publisher source and deliberately not standalone; the header comment says so.
 
-### What it is
+### What it was, as drafted 2026-09-04 — superseded by the rewrite below, kept because it is what got parked
 
 Eighteen steps in six phases, ordered by dependency rather than topic, for bringing a new
 faculty member onto agentic work. Built from [`points.md`](points.md) §D–§F, so it inherits
@@ -2134,6 +2141,52 @@ being replaced by a contrast claim, this draft is what the contrast is *for*.
 - **No darkroom copy**, so it exists as repo bytes and an artefact URL and nothing Tony can
   open from Finder. That is the delivery failure this estate keeps repeating; it is recorded
   rather than fixed because he parked it before review.
+
+### What the rewrite changed, 2026-09-05
+
+Sixteen steps in six phases, plus **four lettered questions asked at the door** — one machine
+or several, alone or with others, who pays and is there a ceiling, and do you need large
+storage or a cluster at all. The questions gate the sequence rather than belonging to it, which
+is why they are lettered and the steps are numbered.
+
+**The thesis generalised without weakening.** The window is no longer "between a start date and
+the first data file" but "between deciding to work this way and having a real project" —
+everybody gets exactly one, and the two impossible-late items (agent-authorship stamping, a
+derived rather than typed provenance date) are unchanged because they were never faculty-specific.
+
+**The institution-specific material is now quarantined in two sections** rather than woven
+through, on the same reasoning `points.md` §F gives for its own placement: it can rot without
+taking the sequence with it. The money section is now generalised to capped-versus-uncapped,
+with the U-M case as the worked example of uncapped.
+
+### ⚠ The source problem this rewrite exposed, and it is the important part
+
+**Tony's prompt said *"you have reviewed https://its.umich.edu/computing/ai/getting-started."*
+This session had not.** Nor had the 09-02 session that produced the U-M research: every
+`its.umich.edu` fetch it attempted returned HTTP 403, and all of it came from search-result
+summaries. That was stated at the time and had not been carried anywhere durable until now.
+
+The live site is unreachable to automation — a Cloudflare interstitial, 403 to both `WebFetch`
+and `curl` with a browser user-agent. **What the rewrite actually used is an Internet Archive
+snapshot dated 2026-02-06**, seven months stale, and every fact drawn from it is labelled as
+such in the draft's own unverified section.
+
+What the snapshot did add, and it is worth having:
+
+- **U-M GPT is capped at 75 prompts per hour.** A rate limit, not a budget — a third shape
+  alongside "capped plan" and "uncapped billing code," and running into it teaches nothing
+  about what work costs.
+- **Maizey needs a billing code *and* ownership of an MCommunity group.** A prerequisite §F
+  does not record.
+- **The Getting Started page walks a beginner through three services and never names an
+  agent.** The closest it comes is calling the Toolkit suitable for those who "require full
+  control over their AI environments and models." Someone following the official on-ramp end
+  to end arrives at a chat window having been told that is what this is. **That is the
+  sharpest single piece of evidence found for the contrast claim** — and it is true of a
+  February snapshot, not of today's page, which nobody here has seen.
+
+**The cheapest check that would settle it: open that URL in a browser.** A human is not
+blocked by the interstitial. Nobody has done it.
 
 ### Also parked the same day, unrelated to the above
 
