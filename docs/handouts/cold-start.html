@@ -644,7 +644,39 @@
     font-variant-numeric: tabular-nums; white-space: nowrap;
   }
   .terms dd { margin: 0; font-size: 13.5px; line-height: 1.5; color: var(--ink); }
+  /* The word is the jump. It looks like a link because it is one, and it keeps the accent
+     colour it already had -- a second affordance beside it would be two things to explain. */
+  .terms dt[data-jump] { cursor: pointer; text-decoration: underline; text-underline-offset: 3px;
+                         text-decoration-thickness: 1px; text-decoration-color: var(--rule-firm); }
+  .terms dt[data-jump]:hover { text-decoration-color: var(--accent); }
+  .terms dt[data-off-route="1"] { cursor: default; color: var(--faint); text-decoration: none; }
+  /* WHAT YOU CHOSE, not what the word means. Set apart from the definition so the two are
+     never read as one sentence: the definition is fixed and the chip is yours. */
+  .t-you {
+    display: inline-block; margin-top: 3px;
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .04em;
+    padding: 1px 6px; border-radius: 3px;
+    background: var(--good-soft); color: var(--good); border: 1px solid var(--good);
+  }
+  .t-you[data-known="0"] { background: var(--sunk); color: var(--muted); border-color: var(--rule-firm); }
+  .t-you:empty { display: none; }
+  /* A one-field version of the Phase 2 block. Same handler, same storage, no heading. */
+  .fill-one { margin: 10px 0 12px; }
   @media print { .terms { break-inside: avoid; } }
+
+  /* The step a word sends you to, marked for a moment so the jump lands somewhere visible.
+     Without it the page simply scrolls and the reader has to work out which of the steps on
+     screen was the answer -- which is the problem the jump was built to solve. */
+  ol.steps > li.jumped, section.door.jumped {
+    animation: flashstep 1.6s ease-out 1;
+  }
+  @keyframes flashstep {
+    0%, 30% { background: var(--caution-soft); box-shadow: 0 0 0 6px var(--caution-soft); }
+    100%    { background: transparent; box-shadow: 0 0 0 6px transparent; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    ol.steps > li.jumped, section.door.jumped { animation: none; outline: 2px solid var(--caution); outline-offset: 4px; }
+  }
 </style>
 
 <div class="bar">
@@ -710,24 +742,39 @@
          back. That is tier 4 on this page's own four-tier table, and prose was tier 1. -->
     <div class="terms" id="the-words">
       <b class="terms-k">The six words this page uses, and it uses no others for these things</b>
+      <!-- EACH WORD JUMPS TO THE STEP THAT SETTLES IT, AND SAYS WHAT YOU SETTLED. Tony,
+           2026-09-05: "can we hot link each of these to take the user back to the choice
+           that set their meaning? or enable hover to show what they chose?"
+           BOTH, AND NOT BY HOVER. A definition tells a reader what the word means in
+           general; what they actually need mid-page is what it means FOR THEM, and hover
+           does not exist on the iPad this page is half-written for. So the answer lives on
+           the page permanently, in `.t-you`, and hover is not the mechanism.
+           WHERE THE ANSWERS COME FROM IS THE PART WORTH GUARDING. Four of the six are
+           DERIVED FROM WHAT THE READER HAS ALREADY TICKED -- the route from the door, the
+           rung from whether 3.4 and 3.5 are done, the repository and the editor from their
+           own steps. That is this page's whole argument turned on itself: state read off
+           evidence rather than off a self-report. The agent is the one thing the page
+           cannot derive, so 1.1 asks for it in one optional field; and `plan` is the one
+           thing it deliberately refuses to hold, because prices belong on the vendor's page
+           and What It Costs is the sheet. It says so rather than guessing. -->
       <dl>
-        <dt>agent</dt>
-        <dd><b>The AI you type at.</b> Claude, Codex, Gemini CLI, Copilot, Cursor. Whether it lives in a browser tab, a terminal or your editor, it is <i>the agent</i> on every step here &mdash; never &ldquo;the tool&rdquo;, never &ldquo;the assistant&rdquo;. You get one at <b>step 1.1</b>.</dd>
-        <dt>route</dt>
-        <dd><b>Which of the three sets of steps you are being shown</b> &mdash; the <i>browser route</i>, the <i>laptop route</i>, the <i>cluster route</i>. You pick one immediately below this, and you can change it at any time.</dd>
-        <dt>rung</dt>
-        <dd><b>How much of your machine the agent can see</b>, on a ladder of three. It is a different question from your route and from your plan, and it is the one that decides how much you have to describe by hand. <b>Step 1.1</b> has the ladder.</dd>
-        <dt>plan</dt>
-        <dd><b>What you pay the company that makes the agent</b> &mdash; a free plan or a paid plan. Money only. It is not the route and not the rung; a free plan and a paid plan can sit on the same rung.</dd>
-        <dt>repository</dt>
-        <dd><b>A folder that lives on <code>github.com</code> instead of on your laptop</b>, keeping a record of every change made to it. Often shortened to <i>repo</i> by other people; this page always writes it in full. You make one at <span data-tiers="min"><b>W3</b>.</span><span data-tiers="mid max"><b>step 4.5</b>.</span></dd>
-        <dt>the editor</dt>
-        <dd><b>The program you open your files in</b> &mdash; VS&nbsp;Code, on this page. Distinct from <b>the terminal</b>, the window you type commands into, and from the agent, which can sit inside either.</dd>
+        <dt data-jump="agent-account">agent</dt>
+        <dd><b>The AI you type at.</b> Claude, Codex, Gemini CLI, Copilot, Cursor. Whether it lives in a browser tab, a terminal or your editor, it is <i>the agent</i> on every step here &mdash; never &ldquo;the tool&rdquo;, never &ldquo;the assistant&rdquo;. You get one at <b>step 1.1</b>. <span class="t-you" data-you="agent"></span></dd>
+        <dt data-jump="#door">route</dt>
+        <dd><b>Which of the three sets of steps you are being shown</b> &mdash; the <i>browser route</i>, the <i>laptop route</i>, the <i>cluster route</i>. You pick one immediately below this, and you can change it at any time. <span class="t-you" data-you="route"></span></dd>
+        <dt data-jump="agent-account">rung</dt>
+        <dd><b>How much of your machine the agent can see</b>, on a ladder of three. It is a different question from your route and from your plan, and it is the one that decides how much you have to describe by hand. <b>Step 1.1</b> has the ladder. <span class="t-you" data-you="rung"></span></dd>
+        <dt data-jump="agent-account">plan</dt>
+        <dd><b>What you pay the company that makes the agent</b> &mdash; a free plan or a paid plan. Money only. It is not the route and not the rung; a free plan and a paid plan can sit on the same rung. <span class="t-you" data-you="plan"></span></dd>
+        <dt data-jump="repo-step">repository</dt>
+        <dd><b>A folder that lives on <code>github.com</code> instead of on your laptop</b>, keeping a record of every change made to it. Often shortened to <i>repo</i> by other people; this page always writes it in full. You make one at <span data-tiers="min"><b>W3</b>.</span><span data-tiers="mid max"><b>step 4.5</b>.</span> <span class="t-you" data-you="repository"></span></dd>
+        <dt data-jump="editor">the editor</dt>
+        <dd><b>The program you open your files in</b> &mdash; VS&nbsp;Code, on this page. Distinct from <b>the terminal</b>, the window you type commands into, and from the agent, which can sit inside either. <span class="t-you" data-you="editor"></span></dd>
       </dl>
     </div>
   </div>
 
-  <section class="door">
+  <section class="door" id="door">
     <p class="door-head">One question, asked at the door: how far are you going?</p>
     <p class="door-lede">This decides which steps you are shown. <b>Pick the smallest one that gets you what you want</b> &mdash; you can move up at any time, the page keeps every box you have ticked, and moving up only ever adds steps.</p>
     <div class="tierpicks" role="group" aria-label="How far are you going">
@@ -814,6 +861,18 @@
                data-tiers works on any element, so the four that differ carry their own. -->
           <p class="links"><a data-tiers="min" href="https://claude.com/pricing">Claude</a><a data-tiers="mid max" href="https://claude.com/pricing">Claude Code</a><a data-tiers="mid max" href="https://developers.openai.com/codex/pricing">OpenAI Codex</a><a data-tiers="mid max" href="https://github.com/google-gemini/gemini-cli">Gemini CLI</a><a data-tiers="mid max" href="https://github.com/features/copilot/plans">GitHub Copilot CLI</a><a data-tiers="mid max" href="https://cursor.com/pricing">Cursor</a><a href="https://lookedright.tonydefazio.com/what-it-costs">What It Costs</a><a href="https://lookedright.tonydefazio.com/show-it-your-screen">Show It Your Screen</a></p>
         <div class="detail" id="d-1.1">
+            <!-- THE ONE THING THE PAGE CANNOT DERIVE. Route, rung, repository and editor are
+                 all readable off what the reader has ticked. Which agent they actually chose
+                 is not written anywhere, and it is the single most useful thing to know
+                 about them -- it is what the 2026-09-02 walk turned on. So it is asked, once,
+                 in one optional field, and it feeds the word list at the top of the page.
+                 IT IS NOT A CHECKBOX AND IT GATES NOTHING. Naming your agent is not evidence
+                 of anything; W1's file test is. This is a label for the reader's own benefit,
+                 and an empty field says "not said yet" rather than failing them. -->
+            <div class="fill fill-one">
+              <label><span>Which agent did you pick?</span><input type="text" data-k="agent" spellcheck="false" placeholder="Claude, Codex, Gemini CLI, Copilot, Cursor&hellip;"></label>
+              <p class="fill-note">Optional, and it stays in this browser. It only fills in your own name for it at the top of this page, so a step three phases down says <i>your</i> agent rather than <i>an</i> agent.</p>
+            </div>
             <p class="why"><b>The agent already knows this work. What you are deciding is how much of your machine it is allowed to see</b> &mdash; and that second half is the one people skip, and the one that decides what everything else costs. An agent that cannot see your screen has to be told what is on it, and describing your own screen accurately is the hardest thing a beginner is asked to do, because you do not know which detail matters. That is why you are stuck.</p>
 
             <!-- THE LADDER IS FOR READERS STILL CHOOSING. The tier picker at the top of the
@@ -2117,6 +2176,7 @@ or four A records:
         // A GATE BOX CHANGES OTHER STEPS, so this cannot stop at repainting its own.
         // Ticking W1's file test opens four steps further down the page.
         if (b.dataset.gate) applyGates();
+        termsPaint();
         count();
       });
     });
@@ -2166,6 +2226,13 @@ or four A records:
   // repo's own worked example is the four-tier table -- prose, checklist, test, structure --
   // and its finding is that the first two cost nothing to skip when you are busy. A dimmed
   // checkbox is still a checkbox.
+  // A HOOK, BECAUSE OF DECLARATION ORDER AND NOTHING ELSE. The word list reads `paths` for
+  // the agent's name, and `paths` is built near the bottom of this file with the Phase 2
+  // fields. applyTier() runs long before that, at load. So this starts as a no-op, every
+  // caller calls it unconditionally, and the real one is installed once `paths` exists.
+  // The alternative -- moving `paths` up -- separates it from the three inputs it serves.
+  var termsPaint = function () {};
+
   var gateBoxes = [].slice.call(document.querySelectorAll('.cb[data-gate]'));
 
   function gatePassed(name) {
@@ -2286,6 +2353,7 @@ or four A records:
     // another route must not sit locked while it is off-screen: it comes back on the way
     // up, and it comes back in whatever state its gates are in then.
     applyGates();
+    termsPaint();
     // NOT CHOOSING IS A STATE, AND IT USED TO BE A SILENT ONE. The banner was simply
     // hidden, so a first-time reader got all 39 steps with the browser route and the
     // laptop route interleaved — W1 asking a question 1.1 had already asked, four
@@ -2345,6 +2413,7 @@ or four A records:
     // Reset clears the gate boxes with everything else, so the route shuts again. That is
     // correct: a cleared page is a page nothing has been proved to.
     applyGates();
+    termsPaint();
     count();
   });
 
@@ -2561,9 +2630,153 @@ or four A records:
       if (!inp.value.trim()) delete paths[k];
       try { localStorage.setItem(PKEY, JSON.stringify(paths)); } catch (e) {}
       render();
+      termsPaint();
     });
   });
   render();
+
+  // ---- the word list: jump to the choice, and say what you chose --------------------
+  //
+  // Tony, 2026-09-05: "can we hot link each of these to take the user back to the choice
+  // that set their meaning? or enable hover to show what they chose?"
+  //
+  // BOTH, AND DELIBERATELY NOT BY HOVER. Hover does not exist on the iPad half this page is
+  // written for, and a thing you must discover by pointing at it is a thing most readers
+  // never find. The answer is printed and stays printed.
+  //
+  // FOUR OF THE SIX ARE DERIVED FROM TICKS, NOT ASKED. That is this page's own argument
+  // pointed at itself: it reports what the reader has actually done, not what they would
+  // say about themselves if asked. The rung is the good example -- 3.4 done means the agent
+  // is on your machine, 3.5 done means it is inside your editor, and neither is a question
+  // anybody has to answer twice.
+  //
+  // TWO ARE NOT DERIVABLE AND SAY SO RATHER THAN GUESSING. The agent is asked for once at
+  // 1.1, optionally. `plan` is refused outright: this page's standing rule is that prices
+  // and plans belong on the vendor's page, and inventing a chip that said "free" would be
+  // the page asserting something about somebody's billing it has no way to know.
+  var STEP_RUNG_TERMINAL = 'agent-install';    // 3.4
+  var STEP_RUNG_EDITOR   = 'agent-in-editor';  // 3.5
+
+  // THE ROUTE NAMES ARE READ OFF THE BUTTONS, NOT RETYPED. The door names the three routes
+  // and the comment above it says they are named there "and nowhere else"; a second copy
+  // here would be a second source, and the two would drift the first time one is reworded.
+  var TIER_NAME = (function () {
+    var m = {};
+    tierBtns.forEach(function (b) {
+      var n = b.querySelector('b');
+      m[b.dataset.tier] = n ? n.textContent.trim().replace(/^The\s+/, '') : b.dataset.tier;
+    });
+    return m;
+  })();
+
+  var stepByKey = (function () {
+    var m = {};
+    steps.forEach(function (s) { m[s.li.dataset.key] = s; });
+    return m;
+  })();
+
+  function stepDone(key) {
+    var li = document.querySelector('ol.steps > li[data-key="' + key + '"]');
+    return !!li && li.dataset.done === '1';
+  }
+  function stepOnRoute(key) {
+    var li = document.querySelector('ol.steps > li[data-key="' + key + '"]');
+    return !!li && li.dataset.off !== '1';
+  }
+
+  // The repository is made at a different step depending on the route, so the word points
+  // at whichever of the two this reader is actually shown.
+  function repoStep() { return stepOnRoute('connect-or-repo') ? 'connect-or-repo' : 'remote'; }
+
+  function chip(el, text, known) {
+    el.textContent = text;
+    el.dataset.known = known ? '1' : '0';
+  }
+
+  termsPaint = function () {
+    var t = readTier();
+    [].forEach.call(document.querySelectorAll('.t-you'), function (el) {
+      var w = el.dataset.you;
+      if (w === 'route') {
+        chip(el, t ? 'you: ' + TIER_NAME[t] : 'not picked yet — all three shown', !!t);
+
+      } else if (w === 'agent') {
+        var a = (paths.agent || '').trim();
+        chip(el, a ? 'yours: ' + a : 'not said yet — 1.1 asks', !!a);
+
+      } else if (w === 'rung') {
+        // READ OFF THE STEPS, NOT OFF A CLAIM. The browser route has no ladder and no way
+        // up without changing route, so it is stated flatly rather than left as "so far".
+        if (t === 'min') {
+          chip(el, 'yours: rung 1 — a browser tab', true);
+        } else if (stepDone(STEP_RUNG_EDITOR)) {
+          chip(el, 'yours: rung 3 — inside your editor', true);
+        } else if (stepDone(STEP_RUNG_TERMINAL)) {
+          chip(el, 'yours: rung 2 — in your terminal', true);
+        } else {
+          chip(el, 'rung 1 so far — 3.4 and 3.5 move you up', false);
+        }
+
+      } else if (w === 'plan') {
+        chip(el, 'this page never asks — see What It Costs', false);
+
+      } else if (w === 'repository') {
+        var rs = repoStep();
+        chip(el, stepDone(rs) ? 'yours: made' : 'not made yet', stepDone(rs));
+
+      } else if (w === 'editor') {
+        if (!stepOnRoute('editor')) {
+          chip(el, 'not on the browser route', false);
+        } else {
+          chip(el, stepDone('editor') ? 'yours: set up at 3.1' : 'not set up yet — 3.1', stepDone('editor'));
+        }
+      }
+    });
+
+    // A WORD WHOSE STEP THIS ROUTE NEVER SHOWS MUST NOT PRETEND TO BE A LINK. "the editor"
+    // on the browser route is the live case, and a jump that scrolls nowhere is the exact
+    // failure tier_check.sh exists to catch, rebuilt in a click handler.
+    [].forEach.call(document.querySelectorAll('.terms dt[data-jump]'), function (dt) {
+      var target = dt.dataset.jump;
+      if (target === 'repo-step') target = repoStep();
+      var live = target.charAt(0) === '#' ? !!document.querySelector(target) : stepOnRoute(target);
+      dt.dataset.offRoute = live ? '0' : '1';
+      dt.setAttribute('role', live ? 'link' : 'presentation');
+      if (live) { dt.setAttribute('tabindex', '0'); }
+      else      { dt.removeAttribute('tabindex'); }
+    });
+  };
+
+  function jumpTo(dt) {
+    if (dt.dataset.offRoute === '1') return;
+    var target = dt.dataset.jump;
+    if (target === 'repo-step') target = repoStep();
+    var el = target.charAt(0) === '#'
+      ? document.querySelector(target)
+      : document.querySelector('ol.steps > li[data-key="' + target + '"]');
+    if (!el) return;
+    // A LOCKED STEP IS SCROLLED TO AND NOT OPENED. Forcing it open would show boxes the
+    // gate has deliberately removed; its own lock message is the right thing to arrive at.
+    if (el.tagName === 'LI' && el.dataset.locked !== '1' && el.dataset.open !== '1') {
+      el.dataset.open = '1';
+      var s = stepByKey[el.dataset.key];
+      if (s) s.paint();
+    }
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    el.classList.remove('jumped');
+    void el.offsetWidth;               // restart the animation if the same word is clicked twice
+    el.classList.add('jumped');
+    setTimeout(function () { el.classList.remove('jumped'); }, 1800);
+  }
+
+  [].forEach.call(document.querySelectorAll('.terms dt[data-jump]'), function (dt) {
+    dt.addEventListener('click', function () { jumpTo(dt); });
+    dt.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); jumpTo(dt); }
+    });
+  });
+
+  termsPaint();
 
   [].forEach.call(document.querySelectorAll('.gen'), function (box) {
     var hint = box.querySelector('.gen-hint');

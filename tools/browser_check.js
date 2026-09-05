@@ -309,6 +309,71 @@ const server = http.createServer((req, res) => {
       [...document.querySelectorAll('#the-words dt')].filter(d => d.offsetParent !== null).length), 6);
   }
 
+  // ---- each word jumps to the choice that set it, and says what you chose ----------
+  // Added 2026-09-05. Four of the six answers are DERIVED from ticks rather than asked, so
+  // the thing that can silently rot is the derivation: a step renamed, a data-key changed,
+  // and the chip quietly reports "not made yet" forever at nobody in particular. Markup
+  // cannot show that. Every assertion below drives the real page.
+  await page.evaluate(() => localStorage.clear());
+  await page.reload();
+  const chip = w => page.$eval(`.t-you[data-you="${w}"]`, e => e.textContent.trim());
+  const known = w => page.$eval(`.t-you[data-you="${w}"]`, e => e.dataset.known);
+
+  check('with no route picked, the route chip says so',
+    (await chip('route')).includes('not picked yet'), true);
+  await page.click('.tierpick[data-tier="min"]');
+  check('picking a route names it back to the reader', await chip('route'), 'you: browser route');
+  check('and the browser route fixes the rung at 1', await chip('rung'), 'yours: rung 1 — a browser tab');
+  check('the plan is refused rather than guessed at',
+    (await chip('plan')).includes('never asks'), true);
+  check('and is not dressed up as something the page knows', await known('plan'), '0');
+  check('the editor is off the browser route and says that, not "not yet"',
+    await chip('editor'), 'not on the browser route');
+  check('a word whose step this route never shows is not clickable',
+    await page.$eval('.terms dt[data-jump="editor"]', e => e.dataset.offRoute), '1');
+
+  // The derivation, on a route that has the steps: rung follows 3.4 and then 3.5.
+  await page.click('.tierpick[data-tier="mid"]');
+  check('before 3.4, the rung is stated as provisional', await known('rung'), '0');
+  const finish = async key => {
+    await page.evaluate(k => {
+      const li = document.querySelector(`ol.steps > li[data-key="${k}"]`);
+      li.querySelectorAll('.cb').forEach(b => { if (b.getAttribute('aria-pressed') !== 'true') b.click(); });
+    }, key);
+  };
+  await finish('agent-install');
+  check('ticking 3.4 moves the reader to rung 2', await chip('rung'), 'yours: rung 2 — in your terminal');
+  await finish('agent-in-editor');
+  check('and ticking 3.5 moves them to rung 3', await chip('rung'), 'yours: rung 3 — inside your editor');
+  check('the editor chip follows its own step too',
+    (await chip('editor')).includes('not set up yet'), true);
+  await finish('editor');
+  check('and reports it once 3.1 is done', await chip('editor'), 'yours: set up at 3.1');
+
+  // The repository word points at a DIFFERENT step per route, which is the part most
+  // likely to be got wrong by a later edit.
+  check('on the laptop route the repository word points at 4.5',
+    await page.$eval('.terms dt[data-jump="repo-step"]', e => e.dataset.offRoute), '0');
+  await page.click('.tierpick[data-tier="min"]');
+  check('and on the browser route it still resolves, to W3',
+    await page.$eval('.terms dt[data-jump="repo-step"]', e => e.dataset.offRoute), '0');
+
+  // The jump itself.
+  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+  await page.click('.terms dt[data-jump="agent-account"]');
+  await page.waitForFunction(() =>
+    document.querySelector('ol.steps > li[data-key="agent-account"]').classList.contains('jumped'),
+    null, { timeout: 3000 });
+  check('clicking a word opens the step that settles it', await page.$eval(
+    'ol.steps > li[data-key="agent-account"]', e => e.dataset.open), '1');
+
+  // The one thing the page cannot derive is asked for, and reaches the word list.
+  await page.fill('.fill-one input[data-k="agent"]', 'Gemini CLI');
+  check('naming your agent at 1.1 reaches the word list', await chip('agent'), 'yours: Gemini CLI');
+  await page.reload();
+  await page.click('.tierpick[data-tier="min"]');
+  check('and survives a reload', await chip('agent'), 'yours: Gemini CLI');
+
   // ---- the route gates ------------------------------------------------------------
   // WHAT THESE ARE FOR. On 2026-09-02 a beginner walked the browser route with an office
   // assistant, which opened a blank template and had her type the title in herself. The

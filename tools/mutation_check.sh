@@ -60,6 +60,17 @@ cd "$(dirname "$0")/.." || exit 1
 # still the check answering a question nobody asked.
 verdict() {
     case "$1" in
+        *.js)
+            # browser_check.js has no --selftest: RUNNING it is the test, and it exits
+            # non-zero when an assertion fails. Added 2026-09-05 so the word-list chips --
+            # four of which are DERIVED from ticks rather than authored -- have something
+            # proving their assertions can go red. A derivation that silently stops
+            # deriving reports a plausible wrong answer forever, which is the failure this
+            # whole page is about.
+            # NOTE the rows that use this mutate site/cold-start.html, not the handout:
+            # this checker serves the BUILT page, and mutating the source would leave it
+            # reading unmutated bytes and report a miss that is really a plumbing error.
+            if node "$1" >/dev/null 2>&1; then printf 'PASS\n'; else printf 'FAIL\n'; fi ;;
         *.py)
             if python3 "$1" --selftest >/dev/null 2>&1; then printf 'PASS\n'; else printf 'FAIL\n'; fi ;;
         *)
@@ -121,6 +132,8 @@ tools/build_site.sh@@    if _git("status", "--porcelain", "--", src):@@    if Fa
 docs/handouts/cold-start.html@@state[stepKey][bk] = 1;@@state[stepKey][i] = 1;@@checklist ticks migrate by position again@@tools/checklist_state.sh
 docs/handouts/cold-start.html@@var bk = boxKeys[+i];@@var bk = boxKeys[0];@@every migrated tick lands on the first box of its step@@tools/checklist_state.sh
 docs/handouts/cold-start.html@@if (localStorage.getItem(KEY) !== null) return;@@if (false) return;@@migration re-runs over a reader already on v4@@tools/checklist_state.sh
+site/cold-start.html@@        } else if (stepDone(STEP_RUNG_TERMINAL)) {@@        } else if (false) {@@the rung stops following the steps that set it@@tools/browser_check.js
+site/cold-start.html@@      dt.dataset.offRoute = live ? '0' : '1';@@      dt.dataset.offRoute = '0';@@a word whose step this route hides still looks clickable@@tools/browser_check.js
 tools/tier_check.sh@@        gate_tiers.setdefault(bm.group(2), set()).update(btiers & set(st["tiers"]))@@        gate_tiers.setdefault(bm.group(2), set()).update(TIERS)@@a gate box is treated as reachable from every route
 tools/tier_check.sh@@            if t not in openers:@@            if False:@@a step gated behind an unreachable box is passed
 tools/worktree.sh@@git -C "$REPO" worktree add -q "$path" -b "$slug" "$base" || die@@true || die@@open creates no worktree at all
