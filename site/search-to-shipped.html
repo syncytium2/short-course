@@ -368,7 +368,7 @@
     <p class="eyebrow"><a href="/" class="home">&larr;&nbsp;It Looked Right</a> &middot; Runbook · one page</p>
     <h1>Search to Shipped</h1>
     <p class="standfirst">Zero to a deployed web app, for a researcher who has never written software. Every step, in order, with the condition that tells you it worked.</p>
-    <p class="pv">Version <b>0.1.8</b> &middot; 31 Aug 2026<span class="pv-born">First published 27 Aug 2026</span></p>
+    <p class="pv">Version <b>0.1.9</b> &middot; 5 Sep 2026<span class="pv-born">First published 27 Aug 2026</span></p>
   </header>
 
   <div class="escalation">
@@ -386,7 +386,7 @@
     </div>
   </div>
 
-  <p class="method"><b>Why every step has a “done when”.</b> An action and its report are two different events. A tool that says it worked is telling you it reached the end of its own instructions — not that anything happened. Check the world, not the summary. That habit is the entire skill; the steps are just where you practice it.</p>
+  <p class="method"><b>Why every step has a “done when”.</b> An action and its report are two different events. An agent that says it worked is telling you it reached the end of its own instructions — not that anything happened. Check the world, not the summary. That habit is the entire skill; the steps are just where you practice it.</p>
 
   <section class="phase">
     <div class="phase-head">
@@ -455,7 +455,7 @@
         <span class="n">4</span>
         <div class="body">
           <p class="do">Get a coding-agent plan and install the extension.</p>
-          <p class="why">Check what your institution already provides before paying — many give staff API access against a billing code, and some give students a free chat tool that is <em>not</em> an agent. The difference is the whole point.</p>
+          <p class="why">Check what your institution already provides before paying — many give staff API access against a billing code, and some give students an agent that will answer questions and never write a file. <b>That difference decides everything here, and it is one prompt to settle:</b> ask it to make a file called <code>hello.txt</code> and see whether a file comes back or instructions do.</p>
           <p class="done">The agent opens <b>inside VS Code</b> and answers a question about a file in your folder.</p>
         </div>
       </li>
@@ -475,7 +475,7 @@ git push -u origin main</pre>
         <span class="n">6</span>
         <div class="body">
           <p class="do">Write a deny list before the first real task.</p>
-          <p class="why">A scratch folder is not a wall — the agent can leave it with an absolute path while doing exactly what you asked. A deny list is different in kind: the tool refuses the command instead of asking the model nicely. Start with <code>rm -rf</code>, <code>sudo</code>, <code>git push --force</code>, <code>git reset --hard</code>. See <a href="https://code.claude.com/docs/en/settings">settings</a>.</p>
+          <p class="why">A scratch folder is not a wall — the agent can leave it with an absolute path while doing exactly what you asked. A deny list is different in kind: it is enforced outside the model rather than asked of it, so the command is refused rather than reconsidered. Start with <code>rm -rf</code>, <code>sudo</code>, <code>git push --force</code>, <code>git reset --hard</code>. See <a href="https://code.claude.com/docs/en/settings">settings</a>.</p>
           <p class="done">You ask it to run a denied command and it <b>refuses</b>. Test this. An untested guard is a guess.</p>
         </div>
       </li>
@@ -618,7 +618,7 @@ Revisit if:       recordings drop below ~20, or exports stop.</pre>
         <span class="n">16</span>
         <div class="body">
           <p class="do">Put it on the internet.</p>
-          <p class="why">A static site — one built from your files with no server of its own — is enough for most research tools and is free to host. <a href="https://pages.github.com/">GitHub Pages</a> is the shortest path from a repo you already have. <a href="https://www.cloudflare.com/products/pages/">Cloudflare Pages</a> and <a href="https://vercel.com/">Vercel</a> add a custom domain easily. Ask the agent to set up <a href="https://vite.dev/">Vite</a> if you need a build step.</p>
+          <p class="why">A static site — one built from your files with no server of its own — is enough for most research software and is free to host. <a href="https://pages.github.com/">GitHub Pages</a> is the shortest path from a repo you already have. <a href="https://www.cloudflare.com/products/pages/">Cloudflare Pages</a> and <a href="https://vercel.com/">Vercel</a> add a custom domain easily. Ask the agent to set up <a href="https://vite.dev/">Vite</a> if you need a build step.</p>
           <p class="done">The URL <b>loads on your phone</b>, off your wifi.</p>
         </div>
       </li>
@@ -683,8 +683,8 @@ Revisit if:       recordings drop below ~20, or exports stop.</pre>
         <span class="sub">One line, today, about something that just annoyed you. Repetition is the signal — the third time is when you build the cure.</span>
       </li>
       <li>
-        <span class="lead">Cures come in three kinds, and only one is a tool.</span>
-        <span class="sub">A tool, a change of habit, or a check you accept forever. Not every fix is tool-shaped, and a cure that is expensive to use silently stops being used.</span>
+        <span class="lead">Cures come in three kinds, and only one of them is something you build.</span>
+        <span class="sub">A program, a change of habit, or a check you accept forever. Not every fix is a program, and a cure that is expensive to use silently stops being used.</span>
       </li>
       <li>
         <span class="lead">Stop a session on purpose, before it degrades.</span>
