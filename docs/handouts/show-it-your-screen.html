@@ -97,8 +97,14 @@
 
   /* ---- stoppages ---- */
   .stop { border: 1px solid var(--rule); background: var(--surface); margin: 0 0 16px; }
+  /* flex-wrap is load-bearing, not tidying. `.stop-tag` is `white-space: nowrap`, so on a
+     390px phone it cannot shrink and a non-wrapping row pushes it past the document edge.
+     It only fires where the row does not fit, so nothing moves on a laptop or a desktop.
+     Found by CI on 2026-09-06 and NOT reproducible on macOS -- the same page measures clean
+     there and overflows on the runner, because the two resolve the mono stack to different
+     fonts and this row is a few characters from the edge either way. */
   .stop-head {
-    display: flex; align-items: baseline; gap: 10px; padding: 12px 16px;
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; padding: 12px 16px;
     border-bottom: 1px solid var(--rule); background: var(--sunk);
   }
   .stop-n {
