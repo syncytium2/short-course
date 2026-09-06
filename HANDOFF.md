@@ -7,6 +7,22 @@ is for murderboard development only; see [Boundary](#boundary) below.
 
 ## If you are coming back to this cold
 
+**2026-09-06, session close.** *Happened:* the starter template and *Already Set Up* shipped
+on 2026-09-04 and still stand — [`starter/`](starter/) is unmodified against `HEAD` and its
+three selftests pass. Two doubts filed today, both about this checkout rather than about the
+course. *Unfinished:* everything in the 2026-09-04 block below, unchanged. *Next:* the
+`claim.sh` flag fix is ten minutes and is the cheapest thing on any list here.
+
+> **Do the next piece of work in a worktree, and this is not advice about tidiness.** Three
+> things happened in one wind-down in the shared checkout, with another session live in it: an
+> `Edit` returned success and the change was gone forty seconds later with no hook that could
+> have done it; two staged files were swept into somebody else's commit, so
+> `git log -- docs/doubt/…` now answers with a message about page widths; and the board gained
+> an ACTIVE claim called `--help`. The first two are filed in [`docs/doubt/`](docs/doubt/).
+> **This session had a worktree for its own work and came back here afterwards, which is the
+> gap the board's own advice does not cover** — the rule is not "open a worktree to start", it
+> is "do not write in the shared checkout at all."
+
 **2026-09-04. Two things are open and neither is started. Read this before picking either up.**
 
 **1 · The Windows route is decided, and it is not the one you would guess.** Tony, relaying
