@@ -2443,8 +2443,34 @@ risks in the file.
 - **Status:** DONE 2026-09-06
 - **Opened:** 2026-09-06
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** this block only, in the repo. **Outside git:** the darkroom index at
+  `darkroom/short-course/README.md`, rebuilt; `starter-README-copy.md`, created. Deleted four
+  **merged** remote branches (`case-warning-was-row-26`, `idea-generator-out`,
+  `site-evidence-selection`, `the-turn-ended-with-an-inventory`) and the merged local
+  `idea-generator-out`. **Touched none of the 14 files another session has in flight**, and did
+  not write `HANDOFF.md` — `Mac/730cc14a` holds an ACTIVE claim on it.
+- **Notes:** ⚠ **The darkroom index was destroyed on 2026-09-04 11:21 and nobody noticed for two
+  days.** A session copied the starter template's own `starter/README.md` into
+  `darkroom/short-course/README.md` — byte-identical, which is how it was found. That file is
+  the only thing in the darkroom answering *"what needs me?"* without opening seven folders.
+  **Rebuilt from what could be verified on 2026-09-06 and banner-marked as a rebuild, not a
+  restore.** The original is in Dropbox version history (dropbox.com → the file → *Version
+  history* → 2026-09-02 or earlier) and getting it is worth more than the rebuild.
+  **The mechanism, because it will happen again:** the darkroom is a shared folder with no git,
+  no gate and no history a session can read. `check_pointers.sh` and CI cover the repo and stop
+  at its edge. **Writing a deliverable there is an unguarded overwrite of whatever shares its
+  name** — and `README.md` is the name everything is called.
+  ⚠ **`case-true-report-wrong-object` is finished and stranded.** 365 lines, claim released
+  **DONE 2026-09-04**, pushed, and **no PR was ever opened** — so nothing surfaces it. Two days
+  now. Its worktree is idle. This is `2026-08-29`'s "four cases lived only on a branch" happening
+  again to a case file. Left for a human because merging another session's unproposed work is
+  not this session's call; **opening a PR for it costs one command and would fix it.**
+  **Still owed a decision by Tony, re-checked 2026-09-06 and untouched by the last 55 commits:**
+  `points.md` **B2** went public with nobody making the call. **And four findings are written up
+  with no home in `points.md`** — correspondence is a test not context; a claim stated as a count
+  can be audited while one stated as a tendency cannot; a check that did not fire and a check that
+  fired and was not read are different failures and only the first is mechanizable; and a cure
+  that lives in one project is not a cure yet (that fourth one landed, as B7 rule 9).
 
 <!-- RELEASE THIS
      tools/claim.sh --release
