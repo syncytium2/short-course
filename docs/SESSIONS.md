@@ -2500,3 +2500,15 @@ risks in the file.
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/75e4d067 — cold-start Phase 7 note: name the thing 'it' points at (the domain), both tiers; rebuild site
+- **Status:** ACTIVE
+- **Opened:** 2026-09-06
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** `docs/handouts/cold-start.html` (the two Phase 7 phase-notes only), `site/` via `tools/build_site.sh`, this file.
+- **Notes:** One dangling pronoun — "something to put on it" — where "it" is the domain named in the phase heading two blocks up. No step numbers touched. Deploy is not part of this claim.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
