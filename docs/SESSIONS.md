@@ -2502,7 +2502,7 @@ risks in the file.
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Mac/75e4d067 — cold-start Phase 7 note: name the thing 'it' points at (the domain), both tiers; rebuild site
-- **Status:** ACTIVE
+- **Status:** DONE 2026-09-06
 - **Opened:** 2026-09-06
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
 - **Writes:** `docs/handouts/cold-start.html` (the two Phase 7 phase-notes only), `site/` via `tools/build_site.sh`, this file.
