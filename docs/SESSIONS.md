@@ -2411,7 +2411,7 @@ risks in the file.
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Mac/730cc14a — Session close: record the mutation-suite coverage gap, the unchecked cross-page step references, and the cross-repo push-hook false positive
-- **Status:** ACTIVE
+- **Status:** DONE 2026-09-06
 - **Opened:** 2026-09-06
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
 - **Writes:** `HANDOFF.md` and this file. Nothing else.
