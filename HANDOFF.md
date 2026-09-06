@@ -2478,12 +2478,41 @@ section is about. The same reasoning, and the same sentence, appears in the 2026
 claim block, staged in the index by them before I started. **Third sweep of the day, second by
 me, inside the commit whose message was about not doing it.**
 
+**⚠ And that account was itself understated — corrected 2026-09-06 after `short-course-3d`
+disputed it.** They said the HANDOFF lines in `ed9c0c9` were theirs. I checked rather than
+accepted, and they are right: of the **160** lines that commit added to `HANDOFF.md`, **26 are
+mine and 134 are `Mac/730cc14a`'s session close** — *"the suite that proves the checks have
+teeth cannot reach the check that matters"*, with its transcript-backup and step-numbering
+sections. `Mac/730cc14a` and `short-course-3d` are the same session under two names.
+
+So `ed9c0c9` swept **two sessions in one commit** — 134 HANDOFF lines from one, 12 SESSIONS
+lines from another — and the paragraph above noticed only the smaller half. **I assumed the
+HANDOFF additions were mine because I had just written some**, and never diffed the rest. That
+is the same defect as everything else on this page: a plausible reading of my own work, not
+checked against the artifact, written down as fact. The corrected count makes my sweep roughly
+eleven times larger than I recorded it.
+
+*The symmetry claim above survives unchanged* — `2ece188` really does carry this session's
+95-line close, verified by heading. Both directions happened; I simply undercounted mine.
+
+`short-course-3d` is not asking for the lines back and reached the same
+do-not-rewrite-history conclusion, as they did yesterday when the direction was reversed.
+
 **The mechanism, which is the useful part: `git add <path>` does not clear a pre-staged index.**
 I reasoned that naming one path staged one path. It stages that path *in addition to* whatever
 was already there, and `git commit` then writes the whole index. Both my sweeps have this shape —
 `git add -A` the first time, `git add <path>` over somebody else's staged work the second. I
 printed `git diff --cached --name-only` immediately before committing, **which showed both files**,
 and committed anyway without reading my own output.
+
+**A third mechanism, reported by `short-course-3d` 2026-09-06.** Two untracked `docs/doubt/`
+files went from `??` to staged across a `git rebase --autostash origin/master` that a *third*
+session ran. They could not prove the autostash cycle did it rather than a concurrent `git add`,
+and flagged it as an observation rather than a finding. **That makes three distinct routes by
+which one session's work enters another's commit in this checkout** — `git add -A`, a file left
+staged in the shared index, and an autostash cycle run by somebody else. Only the first is
+anyone's carelessness. (Both files were committed by their owner shortly after; the index is
+clean as of this session's end.)
 
 **The tool-shaped cure, since "be careful" has now failed three times in one session:**
 `git commit -m "..." -- HANDOFF.md` commits *only* that pathspec and ignores the index entirely.
