@@ -2432,3 +2432,163 @@ It did not backfill the `**Writes:**` and `**Notes:**` placeholders on its own c
 which `claim.sh` prompted for four times and which were left unfilled every time. Filling them
 now would be writing history. **Recorded instead because it is the same failure as the sweep:**
 had `Writes:` been filled, the collision would have been visible to somebody before it happened.
+
+### Postscript, minutes later — the swept file has an owner, and the sweep went both ways
+
+**`tools/presentation_check.js` belongs to `Mac/730cc14a`.** Not by inference this time: they
+committed it themselves in `2ece188` — *"Every sheet set a font size smaller than the browser's
+own default, in px, and nothing could see it"* — alongside the seven handout files. The open
+question three sections above is answered, and the answer came from a commit rather than from
+anybody guessing. Whoever needs the `docs/` globbing question answered should address it there.
+
+**And `2ece188` swept this session's in-flight `HANDOFF.md`** — the 95-line session close above,
+committed under a message about font sizes, by the same mechanism and within the hour of my
+doing it to them. Neither of us noticed the other. **That is the strongest available evidence
+that this is a property of the checkout and not of either session's carefulness**, which is the
+reading `short-course-3d` argued for and which I initially resisted in favour of treating it as
+my own lapse.
+
+Both sweeps stand. Two sessions rewriting shared history to tidy attribution would be worse than
+the attribution.
+
+*No claim was opened for this append.* `Mac/e8b745b6` has an ACTIVE claim **staged in the index**
+for `docs/SESSIONS.md`, and `claim.sh` writes to that same file — so claiming would have meant
+committing their in-flight work, which is the sweep this board warns about and which this very
+section is about. Only `HANDOFF.md` is in this commit. The same reasoning, and the same
+sentence, appears in the 2026-09-01 close; it is becoming the standard manoeuvre and probably
+deserves to be a documented one rather than rediscovered per session.
+
+## Session close, 2026-09-06 — `Mac/730cc14a` · the suite that proves the checks have teeth cannot reach the check that matters
+
+**This session changed no source in this repo.** It read, and it built one thing outside it.
+The seven handout/site files and `tools/presentation_check.js` modified in this checkout
+throughout were another session's in-flight work and were deliberately never touched.
+
+### The transcripts are backed up now, and the backup has already earned itself
+
+`~/.claude/projects` is a rolling window. Claude Code prunes it and keeps no second copy.
+Measured 2026-09-02: 845 JSONL files, 1.6 GB, 29 projects, nothing older than 2026-08-02.
+Only 196 of those files are main sessions; 649 are subagent transcripts.
+
+`~/Developer/coding-diary-tools/claude-transcripts-backup.sh` (deployed to `~/bin`, launchd
+job `com.tonydefazio.claude-transcripts`, daily 03:00 and at load) rsyncs that tree
+**additively — never `--delete`** into `~/ClaudeTranscripts/projects`. Four unattended runs
+so far, clean, empty error log.
+
+**In the first 72 hours it rescued 26 transcripts, 7 of them main sessions.** Verified
+independently of the tool's own counter — present in the archive, absent from the source.
+Twenty-five were the 30-day window doing its normal work, dating 30 July to 4 August.
+
+**The twenty-sixth is the finding.** A 10 MB, 2,610-line main-session transcript from
+`draughtsman/.claude-worktrees/unet-glyphs`, three days old, nowhere near any cutoff. That
+worktree was removed and its entire project directory went with it. **Deleting a worktree
+deletes its session history, immediately and silently.** Given how this estate works —
+worktrees per task across a dozen repos, closed on merge — that mechanism has been costing
+far more than the retention window ever did, and nothing anywhere said so.
+
+Two gaps left open on purpose: it is one disk, with no offsite leg; and `--check` (exits 1
+when the last run is over 36h old) is wired to nothing, so if the job dies the thing that
+would notice is a command nobody runs.
+
+### Findings that live nowhere else
+
+**1. `mutation_check.sh` cannot reach `browser_check.js`, which is the check that matters.**
+The runner hardcodes `sh "$TOOL" --selftest` (`tools/mutation_check.sh:131`). `browser_check.js`
+is node and has no selftest, so it cannot be a mutation target at all. The only check in this
+repo that looks at the rendered screen rather than the markup is structurally outside the
+suite that proves checks have teeth. Related: no mutation row covers
+`[data-off="1"] { display: none !important }` in `cold-start.html`, so the 09-02 tier-filter
+repair can be deleted and the suite still prints *caught 34, missed 0*.
+
+**2. `tier_check.sh` and `site_staleness.sh` have selftests CI runs and no mutation rows at
+all.** Both are green; nothing establishes that either would go red if broken.
+
+**3. `browser_check.js` runs at exactly one viewport.** Line 119 is `browser.newPage()` with
+no viewport argument, so every assertion runs at Playwright's default 1280×720 and never
+varies. It proves the tier filter hides things at one width. It cannot see a wide display, a
+narrow one, or a reader who changed their font size — which is the class of defect the px
+font sizes caused. Found independently by whoever wrote `presentation_check.js`.
+
+**4. Six cross-page step references are checked by nothing.** `just-enough-git.html` names
+Cold Start's W3, W4, 1.2 and 5.1; `what-it-costs.html` names step 4.6. `tier_check.sh:39`
+reads `docs/handouts/cold-start.html` and only that file. These are correct today by memory
+alone. Worse, the in-page scanner's regexes are fitted to the document as it stands —
+`[1-7]\.[1-9]`, `W[1-5]`, `Phase [1-7]` (`tier_check.sh:226`) — so a phase 8 or a tenth step
+in a phase is not scanned at all. The reference gate fails open on exactly the growth that
+would prompt renumbering.
+
+**5. `push-goes-where-you-are.sh` fires across repos.** Pushing in
+`~/Developer/coding-diary-tools` from a session whose cwd is short-course, the hook blocked
+`git push origin main` because "main is not checked out in ANY worktree of this repo" — it
+judged a coding-diary-tools push against short-course's branch list, where the branch is
+`master`. It failed safe and its message named the correct fix, but it will cry wolf on
+every sibling-repo push, and a gate that cries wolf is one people learn to wave through.
+
+**6. `claim.sh --help` opens a claim titled `--help`.** There is no help flag; any
+unrecognised argument becomes a claim title. Caught here before it was pushed. The board
+block for this session records it too.
+
+### Step numbering — the cost, counted, and a recommendation
+
+The standing note says renumbering "breaks every cross-reference in the prose." Counted, it
+is 19 in-page `step N.N` references in `cold-start.html` — all of which `tier_check` already
+scans — plus the 6 cross-page ones above, which nothing scans. Also load-bearing and not
+previously written down: `data-id` is the handle the checklist's v3→v4 migration keys on, so
+any renumbering must be display-only or every reader's saved state breaks.
+
+**Recommendation: do not renumber yet, and do not leave it either.** Make references
+checkable across pages first — that liability is live regardless of what happens to the
+numbers, and `build_site.sh` already does render-time substitution with a selftest that
+refuses a count it cannot derive, so the machinery exists. Once a build gate fails when a
+reference names a step that does not exist, the numbering decision costs one rebuild instead
+of a careful read of five files. Deciding numbering first means doing the risky edit while
+the safety net has a hole in it.
+
+### For the site — a section Tony asked for, with its framing
+
+Two complaints about agents that people built fixes for: **fluffing** (the "great idea!"
+response to any input) and **pushiness** (prompting for a next action the agent has already
+queued). They sort cleanly into this page's own taxonomy. The circulating fluffing fix is an
+`AGENTS.md` of anti-sycophancy instructions — prose, which is the class this repo documents
+failing. The pushiness fix is a config flag — a real mechanism.
+
+**And the pushiness fix overshot, which is the better half of the story.** Tony's report,
+2026-09-02, experienced over the preceding two days: the agent now just stops, and he has to
+ask what is next every other prompt. The old behaviour bundled orientation (*here is where we
+are, here is what I think is next*) with a demand (*say go*). The repair removed both, because
+it was aimed at "turns that push at the user" rather than at "information held hostage to an
+approval nobody needed." The state-tracking then lands on the human — which is what this whole
+repo's handoff discipline exists to prevent, arriving one level down, inside the turn.
+
+Belongs in **Fixes that hold**, not in Idiosyncrasies — that section is about the
+environment's quirks, not the agent's manners. Every reader has personally been flattered by a
+model and personally been asked "shall I proceed?" nine times, which is worth more than a
+repo-internal example. **Do not write Addy Osmani's name into it** without finding the actual
+post: searched, and what is his is *Loop Engineering* (replacing yourself as the prompter),
+which is adjacent and not the same claim. That attribution is this repo's signature defect
+waiting to happen on a public page.
+
+**The evidence should be the transcripts, not a citation.** The corpus now survives, the
+before/after sits inside it, and a dated count from it cannot be argued with the way a
+secondhand claim can. The measurement still needs designing: counting how often "what's next"
+was typed counts a phrase, not the thing that actually went missing.
+
+**A second pair for the same section, from 09-05 and better because it is ours.** A sweeping
+`git add -A` in this shared checkout captured another session's unfinished tool into a commit
+about something else, and `claim.sh --list` returned no active claims at the exact moment
+attribution was needed. Two written conventions, both read beforehand, both failing the same
+afternoon in the same checkout. That is the argument, with receipts in the log.
+
+### Carried forward, unchanged
+
+- **Nobody has walked the laptop or cluster routes.** 30 steps / 87 boxes and 34 / 99 against
+  the browser route's 14 / 39. The hazard is this laptop: every install and sign-in step reads
+  true without being exercised. A fresh OS user is the cheap version of a clean machine; short
+  of that, the thing that preserves the walk's value is recording which steps could not be
+  walked cold rather than marking them passed. `tier_check` flags 1.4 and 3.7 as route-aware
+  prose over route-blind boxes — the shape 7.3 shipped in, and unsettleable by anything
+  mechanical.
+- **`Just Enough Git` has never been murderboarded.**
+- **`traps-must-fire` and `idea-generator-out`** are both strictly behind master (their diffs
+  against it are pure deletions), and the `traps-must-fire` worktree is still on disk at
+  `../short-course-worktrees/traps-must-fire`, clean. Left alone.
