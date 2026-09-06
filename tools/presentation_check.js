@@ -66,7 +66,16 @@ let chromium;
 }
 
 const ROOT = path.join(__dirname, '..', 'site');
-const PORT = 876;
+
+// PORT MUST BE >= 1024, and this line is why CI was red on master for three consecutive
+// pushes on 2026-09-06. It was 876, and the selftest binds PORT + 1 -- both privileged ports.
+// Binding one without root fails with `EACCES: permission denied 0.0.0.0:877`, and a GitHub
+// runner is unprivileged, so the step died before it measured a single page. The failure names
+// a port and not a page, so the red run reads as infrastructure rather than as this check.
+//
+// Overridable because several sessions run in this estate at once and a fixed port is a
+// collision waiting to happen: PRESENTATION_PORT=9100 node tools/presentation_check.js
+const PORT = Number(process.env.PRESENTATION_PORT) || 8760;
 
 // THE WIDTHS ARE THE POINT, so they are named rather than swept. A phone, a small laptop,
 // and the wide desktop display the screenshot was taken on. 1280 is included because it is

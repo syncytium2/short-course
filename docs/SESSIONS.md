@@ -2478,7 +2478,7 @@ risks in the file.
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Mac/9bf3acb0 — Master CI is red: presentation_check.js binds privileged port 876/877 and the runner refuses it
-- **Status:** ACTIVE
+- **Status:** DONE 2026-09-06
 - **Opened:** 2026-09-06
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
 - **Writes:** <files or folders you will change; "repo only" if nothing outside git>
