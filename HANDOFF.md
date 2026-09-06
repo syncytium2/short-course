@@ -2454,9 +2454,33 @@ the attribution.
 *No claim was opened for this append.* `Mac/e8b745b6` has an ACTIVE claim **staged in the index**
 for `docs/SESSIONS.md`, and `claim.sh` writes to that same file — so claiming would have meant
 committing their in-flight work, which is the sweep this board warns about and which this very
-section is about. Only `HANDOFF.md` is in this commit. The same reasoning, and the same
-sentence, appears in the 2026-09-01 close; it is becoming the standard manoeuvre and probably
-deserves to be a documented one rather than rediscovered per session.
+section is about. The same reasoning, and the same sentence, appears in the 2026-09-01 close.
+
+### ⚠ That paragraph said "only `HANDOFF.md` is in this commit" and it was false when written
+
+**Commit `ed9c0c9` contains `docs/SESSIONS.md` too** — twelve lines, `Mac/e8b745b6`'s ACTIVE
+claim block, staged in the index by them before I started. **Third sweep of the day, second by
+me, inside the commit whose message was about not doing it.**
+
+**The mechanism, which is the useful part: `git add <path>` does not clear a pre-staged index.**
+I reasoned that naming one path staged one path. It stages that path *in addition to* whatever
+was already there, and `git commit` then writes the whole index. Both my sweeps have this shape —
+`git add -A` the first time, `git add <path>` over somebody else's staged work the second. I
+printed `git diff --cached --name-only` immediately before committing, **which showed both files**,
+and committed anyway without reading my own output.
+
+**The tool-shaped cure, since "be careful" has now failed three times in one session:**
+`git commit -m "..." -- HANDOFF.md` commits *only* that pathspec and ignores the index entirely.
+That is the form to use in this checkout. A `pre-commit` hook refusing a commit whose staged set
+is wider than its pathspec would be the `turnstile`-style version, and `turnstile` already
+blocked a heredoc in this same session, so the instrument exists and is proven here.
+
+**Consequence, and it is mild.** A claim is meant to be published — `claim.sh` itself says
+*"COMMIT AND PUSH `docs/SESSIONS.md` now — an unpushed claim reaches nobody"* — so publishing
+theirs early helps them more than it hurts. **What is damaged is the log**, which now carries a
+commit asserting a fact about its own contents that is untrue. Left standing rather than
+rewritten, for the same reason as the other two, and recorded here because a false sentence in
+a commit message is exactly the defect this repository exists to document.
 
 ## Session close, 2026-09-06 — `Mac/730cc14a` · the suite that proves the checks have teeth cannot reach the check that matters
 
