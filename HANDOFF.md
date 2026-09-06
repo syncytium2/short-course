@@ -44,6 +44,25 @@ six human steps ran on a fresh machine on this date*.
 **Neither was started. Tony, 2026-09-04: "i don't have the focus to do this now."** Nothing is
 half-built and nothing is waiting on a decision — both are simply not begun.
 
+**3 · The only open milestone, added 2026-09-06, and it outranks both of the above.**
+[`docs/MILESTONES.md`](docs/MILESTONES.md) **M8** is the one row still `open`:
+`what-it-costs.html` is live and carries **14 blocking findings** from the 2026-08-29 review,
+[`docs/reviews/README.md`](docs/reviews/README.md) still warns about them **dated 2026-08-30**, and
+**seven commits have touched that page since**, several plainly repairs of findings that run named.
+So the real status is *nobody can say*, and the warning is now the stalest thing in the repo.
+**Do not cite it as current and do not treat it as cleared.** The fix is the taxonomy's own first
+recommendation — findings get durable ids, repairs cite them, and the join is derived rather than
+maintained — and it is a precondition for putting anything from that page in front of a reader.
+
+**Loose ends from 2026-09-05, neither of them decaying.** `case-true-report-wrong-object` is
+finished at `efb3f3a`, pushed, and **has no PR** — its session closed with *"that's short-course's
+call"* and nothing has picked it up since; it is the worked example inside
+[`docs/cases/2026-09-04-the-turn-ended-with-an-inventory.md`](docs/cases/2026-09-04-the-turn-ended-with-an-inventory.md).
+And the **shared checkout was dirty** on 2026-09-06 — all seven handouts plus
+`tools/presentation_check.js`, uncommitted, by a session working in the shared tree rather than a
+worktree. Left untouched deliberately: a clean status is not evidence a worktree is idle, and a
+dirty one is not evidence it is abandoned.
+
 ---
 
 **2026-08-30. Parked, deliberately, and nothing is decaying.** Everything is committed and pushed
@@ -2337,3 +2356,79 @@ Toolkit key is uncapped by default, and the per-token rates.
 - **Which `HANDOFF.md` he meant on 2026-09-02** — he pointed at one in `draughtsman`'s
   scratchpad, not this file. Never resolved, and that scratchpad is session-scoped and may
   already be gone.
+
+---
+
+## Session close, 2026-09-06 — `Mac/41a56768`, later `Tonys-MacBook-Pro/41a56768`
+
+*Two identities, one session: the hostname changed partway through, which is why `claim.sh
+--mine` shows blocks under both names. Worth knowing before it confuses somebody.*
+
+### What shipped
+
+- [`docs/drafts/starting-with-an-agent.html`](docs/drafts/starting-with-an-agent.html) — an
+  onboarding sequence for people new to coding agents. Drafted for new faculty, rewritten for
+  beginners generally on Tony's correction, then verified against live pages. **Parked and
+  never reviewed by him.** Published at
+  <https://claude.ai/code/artifact/80878b75-d69c-4fe1-9d69-5cbe2cac586d>.
+- [`docs/reviews/starting-with-an-agent_murderboard_2026-09-05.md`](docs/reviews/starting-with-an-agent_murderboard_2026-09-05.md)
+  — 11 of 11 roles, 3 blocking / 6 major / 5 minor, round 1, **not blind**.
+- A U-M landscape sweep that found the offering Tony asked about, plus the finding below.
+
+### What was live and wrong
+
+**Three of my own claims died this session, and the order they died in is the finding.**
+
+1. *"The institutional route is uncapped — nothing stops, nothing warns."* Published in two
+   drafts. The Toolkit portal offers monthly quotas and always has. Killed by Tony opening a
+   page I could not fetch.
+2. *"You have reviewed the Getting Started page."* I had not, and neither had the 09-02 session
+   whose research fed the draft — every `its.umich.edu` fetch returned 403 and everything came
+   from search summaries. Said in conversation on the day, written down only when it mattered.
+3. *"`tools/presentation_check.js` belongs to `short-course-3d`."* It does not. Killed by that
+   session, who also correctly refused the fix-up commit I offered.
+
+**Every one was plausible, survived a read, and died to somebody looking at the actual thing.**
+
+### The thing worth keeping
+
+**The draft was accurate wherever it quoted and wrong wherever it compressed.** Every direct
+quotation from `points.md` verifies verbatim — three checked by grep. Every service fact
+reproduces against the pasted pages. All three blocking murderboard findings are in summarised
+material: the tool that does not solve the failure it names, the dependency claim that is not
+true of its own list, and an 18,019-word handout re-derived without being cited.
+
+That is a usable rule for the next document — *quote or verify, never paraphrase from memory* —
+and I do not think this repo has named it before. It also explains the shape of finding 2 above:
+the U-M research was a paraphrase of a search summary of a page nobody had read.
+
+### Carried forward
+
+- **The draft's fate is one decision, and it is Tony's.** Murderboard B1 says it re-derives
+  [`cold-start.html`](docs/handouts/cold-start.html) — same subject, same route-branching, and
+  Cold Start attaches a verification condition to every step where the draft attaches one to
+  none. It is either the decision layer above Cold Start, or it is deleted into it. **Do not
+  ship both.**
+- **`points.md:697` is wrong about `caffeinate`.** `man caffeinate` on this machine: the `u`
+  assertion expires after 5 seconds without `-t`. The draft inherited it. Neither is fixed.
+- **Two facts would promote a major finding to blocking** and both are one link past what was
+  pasted: whether a new Toolkit key is uncapped by default, and the per-token rates.
+- **The swept file's owner is unidentified**, `claim.sh --list` shows no active claims, and its
+  header names the screenshot Tony sent that caused it. **Ask him, not seven sessions.**
+- **The best positioning sentence found all week is the institution's own**: *"it is assumed
+  that Developers who are granted access to the API gateway already have API experience and
+  technical expertise."* Not yet in `OPEN-FINDINGS.md`, where the vacancy-claim material lives.
+- **No darkroom copy of the draft**, deliberately — it is under a blocking finding that may
+  delete it.
+
+### Two things this session did not do, on purpose
+
+It did not touch the seven modified handout files or `presentation_check.js` in the shared
+checkout — they belong to another session and are still modified in the tree. Every commit after
+the sweep staged explicit paths, and the pushes used `--autostash` so that session's working
+tree came back each time; verified after each.
+
+It did not backfill the `**Writes:**` and `**Notes:**` placeholders on its own claim blocks,
+which `claim.sh` prompted for four times and which were left unfilled every time. Filling them
+now would be writing history. **Recorded instead because it is the same failure as the sweep:**
+had `Writes:` been filled, the collision would have been visible to somebody before it happened.

@@ -57,7 +57,7 @@
     background: var(--ground);
     color: var(--ink);
     font-family: var(--sans);
-    font-size: 15px;
+    font-size: 1rem;
     line-height: 1.55;
     margin: 0;
     padding: 40px 24px 96px;
@@ -66,20 +66,29 @@
 
   .page { max-width: 860px; margin: 0 auto; }
 
+  /* ---- one prose measure, site-wide ----
+     58ch is ~71 characters of this font, which is inside the readable band and close to
+     cold-start's 68 -- the one column nobody has ever complained about reading. In `ch`
+     rather than px so it tracks the reader's own font size: raise the text and the column
+     widens with it, and the measure stays put. A px column does the opposite.
+     Only prose is capped. Tables, figures and panels keep their own widths. */
+  p, li { max-width: 58ch; }
+  .page > p, .page > ul, .page > ol { max-width: 58ch; }
+
   /* ---- masthead ---- */
   .mast { border-bottom: 2px solid var(--ink); padding-bottom: 18px; margin-bottom: 8px; }
   .eyebrow .home { color: inherit; text-decoration: none; border-bottom: 1px solid currentColor; }
   .eyebrow .home:hover { color: var(--accent); }
   .eyebrow {
     font-family: var(--mono);
-    font-size: 11px;
+    font-size: 0.7333rem;
     letter-spacing: 0.13em;
     text-transform: uppercase;
     color: var(--muted);
     margin: 0 0 10px;
   }
   h1 {
-    font-size: 26px;
+    font-size: 1.7333rem;
     font-weight: 600;
     letter-spacing: -0.015em;
     margin: 0 0 10px;
@@ -100,7 +109,7 @@
   .esc-row:first-child { border-top: 1px solid var(--rule); }
   .esc-k {
     font-family: var(--mono);
-    font-size: 12px;
+    font-size: 0.8rem;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--muted);
@@ -114,7 +123,7 @@
     border-left: 2px solid var(--accent);
     padding: 13px 16px;
     margin: 0 0 38px;
-    font-size: 14px;
+    font-size: 0.9333rem;
     color: var(--ink);
   }
   .method b { font-weight: 600; }
@@ -129,10 +138,10 @@
     padding-bottom: 7px;
     margin-bottom: 4px;
   }
-  h2 { font-size: 17px; font-weight: 600; margin: 0; letter-spacing: -0.01em; }
+  h2 { font-size: 1.1333rem; font-weight: 600; margin: 0; letter-spacing: -0.01em; }
   .phase-time {
     font-family: var(--mono);
-    font-size: 11px;
+    font-size: 0.7333rem;
     color: var(--muted);
     margin-left: auto;
     white-space: nowrap;
@@ -147,9 +156,16 @@
     padding: 14px 0;
     border-bottom: 1px solid var(--rule);
   }
+  /* WHY min-width: 0, AND IT IS NOT COSMETIC. A grid item defaults to min-width: auto,
+     which refuses to shrink below its widest unbreakable child -- so one long command in a
+     <pre> made the whole 1fr track wider than a phone, and the PAGE scrolled sideways
+     rather than the code block. Every paragraph in the step inherited the blown-out width.
+     Found 2026-09-05 at 390px: the document itself was 518px wide. */
+  ol.steps > li > .body { min-width: 0; }
+  ol.steps > li > .body pre { overflow-x: auto; }
   .n {
     font-family: var(--mono);
-    font-size: 13px;
+    font-size: 0.8667rem;
     font-weight: 500;
     color: var(--accent);
     padding-top: 1px;
@@ -158,10 +174,10 @@
   .body > :first-child { margin-top: 0; }
   .body > :last-child { margin-bottom: 0; }
   .do { margin: 0 0 4px; font-weight: 500; }
-  .why { margin: 0 0 8px; color: var(--muted); font-size: 14px; }
+  .why { margin: 0 0 8px; color: var(--muted); font-size: 0.9333rem; }
 
   .done {
-    font-size: 13.5px;
+    font-size: 0.9rem;
     color: var(--muted);
     margin: 8px 0 0;
     padding-left: 15px;
@@ -177,7 +193,7 @@
 
   pre {
     font-family: var(--mono);
-    font-size: 12.5px;
+    font-size: 0.8333rem;
     line-height: 1.65;
     background: var(--sunk);
     border: 1px solid var(--rule);
@@ -203,12 +219,12 @@
   }
   ul.plain > li:last-child { border-bottom: none; }
   ul.plain .lead { font-weight: 500; }
-  ul.plain .sub { color: var(--muted); font-size: 14px; }
+  ul.plain .sub { color: var(--muted); font-size: 0.9333rem; }
 
   /* ---- loop marker ---- */
   .loop {
     font-family: var(--mono);
-    font-size: 12px;
+    font-size: 0.8rem;
     color: var(--accent);
     background: var(--accent-soft);
     padding: 9px 13px;
@@ -221,7 +237,7 @@
   .traps ul.plain > li { border-bottom: 1px solid var(--rule); }
   .trap-k {
     font-family: var(--mono);
-    font-size: 11px;
+    font-size: 0.7333rem;
     letter-spacing: 0.09em;
     text-transform: uppercase;
     color: var(--caution);
@@ -232,14 +248,14 @@
   /* ---- barriers ---- */
   .barriers { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); margin-top: 4px; }
   .barrier { background: var(--surface); padding: 14px 15px; }
-  .barrier h3 { font-size: 13px; margin: 0 0 5px; font-weight: 600; }
-  .barrier p { margin: 0; font-size: 13.5px; color: var(--muted); }
+  .barrier h3 { font-size: 0.8667rem; margin: 0 0 5px; font-weight: 600; }
+  .barrier p { margin: 0; font-size: 0.9rem; color: var(--muted); }
 
   /* ---- spokes ---- */
   .spokes ul.plain > li { display: flex; gap: 12px; align-items: baseline; justify-content: space-between; flex-wrap: wrap; }
   .status {
     font-family: var(--mono);
-    font-size: 10.5px;
+    font-size: 0.7rem;
     letter-spacing: 0.09em;
     text-transform: uppercase;
     color: var(--faint);
@@ -253,7 +269,7 @@
     padding-top: 16px;
     border-top: 1px solid var(--rule);
     color: var(--faint);
-    font-size: 13px;
+    font-size: 0.8667rem;
   }
   footer p { margin: 0 0 6px; }
 
@@ -271,7 +287,7 @@
   .split { display: grid; grid-template-columns: 1fr 1fr; gap: 0 34px; margin-top: 4px; }
   .split h3 {
     font-family: var(--mono);
-    font-size: 11px;
+    font-size: 0.7333rem;
     letter-spacing: 0.11em;
     text-transform: uppercase;
     margin: 0 0 4px;
@@ -309,13 +325,13 @@
   .draft-k {
     display: block;
     font-family: var(--mono);
-    font-size: 11.5px;
+    font-size: 0.7667rem;
     letter-spacing: .07em;
     text-transform: uppercase;
     color: var(--caution);
     margin: 0 0 5px;
   }
-  .draft p { margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--ink); }
+  .draft p { margin: 0; font-size: 0.9rem; line-height: 1.55; color: var(--ink); }
   .draft p + p { margin-top: 7px; }
   @media print { .draft { break-inside: avoid; } }
 </style>

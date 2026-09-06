@@ -118,17 +118,29 @@ function check(where, what, got, limit, ok) {
 // MEASURED FROM THE FONT ACTUALLY IN USE, not assumed. An average character width taken
 // from the rendered alphabet is what makes "characters per line" a measurement rather than
 // px divided by a guess.
+// THE MEDIAN, NOT THE FIRST ONE. The first draft measured the first long paragraph it
+// found and reported the front page at 41 characters -- because the first long paragraph
+// there sits inside a narrow card, not in the body column. A method that samples one
+// element reports that element, and it read as a verdict on the page. The median across
+// every substantial paragraph is what a reader actually spends their time in, and it
+// cannot be thrown by one narrow box.
 const MEASURE_FN = `(sel) => {
-  const el = [...document.querySelectorAll(sel)]
-    .filter(e => e.offsetParent !== null && e.textContent.trim().length > 120)[0];
-  if (!el) return null;
-  const cs = getComputedStyle(el);
+  const els = [...document.querySelectorAll(sel)]
+    .filter(e => e.offsetParent !== null && e.textContent.trim().length > 120);
+  if (!els.length) return null;
   const c = document.createElement('canvas').getContext('2d');
-  c.font = cs.fontStyle + ' ' + cs.fontWeight + ' ' + cs.fontSize + ' ' + cs.fontFamily;
-  const avg = c.measureText('abcdefghijklmnopqrstuvwxyz').width / 26;
-  const box = el.getBoundingClientRect().width
-    - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
-  return { chars: Math.round(box / avg), px: parseFloat(cs.fontSize), text: el.textContent.slice(0, 40) };
+  const rows = els.map(el => {
+    const cs = getComputedStyle(el);
+    c.font = cs.fontStyle + ' ' + cs.fontWeight + ' ' + cs.fontSize + ' ' + cs.fontFamily;
+    const avg = c.measureText('abcdefghijklmnopqrstuvwxyz').width / 26;
+    const box = el.getBoundingClientRect().width
+      - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+    return { chars: Math.round(box / avg), px: parseFloat(cs.fontSize) };
+  }).sort((a, b) => a.chars - b.chars);
+  const mid = rows[Math.floor(rows.length / 2)];
+  return { chars: mid.chars, px: mid.px, n: rows.length,
+           widest: rows[rows.length - 1].chars,
+           spread: rows[0].chars + '-' + rows[rows.length - 1].chars };
 }`;
 
 const SMALLEST_FN = `() => {
@@ -151,9 +163,18 @@ const OVERFLOW_FN = `() => {
     if (el.offsetParent === null) continue;
     const r = el.getBoundingClientRect();
     if (r.width < 2) continue;
-    // An element allowed to scroll inside itself is not an overflow, it is a decision.
-    const cs = getComputedStyle(el);
-    if (cs.overflowX === 'auto' || cs.overflowX === 'scroll') continue;
+    // AN ELEMENT INSIDE A SCROLLABLE BOX IS NOT AN OVERFLOW, IT IS THE BOX WORKING. The
+    // first version skipped the scroll container itself and then flagged its children, so
+    // every wide table on the site reported as broken on a phone -- while sitting in the
+    // .tw / .tbl-wrap wrapper built precisely to let it scroll. That is the check
+    // misreading a working design as a fault, which costs more than missing one: it puts
+    // four confident false failures in front of whoever runs it.
+    let scrollable = false;
+    for (let a = el; a && a !== document.body; a = a.parentElement) {
+      const acs = getComputedStyle(a);
+      if (acs.overflowX === 'auto' || acs.overflowX === 'scroll') { scrollable = true; break; }
+    }
+    if (scrollable) continue;
     if (r.right > doc.clientWidth + 1 || r.left < -1) {
       out.push((el.tagName.toLowerCase() + '.' + (el.className || '').toString().split(' ')[0])
                .slice(0, 40));
@@ -188,10 +209,20 @@ const OVERFLOW_FN = `() => {
             '>= ' + MIN_ANY_PX + 'px', small.px >= MIN_ANY_PX);
       check(where, 'nothing overflows', over.length ? over.join(', ') : 'clean', 'clean', !over.length);
       if (m) {
-        check(where, 'line length', m.chars + ' chars',
-              MIN_CHARS + '-' + MAX_CHARS, m.chars >= MIN_CHARS && m.chars <= MAX_CHARS);
+        // THE UPPER BOUND IS THE ASSERTION; THE LOWER ONE IS INFORMATION, and the
+        // difference is not squeamishness. An over-wide reading line is a defect
+        // wherever it appears -- the eye loses the start of the next line and there is no
+        // design in which that is wanted. A NARROW paragraph is usually a decision: four
+        // barriers is built from cards and panels whose prose is meant to be short, and
+        // the first version of this check reported that page at "41 chars" and called it a
+        // failure, which was the check describing a card layout it did not understand.
+        // So: fail on the widest prose on the page, report the median, and leave judging
+        // narrowness to a person.
+        check(where, 'widest reading line', m.widest + ' chars',
+              '<= ' + MAX_CHARS, m.widest <= MAX_CHARS);
         console.log('      ' + vp.name.padEnd(8) + ' body ' + String(body + 'px').padEnd(7) +
-                    ' measure ' + String(m.chars + ' chars').padEnd(10) +
+                    ' median ' + String(m.chars).padEnd(4) +
+                    ' widest ' + String(m.widest + ' chars').padEnd(10) +
                     ' smallest ' + String(small.px + 'px').padEnd(7) +
                     (over.length ? ' OVERFLOW: ' + over.join(', ') : ''));
       }
@@ -262,7 +293,7 @@ async function runSelftest() {
   const B = await measure('bad.html');
   say(B.body < MIN_BODY_PX, 'a body smaller than the browser default is caught (' + B.body + 'px)');
   say(B.small.px < MIN_ANY_PX, 'text at 9.5px is caught (' + B.small.px + 'px)');
-  say(B.m && B.m.chars < MIN_CHARS, 'a measure too narrow to read is caught (' + (B.m && B.m.chars) + ' chars)');
+  say(B.m && B.m.widest > 0 && B.m.chars < MIN_CHARS, 'a measure too narrow to read is caught (' + (B.m && B.m.chars) + ' chars)');
   say(B.over.length > 0, 'a block wider than the window is caught (' + B.over.join(', ') + ')');
 
   const G = await measure('good.html');
