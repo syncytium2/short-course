@@ -944,3 +944,51 @@ piece of advice that cannot diagnose the thing in front of you.
 4. **The route has still been walked to completion exactly once**, on 2026-08-30, by the people
    who wrote it. This walk did not finish. The *"not yet walked from a clean machine"* banner
    stays until someone outside this project gets to W5.
+
+---
+
+### N9 · The estate publishes websites from artifact sources and had no presentation check anywhere in it
+
+**Native, 2026-09-05/06. The defect is fixed here; the submission to `armory` is not written.**
+
+Tony, on seeing the live runbook in a fresh Firefox at 110% zoom: *"why is the app display a
+fixed width not filling the width of the browser window"*, then *"and why didn't we handle it
+in a professional manner to start with"*, then **"it sounds like an issue for armory since
+somehow we became a website factory."**
+
+**What was wrong here, and is now repaired** (`f2d18a1` and the rebuild after it): body at
+15px on six of seven sheets — below the browser's own default, in `px`, which overrides the
+reader's setting; 9.5px on the step badges; a media query shrinking phones to 14.5px; prose at
+111 and 124 characters on two sheets; and a phone-width sideways scroll. `tools/presentation_check.js`
+now measures all of it at three viewport widths and runs in CI.
+
+**Why nothing caught it, which is the transferable part.** `browser_check.js` calls
+`browser.newPage()` with no viewport, so 83 assertions had always run at Playwright's default
+1280×720. Fourteen of them touch `offsetParent` or `getComputedStyle` and every one asks *is
+this element visible*, never *is this readable*. **The pages are artifact sources** — authored
+for a narrow panel beside a conversation, where 560px is correct — and `build_site.sh`
+republishes them as a standalone site, reconciling the **markup** and never the **layout
+premise**. The CSS still said *"sized for a window docked beside a terminal"*: true when
+written, and a description of a medium the reader had left.
+
+**Why it is armory's and not ours.** Several repositories in this estate now publish HTML,
+and this class of defect is invisible to every check any of them has. The instrument is
+written to travel — `# instrument: verification` header, no repo-specific paths, viewports
+and limits named as constants at the top.
+
+**Decisions, none taken.**
+
+1. **Write the submission.** armory's rule is *submit, do not merge*: repository, ref, path
+   and line, and a tool arrives as its origin repo's committed file and is collected by the
+   pipeline — nothing outside armory writes to it. Nothing was written to armory by this
+   session, deliberately. The finding needs its stated blind spots carried with it: it
+   measures line length, body size, smallest text and overflow, and **cannot** judge
+   hierarchy, contrast, or whether a wide empty margin should hold navigation.
+2. **The limits are defensible but not researched.** 45–85 characters, a 16px floor, 11px for
+   any reader-visible text. These are the settled typographic ranges as I understand them and
+   the report prints every measured value beside its limit so a reader can argue — but no
+   source is cited, and one figure I quoted in conversation (GOV.UK's 19px desktop body) was
+   from memory and never verified.
+3. **The wide margins are now correctly empty rather than wrongly cramped.** Filling them with
+   the phase navigation — the left rail every documentation site has, driven by the step state
+   this page already computes — is proposed and not built.
