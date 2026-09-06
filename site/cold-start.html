@@ -95,7 +95,7 @@
     background: var(--ground);
     color: var(--ink);
     font-family: var(--sans);
-    font-size: 15px;
+    font-size: 1rem;
     line-height: 1.55;
     margin: 0;
     padding: 0 0 88px;
@@ -120,14 +120,14 @@
     display: flex; align-items: center; gap: 12px;
   }
   .bar-count {
-    font-family: var(--mono); font-size: 11.5px; letter-spacing: .06em;
+    font-family: var(--mono); font-size: 0.7667rem; letter-spacing: .06em;
     color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap;
   }
   .bar-count b { color: var(--ink); font-weight: 600; }
   .bar-track { flex: 1; height: 3px; background: var(--rule); position: relative; }
   .bar-fill { position: absolute; inset: 0 auto 0 0; width: 0; background: var(--good); }
   .bar-reset {
-    font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em;
+    font-family: var(--mono); font-size: 0.7rem; letter-spacing: .08em;
     text-transform: uppercase; color: var(--faint);
     background: none; border: 0; padding: 3px 2px; cursor: pointer;
   }
@@ -136,7 +136,7 @@
      is PRESENT -- a reader who does not know they are missing a word will not go looking,
      and the one who does should not have to scroll to the top to find out. */
   .bar-terms {
-    font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em;
+    font-family: var(--mono); font-size: 0.7rem; letter-spacing: .08em;
     text-transform: uppercase; color: var(--faint);
     text-decoration: none; padding: 3px 2px; margin-right: 2px;
   }
@@ -147,15 +147,15 @@
   .eyebrow .home { color: inherit; text-decoration: none; border-bottom: 1px solid currentColor; }
   .eyebrow .home:hover { color: var(--accent); }
   .eyebrow {
-    font-family: var(--mono); font-size: 11px; letter-spacing: .13em;
+    font-family: var(--mono); font-size: 0.7333rem; letter-spacing: .13em;
     text-transform: uppercase; color: var(--muted); margin: 0 0 10px;
   }
-  h1 { font-size: 27px; font-weight: 600; letter-spacing: -.015em; margin: 0 0 10px; text-wrap: balance; }
+  h1 { font-size: 1.8rem; font-weight: 600; letter-spacing: -.015em; margin: 0 0 10px; text-wrap: balance; }
   .standfirst { color: var(--muted); margin: 0; }
 
   .method {
     background: var(--accent-soft); border-left: 2px solid var(--accent);
-    padding: 13px 15px; margin: 24px 0 30px; font-size: 14px;
+    padding: 13px 15px; margin: 24px 0 30px; font-size: 0.9333rem;
   }
   .method p { margin: 0 0 7px; }
   .method p:last-child { margin: 0; }
@@ -164,7 +164,7 @@
   /* ---- the door questions ---- */
   .door { margin: 0 0 34px; }
   .door-head {
-    font-family: var(--mono); font-size: 11px; letter-spacing: .12em;
+    font-family: var(--mono); font-size: 0.7333rem; letter-spacing: .12em;
     text-transform: uppercase; color: var(--caution); margin: 0 0 8px;
   }
   .door dl { margin: 0; border-top: 1px solid var(--rule); }
@@ -172,10 +172,10 @@
     font-weight: 500; padding: 10px 0 0;
   }
   .door dd {
-    margin: 0 0 0; padding: 2px 0 10px; color: var(--muted); font-size: 14px;
+    margin: 0 0 0; padding: 2px 0 10px; color: var(--muted); font-size: 0.9333rem;
     border-bottom: 1px solid var(--rule);
   }
-  .door-lede { margin: 0 0 12px; color: var(--muted); font-size: 14px; }
+  .door-lede { margin: 0 0 12px; color: var(--muted); font-size: 0.9333rem; }
 
   /* ---- the tier switch: how far are you going ----
      Three buttons, not a dropdown. The options have to be readable side by side
@@ -189,7 +189,7 @@
     border: 1px solid var(--rule-firm); border-radius: 6px; padding: 10px 12px;
   }
   .tierpick b { display: block; font-weight: 600; margin: 0 0 3px; }
-  .tierpick span { display: block; color: var(--muted); font-size: 13px; line-height: 1.4; }
+  .tierpick span { display: block; color: var(--muted); font-size: 0.8667rem; line-height: 1.4; }
   .tierpick:hover { border-color: var(--accent); }
   .tierpick[aria-pressed="true"] {
     background: var(--accent-soft); border-color: var(--accent);
@@ -197,16 +197,16 @@
   }
   .tierpick[aria-pressed="true"] b { color: var(--accent); }
   .door-now {
-    margin: 12px 0 0; font-size: 14px; color: var(--muted);
+    margin: 12px 0 0; font-size: 0.9333rem; color: var(--muted);
     border-top: 1px solid var(--rule); padding-top: 10px;
   }
   .door-more { margin: 14px 0 0; }
   .door-more > summary {
-    cursor: pointer; font-size: 13px; color: var(--muted);
+    cursor: pointer; font-size: 0.8667rem; color: var(--muted);
     font-family: var(--mono); letter-spacing: .02em;
   }
   .door-more dl { margin-top: 10px; }
-  .door-more > p { font-size: 14px; color: var(--muted); margin: 10px 0 0; }
+  .door-more > p { font-size: 0.9333rem; color: var(--muted); margin: 10px 0 0; }
 
   /* A step or a whole phase that this tier does not use is REMOVED, not greyed.
      Greying it would leave the reader deciding, one step at a time, whether a
@@ -231,12 +231,12 @@
     display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
     border-bottom: 1px solid var(--ink); padding-bottom: 7px; margin-bottom: 2px;
   }
-  h2 { font-size: 16.5px; font-weight: 600; margin: 0; letter-spacing: -.01em; }
+  h2 { font-size: 1.1rem; font-weight: 600; margin: 0; letter-spacing: -.01em; }
   .phase-time {
-    font-family: var(--mono); font-size: 11px; color: var(--muted);
+    font-family: var(--mono); font-size: 0.7333rem; color: var(--muted);
     margin-left: auto; white-space: nowrap;
   }
-  .phase-note { font-size: 13.5px; color: var(--muted); margin: 9px 0 0; }
+  .phase-note { font-size: 0.9rem; color: var(--muted); margin: 9px 0 0; }
 
   /* ---- steps ----
      A step is heading + its links + a collapsed detail + a checklist.
@@ -251,11 +251,11 @@
   .head {
     display: block; flex: 1; min-width: 0; text-align: left; padding: 0; border: 0;
     background: none; cursor: pointer; color: inherit;
-    font-family: inherit; font-size: 15px; line-height: 1.45; font-weight: 500;
+    font-family: inherit; font-size: 1rem; line-height: 1.45; font-weight: 500;
     text-wrap: pretty;
   }
   .head .n {
-    font-family: var(--mono); font-size: 12px; font-weight: 500;
+    font-family: var(--mono); font-size: 0.8rem; font-weight: 500;
     color: var(--accent); font-variant-numeric: tabular-nums; margin-right: 8px;
   }
   .head .n::after { content: "\00a0"; }
@@ -277,7 +277,7 @@
 
   .badge {
     flex: none; margin-top: 3px;
-    font-family: var(--mono); font-size: 9.5px; letter-spacing: .13em;
+    font-family: var(--mono); font-size: 0.6875rem; letter-spacing: .13em;
     text-transform: uppercase; padding: 2px 7px; white-space: nowrap;
     color: var(--bad); background: var(--bad-soft); border: 1px solid var(--bad);
   }
@@ -307,18 +307,18 @@
   .lockmsg { display: none; }
   li[data-locked="1"] > .lockmsg {
     display: block; margin: 8px 0 0; padding: 9px 11px;
-    font-size: 13.5px; line-height: 1.5; color: var(--muted);
+    font-size: 0.9rem; line-height: 1.5; color: var(--muted);
     background: var(--sunk); border-left: 2px solid var(--rule-firm);
   }
   li[data-locked="1"] > .lockmsg b { color: var(--ink); }
   .only {
-    font-family: var(--mono); font-size: 9.5px; letter-spacing: .11em;
+    font-family: var(--mono); font-size: 0.6875rem; letter-spacing: .11em;
     text-transform: uppercase; color: var(--caution);
     border: 1px solid var(--caution); padding: 1px 5px; margin-right: 8px;
     vertical-align: 1px;
   }
   .skipbtn {
-    font-family: var(--mono); font-size: 10px; letter-spacing: .08em;
+    font-family: var(--mono); font-size: 0.6875rem; letter-spacing: .08em;
     text-transform: uppercase; color: var(--faint);
     background: none; border: 1px solid var(--rule-firm); padding: 2px 7px;
     cursor: pointer; margin-top: 9px;
@@ -329,15 +329,15 @@
   /* links sit directly under the heading and stay visible when the detail is shut */
   .links {
     margin: 7px 0 0; display: flex; flex-wrap: wrap; gap: 4px 14px;
-    font-size: 13px;
+    font-size: 0.8667rem;
   }
   .links a { text-decoration: none; border-bottom: 1px solid currentColor; }
-  .links a::before { content: "\2197"; margin-right: 4px; font-size: 10px; vertical-align: 1px; }
+  .links a::before { content: "\2197"; margin-right: 4px; font-size: 0.6875rem; vertical-align: 1px; }
   .links a:hover { color: var(--ink); }
 
   .detail { margin-top: 10px; }
   li[data-open="0"] .detail { display: none; }
-  .why { margin: 0 0 8px; color: var(--muted); font-size: 14px; }
+  .why { margin: 0 0 8px; color: var(--muted); font-size: 0.9333rem; }
   .why:last-child { margin-bottom: 0; }
   .detail b { font-weight: 600; }
 
@@ -367,7 +367,7 @@
      answer is for the reader who wants it; 115 of them open at once is a wall.
      ------------------------------------------------------------------------------- */
   .whyq {
-    flex: none; font-family: var(--mono); font-size: 10px; letter-spacing: .06em;
+    flex: none; font-family: var(--mono); font-size: 0.6875rem; letter-spacing: .06em;
     text-transform: uppercase; color: var(--faint); background: none;
     border: 1px solid var(--rule-firm); border-radius: 2px;
     padding: 0 4px; margin-left: 2px; cursor: pointer;
@@ -375,7 +375,7 @@
   .whyq:hover { color: var(--accent); border-color: var(--accent); }
   .whyq[aria-expanded="true"] { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
   .whya {
-    grid-column: 2; margin: 4px 0 5px; font-size: 12.5px; line-height: 1.5;
+    grid-column: 2; margin: 4px 0 5px; font-size: 0.8333rem; line-height: 1.5;
     color: var(--muted); border-left: 2px solid var(--rule-firm); padding-left: 10px;
   }
   /* THE CUE, ON THE BOXES THAT HAVE ONE. An answer that explains the risk and then stops
@@ -385,11 +385,11 @@
      Selectable rather than behind a copy button: there are 46 of them, and a button each
      would be more chrome than the answers they sit under. */
   .whya .ask {
-    display: block; margin-top: 6px; font-family: var(--mono); font-size: 11.5px;
+    display: block; margin-top: 6px; font-family: var(--mono); font-size: 0.7667rem;
     line-height: 1.5; color: var(--ink);
   }
   .whya .ask b {
-    font-family: var(--sans); font-size: 10px; letter-spacing: .08em;
+    font-family: var(--sans); font-size: 0.6875rem; letter-spacing: .08em;
     text-transform: uppercase; color: var(--accent); margin-right: 5px;
   }
   /* ---- the starter-project generator, in the page rather than inside a step ---- */
@@ -397,8 +397,8 @@
     border: 1px solid var(--rule-firm); background: var(--surface);
     padding: 14px 15px; margin: 16px 0 4px;
   }
-  .starter-lede { margin: 0; font-size: 14px; }
-  .starter-note { margin: 10px 0 0; font-size: 13px; color: var(--muted); }
+  .starter-lede { margin: 0; font-size: 0.9333rem; }
+  .starter-note { margin: 10px 0 0; font-size: 0.8667rem; color: var(--muted); }
   .starter .gen { margin: 11px 0 0; }
   /* A ticked box needs its reason less, so it recedes rather than disappearing. */
   ul.checks > li[data-on="1"] .whyq { opacity: .4; }
@@ -413,19 +413,19 @@
   .cb {
     flex: none; width: 16px; height: 16px; margin-top: 1px; padding: 0;
     border: 1px solid var(--muted); background: var(--surface); cursor: pointer;
-    font-family: var(--mono); font-size: 10px; line-height: 14px; text-align: center;
+    font-family: var(--mono); font-size: 0.6875rem; line-height: 14px; text-align: center;
     color: transparent;
   }
   .cb:hover { border-color: var(--good); color: var(--faint); }
   .cb[aria-pressed="true"] { background: var(--good-soft); border-color: var(--good); color: var(--good); }
-  .cbt { font-size: 13.5px; line-height: 1.45; }
+  .cbt { font-size: 0.9rem; line-height: 1.45; }
   li[data-on="1"] .cbt { color: var(--faint); }
   li[data-on="1"] .cbt a { color: var(--faint); }
   .cbt code { background: none; border: 0; padding: 0; }
 
   /* ---- code and prompts ---- */
   pre {
-    font-family: var(--mono); font-size: 12.5px; line-height: 1.6;
+    font-family: var(--mono); font-size: 0.8333rem; line-height: 1.6;
     background: var(--sunk); border: 1px solid var(--rule);
     padding: 10px 12px; margin: 8px 0; overflow-x: auto; white-space: pre;
   }
@@ -441,11 +441,11 @@
     border-bottom: 1px solid var(--accent);
   }
   .prompt-k {
-    font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em;
+    font-family: var(--mono); font-size: 0.7rem; letter-spacing: .1em;
     text-transform: uppercase; color: var(--accent);
   }
   .copy {
-    margin-left: auto; font-family: var(--mono); font-size: 10.5px;
+    margin-left: auto; font-family: var(--mono); font-size: 0.7rem;
     letter-spacing: .08em; text-transform: uppercase;
     border: 1px solid var(--accent); background: var(--surface); color: var(--accent);
     padding: 3px 8px; cursor: pointer;
@@ -457,12 +457,12 @@
   ul.tier { list-style: none; margin: 10px 0 0; padding: 0; border-top: 1px solid var(--rule); }
   ul.tier > li { padding: 9px 0; border-bottom: 1px solid var(--rule); display: grid; gap: 2px; }
   ul.tier .t-n { font-weight: 500; }
-  ul.tier .t-w { color: var(--muted); font-size: 13.5px; }
+  ul.tier .t-w { color: var(--muted); font-size: 0.9rem; }
 
   /* ---- warn block: used where the failure is silent ---- */
   .warn {
     background: var(--caution-soft); border-left: 2px solid var(--caution);
-    padding: 10px 12px; margin: 10px 0 0; font-size: 13.5px;
+    padding: 10px 12px; margin: 10px 0 0; font-size: 0.9rem;
   }
   .warn b { font-weight: 600; }
 
@@ -479,11 +479,11 @@
      Accent rather than caution: this is help, not danger. */
   .ask {
     background: var(--accent-soft); border-left: 2px solid var(--accent);
-    padding: 10px 12px; margin: 10px 0 0; font-size: 13.5px;
+    padding: 10px 12px; margin: 10px 0 0; font-size: 0.9rem;
   }
   .ask b { font-weight: 600; }
   .ask-k {
-    display: block; font-family: var(--mono); font-size: 10.5px;
+    display: block; font-family: var(--mono); font-size: 0.7rem;
     letter-spacing: .12em; text-transform: uppercase; color: var(--accent);
     margin-bottom: 4px;
   }
@@ -491,14 +491,14 @@
   /* ---- the agent ladder (1.1) ---- */
   .tbl-wrap { overflow-x: auto; margin: 10px 0 0; }
   table.ladder {
-    border-collapse: collapse; width: 100%; font-size: 13.5px; min-width: 460px;
+    border-collapse: collapse; width: 100%; font-size: 0.9rem; min-width: 460px;
   }
   table.ladder th, table.ladder td {
     text-align: left; padding: 8px 12px 8px 0;
     border-bottom: 1px solid var(--rule); vertical-align: top;
   }
   table.ladder th {
-    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.07em;
+    font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.07em;
     text-transform: uppercase; color: var(--muted); font-weight: 400;
     border-bottom: 1px solid var(--ink); white-space: nowrap;
   }
@@ -508,19 +508,19 @@
   /* ---- the fillable storage panel (2.1) ---- */
   .fill { border: 1px solid var(--rule-firm); background: var(--surface); padding: 12px 13px; margin: 10px 0 0; }
   .fill-k {
-    font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em;
+    font-family: var(--mono); font-size: 0.7rem; letter-spacing: .1em;
     text-transform: uppercase; color: var(--faint); margin: 0 0 9px;
   }
   .fill label { display: block; margin-bottom: 9px; }
-  .fill label span { display: block; font-size: 13px; color: var(--muted); margin-bottom: 3px; }
+  .fill label span { display: block; font-size: 0.8667rem; color: var(--muted); margin-bottom: 3px; }
   .fill input {
     width: 100%; padding: 6px 8px; background: var(--sunk); color: var(--ink);
     border: 1px solid var(--rule); border-radius: 0;
-    font-family: var(--mono); font-size: 12.5px; line-height: 1.4;
+    font-family: var(--mono); font-size: 0.8333rem; line-height: 1.4;
   }
   .fill input::placeholder { color: var(--faint); }
   .fill input:focus { border-color: var(--accent); background: var(--surface); }
-  .fill-note { margin: 4px 0 0; font-size: 13px; color: var(--muted); }
+  .fill-note { margin: 4px 0 0; font-size: 0.8667rem; color: var(--muted); }
 
   /* The generated prompt. The whole panel is the copy control, so there is no
      button inside it to nest. */
@@ -530,7 +530,7 @@
     background: var(--accent-soft); padding: 6px 10px; border-bottom: 1px solid var(--accent);
   }
   .gen-hint {
-    margin-left: auto; font-family: var(--mono); font-size: 10.5px;
+    margin-left: auto; font-family: var(--mono); font-size: 0.7rem;
     letter-spacing: .08em; text-transform: uppercase; color: var(--accent);
     border: 1px solid var(--accent); padding: 3px 8px; background: var(--surface); cursor: pointer;
   }
@@ -540,7 +540,7 @@
      the right; leaving both buttons with margin-left:auto splits the free space between them
      and they drift apart. */
   .gen-alt {
-    margin-left: auto; font-family: var(--mono); font-size: 10.5px;
+    margin-left: auto; font-family: var(--mono); font-size: 0.7rem;
     letter-spacing: .08em; text-transform: uppercase; color: var(--accent);
     border: 1px solid var(--accent); padding: 3px 8px; background: var(--surface); cursor: pointer;
   }
@@ -559,27 +559,27 @@
   .traps li { padding: 11px 0; border-bottom: 1px solid var(--rule); }
   .traps li:last-child { border-bottom: 0; }
   .trap-k {
-    font-family: var(--mono); font-size: 11px; letter-spacing: .09em;
+    font-family: var(--mono); font-size: 0.7333rem; letter-spacing: .09em;
     text-transform: uppercase; color: var(--caution); display: block; margin-bottom: 3px;
   }
-  .traps p { margin: 0 0 8px; font-size: 14px; color: var(--muted); }
+  .traps p { margin: 0 0 8px; font-size: 0.9333rem; color: var(--muted); }
   .traps p:last-child { margin-bottom: 0; }
   .traps p b { color: var(--ink); font-weight: 500; }
   .wrong {
     display: inline-block; background: var(--caution); color: var(--ground);
-    font-family: var(--mono); font-size: 10px; letter-spacing: .14em;
+    font-family: var(--mono); font-size: 0.6875rem; letter-spacing: .14em;
     padding: 1px 6px; margin-left: 7px; vertical-align: 1px;
   }
   .traps .incident {
     background: var(--sunk); border-left: 2px solid var(--rule-firm);
-    padding: 10px 12px; font-size: 13.5px;
+    padding: 10px 12px; font-size: 0.9rem;
   }
-  .traps .src { font-size: 13px; }
+  .traps .src { font-size: 0.8667rem; }
   .traps .src::before { content: "\2192"; color: var(--accent); margin-right: 6px; }
 
   footer {
     margin-top: 40px; padding-top: 14px; border-top: 1px solid var(--rule);
-    color: var(--faint); font-size: 12.5px;
+    color: var(--faint); font-size: 0.8333rem;
   }
   footer p { margin: 0 0 6px; }
   footer a { color: var(--faint); }
@@ -599,7 +599,7 @@
   }
 
   @media (max-width: 460px) {
-    body { font-size: 14.5px; }
+    body { }
     .page, .bar-in { padding-left: 14px; padding-right: 14px; }
     .phase-time { margin-left: 0; }
   }
@@ -621,13 +621,13 @@
   .draft-k {
     display: block;
     font-family: var(--mono);
-    font-size: 11.5px;
+    font-size: 0.7667rem;
     letter-spacing: .07em;
     text-transform: uppercase;
     color: var(--caution);
     margin: 0 0 5px;
   }
-  .draft p { margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--ink); }
+  .draft p { margin: 0; font-size: 0.9rem; line-height: 1.55; color: var(--ink); }
   .draft p + p { margin-top: 7px; }
   @media print { .draft { break-inside: avoid; } }
 
@@ -648,7 +648,7 @@
     scroll-margin-top: 56px;
   }
   .terms-k {
-    display: block; font-family: var(--mono); font-size: 11.5px;
+    display: block; font-family: var(--mono); font-size: 0.7667rem;
     letter-spacing: .07em; text-transform: uppercase; color: var(--muted);
     margin: 0 0 8px;
   }
@@ -656,10 +656,10 @@
   @media (max-width: 560px) { .terms dl { grid-template-columns: 1fr; gap: 2px; }
                               .terms dd { margin-bottom: 7px; } }
   .terms dt {
-    font-weight: 600; font-size: 13.5px; color: var(--accent);
+    font-weight: 600; font-size: 0.9rem; color: var(--accent);
     font-variant-numeric: tabular-nums; white-space: nowrap;
   }
-  .terms dd { margin: 0; font-size: 13.5px; line-height: 1.5; color: var(--ink); }
+  .terms dd { margin: 0; font-size: 0.9rem; line-height: 1.5; color: var(--ink); }
   /* The word is the jump. It looks like a link because it is one, and it keeps the accent
      colour it already had -- a second affordance beside it would be two things to explain. */
   .terms dt[data-jump] { cursor: pointer; text-decoration: underline; text-underline-offset: 3px;
@@ -670,7 +670,7 @@
      never read as one sentence: the definition is fixed and the chip is yours. */
   .t-you {
     display: inline-block; margin-top: 3px;
-    font-family: var(--mono); font-size: 10.5px; letter-spacing: .04em;
+    font-family: var(--mono); font-size: 0.7rem; letter-spacing: .04em;
     padding: 1px 6px; border-radius: 3px;
     background: var(--good-soft); color: var(--good); border: 1px solid var(--good);
   }
@@ -753,7 +753,7 @@
     <p class="eyebrow"><a href="/" class="home">&larr;&nbsp;It Looked Right</a> &middot; Setup runbook &middot; keep this window open</p>
     <h1>Cold Start</h1>
     <p class="standfirst">An email address to a first agent session that leaves a record behind it. Pick one of three routes &mdash; nothing installed, your own laptop, or a cluster shared with other people &mdash; and get every step it needs in order, with the condition that tells you each one worked.</p>
-    <p class="pv">Version <b>0.1.47</b> &middot; 5 Sep 2026<span class="pv-born">First published 29 Aug 2026</span></p>
+    <p class="pv">Version <b>0.1.48</b> &middot; 6 Sep 2026<span class="pv-born">First published 29 Aug 2026</span></p>
   </header>
 
   <div class="method">

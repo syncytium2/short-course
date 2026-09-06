@@ -56,7 +56,7 @@
 
   body {
     background: var(--ground); color: var(--ink);
-    font-family: var(--sans); font-size: 15px; line-height: 1.55;
+    font-family: var(--sans); font-size: 1rem; line-height: 1.55;
     margin: 0; padding: 40px 24px 96px; -webkit-font-smoothing: antialiased;
   }
   .page { max-width: 860px; margin: 0 auto; }
@@ -65,21 +65,25 @@
   .eyebrow .home { color: inherit; text-decoration: none; border-bottom: 1px solid currentColor; }
   .eyebrow .home:hover { color: var(--accent); }
   .eyebrow {
-    font-family: var(--mono); font-size: 11px; letter-spacing: 0.13em;
+    font-family: var(--mono); font-size: 0.7333rem; letter-spacing: 0.13em;
     text-transform: uppercase; color: var(--muted); margin: 0 0 10px;
   }
-  h1 { font-size: 26px; font-weight: 600; letter-spacing: -0.015em; margin: 0 0 10px; text-wrap: balance; }
+  h1 { font-size: 1.7333rem; font-weight: 600; letter-spacing: -0.015em; margin: 0 0 10px; text-wrap: balance; }
   .standfirst { color: var(--muted); margin: 0; max-width: 62ch; }
 
   .status {
     background: var(--caution-soft); border-left: 2px solid var(--caution);
-    padding: 13px 16px; margin: 22px 0 30px; font-size: 14px;
+    padding: 13px 16px; margin: 22px 0 30px; font-size: 0.9333rem;
   }
   .method {
     background: var(--accent-soft); border-left: 2px solid var(--accent);
-    padding: 13px 16px; margin: 0 0 34px; font-size: 14px;
+    padding: 13px 16px; margin: 0 0 34px; font-size: 0.9333rem;
   }
-  .status p, .method p { margin: 0 0 8px; max-width: none; }
+  /* WAS max-width: none, WHICH IS WHY THIS PAGE READ AT 124 CHARACTERS. Two panel classes
+     opted their own prose out of the site measure, on a page whose body paragraphs were
+     capped correctly -- so the defect was invisible in any rule you happened to read, and
+     only showed up when something measured the rendered line. */
+  .status p, .method p { margin: 0 0 8px; max-width: 58ch; }
   .status p:last-child, .method p:last-child { margin: 0; }
   .status b, .method b { font-weight: 600; }
 
@@ -88,13 +92,13 @@
     display: flex; align-items: baseline; gap: 12px;
     border-bottom: 1px solid var(--ink); padding-bottom: 7px; margin-bottom: 14px;
   }
-  h2 { font-size: 17px; font-weight: 600; margin: 0; letter-spacing: -0.01em; }
+  h2 { font-size: 1.1333rem; font-weight: 600; margin: 0; letter-spacing: -0.01em; }
   .sect-tag {
-    font-family: var(--mono); font-size: 11px; color: var(--muted);
+    font-family: var(--mono); font-size: 0.7333rem; color: var(--muted);
     margin-left: auto; white-space: nowrap; letter-spacing: 0.06em; text-transform: uppercase;
   }
-  h3 { font-size: 14px; font-weight: 600; margin: 22px 0 8px; }
-  p { margin: 0 0 12px; max-width: 74ch; }
+  h3 { font-size: 0.9333rem; font-weight: 600; margin: 22px 0 8px; }
+  p { margin: 0 0 12px; max-width: 58ch; }
 
   /* ---- the loop ---- */
   ol.beats { list-style: none; margin: 0; padding: 0; }
@@ -102,7 +106,7 @@
     display: grid; grid-template-columns: 40px 1fr; gap: 0 14px;
     padding: 14px 0; border-bottom: 1px solid var(--rule);
   }
-  .n { font-family: var(--mono); font-size: 13px; color: var(--accent); font-weight: 500; padding-top: 1px; }
+  .n { font-family: var(--mono); font-size: 0.8667rem; color: var(--accent); font-weight: 500; padding-top: 1px; }
   .b-title { font-weight: 600; margin: 0 0 6px; }
   .b-body { color: var(--muted); margin: 0 0 8px; }
   .b-body:last-child { margin: 0; }
@@ -114,18 +118,18 @@
     border-bottom: 1px solid var(--rule); background: var(--sunk);
   }
   .stop-n {
-    font-family: var(--mono); font-size: 11px; color: var(--accent);
+    font-family: var(--mono); font-size: 0.7333rem; color: var(--accent);
     letter-spacing: 0.06em; white-space: nowrap;
   }
-  .stop-t { font-weight: 600; font-size: 14px; }
+  .stop-t { font-weight: 600; font-size: 0.9333rem; }
   .stop-tag {
-    margin-left: auto; font-family: var(--mono); font-size: 10.5px;
+    margin-left: auto; font-family: var(--mono); font-size: 0.7rem;
     letter-spacing: 0.07em; text-transform: uppercase; white-space: nowrap;
   }
   .by-loop { color: var(--accent); }
   .not-loop { color: var(--caution); }
   .stop-body { padding: 14px 16px; }
-  .stop-body p { font-size: 14px; margin: 0 0 10px; }
+  .stop-body p { font-size: 0.9333rem; margin: 0 0 10px; }
   .stop-body p:last-child { margin: 0; }
 
   figure { margin: 0 0 12px; }
@@ -135,16 +139,16 @@
   }
   .shot img { display: block; width: 100%; height: auto; }
   figcaption {
-    font-size: 12.5px; color: var(--faint); padding-top: 7px; line-height: 1.5;
+    font-size: 0.8333rem; color: var(--faint); padding-top: 7px; line-height: 1.5;
   }
   figcaption b { color: var(--muted); font-weight: 600; }
 
   .said {
     border-left: 2px solid var(--rule); padding: 2px 0 2px 14px;
-    margin: 10px 0; font-size: 14px;
+    margin: 10px 0; font-size: 0.9333rem;
   }
   .said .who {
-    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.08em;
+    font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em;
     text-transform: uppercase; color: var(--faint); display: block; margin-bottom: 3px;
   }
   .said p { margin: 0 0 6px; }
@@ -152,14 +156,14 @@
 
   .verdict {
     margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--rule);
-    font-size: 13.5px;
+    font-size: 0.9rem;
   }
   .verdict b { font-weight: 600; }
 
-  table { border-collapse: collapse; width: 100%; margin: 6px 0 16px; font-size: 14px; }
+  table { border-collapse: collapse; width: 100%; margin: 6px 0 16px; font-size: 0.9333rem; }
   th, td { text-align: left; padding: 9px 12px 9px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
   th {
-    font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em;
+    font-family: var(--mono); font-size: 0.7333rem; letter-spacing: 0.06em;
     text-transform: uppercase; color: var(--muted); font-weight: 400;
     border-bottom: 1px solid var(--ink);
   }
@@ -167,12 +171,16 @@
   .tbl-wrap { overflow-x: auto; }
 
   .path, code {
-    font-family: var(--mono); font-size: 12.5px;
+    font-family: var(--mono); font-size: 0.8333rem;
     background: var(--sunk); padding: 1px 5px; border-radius: 2px;
   }
+  /* THE PROVENANCE BLOCK WAS THE WIDEST TEXT ON THE SITE, at 124 characters, because it
+     set max-width: none on a page whose body prose was capped correctly. It is the block
+     that says where every claim came from -- the one paragraph a sceptical reader is most
+     likely to actually read -- and it was the least readable thing here. */
   .prov {
-    font-size: 12.5px; color: var(--faint); border-top: 1px solid var(--rule);
-    padding-top: 12px; margin-top: 26px; max-width: none;
+    font-size: 0.8333rem; color: var(--faint); border-top: 1px solid var(--rule);
+    padding-top: 12px; margin-top: 26px; max-width: 58ch;
   }
   .prov b { color: var(--muted); font-weight: 600; }
   a { color: var(--accent); }
@@ -207,7 +215,7 @@
     <p class="standfirst">You do not need to become an expert at web deployment. Nobody stays one —
     the dashboards are rebuilt faster than anybody can memorise them. What you need is a loop, and
     the loop is four beats long.</p>
-    <p class="pv">Version <b>0.1.6</b> &middot; 5 Sep 2026<span class="pv-born">First published 30 Aug 2026</span></p>
+    <p class="pv">Version <b>0.1.7</b> &middot; 6 Sep 2026<span class="pv-born">First published 30 Aug 2026</span></p>
   </div>
 
   <div class="status">

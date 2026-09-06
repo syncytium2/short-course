@@ -136,6 +136,15 @@ jobs:
         # markup cannot tell you that a listener is bound to a selector matching nothing.
         run: node tools/browser_check.js
 
+      - name: Every page is readable at the widths people use
+        # browser_check has always run at Playwright's default 1280x720 and asserted that
+        # elements are VISIBLE, never that they are READABLE. This renders each page at a
+        # phone, a laptop and a wide desktop and measures line length, body size against
+        # the browser default, the smallest text, and anything hanging off the edge.
+        run: |
+          node tools/presentation_check.js --selftest
+          node tools/presentation_check.js
+
       - name: The selftests still have teeth
         # Runs last because it is the slowest, and because a red result here means the other
         # steps' green ticks are worth less than they look.

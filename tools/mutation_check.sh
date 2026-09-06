@@ -70,7 +70,16 @@ verdict() {
             # NOTE the rows that use this mutate site/cold-start.html, not the handout:
             # this checker serves the BUILT page, and mutating the source would leave it
             # reading unmutated bytes and report a miss that is really a plumbing error.
-            if node "$1" >/dev/null 2>&1; then printf 'PASS\n'; else printf 'FAIL\n'; fi ;;
+            # --selftest IS PASSED EVEN THOUGH browser_check.js IGNORES IT, and that is the
+            # point rather than an oversight. Running a checker against a HEALTHY site can
+            # only catch a mutation that makes it crash or over-report; it can never catch
+            # one that RELAXES a limit, because a relaxed limit still passes a good page.
+            # Both presentation_check rows missed exactly that way -- MIN_BODY_PX set to 1
+            # is invisible against a site whose body is 16px. A selftest carries its own
+            # broken fixture, so a widened limit stops catching it and the mutation lands.
+            # browser_check takes no arguments and runs its normal suite, which is its own
+            # equivalent: its fixtures are the mutated page itself.
+            if node "$1" --selftest >/dev/null 2>&1; then printf 'PASS\n'; else printf 'FAIL\n'; fi ;;
         *.py)
             if python3 "$1" --selftest >/dev/null 2>&1; then printf 'PASS\n'; else printf 'FAIL\n'; fi ;;
         *)
@@ -132,6 +141,8 @@ tools/build_site.sh@@    if _git("status", "--porcelain", "--", src):@@    if Fa
 docs/handouts/cold-start.html@@state[stepKey][bk] = 1;@@state[stepKey][i] = 1;@@checklist ticks migrate by position again@@tools/checklist_state.sh
 docs/handouts/cold-start.html@@var bk = boxKeys[+i];@@var bk = boxKeys[0];@@every migrated tick lands on the first box of its step@@tools/checklist_state.sh
 docs/handouts/cold-start.html@@if (localStorage.getItem(KEY) !== null) return;@@if (false) return;@@migration re-runs over a reader already on v4@@tools/checklist_state.sh
+tools/presentation_check.js@@const MIN_BODY_PX = 16;@@const MIN_BODY_PX = 1;@@a body smaller than the browser default stops being caught
+tools/presentation_check.js@@const MAX_CHARS = 85;@@const MAX_CHARS = 9999;@@an unreadably wide reading line stops being caught
 site/cold-start.html@@        } else if (stepDone(STEP_RUNG_TERMINAL)) {@@        } else if (false) {@@the rung stops following the steps that set it@@tools/browser_check.js
 site/cold-start.html@@      dt.dataset.offRoute = live ? '0' : '1';@@      dt.dataset.offRoute = '0';@@a word whose step this route hides still looks clickable@@tools/browser_check.js
 tools/tier_check.sh@@        gate_tiers.setdefault(bm.group(2), set()).update(btiers & set(st["tiers"]))@@        gate_tiers.setdefault(bm.group(2), set()).update(TIERS)@@a gate box is treated as reachable from every route

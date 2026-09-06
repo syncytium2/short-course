@@ -258,6 +258,19 @@ async function runSelftest() {
   </style></head><body><div class="page">
     <p>${'word '.repeat(60)}</p><p class="label">INCOMPLETE</p><div class="wide"></div>
   </div></body></html>`);
+  // THE CEILING NEEDED ITS OWN FIXTURE, and not having one was caught by mutation_check
+  // rather than by reading: widening MAX_CHARS to 9999 changed no selftest result, because
+  // every fixture here was too NARROW or correct. A limit with nothing exercising it is a
+  // number in a file. This is search-to-shipped's real defect rebuilt -- prose with no cap
+  // in a wide container, which measured 111 characters on the live site.
+  fs.writeFileSync(path.join(T, 'wide.html'), `<!doctype html><html><head><style>
+    body { font-size: 1rem; margin: 0; }
+    .page { max-width: none; padding: 0 1rem; }
+    .label { font-size: 0.75rem; }
+  </style></head><body><div class="page">
+    <p>${'word '.repeat(120)}</p><p class="label">INCOMPLETE</p>
+  </div></body></html>`);
+
   fs.writeFileSync(path.join(T, 'good.html'), `<!doctype html><html><head><style>
     body { font-size: 1rem; margin: 0; }
     .page { max-width: 68ch; margin: 0 auto; padding: 0 1rem; }
@@ -295,6 +308,10 @@ async function runSelftest() {
   say(B.small.px < MIN_ANY_PX, 'text at 9.5px is caught (' + B.small.px + 'px)');
   say(B.m && B.m.widest > 0 && B.m.chars < MIN_CHARS, 'a measure too narrow to read is caught (' + (B.m && B.m.chars) + ' chars)');
   say(B.over.length > 0, 'a block wider than the window is caught (' + B.over.join(', ') + ')');
+
+  const W = await measure('wide.html');
+  say(W.m && W.m.widest > MAX_CHARS,
+      'an uncapped paragraph in a wide window is caught (' + (W.m && W.m.widest) + ' chars)');
 
   const G = await measure('good.html');
   say(G.body >= MIN_BODY_PX, 'a page sized in rem from the browser default passes (' + G.body + 'px)');
