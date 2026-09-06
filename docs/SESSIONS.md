@@ -2409,3 +2409,20 @@ risks in the file.
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/730cc14a — Session close: record the mutation-suite coverage gap, the unchecked cross-page step references, and the cross-repo push-hook false positive
+- **Status:** ACTIVE
+- **Opened:** 2026-09-06
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** `HANDOFF.md` and this file. Nothing else.
+- **Notes:** The seven handout/site files and `tools/presentation_check.js` modified in this
+  shared checkout are another session's in-flight work. This session does not touch them and
+  stages explicit paths only. This block's title was originally `--help`, because
+  `claim.sh --help` is not a help flag — any unrecognised argument becomes a claim title.
+  Corrected before the claim was ever pushed; recorded because the next person to type it
+  will do the same thing.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
