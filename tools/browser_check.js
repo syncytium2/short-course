@@ -530,6 +530,50 @@ const server = http.createServer((req, res) => {
   check('and is visible once it is', await page.evaluate(() =>
     document.querySelector('[data-key="one-sentence"] .whya .ask').offsetParent !== null), true);
 
+  // ---- the reader's answers, printed where the word is met ---------------------------
+  // WHY. The word list's chips (above) put "yours: Gemini CLI" under the definition at the
+  // top of the page. Tony, 2026-09-06: the page is unusable by a beginner because it keeps
+  // inferring, and the step three phases down still says "the agent" with the reader's own
+  // answer fifteen hundred lines away. So the same chip is planted after the first mention
+  // of each word inside each unit a reader lands on alone. Markup cannot show that the
+  // planting happened, that it happened ONCE per unit, or that it stayed out of the quoted
+  // prompts -- a chip inside an "Ask it:" line would be text the reader pastes.
+  await page.evaluate(() => localStorage.clear());
+  await page.reload();
+  await page.click('.tierpick[data-tier="min"]');
+  checkAtLeast('the word "agent" is met inside steps, and carries a chip there',
+    await page.evaluate(() => document.querySelectorAll('ol.steps > li .t-inline[data-you="agent"]').length), 10);
+  check('with no agent named, no inline agent chip is on the screen',
+    await page.evaluate(() => [...document.querySelectorAll('.t-inline[data-you="agent"]')]
+      .filter(e => e.offsetParent !== null).length), 0);
+  check('a unit carries at most one chip per word', await page.evaluate(() => {
+    const units = document.querySelectorAll('ol.steps > li .detail, ol.steps > li .whya, .phase-note, .warn');
+    const over = [];
+    units.forEach(u => {
+      const seen = {};
+      u.querySelectorAll('.t-inline').forEach(c => {
+        if (c.parentElement.closest('ol.steps > li .detail, ol.steps > li .whya, .phase-note, .warn') !== u) return;
+        seen[c.dataset.you] = (seen[c.dataset.you] || 0) + 1;
+      });
+      Object.keys(seen).forEach(w => { if (seen[w] > 1) over.push(w + ' x' + seen[w]); });
+    });
+    return over;
+  }), []);
+  check('no chip inside a quoted prompt, a code span, or a link',
+    await page.evaluate(() => document.querySelectorAll('.ask .t-inline, code .t-inline, a .t-inline').length), 0);
+  await page.click('.terms dt[data-jump="agent-account"]');
+  await page.fill('.fill-one input[data-k="agent"]', 'Gemini CLI');
+  check('naming the agent at 1.1 prints it at the word, inside a step',
+    await page.evaluate(() => {
+      const c = document.querySelector('ol.steps > li[data-key="agent-account"] .detail .t-inline[data-you="agent"]');
+      return c ? c.textContent.trim() + '|' + (c.offsetParent !== null) : 'no chip in 1.1';
+    }), 'yours: Gemini CLI|true');
+  check('and the route chip inside a step reads the door, not a second copy',
+    await page.evaluate(() => {
+      const c = document.querySelector('ol.steps > li .t-inline[data-you="route"]');
+      return c ? c.textContent.trim() : 'no route chip in any step';
+    }), 'you: browser route');
+
   check('no uncaught JS errors', errors, []);
 
   await browser.close();

@@ -660,6 +660,13 @@
   }
   .t-you[data-known="0"] { background: var(--sunk); color: var(--muted); border-color: var(--rule-firm); }
   .t-you:empty { display: none; }
+  /* THE SAME CHIP, PLANTED WHERE THE WORD IS MET. After the first "agent", "route", "rung",
+     "repository" or "editor" in each step, why-answer, phase note and warning box, so the
+     reader's own answer is on the line they are reading and not at the top of the page.
+     Only when known: an unknown printed forty times is a nag, and the word list already
+     carries the one that asks. */
+  .t-inline { margin: 0 0 0 4px; vertical-align: 1px; }
+  .t-inline[data-known="0"] { display: none; }
   /* A one-field version of the Phase 2 block. Same handler, same storage, no heading. */
   .fill-one { margin: 10px 0 12px; }
   @media print { .terms { break-inside: avoid; } }
@@ -2692,6 +2699,72 @@ or four A records:
     el.textContent = text;
     el.dataset.known = known ? '1' : '0';
   }
+
+  // THE ANSWER IS PRINTED WHERE THE WORD IS MET, NOT ONLY WHERE IT IS DEFINED. Tony,
+  // 2026-09-06: the page is unusable by a beginner because it keeps inferring, and "we had
+  // an idea for hover to show the user their selections for things like 'agent'". The
+  // chips above did that on 2026-09-05 -- for the six definitions at the top of the page,
+  // fifteen hundred lines away from the step where a reader actually meets "the agent".
+  // So the same chip is planted after the FIRST mention of each word inside each unit a
+  // reader lands on alone: a step's detail, a single "why?" answer, a phase note, a
+  // warning box. One derivation, one text, painted by the same termsPaint() as the list.
+  //
+  // Still not hover, for the reason given at the word list: the iPad half of the audience
+  // has no pointer. And only when KNOWN -- an inline "not said yet" after every "agent" on
+  // the page would be forty nags; the word list carries the one that asks.
+  //
+  // NOT PLANTED inside a quoted prompt (.ask -- that text is what the reader types, and a
+  // chip in it would corrupt the quote), inside <code>, inside a link, or inside the word
+  // list itself, which already has them. Plurals are skipped: "agents" is a category, not
+  // the reader's one.
+  var INLINE_WORDS = [
+    ['agent',      /\bagent\b/],
+    ['route',      /\b(?:your|the|this|that) route\b/],
+    ['rung',       /\brung\b/],
+    ['repository', /\b(?:your|the|a|that|this) repository\b/],
+    ['editor',     /\b(?:your|the) editor\b/]
+  ];
+  var INLINE_UNITS = 'ol.steps > li .detail, ol.steps > li .whya, .phase-note, .warn';
+  function skipNode(n) {
+    for (var p = n.parentNode; p && p.nodeType === 1; p = p.parentNode) {
+      if (p.classList.contains('ask') || p.classList.contains('t-you') ||
+          p.classList.contains('terms') || p.tagName === 'CODE' || p.tagName === 'A' ||
+          p.tagName === 'SCRIPT' || p.tagName === 'STYLE') return true;
+    }
+    return false;
+  }
+  function plantInline() {
+    [].forEach.call(document.querySelectorAll(INLINE_UNITS), function (unit) {
+      // A "why?" answer sits inside its step's <li> but is shown alone, so it is its own
+      // unit and gets its own chip; the detail block is a sibling, not an ancestor.
+      var walker = document.createTreeWalker(unit, NodeFilter.SHOW_TEXT, null, false);
+      var nodes = [], n;
+      while ((n = walker.nextNode())) nodes.push(n);
+      INLINE_WORDS.forEach(function (pair) {
+        var word = pair[0], re = pair[1];
+        for (var i = 0; i < nodes.length; i++) {
+          var tn = nodes[i];
+          if (skipNode(tn)) continue;
+          // A unit nested inside this one -- a warning box inside a detail block, a why?
+          // answer inside a step -- is its own landing unit and gets its own pass. Text
+          // belongs to the NEAREST enclosing unit only.
+          if (tn.parentNode.closest(INLINE_UNITS) !== unit) continue;
+          var m = re.exec(tn.nodeValue);
+          if (!m) continue;
+          var after = tn.splitText(m.index + m[0].length);
+          var el = document.createElement('span');
+          el.className = 't-you t-inline';
+          el.dataset.you = word;
+          after.parentNode.insertBefore(el, after);
+          // The split leaves `after` as a fresh node the walker never saw; the next word's
+          // search should still cover it.
+          nodes.splice(i + 1, 0, after);
+          break;
+        }
+      });
+    });
+  }
+  plantInline();
 
   termsPaint = function () {
     var t = readTier();
