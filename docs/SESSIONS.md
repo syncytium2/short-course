@@ -2428,7 +2428,7 @@ risks in the file.
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Mac/e8b745b6 — Session close: record M8 and two loose ends in HANDOFF.md's cold-start section
-- **Status:** ACTIVE
+- **Status:** DONE 2026-09-06
 - **Opened:** 2026-09-06
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
 - **Writes:** <files or folders you will change; "repo only" if nothing outside git>
