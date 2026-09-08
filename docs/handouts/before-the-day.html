@@ -1,0 +1,236 @@
+<title>Before the Day</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap">
+<style>
+  /* Same palette and face as the workshop proposal, on purpose: the two are handed out as a
+     pair and a reader should recognise the second as belonging to the first. */
+  :root {
+    --paper:      #F7F8F6;
+    --card:       #FDFDFC;
+    --ink:        #191E1B;
+    --muted:      #667069;
+    --rule:       #DCE1DC;
+    --rule-firm:  #C3CBC4;
+    --accent:     #2E5C4E;
+    --accent-soft:#E4EDE8;
+    --flag:       #7E5F16;
+    --flag-soft:  #F6EEDA;
+    --stop:       #8C3A2E;
+    --stop-soft:  #F7E7E3;
+    --f: "Source Serif 4", "Iowan Old Style", Georgia, "Times New Roman", serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:      #121614;
+      --card:       #191E1B;
+      --ink:        #E7EBE7;
+      --muted:      #97A09A;
+      --rule:       #2A312D;
+      --rule-firm:  #3B443E;
+      --accent:     #86B9A5;
+      --accent-soft:#1D2A25;
+      --flag:       #D3B276;
+      --flag-soft:  #2A2415;
+      --stop:       #E0917F;
+      --stop-soft:  #2E1C18;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:      #121614;
+    --card:       #191E1B;
+    --ink:        #E7EBE7;
+    --muted:      #97A09A;
+    --rule:       #2A312D;
+    --rule-firm:  #3B443E;
+    --accent:     #86B9A5;
+    --accent-soft:#1D2A25;
+    --flag:       #D3B276;
+    --flag-soft:  #2A2415;
+    --stop:       #E0917F;
+    --stop-soft:  #2E1C18;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: var(--f); font-size: 17px; line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 42rem; margin: 0 auto; padding: 3.5rem 1.5rem 5rem; }
+
+  .eyebrow {
+    font-size: .75rem; text-transform: uppercase; letter-spacing: .13em;
+    color: var(--muted); font-weight: 600; margin: 0 0 .9rem;
+  }
+  h1 {
+    font-size: 2.05rem; font-weight: 700; line-height: 1.15; letter-spacing: -.012em;
+    margin: 0 0 1rem; text-wrap: balance;
+  }
+  .standfirst { font-size: 1.1rem; color: var(--muted); margin: 0; text-wrap: pretty; }
+  .standfirst b { color: var(--ink); font-weight: 600; }
+
+  section { margin-top: 2.75rem; padding-top: 1.75rem; border-top: 1px solid var(--rule); }
+  h2 { font-size: 1.18rem; font-weight: 700; margin: 0 0 .9rem; text-wrap: balance; }
+  p { margin: 0 0 1rem; text-wrap: pretty; }
+  p:last-child { margin-bottom: 0; }
+
+  /* Each item is a CONDITION, not an instruction: the thing that must be true, then the
+     evidence that it is. An instruction can be followed and still leave you unready, which
+     is the whole reason the day has a pre-session sheet at all. */
+  .conds { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.6rem; counter-reset: c; }
+  .conds > li {
+    display: grid; grid-template-columns: 1.9rem 1fr; gap: 0 .8rem;
+    counter-increment: c;
+  }
+  .conds > li::before {
+    content: counter(c);
+    font-variant-numeric: tabular-nums; font-weight: 700; font-size: .95rem;
+    color: var(--accent); background: var(--accent-soft);
+    width: 1.75rem; height: 1.75rem; border-radius: 50%;
+    display: grid; place-items: center; margin-top: .1rem;
+  }
+  .conds .what { font-weight: 600; font-size: 1.04rem; margin: 0 0 .45rem; }
+  .conds dl { margin: 0; display: grid; gap: .4rem; }
+  .conds dt {
+    font-size: .7rem; text-transform: uppercase; letter-spacing: .1em;
+    font-weight: 600; color: var(--muted); margin-bottom: -.28rem;
+  }
+  .conds dd { margin: 0; font-size: .96rem; }
+  .conds .proof dd { color: var(--ink); }
+  .conds .fails dd { color: var(--muted); }
+  .conds .fails dt { color: var(--stop); }
+
+  .quote {
+    display: block; margin: .3rem 0; padding: .45rem .75rem;
+    background: var(--card); border-left: 2px solid var(--rule-firm);
+    font-style: italic;
+  }
+
+  .box {
+    background: var(--card); border: 1px solid var(--rule);
+    border-radius: 3px; padding: 1.05rem 1.2rem; margin: 1.25rem 0 0;
+  }
+  .box h3 {
+    font-size: .73rem; text-transform: uppercase; letter-spacing: .11em;
+    color: var(--muted); font-weight: 600; margin: 0 0 .5rem;
+  }
+  .box p { font-size: .95rem; }
+  .stop { border-left: 2px solid var(--stop); background: var(--stop-soft); }
+  .stop h3 { color: var(--stop); }
+  .hole { border-left: 2px solid var(--flag); background: var(--flag-soft); }
+  .hole h3 { color: var(--flag); }
+
+  ul.plain { margin: 0; padding-left: 1.15rem; }
+  ul.plain li { margin-bottom: .5rem; }
+  ul.plain li:last-child { margin-bottom: 0; }
+
+  footer {
+    margin-top: 2.75rem; padding-top: 1.2rem; border-top: 1px solid var(--rule);
+    font-size: .86rem; color: var(--muted);
+  }
+  a { color: var(--accent); text-underline-offset: 2px; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+</style>
+
+<div class="wrap">
+
+  <p class="eyebrow">Before the workshop &middot; about forty minutes</p>
+  <h1>Before the Day</h1>
+  <p class="standfirst">Four things need to be true before you walk in. <b>Each one is written as something you can prove</b>, because the failure this sheet exists to prevent is arriving believing you are set up when you are not.</p>
+
+  <section>
+    <h2>Why you are being asked for forty minutes</h2>
+    <p>The day is spent building something you actually need, and there is no time in it for installation. More importantly: <b>the ways this goes wrong at the start are silent.</b> An agent that cannot open your files will still answer questions about them, fluently and confidently, from whatever you pasted &mdash; and you will not be able to tell from the reply.</p>
+    <p>So every item below has a check attached. Doing the step is not the same as the step having worked, and that distinction is the subject of the whole day.</p>
+  </section>
+
+  <section>
+    <h2>The four</h2>
+    <ol class="conds">
+
+      <li>
+        <div>
+          <p class="what">You have an agent, and you are signed in with an account you mean to keep.</p>
+          <dl class="proof">
+            <dt>How you know</dt>
+            <dd>Ask it for a file, and a file comes back.
+              <span class="quote">&ldquo;Make a file called hello.txt with the word hello in it, and show me the file.&rdquo;</span>
+            </dd>
+          </dl>
+          <dl class="fails">
+            <dt>If instead you get</dt>
+            <dd>Instructions for making one yourself, a blank template to fill in, or a new app to click through &mdash; <b>you have the wrong kind of product.</b> That is not a mistake you made, and it is not fixable on the morning. Say so now.</dd>
+          </dl>
+          <dl class="fails">
+            <dt>On the account</dt>
+            <dd>A throwaway you sign up with in a hurry becomes the one every piece of your work hangs off. Moving later means moving all of it.</dd>
+          </dl>
+        </div>
+      </li>
+
+      <li>
+        <div>
+          <p class="what">The agent can see files on your own computer.</p>
+          <dl class="proof">
+            <dt>How you know</dt>
+            <dd>Point it at a folder and it tells you something about the contents <b>that you did not type into it.</b>
+              <span class="quote">&ldquo;What files are in this folder, and what is the largest one?&rdquo;</span>
+            </dd>
+          </dl>
+          <dl class="fails">
+            <dt>Why this one is worth proving</dt>
+            <dd>Reading your files and talking about your files look identical in the reply. This is the single check that separates them, and it takes a minute.</dd>
+          </dl>
+        </div>
+      </li>
+
+      <li>
+        <div>
+          <p class="what">You have written down a real problem, in one paragraph.</p>
+          <dl class="proof">
+            <dt>How you know</dt>
+            <dd>A colleague could read it and tell you what the finished thing would do.</dd>
+          </dl>
+          <dl class="fails">
+            <dt>What makes a good one</dt>
+            <dd><b>Something you have already failed to get out of a chat window</b> is the best possible choice. A figure that came back described instead of drawn; a table you wanted reshaped; a calculation you gave up explaining. You will leave with the thing itself, so bring a problem you would actually use the answer to.</dd>
+          </dl>
+        </div>
+      </li>
+
+      <li>
+        <div>
+          <p class="what">You have whatever that problem needs, on your laptop.</p>
+          <dl class="proof">
+            <dt>How you know</dt>
+            <dd>The file opens, on your machine, <b>with the network turned off.</b></dd>
+          </dl>
+          <dl class="fails">
+            <dt>Why offline</dt>
+            <dd>A file that lives on shared storage or a sync service opens beautifully at your desk and not always in a seminar room. Copy what you need onto the laptop itself.</dd>
+          </dl>
+        </div>
+      </li>
+
+    </ol>
+
+    <div class="box stop">
+      <h3>If any of the four does not come true</h3>
+      <p><b>Tell us before the day rather than on it.</b> Every one of these is fixable with a few minutes of warning and none of them is fixable at nine in the morning with twenty people waiting. Nobody has ever been the only person on the list.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Bring</h2>
+    <ul class="plain">
+      <li>The laptop you did the four checks on &mdash; not a different one.</li>
+      <li>Its charger.</li>
+      <li>The paragraph, and the data.</li>
+    </ul>
+    <p style="margin-top:1rem">Nothing else. There is no reading to do, and no account to set up on the morning.</p>
+  </section>
+
+  <footer>
+    <p>Companion to the workshop outline. If a step here does not match what is on your screen, that is expected rather than your mistake &mdash; screenshot the window and send it, and we will sort it before the day.</p>
+  </footer>
+
+</div>
