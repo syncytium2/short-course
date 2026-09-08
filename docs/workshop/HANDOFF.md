@@ -180,22 +180,45 @@ person performing it.
 conditions changes — a fifth appears, or one is dropped — the proposal's list is wrong and must be
 updated. A change to how a condition is *checked* does not touch this file at all.
 
-**Three drafting decisions in the current file-count check, recorded here because they are easy to
-reverse without noticing** — they belong to the sheet now, and `short-course-01` carried them across
-intact:
-- **"or any folder with a few dozen files in it"** — Documents is empty on plenty of Macs where
-  everything lives in iCloud or on the Desktop, and enormous on others. Without the escape hatch the
-  check fails for reasons that say nothing about the agent.
-- **"file names only, not what is inside them"** — this is a research department and Documents may
-  hold data that should not be read by anything. Counting by extension genuinely does not need file
-  contents, so the reassurance is true as well as reassuring.
-- **No OS-specific name or command** — the decided route is VS Code on native Windows, no WSL, so the
-  wording says *file browser* and *item count* rather than naming Finder.
+### ⚠ The file-count check is withdrawn — replace it with the recent-files check
 
-And the instruction that carries the weight: **do not soften "check that total."** Without it the
-check grades *"a table came back"*, which is the same ungradeable shape as the sentence it replaced.
-A chat window will produce a confident, plausible, entirely invented table — which is why this
-condition rehearses the 9:00 bake-off before anyone is in the room.
+**Tony, 2026-09-08: *"most peoples documents folder has thousands of unorganized files. no one is
+going to count."*** He is right, and it retires the count.
+
+**The check must be this instead:**
+
+> **True when:** you pointed it at your Documents folder — or any folder you actually keep files in
+> — and asked which three files in it changed most recently. **The three names it gives you are the
+> three at the top when you sort that folder by date in your file browser.** A chat window will
+> answer with three confident, plausible, entirely invented filenames, and you will know instantly,
+> because they will not be yours. It needs the names and dates only, never what is inside the files.
+
+**Why the count failed, and it failed twice over.** A total of several thousand is not something
+anyone verifies, so the instruction to check it would simply go unperformed — leaving the check
+grading *"a table came back"*, which is the ungradeable shape the whole rewrite existed to escape.
+And it was worse than useless: an agent's count and a file browser's disagree legitimately over
+hidden files, subfolders and aliases, **so an exact-total match would have failed participants who
+had done everything right.** A check that produces false failures is worse than no check.
+
+**Why three recent filenames is the right shape.** Verification is one sort and one glance, on a
+folder of any size. And the fabrication is *unmistakable* rather than merely wrong: an invented
+count of 3,847 is unfalsifiable in practice, while an invented filename is obviously not yours the
+moment you read it. **The check should make a wrong answer loud, not just possible.**
+
+**Two of the three original drafting decisions survive and must not be reversed:**
+- **"file names only, never what is inside them"** — this is a research department and Documents may
+  hold data that should not be read by anything. Listing names and dates genuinely does not need file
+  contents, so the reassurance is true as well as reassuring.
+- **No OS-specific name or command** — the decided route is VS Code on native Windows, no WSL, so it
+  says *file browser* and *sort by date* rather than naming Finder, and asks for no command.
+
+The third is retired with the count: *"or any folder with a few dozen files in it"* existed because
+folder size broke the old check. It does not matter now, so the escape hatch is only about Documents
+being empty on machines where everything lives in iCloud or on the Desktop — hence *"any folder you
+actually keep files in."*
+
+**This is the new arrangement working.** Under the old duplication this correction would have meant
+two document edits and a transfer. It is now one edit to one file, and this notice.
 
 **Claim before you write** — `tools/claim.sh "what you are about to do"`, and this checkout has
 three recorded routes by which one session's work lands in another's commit. **Stage explicit
