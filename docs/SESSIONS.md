@@ -2571,7 +2571,7 @@ risks in the file.
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Tonys-MacBook-Pro/4d1eb206 — Teach that a handoff hardens as it is relayed: new point in points.md, a glossary term beside 'stale', a required hedge line in starter/HANDOFF.md, sibling evidence in docs/from-the-siblings.md
-- **Status:** ACTIVE
+- **Status:** DONE 2026-09-08
 - **Opened:** 2026-09-08
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
 - **Writes:** `points.md` (a new **C4** and one glossary entry in **E**), `starter/HANDOFF.md`,
