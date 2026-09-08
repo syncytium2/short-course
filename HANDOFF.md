@@ -7,6 +7,16 @@ is for murderboard development only; see [Boundary](#boundary) below.
 
 ## If you are coming back to this cold
 
+> **⚠ 2026-09-08 — a second project now lives here, with its own handoff and its own owner.**
+> Tony has been offered the chance to propose a **day-long departmental workshop**, and it has
+> changed what the course material is for: the deliverable is now a self-contained **HTML widget**
+> rather than a published website, and **`cold-start.html` is being rewritten into that workshop's
+> pre-session work**. Publishing, domains and the second machine are **parked, not deleted**.
+> **[`docs/workshop/HANDOFF.md`](docs/workshop/HANDOFF.md) is that project's handoff** — it carries
+> the boundary between the two, and the workshop's cheapest open item is the measured run this file
+> has called N1 since 26 August. Anything below reasoning from *"the course ends in a published
+> site"* is reasoning from a decision that was superseded on 2026-09-08.
+
 **2026-09-06, session close.** *Happened:* the starter template and *Already Set Up* shipped
 on 2026-09-04 and still stand — [`starter/`](starter/) is unmodified against `HEAD` and its
 three selftests pass. Two doubts filed today, both about this checkout rather than about the
