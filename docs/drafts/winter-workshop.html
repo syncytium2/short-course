@@ -127,12 +127,18 @@
      course being proposed, applied to its own budget line -- a figure that changed a
      decision has to say whether anybody checked it. */
   .est {
-    display: inline-block; font-size: .68rem; text-transform: uppercase; letter-spacing: .08em;
+    display: inline-block; font-size: .7rem; text-transform: uppercase; letter-spacing: .08em;
     font-weight: 600; color: var(--flag); background: var(--flag-soft);
     border: 1px solid var(--flag); border-radius: 2px;
     padding: 0 .3rem; margin-left: .3rem; vertical-align: 1.5px; font-style: normal;
   }
   .legend { font-size: .86rem; color: var(--muted); font-style: italic; }
+
+  /* SMALL TYPE NEEDS A NARROWER COLUMN THAN BODY TYPE, and the 44rem wrap is set for body
+     type. At .86rem a full-width line measured 107 characters against a limit of 85 — the
+     line gets longer as the type gets smaller, which is the opposite of what it needs. The
+     cap is in ch so it tracks each element's own font rather than a px guess. */
+  p, li, .legend, .box p, .sec-note, .prep .cond { max-width: 68ch; }
 
   .open { display: grid; gap: 1.1rem; margin: 0; padding: 0; list-style: none; }
   .open li { margin: 0; padding-left: 1.5rem; position: relative; }
@@ -148,6 +154,23 @@
   }
   a { color: var(--accent); text-underline-offset: 2px; }
   a:focus-visible, li:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  /* PHONE. At 390px the measure was 39 characters against a floor of 45, where the eye
+     re-tracks constantly. Three things were taking the width and none of them was the column:
+     the body size, the page padding, and the indents on the two custom lists. All three give
+     it back here. 16px is the browser's own default and the floor, not a preference.
+
+     THIS BLOCK IS LAST ON PURPOSE. It sat above `.open li`'s base rule in the first draft, so
+     its `.open li` override — same specificity, earlier in the file — silently lost and the
+     rule was dead while looking live. A media query that has to win goes after everything it
+     overrides. */
+  @media (max-width: 560px) {
+    body { font-size: 16px; }
+    .wrap { padding: 2.5rem .6rem 4rem; }
+    .box { padding: 1rem .8rem; }
+    .prep li { padding-left: 1rem; }
+    .open li { padding-left: 1.1rem; }
+  }
 </style>
 
 <div class="wrap">
