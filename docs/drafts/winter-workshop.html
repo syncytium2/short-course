@@ -1,0 +1,296 @@
+<title>A Day With Coding Agents</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap">
+<style>
+  :root {
+    --paper:      #F7F8F6;
+    --card:       #FDFDFC;
+    --ink:        #191E1B;
+    --muted:      #667069;
+    --rule:       #DCE1DC;
+    --rule-firm:  #C3CBC4;
+    --accent:     #2E5C4E;
+    --accent-soft:#E4EDE8;
+    --flag:       #7E5F16;
+    --flag-soft:  #F6EEDA;
+    --f: "Source Serif 4", "Iowan Old Style", Georgia, "Times New Roman", serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:      #121614;
+      --card:       #191E1B;
+      --ink:        #E7EBE7;
+      --muted:      #97A09A;
+      --rule:       #2A312D;
+      --rule-firm:  #3B443E;
+      --accent:     #86B9A5;
+      --accent-soft:#1D2A25;
+      --flag:       #D3B276;
+      --flag-soft:  #2A2415;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:      #121614;
+    --card:       #191E1B;
+    --ink:        #E7EBE7;
+    --muted:      #97A09A;
+    --rule:       #2A312D;
+    --rule-firm:  #3B443E;
+    --accent:     #86B9A5;
+    --accent-soft:#1D2A25;
+    --flag:       #D3B276;
+    --flag-soft:  #2A2415;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--f);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 44rem; margin: 0 auto; padding: 4rem 1.5rem 6rem; }
+
+  .eyebrow {
+    font-size: 0.75rem; text-transform: uppercase; letter-spacing: .13em;
+    color: var(--muted); font-weight: 600; margin: 0 0 1rem;
+  }
+  h1 {
+    font-size: 2.1rem; font-weight: 700; line-height: 1.15; letter-spacing: -0.012em;
+    margin: 0 0 1rem; text-wrap: balance;
+  }
+  .standfirst { font-size: 1.12rem; color: var(--muted); margin: 0; text-wrap: pretty; }
+  .standfirst b { color: var(--ink); font-weight: 600; }
+
+  h2 {
+    font-size: 1.22rem; font-weight: 700; letter-spacing: -0.005em;
+    margin: 0 0 .2rem; text-wrap: balance;
+  }
+  .sec-note { font-size: .88rem; color: var(--muted); margin: 0 0 1.1rem; font-style: italic; }
+
+  section { margin-top: 3.25rem; padding-top: 2rem; border-top: 1px solid var(--rule); }
+  section:first-of-type { border-top: none; }
+  p { margin: 0 0 1rem; text-wrap: pretty; }
+  p:last-child { margin-bottom: 0; }
+
+  ul { margin: 0 0 1rem; padding-left: 1.15rem; }
+  li { margin-bottom: .55rem; }
+  li:last-child { margin-bottom: 0; }
+
+  .lede-in { color: var(--ink); font-weight: 600; }
+
+  /* The prep list: each item is a thing that must be TRUE before the day, so it carries a
+     check-condition rather than an instruction. That is the course's own discipline, and it
+     is the reason this list is not just bullets. */
+  .prep { list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; }
+  .prep li { margin: 0; padding-left: 1.6rem; position: relative; }
+  .prep li::before {
+    content: ""; position: absolute; left: 0; top: .52em;
+    width: .62rem; height: .62rem; border: 1.5px solid var(--rule-firm); border-radius: 2px;
+  }
+  .prep .cond {
+    display: block; font-size: .9rem; color: var(--muted); margin-top: .12rem;
+  }
+  .prep .cond b { color: var(--accent); font-weight: 600; font-style: normal; }
+
+  table { width: 100%; border-collapse: collapse; margin: 0 0 1rem; font-size: .95rem; }
+  .scroll { overflow-x: auto; }
+  th, td { text-align: left; padding: .6rem .7rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th {
+    font-size: .72rem; text-transform: uppercase; letter-spacing: .1em;
+    color: var(--muted); font-weight: 600; border-bottom: 1px solid var(--rule-firm);
+  }
+  td.t { white-space: nowrap; font-variant-numeric: tabular-nums; color: var(--muted); width: 6.2rem; }
+  td.n b { font-weight: 600; }
+  td.n span { display: block; color: var(--muted); font-size: .9rem; margin-top: .1rem; }
+  tr:last-child td { border-bottom: none; }
+
+  .money { font-variant-numeric: tabular-nums; }
+  .money td:nth-child(2), .money th:nth-child(2) { text-align: right; white-space: nowrap; }
+
+  .box {
+    background: var(--card); border: 1px solid var(--rule);
+    border-radius: 3px; padding: 1.1rem 1.25rem; margin: 0 0 1.25rem;
+  }
+  .box h3 {
+    font-size: .74rem; text-transform: uppercase; letter-spacing: .11em;
+    color: var(--muted); font-weight: 600; margin: 0 0 .5rem;
+  }
+  .box p { font-size: .95rem; }
+
+  .ask { border-left: 2px solid var(--accent); background: var(--accent-soft); }
+  .ask h3 { color: var(--accent); }
+
+  /* An unmeasured number is marked wherever it appears. This is the whole method of the
+     course being proposed, applied to its own budget line -- a figure that changed a
+     decision has to say whether anybody checked it. */
+  .est {
+    display: inline-block; font-size: .68rem; text-transform: uppercase; letter-spacing: .08em;
+    font-weight: 600; color: var(--flag); background: var(--flag-soft);
+    border: 1px solid var(--flag); border-radius: 2px;
+    padding: 0 .3rem; margin-left: .3rem; vertical-align: 1.5px; font-style: normal;
+  }
+  .legend { font-size: .86rem; color: var(--muted); font-style: italic; }
+
+  .open { display: grid; gap: 1.1rem; margin: 0; padding: 0; list-style: none; }
+  .open li { margin: 0; padding-left: 1.5rem; position: relative; }
+  .open li::before {
+    content: "?"; position: absolute; left: 0; top: 0;
+    color: var(--flag); font-weight: 700;
+  }
+  .open b { font-weight: 600; }
+
+  footer {
+    margin-top: 3.25rem; padding-top: 1.25rem; border-top: 1px solid var(--rule);
+    font-size: .86rem; color: var(--muted);
+  }
+  a { color: var(--accent); text-underline-offset: 2px; }
+  a:focus-visible, li:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+</style>
+
+<div class="wrap">
+
+  <p class="eyebrow">Workshop proposal &middot; winter term</p>
+  <h1>A Day With Coding Agents</h1>
+  <p class="standfirst">One day, one room, and everybody leaves with <b>a working tool that solves a problem they actually have</b> &mdash; built by an agent, checked by the person who knows the subject. Not a demo. Not a lecture about AI.</p>
+
+  <section>
+    <h2>Who this is for</h2>
+    <p class="sec-note">And who it is not for.</p>
+    <p>Researchers who have <b class="lede-in">already tried this and concluded it does not work</b>. That group is larger than the enthusiast group and it is the one worth the day, because their objection is usually correct about what happened and wrong about what it meant.</p>
+    <p>Two recorded examples, both from this department&rsquo;s own kind of work. Someone wanted the tick labels on a fold-change axis recomputed on a log scale, put it to a search engine, got nothing usable, and concluded <i>&ldquo;AI is stupid, it can&rsquo;t do this simple task.&rdquo;</i> Someone else tried to get a chat window to draw a genogram; it described one fluently and drew nothing.</p>
+    <p>Neither person met an agent. They met a search box and a chat window, which are different products with different jobs. <b>The day exists to make that difference something people have seen happen rather than been told.</b></p>
+  </section>
+
+  <section>
+    <h2>Before the day</h2>
+    <p class="sec-note">About forty minutes, done at home. If this is not finished, the morning is lost to installation.</p>
+    <p>Each item is written as something that must be <b>true</b>, with the check that proves it. A participant who cannot complete one arrives and says so, and we fix it in the first fifteen minutes rather than at minute five of the first exercise.</p>
+    <ul class="prep">
+      <li>
+        You have an agent, and you have signed in with an account you mean to keep.
+        <span class="cond"><b>True when:</b> you asked it for a file called <i>hello.txt</i> and a file came back. Instructions for making one, or a template to fill in yourself, means you have the wrong kind of product &mdash; tell us before the day, not on it.</span>
+      </li>
+      <li>
+        The agent can see files on your own machine.
+        <span class="cond"><b>True when:</b> you pointed it at a folder and it told you something about the contents that you had not typed into it.</span>
+      </li>
+      <li>
+        You have brought a real problem, in writing, one paragraph.
+        <span class="cond"><b>True when:</b> a colleague could read it and say what the finished thing would do. Best case: something you already failed to get out of a chat window.</span>
+      </li>
+      <li>
+        You have brought whatever the problem needs &mdash; a spreadsheet, a figure, a set of numbers.
+        <span class="cond"><b>True when:</b> the file opens on your laptop, in the room, offline.</span>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>What the department is asked for</h2>
+    <p class="sec-note">One billing code, one eligibility answer, and a room with power.</p>
+
+    <div class="box ask">
+      <h3>The ask</h3>
+      <p><b>A Shortcode to bill the day&rsquo;s usage against</b>, and a decision about who in the room is eligible to use it. Nothing else is required from the department: no licences to buy, no software to procure, no IT ticket.</p>
+    </div>
+
+    <p>The University already provides a free chat assistant to everyone, and puts the <i>agent</i> behind an employment check and a billing code. That is the distinction this workshop teaches, enforced by the institution itself &mdash; which is better evidence than any demonstration I could run.</p>
+
+    <div class="scroll">
+      <table class="money">
+        <thead>
+          <tr><th>Published rate, per million tokens</th><th>In / out</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Claude Opus 5</td><td>$5.00 / $25.00</td></tr>
+          <tr><td>Claude Sonnet 5</td><td>$2.00 / $10.00</td></tr>
+          <tr><td>Claude Haiku 4.5</td><td>$1.00 / $5.00</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="legend">University rates match the vendor&rsquo;s public list pricing, checked 27 August 2026. Rates move; re-check before the proposal is signed.</p>
+
+    <div class="box">
+      <h3>What a day is likely to cost</h3>
+      <p><b>Order of $20&ndash;60 a person<span class="est">estimate</span></b>, so roughly <b>$250&ndash;700 for a room of twelve<span class="est">estimate</span></b>. This is arithmetic from a 90-minute figure, scaled to a full day. <b>Nobody has measured a real run.</b></p>
+      <p>One instrumented run costs a few dollars and would replace both numbers above with a measurement. <b>That should happen before this proposal is submitted</b>, not after it is approved &mdash; a budget line nobody checked is exactly the failure this workshop is about.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>The day</h2>
+    <p class="sec-note">Two builds, one break, and a demonstration that is allowed to fail in front of the room.</p>
+    <div class="scroll">
+      <table>
+        <tbody>
+          <tr>
+            <td class="t">9:00</td>
+            <td class="n"><b>The same question, three places</b>
+              <span>A search engine, a chat window, and an agent get one identical prompt &mdash; a literature question with a citation that either resolves or does not. Run live, unrehearsed. If the chat window happens not to fabricate that morning, we say so out loud; a day about checking claims cannot rig its own opening.</span></td>
+          </tr>
+          <tr>
+            <td class="t">9:45</td>
+            <td class="n"><b>Why serious people bounce off this</b>
+              <span>The four barriers, and the one that actually stops people: not knowing whether the thing it handed you is right. Short, and the only lecture of the day.</span></td>
+          </tr>
+          <tr>
+            <td class="t">10:15</td>
+            <td class="n"><b>Build, first pass &mdash; commission the thing</b>
+              <span>Everyone describes their own problem to their own agent and asks for a single self-contained page that solves it. One file, opens in a browser, no server and nothing installed. By the break it runs and is wrong somewhere.</span></td>
+          </tr>
+          <tr>
+            <td class="t">12:00</td>
+            <td class="n"><b>Lunch</b></td>
+          </tr>
+          <tr>
+            <td class="t">13:00</td>
+            <td class="n"><b>Build, second pass &mdash; find what is wrong with it</b>
+              <span>Paired: one drives, one is the designated sceptic, swap halfway. You are checking against what you know about the subject, not reading the code. A baroreflex does not hunt with a forty-second period, and you know that whether or not you can read a line of JavaScript.</span></td>
+          </tr>
+          <tr>
+            <td class="t">14:30</td>
+            <td class="n"><b>How this goes wrong in the wild</b>
+              <span>Real incidents with receipts: the check that could not fire, the number that was right about the wrong thing, the report that said done when nothing had happened. Every one from working projects, with the commit that fixed it.</span></td>
+          </tr>
+          <tr>
+            <td class="t">15:15</td>
+            <td class="n"><b>Monday morning</b>
+              <span>What you write down so the next session &mdash; yours or an agent&rsquo;s &mdash; can pick the work up. Three lines at the end of every sitting. Then everyone opens the thing they built.</span></td>
+          </tr>
+          <tr>
+            <td class="t">16:00</td>
+            <td class="n"><b>Close</b></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>What people leave with</h2>
+    <ul>
+      <li><b>A working tool of their own</b> &mdash; one file, on their laptop, that solves a problem they brought in that morning. It runs without the internet and without an account.</li>
+      <li><b>A record of how it was made</b>, including where the agent got it wrong and what the person did about it.</li>
+      <li><b>One habit</b>: check the thing itself, not the report about the thing. This is the only part of the day that does not expire when the software changes.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Not settled</h2>
+    <p class="sec-note">Listed here rather than discovered later.</p>
+    <ul class="open">
+      <li><b>Who in the room is eligible.</b> Agent access at this institution is <b>faculty and staff only</b>, students excluded, sharing prohibited. If graduate students are in the audience, they need a separate route and it has to be arranged in advance. <b>This is the question that decides whether the day is possible as written.</b></li>
+      <li><b>The cost is an estimate and not a measurement.</b> One run settles it, for a few dollars.</li>
+      <li><b>Which department, and therefore which worked example.</b> The build exercise is each person&rsquo;s own problem, but the demonstration in front of the room should come from the field the audience is in.</li>
+      <li><b>Room requirements.</b> Power at every seat, and a network that permits the agent to reach the internet &mdash; worth confirming rather than assuming.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>Draft for discussion. Figures marked <span class="est">estimate</span> have not been measured; every other number cites a page that was read on a stated date and will move without notice.</p>
+  </footer>
+
+</div>
