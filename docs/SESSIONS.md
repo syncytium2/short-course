@@ -2569,3 +2569,22 @@ risks in the file.
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Tonys-MacBook-Pro/4d1eb206 — Teach that a handoff hardens as it is relayed: new point in points.md, a glossary term beside 'stale', a required hedge line in starter/HANDOFF.md, sibling evidence in docs/from-the-siblings.md
+- **Status:** ACTIVE
+- **Opened:** 2026-09-08
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** `points.md` (a new **C4** and one glossary entry in **E**), `starter/HANDOFF.md`,
+  `docs/from-the-siblings.md`, a dated line in
+  `docs/cases/2026-08-30-the-hedge-that-crossed-a-session-boundary.md`, and this file.
+- **Notes:** **Not touching `docs/handouts/` or `site/` at all.** `Tonys-MacBook-Pro/75e4d067`
+  holds `cold-start.html` and `before-the-day.html`, and nothing here belongs on a page today
+  in any case — `docs/selection.md`: nothing goes on a page the day it is written.
+  `interface2` and `fireflies` were read **read-only** for evidence; nothing in either was run
+  or edited. Tony has asked the `interface2` session for a report of its own; when that arrives
+  it folds into C4's evidence list, so leave that list open rather than closing the point.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
