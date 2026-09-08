@@ -31,6 +31,18 @@ The original publish came from a scratchpad path that dies with the session that
 publishing the repo copy without `url` would silently create a *second* artifact and leave Tony
 holding a link that no longer updates.
 
+**⚠ Passing `url` correctly is the smaller half of getting this right.** This paragraph used to stop
+at the line above, which reads as complete and is not. The worse failure is quieter: publish with
+the right URL from a branch that does not contain what landed on `master` since you cut it, and you
+**overwrite the live page with stale content**. No error, no second artifact, no warning — the
+publish succeeds and the page looks finished. A session came within one call of doing that to the
+per-person cost table on 2026-09-08; the record is
+[`docs/doubt/2026-09-08-the-workshop-proposal-now-exists-in-four-different-states-an.md`](../doubt/2026-09-08-the-workshop-proposal-now-exists-in-four-different-states-an.md).
+
+**The order is: `git fetch`, rebase onto `origin/master`, read the live artifact, diff it against
+your source, then publish.** The read is not a formality — it is the only step that can tell you the
+page moved under you while you were working.
+
 ---
 
 ## ⛔ The department is not to be named, anywhere this repository can reach

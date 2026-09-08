@@ -31,16 +31,34 @@ live artifact turned out to carry content my source did not. **A safety step aim
 else caught this**, which is the shape of every mechanism in the verification ledger — the tool was
 not wrong, and it was not looking here.
 
-Three things that should have caught it and did not:
+**Both instruments were right, and the first version of this file said they had failed.** That was
+wrong, `short-course-01` disputed it, and I checked rather than accepted. What the artifacts say:
 
-- **`claim.sh --list` returned no active claims**, twice, while a session was mid-edit on two files
-  in the shared checkout. The board is a message, not a lock, and this is now at least the second
-  time it has reported an empty room that was not empty.
-- **`worktree.sh --list` said `shared master *dirty`** and I read it as ordinary residue. Dirty is
-  the only signal there is, and it does not distinguish *someone is typing right now* from *someone
-  left this here last week.* The handoff already says as much in prose; prose did not stop me.
-- **Nothing in `tools/` looks at `docs/drafts/`.** No check, no CI job, no staleness gate. The one
-  file in this repo with three published copies downstream of it is the one file with no coverage.
+- **`claim.sh --list` answered honestly.** It returned no active claims because there were none.
+  `git log` gives the order: `b22d66a` released the workshop claim, `7dc9901` then edited the
+  proposal and the workshop handoff **with no claim open** — verified, that commit touches no
+  `docs/SESSIONS.md` — and `c86767a` opened the next claim afterwards. The window I branched into
+  was an unclaimed edit, not a board that lost one. (A raw `grep -c "Status:\*\* ACTIVE"` returns
+  one more than `--list` does; the extra is the format template in the fenced block, and `--list`
+  excluding it is the 2026-08-28 defect already fixed. The naive grep is the unreliable reading.)
+- **`worktree.sh --list` fired correctly.** `shared master *dirty` was true — there was uncommitted
+  work in that tree. **It reported, and I dismissed it as old residue.** That is the opposite of an
+  instrument that cannot fire, and it is this repository's more common shape: the tool was right and
+  the reasoning about it was wrong.
+
+So the near miss has one cause and it is not the tooling: **two files were edited across two turns
+with no claim open**, and nothing existed for either instrument to report. Recorded this way
+deliberately, because *"the board failed"* would send the next session hunting a bug in `claim.sh`
+that was fixed eleven days ago.
+
+One suggestion survives the correction, as an improvement rather than a defect: `*dirty` is a single
+word covering *someone is typing right now* and *someone left this here last week*, which are
+different facts. A modification time next to it would have made the signal I ignored harder to
+ignore.
+
+And one real gap remains: **nothing in `tools/` looks at `docs/drafts/`.** No check, no CI job, no
+staleness gate. The one file in this repo with three published copies downstream of it is the one
+file with no coverage.
 
 ## What would settle it
 
