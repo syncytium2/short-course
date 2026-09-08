@@ -23,8 +23,33 @@ The proposal is drafted and unreviewed by him as of this file's date.
 **The artifact and the source are the same bytes** except for the `<!doctype>`/`<head>`/`<body>`
 wrapper, which the artifact host supplies and the darkroom copy needs. `tools/` has no build step
 for this — the wrapper was applied by a throwaway script. **If you edit the source, re-publish the
-artifact with the same URL and re-write the darkroom copy, or the three drift.** A delivered
-handout in this repo once shipped with `</html>` before `</body>` for exactly this reason.
+artifact and re-write the darkroom copy, or the three drift.** A delivered handout in this repo
+once shipped with `</html>` before `</body>` for exactly this reason.
+
+**To republish to the same URL from a different session**, pass that URL as the `url` argument.
+The original publish came from a scratchpad path that dies with the session that made it, so
+publishing the repo copy without `url` would silently create a *second* artifact and leave Tony
+holding a link that no longer updates.
+
+---
+
+## ⛔ The department is not to be named, anywhere this repository can reach
+
+**Tony, 2026-09-08: *"i don't want the department name to leak out anywhere public."*** This
+repository is **public** — `github.com/syncytium2/short-course` — so every file in it is a public
+file, including this one, including any note you write to yourself.
+
+- **Do not write the department's name** into a commit message, a file, a branch name, or the
+  proposal. Not in `docs/`, not in a doubt file, not in a case file.
+- **"Physiology" is the authorised stand-in** for the worked example, on his instruction: *"make it
+  physiology if you need to."* It is safe because `points.md` §E already used glucose–insulin,
+  thermoregulation, baroreflex and osmolality–ADH as its examples **before this workshop existed**,
+  so the word carries no information about who was approached.
+- **Checked on 2026-09-08 and clean:** nothing in `docs/workshop/`, `docs/drafts/winter-workshop.html`
+  or `HANDOFF.md` names a department. **Re-check before any commit that touches this project** —
+  `grep -rniE "department of |the [a-z]+ department"` over your diff is enough.
+- The published artifact is **private by default**. That is a default, not a guarantee: it becomes
+  readable by anyone Tony shares it with, so it is bound by this rule too.
 
 ---
 
@@ -63,11 +88,26 @@ handout in this repo once shipped with `</html>` before `</body>` for exactly th
    **This is the cheapest thing on this list and the one that most changes the document.** A
    department is being asked for money against a number nobody checked, which is the failure the
    workshop itself is about. **Do it before submission, not after approval.**
-3. **Which department.** Unknown to the drafting session. It sets the worked example in the room —
-   §E's feedback-loop exercise names glucose–insulin, thermoregulation, baroreflex and
-   osmolality–ADH, which assumes physiology. If the department is not physiological, that example
-   needs replacing and the *"you know a baroreflex does not hunt"* argument needs a local
-   equivalent.
+
+   > **A second anchor already exists in this repo and was not used when the estimate was
+   > written.** [`docs/handouts/what-it-costs.html`](../handouts/what-it-costs.html) quotes the
+   > vendor's own published figures: **~$13 per developer per active day**, and **under $30 per
+   > active day for 90% of users**. A workshop day *is* one active day, which makes these closer to
+   > the thing being priced than the $5–15 ninety-minute figure the estimate was scaled from.
+   > **Two cautions before anyone uses them.** A professional developer working all day is not a
+   > beginner in a taught room, in either direction — fewer hours, but more back-and-forth per
+   > result. And [`docs/reviews/what-it-costs_2026-08-29.findings.json`](../reviews/what-it-costs_2026-08-29.findings.json)
+   > contains a **blocking finding** against that very page for reading the $150–250 monthly
+   > average as a ceiling: *"an average is not a ceiling — by construction a large share of that
+   > population spends more."* Do not repeat that mistake with the daily figure. **The measured run
+   > still settles it; this only says the estimate is in a plausible range.**
+3. **How many people, which is what the budget actually turns on.** Tony, 2026-09-08: *"it not
+   clear how many would participate."* Every cost figure in the proposal is now **per person**, with
+   a table of room sizes the reader finds their own number in — an earlier draft asserted *"a room
+   of twelve"*, which nobody had said and which I invented. Headcount also decides the afternoon's
+   shape: the paired driver-and-sceptic exercise works in a room of twenty and stops working in a
+   room of sixty.
+   **The worked example is settled** — a physiological feedback loop, per the section above.
 4. **Room requirements** — power at every seat, and a network that lets the agent reach the
    internet. Worth confirming rather than assuming.
 5. **Nothing in the proposal has been reviewed by Tony.** It was published and handed to him in the
