@@ -94,9 +94,14 @@ file, including this one, including any note you write to yourself.
    in advance. **This decides whether the day is possible in its current shape**, and it is not a
    detail to settle late.
 2. **The cost in the proposal is an estimate and is marked as one on the page.** $20–60 a person,
-   $250–700 for twelve. That is arithmetic scaling §F's $5–15 ninety-minute figure to a full day —
-   **an estimate scaled from an estimate.** `OPEN-FINDINGS.md` **N1** has wanted one measured run
-   since 26 August. It costs a few dollars.
+   and the proposal gives room totals for 8, 16 and 24 rather than asserting a headcount. That is
+   arithmetic scaling §F's $5–15 ninety-minute figure to a full day — **an estimate scaled from an
+   estimate.** `OPEN-FINDINGS.md` **N1** has wanted one measured run since 26 August. It costs a few
+   dollars.
+   *This line said "$250–700 for twelve" until 2026-09-08. The proposal had already dropped twelve as
+   an invented headcount, so the handoff became the last place that number survived — in the document
+   whose job is to stop the next session believing something untrue. Caught by `short-course-01`, who
+   wrote both halves and walked past this one.*
    **This is the cheapest thing on this list and the one that most changes the document.** A
    department is being asked for money against a number nobody checked, which is the failure the
    workshop itself is about. **Do it before submission, not after approval.**
