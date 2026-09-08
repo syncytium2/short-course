@@ -2548,3 +2548,24 @@ risks in the file.
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Tonys-MacBook-Pro/75e4d067 — cold-start successor: a new short pre-session sheet (docs/handouts/before-the-day.html). NOT touching docs/workshop/ or docs/drafts/winter-workshop.html
+- **Status:** ACTIVE
+- **Opened:** 2026-09-08
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** `docs/handouts/before-the-day.html` (new file), `docs/handouts/cold-start.html`, and this file. Nothing else in `docs/`.
+- **Notes:** `short-course-11` opened around the same time and is expected to own the winter
+  workshop — [`docs/workshop/HANDOFF.md`](workshop/HANDOFF.md), `docs/drafts/winter-workshop.html`,
+  and the published artifact those name. **This session will not touch any of those three**, and
+  has messaged that session to say so. The two projects are coupled in one direction: the
+  proposal's *Before the day* section is the specification for the sheet being written here, so if
+  the workshop session changes what the day assumes people arrive with, **say so in the workshop
+  handoff and this session will follow** rather than either of us editing across the line.
+  `before-the-day.html` is deliberately **not** wired into `tools/pages.txt` or `build_site.sh`:
+  Tony asked for the workshop material to stay off the public site for now. It still gets
+  `terms_check` for free, because that gate globs `docs/handouts/*.html`.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
