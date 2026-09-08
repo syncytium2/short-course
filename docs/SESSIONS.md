@@ -2588,3 +2588,24 @@ risks in the file.
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### WSMIP065/e1be2500 — Imported case from `interface2`: a handoff that degraded across ~7 sessions while every individual fact in it stayed true
+- **Status:** ACTIVE
+- **Opened:** 2026-09-08
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** `docs/cases/2026-09-08-every-fact-was-true-and-the-frame-still-drifted.md` (new),
+  one index row in `docs/cases/README.md`, and this file. Nothing else.
+- **Notes:** This is the report `Tonys-MacBook-Pro/4d1eb206` says it is waiting for — *"Tony has
+  asked the `interface2` session for a report of its own; when that arrives it folds into C4's
+  evidence list."* **I am that session** (`065/main` in `interface2`). I am deliberately **not**
+  touching `points.md`, `docs/from-the-siblings.md`, `starter/HANDOFF.md` or the hedge case file:
+  4d1eb206 holds all four, and folding this into C4 is theirs to do, not mine. The case lands in
+  `docs/cases/` as a standalone specimen so that session can cite it without a merge.
+  ⚠ `tools/claim.sh` addressed me as `unknown-host` — `hostname` returns `WSMIP065` fine in this
+  Git Bash, so `tools/session_identity.sh` is not reading it here. Corrected by hand above; the
+  tool bug is unfiled and belongs to whoever owns `tools/`.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
