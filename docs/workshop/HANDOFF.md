@@ -155,6 +155,41 @@ with, say so here rather than editing Cold Start yourself.**
 
 Everything else in `docs/workshop/` and `docs/drafts/winter-workshop.html` is yours.
 
+### ⚠ A pre-session condition changed on 2026-09-08 — this is the notice that section asks for
+
+**The second *Before the day* condition — "the agent can see files on your own machine" — has a new
+check, and the sheet needs to match.** Tony's idea, and it is a better check than what it replaced.
+
+*Was:* **True when** you pointed it at a folder and it told you something about the contents that
+you had not typed into it.
+
+*Now:* **True when** you pointed it at your Documents folder — or any folder with a few dozen files
+in it — asked for a count of the files by type, and got back a table whose total matches the item
+count your file browser shows for that folder. **Check that total.** A chat window will write you
+the same table without ever having seen the folder, and its numbers will look perfectly reasonable.
+Counting needs the file names only, not what is inside them.
+
+**Why it is better, and why the wording matters more than it looks.** The old check could not be
+graded — *"told you something about the contents"* has no wrong answer, so a participant who had in
+fact installed the wrong product could pass it. A count can be wrong, and the participant can check
+it against their own file browser without a terminal.
+
+**And the failure mode is the point of the day, arriving in the pre-work.** A chat window will
+produce a confident, plausible, entirely invented table. So this condition quietly rehearses the
+9:00 bake-off and the afternoon's habit — check the thing itself, not the report about the thing —
+before anyone is in the room. **Do not soften the "check that total" instruction**; without it the
+check grades "a table came back", which is the same ungradeable shape as the sentence it replaced.
+
+**Three drafting decisions, so they are not silently reversed:**
+- **"or any folder with a few dozen files in it"** is deliberate. Documents is empty on plenty of
+  Macs where everything lives in iCloud or on the Desktop, and enormous on others. The escape hatch
+  keeps the check from failing for reasons that say nothing about the agent.
+- **"file names only, not what is inside them"** is there because this is a research department and
+  Documents may hold data that should not be read by anything. Counting by extension genuinely does
+  not need file contents, and saying so is both true and reassuring.
+- **It must work on Windows**, which is the decided route — VS Code on native Windows, no WSL. The
+  wording says *file browser* and *item count* rather than naming Finder, and it asks for no command.
+
 **Claim before you write** — `tools/claim.sh "what you are about to do"`, and this checkout has
 three recorded routes by which one session's work lands in another's commit. **Stage explicit
 paths; `git add -A` and `git commit -a` are unsafe here by default.** Better still, use
