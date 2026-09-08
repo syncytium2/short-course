@@ -155,40 +155,47 @@ with, say so here rather than editing Cold Start yourself.**
 
 Everything else in `docs/workshop/` and `docs/drafts/winter-workshop.html` is yours.
 
-### ⚠ A pre-session condition changed on 2026-09-08 — this is the notice that section asks for
+### The pre-session checks have ONE source now, and it is not this project — 2026-09-08
 
-**The second *Before the day* condition — "the agent can see files on your own machine" — has a new
-check, and the sheet needs to match.** Tony's idea, and it is a better check than what it replaced.
+**`docs/handouts/before-the-day.html` is the single source for the four checks.** The proposal names
+the four conditions and stops; it does not restate a single *True when* line. Do not put them back.
 
-*Was:* **True when** you pointed it at a folder and it told you something about the contents that
-you had not typed into it.
+**Why, and it was proved rather than argued.** Both documents used to carry all four checks in full.
+On 2026-09-08 one condition changed — *"the agent can see files on your own machine"*, Tony's idea,
+replacing an ungradeable check with a file-count table whose total the participant verifies. Because
+the wording lived in two places, a one-line improvement cost a cross-session message, a careful
+transfer, and a window in which **master's handout carried the new check while master's proposal
+carried the old one.** That is the drift this repository documents, produced by the documents about
+it, in an afternoon.
 
-*Now:* **True when** you pointed it at your Documents folder — or any folder with a few dozen files
-in it — asked for a count of the files by type, and got back a table whose total matches the item
-count your file browser shows for that folder. **Check that total.** A chat window will write you
-the same table without ever having seen the folder, and its numbers will look perfectly reasonable.
-Counting needs the file names only, not what is inside them.
+`HANDOFF.md`'s own Windows section already names the rule — *"a second entry point is a second
+source, and two sources drift."* This is the same defect and it had already happened.
 
-**Why it is better, and why the wording matters more than it looks.** The old check could not be
-graded — *"told you something about the contents"* has no wrong answer, so a participant who had in
-fact installed the wrong product could pass it. A count can be wrong, and the participant can check
-it against their own file browser without a terminal.
+**So: a check changes in one file, and no message is needed.** The department reader was never the
+reason the wording was there. Someone deciding whether to fund a day needs to know pre-work exists,
+roughly what it covers and that it takes forty minutes; the exact phrasing of a check is for the
+person performing it.
 
-**And the failure mode is the point of the day, arriving in the pre-work.** A chat window will
-produce a confident, plausible, entirely invented table. So this condition quietly rehearses the
-9:00 bake-off and the afternoon's habit — check the thing itself, not the report about the thing —
-before anyone is in the room. **Do not soften the "check that total" instruction**; without it the
-check grades "a table came back", which is the same ungradeable shape as the sentence it replaced.
+**What the proposal still owes the sheet**, and this is the one coupling left: if the *set* of
+conditions changes — a fifth appears, or one is dropped — the proposal's list is wrong and must be
+updated. A change to how a condition is *checked* does not touch this file at all.
 
-**Three drafting decisions, so they are not silently reversed:**
-- **"or any folder with a few dozen files in it"** is deliberate. Documents is empty on plenty of
-  Macs where everything lives in iCloud or on the Desktop, and enormous on others. The escape hatch
-  keeps the check from failing for reasons that say nothing about the agent.
-- **"file names only, not what is inside them"** is there because this is a research department and
-  Documents may hold data that should not be read by anything. Counting by extension genuinely does
-  not need file contents, and saying so is both true and reassuring.
-- **It must work on Windows**, which is the decided route — VS Code on native Windows, no WSL. The
-  wording says *file browser* and *item count* rather than naming Finder, and it asks for no command.
+**Three drafting decisions in the current file-count check, recorded here because they are easy to
+reverse without noticing** — they belong to the sheet now, and `short-course-01` carried them across
+intact:
+- **"or any folder with a few dozen files in it"** — Documents is empty on plenty of Macs where
+  everything lives in iCloud or on the Desktop, and enormous on others. Without the escape hatch the
+  check fails for reasons that say nothing about the agent.
+- **"file names only, not what is inside them"** — this is a research department and Documents may
+  hold data that should not be read by anything. Counting by extension genuinely does not need file
+  contents, so the reassurance is true as well as reassuring.
+- **No OS-specific name or command** — the decided route is VS Code on native Windows, no WSL, so the
+  wording says *file browser* and *item count* rather than naming Finder.
+
+And the instruction that carries the weight: **do not soften "check that total."** Without it the
+check grades *"a table came back"*, which is the same ungradeable shape as the sentence it replaced.
+A chat window will produce a confident, plausible, entirely invented table — which is why this
+condition rehearses the 9:00 bake-off before anyone is in the room.
 
 **Claim before you write** — `tools/claim.sh "what you are about to do"`, and this checkout has
 three recorded routes by which one session's work lands in another's commit. **Stage explicit
