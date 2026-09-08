@@ -614,6 +614,12 @@ obtainable by asking rather than by reasoning.
   network goes, the machine keeps running, and the session has to be recovered rather than
   resumed. Read them together; do not elaborate one without the other.
 
+  *And the failure on the far side of a delivered handoff is **C5**.* Everything above is about a
+  handoff that does not get written or a session that cannot tell who is editing what. C5 is what
+  happens when the handoff **is** written, **is** read, and is passed on one more time: it arrives
+  more confident than it left. The two are opposite ends of one channel and neither substitutes
+  for the other.
+
 - **C4. The force multiplier does not apply overnight.** It takes time to learn how this can make
   you, or your employees, 100x faster.
 
@@ -624,6 +630,80 @@ obtainable by asking rather than by reasoning.
   *Unchecked, and labelled rather than taught:* 100x. Nobody has measured it. Same treatment as
   §10's price (see `OPEN-FINDINGS.md`, N1) — argue the shape of the curve, not the multiple, until
   someone has a number they can source.
+
+- **C5. A handoff hardens what it carries.** C3 says a session that leaves no handoff delivers
+  nothing. This is the failure on the other side of that: the handoff gets written, gets read, gets
+  passed on — and what arrives at the far end is more confident than what went in. A guess becomes
+  a finding, an offhand remark becomes an instruction, and no step in the chain was a lie.
+
+  **The mechanism is mundane and it is why care does not fix it.** Every retelling is written by
+  somebody one step further from the thing itself, working from the previous summary rather than
+  from the evidence. Facts survive that trip — numbers, filenames, dates all arrive intact.
+  **Qualifiers do not, because a hedge is the one part of a sentence that does not help the reader
+  do anything**, and a summary is written by deciding what to drop.
+
+  *The clearest specimen, and this repo already holds it.* 2026-08-30: Tony floated a proposal
+  containing the word *maybe* and a literal blank — `[?]` — for the third item he had not thought
+  of yet. Within one turn an agent filled the blank, built a figure, wrote it up as *"Settled
+  today"*, and told a second agent working on the same project: **"F1 IS BEING BROKEN INTO THREE
+  MEASURES, Tony's call."** The second agent was at that moment editing the page the decision
+  governed and had no transcript, no way to ask, and every reason to believe it. *maybe* → *is
+  being* → *Tony's call*, in two hops, in minutes. Nothing was published; the whole cost was one
+  retraction. [`docs/cases/2026-08-30-the-hedge-that-crossed-a-session-boundary.md`](docs/cases/2026-08-30-the-hedge-that-crossed-a-session-boundary.md).
+
+  *The obvious cure was falsified the same day, by the other agent in the incident.* The rule that
+  case first proposed was **ask for the words, not the summary**. Hours later the session that had
+  been misinformed relayed a second hedged remark of Tony's — *"maybe just rewrite the text so it
+  is independent of how many detectors are currently enabled?"* — and **quoted it exactly**, hedge
+  and question mark intact, inside a sentence reading *"Tony had already given me the other
+  instruction directly."* In its own words: *"the quote was accurate and the frame around it was
+  not, so 'quote them exactly' is insufficient as a rule."* **The reader keeps the frame and skims
+  the quote**, which is the opposite of the order a careful person imagines they read in.
+
+  *Second cure, from the siblings, and it is a real one.* `interface2` sends caveats as a **required
+  section of the artifact rather than as prose around it**. Its 2026-08-07 thread handing an
+  endpoint table to another team heads them *"Three things that must travel WITH the table — not
+  footnotes — any of them silently changes what a model means"*, the first being **"CNMF-E has 61
+  slices in arm A, not 67."** That is B4 answered the way B4 has to be answered: a field, not a
+  habit of writing carefully.
+
+  *And it is still not enough — which is the half worth teaching.* Read read-only on 2026-09-08:
+  that thread is still `status: open` a month on, and the stream the table was built from has since
+  been **proven wrong** — a signed `C_raw` divided by a running-minimum baseline, inverting 74 of 75
+  ROIs in one slice with no NaN anywhere to announce it. The caveats travelled perfectly. The table
+  under them did not, so a 2026-09-03 handoff has to instruct whoever picks the work up to *"decide
+  whether that N still holds against the re-run corpus, and tell fireflies the table is superseded."*
+  **A caveat is dated to the moment it was written, and nothing re-checks it** — so a well-qualified
+  claim hardens too, by outliving the reason it was qualified. That is the glossary's **stale**
+  arriving from the other direction, and both are one defect: the document does not carry when it
+  was last checked.
+
+  *What did survive, and it is the only prescription here that has evidence behind it.* On
+  2026-08-28 an `interface2` session reported that empty windows tracked the window type — set3
+  35%/30% against set2 21%/18% — and recorded, in the same breath, *"flagged provisional and
+  explicitly NOT interpreted, because set2/set3 [are] undefined in the foundations pair,"* leaving a
+  residual line addressed to Tony saying exactly that. **Five days and several sessions later he
+  asked the question it named** — *"cnmfe never adopted the 15 minute window regime?"* — and a
+  different session measured all 264 windows and retracted the pattern outright: set3 is the same
+  data as set2 with two thirds of the frames removed, the statistic is a maximum over the window, so
+  the shorter one is mechanically lower. 18 slices where the long window found cells the short one
+  missed; **one** the other way.
+
+  > **A hedge survives being passed along only if it names what would settle it.** *Provisional*,
+  > *worth checking*, *maybe* are descriptions of a feeling and evaporate at the first hop.
+  > *set2/set3 are undefined — measure the window lengths* is an **address**, and an address can be
+  > acted on by a session that never met the person who wrote it.
+
+  *The mechanism this earns, and it is one line.* `starter/HANDOFF.md` now has a fourth field,
+  **Guessing.**, for what the entry above did not check and what would settle it. The repo has been
+  carrying the argument for it in a tool header all along — `tools/doubt.sh`: *"the doubts that go
+  unrecorded are exactly the ones that later get taught as facts."* That sentence had never reached
+  the material.
+
+  *Open, deliberately.* Tony has asked the `interface2` session for an account in its own words;
+  when it arrives it belongs in this list rather than in a rewrite. Where C5 lands in the running
+  order is undecided and travels with **G**, not with C3. **Nothing from this point is on a page
+  yet** — `docs/selection.md`.
 
 ---
 
@@ -842,6 +922,27 @@ asked at the door.
   matters because freshness is cheap and automatable and truth is neither; a freshness gate
   buys you "this has not drifted from upstream", never "this is correct."
 
+  **hardened** — *stated more confidently than it was known, and the confidence was added by
+  the retelling rather than by anyone checking.*
+
+  The mirror of **stale**, and the two are worth hearing together. A stale claim was true and
+  the world moved. A hardened claim was never asserted in the first place: it started as a
+  guess, a hedge, an aside, a *maybe* — and each time it was summarised for somebody one step
+  further away, the qualifier was the part that got dropped, because a qualifier is the part
+  that does not tell the reader what to do. Nobody lied at any hop. *Maybe* to *is being* to
+  *Tony's call* took two hops and a few minutes (C5).
+
+  *Why it reads as reliable.* Confidence and evidence are separate fields and only one of them
+  is on the page. A hardened claim arrives flat, plain, sourceless and load-bearing — which is
+  what a well-checked claim also looks like. **The tell is not in the sentence; it is that the
+  sentence has no address.**
+
+  *What changes if you hear the word.* Not *"is that true?"* — it may well be. Ask **"who said
+  it first, and how sure were they when they said it?"** and then go and read the words, in the
+  place they were originally written. And when you are the one passing something on: **name what
+  would settle it**, because a hedge that names a measurement survives relay and a hedge that
+  names a feeling does not.
+
   **gripping hand** — the decisive third consideration, from Niven and Pournelle's *The Mote
   in God's Eye*, where the aliens have a third arm and use it for the argument that ends the
   argument. Here: on the one hand the official page said Duo, on the other hand the local
@@ -983,6 +1084,11 @@ sit here unread.*
 - **G1a.** Handing work between sessions — what the receiving session needs and in what form.
 - **G1b.** Relationship to the five written channels in C3 (`interface2`): which of them a
   course-sized project actually needs, and which are estate-scale overhead.
+- **G1c.** *Extracted 2026-09-08 — the first thing taken out of G and argued.* **C5** answers half
+  of G1a from the other end: not what the receiving session needs, but **what the sending session
+  loses in transit.** Facts arrive; qualifiers do not, and a handoff read second-hand is more
+  confident than the work it describes. G1a is still open — C5 says what to carry, and says
+  nothing about form, length, or where the file lives.
 
 ### G2. Pull requests
 

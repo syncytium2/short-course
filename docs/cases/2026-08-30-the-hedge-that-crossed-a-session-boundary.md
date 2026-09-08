@@ -23,6 +23,14 @@
 > **Revisit if:** the course gains a session on *multi-agent work*, or on *how an
 > instruction degrades as it is relayed*. This is that session's worked example, and
 > nothing else in the folder covers relay.
+>
+> **Update 2026-09-08 — the second condition is met, and the audience call is still Tony's.**
+> He asked the material to teach that handoffs degrade as they are passed between sessions, so
+> `points.md` gained **C5** (*a handoff hardens what it carries*), which cites this file as its
+> clearest specimen and takes §4's own falsified rule — *quote them exactly* — as its central
+> lesson. **That places the finding, not the file.** Whether this case appears on a page is
+> unchanged and undecided; see [`../selection.md`](../selection.md), and nothing goes on a page
+> the day it is written.
 
 > ## ⚠ Provenance: written by the agent that caused the incident
 >

@@ -215,3 +215,78 @@ environment where its premise held. **Nothing here should land without a selftes
 in the world it is meant to catch** — which is
 [N6 decision 3](../OPEN-FINDINGS.md), already learned here, at the cost of a session losing a
 push.
+
+---
+
+# Second reading, 2026-09-08 — what the siblings do about a claim that hardens
+
+**Read at Tony's instruction**, after he named the failure this time rather than the tooling:
+*"assumptions get baked in and assumed as fact when they seemed to start as ideas or hypotheses
+or off hand comments. check recent interface2 work."* The survey above is about **channels** —
+where a message goes. This is about **what happens to a claim inside one.** It is the evidence
+base for `points.md` **C5**.
+
+> **Scope.** `../interface2` and `../fireflies` read **read-only** on 2026-09-08: commit bodies
+> from 2026-09-01 to 09-05, `docs/handoffs/`, `docs/teams/inbox/`, `docs/verification_gotchas.md`,
+> `docs/GLOSSARY.md`. **Not read:** anything MATLAB, their CI, and any data. Nothing was run or
+> changed in either. Tony has asked the `interface2` session for its own account; **that account
+> is not in here and should be added rather than summarised** when it arrives.
+
+## The instrument they have that this repo does not
+
+**Caveats ride the artifact as a named section, not as prose around it.** The 2026-08-07 thread
+handing an endpoint table to `fireflies` heads its qualifiers:
+
+> *"**Three things that must travel WITH the table** — Not footnotes — any of them silently
+> changes what a model means."*
+
+— the first being *"CNMF-E has **61 slices in arm A, not 67**."* That is B4 answered the way B4
+has to be answered: the qualifier is a field of the deliverable, so relaying the table without it
+is visibly incomplete rather than merely careless.
+
+## And the measured limit of it, which is the more useful half
+
+**A caveat is dated to the moment it was written, and nothing re-checks it.** As of 2026-09-08
+that thread is still `status: open`, and the stream the table was built from has since been
+proven wrong — a signed `C_raw` run through a running-minimum baseline, inverting 74 of 75 ROIs
+in one slice, **with no NaN anywhere to announce it**. The three caveats survived a month intact.
+The table beneath them did not. `docs/handoffs/cnmfe_to_fireflies.md` (2026-09-03) therefore has
+to instruct its successor to *"decide whether that N still holds against the re-run corpus"* and
+*"tell fireflies the table is superseded"* — and to *"not let a corrected export land silently
+beside an uncorrected one."*
+
+So the two failures are one defect wearing two faces: **a hedge that loses its qualifier, and a
+qualifier that outlives its reason.** Neither is caught by re-reading the document, because in
+both cases the document reads exactly as it did when it was right.
+
+## The one hedge that did survive relay, and why
+
+2026-08-28, `interface2` commit `389f68ba`: a session found that empty windows tracked the window
+type — set3 35%/30% against set2 21%/18% — and wrote, in the same breath, *"flagged provisional
+and explicitly NOT interpreted, because set2/set3 [are] undefined in the foundations pair,"*
+closing with a residual addressed to Tony saying exactly that.
+
+**Five days and several sessions later he asked the question the residual named** — *"cnmfe never
+adopted the 15 minute window regime?"* — and a different session measured all 264 windows and
+retracted the pattern outright (`570933b0`): set3 is the same data as set2 with two thirds of the
+frames removed, and the statistic is a maximum over the window, so the short one is mechanically
+lower. **18 slices where the long window found cells the short one missed; one the other way.**
+
+> **What made that hedge portable was that it named the missing measurement.** *Provisional* is a
+> feeling and evaporates at the first hop. *set2/set3 are undefined — measure the window lengths*
+> is an address, and a session that never met the author can act on an address.
+
+## What to take
+
+**Nothing to copy, and that is the finding.** The mechanism here is a habit of writing that this
+repo can adopt in one line — the fourth handoff field in `starter/HANDOFF.md` — and the estate's
+own instrument for it is already in this repo, unconnected to the material: `tools/doubt.sh`,
+whose header says *"the doubts that go unrecorded are exactly the ones that later get taught as
+facts."*
+
+**What is worth carrying upstream** is the second half above, and it is not written anywhere in
+the estate: `interface2`'s caveats-travel-with-the-artifact rule solves modality and does not
+solve freshness, so a thread that stays `status: open` across a month of work is a caveat with
+nobody re-checking whether it still applies. That is a candidate rule for `armory` — *a thread
+open past N days re-states what is still true* — and **it is not proposed there by this session**;
+proposing it is somebody's next task, not a thing that has happened.

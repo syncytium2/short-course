@@ -95,7 +95,7 @@ The split is the one decision in this repo worth understanding.
 | [`docs/SETUP.md`](docs/SETUP.md) | the three paths — data, work, review. `bootstrap.sh` offers to fill these. |
 | [`CLAUDE.md`](CLAUDE.md) | one sentence on what this project is. The agent reads this every session. |
 | [`FRICTION.md`](FRICTION.md) | what went wrong, when it goes wrong. Empty is correct today. |
-| [`HANDOFF.md`](HANDOFF.md) | three lines at the end of each session. Empty is correct today. |
+| [`HANDOFF.md`](HANDOFF.md) | four lines at the end of each session — the fourth is what you are guessing. Empty is correct today. |
 | [`.gitignore`](.gitignore) | has the common cases; the last section is yours to add to. |
 
 **Nothing here decides where your data lives, and nothing here moves a file of yours.**

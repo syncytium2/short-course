@@ -992,3 +992,36 @@ and limits named as constants at the top.
 3. **The wide margins are now correctly empty rather than wrongly cramped.** Filling them with
    the phase navigation — the left rail every documentation site has, driven by the step state
    this page already computes — is proposed and not built.
+
+### N10 · The handoff is four lines in the starter and three lines on three pages
+
+**Opened 2026-09-08 by the session that caused it, in the same commit as the change.** `points.md`
+**C5** argues that a hedge does not survive being relayed unless it is a required field rather than
+prose, and the mechanism it earns is a fourth line in the handoff — **Guessing.**, for what the
+entry did not check and what would settle it. `starter/HANDOFF.md`, `starter/CLAUDE.md` and
+`starter/README.md` now say four. **Three reader-facing pages still say three**, in six places:
+
+| where | what it says |
+|---|---|
+| [`docs/handouts/cold-start.html`](docs/handouts/cold-start.html) | step 5.5 prose, the checklist item `left-three-lines-happened`, and the **Ask it** prompt inside its *why?* |
+| [`docs/handouts/already-set-up.html`](docs/handouts/already-set-up.html) | the file table — *"Three lines at the end of a session"* |
+| [`docs/drafts/winter-workshop.html`](docs/drafts/winter-workshop.html) | the schedule row — *"Three lines at the end of every sitting"* |
+
+**Not fixed here on purpose, and the reason is the point of C5.** Cold Start was claimed by
+`Tonys-MacBook-Pro/75e4d067` when this landed; the winter workshop belongs to its own session and
+handoff ([`docs/workshop/HANDOFF.md`](docs/workshop/HANDOFF.md)); and `docs/selection.md` says
+nothing goes on a page the day it is written. Editing across those lines to keep a number
+consistent is how two sessions overwrite each other.
+
+**What has to travel with the fix, if it is taken.** The checkbox key `left-three-lines-happened`
+is persisted in the reader's browser, so renaming it silently un-ticks the box for anyone who has
+already used the page — the same class of defect as `pages.txt`/`META` drift. And the **Ask it**
+prompt is the sentence a learner actually types; if only the prose changes, the learner's agent
+still writes three lines and the mechanism does not exist.
+
+**The open question, and it is genuinely open:** whether four lines is still short enough to get
+written on a busy day. B7 rule 3 says a channel dies when writing to it costs more than skipping
+it, and the whole argument for three was that a handoff which grows into a report is one nobody
+reads. C5's answer is that the fourth line is where the doubt was going to go anyway, badly, in
+the first three — but that is an argument, not a measurement, and nobody has run a session against
+the four-line template yet.

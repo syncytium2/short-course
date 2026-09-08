@@ -41,9 +41,13 @@ choosing the confident wording.
 
 ## Finishing
 
-End a session by committing, pushing, and adding three lines to
-[`HANDOFF.md`](HANDOFF.md): what happened, what is unfinished, what is next. Work that is
-not pushed reaches no other machine and no next session.
+End a session by committing, pushing, and adding four lines to
+[`HANDOFF.md`](HANDOFF.md): what happened, what is unfinished, what is next, and what you
+are guessing. Work that is not pushed reaches no other machine and no next session.
+
+The fourth line is the one above about not choosing the confident wording, written down
+where the next session will read it. Say what you did not check and what would settle it —
+never *probably fine*. If everything was checked, say that instead of leaving it empty.
 
 When the same thing goes wrong twice, add a line to [`FRICTION.md`](FRICTION.md). That
 file, not my mood, decides what we build a guard for.
