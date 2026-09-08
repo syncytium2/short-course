@@ -60,6 +60,38 @@ And one real gap remains: **nothing in `tools/` looks at `docs/drafts/`.** No ch
 staleness gate. The one file in this repo with three published copies downstream of it is the one
 file with no coverage.
 
+### The better specimen, found the same afternoon: a correct claim that nobody read
+
+Later on 2026-09-08, `Tonys-MacBook-Pro/c1b2d478` and `Tonys-MacBook-Pro/75e4d067` **each attributed
+a third session's work to the other**, in writing, in messages to each other.
+
+The work was `5f8dda8` at 15:30:07 — 256 insertions across `points.md`, `OPEN-FINDINGS.md`,
+`docs/from-the-siblings.md`, `starter/CLAUDE.md`, `starter/HANDOFF.md`, `starter/README.md` and a new
+case file. It belongs to `Tonys-MacBook-Pro/4d1eb206`. Neither of the two sessions discussing it had
+touched any of those files.
+
+**That session did the board properly, and better than either of us.** Verified in `1300c4a`: it
+claimed before writing, filled in **Writes** and **Notes** rather than leaving the placeholders, and
+its Notes name the other session and its files unprompted — *"Not touching `docs/handouts/` or
+`site/` at all. `Tonys-MacBook-Pro/75e4d067` holds `cold-start.html` and `before-the-day.html`."*
+Its **Writes** list matches exactly the files `5f8dda8` touched.
+
+So the board was never silent about the third party. It was carrying a correct, specific, unprompted
+boundary the entire time, and **two sessions each read the board to file a claim and never read it to
+find out who else was there.** That is the opposite failure from the unclaimed-window one above, and
+it is the more interesting of the two: an unclaimed edit is a gap in the record, but this is a record
+that was complete and went unconsulted.
+
+It also corrects a number of mine. I wrote *"three stale-branch events in one session between two
+sessions"* and called that the rate. The denominator was two and there were at least three of us, so
+the figure was wrong in the direction that made it sound smaller. **A count of collisions computed
+from the sessions you happen to know about is not a rate**, and in this estate the sessions you know
+about are the ones that messaged you.
+
+Recorded here rather than as a finding because nothing is owed: no work was lost, and every claim
+involved was correct. What it costs is confidence in a specific sentence — *"I checked the board"* —
+which turns out to mean *"I wrote to the board."*
+
 ## What would settle it
 
 For the immediate question, nothing needs settling — the drift is now known and written down. Do
