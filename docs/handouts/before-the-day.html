@@ -172,13 +172,18 @@
           <p class="what">The agent can see files on your own computer.</p>
           <dl class="proof">
             <dt>How you know</dt>
-            <dd>Point it at a folder and it tells you something about the contents <b>that you did not type into it.</b>
-              <span class="quote">&ldquo;What files are in this folder, and what is the largest one?&rdquo;</span>
+            <dd>Point it at your Documents folder &mdash; or any folder with a few dozen files in it &mdash; and ask for a count.
+              <span class="quote">&ldquo;Count the files in this folder by type. Give me a table, with a total.&rdquo;</span>
+              <b>Then check that total against the number of items your file browser shows for the same folder.</b> They have to match.
             </dd>
           </dl>
           <dl class="fails">
-            <dt>Why this one is worth proving</dt>
-            <dd>Reading your files and talking about your files look identical in the reply. This is the single check that separates them, and it takes a minute.</dd>
+            <dt>Check the total, not the table</dt>
+            <dd>A chat window will write you the same table without ever having seen the folder, and every number in it will look perfectly reasonable. <b>The total is the part that can be wrong, so it is the only part that proves anything.</b> This is the whole day in one minute: the answer looked right, and looking right is not the test.</dd>
+          </dl>
+          <dl class="fails">
+            <dt>It does not read your files</dt>
+            <dd>Counting by type needs the file names only, never what is inside them. If the folder you pick holds data that should not be read by anything, this check still does not read it.</dd>
           </dl>
         </div>
       </li>
