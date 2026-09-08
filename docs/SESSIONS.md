@@ -2590,7 +2590,7 @@ risks in the file.
      and a release nobody can see leaves the door locked behind you. -->
 
 ### WSMIP065/e1be2500 — Imported case from `interface2`: a handoff that degraded across ~7 sessions while every individual fact in it stayed true
-- **Status:** ACTIVE
+- **Status:** DONE 2026-09-08
 - **Opened:** 2026-09-08
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
 - **Writes:** `docs/cases/2026-09-08-every-fact-was-true-and-the-frame-still-drifted.md` (new),
