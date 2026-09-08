@@ -56,6 +56,16 @@
     -webkit-font-smoothing: antialiased;
   }
   .wrap { max-width: 42rem; margin: 0 auto; padding: 3.5rem 1.5rem 5rem; }
+  /* ON A PHONE THE MEASURE IS THE CONSTRAINT, NOT THE TYPE SIZE. At 390px with 1.5rem of
+     side padding and a 17px body, a line holds about 40 characters — short enough that the
+     eye re-tracks constantly. Buying the characters back means giving up the padding and
+     one pixel of body text, and 16px is the floor: the browser's own default, which is not
+     ours to go under. Measured, not guessed — tools/presentation_check.js sets these limits
+     and cannot see this file, because the file is deliberately not in site/. */
+  @media (max-width: 560px) {
+    body { font-size: 16px; }
+    .wrap { padding: 2.5rem 0.9rem 3.5rem; }
+  }
 
   .eyebrow {
     font-size: .75rem; text-transform: uppercase; letter-spacing: .13em;
@@ -127,6 +137,11 @@
     margin-top: 2.75rem; padding-top: 1.2rem; border-top: 1px solid var(--rule);
     font-size: .86rem; color: var(--muted);
   }
+  /* THE SMALLER THE TYPE, THE NARROWER THE MEASURE HAS TO BE. This paragraph is the page's
+     smallest running text and was running the full 42rem column: 91 characters at 13.76px,
+     well past the 85 the estate's own limit sets. The column width is right for 17px body
+     text and wrong for this. */
+  footer p { max-width: 34rem; }
   a { color: var(--accent); text-underline-offset: 2px; }
   a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 </style>
