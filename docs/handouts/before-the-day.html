@@ -129,6 +129,20 @@
   .hole { border-left: 2px solid var(--flag); background: var(--flag-soft); }
   .hole h3 { color: var(--flag); }
 
+  /* Routes are a lookup, not a sequence — you read your own row and skip the others — so
+     they are a definition list rather than the numbered conditions above. */
+  .routes { margin: 0; display: grid; gap: .9rem; }
+  .routes dt {
+    font-weight: 600; font-size: .96rem; color: var(--accent);
+    margin-bottom: -.55rem;
+  }
+  /* 38rem, not 40: at 40 the measure lands on 85 exactly, which is the limit rather than a
+     margin, and the next sentence anyone adds pushes it over with nothing to notice. */
+  .routes dd { margin: 0; font-size: .96rem; max-width: 38rem; }
+  .dated {
+    margin: 1.25rem 0 0; font-size: .88rem; color: var(--muted);
+    max-width: 34rem; border-left: 2px solid var(--rule-firm); padding-left: .8rem;
+  }
   ul.plain { margin: 0; padding-left: 1.15rem; }
   ul.plain li { margin-bottom: .5rem; }
   ul.plain li:last-child { margin-bottom: 0; }
@@ -156,6 +170,29 @@
     <h2>Why you are being asked for forty minutes</h2>
     <p>The day is spent building something you actually need, and there is no time in it for installation. More importantly: <b>the ways this goes wrong at the start are silent.</b> An agent that cannot open your files will still answer questions about them, fluently and confidently, from whatever you pasted &mdash; and you will not be able to tell from the reply.</p>
     <p>So every item below has a check attached. Doing the step is not the same as the step having worked, and that distinction is the subject of the whole day.</p>
+  </section>
+
+  <section>
+    <h2>Getting an agent, if you do not have one</h2>
+    <p class="sec-note">Find the line that applies to you. If none of them does, read the last one.</p>
+
+    <div class="box stop">
+      <h3>First, the one that catches everybody</h3>
+      <p><b>What the University gives everyone for free is a chat window, not an agent.</b> It cannot open your files, and condition&nbsp;2 below will fail with it &mdash; correctly. The University itself draws this line: the chat box is free to everyone, and the agent sits behind an employment check and a billing code. That is the distinction the whole day is about, and you can see it in the access rules before you see it in a demonstration.</p>
+    </div>
+
+    <dl class="routes">
+      <dt>Faculty and staff</dt>
+      <dd><b>Claude Code through the U&#8209;M GPT Toolkit</b>, requested through the self-service portal. It bills per token against a departmental Shortcode, and <b>the department is covering the day</b> &mdash; so there is nothing for you to buy, no licence to procure, and no ticket to file.</dd>
+
+      <dt>Graduate students</dt>
+      <dd><b>That route is not open to you</b>, and it is a rule rather than a hurdle: Toolkit access to Claude Code is faculty and staff only, and using a colleague&rsquo;s key is prohibited, not merely discouraged. <b>Do not ask your supervisor to share one.</b> Two routes that are open: <b>Codex for the Classroom</b>, if we have provisioned this workshop as a course &mdash; we will tell you before the day, since it needs arranging in advance &mdash; or the <b>$100 student credit</b>, which you claim yourself in about ten minutes, verifies against your university address, and works on a free account. <b>The student credit is US and Canada only.</b></dd>
+
+      <dt>Neither of those works for you</dt>
+      <dd><b>Tell us, and then stop worrying about it.</b> The day is run in pairs anyway &mdash; one person drives, one is the designated sceptic, and you swap halfway &mdash; so a person without their own agent is a full participant in the exercise rather than a spectator. <b>You will not be singled out and nobody will be told why you are paired.</b></dd>
+    </dl>
+
+    <p class="dated"><b>Every access rule and price on this page was read on 27 August 2026 and nowhere else.</b> These pages move, the eligibility rules move with them, and nothing re-checks this sheet. If what you find does not match what is written here, <b>the page is wrong and you are not</b> &mdash; tell us, and that correction is worth more to us than the sheet was.</p>
   </section>
 
   <section>
