@@ -30,6 +30,17 @@ is for murderboard development only; see [Boundary](#boundary) below.
 > *Next:* Tony expects to work here again tomorrow. The workshop stays private —
 > [`docs/workshop/HANDOFF.md`](docs/workshop/HANDOFF.md) carries its own state and its no-name rule.
 
+> **2026-09-08, a second close the same day — the material gained a point about handoffs, and the
+> estate gained a survey saying why the method behind it has never travelled.** `points.md` **C5**
+> (*a handoff hardens what it carries*), the glossary term **hardened** beside **stale**, and the
+> mechanism it earns: a fourth **Guessing.** field in `starter/HANDOFF.md`. Then
+> [`docs/the-handoff-does-not-travel.md`](docs/the-handoff-does-not-travel.md) — twelve repos read
+> read-only, and `docs/session_protocol.md` is vendored into six of them without using the word
+> *handoff* once. **Open:** the `armory` submission is unwritten, nothing is proposed to
+> `interface2` or `bugarach`, and C5 has not absorbed
+> [the case where every fact was true and the frame drifted anyway](docs/cases/2026-09-08-every-fact-was-true-and-the-frame-still-drifted.md).
+> Full block at the end of this file.
+
 > **⚠ 2026-09-08 — a second project now lives here, with its own handoff and its own owner.**
 > Tony has been offered the chance to propose a **day-long departmental workshop**, and it has
 > changed what the course material is for: the deliverable is now a self-contained **HTML widget**
@@ -2784,3 +2795,91 @@ Git rejected three non-fast-forward pushes. The publish path demanded I read the
 failure that got through was one where the tool reported correctly and a session reasoned past it, or
 where no tool was looking. **The gap is not gates that fail — it is scope that quietly excludes, and
 signals nobody reads.** Three of the four open items above are that same shape.
+
+## Session close, 2026-09-08 — `Mac/4d1eb206` · the course now teaches what a handoff loses, and the estate does not carry the method that would fix it
+
+**Written 2026-09-09 06:50. Working tree clean, no claim held, nothing waiting on this session.**
+This block uses the four-line shape it shipped, including the fourth field, because a session that
+adds a *Guessing* line to the template and does not use it has argued against itself.
+
+### Happened
+
+Tony asked for an element teaching that **handoffs degrade as they are passed between sessions**,
+then sharpened it: *"assumptions get baked in and assumed as fact when they seemed to start as
+ideas or hypotheses or off hand comments."*
+
+- **`points.md` gains C5 — *a handoff hardens what it carries*.** Facts survive relay; qualifiers
+  do not, because a hedge is the part of a sentence that does not tell the reader what to do and a
+  summary is written by deciding what to drop. Evidence is three-sided: this repo's own
+  *maybe → is being → "Tony's call"* case, including the cure it falsified the same day (that
+  session quoted the next hedge **verbatim** and framed it as an instruction — the reader keeps the
+  frame and skims the quote); `interface2`'s caveats-travel-with-the-artifact rule, which works and
+  is not enough because a caveat is dated to when it was written and nothing re-checks it; and the
+  one hedge that did survive five days, which named the missing measurement rather than a feeling.
+- **A glossary entry, `hardened`, beside `stale`** — the mirror of it. Stale was true and the world
+  moved; hardened was never asserted and gained its confidence from the retelling.
+- **The mechanism, one line:** `starter/HANDOFF.md` now has a fourth field, **Guessing.**, for what
+  the entry did not check and what would settle it, with `starter/CLAUDE.md` and `starter/README.md`
+  brought level. `tools/doubt.sh` had carried the argument in its header the whole time — *"the
+  doubts that go unrecorded are exactly the ones that later get taught as facts"* — and that
+  sentence had never reached the material.
+- **[`docs/the-handoff-does-not-travel.md`](docs/the-handoff-does-not-travel.md)** — new, answering
+  *"how do we preserve interface2 handoff method and improve it for all repos."* Twelve repos read
+  **read-only**. The premise needed correcting: `interface2` has a session protocol that travels and
+  a handoff practice that never has. **`docs/session_protocol.md` is vendored into six repos and the
+  word "handoff" does not appear in its 196 lines** — vendoring propagated the board and left the
+  handoff behind. Four incompatible shapes are deployed instead, and three repos have none. The best
+  handoff practice in the estate is `bugarach`'s, unvendored: its `docs/handoffs/` charter and
+  `tools/session_briefing.sh`, whose *work is in flight* alarm once sat 15.5 KB past a 2 KB
+  injection cut and reached no session for five days.
+- **[`docs/from-the-siblings.md`](docs/from-the-siblings.md)** gains a second and third reading,
+  both scope-bannered.
+- **N10 filed** rather than fixed: the starter says four lines and three reader-facing pages still
+  say three, in six places.
+
+### What moved under this session, re-derived 2026-09-09 and not restated from context
+
+Another session imported an `interface2` case as **the complement to C5, not a repeat of it** —
+[`docs/cases/2026-09-08-every-fact-was-true-and-the-frame-still-drifted.md`](docs/cases/2026-09-08-every-fact-was-true-and-the-frame-still-drifted.md).
+A thread drifted for eleven days **without a single qualifier being dropped**: red-flagged
+corrections, an independent reproduction, an explicit refusal to settle the question — and what
+drifted was the *frame*, a mechanism compressed into a table column heading. Its Point 4 is the one
+that bites: **every defence in that thread catches errors of fact, and none fires on a frame.**
+C5's prescription is *name what would settle it*, and that case is a document where everything was
+named and the question still moved. **C5 has not absorbed this and should not be quietly patched to
+look as though it had.**
+
+### Unfinished
+
+- **N10 — six places, three pages.** Cold Start's checkbox key `left-three-lines-happened` is
+  persisted in readers' browsers, so renaming it un-ticks the box for anyone who has used the page;
+  and the **Ask it** prompt is the sentence a learner actually types, so changing prose alone leaves
+  the mechanism non-existent. Not done here because Cold Start was claimed by another session.
+- **The `armory` submission for the handoff-portability finding is not written** — which is the
+  exact failure the proposal names, and the second time this repo has diagnosed something for
+  `armory` and not sent it (the first is the presentation check, `OPEN-FINDINGS.md`).
+- **Nothing has been proposed to `interface2` or `bugarach`.** The three moves — a `## Handoffs`
+  section in the file that already copies, generalizing the in-flight alarm into the vendored hook,
+  and naming one shape so a generic check can look for it — are recommendations addressed to the
+  repos that own those files. **No sibling was run or edited by this session.**
+- **`interface2`'s own account has not arrived.** Tony asked that session for one; the survey leaves
+  a space for it rather than a summary, and it should be added rather than paraphrased.
+
+### Next
+
+The `armory` submission is one file and is the step this estate has skipped twice. The alternative,
+and the one with more reach, is drafting the `## Handoffs` section as a patch `interface2`'s owner
+can apply — reach, but it edits a repo another session may be holding.
+
+### Guessing
+
+- **Every behavioural claim about a sibling comes from a header, a charter or `.claude/settings.json`.
+  Nothing was run in any of them.** `bugarach/.claude/hooks/session-start.sh` is dated three weeks
+  before the rest of its vendored family, and `b8c90c0` reports `interface2`'s vendored murderboard
+  process is stale — so staleness in that family is live, not hypothetical. **Settle it** by running
+  each repo's briefing once and reading what it prints.
+- **The twelve-repo table is file *presence*, not use.** A repo can hold `docs/handoffs/` and never
+  write to it. **Settle it** with a commit count per directory.
+- **Whether four lines still gets written on a busy day is an argument, not a measurement.** B7 rule
+  3 says a channel dies when writing to it costs more than skipping it. **Settle it** by running one
+  session against the four-line template and seeing whether the fourth line arrives.

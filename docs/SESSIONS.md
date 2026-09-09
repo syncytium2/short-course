@@ -2645,3 +2645,22 @@ risks in the file.
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/4d1eb206 — Session close: write this session's HANDOFF.md block (C5, the starter's fourth field, the twelve-repo handoff-portability survey)
+- **Status:** ACTIVE
+- **Opened:** 2026-09-09
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** `HANDOFF.md` only — one appended `## Session close` block at the end, and one
+  blockquote added inside *If you are coming back to this cold*. **No existing text edited.**
+- **Notes:** Closing. Nothing of this session's is uncommitted and no other claim is held. Two
+  earlier claims from this same session stand above under `Tonys-MacBook-Pro/4d1eb206` — the
+  machine half changed mid-session ([N7](../OPEN-FINDINGS.md)), not a second session. The work
+  is `points.md` C5, the `starter/` fourth handoff field, and
+  [`docs/the-handoff-does-not-travel.md`](the-handoff-does-not-travel.md); **no sibling repo was
+  run or edited**, and the three moves that document recommends are addressed to `interface2`
+  and `bugarach` and have not been proposed to either.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
