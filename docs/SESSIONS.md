@@ -2622,6 +2622,16 @@ risks in the file.
   the proposal recommends edits to `interface2` and `bugarach` that **this session has not
   made and must not make**. If you own either repo, that document is addressed to you and
   nothing in it has been submitted anywhere.
+### Tonys-MacBook-Pro/2a83f57c — write up the true-report-wrong-object pattern as a case study — docs/cases/2026-09-04-*
+- **Status:** DONE 2026-09-04
+- **Opened:** 2026-09-04
+- **Branch when opened:** `case-true-report-wrong-object` — a fact, not an identity; it may move under you
+- **Writes:** `docs/cases/2026-09-04-a-true-report-about-the-wrong-object.md` — one new file.
+  No existing file edited, nothing outside `docs/cases/`.
+- **Notes:** Imported incident, not native: it happened in `syncytium2/murderboard` tonight,
+  and **the session writing it up is the one that caused it** — same provenance problem the
+  2026-08-28 tests-were-defending-the-bug case carries, and stated in the file. If you are
+  also filing a case dated 2026-09-04, check the slug before you write.
 
 <!-- RELEASE THIS
      tools/claim.sh --release
