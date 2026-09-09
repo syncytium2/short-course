@@ -2611,7 +2611,7 @@ risks in the file.
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Mac/4d1eb206 — Why the handoff method does not travel and what would carry it: a new docs/ proposal, read-only survey of 12 repos, no sibling edits
-- **Status:** ACTIVE
+- **Status:** DONE 2026-09-08
 - **Opened:** 2026-09-08
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
 - **Writes:** `docs/the-handoff-does-not-travel.md` (new), `docs/from-the-siblings.md` (one
