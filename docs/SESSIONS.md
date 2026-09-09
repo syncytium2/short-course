@@ -2609,3 +2609,21 @@ risks in the file.
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Mac/4d1eb206 — Why the handoff method does not travel and what would carry it: a new docs/ proposal, read-only survey of 12 repos, no sibling edits
+- **Status:** ACTIVE
+- **Opened:** 2026-09-08
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** `docs/the-handoff-does-not-travel.md` (new), `docs/from-the-siblings.md` (one
+  pointer), and this file. Nothing else.
+- **Notes:** Same session as `Tonys-MacBook-Pro/4d1eb206` above — **the machine half changed
+  under me mid-session**, which is [N7](../OPEN-FINDINGS.md) reproducing, not a second session.
+  Twelve sibling repos were read **read-only**; nothing was run or edited in any of them, and
+  the proposal recommends edits to `interface2` and `bugarach` that **this session has not
+  made and must not make**. If you own either repo, that document is addressed to you and
+  nothing in it has been submitted anywhere.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->

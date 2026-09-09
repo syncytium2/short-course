@@ -290,3 +290,18 @@ solve freshness, so a thread that stays `status: open` across a month of work is
 nobody re-checking whether it still applies. That is a candidate rule for `armory` — *a thread
 open past N days re-states what is still true* — and **it is not proposed there by this session**;
 proposing it is somebody's next task, not a thing that has happened.
+
+---
+
+## Third reading, 2026-09-08 — the handoff itself
+
+Tony, the same afternoon: *"how do we preserve interface2 handoff method and improve it for all
+repos."* Answered in [`the-handoff-does-not-travel.md`](the-handoff-does-not-travel.md), which is
+a survey of twelve repos rather than two and belongs beside this one.
+
+**The one-line finding there,** because it corrects the premise of both readings above:
+`docs/session_protocol.md` is vendored into half the estate and **the word "handoff" does not
+appear in its 196 lines.** The board travels; the handoff never entered the file that copies. And
+the best handoff practice in the estate is not `interface2`'s — it is `bugarach`'s
+`docs/handoffs/` charter and its unvendored `tools/session_briefing.sh`, whose alarm for *work is
+in flight* was once truncated 15.5 KB past a 2 KB injection limit and reached nobody for five days.
