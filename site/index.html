@@ -631,7 +631,7 @@
 
       <a class="ready" href="/cold-start">
         <span class="ready-k">Cold Start</span>
-        <span class="ready-t">A web app in an evening, without installing anything &mdash; or the whole setup. You pick.</span>
+        <span class="ready-t">Something that runs on your own laptop in an evening &mdash; or the whole setup. You pick.</span>
         <span class="ready-go" aria-hidden="true">&rarr;</span>
       </a>
 
@@ -641,7 +641,7 @@
       <p class="eyebrow">It Looked Right &middot; for researchers</p>
       <h1>Using coding agents today and tomorrow</h1>
       <p class="standfirst"><b>Coding is no longer the barrier. <a href="#communication" data-view="communication">Four challenges remain.</a></b> Each is set out with the incidents that produced it.</p>
-    <p class="pv">Version <b>0.1.69</b> &middot; 6 Sep 2026<span class="pv-born">First published 28 Aug 2026</span></p>
+    <p class="pv">Version <b>0.1.70</b> &middot; 9 Sep 2026<span class="pv-born">First published 28 Aug 2026</span></p>
       <!-- The locator that replaces the deck once you are inside a pane. Both segments are
            written by show() from the page itself, never from a list kept alongside. -->
       <p class="mast-where"><a class="mw-home" href="#overview" data-view="overview">It Looked Right</a><span class="mw-group"></span><span class="mw-title"></span></p>
@@ -1039,21 +1039,21 @@
         <div class="view-head">
           <p class="eyebrow">What to do about it</p>
           <h2 id="h-step0">Getting started &mdash; how far are you going?</h2>
-          <p class="lede">Everything before the first real task. <b>There are three ways through it, and the shortest ends with something published, in one evening, without installing anything.</b></p>
+          <p class="lede">Everything before the first real task. <b>There are two ways through it, and the shorter one ends with something that runs on your own machine, in an evening.</b></p>
         </div>
 
-        <p><b>Start with the shortest one unless you already know you need more.</b> It happens entirely in a browser: no terminal, no <span class="path">git init</span>, nothing installed on your machine. You say what you want in one sentence, make a repository from a web page, build one element and look at it yourself, then publish. It was walked end to end on <b>2026-08-30</b>, and the things that went wrong on that walk are written into the steps rather than tidied out of them.</p>
+        <p><b>Start with the shorter one unless you already know you need more.</b> The agent works on files on your own laptop, which is the thing that makes it an agent rather than a chat window: it opens what you have, writes something, runs it, reads the error and tries again. You say what you want in one sentence, build one part at a time, and look at each one yourself.</p>
 
-        <p><b>Publishing early is not the finish line &mdash; it is what makes everything after it cheap.</b> Once the page is live, each further change is a sentence, a look, and it is out there: the build-change-see-it loop closes in minutes, and it stays closed whether the thing you are making is a one-afternoon tool or the next three years of your work. <b>The point of the shortest route is not that it asks little of you. It is that it gets you into that loop by tonight.</b> Going further up this list buys you a sturdier machine underneath the same loop, on any day you choose, without losing anything already done.</p>
+        <p><b>Getting into the loop early is the point &mdash; not getting published early.</b> Once something runs, each further change is a sentence, a look, and it is different: the build-change-see-it loop closes in minutes, and it stays closed whether the thing you are making is a one-afternoon tool or the next three years of your work. Putting it on the internet is a separate act, worth doing when you want other people to open it, and nothing before that depends on it. Going further up this list buys you a sturdier machine underneath the same loop, on any day you choose, without losing anything already done.</p>
 
         <div class="phase">
-          <p class="phase-k">A web app, in the browser &middot; one evening</p>
+          <p class="phase-k">Something that runs, on your laptop &middot; one evening</p>
           <ul>
-            <li><b>Nothing installed and no terminal.</b> An agent account, a repository made from a web page, and a plan you can say in one sentence.</li>
-            <li><b>One element at a time,</b> checked by looking at the thing rather than reading the report that says it worked.</li>
-            <li><b>Publishing that keeps happening without you</b> &mdash; which is the one part of this route that is not just something you did once.</li>
+            <li><b>One file you can open in a browser.</b> An agent that can reach your own files, and a plan you can say in one sentence.</li>
+            <li><b>One part at a time,</b> checked by looking at the thing rather than reading the report that says it worked.</li>
+            <li><b>A record of what changed,</b> so tomorrow&rsquo;s session &mdash; yours or the agent&rsquo;s &mdash; can pick the work up.</li>
           </ul>
-          <p style="color:var(--muted);margin-top:10px"><b>Ends when the URL loads on your phone, off your wifi.</b> Nothing above needs you to read code, and the review step &mdash; <i>what did it touch that I did not ask about?</i> &mdash; needs no programming at all.</p>
+          <p style="color:var(--muted);margin-top:10px"><b>Ends when you double-click the file and the thing you asked for is there.</b> Nothing above needs you to read code, and the review step &mdash; <i>what did it touch that I did not ask about?</i> &mdash; needs no programming at all.</p>
         </div>
 
         <div class="phase">
@@ -1082,7 +1082,7 @@
 
         <p><b>The steps themselves are on <a href="/cold-start">Cold Start</a>,</b> which asks this same question at the top and then shows you only the steps your answer needs. <b>This page deliberately carries no step numbers</b> &mdash; there is one numbered list of these steps and it is on that page, because for two days there were two, and they disagreed.</p>
 
-        <div class="prov"><b>Section source.</b> <span class="path">points.md</span> &sect;D, ordered 2026-08-27; the browser route from <span class="path">docs/decisions/0002</span> &sect;5, walked end to end on 2026-08-30. Institution-specific storage and cluster names have been generalized here; the sourced originals, with rates and dates, are in <span class="path">points.md</span> &sect;F and are expected to go stale.<br><b>This section used to carry its own numbered list of phases, and it was removed on 2026-08-31 rather than corrected.</b> It had numbered them against <span class="path">points.md</span> &sect;D while <a href="/cold-start">Cold Start</a> numbered the same work against itself, so <i>phase 2</i> meant storage on one of these two public pages and the machine on the other &mdash; on pages that link to each other, for two days, because each was edited without the other. Keeping both and syncing them would have left two copies to hold in step forever. There is now one numbered list of these steps and it is on that page.</div>
+        <div class="prov"><b>Section source.</b> <span class="path">points.md</span> &sect;D, ordered 2026-08-27; the routes from <span class="path">docs/decisions/0002</span> &sect;5. <b>A third route &mdash; entirely in a browser, nothing installed, walked end to end on 2026-08-30 &mdash; was removed on 2026-09-09</b> after the only walk by a beginner outside this project failed on it; the material is parked at <span class="path">docs/parked/browser-route.html</span>. Institution-specific storage and cluster names have been generalized here; the sourced originals, with rates and dates, are in <span class="path">points.md</span> &sect;F and are expected to go stale.<br><b>This section used to carry its own numbered list of phases, and it was removed on 2026-08-31 rather than corrected.</b> It had numbered them against <span class="path">points.md</span> &sect;D while <a href="/cold-start">Cold Start</a> numbered the same work against itself, so <i>phase 2</i> meant storage on one of these two public pages and the machine on the other &mdash; on pages that link to each other, for two days, because each was edited without the other. Keeping both and syncing them would have left two copies to hold in step forever. There is now one numbered list of these steps and it is on that page.</div>
       </section>
 
       <!-- ============ STANDING RULE ============ -->

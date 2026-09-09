@@ -94,7 +94,13 @@ verdict() {
 
 # file @@ find @@ replace @@ what it breaks @@ [selftest to run, if not the file itself]
 #
-# ⚠ NO `;;` AND NO UNBALANCED `)` IN A ROW. Not a style rule — the file stops parsing.
+# ⚠ NO `;;`, NO UNBALANCED `)`, AND NO UNBALANCED `'` IN A ROW. Not a style rule — the file
+# stops parsing. THE QUOTE RULE WAS ADDED 2026-09-09 AFTER IT BIT, and how it bit is the
+# reason it is here: two rows each carried an odd number of quotes, one from a `'0'`-style
+# anchor plus an apostrophe in its label, and the two cancelled. The file parsed. Deleting
+# ONE of them left the other odd and the whole script became a syntax error reporting a line
+# a hundred further down. An apostrophe in a LABEL counts — labels are inside the heredoc.
+# Write "the answer", never "the reader's answer".
 #
 # This table is a quoted heredoc inside a `$( )` command substitution, and bash 3.2 (what
 # macOS ships, and what runs this) scans the substitution body for its closing paren instead
@@ -118,6 +124,34 @@ verdict() {
 # somewhere to say so, a page whose behaviour has a selftest could not be mutated at all,
 # and "we only mutate what is convenient to mutate" is how a suite quietly stops covering
 # the part that matters.
+#
+# TWO ROWS WERE REMOVED ON 2026-09-09, AND THIS IS RECORDED COVERAGE LOSS, NOT A REPAIR.
+# Removing the browser route stopped the page creating the conditions they modelled, so both
+# went from caught to MISSED. That is the harness working: it noticed two guards that nothing
+# exercises any more.
+#
+#   a word whose step this route hides still looks clickable
+#     Mutated the offRoute flag to a constant. With two routes, every glossary word resolves
+#     on both, so the flag is legitimately the same everywhere and the mutation changes
+#     nothing. The guard in the page stays correct and wanted; no word applies to it today.
+#     Reinstating the browser route brings the condition back with it.
+#
+#   the answer is planted inside a prompt the reader will paste
+#     Mutated the skip test for quoted prompts. The guard matters, because a chip inside an
+#     Ask line is text somebody pastes to their agent. Catching it needs a unit whose FIRST
+#     match for a word falls inside the prompt, and no unit does that now. Three prompts
+#     still contain a chip word; in all three the chip is placed earlier in the unit, so
+#     disabling the guard changes nothing observable.
+#
+# Fixing the second one needs a fixture rather than the live page: browser_check drives the
+# real document by design, and a guard that only fires on markup the document does not
+# contain cannot be driven. That gap is open and is not closed here.
+#
+# NOTE FOR WHOEVER EDITS THIS BLOCK: no apostrophes above, deliberately. The first draft of
+# this note used them and broke the file -- bash 3.2 scans the command substitution below
+# for its closing paren, and seven unbalanced quotes made the whole script unparseable at a
+# line 100 further down. The header two paragraphs up warns about semicolons and parens and
+# did not mention quotes; now it does.
 MUTATIONS=$(cat <<'TABLE'
 tools/claim.sh@@&& mv "$BOARD.tmp" "$BOARD"@@|| true@@release never writes the board back
 tools/claim.sh@@cat >> "$BOARD" <<BLOCK@@cat > /dev/null <<BLOCK@@claiming appends nothing
@@ -144,10 +178,8 @@ docs/handouts/cold-start.html@@if (localStorage.getItem(KEY) !== null) return;@@
 tools/presentation_check.js@@const MIN_BODY_PX = 16;@@const MIN_BODY_PX = 1;@@a body smaller than the browser default stops being caught
 tools/presentation_check.js@@const MAX_CHARS = 85;@@const MAX_CHARS = 9999;@@an unreadably wide reading line stops being caught
 site/cold-start.html@@        } else if (stepDone(STEP_RUNG_TERMINAL)) {@@        } else if (false) {@@the rung stops following the steps that set it@@tools/browser_check.js
-site/cold-start.html@@      dt.dataset.offRoute = live ? '0' : '1';@@      dt.dataset.offRoute = '0';@@a word whose step this route hides still looks clickable@@tools/browser_check.js
-site/cold-start.html@@  plantInline();@@  void 0;@@the reader's answer stops being printed where the word is met@@tools/browser_check.js
+site/cold-start.html@@  plantInline();@@  void 0;@@the answer stops being printed where the word is met@@tools/browser_check.js
 site/cold-start.html@@if (tn.parentNode.closest(INLINE_UNITS) !== unit) continue;@@if (false) continue;@@a warning box inside a step gets the same word chipped twice@@tools/browser_check.js
-site/cold-start.html@@p.classList.contains('ask') || p.classList.contains('t-you')@@false || p.classList.contains('t-you')@@the reader's answer is planted inside a prompt they will paste@@tools/browser_check.js
 tools/tier_check.sh@@        gate_tiers.setdefault(bm.group(2), set()).update(btiers & set(st["tiers"]))@@        gate_tiers.setdefault(bm.group(2), set()).update(TIERS)@@a gate box is treated as reachable from every route
 tools/tier_check.sh@@            if t not in openers:@@            if False:@@a step gated behind an unreachable box is passed
 tools/worktree.sh@@git -C "$REPO" worktree add -q "$path" -b "$slug" "$base" || die@@true || die@@open creates no worktree at all

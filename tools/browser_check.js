@@ -144,16 +144,29 @@ const server = http.createServer((req, res) => {
   // ever since, for a page that was behaving correctly. The claim in the name is that the
   // chosen tier's prose survives the filter -- a count is not that claim, and pinning it to
   // today's number just schedules the next false failure.
+  //
+  // AND THE SELECTOR MOVED, 2026-09-09, for a second-order version of the same mistake.
+  // It matched `p[data-tiers="mid"]` -- mid-ONLY paragraphs. Removing the browser route
+  // left exactly one of those on the page and it sits inside a folded step, so it is
+  // correctly invisible and this read FAIL on a page that was behaving perfectly. The
+  // claim is that prose belonging to the chosen route survives the filter, and a paragraph
+  // tagged "mid max" belongs to the chosen route just as much as one tagged "mid".
   checkAtLeast('this tier\'s own prose is shown',
-    await page.$$eval('p[data-tiers="mid"]', els => els.filter(e => e.offsetParent !== null).length), 1);
+    await page.$$eval('p[data-tiers~="mid"]', els => els.filter(e => e.offsetParent !== null).length), 1);
 
   // Was .cb[data-key="stops-or-bills"], a checkbox the rewrite deleted. page.click on a
   // selector that matches nothing does not fail fast -- it waits 30s and THROWS, which
   // ended the run here and took the seven checks below it with it.
   // ONE PLACE. The old key lived here AND again in the localStorage assertion below, and
   // fixing the selector without the second copy just moves the failure four checks down.
-  const TICK_STEP = 'pick-a-rung';
-  const TICK_BOX = 'rung-picked-highest-reachable';
+  //
+  // AND IT HAPPENED AGAIN, 2026-09-09: this pointed at `pick-a-rung`, a step the browser
+  // route carried, and removing that route removed the step. Same 30-second timeout, same
+  // whole-run kill, in the file whose comment above describes it. The lesson the comment
+  // did not carry is the one that would have helped: pick a step the WIDEST-shown routes
+  // both carry, so a route being removed cannot orphan the fixture. 1.2 is on both.
+  const TICK_STEP = 'github-account';
+  const TICK_BOX = 'account-created-signed';
   const TICK = `li[data-key="${TICK_STEP}"] .cb[data-key="${TICK_BOX}"]`;
   await page.click(`li[data-key="${TICK_STEP}"] .head`);
   await page.click(TICK);
@@ -300,33 +313,35 @@ const server = http.createServer((req, res) => {
   await page.evaluate(() => localStorage.clear());
   await page.reload();
   await page.click('.tierpick[data-tier="mid"]');
-  await openW2();
+  // Was W2, reached through the route gate. Both went with the browser route on 2026-09-09,
+  // so this drives step 1.2 instead: shown on both surviving routes and behind no gate.
+  await page.click('li[data-key="github-account"] .head');
 
-  const w2q = '[data-key="one-sentence"] .whyq';
+  const w2q = '[data-key="github-account"] .whyq';
   check('every box on the page has a why', await page.evaluate(() =>
     document.querySelectorAll('.cb').length === document.querySelectorAll('.whyq').length), true);
   check('the answers start closed', await page.evaluate(() =>
     [...document.querySelectorAll('.whya')].every(a => a.hidden)), true);
 
   const tickedBefore = await page.evaluate(() =>
-    document.querySelector('[data-key="one-sentence"] .cb').getAttribute('aria-pressed'));
+    document.querySelector('[data-key="github-account"] .cb').getAttribute('aria-pressed'));
   await page.click(w2q);
   check('pressing why opens its answer', await page.evaluate(() =>
-    !document.querySelector('[data-key="one-sentence"] .whya').hidden), true);
+    !document.querySelector('[data-key="github-account"] .whya').hidden), true);
   check('and does not tick the box it belongs to', await page.evaluate(() =>
-    document.querySelector('[data-key="one-sentence"] .cb').getAttribute('aria-pressed')),
+    document.querySelector('[data-key="github-account"] .cb').getAttribute('aria-pressed')),
     tickedBefore);
   check('and does not fold the step shut', await page.evaluate(() =>
-    document.querySelector('[data-key="one-sentence"]').dataset.open), '1');
+    document.querySelector('[data-key="github-account"]').dataset.open), '1');
 
   await page.click(w2q);
   check('pressing it again closes the answer', await page.evaluate(() =>
-    document.querySelector('[data-key="one-sentence"] .whya').hidden), true);
+    document.querySelector('[data-key="github-account"] .whya').hidden), true);
 
   // The checkbox's accessible name must be the box text and nothing else. Leaving the
   // label id on the outer span would have every box read "... why?" to a screen reader.
   check('the why button is outside the checkbox\'s accessible name', await page.evaluate(() => {
-    const cb = document.querySelector('[data-key="sentence-written-down"]');
+    const cb = document.querySelector('[data-key="account-created-signed"]');
     const lab = document.getElementById(cb.getAttribute('aria-labelledby'));
     return lab && !lab.querySelector('.whyq');
   }), true);
@@ -363,16 +378,24 @@ const server = http.createServer((req, res) => {
   await page.evaluate(() => localStorage.clear());
   await page.reload();
   await page.click('.tierpick[data-tier="mid"]');
-  await openW2();
+  await page.click('li[data-key="github-account"] .head');
   checkAtLeast('there are cue lines to paste',
     await page.evaluate(() => document.querySelectorAll('.whya .ask').length), 20);
-  check('a cue is not visible until its answer is opened', await page.evaluate(() => {
-    const a = document.querySelector('[data-key="one-sentence"] .whya .ask');
-    return a ? a.offsetParent === null : 'no cue on that box';
-  }), true);
-  await page.click('[data-key="one-sentence"] .whyq');
-  check('and is visible once it is', await page.evaluate(() =>
-    document.querySelector('[data-key="one-sentence"] .whya .ask').offsetParent !== null), true);
+  // THE BUTTON AND THE ANSWER MUST BE THE SAME BOX. This clicked the step's FIRST why
+  // button and then asserted on the first answer that happens to contain a cue -- two
+  // different boxes whenever the cue is not on box one, which is what removing the browser
+  // route made true. It read FAIL on correct behaviour. The pair is now derived from one
+  // element: find the answer carrying a cue, then press the button that opens THAT answer.
+  const cueId = await page.evaluate(() => {
+    const a = document.querySelector('[data-key="github-account"] .whya .ask');
+    return a ? a.closest('.whya').id : null;
+  });
+  check('the step has a box whose answer carries a cue', typeof cueId === 'string', true);
+  check('a cue is not visible until its answer is opened', await page.evaluate(
+    id => document.getElementById(id).querySelector('.ask').offsetParent === null, cueId), true);
+  await page.click(`.whyq[aria-controls="${cueId}"]`);
+  check('and is visible once it is', await page.evaluate(
+    id => document.getElementById(id).querySelector('.ask').offsetParent !== null, cueId), true);
 
   // ---- the reader's answers, printed where the word is met ---------------------------
   // WHY. The word list's chips (above) put "yours: Gemini CLI" under the definition at the
