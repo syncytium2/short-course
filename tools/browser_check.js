@@ -98,7 +98,7 @@ function expectedCounts() {
   const tiers = [...src.matchAll(/<li data-key="[^"]+" data-id="[^"]+" data-tiers="([^"]+)"/g)]
     .map(m => m[1].split(' '));
   const out = {};
-  for (const t of ['min', 'mid', 'max']) out[t] = tiers.filter(x => x.includes(t)).length;
+  for (const t of ['mid', 'max']) out[t] = tiers.filter(x => x.includes(t)).length;
   return { counts: out, total: tiers.length };
 }
 
@@ -128,7 +128,7 @@ const server = http.createServer((req, res) => {
   await page.goto(url);
   check('no tier chosen shows the page\'s whole scope', await visible(), total);
 
-  for (const tier of ['min', 'mid', 'max']) {
+  for (const tier of ['mid', 'max']) {
     await page.click(`.tierpick[data-tier="${tier}"]`);
     check(`${tier}: visible steps match the source`, await visible(), counts[tier]);
     check(`${tier}: progress denominator agrees`, await denom(), String(counts[tier]));
@@ -136,7 +136,7 @@ const server = http.createServer((req, res) => {
       await page.$eval(`.tierpick[data-tier="${tier}"]`, e => e.getAttribute('aria-pressed')), 'true');
   }
 
-  await page.click('.tierpick[data-tier="min"]');
+  await page.click('.tierpick[data-tier="mid"]');
   check('prose for other tiers is hidden, not only steps',
     await page.$$eval('[data-tiers="max"]', els => els.filter(e => e.offsetParent !== null).length), 0);
   // AT LEAST ONE, not exactly one. This asserted `1` and was true of the page on the day
@@ -145,7 +145,7 @@ const server = http.createServer((req, res) => {
   // chosen tier's prose survives the filter -- a count is not that claim, and pinning it to
   // today's number just schedules the next false failure.
   checkAtLeast('this tier\'s own prose is shown',
-    await page.$$eval('p[data-tiers="min"]', els => els.filter(e => e.offsetParent !== null).length), 1);
+    await page.$$eval('p[data-tiers="mid"]', els => els.filter(e => e.offsetParent !== null).length), 1);
 
   // Was .cb[data-key="stops-or-bills"], a checkbox the rewrite deleted. page.click on a
   // selector that matches nothing does not fail fast -- it waits 30s and THROWS, which
@@ -161,12 +161,12 @@ const server = http.createServer((req, res) => {
   check('a tick registers', await ticked(), 'true');
 
   await page.click('.tierpick[data-tier="max"]');
-  await page.click('.tierpick[data-tier="min"]');
+  await page.click('.tierpick[data-tier="mid"]');
   check('the tick survives a round trip through another tier', await ticked(), 'true');
 
   await page.reload();
   check('the tier choice survives a reload',
-    await page.$eval('.tierpick[data-tier="min"]', e => e.getAttribute('aria-pressed')), 'true');
+    await page.$eval('.tierpick[data-tier="mid"]', e => e.getAttribute('aria-pressed')), 'true');
   check('the tick survives a reload', await ticked(), 'true');
 
   await page.click('.tierpick[data-tier="max"]');
@@ -185,107 +185,6 @@ const server = http.createServer((req, res) => {
     migrated['github-account'],
     { 'account-created-signed': 1, 'username-willing-keep': 1 });
 
-  // ---- W2's starter-project generator -------------------------------------------
-  // A button, which is the thing static analysis is worst at. `node --check` and a markup
-  // simulation both pass on a listener bound to a selector that matches nothing, which is
-  // the reason this whole file exists.
-  await page.evaluate(() => localStorage.clear());
-  await page.reload();
-  await page.click('.tierpick[data-tier="min"]');   // it lives on the browser route only
-  // W2 IS BEHIND A GATE AS OF 2026-09-02, so opening it is now two acts, and every check
-  // below that reads W2's insides has to pass the gate first. That is not scaffolding to
-  // work around -- it is the check: if this helper ever stops being necessary, the gate has
-  // stopped holding and roughly a dozen assertions below will go green while it is broken.
-  const GATE1 = 'li[data-key="pick-a-rung"] .cb[data-gate="tool-makes-things"]';
-  const unlockRoute = async () => {
-    if (await page.$eval('[data-key="pick-a-rung"]', e => e.dataset.open) !== '1') {
-      await page.click('[data-key="pick-a-rung"] .head');
-    }
-    if (await page.$eval(GATE1, e => e.getAttribute('aria-pressed')) !== 'true') {
-      await page.click(GATE1);
-    }
-  };
-  const openW2 = async () => {
-    await unlockRoute();
-    await page.click('[data-key="one-sentence"] .head');
-  };
-
-  // IT IS NOT IN THE FOLD ANY MORE, and that is the point of the move: the reader who has
-  // nothing to build should not have to open a step about writing a sentence to find out
-  // they need not supply the sentence. So the check no longer opens anything first -- if it
-  // had to, the move would not have happened.
-  check('the generator is reachable without opening a step',
-    await page.evaluate(() => {
-      const b = document.getElementById('idea-roll');
-      return !!b && b.offsetParent !== null;
-    }), true);
-
-  const ideaBefore = await page.evaluate(() => document.getElementById('gen-idea').textContent);
-  await page.click('#idea-roll');
-  const ideaAfter = await page.evaluate(() => document.getElementById('gen-idea').textContent);
-  check('the generator button produces an idea', ideaAfter !== ideaBefore, true);
-  check("the idea arrives in W2's shape: a sentence, then parts",
-    /^.+\.\n\nThe parts, one at a time:\n( +· .+\n?)+$/.test(ideaAfter), true);
-  check('the placeholder styling clears once there is an idea',
-    await page.evaluate(() => document.getElementById('idea-box').classList.contains('empty')),
-    false);
-
-  // NEVER THE SAME ONE TWICE RUNNING. A shuffle that repeats reads as a dead button, and the
-  // reader concludes something about the page rather than about chance.
-  //
-  // THIS CHECK IS DETERMINISTIC, AND THE FIRST VERSION WAS NOT. It pressed twenty times and
-  // asserted no repeat, which for fourteen ideas passes by luck 22% of the time -- so it
-  // could not distinguish the guard working from the guard being absent, and when the guard
-  // WAS removed to test it, it passed. A statistical check on a property that is supposed to
-  // be absolute is not a check.
-  //
-  // Now the draw removes the last pick from the candidates rather than re-rolling, so a
-  // CONSTANT random is the hardest possible case and also a legal one: every press asks for
-  // the same pool and the same position, and the answer still has to change.
-  await page.evaluate(() => { Math.random = () => 0.5; });
-  let repeats = 0, prev = await page.evaluate(() => document.getElementById('gen-idea').textContent);
-  for (let i = 0; i < 8; i++) {
-    await page.click('#idea-roll');
-    const now = await page.evaluate(() => document.getElementById('gen-idea').textContent);
-    if (now === prev) repeats++;
-    prev = now;
-  }
-  check('the same idea never comes back twice running, even on a constant random', repeats, 0);
-
-  // ---- one draw in three is blue sky -------------------------------------------------
-  // Asserted through the MECHANISM, not by sampling. Drawing a few hundred and checking the
-  // proportion would be a test that fails occasionally for no reason and passes when the
-  // ratio is quietly wrong, which is the worst of both. The pool is chosen by its own draw,
-  // so pinning that draw pins the pool.
-  const kindFor = async (r) => {
-    await page.evaluate((v) => { Math.random = () => v; }, r);
-    await page.click('#idea-roll');
-    return page.evaluate(() => document.getElementById('idea-box').dataset.kind);
-  };
-  check('a low draw lands in the blue-sky pool', await kindFor(0.10), 'blue');
-  check('a high draw lands in the work pool',    await kindFor(0.90), 'lab');
-  check('the boundary belongs to the work pool', await kindFor(0.34), 'lab');
-  check('both pools are actually filled', await page.evaluate(() => {
-    // Reads the page's own list rather than a number typed here, which would go stale the
-    // first time anybody adds an idea.
-    const m = document.documentElement.innerHTML.match(/'(lab|blue)'\]/g) || [];
-    return m.some(x => x.includes('blue')) && m.some(x => x.includes('lab'));
-  }), true);
-
-  const kept = await page.evaluate(() => document.getElementById('gen-idea').textContent);
-  await page.reload();
-  check('the chosen idea survives a reload',
-    await page.evaluate(() => document.getElementById('gen-idea').textContent), kept);
-
-  // A stored index from a longer list must not throw and take the checklist down with it.
-  await page.evaluate(() => localStorage.setItem('cold-start-idea-v2', '9999'));
-  await page.reload();
-  check('an out-of-range stored idea is ignored rather than thrown',
-    await page.evaluate(() => document.getElementById('idea-box').classList.contains('empty')),
-    true);
-  check('and the checklist still works after it',
-    await page.evaluate(() => !!document.querySelector('.cb')), true);
-
   // ---- the words, reachable from wherever you landed ------------------------------
   // Added 2026-09-05 with the terminology pass. terms_check.sh proves the page uses one
   // word per thing; it cannot prove a reader can FIND the definitions, and the whole
@@ -303,7 +202,7 @@ const server = http.createServer((req, res) => {
     const t = document.getElementById('the-words');
     return !!t && t.offsetParent !== null && t.querySelectorAll('dt').length === 6;
   }), true);
-  for (const tier of ['min', 'mid', 'max']) {
+  for (const tier of ['mid', 'max']) {
     await page.click(`.tierpick[data-tier="${tier}"]`);
     check(`${tier}: every definition survives the route filter`, await page.evaluate(() =>
       [...document.querySelectorAll('#the-words dt')].filter(d => d.offsetParent !== null).length), 6);
@@ -321,16 +220,18 @@ const server = http.createServer((req, res) => {
 
   check('with no route picked, the route chip says so',
     (await chip('route')).includes('not picked yet'), true);
-  await page.click('.tierpick[data-tier="min"]');
-  check('picking a route names it back to the reader', await chip('route'), 'you: browser route');
-  check('and the browser route fixes the rung at 1', await chip('rung'), 'yours: rung 1 — a browser tab');
+  await page.click('.tierpick[data-tier="mid"]');
+  check('picking a route names it back to the reader', await chip('route'), 'you: laptop route');
   check('the plan is refused rather than guessed at',
     (await chip('plan')).includes('never asks'), true);
   check('and is not dressed up as something the page knows', await known('plan'), '0');
-  check('the editor is off the browser route and says that, not "not yet"',
-    await chip('editor'), 'not on the browser route');
-  check('a word whose step this route never shows is not clickable',
-    await page.$eval('.terms dt[data-jump="editor"]', e => e.dataset.offRoute), '1');
+  // BOTH SURVIVING ROUTES SHOW THE EDITOR, so the off-route case this pair used to assert
+  // no longer exists on the page. Asserting the live half is what is left: the editor word
+  // is reachable, and it reports a state rather than pretending to know one.
+  check('the editor word is on this route and clickable',
+    await page.$eval('.terms dt[data-jump="editor"]', e => e.dataset.offRoute), '0');
+  check('and before 3.1 it says not set up yet rather than nothing',
+    (await chip('editor')).includes('not set up yet'), true);
 
   // The derivation, on a route that has the steps: rung follows 3.4 and then 3.5.
   await page.click('.tierpick[data-tier="mid"]');
@@ -354,8 +255,11 @@ const server = http.createServer((req, res) => {
   // likely to be got wrong by a later edit.
   check('on the laptop route the repository word points at 4.5',
     await page.$eval('.terms dt[data-jump="repo-step"]', e => e.dataset.offRoute), '0');
-  await page.click('.tierpick[data-tier="min"]');
-  check('and on the browser route it still resolves, to W3',
+  // The second half of this pair asserted the same word resolving to W3 on the browser
+  // route. That route was removed 2026-09-09 and W3 with it, so what is left to check is
+  // that the word still resolves on the OTHER surviving route rather than only the first.
+  await page.click('.tierpick[data-tier="max"]');
+  check('and on the cluster route it still resolves',
     await page.$eval('.terms dt[data-jump="repo-step"]', e => e.dataset.offRoute), '0');
 
   // The jump itself.
@@ -377,7 +281,7 @@ const server = http.createServer((req, res) => {
   // the deployed page, where nothing had opened anything first.
   await page.evaluate(() => localStorage.clear());
   await page.reload();
-  await page.click('.tierpick[data-tier="min"]');
+  await page.click('.tierpick[data-tier="mid"]');
   check('the agent field is behind 1.1\'s fold, as every field on this page is',
     await page.$eval('.fill-one input[data-k="agent"]', e => e.offsetParent !== null), false);
   await page.click('.terms dt[data-jump="agent-account"]');
@@ -386,68 +290,8 @@ const server = http.createServer((req, res) => {
   await page.fill('.fill-one input[data-k="agent"]', 'Gemini CLI');
   check('naming your agent at 1.1 reaches the word list', await chip('agent'), 'yours: Gemini CLI');
   await page.reload();
-  await page.click('.tierpick[data-tier="min"]');
+  await page.click('.tierpick[data-tier="mid"]');
   check('and survives a reload', await chip('agent'), 'yours: Gemini CLI');
-
-  // ---- the route gates ------------------------------------------------------------
-  // WHAT THESE ARE FOR. On 2026-09-02 a beginner walked the browser route with an office
-  // assistant, which opened a blank template and had her type the title in herself. The
-  // repair was to shut W2-W5 until the tool has been shown to make a file, and W4-W5 until
-  // a write has been shown to land. A gate that can be clicked past is decorative, and a
-  // gate whose lock never lifts is a page that has eaten itself -- so both directions are
-  // asserted here, in a browser, because neither is visible in the markup.
-  await page.evaluate(() => localStorage.clear());
-  await page.reload();
-  await page.click('.tierpick[data-tier="min"]');
-
-  const lockedOf = k => page.$eval(`[data-key="${k}"]`, e => e.dataset.locked);
-  const GATED = { 'one-sentence': 'W2', 'connect-or-repo': 'W3', 'one-element': 'W4', 'publish-and-notice': 'W5' };
-
-  for (const [k, name] of Object.entries(GATED)) {
-    check(`${name} starts shut on a page nothing has been proved to`, await lockedOf(k), '1');
-  }
-  check('a shut step removes its boxes rather than dimming them',
-    await page.$$eval('[data-key="one-sentence"] .cb', els => els.filter(e => e.offsetParent !== null).length), 0);
-  check('and says so in its own authored words, not a generated string',
-    await page.$eval('[data-key="one-sentence"] .lockmsg',
-      e => e.offsetParent !== null && /laptop route/.test(e.textContent)), true);
-  check('a shut step will not open when its heading is pressed', await (async () => {
-    await page.click('[data-key="one-sentence"] .head');
-    return page.$eval('[data-key="one-sentence"]', e => e.dataset.open);
-  })(), '0');
-
-  await unlockRoute();
-  check('the file test opens W2 and W3', await lockedOf('one-sentence') + await lockedOf('connect-or-repo'), '00');
-  check('and leaves W4 shut, because the second test has not been passed',
-    await lockedOf('one-element'), '1');
-
-  const GATE2 = 'li[data-key="connect-or-repo"] .cb[data-gate="repo-takes-writes"]';
-  await page.click('[data-key="connect-or-repo"] .head');
-  await page.click(GATE2);
-  check('the write test opens W4 and W5', await lockedOf('one-element') + await lockedOf('publish-and-notice'), '00');
-
-  await page.click(GATE1);
-  check('untick the file test and the route shuts again', await lockedOf('one-sentence'), '1');
-  await page.click(GATE1);
-
-  check('the gates survive a reload', await (async () => {
-    await page.reload();
-    return await lockedOf('one-element');
-  })(), '0');
-
-  // A READER MID-ROUTE WHEN THIS SHIPPED HAS TICKS AND NO GATE BOX. Locking their finished
-  // steps would take away work they really did, to enforce a test nobody asked them for.
-  await page.evaluate(() => {
-    localStorage.clear();
-    localStorage.setItem('cold-start-v4', JSON.stringify({
-      'one-sentence': { 'sentence-written-down': 1, 'outsider-understands': 1, 'each-item-one-afternoon': 1 }
-    }));
-  });
-  await page.reload();
-  await page.click('.tierpick[data-tier="min"]');
-  check('a step already finished is never shut behind a gate that came later',
-    await lockedOf('one-sentence'), '0');
-  check('and its unfinished neighbour still is', await lockedOf('one-element'), '1');
 
   // ---- "why?" on every checkbox ---------------------------------------------------
   // The failure that matters here is not the answer being wrong, it is the button being
@@ -455,7 +299,7 @@ const server = http.createServer((req, res) => {
   // the markup and it cannot be seen by reading the handler; it needs a press.
   await page.evaluate(() => localStorage.clear());
   await page.reload();
-  await page.click('.tierpick[data-tier="min"]');
+  await page.click('.tierpick[data-tier="mid"]');
   await openW2();
 
   const w2q = '[data-key="one-sentence"] .whyq';
@@ -494,7 +338,7 @@ const server = http.createServer((req, res) => {
   // `.links { display: flex }` -- and `ul.checks > li { display: flex }` beats it outright
   // on specificity. Both were true, both shipped, and every attribute-based check passed
   // throughout: the counts were correct and the elements were on the screen anyway.
-  for (const tier of ['min', 'mid', 'max']) {
+  for (const tier of ['mid', 'max']) {
     await page.evaluate(() => localStorage.clear());
     await page.reload();
     await page.click(`.tierpick[data-tier="${tier}"]`);
@@ -518,7 +362,7 @@ const server = http.createServer((req, res) => {
   // The cue lines live inside the answers, so they must be closed until the answer is.
   await page.evaluate(() => localStorage.clear());
   await page.reload();
-  await page.click('.tierpick[data-tier="min"]');
+  await page.click('.tierpick[data-tier="mid"]');
   await openW2();
   checkAtLeast('there are cue lines to paste',
     await page.evaluate(() => document.querySelectorAll('.whya .ask').length), 20);
@@ -540,7 +384,7 @@ const server = http.createServer((req, res) => {
   // prompts -- a chip inside an "Ask it:" line would be text the reader pastes.
   await page.evaluate(() => localStorage.clear());
   await page.reload();
-  await page.click('.tierpick[data-tier="min"]');
+  await page.click('.tierpick[data-tier="mid"]');
   checkAtLeast('the word "agent" is met inside steps, and carries a chip there',
     await page.evaluate(() => document.querySelectorAll('ol.steps > li .t-inline[data-you="agent"]').length), 10);
   check('with no agent named, no inline agent chip is on the screen',
@@ -572,7 +416,7 @@ const server = http.createServer((req, res) => {
     await page.evaluate(() => {
       const c = document.querySelector('ol.steps > li .t-inline[data-you="route"]');
       return c ? c.textContent.trim() : 'no route chip in any step';
-    }), 'you: browser route');
+    }), 'you: laptop route');
 
   check('no uncaught JS errors', errors, []);
 

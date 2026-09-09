@@ -43,17 +43,21 @@ if [ "$MODE" = "--selftest" ]; then
     T=$(mktemp -d) || exit 1
     trap 'rm -rf "$T"' EXIT
     # THE FIXTURE IS THE DEFECT, REBUILT. Two steps: one healthy, one that shows itself to
-    # `min` while every box it carries belongs to `mid max`. That is 7.3 exactly, and if
-    # this file stops catching it the check has stopped being worth running.
+    # `mid` while every box it carries belongs to `max`. That is 7.3 exactly, and if this
+    # file stops catching it the check has stopped being worth running.
+    # Rewritten 2026-09-09 when the browser route was removed: the fixture used `min` as its
+    # excluded route, so it went red on a tier the document no longer has. The DEFECT it
+    # models is unchanged -- a step shown to a route that cannot complete it -- only the
+    # route standing in for "the other one".
     printf '%s' '<ol class="steps">
-<li data-key="ok-step" data-id="1.1" data-tiers="min mid max">
+<li data-key="ok-step" data-id="1.1" data-tiers="mid max">
 <ul class="checks">
-<li data-tiers="min"><button class="cb" data-key="a"></button></li>
-<li data-tiers="mid max"><button class="cb" data-key="b"></button></li>
+<li data-tiers="mid"><button class="cb" data-key="a"></button></li>
+<li data-tiers="max"><button class="cb" data-key="b"></button></li>
 </ul></li>
-<li data-key="dead-step" data-id="7.3" data-tiers="min mid max">
+<li data-key="dead-step" data-id="7.3" data-tiers="mid max">
 <ul class="checks">
-<li data-tiers="mid max"><button class="cb" data-key="c"></button></li>
+<li data-tiers="max"><button class="cb" data-key="c"></button></li>
 </ul></li>
 </ol>
 ' > "$T/fixture.html"
@@ -76,7 +80,7 @@ if [ "$MODE" = "--selftest" ]; then
     printf '%s' '<section class="phase"><h2>Phase 1</h2>
 <p>Everything here is fine, but see step 6.1 for the rest.</p>
 <ol class="steps">
-<li data-key="a-step" data-id="1.1" data-tiers="min mid max">
+<li data-key="a-step" data-id="1.1" data-tiers="mid max">
 <ul class="checks"><li><button class="cb" data-key="a"></button></li></ul></li>
 </ol></section>
 <section class="phase"><h2>Phase 6</h2>
@@ -88,7 +92,11 @@ if [ "$MODE" = "--selftest" ]; then
     if SRC="$T/refs.html" sh "$0" --check >"$T/refout" 2>&1; then
         echo "  FAIL a reference to a step the route never shows was passed"; echo FAIL; exit 1
     else echo "  ok   a reference to a hidden step is caught"; fi
-    if grep -q 'browser route.*names step 6.1' "$T/refout" \
+    # The fixture hides 6.1 from every route but `max`, so the laptop route must be named
+    # and the cluster route must not. This asserted the BROWSER route until 2026-09-09;
+    # the property under test -- caught on the routes that hide it, not the one that shows
+    # it -- is the same, and it is the reason this assertion is two-sided.
+    if grep -q 'laptop route.*names step 6.1' "$T/refout" \
        && ! grep -q 'cluster route.*names step 6.1' "$T/refout"; then
         echo "  ok   caught on the routes that hide it, not on the one that shows it"
     else
@@ -102,21 +110,22 @@ if [ "$MODE" = "--selftest" ]; then
     # the reachability check above passes it happily: the gated step has three perfectly
     # good boxes, behind a door with no handle on this side.
     #
-    # Three steps. `opener` carries the gate box and is tagged mid max, so the browser
-    # route cannot reach it. `shut-step` needs that gate and IS shown to min -- the defect.
+    # Three steps. `opener` carries the gate box and is tagged max only, so the laptop
+    # route cannot reach it. `shut-step` needs that gate and IS shown to mid -- the defect.
     # `fine-step` needs a gate whose box its own route can reach, and must stay quiet.
+    # The excluded route was `min` until 2026-09-09; the defect being modelled is unchanged.
     printf '%s' '<ol class="steps">
-<li data-key="opener" data-id="1.1" data-tiers="mid max">
+<li data-key="opener" data-id="1.1" data-tiers="max">
 <ul class="checks">
 <li><button class="cb" data-gate="proved-it" data-key="g"></button></li>
 </ul></li>
-<li data-key="everyone-opener" data-id="1.2" data-tiers="min mid max">
+<li data-key="everyone-opener" data-id="1.2" data-tiers="mid max">
 <ul class="checks">
 <li><button class="cb" data-gate="proved-it-here" data-key="h"></button></li>
 </ul></li>
-<li data-key="shut-step" data-id="2.1" data-tiers="min mid max" data-needs="proved-it">
+<li data-key="shut-step" data-id="2.1" data-tiers="mid max" data-needs="proved-it">
 <ul class="checks"><li><button class="cb" data-key="a"></button></li></ul></li>
-<li data-key="fine-step" data-id="2.2" data-tiers="min mid max" data-needs="proved-it-here">
+<li data-key="fine-step" data-id="2.2" data-tiers="mid max" data-needs="proved-it-here">
 <ul class="checks"><li><button class="cb" data-key="b"></button></li></ul></li>
 </ol>
 ' > "$T/gates.html"
@@ -124,8 +133,12 @@ if [ "$MODE" = "--selftest" ]; then
         echo "  FAIL a step gated behind a box its own route cannot reach was passed"
         echo FAIL; exit 1
     else echo "  ok   a step gated behind an unreachable box is caught"; fi
-    if grep -q 'browser route.*shut-step' "$T/gateout" \
-       && ! grep -q 'laptop route.*shut-step' "$T/gateout"; then
+    # `opener` carries the gate and is `max` only, so the laptop route must be named and the
+    # cluster route must not. Asserted the browser route until 2026-09-09; two-sided for the
+    # same reason as the reference check above -- a one-sided version passes a checker that
+    # names every route on every failure.
+    if grep -q 'laptop route.*shut-step' "$T/gateout" \
+       && ! grep -q 'cluster route.*shut-step' "$T/gateout"; then
         echo "  ok   caught on the route that cannot reach the gate, not on the ones that can"
     else
         echo "  FAIL the gate failure was misattributed across routes"
@@ -145,11 +158,17 @@ import io, os, re, sys
 src, mode = os.environ["SRC"], os.environ["MODE"]
 s = io.open(src, encoding="utf-8").read()
 
-TIERS = ("min", "mid", "max")
+# THE BROWSER ROUTE (`min`) WAS REMOVED FROM THE PAGE 2026-09-09 and is removed here with
+# it. Left in, this gate reported the browser route as UNFINISHABLE on every cross-reference
+# in the file -- true, and useless: a route with no steps cannot finish anything. A checker
+# that keeps asserting a thing the document no longer contains produces failures nobody can
+# act on, which is how a gate gets waved through. The material is parked at
+# docs/parked/browser-route.html and reinstating it means putting `min` back in both lines.
+TIERS = ("mid", "max")
 # The names the PAGE gives these, so a report and the document agree out loud. The tier
-# attribute values stay min/mid/max because they are handles, not prose -- renaming them
+# attribute values stay mid/max because they are handles, not prose -- renaming them
 # would move every data-tiers in the file for a cosmetic gain.
-NAMES = {"min": "browser route", "mid": "laptop route", "max": "cluster route"}
+NAMES = {"mid": "laptop route", "max": "cluster route"}
 
 # Steps are the <li> that carry data-key; a step runs to the next one or to </ol>.
 li_re = re.compile(r'<li\b[^>]*\bdata-key="[^"]*"[^>]*>')
