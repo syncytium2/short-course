@@ -155,6 +155,71 @@ with, say so here rather than editing Cold Start yourself.**
 
 Everything else in `docs/workshop/` and `docs/drafts/winter-workshop.html` is yours.
 
+### The pre-session checks have ONE source now, and it is not this project — 2026-09-08
+
+**`docs/handouts/before-the-day.html` is the single source for the four checks.** The proposal names
+the four conditions and stops; it does not restate a single *True when* line. Do not put them back.
+
+**Why, and it was proved rather than argued.** Both documents used to carry all four checks in full.
+On 2026-09-08 one condition changed — *"the agent can see files on your own machine"*, Tony's idea,
+replacing an ungradeable check with a file-count table whose total the participant verifies. Because
+the wording lived in two places, a one-line improvement cost a cross-session message, a careful
+transfer, and a window in which **master's handout carried the new check while master's proposal
+carried the old one.** That is the drift this repository documents, produced by the documents about
+it, in an afternoon.
+
+`HANDOFF.md`'s own Windows section already names the rule — *"a second entry point is a second
+source, and two sources drift."* This is the same defect and it had already happened.
+
+**So: a check changes in one file, and no message is needed.** The department reader was never the
+reason the wording was there. Someone deciding whether to fund a day needs to know pre-work exists,
+roughly what it covers and that it takes forty minutes; the exact phrasing of a check is for the
+person performing it.
+
+**What the proposal still owes the sheet**, and this is the one coupling left: if the *set* of
+conditions changes — a fifth appears, or one is dropped — the proposal's list is wrong and must be
+updated. A change to how a condition is *checked* does not touch this file at all.
+
+### ⚠ The file-count check is withdrawn — replace it with the recent-files check
+
+**Tony, 2026-09-08: *"most peoples documents folder has thousands of unorganized files. no one is
+going to count."*** He is right, and it retires the count.
+
+**The check must be this instead:**
+
+> **True when:** you pointed it at your Documents folder — or any folder you actually keep files in
+> — and asked which three files in it changed most recently. **The three names it gives you are the
+> three at the top when you sort that folder by date in your file browser.** A chat window will
+> answer with three confident, plausible, entirely invented filenames, and you will know instantly,
+> because they will not be yours. It needs the names and dates only, never what is inside the files.
+
+**Why the count failed, and it failed twice over.** A total of several thousand is not something
+anyone verifies, so the instruction to check it would simply go unperformed — leaving the check
+grading *"a table came back"*, which is the ungradeable shape the whole rewrite existed to escape.
+And it was worse than useless: an agent's count and a file browser's disagree legitimately over
+hidden files, subfolders and aliases, **so an exact-total match would have failed participants who
+had done everything right.** A check that produces false failures is worse than no check.
+
+**Why three recent filenames is the right shape.** Verification is one sort and one glance, on a
+folder of any size. And the fabrication is *unmistakable* rather than merely wrong: an invented
+count of 3,847 is unfalsifiable in practice, while an invented filename is obviously not yours the
+moment you read it. **The check should make a wrong answer loud, not just possible.**
+
+**Two of the three original drafting decisions survive and must not be reversed:**
+- **"file names only, never what is inside them"** — this is a research department and Documents may
+  hold data that should not be read by anything. Listing names and dates genuinely does not need file
+  contents, so the reassurance is true as well as reassuring.
+- **No OS-specific name or command** — the decided route is VS Code on native Windows, no WSL, so it
+  says *file browser* and *sort by date* rather than naming Finder, and asks for no command.
+
+The third is retired with the count: *"or any folder with a few dozen files in it"* existed because
+folder size broke the old check. It does not matter now, so the escape hatch is only about Documents
+being empty on machines where everything lives in iCloud or on the Desktop — hence *"any folder you
+actually keep files in."*
+
+**This is the new arrangement working.** Under the old duplication this correction would have meant
+two document edits and a transfer. It is now one edit to one file, and this notice.
+
 **Claim before you write** — `tools/claim.sh "what you are about to do"`, and this checkout has
 three recorded routes by which one session's work lands in another's commit. **Stage explicit
 paths; `git add -A` and `git commit -a` are unsafe here by default.** Better still, use
