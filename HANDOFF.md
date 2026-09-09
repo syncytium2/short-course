@@ -7,6 +7,29 @@ is for murderboard development only; see [Boundary](#boundary) below.
 
 ## If you are coming back to this cold
 
+> **2026-09-08, session close — the site is deployed and reviewers arrive tomorrow.**
+> *Happened:* every branch merged (`findable`, `case-true-report-wrong-object` — stranded with no
+> PR since 4 September — and `traps-must-fire`), **zero unmerged branches remain**, and
+> `lookedright.tonydefazio.com` was deployed and verified: all seven pages answer 200, Cold Start
+> serves 0.1.52, and the readability work is live. Cold Start took **387 edits across two passes** —
+> 297 naming what every pronoun, position and bare step number points at, then 90 more for
+> pronouns alone after Tony found one the first pass had walked past *in a sentence it had already
+> edited*. A new sheet, [`docs/handouts/before-the-day.html`](docs/handouts/before-the-day.html),
+> is the workshop's pre-session work and **Cold Start is now the back pocket behind it** — nothing
+> deleted, the demotion recorded in [`docs/handouts/README.md`](docs/handouts/README.md).
+> *Verified at close:* browser 89/89, presentation 84/84, vocabulary, step-references, pointers,
+> dated buttons, build-current, and the workshop material returns **404** on the public site,
+> checked rather than assumed.
+> *Unfinished, and the cheapest first:* **the measured cost run (N1)** — a few dollars, open since
+> 26 August, and the winter workshop proposal asks a department for money against an estimate
+> scaled from an estimate. **`presentation_check.js` has no seam for a page outside `site/`**, so
+> both workshop files are checked by hand or not at all; `terms_check.sh`'s `TC_COVERED` is the
+> pattern, two sessions independently asked for it, and neither claimed `tools/`. And
+> **`claim.sh --release` cannot release a claim filed before the machine's hostname changes** —
+> hit today, released by hand, recorded in [`docs/SESSIONS.md`](docs/SESSIONS.md) and unfiled.
+> *Next:* Tony expects to work here again tomorrow. The workshop stays private —
+> [`docs/workshop/HANDOFF.md`](docs/workshop/HANDOFF.md) carries its own state and its no-name rule.
+
 > **⚠ 2026-09-08 — a second project now lives here, with its own handoff and its own owner.**
 > Tony has been offered the chance to propose a **day-long departmental workshop**, and it has
 > changed what the course material is for: the deliverable is now a self-contained **HTML widget**

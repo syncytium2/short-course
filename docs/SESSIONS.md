@@ -2550,7 +2550,15 @@ risks in the file.
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Tonys-MacBook-Pro/75e4d067 — cold-start successor: a new short pre-session sheet (docs/handouts/before-the-day.html). NOT touching docs/workshop/ or docs/drafts/winter-workshop.html
-- **Status:** ACTIVE
+- **Status:** DONE 2026-09-08 — **released by hand, because `claim.sh --release` could not do it.**
+  The block was filed as `Tonys-MacBook-Pro/75e4d067` and the release resolved this same session
+  as `Mac/75e4d067`, answering *"no ACTIVE block matching 'Mac/75e4d067'"*. **The hostname
+  changed under the session between claiming and releasing** — N7, and the 2026-09-06 close
+  records the same pair of names on `41a56768`. The consequence is worse than the inconvenience:
+  a claim filed before the flip **cannot be released by the session holding it**, so it stays
+  ACTIVE forever and the next session reads a live claim on files nobody is working on. That is
+  the door this file's own release note says not to leave locked. **Unfiled as a tool defect** —
+  `tools/` is unclaimed and the fix is a change to shared instrumentation, not to a handout.
 - **Opened:** 2026-09-08
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
 - **Writes:** `docs/handouts/before-the-day.html` (new file), `docs/handouts/cold-start.html`, and this file. Nothing else in `docs/`.
