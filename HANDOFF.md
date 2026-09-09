@@ -2694,3 +2694,93 @@ afternoon in the same checkout. That is the argument, with receipts in the log.
 - **`traps-must-fire` and `idea-generator-out`** are both strictly behind master (their diffs
   against it are pure deletions), and the `traps-must-fire` worktree is still on disk at
   `../short-course-worktrees/traps-must-fire`, clean. Left alone.
+
+## Session close, 2026-09-08 — `Tonys-MacBook-Pro/c1b2d478` · three sessions, and each of us knew about two
+
+**Everything is merged, pushed, and the three copies of the proposal agree for the first time all
+day.** Working tree clean, no claim held, nothing waiting on this session. Written 2026-09-09 as the
+machine was going down.
+
+### What shipped
+
+- **`docs/README.md`** — new. `docs/` had 94 files across eight folders and no index, so the only
+  route to the live work was a 2,600-line log. A map, not a second source.
+- **The darkroom index now opens with what is live.** It was accurate and led with a four-day-old
+  housekeeping notice, so the winter workshop — the current work — was invisible below the fold.
+  All twenty links verified to resolve.
+- **The proposal's *Who this is for*** — dropped the *"And who it is not for"* standfirst that
+  promised a half it never delivered, and untangled pronouns that pointed at four different things.
+- **The proposal's *Before the day* is no longer a second source.** It names the four conditions and
+  stops; `docs/handouts/before-the-day.html` owns the checks.
+- **Layout, all four viewports.** The estimate chip was 10.88px against an 11px floor, the widest
+  line 107 characters against 85, the phone measure 39 against 45. Now 11.2 / 84 / 45.
+- **The darkroom copy and the claude.ai artifact are level with `master`.** Verified byte-identical
+  after the wrapper is stripped.
+
+### The three findings that live nowhere else
+
+**1. A publish has no equivalent of git's non-fast-forward refusal, and that is the sharpest thing
+this session produced.** I came one call from republishing the proposal from a branch cut before
+another session's cost rewrite. It would have succeeded and silently deleted their work. What
+stopped it was incidental — the publish path made me read the live page first, and the live page
+carried content my source did not. Git refused three bad pushes to my face the same afternoon. The
+artifact would have taken all three without a word. Recorded in
+`docs/doubt/2026-09-08-the-workshop-proposal-now-exists-in-four-different-states-an.md`.
+
+**2. Two sessions each attributed a third session's work to the other, and the board had said so all
+along.** `5f8dda8` belongs to `Tonys-MacBook-Pro/4d1eb206`, which claimed before writing, filled in
+**Writes** and **Notes** rather than the placeholders, and named the other session's files
+unprompted. Neither of the two sessions discussing it had touched any of them. **Both of us read the
+board to file a claim and neither to find out who was there.** *"I checked the board"* turned out to
+mean *"I wrote to the board."* Same doubt file.
+
+**3. ⚠ `armory` cannot see JavaScript, and it is the same defect it exists to catch.** Across all
+406 collected tools: 236 `.py`, 100 `.sh`, 52 `.m`, 14 `.ts`, 3 `.ps1`, 1 `.awk`, and **zero `.js`**.
+`presentation_check.js` and `browser_check.js` both predate the 2026-09-06 scan and neither is in the
+manifest. Estate-wide there are three such tools — those two and one in `triptych`. A collector built
+because instruments live in exactly one repository is blind to the file type of the two instruments
+in this repository that live in exactly one repository. **Not filed in `armory` — that repo was not
+claimed and the finding was raised as a question, not an instruction.**
+
+### Open, in the order they cost something
+
+1. **The measured run, still.** Open since 26 August, still the cheapest thing on any list and still
+   the one that most changes the proposal. The instrument is `~/.claude/projects/**/*.jsonl`, which
+   carries per-message `usage` with cache tiers. **Three traps, all verified on this session's own
+   transcript:** records repeat — 39 usage rows, 20 unique `message.id`, so summing lines doubles the
+   bill; cache reads bill at 0.1× and writes at 1.25×/2×, so billing all input at list gives 4× the
+   true figure; and subagents write separate files. This session priced correctly at **$1.60**; the
+   naive arithmetic says $6.43.
+2. **`presentation_check.js` has no seam for a page outside `site/`.** `terms_check.sh` has exactly
+   that seam in `TC_COVERED`, which is why a new handout is vocabulary-checked the moment it lands.
+   Until the layout gate has one, every page outside `site/` is checked by hand or not at all — and
+   both workshop files are outside it deliberately.
+3. **Eligibility** — faculty and staff only, students excluded. Still the question that decides
+   whether the day is possible as written.
+4. **`worktree.sh --list` prints one word for two facts.** `*dirty` covers *someone is typing right
+   now* and *someone left this last week*. A modification time is the cheap fix. Raised, not built.
+
+### What this session got wrong, on the record
+
+- **I blamed the wrong session for `5f8dda8`**, in writing, unprompted and unchecked, in a repo where
+  git authorship distinguishes nobody. `short-course-01` caught it.
+- **I said two instruments had failed when both had reported correctly.** `claim.sh` answered
+  honestly — there were no claims because the edit was unclaimed. `worktree.sh` said `dirty` and I
+  dismissed a true signal. Corrected in the doubt file after checking rather than accepting.
+- **I shipped a check that would have failed people who did everything right.** The file-count
+  version required an exact total match; an agent's count and a file browser's disagree legitimately
+  over hidden files and subfolders. Tony killed it — *"most peoples documents folder has thousands of
+  unorganized files. no one is going to count."*
+- **I wrote a dead CSS rule inside the block fixing a layout bug.** The phone media query sat above
+  the base `.open li` rule, same specificity, so the override silently lost. The measurement still
+  passed. It is now last in the stylesheet with a comment saying why it must stay there.
+- **I gave a push command naming a branch that existed only on the remote.** I had been pushing
+  `HEAD:refs/heads/findable` without ever creating `findable` locally.
+
+### The thing to carry forward
+
+**Every instrument that worked today refused something to my face.** `turnstile` blocked a heredoc.
+Git rejected three non-fast-forward pushes. The publish path demanded I read the live page. Every
+failure that got through was one where the tool reported correctly and a session reasoned past it, or
+where no tool was looking. **The gap is not gates that fail — it is scope that quietly excludes, and
+signals nobody reads.** Three of the four open items above are that same shape.
