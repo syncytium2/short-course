@@ -31,6 +31,19 @@ in committed material live in [`../cases/OPEN-CORRECTIONS.md`](../cases/OPEN-COR
 ⚠ **As of 2026-08-30 the 14 blocking findings against `what-it-costs.html` are unrepaired and the
 page is live**, and neither of the 2026-08-29 handout runs has an `OPEN-CORRECTIONS` entry.
 
+> **One of the fourteen is repaired, 2026-09-09 — and this line exists because nothing else joins
+> a repair to the finding it answers, which is [`MILESTONES.md`](../MILESTONES.md) **M8**.**
+> The page called the **$150–250 per developer per month average a *ceiling***, four lines under
+> the statistic that refutes it: 90% stay under $30 on an active day, so one user in ten is north
+> of $600 across a working month — over twice the figure the reader was told was the worst case.
+> Found by reading the **live page**, not the review. Repaired in `docs/handouts/what-it-costs.html`,
+> rebuilt and **deployed the same hour**; the paragraph now derives its bound from the page's own
+> statistic instead of asserting one.
+>
+> **The other thirteen are not cleared and this does not clear them.** Nobody has walked the list.
+> The warning above stands exactly as written, and the honest status of the rest is still
+> *unknown* rather than *open* or *fixed* — which is the gap M8 names and this note does not close.
+
 ## Other channels
 
 | you want | it is at |
