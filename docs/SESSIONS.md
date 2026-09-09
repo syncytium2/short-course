@@ -2647,7 +2647,7 @@ risks in the file.
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Mac/4d1eb206 — Session close: write this session's HANDOFF.md block (C5, the starter's fourth field, the twelve-repo handoff-portability survey)
-- **Status:** ACTIVE
+- **Status:** DONE 2026-09-09
 - **Opened:** 2026-09-09
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
 - **Writes:** `HANDOFF.md` only — one appended `## Session close` block at the end, and one
