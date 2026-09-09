@@ -7,6 +7,50 @@ is for murderboard development only; see [Boundary](#boundary) below.
 
 ## If you are coming back to this cold
 
+> ## ⛔ 2026-09-09, session close — START HERE. Three public pages are built and NOT deployed, and that is deliberate.
+>
+> **THE BROWSER ROUTE IS GONE.** Tony: *"remove the browser route everywhere. keep the material
+> in case i change my mind."* Cold Start lost the W1–W5 section, 20 min-only elements, the third
+> door button and 46,675 bytes; the front page stops promising *"a web app in an evening, without
+> installing anything"*; `just-enough-git` stops saying you will never type a command. The material
+> is parked at [`docs/parked/browser-route.html`](docs/parked/browser-route.html) with the
+> reasoning and what reinstating costs. `tier_check`, `browser_check` and `mutation_check` all
+> know about two routes now, and every gate is green: browser 58/58, presentation 84/84, mutation
+> 44 caught / 0 missed / 0 errors, plus vocabulary, step-references, pointers, dated buttons and
+> build-current.
+>
+> **⚠ DO NOT DEPLOY WITHOUT ASKING HIM.** `site/` is built and correct; **live still serves the
+> three-route page** — 3 of 7 pages behind, confirmed by `tools/site_staleness.sh` and by counting
+> `.tierpick` buttons on the live page (3) against the build (2). **He paused releasing his résumé
+> over exactly these doubts**, so the public site is a live decision and not a chore. One command
+> ships it: `npx wrangler deploy`.
+>
+> **WHAT DID GO LIVE TODAY**, with his explicit go: `what-it-costs.html` called the **$150–250
+> monthly average a *ceiling***, four lines under the statistic refuting it. A 2026-08-29 blocking
+> finding, unrepaired for eleven days on a public page, found by reading the live page rather than
+> the review. One of fourteen; **the other thirteen are not cleared and nobody has walked them** —
+> [`docs/reviews/README.md`](docs/reviews/README.md) now records that distinction, and it is `M8`.
+>
+> **HE HAD ALREADY DECIDED THE BROWSER ROUTE ON 2026-09-02**, and the decision sat unexecuted in a
+> code comment inside the page it was about: *"we have to pull the browser route. it is a complete
+> shitshow without having agents working the files directly."* Seven days, in a repository whose
+> subject is the gap between a finding and its repair.
+>
+> **The workshop is a separate project and stays private** —
+> [`docs/workshop/HANDOFF.md`](docs/workshop/HANDOFF.md), including its no-name rule for the
+> department. `before-the-day.html` is the participant sheet and is deliberately not in
+> `tools/pages.txt`.
+>
+> **Open, cheapest first:** the **measured cost run** (N1, open since 26 August, a few dollars, and
+> the workshop proposal asks a department for money against an estimate scaled from an estimate —
+> a peer session measured one conversation at **$1.60 where naive arithmetic said $6.43**); the
+> **`presentation_check.js` seam**, so a page outside `site/` can be layout-checked at all, which
+> both sessions asked for and neither claimed; the **thirteen unwalked findings** on
+> `what-it-costs.html`; and **`claim.sh --release` cannot release a claim filed before the
+> machine's hostname changes**, hit on 09-08, released by hand, still unfiled.
+>
+> *Everything below this block is older and still stands. Nothing in it was removed.*
+
 > **2026-09-08, session close — the site is deployed and reviewers arrive tomorrow.**
 > *Happened:* every branch merged (`findable`, `case-true-report-wrong-object` — stranded with no
 > PR since 4 September — and `traps-must-fire`), **zero unmerged branches remain**, and
