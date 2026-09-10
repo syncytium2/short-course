@@ -2688,3 +2688,21 @@ risks in the file.
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Arioch/9e999600 — Deploy the browser-route removal to live and correct the handoff block that says it is undeployed
+- **Status:** DONE 2026-09-10
+- **Opened:** 2026-09-10
+- **Branch when opened:** `master` — a fact, not an identity; it may move under you
+- **Writes:** `HANDOFF.md` (top block), `docs/SESSIONS.md` (this claim). Outside git: **the live
+  site** — `npx wrangler deploy` ran at Tony's explicit go, version
+  `d474d8a1-1776-4129-993e-2c0d04ecae59`, three files.
+- **Notes:** The deploy is DONE and verified — `site_staleness.sh` says every page matches the
+  checkout, so if you came here to ship it there is nothing to ship. The 09-09 handoff block said
+  **do not deploy without asking him**; that rule still stands for the NEXT deploy, and only its
+  specific "3 of 7 pages behind" claim was struck. He paused releasing his résumé over doubts about
+  this site, so publishing stays his call.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->

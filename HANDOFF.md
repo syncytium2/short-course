@@ -7,7 +7,40 @@ is for murderboard development only; see [Boundary](#boundary) below.
 
 ## If you are coming back to this cold
 
-> ## ⛔ 2026-09-09, session close — START HERE. Three public pages are built and NOT deployed, and that is deliberate.
+> ## ✅ 2026-09-10 — START HERE. The browser route is gone from the LIVE site too. Nothing is pending.
+>
+> **Tony, 2026-09-10:** *"the website is still showing the browser route. i thought we decided to
+> clean this up."* He was right about what he saw, and it was not a missed cleanup: the removal had
+> been in the source and pushed since 09-09, and only the deploy was outstanding — deliberately, on
+> the 09-09 block's own instruction to ask him first. He was shown the gap and said **"deploy"**.
+>
+> **DEPLOYED.** `npx wrangler deploy` uploaded exactly three files — `index.html`, `cold-start.html`,
+> `just-enough-git.html` — version `d474d8a1-1776-4129-993e-2c0d04ecae59`. Verified after the fact
+> rather than assumed: `tools/site_staleness.sh` reports **every page matches this checkout** (it
+> was 3 of 7 behind), live `cold-start` is **byte-identical** to `site/cold-start.html`, its route
+> buttons went **3 → 2** with **zero** browser-route-only elements left, and the front page no
+> longer says *"without installing anything"* nor `just-enough-git` *"never type a command"*.
+>
+> **IT CARRIED ONE COMMIT AND NOTHING ELSE**, checked before deploying rather than after, because a
+> deploy that quietly ships unrelated work is how a small go turns into a big one: all three stale
+> pages were stale from commit `93876a6` alone. `what-it-costs.html` was already current and was
+> not touched.
+>
+> **THE 23 REMAINING `W1`–`W5` MARKERS IN `cold-start.html` ARE NOT LEFTOVERS.** All 23 sit in HTML
+> and JS comments — why the route existed, and which gates open which steps. **Reader-visible text
+> contains zero.** The `Minimum` row of the rungs table is also not the removed route: it is the
+> free rung of agent access, and the page tells you to outgrow it.
+>
+> **STILL OPEN, and untouched by this deploy:** the **thirteen unwalked findings** on
+> `what-it-costs.html` — that page is live and current, so an up-to-date site is not a reviewed one.
+> Also the **measured cost run** (N1, open since 26 August), the **`presentation_check.js` seam** so
+> a page outside `site/` can be layout-checked at all, and **`claim.sh --release` cannot release a
+> claim filed before the machine's hostname changes**.
+>
+> *Everything below this block is older. The 09-09 deploy warning is struck through where this
+> overtook it; the rest of that block stands.*
+
+> ## 2026-09-09, session close — the browser route leaves the source. ~~START HERE. Three public pages are built and NOT deployed, and that is deliberate.~~ *They were deployed on 09-10; read the block above first.*
 >
 > **THE BROWSER ROUTE IS GONE.** Tony: *"remove the browser route everywhere. keep the material
 > in case i change my mind."* Cold Start lost the W1–W5 section, 20 min-only elements, the third
@@ -19,11 +52,13 @@ is for murderboard development only; see [Boundary](#boundary) below.
 > 44 caught / 0 missed / 0 errors, plus vocabulary, step-references, pointers, dated buttons and
 > build-current.
 >
-> **⚠ DO NOT DEPLOY WITHOUT ASKING HIM.** `site/` is built and correct; **live still serves the
+> **⚠ DO NOT DEPLOY WITHOUT ASKING HIM.** ~~`site/` is built and correct; **live still serves the
 > three-route page** — 3 of 7 pages behind, confirmed by `tools/site_staleness.sh` and by counting
-> `.tierpick` buttons on the live page (3) against the build (2). **He paused releasing his résumé
-> over exactly these doubts**, so the public site is a live decision and not a chore. One command
-> ships it: `npx wrangler deploy`.
+> `.tierpick` buttons on the live page (3) against the build (2).~~ **SUPERSEDED 2026-09-10 — he
+> gave the go and it is deployed; see the block above.** The standing rule it states is not
+> superseded: **he paused releasing his résumé over exactly these doubts**, so the public site is a
+> live decision and not a chore, and the next deploy needs asking too. One command ships it:
+> `npx wrangler deploy`.
 >
 > **WHAT DID GO LIVE TODAY**, with his explicit go: `what-it-costs.html` called the **$150–250
 > monthly average a *ceiling***, four lines under the statistic refuting it. A 2026-08-29 blocking
