@@ -63,6 +63,43 @@ file, including this one, including any note you write to yourself.
 - The published artifact is **private by default**. That is a default, not a guarantee: it becomes
   readable by anyone Tony shares it with, so it is bound by this rule too.
 
+### ⛔ And neither is any person — added 2026-09-14, because this block passed and the commit was still wrong
+
+**The rule is not new.** [`docs/selection.md`](../selection.md) test 2: *"Nobody but the author is
+the subject. No third party, named or identifiable […] Anonymisation is not consent."* And
+[`docs/cases/README.md`](../cases/README.md): ***"Material quoting or naming someone who did not
+choose to be published does not enter this repository at all — not on master, not on a branch."***
+Third-party material lives in `syncytium2/short-course-private` and reaches here only as a
+de-identified generalisation, by an explicit call.
+
+**What is new is that this block is where a session looks and it did not say so.** On 2026-09-13 a
+session evaluated an external event, ran this block's department grep, got a clean pass, and
+committed a named third party — her role, the wording of a sign-in-only page, and a note about
+approaching her — to a **public branch**. Caught the next day by Tony asking, not by anything
+firing. It was the second such landing in thirteen days; the first is why the private repo exists.
+
+**Three reasons the existing controls missed it, and the third is the useful one:**
+
+1. **A check ran and came back green.** This block's grep is about a *department*. It passed, and a
+   cleared check made the area feel cleared.
+2. **The rule that applied lives in a file the question never named.** `selection.md` governs which
+   cases may be *cited on a page*; the session was writing a handoff entry. That is Point 4 of
+   [`docs/cases/2026-09-01-the-index-worked-and-the-trap-was-not-a-question.md`](../cases/2026-09-01-the-index-worked-and-the-trap-was-not-a-question.md)
+   — *the unit of retrieval is the query, not the file.*
+3. **The private repo's control was built against the other direction of travel.** *"No promotion
+   step exists to be forgotten"* assumes the material starts private and someone moves it in. This
+   material was **born in the public tree**, typed from a screenshot straight into a public file, so
+   there was no promotion step and the control was true and beside the point.
+
+**So there is now a gate as well as a sentence**, because this repo's best-known finding is that
+prose loses: [`.claude/hooks/new-name-in-the-record.sh`](../../.claude/hooks/new-name-in-the-record.sh)
+refuses a `git commit` whose staged diff introduces a **person-shaped name that does not already
+appear anywhere in the repository.** New proper nouns are rare in established prose and a new
+person's name is exactly the thing worth one deliberate confirmation. Override, when the name
+belongs here (a public author being cited, a tool, a place):
+
+    SC_NEWNAME_OK=1 git commit -m "…"
+
 ---
 
 ## What is decided, and should not be reopened without him
@@ -129,6 +166,12 @@ file, including this one, including any note you write to yourself.
    internet. Worth confirming rather than assuming.
 5. **Nothing in the proposal has been reviewed by Tony.** It was published and handed to him in the
    same turn it was written. Treat every sentence as a draft, including the schedule times.
+6. **⚠ Nothing in the four conditions says what data may be brought into the room** — added
+   2026-09-13, and **appended rather than ranked** so the numbers above keep meaning. It is not
+   the sixth most expensive item; on a clinical or human-subjects audience it sits with
+   eligibility. The reasoning is in
+   [the entry below](#an-external-session-was-evaluated-2026-09-13--what-it-changed-and-what-it-did-not),
+   which is where it came from, and it is not restated here.
 
 ---
 
@@ -224,6 +267,88 @@ two document edits and a transfer. It is now one edit to one file, and this noti
 three recorded routes by which one session's work lands in another's commit. **Stage explicit
 paths; `git add -A` and `git commit -a` are unsafe here by default.** Better still, use
 `git commit -m "..." -- <path>`, which ignores the index entirely.
+
+---
+
+## An external session was evaluated, 2026-09-13 — what it changed and what it did not
+
+Tony sent in a listing for an **institutional session on AI in research** — one hour, on Zoom,
+**6 November 2026**, run centrally at his own university, on adopting AI across the research data
+lifecycle: approved tools, data quality, governance, reproducibility. He asked for an evaluation.
+
+**Everything identifying is deliberately absent from this file**, per the third-party rule in the
+⛔ block above: the listing sits behind institutional sign-in, and the person running it did not
+choose to appear in a public repository. The full record — the listing, the facilitator, and what
+was published about them before this was caught — is in `syncytium2/short-course-private`,
+`faculty-development-event/`. **Nothing in the reasoning below needs any of it**, which is the
+test that decided what stayed.
+
+### It does not go on the public page, and this is the reasoning rather than a preference
+
+`site/index.html` *Others teaching this* runs on a stated method — the programmes' own wording, a
+**checked-on** date, and *"go to the source, because course offerings move."* This fails two of its
+three tests:
+
+1. **Subject.** That list is about coding agents; the contrast line under it is *"those three teach
+   you to use the agents. This page is about what to do when they are confidently wrong."* An hour
+   on approved tools, data quality and governance is not what that sentence distinguishes itself
+   from. Nothing in the listing suggests agentic work on a participant's own machine and own files.
+2. **Checkability.** The listing is behind an institutional sign-in, so a link to it converts *go to
+   the source* into *take my word for it* — the exact shape
+   [B5](../../OPEN-FINDINGS.md#b5--the-positioning-section-is-a-check-that-cannot-fail) was raised
+   against. **A citation the reader cannot open is worse than no entry**, because it looks like
+   evidence and cannot be used as any.
+
+It passes the third test — B2's prerequisites instrument — trivially and uselessly: a one-hour
+session lists no prerequisites, so it is open to non-programmers. That tells us nothing, because it
+is not teaching agent work.
+
+**So nothing in `site/` changes and no re-check is triggered.** Noticed while looking and **not
+filed**, because it is older than this and belongs to whoever next holds that section: all three
+entries there are dated **June 2026** under a present-tense heading, and the section's own
+checked-on date is 31 August. Neither is wrong, and neither is obviously right either.
+
+### What it did change, and both are about the day rather than the course
+
+1. **A re-check for §F is available on 6 November, while §F is stale and load-bearing.**
+   [`points.md`](../../points.md) §F was checked **2026-08-27** and copied into the proposal on
+   09-08 without re-check — 18 days old today, and 71 days old on the day of the session. The
+   proposal's single ask (a Shortcode, and who may bill against it) rests on that table, and the
+   session's own stated objective is the institution's *available, approved AI resources*.
+   **Whether it reaches the agent tier or stops at the chat tier and an approved-tool list is
+   unknown — that is what attending settles**, and attending costs an hour rather than a week of
+   other people's lead time. **One scheduling fact, not advice:** if the proposal goes in before
+   6 November, that re-check arrives after the numbers it would have corrected.
+2. **The four conditions say nothing about what data may enter the room — Open item 6.** The day
+   asks people to bring *"a real problem … and whatever the problem needs — a spreadsheet, a
+   figure, a set of numbers"*, and the room requirement is a network that lets the agent reach the
+   internet. The fourth condition is about **having** the material, never about whether it may
+   leave the machine. **The instinct is already in the material and was not generalised:**
+   [`before-the-day.html`](../handouts/before-the-day.html)'s recent-files check says names and
+   dates only, never contents, *"this is a research department and Documents may hold data that
+   should not be read by anything"* — **the folder the agent is pointed at is protected, and the
+   file people are told to carry in is not.** That an institution is running a session on adopting
+   AI responsibly across the research data lifecycle is evidence the answer is expected of
+   researchers here; it does not supply one.
+   **This is a finding against the proposal, not against anybody's session**, it was read off this
+   repo's own handout rather than off the listing, and it is the whole value of the exercise.
+   **Undecided on purpose, because nobody has checked what the local rule is:** whether the day
+   handles it by exclusion (nothing restricted in the room), by substitution (a de-identified
+   extract or a synthetic stand-in), or by naming the rule and stopping. If it becomes a **fifth
+   condition**, that is precisely the coupling [Boundary](#boundary) says must be reported here —
+   the *set* changing, not the wording of a check.
+
+### Guessing
+
+- **The listing was read from two phone screenshots and nothing else.** Nobody opened the page or
+  confirmed the session still exists on the day. The one internal check available passed:
+  **6 November 2026 is a Friday**, as the listing says. **Settle it** by opening the page.
+- **That the session covers the agent tier at all is an inference from one objective line.** It is
+  equally consistent with an hour about approved chat tools and a data catalogue. **Settle it** by
+  attending, or by reading the slides afterwards if they are posted.
+- **That the local governance answer differs from §F's central-IT table is untested.** Clinical
+  research data here may sit under rules the central pages do not describe. **Settle it** at the
+  session, which is the one place both halves are in the room at once.
 
 ---
 

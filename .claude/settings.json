@@ -13,6 +13,11 @@
             "type": "command",
             "command": "sh tools/turnstile/turnstile-run .claude/hooks/no-heredoc-source.sh",
             "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "sh tools/turnstile/turnstile-run .claude/hooks/new-name-in-the-record.sh",
+            "timeout": 25
           }
         ]
       }
