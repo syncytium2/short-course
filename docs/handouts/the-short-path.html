@@ -1,0 +1,324 @@
+<title>The Short Path</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap">
+<!--
+  The Short Path — four steps from nothing to a working web page, on Tony's outline of
+  2026-09-14: pay, open the Claude app, have it guide the install, tell Claude Code the goal.
+
+  Why it can be this short when cold-start.html is seven phases: the install instructions are
+  not written here. The Claude app gives them, live, and can read a screenshot of what the
+  reader is actually looking at. Decision record 0002 §7 is the evidence for leaning on that:
+  instructions written in advance were wrong five times out of five on 2026-08-30, and an
+  expert who could see the screen unstuck three of those in one exchange. So this page carries
+  only what the app cannot know — which plan, what to ask it, what to ask Claude Code, and how
+  to tell whether the result works.
+
+  Publisher source: no doctype, because publishing wraps it. Deliberately NOT in
+  tools/pages.txt — the public site is a decision Tony makes, not a build step.
+  Palette and face match before-the-day.html on purpose; the two are a family.
+-->
+<style>
+  :root {
+    --paper:      #F7F8F6;
+    --card:       #FDFDFC;
+    --ink:        #191E1B;
+    --muted:      #667069;
+    --rule:       #DCE1DC;
+    --rule-firm:  #C3CBC4;
+    --accent:     #2E5C4E;
+    --accent-soft:#E4EDE8;
+    --flag:       #7E5F16;
+    --flag-soft:  #F6EEDA;
+    --f: "Source Serif 4", "Iowan Old Style", Georgia, "Times New Roman", serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:      #121614;
+      --card:       #191E1B;
+      --ink:        #E7EBE7;
+      --muted:      #97A09A;
+      --rule:       #2A312D;
+      --rule-firm:  #3B443E;
+      --accent:     #86B9A5;
+      --accent-soft:#1D2A25;
+      --flag:       #D3B276;
+      --flag-soft:  #2A2415;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:      #121614;
+    --card:       #191E1B;
+    --ink:        #E7EBE7;
+    --muted:      #97A09A;
+    --rule:       #2A312D;
+    --rule-firm:  #3B443E;
+    --accent:     #86B9A5;
+    --accent-soft:#1D2A25;
+    --flag:       #D3B276;
+    --flag-soft:  #2A2415;
+  }
+
+  body {
+    background: var(--paper); color: var(--ink);
+    font-family: var(--f); font-size: 17px; line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 40rem; margin: 0 auto; padding: 3.5rem 1.5rem 5rem; }
+  @media (max-width: 560px) {
+    body { font-size: 16px; }
+    .wrap { padding: 2.5rem 1rem 3.5rem; }
+  }
+
+  .eyebrow {
+    font-size: .75rem; text-transform: uppercase; letter-spacing: .13em;
+    color: var(--muted); font-weight: 600; margin: 0 0 .9rem;
+  }
+  h1 {
+    font-size: 2.05rem; font-weight: 700; line-height: 1.15; letter-spacing: -.012em;
+    margin: 0 0 1rem; text-wrap: balance;
+  }
+  .standfirst { font-size: 1.1rem; color: var(--muted); margin: 0; text-wrap: pretty; }
+  .standfirst b { color: var(--ink); font-weight: 600; }
+  p { margin: 0 0 1rem; text-wrap: pretty; }
+  p:last-child { margin-bottom: 0; }
+
+  /* THE FOUR STEPS ARE THE PAGE. A real sequence — each one needs the one before — so they
+     are the only numbered thing on it, and the numbers sit on a rail that joins them. */
+  .steps { list-style: none; margin: 2.75rem 0 0; padding: 0; counter-reset: s; }
+  .steps > li {
+    position: relative; counter-increment: s;
+    display: grid; grid-template-columns: 2.25rem 1fr; gap: 0 1rem;
+    padding-bottom: 2.4rem;
+  }
+  .steps > li:last-child { padding-bottom: 0; }
+  .steps > li::before {
+    content: counter(s);
+    grid-row: 1 / span 20;
+    width: 2.25rem; height: 2.25rem; border-radius: 50%;
+    display: grid; place-items: center;
+    font-weight: 700; font-size: 1.05rem; font-variant-numeric: tabular-nums;
+    color: var(--paper); background: var(--accent);
+    position: relative; z-index: 1;
+  }
+  .steps > li:not(:last-child)::after {
+    content: ""; position: absolute; left: calc(1.125rem - 1px); top: 2.25rem; bottom: 0;
+    width: 2px; background: var(--rule);
+  }
+  .steps h2 {
+    font-size: 1.3rem; font-weight: 700; line-height: 1.25; margin: .3rem 0 .15rem;
+    text-wrap: balance;
+  }
+  .steps .when {
+    font-size: .8rem; text-transform: uppercase; letter-spacing: .1em;
+    color: var(--muted); font-weight: 600; margin: 0 0 .7rem;
+  }
+  .steps .body > * + * { margin-top: .85rem; }
+
+  /* The two things to paste. A reader copies these word for word, so they are set apart,
+     and the only interactive things on the page are the ones that act on them. */
+  .prompt {
+    background: var(--card); border: 1px solid var(--rule); border-radius: 4px;
+  }
+  .prompt-head {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    gap: .5rem; padding: .5rem .6rem .5rem .9rem; border-bottom: 1px solid var(--rule);
+  }
+  .prompt-label {
+    font-size: .72rem; text-transform: uppercase; letter-spacing: .11em;
+    color: var(--muted); font-weight: 600;
+  }
+  .prompt-tools { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; }
+  .prompt-text {
+    margin: 0; padding: .85rem .9rem 1rem; font-size: .98rem; line-height: 1.55;
+    white-space: pre-wrap; font-family: var(--f);
+  }
+  .prompt-text .fill {
+    background: var(--flag-soft); color: var(--flag); font-style: italic;
+    padding: 0 .2rem; border-radius: 2px;
+  }
+
+  button {
+    font: inherit; font-size: .82rem; font-weight: 600; cursor: pointer;
+    color: var(--accent); background: transparent;
+    border: 1px solid var(--rule-firm); border-radius: 3px; padding: .2rem .65rem;
+  }
+  button:hover { background: var(--accent-soft); }
+  button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .seg { display: inline-flex; border: 1px solid var(--rule-firm); border-radius: 3px; }
+  .seg button { border: 0; border-radius: 0; }
+  .seg button + button { border-left: 1px solid var(--rule-firm); }
+  .seg button[aria-pressed="true"] { background: var(--accent); color: var(--paper); }
+
+  .aside {
+    font-size: .93rem; color: var(--muted);
+    border-left: 2px solid var(--rule-firm); padding-left: .8rem;
+  }
+  .aside b { color: var(--ink); font-weight: 600; }
+
+  section.after {
+    margin-top: 3rem; padding-top: 1.75rem; border-top: 1px solid var(--rule);
+  }
+  section.after + section.after { margin-top: 2rem; }
+  section.after h2 { font-size: 1.12rem; font-weight: 700; margin: 0 0 .7rem; }
+  .check {
+    background: var(--accent-soft); border-radius: 4px; padding: 1rem 1.15rem;
+  }
+  .check p { margin: 0; }
+  .check p + p { margin-top: .7rem; }
+
+  footer {
+    margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--rule);
+    font-size: .86rem; color: var(--muted);
+  }
+  footer p { max-width: 34rem; }
+  a { color: var(--accent); text-underline-offset: 2px; }
+</style>
+
+<div class="wrap">
+  <p class="eyebrow">From nothing to a working web page</p>
+  <h1>The Short Path</h1>
+  <p class="standfirst">Four steps. You will not follow a list of install instructions, because
+    <b>Claude gives you those itself</b>, one at a time, and can look at a screenshot of
+    what is actually on your screen.</p>
+
+  <ol class="steps">
+    <li>
+      <div class="body">
+        <h2>Pay for Claude Code</h2>
+        <p class="when">A few minutes · $20 a month</p>
+        <p>Go to <a href="https://claude.com/pricing">claude.com/pricing</a> and choose
+          <b>Pro</b>: $20 a month, or $17 a month if you pay for a year up front. Sign up with
+          an account you mean to keep. Everything you build will hang off it.</p>
+        <p class="aside"><b>The free plan will not work.</b> It includes the chat window and
+          not Claude Code, and the last step needs Claude Code. If your employer already
+          provides Claude Code, ask them how to sign in and skip this step.</p>
+      </div>
+    </li>
+
+    <li>
+      <div class="body">
+        <h2>Open the Claude app</h2>
+        <p class="when">One minute</p>
+        <p>Either the desktop app from <a href="https://claude.ai/download">claude.ai/download</a>
+          or <a href="https://claude.ai">claude.ai</a> in your browser. Sign in with the account
+          you just paid for. This is the chat window, and for the next step it is your guide.</p>
+      </div>
+    </li>
+
+    <li>
+      <div class="body">
+        <h2>Ask it to get you set up</h2>
+        <p class="when">Twenty minutes or so · mostly waiting for downloads</p>
+        <p>Paste this into the Claude app. It installs two things: <b>VS Code</b>, the program
+          you will work in, and the <b>Claude Code extension</b> that lives inside it.</p>
+
+        <div class="prompt">
+          <div class="prompt-head">
+            <span class="prompt-label">Paste into the Claude app</span>
+            <span class="prompt-tools">
+              <span class="seg" role="group" aria-label="Your computer">
+                <button type="button" id="os-mac" aria-pressed="true" data-os="a Mac">Mac</button>
+                <button type="button" id="os-win" aria-pressed="false" data-os="Windows">Windows</button>
+              </span>
+              <button type="button" id="copy-setup" data-copy="setup-text">Copy</button>
+            </span>
+          </div>
+          <pre class="prompt-text" id="setup-text">I'm on <span id="os-name">a Mac</span> and I have never installed developer tools. I've just paid for Claude Pro.
+
+Walk me through installing Visual Studio Code and the Claude Code extension for it, one step at a time. After each step, stop and wait for me to tell you what I see before giving me the next one. I may paste a screenshot instead of describing it.
+
+We're done when VS Code is open on a new, empty folder called my-site, Claude Code is open inside VS Code, and I'm signed in to it.</pre>
+        </div>
+
+        <p><b>When anything looks different from what it said</b>, take a screenshot and paste
+          it in. That is what the app is for here, and it is faster than describing it.</p>
+        <!-- Cold Start 3.1's trap, carried here because it fails silently and the app may not
+             mention it: answering "no" to workspace trust disables the extension without saying so. -->
+        <p class="aside"><b>If VS Code asks whether you trust the authors of the files in this
+          folder, choose yes.</b> It is your own empty folder, and choosing no quietly switches
+          Claude Code off.</p>
+      </div>
+    </li>
+
+    <li>
+      <div class="body">
+        <h2>Tell Claude Code what you want</h2>
+        <p class="when">As long as it takes · in VS Code, not the Claude app</p>
+        <p>In the Claude Code panel inside VS Code, say what the website is for. Say it the way
+          you would to a colleague: who uses it, and what it does for them. Fill in the
+          highlighted part.</p>
+
+        <div class="prompt">
+          <div class="prompt-head">
+            <span class="prompt-label">Paste into Claude Code, in VS Code</span>
+            <span class="prompt-tools">
+              <button type="button" id="copy-goal" data-copy="goal-text">Copy</button>
+            </span>
+          </div>
+          <pre class="prompt-text" id="goal-text">I want a website that <span class="fill">lets me paste in a column of plasma osmolality readings and shows which ones fall outside 275–295 mOsm/kg, with a plot of all of them</span>.
+
+Build it in this folder as web pages that open in my browser, with no accounts and no server. When it works, tell me how to open it.</pre>
+        </div>
+
+        <p>Claude Code asks before it creates or changes a file. Read what it wants to do, then
+          allow it. This folder is where it is meant to work.</p>
+        <p>The first version will not be exactly right. Say what is wrong, in plain words, and
+          let it try again. That back-and-forth <em>is</em> the work, not a sign it is failing.</p>
+      </div>
+    </li>
+  </ol>
+
+  <section class="after">
+    <h2>How you know it works</h2>
+    <div class="check">
+      <p><b>A page that looks right has not yet shown you it works.</b> Give it an input you
+        already know the answer to. If it flags readings, include one you know is out of range.
+        If it adds things up, check one total by hand.</p>
+      <p>If the answer is wrong, tell Claude Code exactly which input gave which wrong answer.</p>
+    </div>
+  </section>
+
+  <section class="after">
+    <h2>If you get stuck</h2>
+    <p>Go back to the Claude app, paste a screenshot, and say what you were trying to do. If it
+      is stuck too, <a href="https://lookedright.tonydefazio.com/cold-start.html">Cold Start</a>
+      is the long version of this path, with every step written out.</p>
+  </section>
+
+  <footer>
+    <p>The price and the plans were read on claude.com on 14 September 2026, and nothing
+      re-checks them. Nobody has yet walked this path from a clean machine.</p>
+  </footer>
+</div>
+
+<script>
+  (function () {
+    var name = document.getElementById("os-name");
+    var btns = document.querySelectorAll("[data-os]");
+    btns.forEach(function (b) {
+      b.addEventListener("click", function () {
+        btns.forEach(function (o) { o.setAttribute("aria-pressed", o === b ? "true" : "false"); });
+        name.textContent = b.getAttribute("data-os");
+      });
+    });
+
+    // The viewer's sandbox can refuse the clipboard. When it does, select the text instead,
+    // so a keyboard copy still works and the button says what happened.
+    document.querySelectorAll("[data-copy]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var el = document.getElementById(b.getAttribute("data-copy"));
+        var done = function (msg) {
+          b.textContent = msg;
+          setTimeout(function () { b.textContent = "Copy"; }, 2200);
+        };
+        var select = function () {
+          var r = document.createRange(); r.selectNodeContents(el);
+          var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+          done("Selected, now copy it");
+        };
+        try {
+          navigator.clipboard.writeText(el.innerText).then(function () { done("Copied"); }, select);
+        } catch (e) { select(); }
+      });
+    });
+  })();
+</script>
