@@ -7,6 +7,25 @@ is for murderboard development only; see [Boundary](#boundary) below.
 
 ## If you are coming back to this cold
 
+> ## 2026-09-14 — START HERE. The Short Path exists and is NOT deployed.
+>
+> **Tony, 2026-09-14:** *"my goal is a very short path to a functional website doing what the user
+> wanted"* — pay for Claude Code, open the Claude app, ask it for guidance installing VS Code and the
+> Claude Code extension, tell Claude Code your goal. Built as
+> [`docs/handouts/the-short-path.html`](docs/handouts/the-short-path.html), private artifact
+> <https://claude.ai/artifact/MRgeK3sMfABJwUowr1X6tW>, standalone copy in
+> `<darkroom>/short-course/2026-09-14-the-short-path/`.
+>
+> **Open, and his:** whether it goes on the public site, and whether it sits in front of Cold Start.
+> Deploying still needs asking. **Nobody has walked it from a clean machine.** Its one checkable
+> fact — Pro at $20, or $17 annual, includes Claude Code and Free does not — was read on claude.com
+> that day.
+>
+> **Not this session's, noticed:** `origin/claude/new-event-evaluation-paxvio`, pushed 2026-09-14 by
+> a cloud session, is unmerged.
+>
+> *The 09-10 block below still stands.*
+
 > ## ✅ 2026-09-10 — START HERE. The browser route is gone from the LIVE site too. Nothing is pending.
 >
 > **Tony, 2026-09-10:** *"the website is still showing the browser route. i thought we decided to
