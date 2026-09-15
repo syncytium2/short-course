@@ -7,7 +7,7 @@ is for murderboard development only; see [Boundary](#boundary) below.
 
 ## If you are coming back to this cold
 
-> ## 2026-09-15 — START HERE. The short route is the first door on Cold Start, merged, and NOT deployed.
+> ## 2026-09-15 — START HERE. The short route is the first door on Cold Start, and it is LIVE.
 >
 > **Tony, 2026-09-15:** *"ok add this as the first option on cold start. i'll have a colleague try
 > it on a clean machine."* Done as a third route, `short`, first button at the door: four steps of
@@ -20,8 +20,12 @@ is for murderboard development only; see [Boundary](#boundary) below.
 > `the-short-path.html` and Cold Start's short route. Nothing keeps them in step; if the walk
 > changes one, change both, or retire the standalone.
 >
-> **Deploying still needs his go.** `npx wrangler deploy` would also carry a fix to Cold Start's
-> meta description, which has offered *"a web app in the browser"* since the 09-09 removal.
+> **DEPLOYED on his "please deploy".** `npx wrangler deploy` uploaded one file, `cold-start.html`,
+> version `b8d25422-0a23-4820-8817-023115c5718d`. Verified after, not assumed: live `cold-start` is
+> **byte-identical** to `site/cold-start.html`, its buttons read short / laptop / cluster, the four
+> short-route steps are there, *"a web app in the browser"* is gone from the description, and
+> `tools/site_staleness.sh` reports **every page matches this checkout**. The next deploy needs
+> asking too.
 >
 > *The 09-14 block below still stands except where this overtook it.*
 
