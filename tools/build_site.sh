@@ -50,8 +50,8 @@ META = {
         "Four challenges in working with coding agents, for researchers \u2014 with the real "
         "incidents behind each one, readable at three depths.", "\U0001F9F1"),
     "cold-start.html": (
-        "Zero to a working coding-agent setup. Say how far you are going — a web app in the "
-        "browser, VS Code on your laptop, or a cluster and other people — and the page shows "
+        "Zero to a working coding-agent setup. Say how far you are going — four steps to a "
+        "working page, VS Code set up properly on your laptop, or a cluster and other people — and the page shows "
         "only the steps your answer needs, each a checklist that stays red until it is done.",
         "\U0001F9CA"),
     "just-enough-git.html": (

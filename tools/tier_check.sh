@@ -164,11 +164,13 @@ s = io.open(src, encoding="utf-8").read()
 # that keeps asserting a thing the document no longer contains produces failures nobody can
 # act on, which is how a gate gets waved through. The material is parked at
 # docs/parked/browser-route.html and reinstating it means putting `min` back in both lines.
-TIERS = ("mid", "max")
+# THE SHORT ROUTE (`short`) WAS ADDED 2026-09-14, as the first button at the door. It owns
+# its own four steps, S1-S4, and borrows none from Phases 1-7.
+TIERS = ("short", "mid", "max")
 # The names the PAGE gives these, so a report and the document agree out loud. The tier
 # attribute values stay mid/max because they are handles, not prose -- renaming them
 # would move every data-tiers in the file for a cosmetic gain.
-NAMES = {"mid": "laptop route", "max": "cluster route"}
+NAMES = {"short": "short route", "mid": "laptop route", "max": "cluster route"}
 
 # Steps are the <li> that carry data-key; a step runs to the next one or to </ol>.
 li_re = re.compile(r'<li\b[^>]*\bdata-key="[^"]*"[^>]*>')
