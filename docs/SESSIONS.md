@@ -2720,7 +2720,7 @@ risks in the file.
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Arioch/dbead6db — cold-start.html — The Short Path as the first route; tier/browser/mutation checks; site build
-- **Status:** ACTIVE
+- **Status:** DONE 2026-09-15
 - **Opened:** 2026-09-15
 - **Branch when opened:** `short-path-on-cold-start` — a fact, not an identity; it may move under you
 - **Writes:** <files or folders you will change; "repo only" if nothing outside git>
