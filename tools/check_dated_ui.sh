@@ -74,9 +74,15 @@ scan() {  # scan <dir> -> prints "file:step" per UI-naming step with no date nea
                     line = substr(line, s+l)
                 }
                 if (id != "") {
-                    prose = line
+                    # A STEP ALSO ENDS AT THE CLOSE OF ITS LIST. Without this the last step of
+                    # a section swallowed everything up to the first step of the next one, and
+                    # on 2026-09-14 S4, the last step of the short route, was reported for the
+                    # word "button" in the Phase 1 help box. tier_check.sh fixed the same bound.
+                    cut = index(line, "</ol>")
+                    prose = cut ? substr(line, 1, cut - 1) : line
                     gsub(/<[^>]*>/, " ", prose)   # markup is not prose; see the note above
                     body = body " " prose
+                    if (cut) { emit(); id = "" }
                 }
             }
             function emit(   ui, dt) {
@@ -99,6 +105,8 @@ if [ "${1:-}" = "--selftest" ]; then
     printf '<li data-id="d">Terminal &rarr; New Terminal, as of 2026-08-30</li>\n'       >> "$TD/p.html"
     printf '<li data-id="e">the custom domain is one button</li>\n'                      >> "$TD/p.html"
     printf '<li data-id="f"><button class="cb">x</button>a step with no UI prose at all</li>\n' >> "$TD/p.html"
+    printf '<ol><li data-id="g">the last step in its list</li>\n</ol>\n<p>click the button</p>\n' >> "$TD/p.html"
+    printf '<li data-id="h">a step after it, naming nothing on screen</li>\n'                    >> "$TD/p.html"
     out=$(scan "$TD"); rm -rf "$TD"
     fail=0
     ck() { if [ "$2" = "$3" ]; then echo "  ok   $1"; else echo "  FAIL $1 (want $2 got $3)"; fail=1; fi; }
@@ -108,6 +116,8 @@ if [ "${1:-}" = "--selftest" ]; then
     ck "a dated arrow path is not"                 0 "$(printf '%s' "$out" | grep -c ':d$')"
     ck "'one button' is reported (7.3's wording)"  1 "$(printf '%s' "$out" | grep -c ':e$')"
     ck "the page's own <button> markup is not"     0 "$(printf '%s' "$out" | grep -c ':f$')"
+    ck "a step ends at its list, not at the next step" 0 "$(printf '%s' "$out" | grep -c ':g$')"
+    ck "and prose between lists is charged to nobody"  0 "$(printf '%s' "$out" | grep -c ':h$')"
     [ $fail -eq 0 ] && { echo PASS; exit 0; } || { echo FAIL; exit 1; }
 fi
 

@@ -41,6 +41,10 @@
 //
 // EXIT 0 = every check passed. 1 = a check failed. 2 = could not run.
 
+// ONE LIST OF ROUTES. It was typed as ['mid', 'max'] four times, so adding the short route
+// on 2026-09-14 meant finding all four, and missing one leaves that section silently
+// testing two routes of three.
+const ROUTES = ['short', 'mid', 'max'];
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
@@ -98,7 +102,7 @@ function expectedCounts() {
   const tiers = [...src.matchAll(/<li data-key="[^"]+" data-id="[^"]+" data-tiers="([^"]+)"/g)]
     .map(m => m[1].split(' '));
   const out = {};
-  for (const t of ['mid', 'max']) out[t] = tiers.filter(x => x.includes(t)).length;
+  for (const t of ROUTES) out[t] = tiers.filter(x => x.includes(t)).length;
   return { counts: out, total: tiers.length };
 }
 
@@ -128,7 +132,7 @@ const server = http.createServer((req, res) => {
   await page.goto(url);
   check('no tier chosen shows the page\'s whole scope', await visible(), total);
 
-  for (const tier of ['mid', 'max']) {
+  for (const tier of ROUTES) {
     await page.click(`.tierpick[data-tier="${tier}"]`);
     check(`${tier}: visible steps match the source`, await visible(), counts[tier]);
     check(`${tier}: progress denominator agrees`, await denom(), String(counts[tier]));
@@ -215,7 +219,7 @@ const server = http.createServer((req, res) => {
     const t = document.getElementById('the-words');
     return !!t && t.offsetParent !== null && t.querySelectorAll('dt').length === 6;
   }), true);
-  for (const tier of ['mid', 'max']) {
+  for (const tier of ROUTES) {
     await page.click(`.tierpick[data-tier="${tier}"]`);
     check(`${tier}: every definition survives the route filter`, await page.evaluate(() =>
       [...document.querySelectorAll('#the-words dt')].filter(d => d.offsetParent !== null).length), 6);
@@ -263,6 +267,35 @@ const server = http.createServer((req, res) => {
     (await chip('editor')).includes('not set up yet'), true);
   await finish('editor');
   check('and reports it once 3.1 is done', await chip('editor'), 'yours: set up at 3.1');
+
+  // ---- the short route, added 2026-09-14 ----------------------------------------------
+  // It owns four steps and borrows none, so picking it must leave exactly one phase on the
+  // screen, and the words must answer from its own steps rather than from ones it hides.
+  await page.evaluate(() => localStorage.clear());
+  await page.reload();
+  await page.click('.tierpick[data-tier="short"]');
+  check('short: one phase on the screen, its own',
+    await page.$$eval('section.phase', els => els.filter(e => e.offsetParent !== null)
+      .map(e => e.querySelector('h2').textContent.trim().slice(0, 15))), ['The short route']);
+  check('short: the route chip names it', await chip('route'), 'you: short route');
+  check('short: the agent is named by the route, not asked', await chip('agent'), 'yours: Claude Code');
+  check('short: the plan chip points at S1 rather than refusing',
+    (await chip('plan')).includes('S1'), true);
+  check('short: the repository word says the route makes none',
+    await chip('repository'), 'the short route makes none');
+  check('short: the editor word jumps to S3, not to a hidden 3.1',
+    await page.$eval('.terms dt[data-jump="editor"]', e => e.dataset.offRoute), '0');
+  check('short: before S3, the rung is provisional', await known('rung'), '0');
+  await finish('short-get-set-up');
+  check('short: finishing S3 puts the reader on rung 3', await chip('rung'), 'yours: rung 3 — inside your editor');
+  check('short: and the editor chip follows S3', await chip('editor'), 'yours: set up at S3');
+  await page.click('.terms dt[data-jump="agent-account"]');
+  await page.waitForFunction(() =>
+    document.querySelector('ol.steps > li[data-key="short-pay"]').classList.contains('jumped'),
+    null, { timeout: 3000 });
+  check('short: the agent word opens S1', await page.$eval(
+    'ol.steps > li[data-key="short-pay"]', e => e.dataset.open), '1');
+  await page.click('.tierpick[data-tier="mid"]');
 
   // The repository word points at a DIFFERENT step per route, which is the part most
   // likely to be got wrong by a later edit.
@@ -353,7 +386,7 @@ const server = http.createServer((req, res) => {
   // `.links { display: flex }` -- and `ul.checks > li { display: flex }` beats it outright
   // on specificity. Both were true, both shipped, and every attribute-based check passed
   // throughout: the counts were correct and the elements were on the screen anyway.
-  for (const tier of ['mid', 'max']) {
+  for (const tier of ROUTES) {
     await page.evaluate(() => localStorage.clear());
     await page.reload();
     await page.click(`.tierpick[data-tier="${tier}"]`);

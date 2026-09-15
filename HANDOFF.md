@@ -7,7 +7,25 @@ is for murderboard development only; see [Boundary](#boundary) below.
 
 ## If you are coming back to this cold
 
-> ## 2026-09-14 — START HERE. The Short Path exists and is NOT deployed.
+> ## 2026-09-15 — START HERE. The short route is the first door on Cold Start, merged, and NOT deployed.
+>
+> **Tony, 2026-09-15:** *"ok add this as the first option on cold start. i'll have a colleague try
+> it on a clean machine."* Done as a third route, `short`, first button at the door: four steps of
+> its own, S1–S4, in their own section, borrowing nothing from Phases 1–7. Every gate green —
+> browser 73/73, presentation 84/84, mutation 44 caught / 0 missed / 0 errors, tier, terms,
+> pointers, dated buttons, build-current.
+>
+> **The colleague's walk is the first walk of this route by anyone.** Whatever it finds goes in as
+> a case, and the S1–S4 prose changes from what was observed. **Two sources now say this:**
+> `the-short-path.html` and Cold Start's short route. Nothing keeps them in step; if the walk
+> changes one, change both, or retire the standalone.
+>
+> **Deploying still needs his go.** `npx wrangler deploy` would also carry a fix to Cold Start's
+> meta description, which has offered *"a web app in the browser"* since the 09-09 removal.
+>
+> *The 09-14 block below still stands except where this overtook it.*
+
+> ## 2026-09-14 — The Short Path exists and is NOT deployed.
 >
 > **Tony, 2026-09-14:** *"my goal is a very short path to a functional website doing what the user
 > wanted"* — pay for Claude Code, open the Claude app, ask it for guidance installing VS Code and the

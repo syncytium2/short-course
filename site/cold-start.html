@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Zero to a working coding-agent setup. Say how far you are going — a web app in the browser, VS Code on your laptop, or a cluster and other people — and the page shows only the steps your answer needs, each a checklist that stays red until it is done.">
+<meta name="description" content="Zero to a working coding-agent setup. Say how far you are going — four steps to a working page, VS Code set up properly on your laptop, or a cluster and other people — and the page shows only the steps your answer needs, each a checklist that stays red until it is done.">
 <link rel="canonical" href="https://lookedright.tonydefazio.com/cold-start">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%8A%3C/text%3E%3C/svg%3E">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Cold Start">
-<meta property="og:description" content="Zero to a working coding-agent setup. Say how far you are going — a web app in the browser, VS Code on your laptop, or a cluster and other people — and the page shows only the steps your answer needs, each a checklist that stays red until it is done.">
+<meta property="og:description" content="Zero to a working coding-agent setup. Say how far you are going — four steps to a working page, VS Code set up properly on your laptop, or a cluster and other people — and the page shows only the steps your answer needs, each a checklist that stays red until it is done.">
 <meta property="og:url" content="https://lookedright.tonydefazio.com/cold-start">
 <meta name="twitter:card" content="summary">
 <!-- GENERATED FILE - do not edit.
@@ -759,8 +759,8 @@
   <header class="mast">
     <p class="eyebrow"><a href="/" class="home">&larr;&nbsp;It Looked Right</a> &middot; Setup runbook &middot; keep this window open</p>
     <h1>Cold Start</h1>
-    <p class="standfirst">An email address to a first agent session that leaves a record behind it. Pick one of two routes &mdash; your own laptop, or a laptop plus a cluster shared with other people &mdash; and get every step that route needs in order, with the condition that tells you each one worked.</p>
-    <p class="pv">Version <b>0.1.53</b> &middot; 9 Sep 2026<span class="pv-born">First published 29 Aug 2026</span></p>
+    <p class="standfirst">An email address to a first agent session that leaves a record behind it. Pick one of three routes &mdash; four steps to a working page, your own laptop set up properly, or a laptop plus a cluster shared with other people &mdash; and get every step that route needs in order, with the condition that tells you each one worked.</p>
+    <p class="pv">Version <b>0.1.54</b> &middot; 15 Sep 2026<span class="pv-born">First published 29 Aug 2026</span></p>
   </header>
 
   <div class="method">
@@ -804,15 +804,15 @@
            and What It Costs is the sheet. It says so rather than guessing. -->
       <dl>
         <dt data-jump="agent-account">agent</dt>
-        <dd><b>The AI you type at.</b> Claude, Codex, Gemini CLI, Copilot, Cursor. Whether it lives in a browser tab, a terminal or your editor, it is <i>the agent</i> on every step here &mdash; never &ldquo;the tool&rdquo;, never &ldquo;the assistant&rdquo;. You get one at <b>step 1.1</b>, where you choose an agent and decide how much of your machine it can see. <span class="t-you" data-you="agent"></span></dd>
+        <dd><b>The AI you type at.</b> Claude, Codex, Gemini CLI, Copilot, Cursor. Whether it lives in a browser tab, a terminal or your editor, it is <i>the agent</i> on every step here &mdash; never &ldquo;the tool&rdquo;, never &ldquo;the assistant&rdquo;. <span data-tiers="mid max">You get one at <b>step 1.1</b>, where you choose an agent and decide how much of your machine it can see.</span><span data-tiers="short">On the short route you get one by paying for Claude Code, the first of its four steps.</span> <span class="t-you" data-you="agent"></span></dd>
         <dt data-jump="#door">route</dt>
-        <dd><b>Which of the two sets of steps you are being shown</b> &mdash; the <i>laptop route</i>, the <i>cluster route</i>. You pick one at the door &mdash; the two buttons headed &ldquo;how far are you going?&rdquo;, just under these six words &mdash; and you can change it at any time. <span class="t-you" data-you="route"></span></dd>
+        <dd><b>Which of the three sets of steps you are being shown</b> &mdash; the <i>short route</i>, the <i>laptop route</i>, the <i>cluster route</i>. You pick one at the door &mdash; the three buttons headed &ldquo;how far are you going?&rdquo;, just under these six words &mdash; and you can change it at any time. <span class="t-you" data-you="route"></span></dd>
         <dt data-jump="agent-account">rung</dt>
-        <dd><b>How much of your machine the agent can see</b>, on a ladder of three. It is a different question from your route and from your plan, and it is the one that decides how much you have to describe by hand. <b>Step 1.1</b>, where you choose an agent and decide how much of your machine it can see, has the ladder. <span class="t-you" data-you="rung"></span></dd>
+        <dd><b>How much of your machine the agent can see</b>, on a ladder of three. It is a different question from your route and from your plan, and it is the one that decides how much you have to describe by hand. <span data-tiers="mid max"><b>Step 1.1</b>, where you choose an agent and decide how much of your machine it can see, has the ladder.</span><span data-tiers="short">The short route goes straight to the top rung: the agent inside your editor, on a folder on your own laptop.</span> <span class="t-you" data-you="rung"></span></dd>
         <dt data-jump="agent-account">plan</dt>
         <dd><b>What you pay the company that makes the agent</b> &mdash; a free plan or a paid plan. Money only. It is not the route and not the rung; a free plan and a paid plan can sit on the same rung. <span class="t-you" data-you="plan"></span></dd>
         <dt data-jump="repo-step">repository</dt>
-        <dd><b>A folder that lives on <code>github.com</code> instead of on your laptop</b>, keeping a record of every change made to the folder. Often shortened to <i>repo</i> by other people; this page always writes it in full. You make one at <span data-tiers="mid max"><b>step 4.5</b>, where you add the remote &mdash; the copy on <code>github.com</code> &mdash; in the same sitting as the folder.</span> <span class="t-you" data-you="repository"></span></dd>
+        <dd><b>A folder that lives on <code>github.com</code> instead of on your laptop</b>, keeping a record of every change made to the folder. Often shortened to <i>repo</i> by other people; this page always writes it in full. <span data-tiers="short">The short route does not make one; the laptop route does.</span><span data-tiers="mid max">You make one at </span><span data-tiers="mid max"><b>step 4.5</b>, where you add the remote &mdash; the copy on <code>github.com</code> &mdash; in the same sitting as the folder.</span> <span class="t-you" data-you="repository"></span></dd>
         <dt data-jump="editor">the editor</dt>
         <dd><b>The program you open your files in</b> &mdash; VS&nbsp;Code, on this page. Distinct from <b>the terminal</b>, the window you type commands into, and from the agent, which can sit inside either. <span class="t-you" data-you="editor"></span></dd>
       </dl>
@@ -821,7 +821,7 @@
 
   <section class="door" id="door">
     <p class="door-head">One question, asked at the door: how far are you going?</p>
-    <p class="door-lede">Your answer decides which steps you are shown. <b>Pick the smallest route that gets you what you want</b> &mdash; you can move up at any time, the page keeps every box you have ticked, and moving up only ever adds steps.</p>
+    <p class="door-lede">Your answer decides which steps you are shown. <b>Pick the smallest route that gets you what you want</b> &mdash; you can change route at any time, and the page keeps every box you have ticked. Moving from the laptop route to the cluster route only ever adds steps.</p>
     <div class="tierpicks" role="group" aria-label="How far are you going">
       <!-- THE THREE ROUTES ARE NAMED HERE AND NOWHERE ELSE, and the name is the head noun of
            every later reference to them. Before this the buttons were DESCRIBED rather than
@@ -833,6 +833,10 @@
            So: browser route / laptop route / cluster route, always carrying the word "route",
            and the descriptive promise moves to the line underneath, where "browser" and
            "browser tab" can only mean the application. -->
+      <button class="tierpick" type="button" data-tier="short">
+        <b>The short route</b>
+        <span>Four steps to a working page on your own laptop. The Claude app talks you through the installs. The place to start.</span>
+      </button>
       <button class="tierpick" type="button" data-tier="mid">
         <b>The laptop route</b>
         <span>VS&nbsp;Code and your own copy of your project&rsquo;s files on your laptop, work that outlives a browser tab. The usual answer.</span>
@@ -847,7 +851,7 @@
       <summary>The two questions underneath &ldquo;how far are you going?&rdquo;</summary>
       <dl>
         <dt>One machine, or more than one?</dt>
-        <dd>More than one, and you need a copy of the work that lives somewhere other than your laptop &mdash; on <code>github.com</code>, say, which every route here sets up. Work that lives only in a folder on one machine reaches no other machine and no other session, and you find that out on the day you need it.</dd>
+        <dd>More than one, and you need a copy of the work that lives somewhere other than your laptop &mdash; on <code>github.com</code>, say, which the laptop and cluster routes both set up and the short route does not. Work that lives only in a folder on one machine reaches no other machine and no other session, and you find that out on the day you need it.</dd>
         <dt>Alone, or with other people?</dt>
         <dd>Working with anyone &mdash; including a second session of your own, running in another window &mdash; adds steps about not writing over each other. Alone on one laptop, none of those extra steps applies to you.</dd>
       </dl>
@@ -865,6 +869,119 @@
       <p><b>Roughly half the steps on this page have exactly one right answer</b> &mdash; the same answer for everybody. A line that stops Windows and Mac disagreeing about how a line of text ends; a hook, which is a short script git runs by itself, marking the agent&rsquo;s commits as the agent&rsquo;s work rather than yours (a commit is one saved change; <i>Just Enough Git</i> explains them); a written list of what the agent may never do; and one file recording where your data lives. <a href="/already-set-up"><i>Already Set Up</i></a> is a template that arrives with those four already written, and every decision that is genuinely yours still blank.</p>
       <p><b>What the template costs you is this page.</b> Writing your own list of what the agent may not do is a different event from reading one somebody else wrote, and writing your own is the event that makes your second project cheap. Take the template if you have work this week and the setup is in the way; take the steps on this page if you expect to do this more than once, or if anybody is going to ask you what your agent is allowed to do.</p>
     </details>
+  </section>
+
+  <!-- THE SHORT ROUTE, ADDED 2026-09-14 on Tony's word: "add this as the first option on cold
+       start." It is docs/handouts/the-short-path.html folded into this page's step format, and
+       the two must say the same thing -- nothing keeps them in step.
+       WHY IT IS NOT THE BROWSER ROUTE COME BACK. That route failed because every hard step
+       happened in a vendor web UI the agent could not see, and it never put the agent on the
+       reader's own files. This one ends with the agent INSIDE the editor, on a folder on the
+       laptop, which is what before-the-day.html condition 2 requires. What it drops is the
+       written install instructions: the Claude app gives them live and reads screenshots,
+       which is the one thing Show It Your Screen found works where click paths written in
+       advance do not.
+       THE TWO TRAPS FROM 3.1 AND 3.5 ARE CARRIED IN, because both fail silently and a guide
+       answering from general knowledge may not mention either: the trust question that turns
+       the extension off, and the spark button that does not exist until a file is open.
+       Its own section rather than steps borrowed from Phases 1-7, so picking it hides every
+       phase and the reader sees four steps and nothing else. The S ids keep it out of the
+       numbered sequence the other two routes share. -->
+  <section class="phase">
+    <div class="phase-head">
+      <h2>The short route &middot; four steps to a working page</h2>
+      <span class="phase-time">about an hour</span>
+    </div>
+    <div class="ask"><span class="ask-k">If this does not match your screen</span><b>From the second step on, the Claude app is your guide, and it can see a screenshot.</b> When anything looks different from what it told you, screenshot the whole window and paste it in, with one line saying what you were trying to do. That is faster than describing it, and it is the method in <a href="https://lookedright.tonydefazio.com/show-it-your-screen"><i>Show It Your Screen</i></a>.</div>
+    <p class="phase-note"><b>This route writes out no install instructions, on purpose.</b> Instructions written in advance go stale as the vendors change their screens. The Claude app gives you each instruction as you need it, for the screen you actually have. What this route does write down is what the app cannot be relied on to know: which plan to pay for, what to ask for, two traps that fail without a message, and how to tell whether the page you end up with works.</p>
+    <ol class="steps">
+      <li data-key="short-pay" data-id="S1" data-tiers="short" data-open="0" data-done="0">
+        <div class="srow">
+          <button class="head" type="button" aria-expanded="false" aria-controls="d-S1"><span class="n">S1</span>Pay for Claude Code</button>
+          <span class="badge">Incomplete</span>
+        </div>
+          <p class="links"><a href="https://claude.com/pricing">Claude plans</a></p>
+        <div class="detail" id="d-S1">
+            <p class="why">Choose <b>Pro</b>: $20 a month, or $17 a month if you pay for a year up front. Pro includes Claude Code. <b>The free plan does not</b>, and the last step of this route needs Claude Code.</p>
+            <p class="why">Sign up with an account you mean to keep. Everything you build will hang off it, and moving later means moving all of it. If your employer already provides Claude Code, ask them how to sign in and use that instead.</p>
+        </div>
+        <ul class="checks">
+            <li><button class="cb" data-key="short-plan-includes-claude-code" type="button" aria-pressed="false" aria-labelledby="c-S1-0">&#10003;</button><span class="cbt"><span id="c-S1-0">I am on a paid plan, and the plans page says that plan includes Claude Code</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-S1-0">why?</button></span><p class="whya" id="w-c-S1-0" hidden>On the free plan everything up to the last step works, and the last step does not. You find that out after the hour, not before it.</p></li>
+            <li><button class="cb" data-key="short-account-to-keep" type="button" aria-pressed="false" aria-labelledby="c-S1-1">&#10003;</button><span class="cbt"><span id="c-S1-1">The account is one I mean to keep</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-S1-1">why?</button></span><p class="whya" id="w-c-S1-1" hidden>A throwaway account signed up in a hurry becomes the one all of your work hangs off.</p></li>
+        </ul>
+      </li>
+      <li data-key="short-open-app" data-id="S2" data-tiers="short" data-open="0" data-done="0">
+        <div class="srow">
+          <button class="head" type="button" aria-expanded="false" aria-controls="d-S2"><span class="n">S2</span>Open the Claude app</button>
+          <span class="badge">Incomplete</span>
+        </div>
+          <p class="links"><a href="https://claude.ai/download">Desktop app</a><a href="https://claude.ai">claude.ai</a></p>
+        <div class="detail" id="d-S2">
+            <p class="why">The desktop app, or <a href="https://claude.ai">claude.ai</a> in a browser tab. Either is fine. Sign in with the account you just paid for. This is the chat window, and for the next step it is your guide rather than the thing doing the work.</p>
+        </div>
+        <ul class="checks">
+            <li><button class="cb" data-key="short-app-signed-in" type="button" aria-pressed="false" aria-labelledby="c-S2-0">&#10003;</button><span class="cbt"><span id="c-S2-0">The Claude app is open and signed in with the account I paid for</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-S2-0">why?</button></span><p class="whya" id="w-c-S2-0" hidden>Signed in with a different account, the app works and the plan you paid for is not the one it is using.<span class="ask"><b>Ask it:</b> &ldquo;Which plan is this account on?&rdquo; &mdash; then check the answer on the account settings page, because the agent can be wrong about its own plan.</span></p></li>
+        </ul>
+      </li>
+      <li data-key="short-get-set-up" data-id="S3" data-tiers="short" data-open="0" data-done="0">
+        <div class="srow">
+          <button class="head" type="button" aria-expanded="false" aria-controls="d-S3"><span class="n">S3</span>Ask the Claude app to get you set up</button>
+          <span class="badge">Incomplete</span>
+        </div>
+          <p class="links"><a href="https://code.visualstudio.com/">VS&nbsp;Code</a><a href="https://code.claude.com/docs/en/vs-code">Extension docs</a></p>
+        <div class="detail" id="d-S3">
+            <p class="why">Two things get installed: <b>VS&nbsp;Code</b>, the editor you will work in, and the <b>Claude Code extension</b>, which puts the agent inside the editor. Paste this into the Claude app, changing <i>a Mac</i> to <i>Windows</i> if that is what you have.</p>
+            <div class="prompt">
+              <div class="prompt-head"><span class="prompt-k">Paste into the Claude app</span><button class="copy" type="button">Copy</button></div>
+              <pre>I'm on a Mac and I have never installed developer tools.
+I've just paid for Claude Pro.
+
+Walk me through installing Visual Studio Code and the
+Claude Code extension for it, one step at a time. After
+each step, stop and wait for me to tell you what I see
+before giving me the next one. I may paste a screenshot
+instead of describing it.
+
+We're done when VS Code is open on a new, empty folder
+called my-site, Claude Code is open inside VS Code, and
+I'm signed in to it.</pre>
+            </div>
+            <div class="warn"><b>Two things go wrong here without any message, and the app may not warn you about either.</b>
+            <br><br><b>The trust question.</b> The first time you open the folder, VS&nbsp;Code asks <i>&ldquo;Do you trust the authors of the files in this folder?&rdquo;</i> It is your own empty folder: choose <i>&ldquo;Yes, I trust the authors&rdquo;</i>. Choose no and the window opens in <b>Restricted Mode</b>, where the Claude Code extension does not run at all. The editor looks normal and the agent is simply not there.
+            <br><br><b>The button that hides.</b> Claude Code&rsquo;s button is a small orange spark at the <b>top right of the editor</b>, and it only appears when a file is open. An empty folder has no file open, so there is no button, and it looks as if the install failed. It did not. Open the Command Palette with <b>Cmd+Shift+P</b> (<b>Ctrl+Shift+P</b> on Windows), type <code>Claude Code</code>, and choose <b>Open in New Tab</b>. That works with nothing open.
+            <br><br><b>Both of these were true on 2026-08-30.</b> If the screen has moved since, screenshot it and ask the Claude app.</div>
+        </div>
+        <ul class="checks">
+            <li><button class="cb" data-key="short-editor-on-own-folder" type="button" aria-pressed="false" aria-labelledby="c-S3-0">&#10003;</button><span class="cbt"><span id="c-S3-0">VS&nbsp;Code is open on a new folder I made, and there is no <i>Restricted Mode</i> banner along the top</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-S3-0">why?</button></span><p class="whya" id="w-c-S3-0" hidden>The agent can see the folder the editor has open and nothing outside it. Restricted Mode switches the agent off, and nothing on screen connects the banner to the missing agent.</p></li>
+            <li><button class="cb" data-key="short-agent-names-folder" type="button" aria-pressed="false" aria-labelledby="c-S3-1">&#10003;</button><span class="cbt"><span id="c-S3-1">Claude Code is open inside VS&nbsp;Code, and when I asked it which folder it can see, it named my folder</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-S3-1">why?</button></span><p class="whya" id="w-c-S3-1" hidden>An agent that cannot see your folder still answers, fluently. Asking for the folder&rsquo;s name is a question you already know the answer to, so a wrong answer is obvious.<span class="ask"><b>Ask it:</b> &ldquo;What folder can you see right now? Print its full path.&rdquo;</span></p></li>
+        </ul>
+      </li>
+      <li data-key="short-say-the-goal" data-id="S4" data-tiers="short" data-open="0" data-done="0">
+        <div class="srow">
+          <button class="head" type="button" aria-expanded="false" aria-controls="d-S4"><span class="n">S4</span>Tell Claude Code what you want the page to do</button>
+          <span class="badge">Incomplete</span>
+        </div>
+        <div class="detail" id="d-S4">
+            <p class="why"><b>In the Claude Code panel inside VS&nbsp;Code, not in the Claude app.</b> Say what the page is for the way you would say it to a colleague: who uses it, and what it does for them. Replace the example in the first sentence with your own.</p>
+            <div class="prompt">
+              <div class="prompt-head"><span class="prompt-k">Paste into Claude Code, in VS&nbsp;Code</span><button class="copy" type="button">Copy</button></div>
+              <pre>I want a website that lets me paste in a column of
+plasma osmolality readings and shows which ones fall
+outside 275-295 mOsm/kg, with a plot of all of them.
+
+Build it in this folder as web pages that open in my
+browser, with no accounts and no server. When it works,
+tell me how to open it.</pre>
+            </div>
+            <p class="why">Claude Code asks before it creates or changes a file. Read what it wants to do, then allow it: this folder is where it is meant to work. <b>The first version will not be exactly right.</b> Say what is wrong, in plain words, and let it try again. That back-and-forth is the work, not a sign that it is failing.</p>
+        </div>
+        <ul class="checks">
+            <li><button class="cb" data-key="short-page-opens" type="button" aria-pressed="false" aria-labelledby="c-S4-0">&#10003;</button><span class="cbt"><span id="c-S4-0">The page opens in my browser, from a file in my folder</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-S4-0">why?</button></span><p class="whya" id="w-c-S4-0" hidden>&ldquo;It is done&rdquo; is the agent reaching the end of its own instructions. A page open in your browser is something you can see for yourself.</p></li>
+            <li><button class="cb" data-key="short-known-answer-right" type="button" aria-pressed="false" aria-labelledby="c-S4-1">&#10003;</button><span class="cbt"><span id="c-S4-1">I gave the page an input whose answer I already knew, and it got that answer right</span> <button class="whyq" type="button" aria-expanded="false" aria-controls="w-c-S4-1">why?</button></span><p class="whya" id="w-c-S4-1" hidden>A page that looks right has not yet shown you it works. If it flags readings, include one you know is out of range; if it adds things up, check one total by hand. When it is wrong, tell Claude Code exactly which input gave which wrong answer.</p></li>
+        </ul>
+      </li>
+    </ol>
+    <p class="phase-note" style="margin-top:16px"><b>Nothing after this is required to keep building.</b> Ask Claude Code for the next change, look at the page, and say what is still wrong. The laptop route, at the top of this page, is for when you want more underneath the page: your data kept in the right place, a record of every change, work that reaches a second machine. You can switch to it on any day, and every box you ticked here stays ticked.</p>
   </section>
 
   <section class="phase">
@@ -1728,7 +1845,7 @@ or four A records:
     <ul>
       <li>
         <span class="trap-k">Setting up the guards first<span class="wrong">Wrong</span></span>
-        <p>Phase&nbsp;5, the habits, looks like the enjoyable part and it is the one part you cannot do in advance. <b>Every guard built before its failure is a guess</b>, and guesses accumulate into a setup that costs more to maintain than the work it was protecting.</p>
+        <p><span data-tiers="mid max">Phase&nbsp;5, the habits,</span><span data-tiers="short">Building guards against the agent</span> looks like the enjoyable part and it is the one part you cannot do in advance. <b>Every guard built before its failure is a guess</b>, and guesses accumulate into a setup that costs more to maintain than the work it was protecting.</p>
         <p class="incident"><b>What actually happened.</b> Across one person&rsquo;s projects, the scripts that run automatically when a session opens had grown to 39, 34, 27, 17, 11, 9 and 7 kilobytes. One kept growing until sessions stopped opening at all, against a sixty-second ceiling the editor hardcodes. Raising the script&rsquo;s own timeout changed nothing &mdash; it was never the thing enforcing the limit. The guard had eaten the thing it was guarding.</p>
         <p><b>Instead:</b> build a guard only from friction that has actually happened to you, and keep its off switch somewhere the broken thing cannot reach &mdash; a switch inside the project is unreachable when the broken thing is what opens the project.</p>
         <p class="src"><a href="https://lookedright.tonydefazio.com/#asymptote">The full incident &mdash; <i>It Looked Right</i>, challenge 4</a></p>
@@ -1763,7 +1880,8 @@ or four A records:
          The provenance is true and is kept HERE. What a reader can act on is that nothing
          keeps the two in step, which is what the sentence now says. -->
     <p>This page was drawn from a working list kept while the page was being built, and checked against that list once. <b>Nothing keeps the two in step</b>, so that list can gain an item and this page will not know.</p>
-    <p><b>Two dates, because they are two different claims.</b> The vendor pages, the cost documentation and the DNS records &mdash; the settings that point a name at a website &mdash; in Phase&nbsp;7, a name of your own, were read on <b>29 August 2026</b>, and every outbound link was checked that day. The click paths, dashboards and button names <span data-tiers="mid max">in Phase&nbsp;7 </span>come from one walk on <b>30 August 2026</b> and describe that afternoon only. <b>Nothing re-checks either date.</b> When a link rots or a dashboard moves, this page will not tell you &mdash; it will keep saying what was true.</p>
+    <p data-tiers="short"><b>The short route&rsquo;s prices and plans were read on claude.com on 14 September 2026</b>, and its two traps, the trust question and the hiding button, come from the walk on 30 August 2026. <b>Nobody has walked the short route from a clean machine yet.</b> Nothing re-checks any of it; when a price or a screen moves, this page will keep saying what was true.</p>
+    <p data-tiers="mid max"><b>Two dates, because they are two different claims.</b> The vendor pages, the cost documentation and the DNS records &mdash; the settings that point a name at a website &mdash; in Phase&nbsp;7, a name of your own, were read on <b>29 August 2026</b>, and every outbound link was checked that day. The click paths, dashboards and button names <span data-tiers="mid max">in Phase&nbsp;7 </span>come from one walk on <b>30 August 2026</b> and describe that afternoon only. <b>Nothing re-checks either date.</b> When a link rots or a dashboard moves, this page will not tell you &mdash; it will keep saying what was true.</p>
     <p><b>A step is complete when every box you are shown is ticked, and not before.</b> Boxes belonging to a route you did not pick are hidden and are not counted; they come back, still ticked, if you later change to a bigger route. Ticks are stored in this browser only and do not travel with the page.</p>
   </footer>
 
@@ -2130,12 +2248,13 @@ or four A records:
   // anybody a box they had already earned.
   var TKEY = 'cold-start-tier-v1';
   var TIER_COPY = {
+    short: 'Showing <b>the short route</b> — four steps, and nothing from the seven phases. The Claude app gives you the install instructions as you go.',
     mid: 'Showing <b>the laptop route</b> — your own editor, your own copy of the files. The step numbers skip where a step belongs only to the cluster route; they stay stable across both, so a number always means the same step.',
     max: 'Showing <b>the cluster route</b>, which is all of it, including the parts somebody else has to approve. <b>Start the storage and allocation requests today</b> — they take days to weeks, and everything else here proceeds while they pend.'
   };
   // The unchosen state, said out loud rather than left to be inferred from a page
   // that is twice as long as any route through it.
-  var TIER_UNSET = 'No route picked yet, so this is <b>both at once</b>. Pick one above and the page shows only the steps that route needs.';
+  var TIER_UNSET = 'No route picked yet, so this is <b>all three at once</b>. Pick one above and the page shows only the steps that route needs.';
   var tierBtns = [].slice.call(document.querySelectorAll(".tierpick"));
   var tierNow = document.getElementById('tier-now');
   var phases = [].slice.call(document.querySelectorAll('section.phase'));
@@ -2529,6 +2648,13 @@ or four A records:
   // at whichever of the two this reader is actually shown.
   function repoStep() { return stepOnRoute('connect-or-repo') ? 'connect-or-repo' : 'remote'; }
 
+  // The short route settles the agent and the plan at S1 and the editor at S3, so on that
+  // route the words jump there instead of to steps the route hides.
+  var SHORT_JUMP = { 'agent-account': 'short-pay', 'editor': 'short-get-set-up' };
+  function shortJump(target) {
+    return readTier() === 'short' && SHORT_JUMP[target] ? SHORT_JUMP[target] : target;
+  }
+
   function chip(el, text, known) {
     el.textContent = text;
     el.dataset.known = known ? '1' : '0';
@@ -2605,16 +2731,20 @@ or four A records:
     [].forEach.call(document.querySelectorAll('.t-you'), function (el) {
       var w = el.dataset.you;
       if (w === 'route') {
-        chip(el, t ? 'you: ' + TIER_NAME[t] : 'not picked yet — both shown', !!t);
+        chip(el, t ? 'you: ' + TIER_NAME[t] : 'not picked yet — all three shown', !!t);
 
       } else if (w === 'agent') {
-        var a = (paths.agent || '').trim();
+        // The short route names its agent in its first step, so there is nothing to ask.
+        var a = t === 'short' ? 'Claude Code' : (paths.agent || '').trim();
         chip(el, a ? 'yours: ' + a : 'not said yet — 1.1 asks', !!a);
 
       } else if (w === 'rung') {
-        // READ OFF THE STEPS, NOT OFF A CLAIM. Both surviving routes have the ladder, so
-        // the rung follows 3.4 and 3.5 rather than being fixed by the route.
-        if (stepDone(STEP_RUNG_EDITOR)) {
+        // READ OFF THE STEPS, NOT OFF A CLAIM. The laptop and cluster routes have the ladder,
+        // so the rung follows 3.4 and 3.5. The short route has no ladder: the agent goes
+        // straight into the editor, and S3 is the step that puts it there.
+        if (t === 'short') {
+          chip(el, stepDone('short-get-set-up') ? 'yours: rung 3 — inside your editor' : 'rung 3 once S3 is done', stepDone('short-get-set-up'));
+        } else if (stepDone(STEP_RUNG_EDITOR)) {
           chip(el, 'yours: rung 3 — inside your editor', true);
         } else if (stepDone(STEP_RUNG_TERMINAL)) {
           chip(el, 'yours: rung 2 — in your terminal', true);
@@ -2623,15 +2753,21 @@ or four A records:
         }
 
       } else if (w === 'plan') {
-        chip(el, 'this page never asks — see What It Costs', false);
+        chip(el, t === 'short' ? 'a paid plan — S1 says which' : 'this page never asks — see What It Costs', false);
 
       } else if (w === 'repository') {
         var rs = repoStep();
-        chip(el, stepDone(rs) ? 'yours: made' : 'not made yet', stepDone(rs));
+        if (t === 'short') {
+          chip(el, 'the short route makes none', false);
+        } else {
+          chip(el, stepDone(rs) ? 'yours: made' : 'not made yet', stepDone(rs));
+        }
 
       } else if (w === 'editor') {
-        if (!stepOnRoute('editor')) {
-          chip(el, 'not on the browser route', false);
+        if (t === 'short') {
+          chip(el, stepDone('short-get-set-up') ? 'yours: set up at S3' : 'not set up yet — S3', stepDone('short-get-set-up'));
+        } else if (!stepOnRoute('editor')) {
+          chip(el, 'not on this route', false);
         } else {
           chip(el, stepDone('editor') ? 'yours: set up at 3.1' : 'not set up yet — 3.1', stepDone('editor'));
         }
@@ -2644,6 +2780,7 @@ or four A records:
     [].forEach.call(document.querySelectorAll('.terms dt[data-jump]'), function (dt) {
       var target = dt.dataset.jump;
       if (target === 'repo-step') target = repoStep();
+      target = shortJump(target);
       var live = target.charAt(0) === '#' ? !!document.querySelector(target) : stepOnRoute(target);
       dt.dataset.offRoute = live ? '0' : '1';
       dt.setAttribute('role', live ? 'link' : 'presentation');
@@ -2656,6 +2793,7 @@ or four A records:
     if (dt.dataset.offRoute === '1') return;
     var target = dt.dataset.jump;
     if (target === 'repo-step') target = repoStep();
+    target = shortJump(target);
     var el = target.charAt(0) === '#'
       ? document.querySelector(target)
       : document.querySelector('ol.steps > li[data-key="' + target + '"]');
