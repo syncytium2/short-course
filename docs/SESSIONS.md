@@ -2732,7 +2732,7 @@ risks in the file.
      and a release nobody can see leaves the door locked behind you. -->
 
 ### unknown-host/52307b4d — Case from armory: sessions re-solve the same tooling gap (PDF pages, .xlsx) and keep nothing; one wrote its own spreadsheet reader from scratch while the fix was already on the machine
-- **Status:** ACTIVE
+- **Status:** DONE 2026-09-16
 - **Opened:** 2026-09-16
 - **Branch when opened:** `case-spreadsheet-reader-from-scratch` — a fact, not an identity; it may move under you
 - **Writes:** `docs/cases/2026-09-16-the-reader-was-already-installed.md` (new) and one row in `docs/cases/README.md` Index. Repo only.
