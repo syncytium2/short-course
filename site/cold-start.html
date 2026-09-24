@@ -760,7 +760,7 @@
     <p class="eyebrow"><a href="/" class="home">&larr;&nbsp;It Looked Right</a> &middot; Setup runbook &middot; keep this window open</p>
     <h1>Cold Start</h1>
     <p class="standfirst">An email address to a first agent session that leaves a record behind it. Pick one of three routes &mdash; four steps to a working page, your own laptop set up properly, or a laptop plus a cluster shared with other people &mdash; and get every step that route needs in order, with the condition that tells you each one worked.</p>
-    <p class="pv">Version <b>0.1.54</b> &middot; 15 Sep 2026<span class="pv-born">First published 29 Aug 2026</span></p>
+    <p class="pv">Version <b>0.1.55</b> &middot; 24 Sep 2026<span class="pv-born">First published 29 Aug 2026</span></p>
   </header>
 
   <div class="method">
@@ -869,6 +869,21 @@
       <p><b>Roughly half the steps on this page have exactly one right answer</b> &mdash; the same answer for everybody. A line that stops Windows and Mac disagreeing about how a line of text ends; a hook, which is a short script git runs by itself, marking the agent&rsquo;s commits as the agent&rsquo;s work rather than yours (a commit is one saved change; <i>Just Enough Git</i> explains them); a written list of what the agent may never do; and one file recording where your data lives. <a href="/already-set-up"><i>Already Set Up</i></a> is a template that arrives with those four already written, and every decision that is genuinely yours still blank.</p>
       <p><b>What the template costs you is this page.</b> Writing your own list of what the agent may not do is a different event from reading one somebody else wrote, and writing your own is the event that makes your second project cheap. Take the template if you have work this week and the setup is in the way; take the steps on this page if you expect to do this more than once, or if anybody is going to ask you what your agent is allowed to do.</p>
     </details>
+    <!-- ADDED 2026-09-24 on Tony's word: "we need to add warnings to the cold start page that
+         the agents are now aggressively pursuing poorly expressed goals. users need to learn
+         right away how to spec an aggressive agent." At the door, not at S4 or Phase 4, because
+         every route reaches a first goal and this has to be read before it.
+         THE EVIDENCE a stranger can check is bugarach's ADR-0007, in a public repository. The
+         producer's repository, interface2, is private, so the numbers from its side are stated
+         here rather than linked. S4's example prompt carries the second and third parts, so the
+         reader sees the habit in the one goal the short route asks them to paste; the first
+         part was already there. -->
+    <div class="warn"><b>Before you give an agent its first goal: it will pursue what you wrote, hard, including the parts you did not mean.</b> Current coding agents keep going until they reach what they take your goal to be. They reach for whatever tool gets there, including the most expensive one available, and they will work outside the folder you meant if the goal seems to need it. On 23 September 2026 the author asked an agent to &ldquo;re-export&rdquo; a data folder without one recording. The job needed 83 files copied. The agent ran the full export instead, which started downloading recordings totalling 125&nbsp;GB, and then ran part of its checking inside a different project it had no business in. Nothing was lost; an afternoon was. The <a href="https://github.com/syncytium2/bugarach/blob/main/docs/adr/0007-bugarach-sessions-do-not-act-in-interface2.md">written account</a> is public.
+    <br><br><b>The request was the problem: it named an action instead of the result.</b> So every goal you give an agent says three things:
+    <br>&bull; <b>What should exist when it is done</b>, in a form you can check yourself. &ldquo;The same folder minus that one recording, every other file unchanged&rdquo;, not &ldquo;re-export it&rdquo;.
+    <br>&bull; <b>Where it may work.</b> &ldquo;Only in this folder. Do not change anything outside it.&rdquo;
+    <br>&bull; <b>When to stop and ask.</b> &ldquo;Before you install, download or delete anything, tell me what and why, and wait for me.&rdquo;
+    <br><br><b>The author runs many agents at once across several projects, which is where this bites hardest.</b> One agent in one new folder has much less room to wander. The three parts still cost a sentence each, and they are the difference between an agent that asks and one that finds out.</div>
   </section>
 
   <!-- THE SHORT ROUTE, ADDED 2026-09-14 on Tony's word: "add this as the first option on cold
@@ -970,8 +985,11 @@ plasma osmolality readings and shows which ones fall
 outside 275-295 mOsm/kg, with a plot of all of them.
 
 Build it in this folder as web pages that open in my
-browser, with no accounts and no server. When it works,
-tell me how to open it.</pre>
+browser, with no accounts and no server. Work only in
+this folder. Before you install or download anything,
+tell me what and why, and wait for me.
+
+When it works, tell me how to open it.</pre>
             </div>
             <p class="why">Claude Code asks before it creates or changes a file. Read what it wants to do, then allow it: this folder is where it is meant to work. <b>The first version will not be exactly right.</b> Say what is wrong, in plain words, and let it try again. That back-and-forth is the work, not a sign that it is failing.</p>
         </div>
