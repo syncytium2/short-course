@@ -2744,7 +2744,7 @@ risks in the file.
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Arioch/367ab0b3 — Cold Start: warn that agents chase the goal as written, and teach a three-part goal at the door and in S4
-- **Status:** ACTIVE
+- **Status:** DONE 2026-09-24
 - **Opened:** 2026-09-24
 - **Branch when opened:** `spec-the-goal` — a fact, not an identity; it may move under you
 - **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
