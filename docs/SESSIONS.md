@@ -860,8 +860,8 @@ find out about each other. That is what a board is for, and it is why C3 in
 - **Status:** DONE 2026-08-30
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
   **Where they are:** darkroom `short-course/2026-08-30_outside-reader-feedback/` — three HTML
   docs + a folder README, and each one is also an artifact so Tony can send a link. **No repo in
   this estate was touched**; nothing was written into no_peak, bugarach or colonel_kernel.
@@ -887,8 +887,8 @@ find out about each other. That is what a board is for, and it is why C3 in
 - **Status:** DONE 2026-08-30
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -1002,8 +1002,8 @@ find out about each other. That is what a board is for, and it is why C3 in
 - **Status:** DONE 2026-08-30
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
   **Deployed 2026-08-30, version ID d95d162b.** One file changed on the wire (`index.html`);
   the other three pages were already uploaded and are byte-identical to what was live. Verified
   on the live URL, not just from the build: the Objections section, all five objections, the
@@ -1020,8 +1020,8 @@ find out about each other. That is what a board is for, and it is why C3 in
 - **Status:** DONE 2026-08-30
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
   **Deployed, version 0.1.48, Cloudflare version ID 212e0c4a.** The button carries the objection
   in the reader's own words — *"Nobody works this way. Why are you teaching it?"* — rather than a
   label, and sits ABOVE the Cold Start call to action: a sceptic who is not ready for a setup
@@ -1037,8 +1037,8 @@ find out about each other. That is what a board is for, and it is why C3 in
 - **Status:** DONE 2026-08-30
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -1097,8 +1097,8 @@ find out about each other. That is what a board is for, and it is why C3 in
 - **Status:** DONE 2026-08-30
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -1140,8 +1140,8 @@ find out about each other. That is what a board is for, and it is why C3 in
 - **Status:** DONE 2026-08-30
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
   **Deployed twice: 0.1.51, then a rebuild of all four pages.** Cloudflare f45c234b.
   **THE TYPE SCALE IS NOW THREE TOKENS AND NOTHING ELSE** — `--t-head`, `--t-body`, `--t-label`,
   plus `--t-mono` derived at .875 of body. The page had grown **nineteen** font sizes; the only
@@ -1170,8 +1170,8 @@ find out about each other. That is what a board is for, and it is why C3 in
 - **Status:** DONE 2026-08-30
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -1182,8 +1182,8 @@ find out about each other. That is what a board is for, and it is why C3 in
 - **Status:** DONE 2026-08-30
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -1290,8 +1290,8 @@ find out about each other. That is what a board is for, and it is why C3 in
 - **Status:** DONE 2026-08-30
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -1348,8 +1348,8 @@ find out about each other. That is what a board is for, and it is why C3 in
 - **Status:** DONE 2026-08-30
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -1407,8 +1407,8 @@ risks in the file.
 - **Status:** DONE 2026-08-30
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -1565,8 +1565,8 @@ risks in the file.
 - **Status:** DONE 2026-08-30
 - **Opened:** 2026-08-30
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -1725,8 +1725,8 @@ risks in the file.
 - **Status:** DONE 2026-08-31
 - **Opened:** 2026-08-31
 - **Branch when opened:** `clean-three-public-leaks` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -1774,8 +1774,8 @@ risks in the file.
 - **Status:** DONE 2026-08-31
 - **Opened:** 2026-08-31
 - **Branch when opened:** `banner-reads-as-a-verdict` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -1862,8 +1862,8 @@ risks in the file.
 - **Status:** DONE 2026-08-31
 - **Opened:** 2026-08-31
 - **Branch when opened:** `front-door-stamp-and-standfirst` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -1946,8 +1946,8 @@ risks in the file.
 - **Status:** DONE 2026-08-31
 - **Opened:** 2026-08-31
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -2057,8 +2057,8 @@ risks in the file.
 - **Status:** DONE 2026-09-01
 - **Opened:** 2026-09-01
 - **Branch when opened:** `cold-start-tier-repair` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -2069,8 +2069,8 @@ risks in the file.
 - **Status:** DONE 2026-09-01
 - **Opened:** 2026-09-01
 - **Branch when opened:** `cold-start-tier-repair` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -2081,8 +2081,8 @@ risks in the file.
 - **Status:** DONE 2026-09-01
 - **Opened:** 2026-09-01
 - **Branch when opened:** `cold-start-tier-repair` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -2093,8 +2093,8 @@ risks in the file.
 - **Status:** DONE 2026-09-01
 - **Opened:** 2026-09-01
 - **Branch when opened:** `cold-start-tier-repair` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -2105,15 +2105,15 @@ risks in the file.
 - **Status:** DONE 2026-09-01
 - **Opened:** 2026-09-01
 - **Branch when opened:** `just-enough-git` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 ### Tonys-MacBook-Pro/466a6ccf — Case: the index worked and the trap was not a question — N5 instance 8, sequel to nothing-was-missing. Touches docs/cases/2026-09-01-*.md (new) and docs/cases/README.md index row only.
 - **Status:** DONE 2026-09-02
 - **Opened:** 2026-09-01
 - **Branch when opened:** `traps-must-fire` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -2124,8 +2124,8 @@ risks in the file.
 - **Status:** DONE 2026-09-01
 - **Opened:** 2026-09-01
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -2136,8 +2136,8 @@ risks in the file.
 - **Status:** DONE 2026-09-01
 - **Opened:** 2026-09-01
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -2148,8 +2148,8 @@ risks in the file.
 - **Status:** DONE 2026-09-01
 - **Opened:** 2026-09-01
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -2160,8 +2160,8 @@ risks in the file.
 - **Status:** DONE 2026-09-02
 - **Opened:** 2026-09-02
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -2172,8 +2172,8 @@ risks in the file.
 - **Status:** DONE 2026-09-02
 - **Opened:** 2026-09-02
 - **Branch when opened:** `w2-idea-generator` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -2184,8 +2184,8 @@ risks in the file.
 - **Status:** DONE 2026-09-02
 - **Opened:** 2026-09-02
 - **Branch when opened:** `tier-visibility` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -2196,8 +2196,8 @@ risks in the file.
 - **Status:** DONE 2026-09-02
 - **Opened:** 2026-09-02
 - **Branch when opened:** `ci` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -2208,8 +2208,8 @@ risks in the file.
 - **Status:** DONE 2026-09-02
 - **Opened:** 2026-09-02
 - **Branch when opened:** `ci-fixes` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -2247,8 +2247,8 @@ risks in the file.
 - **Status:** DONE 2026-09-02
 - **Opened:** 2026-09-02
 - **Branch when opened:** `idea-generator-out` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -2259,8 +2259,8 @@ risks in the file.
 - **Status:** DONE 2026-09-02
 - **Opened:** 2026-09-02
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -2302,8 +2302,8 @@ risks in the file.
 - **Status:** DONE 2026-09-03
 - **Opened:** 2026-09-03
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -2314,8 +2314,8 @@ risks in the file.
 - **Status:** DONE 2026-09-03
 - **Opened:** 2026-09-03
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -2332,8 +2332,8 @@ risks in the file.
 - **Status:** DONE 2026-09-04
 - **Opened:** 2026-09-04
 - **Branch when opened:** `starter-template` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -2349,8 +2349,8 @@ risks in the file.
 - **Status:** DONE 2026-09-04
 - **Opened:** 2026-09-04
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -2361,8 +2361,8 @@ risks in the file.
 - **Status:** DONE 2026-09-04
 - **Opened:** 2026-09-04
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -2378,8 +2378,8 @@ risks in the file.
 - **Status:** DONE 2026-09-05
 - **Opened:** 2026-09-05
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -2390,8 +2390,8 @@ risks in the file.
 - **Status:** DONE 2026-09-05
 - **Opened:** 2026-09-05
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -2402,8 +2402,8 @@ risks in the file.
 - **Status:** DONE 2026-09-05
 - **Opened:** 2026-09-05
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -2431,8 +2431,8 @@ risks in the file.
 - **Status:** DONE 2026-09-06
 - **Opened:** 2026-09-06
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -2481,8 +2481,8 @@ risks in the file.
 - **Status:** DONE 2026-09-06
 - **Opened:** 2026-09-06
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -2493,8 +2493,8 @@ risks in the file.
 - **Status:** DONE 2026-09-06
 - **Opened:** 2026-09-06
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -2517,8 +2517,8 @@ risks in the file.
 - **Status:** DONE 2026-09-06
 - **Opened:** 2026-09-06
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -2529,8 +2529,8 @@ risks in the file.
 - **Status:** DONE 2026-09-08
 - **Opened:** 2026-09-08
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -2541,8 +2541,8 @@ risks in the file.
 - **Status:** DONE 2026-09-08
 - **Opened:** 2026-09-08
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -2669,8 +2669,8 @@ risks in the file.
 - **Status:** DONE 2026-09-09
 - **Opened:** 2026-09-09
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -2681,8 +2681,8 @@ risks in the file.
 - **Status:** DONE 2026-09-09
 - **Opened:** 2026-09-09
 - **Branch when opened:** `master` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -2711,8 +2711,8 @@ risks in the file.
 - **Status:** DONE 2026-09-14
 - **Opened:** 2026-09-14
 - **Branch when opened:** `the-short-path` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -2723,8 +2723,8 @@ risks in the file.
 - **Status:** DONE 2026-09-15
 - **Opened:** 2026-09-15
 - **Branch when opened:** `short-path-on-cold-start` — a fact, not an identity; it may move under you
-- **Writes:** <files or folders you will change; "repo only" if nothing outside git>
-- **Notes:** <anything another session must know before touching the same thing>
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
@@ -2737,6 +2737,18 @@ risks in the file.
 - **Branch when opened:** `case-spreadsheet-reader-from-scratch` — a fact, not an identity; it may move under you
 - **Writes:** `docs/cases/2026-09-16-the-reader-was-already-installed.md` (new) and one row in `docs/cases/README.md` Index. Repo only.
 - **Notes:** Windows workstation session working from `armory`, at Tony's instruction. `unknown-host` is `tools/session_identity.sh` not finding a hostname under Git Bash on Windows, not a stranger.
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
+
+### Arioch/367ab0b3 — Cold Start: warn that agents chase the goal as written, and teach a three-part goal at the door and in S4
+- **Status:** ACTIVE
+- **Opened:** 2026-09-24
+- **Branch when opened:** `spec-the-goal` — a fact, not an identity; it may move under you
+- **Writes:** `docs/handouts/cold-start.html`, `site/cold-start.html`, `tools/claim.sh`
+- **Notes:** not deployed; deploy needs asking Tony
 
 <!-- RELEASE THIS
      tools/claim.sh --release
