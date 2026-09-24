@@ -7,6 +7,36 @@ is for murderboard development only; see [Boundary](#boundary) below.
 
 ## If you are coming back to this cold
 
+> ## 2026-09-24 — START HERE. Cold Start warns about goals at the door, and it is LIVE. One TODO: the ticker.
+>
+> **Tony, 2026-09-23:** *"we need to add warnings to the cold start page that the agents are now
+> aggressively pursuing poorly expressed goals. users need to learn right away how to spec an
+> aggressive agent."* Done as one `.warn` at the door, read by every route: an agent pursues
+> what you wrote, hard; the 23 Sept "re-export" that started a 125 GB download and checked its
+> work in another project (evidence: bugarach's public ADR-0007); and the three parts of a goal —
+> what exists when done, where it may work, when to stop and ask. The short route's example
+> prompt carries the bounds, in Cold Start **and** `the-short-path.html`.
+>
+> **DEPLOYED on his "deploy".** Version `e45fbdd6-0669-4277-af38-4a5c98fbe4e2`, one file
+> uploaded. Live `cold-start` is **byte-identical** to `site/cold-start.html`, and
+> `tools/site_staleness.sh` reports every page matches. The next deploy needs asking too.
+>
+> **TODO — a news ticker on the main page. Tony: *"we'll work on ticker later."*** He wants a
+> place to report incidents like the one above as they happen. The shape proposed and not yet
+> agreed: one source file, `docs/ticker.md`, one dated line per entry; the main page shows the
+> newest three or four near the top of the overview; a session adds a line when he says
+> "ticker: …" and rebuilds, and deploying stays his. **It collides with `docs/selection.md`'s
+> "nothing goes on a page the day it is written"**, and the proposal resolves that by treating an
+> entry as a dated report, not a lesson: it must pass tests 1, 2 and 4 (a stranger can check it,
+> nobody else is the subject, the caveat travels with it) and is exempt from test 3 and the day
+> rule. Promotion into lesson text, as the Cold Start warning was, still passes all four. Confirm
+> that with him before building.
+>
+> **Also fixed:** `tools/claim.sh --help` used to post a claim titled "--help". It now prints
+> usage and refuses unknown flags; selftest and mutation row cover it.
+>
+> *The 09-15 block below still stands.*
+
 > ## 2026-09-15 — START HERE. The short route is the first door on Cold Start, and it is LIVE.
 >
 > **Tony, 2026-09-15:** *"ok add this as the first option on cold start. i'll have a colleague try
