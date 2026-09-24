@@ -83,6 +83,8 @@ case "${1:-}" in
 --mine)
     printf 'Claims for %s:\n' "$ADDR"
     grep -n "^### $ADDR" "$BOARD" 2>/dev/null || printf '  (none)\n'; exit 0 ;;
+-h|--help)
+    sed -n '4,9p' "$0" | sed 's/^# //'; exit 0 ;;
 esac
 
 # ------------------------------------------------------------------ releasing
@@ -184,6 +186,13 @@ if [ "${1:-}" = "--selftest" ]; then
     if [ "$AFTER" -gt "$BEFORE" ]; then printf '  ok   the board grew, nothing was lost\n'
     else printf '  FAIL board shrank: %s -> %s\n' "$BEFORE" "$AFTER"; fail=1; fi
 
+    # an unknown flag must not become a claim
+    sh "$0" --no-such-flag >/dev/null 2>&1
+    ck "an unknown flag is refused"               2 "$?"
+    ck "and does not reach the board"             0 "$(grep -c -- '— --no-such-flag' "$SC_BOARD")"
+    sh "$0" --help >/dev/null 2>&1
+    ck "--help prints usage, not a claim"         0 "$(grep -c -- '— --help' "$SC_BOARD")"
+
     # releasing something that is not there must NOT report success
     sh "$0" --release definitely-not-on-this-board >/dev/null 2>&1
     ck "releasing a missing block fails loudly" 2 "$?"
@@ -223,6 +232,10 @@ fi
 
 # ------------------------------------------------------------------- claiming
 TASK="$*"
+# AN UNKNOWN FLAG IS NOT A TITLE. 2026-09-24 a session ran `claim.sh --help` to read the
+# usage, and the board in the primary checkout gained an ACTIVE claim titled "--help".
+# Anything dash-led that reaches here is a flag this script does not know.
+case "$TASK" in -*) die "unknown option: $1   (a claim title is plain text; see tools/claim.sh --help)" ;; esac
 [ -n "$TASK" ] || die "usage: tools/claim.sh \"what you are doing\"   |   --list | --mine | --release"
 
 cat >> "$BOARD" <<BLOCK
