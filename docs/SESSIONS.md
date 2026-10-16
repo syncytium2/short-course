@@ -2756,7 +2756,7 @@ risks in the file.
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Arioch/367ab0b3 — American spellings across the public site pages (peer request from mac td-resume CTO-CAI assess, 2026-10-16)
-- **Status:** ACTIVE
+- **Status:** DONE 2026-10-16
 - **Opened:** 2026-10-16
 - **Branch when opened:** `american-spelling` — a fact, not an identity; it may move under you
 - **Writes:** `docs/handouts/*.html`, `site/*.html`
