@@ -2754,3 +2754,15 @@ risks in the file.
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Arioch/367ab0b3 — American spellings across the public site pages (peer request from mac td-resume CTO-CAI assess, 2026-10-16)
+- **Status:** ACTIVE
+- **Opened:** 2026-10-16
+- **Branch when opened:** `american-spelling` — a fact, not an identity; it may move under you
+- **Writes:** `docs/handouts/*.html`, `site/*.html`
+- **Notes:** reader-visible text only; quotes and proper names stay; deploy waits for Tony
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
