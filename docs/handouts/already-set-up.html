@@ -373,7 +373,7 @@
 
   <h2>Why the installer is not allowed to tell you it worked</h2>
 
-  <p><b>An installer that finishes and reports success is summarising its own instructions.</b> It is saying that each command it ran returned zero, which is a fact about the commands and not about your machine. The gap between those two is what the rest of this course is about, and it would be a poor joke to get it wrong in the file that introduces it.</p>
+  <p><b>An installer that finishes and reports success is summarizing its own instructions.</b> It is saying that each command it ran returned zero, which is a fact about the commands and not about your machine. The gap between those two is what the rest of this course is about, and it would be a poor joke to get it wrong in the file that introduces it.</p>
 
   <p>So the installing and the checking are two separate programs. <code>bootstrap.sh</code> ends by handing over to <code>tools/check_setup.sh</code>, which knows nothing about what just happened and goes and looks instead. If they disagree, the second one is right.</p>
 
