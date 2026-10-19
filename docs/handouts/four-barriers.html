@@ -569,6 +569,11 @@
   .draft p { margin: 0; font-size: var(--t-body); line-height: 1.55; color: var(--ink); }
   .draft p + p { margin-top: 7px; }
   @media print { .draft { break-inside: avoid; } }
+  /* The way back to the main site, on every page. Added 2026-10-19 at Tony's report that
+     visitors could not get back to tonydefazio.com without the back button. Spacing and
+     size only: the link takes this page's own type and link color. */
+  .homelink { margin: 0 0 12px; font-size: 0.85rem; }
+  footer .homelink { margin: 12px 0 0; }
 </style>
 
 <div class="shell">
@@ -601,6 +606,7 @@
 
   <header class="mast">
     <div class="mast-id">
+      <p class="homelink"><a href="https://tonydefazio.com/">&larr;&nbsp;tonydefazio.com</a></p>
       <p class="eyebrow">It Looked Right &middot; for researchers</p>
       <h1>Using coding agents today and tomorrow</h1>
       <p class="standfirst"><b>Coding is no longer the barrier. <a href="#communication" data-view="communication">Four challenges remain.</a></b> Each is set out with the incidents that produced it.</p>
