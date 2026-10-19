@@ -2768,7 +2768,7 @@ risks in the file.
      and a release nobody can see leaves the door locked behind you. -->
 
 ### Arioch/367ab0b3 — A link back to tonydefazio.com at the top of every lookedright page (peer request from mac tonydefazio.com updates, 2026-10-19)
-- **Status:** ACTIVE
+- **Status:** DONE 2026-10-19
 - **Opened:** 2026-10-19
 - **Branch when opened:** `home-link` — a fact, not an identity; it may move under you
 - **Writes:** `docs/handouts/*.html` (the seven site sources), `site/*.html`
