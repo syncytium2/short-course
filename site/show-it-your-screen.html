@@ -190,6 +190,11 @@
   }
   .prov b { color: var(--muted); font-weight: 600; }
   a { color: var(--accent); }
+  /* The way back to the main site, on every page. Added 2026-10-19 at Tony's report that
+     visitors could not get back to tonydefazio.com without the back button. Spacing and
+     size only: the link takes this page's own type and link color. */
+  .homelink { margin: 0 0 12px; font-size: 0.85rem; }
+  footer .homelink { margin: 12px 0 0; }
 
   /* Version line under the masthead. Derived at build time by tools/build_site.sh
      from the source's git history -- there is nothing here to edit or to forget. */
@@ -214,6 +219,7 @@
 </head>
 <body>
 <div class="page">
+  <p class="homelink"><a href="https://tonydefazio.com/">&larr;&nbsp;tonydefazio.com</a></p>
 
   <div class="mast">
     <p class="eyebrow"><a href="/" class="home">&larr;&nbsp;It Looked Right</a> &middot; Handout · one page</p>
@@ -221,7 +227,7 @@
     <p class="standfirst">You do not need to become an expert at web deployment. Nobody stays one —
     the dashboards are rebuilt faster than anybody can memorize them. What you need is a loop, and
     the loop is four beats long.</p>
-    <p class="pv">Version <b>0.1.9</b> &middot; 16 Oct 2026<span class="pv-born">First published 30 Aug 2026</span></p>
+    <p class="pv">Version <b>0.1.10</b> &middot; 19 Oct 2026<span class="pv-born">First published 30 Aug 2026</span></p>
   </div>
 
   <div class="status">

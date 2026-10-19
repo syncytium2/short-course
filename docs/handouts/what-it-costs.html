@@ -226,9 +226,15 @@
   .draft p { margin: 0; font-size: 0.9rem; line-height: 1.55; color: var(--ink); }
   .draft p + p { margin-top: 7px; }
   @media print { .draft { break-inside: avoid; } }
+  /* The way back to the main site, on every page. Added 2026-10-19 at Tony's report that
+     visitors could not get back to tonydefazio.com without the back button. Spacing and
+     size only: the link takes this page's own type and link color. */
+  .homelink { margin: 0 0 12px; font-size: 0.85rem; }
+  footer .homelink { margin: 12px 0 0; }
 </style>
 
 <div class="page">
+  <p class="homelink"><a href="https://tonydefazio.com/">&larr;&nbsp;tonydefazio.com</a></p>
   <div class="draft">
     <b class="draft-k">Prices read once, on one day</b>
     <p>Every figure here was read off a vendor page on the day it was written, and has not been re-checked since. Plans get renamed, split, metered differently and re-priced faster than this page moves. <b>Treat each number as a pointer to the vendor&rsquo;s own page, not as the price.</b></p>
@@ -581,6 +587,7 @@
     <p>Companion to <a href="https://lookedright.tonydefazio.com/cold-start"><i>Cold Start</i></a>, and the fourth sheet alongside <a href="https://lookedright.tonydefazio.com/search-to-shipped"><i>Search to Shipped</i></a> and <a href="https://lookedright.tonydefazio.com/"><i>It Looked Right</i></a>.</p>
     <p><b>Filed as its own page on purpose.</b> Cost material decays faster than anything else in this course and is tied to one institution and one moment, so it is kept where it can rot without taking the teaching material with it. When it next matters, go and touch the systems rather than editing around the dates.</p>
     <p>The five-run worked example is derived from a token log in <a href="https://github.com/syncytium2/murderboard">syncytium2/murderboard</a>, summed per run on 29 August 2026; the dollar figures are computed from those counts at list rates and are not invoices. <b>That log is not yet published</b> &mdash; a handoff asking for it has gone to that project, and until it lands the table is checkable only by someone with the file. Prices and plan shapes read from the vendors&rsquo; own pages on 29 August 2026. The heavy-use figures are from Anthropic&rsquo;s cost documentation, the same day. The institutional and student-credit facts were checked at one university on 27 August 2026 and are generalized here. The teaching-session figures are estimates and are labeled as such; the per-user monthly allocation they lean on is <b>$50 from secondary coverage, and the university&rsquo;s own page states no amount</b>. The two money columns in the five-run table are the same tokens priced at two different <b>models</b> &mdash; $5/$25 and $2/$10 per million, cached reading at a tenth of input &mdash; and not two subscription plans. Every outbound link was checked on 29 August 2026 and <b>nothing re-checks them</b>.</p>
+      <p class="homelink"><a href="https://tonydefazio.com/">&larr;&nbsp;tonydefazio.com</a></p>
   </footer>
 
 </div>
