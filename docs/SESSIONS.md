@@ -2766,3 +2766,15 @@ risks in the file.
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### Arioch/367ab0b3 — A link back to tonydefazio.com at the top of every lookedright page (peer request from mac tonydefazio.com updates, 2026-10-19)
+- **Status:** ACTIVE
+- **Opened:** 2026-10-19
+- **Branch when opened:** `home-link` — a fact, not an identity; it may move under you
+- **Writes:** `docs/handouts/*.html` (the seven site sources), `site/*.html`
+- **Notes:** deploy waits for Tony
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
