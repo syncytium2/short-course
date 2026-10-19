@@ -700,6 +700,11 @@
   @media (prefers-reduced-motion: reduce) {
     ol.steps > li.jumped, section.door.jumped { animation: none; outline: 2px solid var(--caution); outline-offset: 4px; }
   }
+  /* The way back to the main site, on every page. Added 2026-10-19 at Tony's report that
+     visitors could not get back to tonydefazio.com without the back button. Spacing and
+     size only: the link takes this page's own type and link color. */
+  .homelink { margin: 0 0 12px; font-size: 0.85rem; }
+  footer .homelink { margin: 12px 0 0; }
 
   /* Version line under the masthead. Derived at build time by tools/build_site.sh
      from the source's git history -- there is nothing here to edit or to forget. */
@@ -739,6 +744,7 @@
 </div>
 
 <div class="page">
+  <p class="homelink"><a href="https://tonydefazio.com/">&larr;&nbsp;tonydefazio.com</a></p>
   <div class="draft">
     <b class="draft-k">Not yet walked from a clean machine</b>
     <p><b>These steps are written from one working setup and reviewed as text, rather than run from zero.</b> The order, the timings and some of the commands are unconfirmed, and a step that is wrong has no way of announcing itself here.</p>
@@ -760,7 +766,7 @@
     <p class="eyebrow"><a href="/" class="home">&larr;&nbsp;It Looked Right</a> &middot; Setup runbook &middot; keep this window open</p>
     <h1>Cold Start</h1>
     <p class="standfirst">An email address to a first agent session that leaves a record behind it. Pick one of three routes &mdash; four steps to a working page, your own laptop set up properly, or a laptop plus a cluster shared with other people &mdash; and get every step that route needs in order, with the condition that tells you each one worked.</p>
-    <p class="pv">Version <b>0.1.56</b> &middot; 16 Oct 2026<span class="pv-born">First published 29 Aug 2026</span></p>
+    <p class="pv">Version <b>0.1.57</b> &middot; 19 Oct 2026<span class="pv-born">First published 29 Aug 2026</span></p>
   </header>
 
   <div class="method">
@@ -1901,6 +1907,7 @@ or four A records:
     <p data-tiers="short"><b>The short route&rsquo;s prices and plans were read on claude.com on 14 September 2026</b>, and its two traps, the trust question and the hiding button, come from the walk on 30 August 2026. <b>Nobody has walked the short route from a clean machine yet.</b> Nothing re-checks any of it; when a price or a screen moves, this page will keep saying what was true.</p>
     <p data-tiers="mid max"><b>Two dates, because they are two different claims.</b> The vendor pages, the cost documentation and the DNS records &mdash; the settings that point a name at a website &mdash; in Phase&nbsp;7, a name of your own, were read on <b>29 August 2026</b>, and every outbound link was checked that day. The click paths, dashboards and button names <span data-tiers="mid max">in Phase&nbsp;7 </span>come from one walk on <b>30 August 2026</b> and describe that afternoon only. <b>Nothing re-checks either date.</b> When a link rots or a dashboard moves, this page will not tell you &mdash; it will keep saying what was true.</p>
     <p><b>A step is complete when every box you are shown is ticked, and not before.</b> Boxes belonging to a route you did not pick are hidden and are not counted; they come back, still ticked, if you later change to a bigger route. Ticks are stored in this browser only and do not travel with the page.</p>
+      <p class="homelink"><a href="https://tonydefazio.com/">&larr;&nbsp;tonydefazio.com</a></p>
   </footer>
 
 </div>

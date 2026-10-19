@@ -249,6 +249,11 @@
   .draft p { margin: 0; font-size: 0.9rem; line-height: 1.55; color: var(--ink); }
   .draft p + p { margin-top: 7px; }
   @media print { .draft { break-inside: avoid; } }
+  /* The way back to the main site, on every page. Added 2026-10-19 at Tony's report that
+     visitors could not get back to tonydefazio.com without the back button. Spacing and
+     size only: the link takes this page's own type and link color. */
+  .homelink { margin: 0 0 12px; font-size: 0.85rem; }
+  footer .homelink { margin: 12px 0 0; }
 
   /* Version line under the masthead. Derived at build time by tools/build_site.sh
      from the source's git history -- there is nothing here to edit or to forget. */
@@ -273,6 +278,7 @@
 </head>
 <body>
 <div class="page">
+  <p class="homelink"><a href="https://tonydefazio.com/">&larr;&nbsp;tonydefazio.com</a></p>
   <div class="draft">
     <b class="draft-k">This is not a git tutorial and will not make you competent</b>
     <p>It defines <b>the dozen words the other sheets use</b>, so that a sentence like &ldquo;commit and push this&rdquo; stops being an incantation, and it makes the case that the rest of this is a job to hand over. That is the whole of its ambition. It leaves out most of git on purpose, <b>the omissions are listed near the bottom rather than left for you to discover</b>, and the last section is where to go when you have outgrown this one &mdash; which will not take long.</p>
@@ -282,7 +288,7 @@
     <p class="eyebrow"><a href="/" class="home">&larr;&nbsp;It Looked Right</a> &middot; Companion sheet &middot; <a href="https://lookedright.tonydefazio.com/cold-start">Cold Start</a></p>
     <h1>Just Enough Git</h1>
     <p class="standfirst">Enough to read what your agent tells you it did &mdash; what git is for, the dozen words, and why keeping a repository tidy is a job you can hand over rather than learn.</p>
-    <p class="pv">Version <b>0.1.5</b> &middot; 16 Oct 2026<span class="pv-born">First published 1 Sep 2026</span></p>
+    <p class="pv">Version <b>0.1.6</b> &middot; 19 Oct 2026<span class="pv-born">First published 1 Sep 2026</span></p>
   </header>
 
   <p class="lede"><b>You do not have to learn git, and you are not going to be graded on it.</b> Running it is something a coding agent does well, and most of the time you will ask for it in words rather than typing a command yourself. What you cannot hand over is <b>reading the report</b> &mdash; because it comes back in these words, and a report you cannot read is not a report. That is what this page is for, and it is a smaller job than learning git.</p>
@@ -491,6 +497,7 @@
   <footer>
     <p>Companion to <a href="https://lookedright.tonydefazio.com/cold-start"><i>Cold Start</i></a>, which is where these words are used. <i>What It Costs</i> is the money half of that sheet; <i>Search to Shipped</i> is what comes after it.</p>
     <p><b>Nothing here is checked by anything.</b> The six links above were opened on the day this was committed and nothing re-checks them; when one rots, this page will not tell you. The definitions are written to be useful rather than exact, and a git expert would qualify several of them.</p>
+      <p class="homelink"><a href="https://tonydefazio.com/">&larr;&nbsp;tonydefazio.com</a></p>
   </footer>
 </div>
 </body>

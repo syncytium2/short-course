@@ -350,6 +350,11 @@
   .draft p { margin: 0; font-size: 0.9rem; line-height: 1.55; color: var(--ink); }
   .draft p + p { margin-top: 7px; }
   @media print { .draft { break-inside: avoid; } }
+  /* The way back to the main site, on every page. Added 2026-10-19 at Tony's report that
+     visitors could not get back to tonydefazio.com without the back button. Spacing and
+     size only: the link takes this page's own type and link color. */
+  .homelink { margin: 0 0 12px; font-size: 0.85rem; }
+  footer .homelink { margin: 12px 0 0; }
 
   /* Version line under the masthead. Derived at build time by tools/build_site.sh
      from the source's git history -- there is nothing here to edit or to forget. */
@@ -374,6 +379,7 @@
 </head>
 <body>
 <div class="page">
+  <p class="homelink"><a href="https://tonydefazio.com/">&larr;&nbsp;tonydefazio.com</a></p>
 
   <div class="draft">
     <b class="draft-k">The one page here not put through a murderboard</b>
@@ -384,7 +390,7 @@
     <p class="eyebrow"><a href="/" class="home">&larr;&nbsp;It Looked Right</a> &middot; Runbook · one page</p>
     <h1>Search to Shipped</h1>
     <p class="standfirst">Zero to a deployed web app, for a researcher who has never written software. Every step, in order, with the condition that tells you it worked.</p>
-    <p class="pv">Version <b>0.1.11</b> &middot; 16 Oct 2026<span class="pv-born">First published 27 Aug 2026</span></p>
+    <p class="pv">Version <b>0.1.12</b> &middot; 19 Oct 2026<span class="pv-born">First published 27 Aug 2026</span></p>
   </header>
 
   <div class="escalation">
@@ -922,6 +928,7 @@ alignment stops being sensitive to neighbors.</pre>
 
   <footer>
     <p>Links checked 27 August 2026. Everything on this page will go stale; the page cannot tell you when. Go touch the system.</p>
+      <p class="homelink"><a href="https://tonydefazio.com/">&larr;&nbsp;tonydefazio.com</a></p>
   </footer>
 
 </div>
