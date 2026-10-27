@@ -2778,3 +2778,15 @@ risks in the file.
      tools/claim.sh --release
      then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
      and a release nobody can see leaves the door locked behind you. -->
+
+### vm/c0574eb1 — American spellings on the seven public pages, by shape; vendored murderboard spelling check in CI; Reader line
+- **Status:** ACTIVE
+- **Opened:** 2026-10-27
+- **Branch when opened:** `claude/ecstatic-goodall-d45wwj` — a fact, not an identity; it may move under you
+- **Writes:** `docs/handouts/*.html` (the seven site sources), `site/*.html`, `tools/murderboard_prose.sh` (new, vendored), `CLAUDE.md` (new), `.github/workflows/ci.yml`
+- **Notes:** reader-visible text and comments; quotes and proper names stay, marked `spelling-ok`; records (chain, reviews, cases) untouched; deploy waits for Tony
+
+<!-- RELEASE THIS
+     tools/claim.sh --release
+     then commit and push docs/SESSIONS.md. A claim nobody can see is not a claim,
+     and a release nobody can see leaves the door locked behind you. -->
