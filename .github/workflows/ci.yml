@@ -118,6 +118,15 @@ jobs:
         # where several sessions push is a live-page regression waiting for a deploy.
         run: sh tools/build_site.sh --check-all
 
+      - name: American spelling on the public pages
+        # The reader is American (CLAUDE.md). Two sweeps fixed only the words someone noticed;
+        # this matches British forms by SHAPE, so a new one fails here before it is deployed.
+        # Sources only: site/ is built from them, and the step above proves it matches.
+        run: |
+          bash tools/murderboard_prose.sh --selftest
+          bash tools/murderboard_prose.sh --spelling us --spelling-only \
+            $(grep -v '^#' tools/pages.txt | awk 'NF {print $1}')
+
       - name: Every route through the runbook can be finished
         run: sh tools/tier_check.sh --check
 
