@@ -192,8 +192,8 @@
   .door-more dl { margin-top: 10px; }
   .door-more > p { font-size: 0.9333rem; color: var(--muted); margin: 10px 0 0; }
 
-  /* A step or a whole phase that this tier does not use is REMOVED, not greyed.
-     Greying it would leave the reader deciding, one step at a time, whether a
+  /* A step or a whole phase that this tier does not use is REMOVED, not grayed.
+     Graying it would leave the reader deciding, one step at a time, whether a
      faded thing applies to them -- which is the work the switch is supposed to
      have done once, at the door. */
   /* !important, AND IT HAS TO BE. This is one class-level selector, so any LATER rule of
@@ -277,7 +277,7 @@
      NOT A DISABLED STEP AND NOT A FAILED ONE. The distinction this styling has to carry is
      the one tier_check.sh's header names as the worst thing this page can do: "It does not
      look like the page being wrong. It looks like the reader failing the last step." So a
-     locked step is not greyed into the background like a skipped one -- it keeps a live
+     locked step is not grayed into the background like a skipped one -- it keeps a live
      border and states, in its own authored sentence, what would open it and where to go if
      that will never happen here. Muted enough to read as not-yet, loud enough to read.
      THE DETAIL AND THE BOXES ARE REMOVED, NOT DIMMED. A dimmed checkbox is still a checkbox
@@ -619,7 +619,7 @@
      NOT FOLDED. Every other block of explanation on this page hides behind its heading,
      because the page is long and a reader in a hurry should be able to skim the steps. The
      definitions are the exception: a reader who does not already know they are missing a
-     word will never open a fold labelled "the words this page uses", and that reader is
+     word will never open a fold labeled "the words this page uses", and that reader is
      exactly who this block is for. It is six lines and it stays open. */
   .terms {
     border: 1px solid var(--rule-firm);
@@ -645,7 +645,7 @@
   }
   .terms dd { margin: 0; font-size: 0.9rem; line-height: 1.5; color: var(--ink); }
   /* The word is the jump. It looks like a link because it is one, and it keeps the accent
-     colour it already had -- a second affordance beside it would be two things to explain. */
+     color it already had -- a second affordance beside it would be two things to explain. */
   .terms dt[data-jump] { cursor: pointer; text-decoration: underline; text-underline-offset: 3px;
                          text-decoration-thickness: 1px; text-decoration-color: var(--rule-firm); }
   .terms dt[data-jump]:hover { text-decoration-color: var(--accent); }
@@ -846,7 +846,7 @@
          here rather than linked. S4's example prompt carries the second and third parts, so the
          reader sees the habit in the one goal the short route asks them to paste; the first
          part was already there. -->
-    <div class="warn"><b>Before you give an agent its first goal: it will pursue what you wrote, hard, including the parts you did not mean.</b> Current coding agents keep going until they reach what they take your goal to be. They reach for whatever tool gets there, including the most expensive one available, and they will work outside the folder you meant if the goal seems to need it. On 23 September 2026 the author asked an agent to &ldquo;re-export&rdquo; a data folder without one recording. The job needed 83 files copied. The agent ran the full export instead, which started downloading recordings totalling 125&nbsp;GB, and then ran part of its checking inside a different project it had no business in. Nothing was lost; an afternoon was. The <a href="https://github.com/syncytium2/bugarach/blob/main/docs/adr/0007-bugarach-sessions-do-not-act-in-interface2.md">written account</a> is public.
+    <div class="warn"><b>Before you give an agent its first goal: it will pursue what you wrote, hard, including the parts you did not mean.</b> Current coding agents keep going until they reach what they take your goal to be. They reach for whatever tool gets there, including the most expensive one available, and they will work outside the folder you meant if the goal seems to need it. On 23 September 2026 the author asked an agent to &ldquo;re-export&rdquo; a data folder without one recording. The job needed 83 files copied. The agent ran the full export instead, which started downloading recordings totaling 125&nbsp;GB, and then ran part of its checking inside a different project it had no business in. Nothing was lost; an afternoon was. The <a href="https://github.com/syncytium2/bugarach/blob/main/docs/adr/0007-bugarach-sessions-do-not-act-in-interface2.md">written account</a> is public.
     <br><br><b>The request was the problem: it named an action instead of the result.</b> So every goal you give an agent says three things:
     <br>&bull; <b>What should exist when it is done</b>, in a form you can check yourself. &ldquo;The same folder minus that one recording, every other file unchanged&rdquo;, not &ldquo;re-export it&rdquo;.
     <br>&bull; <b>Where it may work.</b> &ldquo;Only in this folder. Do not change anything outside it.&rdquo;

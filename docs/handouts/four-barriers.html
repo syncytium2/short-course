@@ -115,19 +115,19 @@
   .ready-go { margin-left: auto; color: var(--accent); font-size: var(--t-body); line-height: 1; }
   @media (max-width: 560px) { .ready-go { margin-left: 0; } }
 
-  /* The sceptic's door, above the reader's. It carries the objection in the reader's
+  /* The skeptic's door, above the reader's. It carries the objection in the reader's
      own words rather than a label, because "Objections" is a thing you skip and
-     "nobody works this way" is a thing you recognise. Quieter than .ready on purpose:
-     position gives it primacy, so the colour does not have to fight for it. */
-  .ready.sceptic {
+     "nobody works this way" is a thing you recognize. Quieter than .ready on purpose:
+     position gives it primacy, so the color does not have to fight for it. */
+  .ready.skeptic {
     border-color: var(--rule-firm); background: var(--surface);
   }
-  .ready.sceptic:hover { background: var(--ink); color: var(--ground); border-color: var(--ink); }
-  .ready.sceptic .ready-k, .ready.sceptic .ready-go { color: var(--muted); }
-  .ready.sceptic:hover .ready-k, .ready.sceptic:hover .ready-go { color: var(--ground); }
-  .ready.sceptic .ready-t { font-weight: 500; font-style: italic; }
+  .ready.skeptic:hover { background: var(--ink); color: var(--ground); border-color: var(--ink); }
+  .ready.skeptic .ready-k, .ready.skeptic .ready-go { color: var(--muted); }
+  .ready.skeptic:hover .ready-k, .ready.skeptic:hover .ready-go { color: var(--ground); }
+  .ready.skeptic .ready-t { font-weight: 500; font-style: italic; }
   /* Once you are reading the objections, the door you came through is noise. */
-  body[data-view="objections"] .ready.sceptic { display: none; }
+  body[data-view="objections"] .ready.skeptic { display: none; }
 
   .mast {
     border-bottom: 2px solid var(--ink);
@@ -300,7 +300,7 @@
   .view ul, .view ol { max-width: 58ch; margin: 0 0 16px; padding-left: 22px; }
   .view li { margin-bottom: 7px; }
   .view li::marker { color: var(--faint); }
-  /* Others teaching this: one entry per programme, each a link then what it is and
+  /* Others teaching this: one entry per program, each a link then what it is and
      who it is for. No new type size -- the page holds three, and a fourth is a rule
      this file already broke once. */
   .view ul.also { list-style: none; padding-left: 0; }
@@ -591,11 +591,11 @@
        read as a verdict on everything below it — which is how it was being read.
        The page already does the stamp's job twice, and better: 38 per-incident provenance
        blocks that name a source and its limits AT the claim, and the Objections section, which
-       concedes in the sceptic's own voice that nothing here has been used or taught by anyone
+       concedes in the skeptic's own voice that nothing here has been used or taught by anyone
        outside. A third statement, unattached to any specific claim, was the weakest of them.
        If you are about to add one back, add it to a claim instead. -->
 
-      <a class="ready sceptic" href="#objections" data-view="objections">
+      <a class="ready skeptic" href="#objections" data-view="objections">
         <span class="ready-k">Objections</span>
         <span class="ready-t">&ldquo;Nobody works this way. Why are you teaching it?&rdquo;</span>
         <span class="ready-go" aria-hidden="true">&rarr;</span>
@@ -1201,7 +1201,7 @@
         <h3>Others teaching this</h3>
         <p>Three university programs cover adjacent ground. Checked <b>31 August 2026</b> &mdash; go to the source, because course offerings move.</p>
         <ul class="also">
-          <li><a href="https://oerc.ox.ac.uk/ai-centre/ai-centre-trainings/using-ai-agents-workshops-using-coding-agents-for-working-with-research-data-and-managing-the-research-process-introduction-to-non-programmers"><b>Oxford &mdash; AI Competency Centre</b></a>, e-Research Centre. <i>Using coding agents for working with research data and managing the research process: introduction to non-programmers.</i> Qualitative coding, document processing, building small tools for repetitive tasks, and reproducibility in AI-assisted research. Three hours, in person, 19 June 2026. <b>The closest to this material, and the only one of the three written for non-programmers.</b></li>
+          <li><a href="https://oerc.ox.ac.uk/ai-centre/ai-centre-trainings/using-ai-agents-workshops-using-coding-agents-for-working-with-research-data-and-managing-the-research-process-introduction-to-non-programmers"><b>Oxford &mdash; AI Competency Centre</b></a>, e-Research Centre. <i>Using coding agents for working with research data and managing the research process: introduction to non-programmers.</i> Qualitative coding, document processing, building small tools for repetitive tasks, and reproducibility in AI-assisted research. Three hours, in person, 19 June 2026. <b>The closest to this material, and the only one of the three written for non-programmers.</b></li> <!-- spelling-ok: proper names, Oxford AI Competency Centre and e-Research Centre -->
           <li><a href="https://escience.washington.edu/events/coding-with-ai-agents-a-hands-on-workshop-for-researchers/"><b>University of Washington &mdash; eScience Institute</b></a>. <i>Coding with AI Agents: a hands-on workshop for researchers.</i> The agent ecosystem, how models plan and generate code, a live research-plan-implement cycle, then you build one. Three hours, 17 June 2026. For <b>researchers and research software engineers</b>; assumes no AI background, but expects a GitHub account.</li>
           <li><a href="https://southampton-rsg-training.github.io/advanced-rs-ai-coding/"><b>Southampton &mdash; Research Software Group</b></a>. <i>Advanced Research Software Development using AI.</i> Agents and assistants inside an IDE, aimed at code quality and productivity. <b>Not for non-programmers</b> and does not claim to be: it lists Python, notebooks, VS&nbsp;Code and prior GitHub Copilot use as prerequisites. Self-paced materials, free to read.</li>
         </ul>
@@ -1642,8 +1642,8 @@
     // switch, which is correct only for the landing view. Everywhere else the run-up --
     // the draft banner, two call-to-action doors, the masthead, the depth control -- is
     // taller than it looks, so the pane that just changed sat below the fold and the click
-    // appeared to do nothing at all. Reported by a reader who pressed the sceptic's door
-    // three times before realising it had worked the first time. A control that changes
+    // appeared to do nothing at all. Reported by a reader who pressed the skeptic's door
+    // three times before realizing it had worked the first time. A control that changes
     // something you cannot see is indistinguishable from a broken one.
     // The same applies to a link somebody was SENT -- "#objections" in a pasted URL has to
     // open on the objections, not on the masthead above them -- so this is not gated on the
